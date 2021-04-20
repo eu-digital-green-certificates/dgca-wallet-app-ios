@@ -17,12 +17,6 @@
   <a href="#licensing">Licensing</a>
 </p>
 
-- [ ] TODO
-
-## Status
-
-![ci](https://github.com/eu-digital-green-certificates/dgca-wallet-app-ios/actions/workflows/ci-master.yml/badge.svg)
-
 ## Development
 
 ### Prerequisites
