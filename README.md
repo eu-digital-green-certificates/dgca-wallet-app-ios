@@ -22,7 +22,7 @@
 
 This repository contains the source code of the Digital Green Certificates Wallet App for iOS.
 
-The wallet app provides a user interface to store and manage personal DGCs directly on the phone. DGCs will be imported by scanning a base45-encoded QR code and decoding CBOR to JSON. Afterwards, it is symmetrically encrypted in the app’s sandbox and the symmetric key is stored in the system’s keychain. Multiple DGCs can be stored in the app. Access to the app is controlled via biometric data (e. g., Touch ID or Face ID). The wallet app can display any imported DGC as QR code for scanning and verifying with the verifier app.
+The wallet app provides a user interface to store and manage personal DGCs directly on the phone. DGCs will be imported by scanning a base45-encoded QR code and decoding CBOR to JSON. Afterwards, it is symmetrically encrypted in the app’s sandbox and the symmetric key is stored in the system’s keychain. Multiple DGCs can be stored in the app. Access to the app is controlled via biometric data (e. g., Touch ID or Face ID). The wallet app can display any imported DGC as QR code for scanning and verifying with the wallet app.
 
 ## Development
 
@@ -40,7 +40,7 @@ In either case open a terminal pointing to the directory you put the sources in.
 
 - [ ] TODO: Add instructions for different build types
 
-## Documentation  
+## Documentation
 
 - [ ] TODO: Link to documentation
 
@@ -48,16 +48,16 @@ In either case open a terminal pointing to the directory you put the sources in.
 
 The following channels are available for discussions, feedback, and support requests:
 
-| Type                     | Channel                                                |
-| ------------------------ | ------------------------------------------------------ |
-| **Issues**    | <a href="/../../issues" title="Open Issues"><img src="https://img.shields.io/github/issues/eu-digital-green-certificates/dgca-wallet-app-ios?style=flat"></a>  |
-| **Other requests**    | <a href="mailto:opensource@telekom.de" title="Email DGC Team"><img src="https://img.shields.io/badge/email-DGC%20team-green?logo=mail.ru&style=flat-square&logoColor=white"></a>   |
+| Type               | Channel                                                                                                                                                                          |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Issues**         | <a href="/../../issues" title="Open Issues"><img src="https://img.shields.io/github/issues/eu-digital-green-certificates/dgca-wallet-app-ios?style=flat"></a>                    |
+| **Other requests** | <a href="mailto:opensource@telekom.de" title="Email DGC Team"><img src="https://img.shields.io/badge/email-DGC%20team-green?logo=mail.ru&style=flat-square&logoColor=white"></a> |
 
-## How to contribute  
+## How to contribute
 
 Contribution and feedback is encouraged and always welcome. For more information about how to contribute, the project structure, as well as additional contribution information, see our [Contribution Guidelines](./CONTRIBUTING.md). By participating in this project, you agree to abide by its [Code of Conduct](./CODE_OF_CONDUCT.md) at all times.
 
-## Contributors  
+## Contributors
 
 Our commitment to open source means that we are enabling -in fact encouraging- all interested parties to contribute and become part of its developer community.
 
