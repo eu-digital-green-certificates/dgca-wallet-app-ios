@@ -1,3 +1,4 @@
+//
 /*-
  * ---license-start
  * eu-digital-green-certificates / dgca-wallet-app-ios
@@ -18,8 +19,19 @@
  * ---license-end
  */
 //  
-//  ___FILENAME___
-//  ___PACKAGENAME___
+//  UIColor.swift
+//  DGCAWallet
 //  
-//  Created by ___FULLUSERNAME___ on ___DATE___.
+//  Created by Yannick Spreen on 4/29/21.
 //  
+        
+
+import UIKit
+
+extension UIColor {
+  static var red: UIColor! { UIColor(named: "red") }
+  static var green: UIColor! { UIColor(named: "green") }
+  static var blue: UIColor! { UIColor(named: "blue") }
+  static var black: UIColor! { UIColor(named: "black") }
+  static var disabledText: UIColor! { UIColor(named: "disabledText") }
+}

@@ -17,9 +17,35 @@
  * limitations under the License.
  * ---license-end
  */
-//  
-//  ___FILENAME___
-//  ___PACKAGENAME___
-//  
-//  Created by ___FULLUSERNAME___ on ___DATE___.
-//  
+//
+//  ViewController.swift
+//  DGCAWallet
+//
+//  Created by Yannick Spreen on 4/8/21.
+//
+//  https://www.raywenderlich.com/12663654-vision-framework-tutorial-for-ios-scanning-barcodes
+//
+
+import UIKit
+import SwiftDGC
+import FloatingPanel
+
+class ScanVC: SwiftDGC.ScanVC {
+  override func viewDidLoad() {
+    super.viewDidLoad()
+
+    delegate = self
+  }
+}
+
+extension ScanVC: ScanVCDelegate {
+  func hCertScanned(_ cert: HCert) {
+    var delay = 0.0
+    #if targetEnvironment(simulator)
+    delay = 0.1
+    #endif
+    DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
+      self?.navigationController?.popViewController(animated: true)
+    }
+  }
+}
