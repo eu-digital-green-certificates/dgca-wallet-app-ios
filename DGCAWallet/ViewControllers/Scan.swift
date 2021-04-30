@@ -31,21 +31,5 @@ import SwiftDGC
 import FloatingPanel
 
 class ScanVC: SwiftDGC.ScanVC {
-  override func viewDidLoad() {
-    super.viewDidLoad()
-
-    delegate = self
-  }
 }
 
-extension ScanVC: ScanVCDelegate {
-  func hCertScanned(_ cert: HCert) {
-    var delay = 0.0
-    #if targetEnvironment(simulator)
-    delay = 0.1
-    #endif
-    DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
-      self?.navigationController?.popViewController(animated: true)
-    }
-  }
-}

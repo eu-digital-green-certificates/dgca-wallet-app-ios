@@ -35,7 +35,10 @@ class ListVC: UIViewController {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
 
-    return
+    if let cert = newHCertScanned {
+      newHCertScanned = nil
+      presentViewer(for: cert)
+    }
   }
 
   @IBAction
@@ -44,6 +47,7 @@ class ListVC: UIViewController {
   }
 
   var presentingViewer: CertificateViewerVC?
+  var newHCertScanned: HCert?
 
   func presentViewer(for certificate: HCert) {
     guard
@@ -55,22 +59,44 @@ class ListVC: UIViewController {
       return
     }
 
+    viewer.hCert = certificate
+    viewer.childDismissedDelegate = self
     let fpc = FloatingPanelController()
     fpc.set(contentViewController: viewer)
     fpc.isRemovalInteractionEnabled = true // Let it removable by a swipe-down
     fpc.layout = FullFloatingPanelLayout()
     fpc.surfaceView.layer.cornerRadius = 24.0
     fpc.surfaceView.clipsToBounds = true
-    viewer.hCert = certificate
-    viewer.childDismissedDelegate = self
     presentingViewer = viewer
 
     present(fpc, animated: true, completion: nil)
+  }
+
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    super.prepare(for: segue, sender: sender)
+
+    if let scan = segue.destination as? ScanVC {
+      scan.delegate = self
+      return
+    }
   }
 }
 
 extension ListVC: CertViewerDelegate {
   func childDismissed() {
     presentingViewer = nil
+  }
+}
+
+extension ListVC: ScanVCDelegate {
+  func hCertScanned(_ cert: HCert) {
+    newHCertScanned = cert
+    var delay = 0.0
+    #if targetEnvironment(simulator)
+    delay = 0.1
+    #endif
+    DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
+      self?.navigationController?.popViewController(animated: true)
+    }
   }
 }
