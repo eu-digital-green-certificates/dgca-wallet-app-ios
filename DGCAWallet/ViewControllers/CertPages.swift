@@ -31,16 +31,22 @@ import UIKit
 class CertPagesVC: UIPageViewController {
   weak var embeddingVC: CertificateViewerVC!
 
+  var index = 0
+  let vcs: [UIViewController] = [
+    UIStoryboard(name: "CertificateViewer", bundle: .main).instantiateViewController(withIdentifier: "infoTable"),
+    UIStoryboard(name: "CertificateViewer", bundle: .main).instantiateViewController(withIdentifier: "code"),
+  ]
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
     self.dataSource = self
+    self.delegate = self
     setViewControllers([vcs[0]], direction: .forward, animated: false)
+    let appearance = UIPageControl.appearance(whenContainedInInstancesOf: [UIPageViewController.self])
+    appearance.pageIndicatorTintColor = UIColor.disabledText
+    appearance.currentPageIndicatorTintColor = UIColor.black
   }
-
-  let vcs: [UIViewController] = [
-    UIStoryboard(name: "CertificateViewer", bundle: .main).instantiateViewController(withIdentifier: "infoTable")
-  ]
 }
 
 extension CertPagesVC: UIPageViewControllerDataSource {
@@ -52,5 +58,30 @@ extension CertPagesVC: UIPageViewControllerDataSource {
   func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
     let index = vcs.firstIndex(of: viewController) ?? vcs.count - 1
     return index == vcs.count - 1 ? nil : vcs[index + 1]
+  }
+
+  func presentationCount(for pageViewController: UIPageViewController) -> Int {
+    vcs.count
+  }
+
+  func presentationIndex(for pageViewController: UIPageViewController) -> Int {
+    index
+  }
+}
+
+extension CertPagesVC: UIPageViewControllerDelegate {
+  func pageViewController(
+    _ pageViewController: UIPageViewController,
+    didFinishAnimating finished: Bool,
+    previousViewControllers: [UIViewController],
+    transitionCompleted completed: Bool
+  ) {
+    guard
+      completed,
+      let vc = pageViewController.viewControllers?.first
+    else {
+      return
+    }
+    index = vcs.firstIndex(of: vc) ?? 0
   }
 }

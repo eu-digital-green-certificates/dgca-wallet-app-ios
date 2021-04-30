@@ -35,6 +35,7 @@
 		CED949CA263B50CE00883558 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED949C9263B50CE00883558 /* List.swift */; };
 		CEDABD40263C5FF4007A9B97 /* CertTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDABD3F263C5FF4007A9B97 /* CertTable.swift */; };
 		CEDABD49263C70EF007A9B97 /* CertPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDABD48263C70EF007A9B97 /* CertPages.swift */; };
+		CEE9DA55263C7D4000A31532 /* CertCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9DA54263C7D4000A31532 /* CertCode.swift */; };
 		CEFAD87F262714C4009AFEF9 /* EHNTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFAD87E262714C4009AFEF9 /* EHNTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +89,7 @@
 		CEDABD48263C70EF007A9B97 /* CertPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertPages.swift; sourceTree = "<group>"; };
 		CEDCA7972639E6E700FCB83E /* SwiftDGC */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SwiftDGC; path = "../dgca-app-core-ios"; sourceTree = "<group>"; };
 		CEDCA79B2639E77800FCB83E /* Package.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; name = Package.resolved; path = DGCAWallet.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved; sourceTree = SOURCE_ROOT; };
+		CEE9DA54263C7D4000A31532 /* CertCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertCode.swift; sourceTree = "<group>"; };
 		CEFAD87E262714C4009AFEF9 /* EHNTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EHNTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -153,6 +155,7 @@
 				CE13CF09262DCDDA0070C80E /* CertificateViewer.swift */,
 				CED949C9263B50CE00883558 /* List.swift */,
 				CEA6D6EF261F8D2700715333 /* Scan.swift */,
+				CEE9DA54263C7D4000A31532 /* CertCode.swift */,
 				CE891304263581D900CB92AF /* Home.swift */,
 				CEDABD48263C70EF007A9B97 /* CertPages.swift */,
 				CEDABD3F263C5FF4007A9B97 /* CertTable.swift */,
@@ -414,6 +417,7 @@
 				CEDABD49263C70EF007A9B97 /* CertPages.swift in Sources */,
 				CE1D1EF6263597A2004C8919 /* LocalData.swift in Sources */,
 				CED2726026398683003D47A9 /* UIFont.swift in Sources */,
+				CEE9DA55263C7D4000A31532 /* CertCode.swift in Sources */,
 				CEA1555D262F63B30024B7AC /* EuDgcSchema.swift in Sources */,
 				CEA6D6F0261F8D2700715333 /* Scan.swift in Sources */,
 				CE13CF23262DDF810070C80E /* RoundedButton.swift in Sources */,
