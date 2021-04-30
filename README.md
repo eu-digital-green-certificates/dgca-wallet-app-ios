@@ -28,7 +28,11 @@ The wallet app provides a user interface to store and manage personal DGCs direc
 
 ### Prerequisites
 
-- [ ] TODO: Describe prerequisites
+- You need a Mac to run Xcode.
+- Xcode 12.4+ is used for our builds. On the Mac App Store, the os requirement lists macOS 11.0+, but it works fine on Catalina as well.
+- To install development apps on physical iPhones, you need an Apple Developer account.
+- Service Endpoints:
+  - To get QR Codes for testing, you might want to check out `https://dgc.a-sit.at/ehn/testsuite`.
 
 ### Build
 
