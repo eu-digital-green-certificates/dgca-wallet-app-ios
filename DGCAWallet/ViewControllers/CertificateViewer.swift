@@ -35,7 +35,6 @@ class CertificateViewerVC: UIViewController {
   @IBOutlet weak var dismissButton: UIButton!
 
   var hCert: HCert!
-
   var childDismissedDelegate: CertViewerDelegate?
 
   func draw() {
@@ -67,6 +66,7 @@ class CertificateViewerVC: UIViewController {
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
 
+    Brightness.reset()
     childDismissedDelegate?.childDismissed()
   }
 

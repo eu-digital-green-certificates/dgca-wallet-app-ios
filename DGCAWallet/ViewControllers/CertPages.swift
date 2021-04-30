@@ -47,6 +47,20 @@ class CertPagesVC: UIPageViewController {
     appearance.pageIndicatorTintColor = UIColor.disabledText
     appearance.currentPageIndicatorTintColor = UIColor.black
   }
+
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+
+    setBrightness()
+  }
+
+  func setBrightness() {
+    if index == 1 {
+      Brightness.forceFull()
+    } else {
+      Brightness.reset()
+    }
+  }
 }
 
 extension CertPagesVC: UIPageViewControllerDataSource {
@@ -83,5 +97,6 @@ extension CertPagesVC: UIPageViewControllerDelegate {
       return
     }
     index = vcs.firstIndex(of: vc) ?? 0
+    setBrightness()
   }
 }
