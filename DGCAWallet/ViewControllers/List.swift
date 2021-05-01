@@ -41,9 +41,23 @@ class ListVC: UIViewController {
     }
   }
 
+  override func viewDidLoad() {
+    super.viewDidLoad()
+
+    table.dataSource = self
+    table.delegate = self
+    reloadTable()
+  }
+
   @IBAction
   func scanNewCert() {
     performSegue(withIdentifier: "scanner", sender: self)
+  }
+
+  @IBOutlet weak var table: UITableView!
+
+  func reloadTable() {
+    table.reloadData()
   }
 
   var presentingViewer: CertificateViewerVC?
@@ -67,6 +81,7 @@ class ListVC: UIViewController {
     fpc.layout = FullFloatingPanelLayout()
     fpc.surfaceView.layer.cornerRadius = 24.0
     fpc.surfaceView.clipsToBounds = true
+    fpc.delegate = self
     presentingViewer = viewer
 
     present(fpc, animated: true, completion: nil)
@@ -92,12 +107,57 @@ extension ListVC: ScanVCDelegate {
   func hCertScanned(_ cert: HCert) {
     LocalData.add(cert)
     newHCertScanned = cert
-    var delay = 0.0
-    #if targetEnvironment(simulator)
-    delay = 0.1
-    #endif
-    DispatchQueue.main.asyncAfter(deadline: .now() + delay) { [weak self] in
+    DispatchQueue.main.async { [weak self] in
+      self?.reloadTable()
       self?.navigationController?.popViewController(animated: true)
+    }
+  }
+}
+
+extension ListVC: UITableViewDataSource {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    LocalData.sharedInstance.certStrings.count
+  }
+
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    let cell = table.dequeueReusableCell(withIdentifier: "walletCell", for: indexPath)
+    guard let walletCell = cell as? WalletCell else {
+      return cell
+    }
+
+    walletCell.draw(LocalData.sharedInstance.certStrings[indexPath.row])
+    return walletCell
+  }
+}
+
+extension ListVC: UITableViewDelegate {
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    table.deselectRow(at: indexPath, animated: true)
+    guard
+      let cert = LocalData.sharedInstance.certStrings[indexPath.row].cert
+    else {
+      return
+    }
+    presentViewer(for: cert)
+  }
+}
+
+extension ListVC: FloatingPanelControllerDelegate {
+  func floatingPanel(_ fpc: FloatingPanelController, shouldRemoveAt location: CGPoint, with velocity: CGVector) -> Bool {
+    let pos = location.y / view.bounds.height
+    if pos >= 0.33 {
+      return true
+    }
+    let threshold: CGFloat = 5.0
+    switch fpc.layout.position {
+    case .top:
+        return (velocity.dy <= -threshold)
+    case .left:
+        return (velocity.dx <= -threshold)
+    case .bottom:
+        return (velocity.dy >= threshold)
+    case .right:
+        return (velocity.dx >= threshold)
     }
   }
 }

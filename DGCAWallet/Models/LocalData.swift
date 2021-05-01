@@ -48,6 +48,7 @@ struct LocalData: Codable {
 
   public static func add(_ cert: HCert) {
     sharedInstance.certStrings.append(.init(date: Date(), certString: cert.payloadString))
+    sharedInstance.save()
   }
 
   static let storage = SecureStorage<LocalData>()
