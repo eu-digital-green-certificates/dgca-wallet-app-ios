@@ -90,6 +90,7 @@ extension ListVC: CertViewerDelegate {
 
 extension ListVC: ScanVCDelegate {
   func hCertScanned(_ cert: HCert) {
+    LocalData.add(cert)
     newHCertScanned = cert
     var delay = 0.0
     #if targetEnvironment(simulator)

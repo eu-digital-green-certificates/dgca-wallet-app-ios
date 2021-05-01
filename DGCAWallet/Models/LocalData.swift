@@ -29,34 +29,25 @@
 import Foundation
 import SwiftDGC
 
+struct DatedCertString: Codable {
+  var date: Date
+  var certString: String
+  var cert: HCert? {
+    HCert(from: certString)
+  }
+}
+
 struct LocalData: Codable {
   static var sharedInstance = LocalData()
 
-  var encodedPublicKeys = [String: String]()
-  var resumeToken: String?
-  var lastFetch_: Date?
-  var lastFetch: Date {
-    get {
-      lastFetch_ ?? .init(timeIntervalSince1970: 0)
-    }
-    set(v) {
-      lastFetch_ = v
-    }
-  }
-
-  mutating func add(encodedPublicKey: String) {
-    let kid = KID.from(encodedPublicKey)
-    let kidStr = KID.string(from: kid)
-
-    encodedPublicKeys[kidStr] = encodedPublicKey
-  }
-
-  static func set(resumeToken: String) {
-    sharedInstance.resumeToken = resumeToken
-  }
+  var certStrings = [DatedCertString]()
 
   public func save() {
     Self.storage.save(self)
+  }
+
+  public static func add(_ cert: HCert) {
+    sharedInstance.certStrings.append(.init(date: Date(), certString: cert.payloadString))
   }
 
   static let storage = SecureStorage<LocalData>()
@@ -66,16 +57,9 @@ struct LocalData: Codable {
       guard let result = success else {
         return
       }
-      print("\(result.encodedPublicKeys.count) certs loaded.")
+      print("\(result.certStrings.count) certs loaded.")
       LocalData.sharedInstance = result
       completion()
     }
-    HCert.publicKeyStorageDelegate = LocalDataDelegate()
-  }
-}
-
-struct LocalDataDelegate: PublicKeyStorageDelegate {
-  func getEncodedPublicKey(for kidStr: String) -> String? {
-    LocalData.sharedInstance.encodedPublicKeys[kidStr]
   }
 }
