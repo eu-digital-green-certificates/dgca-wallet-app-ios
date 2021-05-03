@@ -18,17 +18,27 @@
  * ---license-end
  */
 //
-//  ViewController.swift
+//  InfoCell.swift
 //  DGCAWallet
 //
-//  Created by Yannick Spreen on 4/8/21.
-//
-//  https://www.raywenderlich.com/12663654-vision-framework-tutorial-for-ios-scanning-barcodes
+//  Created by Yannick Spreen on 4/20/21.
 //
 
 import UIKit
 import SwiftDGC
-import FloatingPanel
 
-class ScanVC: SwiftDGC.ScanVC { }
+class WalletCell: UITableViewCell {
+  @IBOutlet weak var typeLabel: UILabel!
+  @IBOutlet weak var nameLabel: UILabel!
+  @IBOutlet weak var dateLabel: UILabel!
 
+  func draw(_ dated: DatedCertString) {
+    guard let cert = dated.cert else {
+      return
+    }
+
+    typeLabel.text = cert.certTypeString
+    nameLabel.text = cert.fullName
+    dateLabel.text = "scanned \(dated.date.dateString)"
+  }
+}

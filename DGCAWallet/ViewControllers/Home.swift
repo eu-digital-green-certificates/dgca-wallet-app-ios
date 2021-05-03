@@ -28,11 +28,13 @@
 
 import Foundation
 import UIKit
+import SwiftDGC
 
 class HomeVC: UIViewController {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
 
+    HCert.PREFETCH_ALL_CODES = true
     LocalData.initialize {
       DispatchQueue.main.async { [weak self] in
         guard let self = self else {

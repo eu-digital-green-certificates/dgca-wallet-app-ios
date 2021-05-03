@@ -1,3 +1,4 @@
+//
 /*-
  * ---license-start
  * eu-digital-green-certificates / dgca-wallet-app-ios
@@ -17,18 +18,37 @@
  * limitations under the License.
  * ---license-end
  */
-//
-//  ViewController.swift
+//  
+//  Brightness.swift
 //  DGCAWallet
-//
-//  Created by Yannick Spreen on 4/8/21.
-//
-//  https://www.raywenderlich.com/12663654-vision-framework-tutorial-for-ios-scanning-barcodes
-//
+//  
+//  Created by Yannick Spreen on 4/30/21.
+//  
+        
 
+import Foundation
 import UIKit
-import SwiftDGC
-import FloatingPanel
 
-class ScanVC: SwiftDGC.ScanVC { }
+struct Brightness {
+  static var fallback: CGFloat?
 
+  static func setTo(_ val: CGFloat) {
+    UIScreen.main.brightness = val
+  }
+
+  public static func forceFull() {
+    if fallback != nil {
+      return
+    }
+    fallback = UIScreen.main.brightness
+    setTo(1.0)
+  }
+
+  public static func reset() {
+    guard let val = fallback else {
+      return
+    }
+    fallback = nil
+    setTo(val)
+  }
+}

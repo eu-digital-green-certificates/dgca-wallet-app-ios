@@ -32,20 +32,13 @@ import SwiftDGC
 class CertificateViewerVC: UIViewController {
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var typeSegments: UISegmentedControl!
-  @IBOutlet weak var infoTable: UITableView!
   @IBOutlet weak var dismissButton: UIButton!
 
-  var hCert: HCert! {
-    didSet {
-      self.draw()
-    }
-  }
-
+  var hCert: HCert!
   var childDismissedDelegate: CertViewerDelegate?
 
   func draw() {
     nameLabel.text = hCert.fullName
-    infoTable.reloadData()
     typeSegments.selectedSegmentIndex = [
       HCertType.test,
       HCertType.vaccine,
@@ -55,16 +48,13 @@ class CertificateViewerVC: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+
     // selected option color
     typeSegments.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black!], for: .selected)
     // color of other options
     typeSegments.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.disabledText!], for: .normal)
     typeSegments.backgroundColor = UIColor(white: 1.0, alpha: 0.06)
-
-    infoTable.dataSource = self
-    infoTable.contentInset = .init(top: 0, left: 0, bottom: 32, right: 0)
-
-    return
+    draw()
   }
 
   override func viewDidAppear(_ animated: Bool) {
@@ -76,6 +66,7 @@ class CertificateViewerVC: UIViewController {
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
 
+    Brightness.reset()
     childDismissedDelegate?.childDismissed()
   }
 
@@ -83,19 +74,10 @@ class CertificateViewerVC: UIViewController {
   func closeButton() {
     dismiss(animated: true, completion: nil)
   }
-}
 
-extension CertificateViewerVC: UITableViewDataSource {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return hCert.info.count
-  }
-
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let base = tableView.dequeueReusableCell(withIdentifier: "infoCell", for: indexPath)
-    guard let cell = base as? InfoCell else {
-      return base
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if let child = segue.destination as? CertPagesVC {
+      child.embeddingVC = self
     }
-    cell.draw(hCert.info[indexPath.row])
-    return cell
   }
 }

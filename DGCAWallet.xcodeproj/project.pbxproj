@@ -14,6 +14,7 @@
 		CE13CF23262DDF810070C80E /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13CF22262DDF810070C80E /* RoundedButton.swift */; };
 		CE1D1EF6263597A2004C8919 /* LocalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1D1EF5263597A2004C8919 /* LocalData.swift */; };
 		CE1F155C2639F9E700736D48 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = CE1F155B2639F9E700736D48 /* SwiftyJSON */; };
+		CE260F56263DD1720083A200 /* WalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE260F55263DD1720083A200 /* WalletCell.swift */; };
 		CE37B643263867D700DEE13D /* SecureBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37B642263867D700DEE13D /* SecureBackground.swift */; };
 		CE56B5052639F48E00FB31B1 /* SwiftDGC in Frameworks */ = {isa = PBXBuildFile; productRef = CE56B5042639F48E00FB31B1 /* SwiftDGC */; };
 		CE8096D9263B07BB00A65AD6 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8096D8263B07BB00A65AD6 /* UIColor.swift */; };
@@ -33,6 +34,10 @@
 		CEA6D70E261F8D2900715333 /* DGCAWalletUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6D70D261F8D2900715333 /* DGCAWalletUITests.swift */; };
 		CED2726026398683003D47A9 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2725F26398683003D47A9 /* UIFont.swift */; };
 		CED949CA263B50CE00883558 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED949C9263B50CE00883558 /* List.swift */; };
+		CEDABD40263C5FF4007A9B97 /* CertTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDABD3F263C5FF4007A9B97 /* CertTable.swift */; };
+		CEDABD49263C70EF007A9B97 /* CertPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDABD48263C70EF007A9B97 /* CertPages.swift */; };
+		CEE9DA55263C7D4000A31532 /* CertCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9DA54263C7D4000A31532 /* CertCode.swift */; };
+		CEE9DA5D263C865200A31532 /* Brightness.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9DA5C263C865200A31532 /* Brightness.swift */; };
 		CEFAD87F262714C4009AFEF9 /* EHNTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFAD87E262714C4009AFEF9 /* EHNTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +64,7 @@
 		CE13CF0E262DD0D80070C80E /* FullFloatingPanelLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullFloatingPanelLayout.swift; sourceTree = "<group>"; };
 		CE13CF22262DDF810070C80E /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		CE1D1EF5263597A2004C8919 /* LocalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalData.swift; sourceTree = "<group>"; };
+		CE260F55263DD1720083A200 /* WalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCell.swift; sourceTree = "<group>"; };
 		CE37B642263867D700DEE13D /* SecureBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureBackground.swift; sourceTree = "<group>"; };
 		CE8096D8263B07BB00A65AD6 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		CE891304263581D900CB92AF /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
@@ -82,8 +88,12 @@
 		CEA6D70F261F8D2900715333 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CED2725F26398683003D47A9 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		CED949C9263B50CE00883558 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
+		CEDABD3F263C5FF4007A9B97 /* CertTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertTable.swift; sourceTree = "<group>"; };
+		CEDABD48263C70EF007A9B97 /* CertPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertPages.swift; sourceTree = "<group>"; };
 		CEDCA7972639E6E700FCB83E /* SwiftDGC */ = {isa = PBXFileReference; lastKnownFileType = folder; name = SwiftDGC; path = "../dgca-app-core-ios"; sourceTree = "<group>"; };
 		CEDCA79B2639E77800FCB83E /* Package.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; name = Package.resolved; path = DGCAWallet.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved; sourceTree = SOURCE_ROOT; };
+		CEE9DA54263C7D4000A31532 /* CertCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertCode.swift; sourceTree = "<group>"; };
+		CEE9DA5C263C865200A31532 /* Brightness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brightness.swift; sourceTree = "<group>"; };
 		CEFAD87E262714C4009AFEF9 /* EHNTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EHNTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				CE37B642263867D700DEE13D /* SecureBackground.swift */,
+				CEE9DA5C263C865200A31532 /* Brightness.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -149,7 +160,10 @@
 				CE13CF09262DCDDA0070C80E /* CertificateViewer.swift */,
 				CED949C9263B50CE00883558 /* List.swift */,
 				CEA6D6EF261F8D2700715333 /* Scan.swift */,
+				CEE9DA54263C7D4000A31532 /* CertCode.swift */,
 				CE891304263581D900CB92AF /* Home.swift */,
+				CEDABD48263C70EF007A9B97 /* CertPages.swift */,
+				CEDABD3F263C5FF4007A9B97 /* CertTable.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -159,6 +173,7 @@
 			children = (
 				CE13CF0E262DD0D80070C80E /* FullFloatingPanelLayout.swift */,
 				CE13CF22262DDF810070C80E /* RoundedButton.swift */,
+				CE260F55263DD1720083A200 /* WalletCell.swift */,
 				CEA1556A262F784E0024B7AC /* SelfSizedTableView.swift */,
 				CEA1556F262F79DE0024B7AC /* InfoCell.swift */,
 			);
@@ -399,19 +414,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEE9DA5D263C865200A31532 /* Brightness.swift in Sources */,
 				CE13CF0A262DCDDA0070C80E /* CertificateViewer.swift in Sources */,
+				CEDABD40263C5FF4007A9B97 /* CertTable.swift in Sources */,
 				CE37B643263867D700DEE13D /* SecureBackground.swift in Sources */,
 				CE13CF0F262DD0D80070C80E /* FullFloatingPanelLayout.swift in Sources */,
 				CEA1556B262F784E0024B7AC /* SelfSizedTableView.swift in Sources */,
 				CE8096D9263B07BB00A65AD6 /* UIColor.swift in Sources */,
+				CEDABD49263C70EF007A9B97 /* CertPages.swift in Sources */,
 				CE1D1EF6263597A2004C8919 /* LocalData.swift in Sources */,
 				CED2726026398683003D47A9 /* UIFont.swift in Sources */,
+				CEE9DA55263C7D4000A31532 /* CertCode.swift in Sources */,
 				CEA1555D262F63B30024B7AC /* EuDgcSchema.swift in Sources */,
 				CEA6D6F0261F8D2700715333 /* Scan.swift in Sources */,
 				CE13CF23262DDF810070C80E /* RoundedButton.swift in Sources */,
 				CEA6D6EC261F8D2700715333 /* AppDelegate.swift in Sources */,
 				CE891305263581D900CB92AF /* Home.swift in Sources */,
 				CEA15563262F6DAB0024B7AC /* CertViewerDelegate.swift in Sources */,
+				CE260F56263DD1720083A200 /* WalletCell.swift in Sources */,
 				CEA15570262F79DE0024B7AC /* InfoCell.swift in Sources */,
 				CED949CA263B50CE00883558 /* List.swift in Sources */,
 				CEA6D6EE261F8D2700715333 /* SceneDelegate.swift in Sources */,

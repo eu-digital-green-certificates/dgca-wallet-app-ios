@@ -1,3 +1,4 @@
+//
 /*-
  * ---license-start
  * eu-digital-green-certificates / dgca-wallet-app-ios
@@ -17,18 +18,26 @@
  * limitations under the License.
  * ---license-end
  */
-//
-//  ViewController.swift
+//  
+//  CertTable.swift
 //  DGCAWallet
-//
-//  Created by Yannick Spreen on 4/8/21.
-//
-//  https://www.raywenderlich.com/12663654-vision-framework-tutorial-for-ios-scanning-barcodes
-//
+//  
+//  Created by Yannick Spreen on 4/30/21.
+//  
 
-import UIKit
 import SwiftDGC
-import FloatingPanel
+import UIKit
 
-class ScanVC: SwiftDGC.ScanVC { }
+class CertCodeVC: UIViewController {
+  @IBOutlet weak var imageView: UIImageView!
 
+  var hCert: HCert! {
+    (parent as? CertPagesVC)?.embeddingVC.hCert
+  }
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+
+    imageView.image = hCert.qrCode
+  }
+}
