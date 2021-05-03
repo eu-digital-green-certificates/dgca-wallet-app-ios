@@ -37,7 +37,7 @@ class ListVC: UIViewController {
 
     if let cert = newHCertScanned {
       newHCertScanned = nil
-      presentViewer(for: cert)
+      presentViewer(for: cert, isSaved: false)
     }
   }
 
@@ -79,6 +79,7 @@ class ListVC: UIViewController {
       return
     }
 
+    viewer.isSaved = isSaved
     viewer.hCert = certificate
     viewer.childDismissedDelegate = self
     let fpc = FloatingPanelController()

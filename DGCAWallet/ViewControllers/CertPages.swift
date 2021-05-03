@@ -33,8 +33,8 @@ class CertPagesVC: UIPageViewController {
 
   var index = 0
   let vcs: [UIViewController] = [
-    UIStoryboard(name: "CertificateViewer", bundle: .main).instantiateViewController(withIdentifier: "infoTable"),
     UIStoryboard(name: "CertificateViewer", bundle: .main).instantiateViewController(withIdentifier: "code"),
+    UIStoryboard(name: "CertificateViewer", bundle: .main).instantiateViewController(withIdentifier: "infoTable"),
   ]
 
   override func viewDidLoad() {
@@ -42,7 +42,8 @@ class CertPagesVC: UIPageViewController {
 
     self.dataSource = self
     self.delegate = self
-    setViewControllers([vcs[0]], direction: .forward, animated: false)
+    index = embeddingVC.isSaved ? 0 : 1
+    setViewControllers([vcs[index]], direction: .forward, animated: false)
     let appearance = UIPageControl.appearance(whenContainedInInstancesOf: [UIPageViewController.self])
     appearance.pageIndicatorTintColor = UIColor.disabledText
     appearance.currentPageIndicatorTintColor = UIColor.black
@@ -55,7 +56,7 @@ class CertPagesVC: UIPageViewController {
   }
 
   func setBrightness() {
-    if index == 1 {
+    if index == 0 {
       Brightness.forceFull()
     } else {
       Brightness.reset()
