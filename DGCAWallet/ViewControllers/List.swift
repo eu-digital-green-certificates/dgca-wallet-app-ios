@@ -60,10 +60,16 @@ class ListVC: UIViewController {
     table.reloadData()
   }
 
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+
+    presentingViewer?.dismiss(animated: true, completion: nil)
+  }
+
   var presentingViewer: CertificateViewerVC?
   var newHCertScanned: HCert?
 
-  func presentViewer(for certificate: HCert) {
+  func presentViewer(for certificate: HCert, isSaved: Bool = true) {
     guard
       presentingViewer == nil,
       let contentVC = UIStoryboard(name: "CertificateViewer", bundle: nil)

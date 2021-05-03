@@ -24,16 +24,20 @@
 //  
 //  Created by Yannick Spreen on 4/27/21.
 //  
-        
+
 
 import Foundation
 import UIKit
+import LocalAuthentication
 
 struct SecureBackground {
   static var imageView: UIImageView?
   public static var image: UIImage?
 
   public static func enable() {
+    guard !paused else {
+      return
+    }
     disable()
     guard let image = image else {
       return
@@ -41,12 +45,46 @@ struct SecureBackground {
     let imageView = UIImageView(image: image)
     UIApplication.shared.windows[0].addSubview(imageView)
     Self.imageView = imageView
+    Self.activation = Date()
   }
 
   public static func disable() {
     if imageView != nil {
+      if activation.timeIntervalSinceNow < -1 {
+        (UIApplication.shared.windows[0].rootViewController as? UINavigationController)?.popToRootViewController(animated: false)
+      }
       imageView?.removeFromSuperview()
       imageView = nil
+    }
+  }
+
+  static var paused = false
+  static var activation = Date()
+  public static func checkId(completion: ((Bool) -> Void)?) {
+    guard !paused else {
+      return
+    }
+    paused = true
+    let context = LAContext()
+    context.localizedCancelTitle = "Try Later"
+    let reason = "Confirm Identity"
+    var error: NSError?
+    guard context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) else {
+      paused = false
+      completion?(true)
+      return
+    }
+    context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason ) { success, error in
+      if success {
+        // Move to the main thread because a state update triggers UI changes.
+        DispatchQueue.main.async {
+          paused = false
+          completion?(true)
+        }
+      } else {
+        paused = false
+        completion?(false)
+      }
     }
   }
 }
