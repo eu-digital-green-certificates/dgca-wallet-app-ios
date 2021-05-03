@@ -38,11 +38,21 @@ The wallet app provides a user interface to store and manage personal DGCs direc
 
 Whether you cloned or downloaded the 'zipped' sources you will either find the sources in the chosen checkout-directory or get a zip file with the source code, which you can expand to a folder of your choice.
 
-In either case open a terminal pointing to the directory you put the sources in. The local build process is described afterwards depending on the way you choose.
+#### Xcode based build
 
-#### XYZ (Maven, Docker ...) based build
+Important Info: SPM and the SwiftDGC [core module](https://github.com/eu-digital-green-certificates/dgca-app-core-ios)
+- Depending on the development status, this module might be either linked locally or via github URL.
+- If it's linked locally, you should clone both repos into the same folder:
+- `<project folder>`
+    - `dgca-app-core-ios`
+    - `dgca-wallet-app-ios`
+- Otherwise it will be pulled by Xcode like all other SPM modules.
 
-- [ ] TODO: Add instructions for different build types
+Build steps
+- Set the development team to any Apple Developer Account
+- Give the project a unique bundle identifier
+- Install swift package manager requirements through Xcode 12.4+
+- Build and run the project through Xcode 12.4+
 
 ## Documentation
 
