@@ -59,7 +59,7 @@ struct LocalData: Codable {
         return
       }
       print("\(result.certStrings.count) certs loaded.")
-//      LocalData.sharedInstance = result
+      LocalData.sharedInstance = result
       completion()
     }
   }
