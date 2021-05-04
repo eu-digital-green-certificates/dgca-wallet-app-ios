@@ -30,5 +30,10 @@ import UIKit
 import SwiftDGC
 import FloatingPanel
 
-class ScanVC: SwiftDGC.ScanVC { }
+class ScanVC: SwiftDGC.ScanVC {
+  override func viewDidLoad() {
+    super.viewDidLoad()
 
+    createBackButton()
+  }
+}

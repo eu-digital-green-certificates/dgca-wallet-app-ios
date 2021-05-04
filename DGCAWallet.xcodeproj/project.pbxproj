@@ -17,7 +17,9 @@
 		CE260F56263DD1720083A200 /* WalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE260F55263DD1720083A200 /* WalletCell.swift */; };
 		CE37B643263867D700DEE13D /* SecureBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37B642263867D700DEE13D /* SecureBackground.swift */; };
 		CE56B5052639F48E00FB31B1 /* SwiftDGC in Frameworks */ = {isa = PBXBuildFile; productRef = CE56B5042639F48E00FB31B1 /* SwiftDGC */; };
+		CE56BC07264068110044FD3F /* GatewayConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE56BC06264068110044FD3F /* GatewayConnection.swift */; };
 		CE8096D9263B07BB00A65AD6 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8096D8263B07BB00A65AD6 /* UIColor.swift */; };
+		CE81533A263FF7EC0030D777 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CE815339263FF7EC0030D777 /* README.md */; };
 		CE8912FB2634C6B900CB92AF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CE8912FA2634C6B900CB92AF /* Alamofire */; };
 		CE891305263581D900CB92AF /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE891304263581D900CB92AF /* Home.swift */; };
 		CEA1555D262F63B30024B7AC /* EuDgcSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA1555C262F63B30024B7AC /* EuDgcSchema.swift */; };
@@ -32,6 +34,7 @@
 		CEA6D6F8261F8D2900715333 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEA6D6F6261F8D2900715333 /* LaunchScreen.storyboard */; };
 		CEA6D703261F8D2900715333 /* DGCAWalletTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6D702261F8D2900715333 /* DGCAWalletTests.swift */; };
 		CEA6D70E261F8D2900715333 /* DGCAWalletUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6D70D261F8D2900715333 /* DGCAWalletUITests.swift */; };
+		CEA6E561264058B50066DC8E /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6E560264058B50066DC8E /* UIViewController.swift */; };
 		CED2726026398683003D47A9 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2725F26398683003D47A9 /* UIFont.swift */; };
 		CED949CA263B50CE00883558 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED949C9263B50CE00883558 /* List.swift */; };
 		CEDABD40263C5FF4007A9B97 /* CertTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDABD3F263C5FF4007A9B97 /* CertTable.swift */; };
@@ -66,7 +69,9 @@
 		CE1D1EF5263597A2004C8919 /* LocalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalData.swift; sourceTree = "<group>"; };
 		CE260F55263DD1720083A200 /* WalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCell.swift; sourceTree = "<group>"; };
 		CE37B642263867D700DEE13D /* SecureBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureBackground.swift; sourceTree = "<group>"; };
+		CE56BC06264068110044FD3F /* GatewayConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewayConnection.swift; sourceTree = "<group>"; };
 		CE8096D8263B07BB00A65AD6 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		CE815339263FF7EC0030D777 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		CE891304263581D900CB92AF /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		CEA1555C262F63B30024B7AC /* EuDgcSchema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EuDgcSchema.swift; sourceTree = "<group>"; };
 		CEA15562262F6DAB0024B7AC /* CertViewerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertViewerDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +91,7 @@
 		CEA6D709261F8D2900715333 /* DGCAWalletUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DGCAWalletUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEA6D70D261F8D2900715333 /* DGCAWalletUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DGCAWalletUITests.swift; sourceTree = "<group>"; };
 		CEA6D70F261F8D2900715333 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CEA6E560264058B50066DC8E /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		CED2725F26398683003D47A9 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		CED949C9263B50CE00883558 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		CEDABD3F263C5FF4007A9B97 /* CertTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertTable.swift; sourceTree = "<group>"; };
@@ -141,6 +147,7 @@
 			children = (
 				CE37B642263867D700DEE13D /* SecureBackground.swift */,
 				CEE9DA5C263C865200A31532 /* Brightness.swift */,
+				CE56BC06264068110044FD3F /* GatewayConnection.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -150,6 +157,7 @@
 			children = (
 				CED2725F26398683003D47A9 /* UIFont.swift */,
 				CE8096D8263B07BB00A65AD6 /* UIColor.swift */,
+				CEA6E560264058B50066DC8E /* UIViewController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -183,6 +191,7 @@
 		CE13CF1E262DDE800070C80E /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				CE815339263FF7EC0030D777 /* README.md */,
 				CEDCA79B2639E77800FCB83E /* Package.resolved */,
 				CEA6D6EB261F8D2700715333 /* AppDelegate.swift */,
 				CEA6D6ED261F8D2700715333 /* SceneDelegate.swift */,
@@ -388,6 +397,7 @@
 			files = (
 				CE13CF05262DCDCD0070C80E /* CertificateViewer.storyboard in Resources */,
 				CEA6D6F8261F8D2900715333 /* LaunchScreen.storyboard in Resources */,
+				CE81533A263FF7EC0030D777 /* README.md in Resources */,
 				CEA6D6F5261F8D2900715333 /* Assets.xcassets in Resources */,
 				CEA6D6F3261F8D2700715333 /* Main.storyboard in Resources */,
 			);
@@ -425,9 +435,11 @@
 				CE1D1EF6263597A2004C8919 /* LocalData.swift in Sources */,
 				CED2726026398683003D47A9 /* UIFont.swift in Sources */,
 				CEE9DA55263C7D4000A31532 /* CertCode.swift in Sources */,
+				CE56BC07264068110044FD3F /* GatewayConnection.swift in Sources */,
 				CEA1555D262F63B30024B7AC /* EuDgcSchema.swift in Sources */,
 				CEA6D6F0261F8D2700715333 /* Scan.swift in Sources */,
 				CE13CF23262DDF810070C80E /* RoundedButton.swift in Sources */,
+				CEA6E561264058B50066DC8E /* UIViewController.swift in Sources */,
 				CEA6D6EC261F8D2700715333 /* AppDelegate.swift in Sources */,
 				CE891305263581D900CB92AF /* Home.swift in Sources */,
 				CEA15563262F6DAB0024B7AC /* CertViewerDelegate.swift in Sources */,

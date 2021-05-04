@@ -31,8 +31,8 @@ import UIKit
 import SwiftDGC
 
 class HomeVC: UIViewController {
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
+  override func viewDidLoad() {
+    super.viewDidLoad()
 
     HCert.PREFETCH_ALL_CODES = true
     LocalData.initialize {
@@ -44,7 +44,31 @@ class HomeVC: UIViewController {
         SecureBackground.image = renderer.image { rendererContext in
           self.view.layer.render(in: rendererContext.cgContext)
         }
-        self.performSegue(withIdentifier: "list", sender: self)
+        self.loadComplete()
+      }
+    }
+  }
+
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+
+    if loaded {
+      checkId()
+    }
+  }
+
+  var loaded = false
+  func loadComplete() {
+    loaded = true
+    checkId()
+  }
+
+  func checkId() {
+    SecureBackground.checkId { [weak self] in
+      if $0 {
+        self?.performSegue(withIdentifier: "list", sender: self)
+      } else {
+        self?.checkId()
       }
     }
   }

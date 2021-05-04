@@ -36,6 +36,7 @@ class CertificateViewerVC: UIViewController {
 
   var hCert: HCert!
   var childDismissedDelegate: CertViewerDelegate?
+  public var isSaved = true
 
   func draw() {
     nameLabel.text = hCert.fullName
@@ -44,6 +45,9 @@ class CertificateViewerVC: UIViewController {
       HCertType.vaccine,
       HCertType.recovery
     ].firstIndex(of: hCert.type) ?? 0
+    if !isSaved {
+      dismissButton.setTitle("Save", for: .normal)
+    }
   }
 
   override func viewDidLoad() {
@@ -72,7 +76,41 @@ class CertificateViewerVC: UIViewController {
 
   @IBAction
   func closeButton() {
-    dismiss(animated: true, completion: nil)
+    if isSaved {
+      return dismiss(animated: true, completion: nil)
+    }
+    saveCert()
+  }
+
+  func saveCert() {
+    showInputDialog(
+      title: "Confirm TAN",
+      subtitle: "Please enter the TAN that was provided together with your certificate:",
+      inputPlaceholder: "XYZ12345"
+    ) { [weak self] in
+      guard let cert = self?.hCert else {
+        return
+      }
+      GatewayConnection.claim(cert: cert, with: $0) {
+        if $0 {
+          guard let cert = self?.hCert else {
+            return
+          }
+          LocalData.add(cert)
+          self?.showAlert(
+            title: "Success",
+            subtitle: "Certificate was saved to wallet!"
+          ) { _ in
+            self?.dismiss(animated: true, completion: nil)
+          }
+        } else {
+          self?.showAlert(
+            title: "Failure",
+            subtitle: "Check the TAN and try again."
+          )
+        }
+      }
+    }
   }
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

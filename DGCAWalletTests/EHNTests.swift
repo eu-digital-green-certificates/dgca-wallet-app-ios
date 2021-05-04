@@ -7,6 +7,7 @@
 
 @testable import DGCAWallet
 import XCTest
+import SwiftDGC
 
 class EHNTests: XCTestCase {
   func testCoseEcdsa() throws {

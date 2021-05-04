@@ -37,7 +37,7 @@ class ListVC: UIViewController {
 
     if let cert = newHCertScanned {
       newHCertScanned = nil
-      presentViewer(for: cert)
+      presentViewer(for: cert, isSaved: false)
     }
   }
 
@@ -60,10 +60,16 @@ class ListVC: UIViewController {
     table.reloadData()
   }
 
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+
+    presentingViewer?.dismiss(animated: true, completion: nil)
+  }
+
   var presentingViewer: CertificateViewerVC?
   var newHCertScanned: HCert?
 
-  func presentViewer(for certificate: HCert) {
+  func presentViewer(for certificate: HCert, isSaved: Bool = true) {
     guard
       presentingViewer == nil,
       let contentVC = UIStoryboard(name: "CertificateViewer", bundle: nil)
@@ -73,6 +79,7 @@ class ListVC: UIViewController {
       return
     }
 
+    viewer.isSaved = isSaved
     viewer.hCert = certificate
     viewer.childDismissedDelegate = self
     let fpc = FloatingPanelController()
@@ -105,7 +112,6 @@ extension ListVC: CertViewerDelegate {
 
 extension ListVC: ScanVCDelegate {
   func hCertScanned(_ cert: HCert) {
-    LocalData.add(cert)
     newHCertScanned = cert
     DispatchQueue.main.async { [weak self] in
       self?.reloadTable()
