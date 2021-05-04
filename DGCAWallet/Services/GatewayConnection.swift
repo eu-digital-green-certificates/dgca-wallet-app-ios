@@ -54,11 +54,15 @@ struct GatewayConnection {
         return
       }
 
+      let keyParam: [String: Any] = [
+        "type": "EC256",
+        "value": "pubkey",
+      ]
       let param: [String: Any] = [
-        "dgci": cert.uvci,
-        "tanHash": tanHash,
-        "certHash": certHash,
-        "pubKey": pubKey,
+        "DGCI": cert.uvci,
+        "TANHash": tanHash,
+        "certhash": certHash,
+        "publicKey": keyParam,
         "signature": sign.base64EncodedData(),
       ]
       AF.request(serverURI + claimEndpoint, method: .get, parameters: param, encoding: JSONEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
