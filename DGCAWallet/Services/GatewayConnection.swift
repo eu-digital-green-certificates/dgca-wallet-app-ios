@@ -47,7 +47,7 @@ struct GatewayConnection {
     let certHash = cert.certHash
     let pubKey = (X509.derPubKey(for: cert.keyPair) ?? Data()).base64EncodedString()
 
-    let toBeSigned = tanHash + certHash + pubKey
+    let toBeSigned = tanHash + ";" + certHash + ";" + pubKey
     let toBeSignedData = Data(toBeSigned.encode())
     Enclave.sign(data: toBeSignedData, with: cert.keyPair) { sign, err in
       guard let sign = sign, err == nil else {
