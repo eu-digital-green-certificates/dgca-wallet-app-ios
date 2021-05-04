@@ -67,11 +67,12 @@ class CertificateViewerVC: UIViewController {
     return
   }
 
+  var newCertAdded = false
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
 
     Brightness.reset()
-    childDismissedDelegate?.childDismissed()
+    childDismissedDelegate?.childDismissed(newCertAdded)
   }
 
   @IBAction
@@ -97,6 +98,7 @@ class CertificateViewerVC: UIViewController {
             return
           }
           LocalData.add(cert)
+          self?.newCertAdded = true
           self?.showAlert(
             title: "Success",
             subtitle: "Certificate was saved to wallet!"

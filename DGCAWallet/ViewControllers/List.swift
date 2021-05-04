@@ -46,7 +46,6 @@ class ListVC: UIViewController {
 
     table.dataSource = self
     table.delegate = self
-    reloadTable()
   }
 
   @IBAction
@@ -105,7 +104,10 @@ class ListVC: UIViewController {
 }
 
 extension ListVC: CertViewerDelegate {
-  func childDismissed() {
+  func childDismissed(_ newCertAdded: Bool) {
+    if newCertAdded {
+      reloadTable()
+    }
     presentingViewer = nil
   }
 }
@@ -114,7 +116,6 @@ extension ListVC: ScanVCDelegate {
   func hCertScanned(_ cert: HCert) {
     newHCertScanned = cert
     DispatchQueue.main.async { [weak self] in
-      self?.reloadTable()
       self?.navigationController?.popViewController(animated: true)
     }
   }
