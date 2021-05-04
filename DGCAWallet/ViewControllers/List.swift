@@ -112,7 +112,6 @@ extension ListVC: CertViewerDelegate {
 
 extension ListVC: ScanVCDelegate {
   func hCertScanned(_ cert: HCert) {
-    LocalData.add(cert)
     newHCertScanned = cert
     DispatchQueue.main.async { [weak self] in
       self?.reloadTable()

@@ -93,6 +93,10 @@ class CertificateViewerVC: UIViewController {
       }
       GatewayConnection.claim(cert: cert, with: $0) {
         if $0 {
+          guard let cert = self?.hCert else {
+            return
+          }
+          LocalData.add(cert)
           self?.showAlert(
             title: "Success",
             subtitle: "Certificate was saved to wallet!"
