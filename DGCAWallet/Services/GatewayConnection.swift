@@ -35,27 +35,43 @@ struct GatewayConnection {
   static let claimEndpoint = "dgci/wallet/claim"
 
   public static func claim(cert: HCert, with tan: String?, completion: ((Bool) -> Void)?) {
-    guard let tan = tan, !tan.isEmpty else {
+    guard var tan = tan, !tan.isEmpty else {
       completion?(false)
       return
     }
-    let param: [String: Any] = [
-      "dgci": cert.uvci,
-      "tanHash": SHA256.stringDigest(input: Data(tan.encode())),
-      "certHash": cert.certHash,
-      "pubKey": "TODO: DER encoded cert.keyPair pubkey",
-      "signature": "TODO: signature",
-    ]
-    AF.request(serverURI + claimEndpoint, method: .get, parameters: param, encoding: JSONEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
-      guard
-        case .success(_) = $0.result,
-        let status = $0.response?.statusCode,
-        status == 204
-      else {
-        completion?(false)
+    // Replace dashes, spaces, etc. and turn into uppercase.
+    let set = CharacterSet(charactersIn: "0123456789").union(.capitalizedLetters)
+    tan = tan.uppercased().components(separatedBy: set.inverted).joined()
+
+    let tanHash = SHA256.stringDigest(input: Data(tan.encode()))
+    let certHash = cert.certHash
+    let pubKey = (X509.derPubKey(for: cert.keyPair) ?? Data()).base64EncodedString()
+
+    let toBeSigned = tanHash + certHash + pubKey
+    let toBeSignedData = Data(toBeSigned.encode())
+    Enclave.sign(data: toBeSignedData, with: cert.keyPair) { sign, err in
+      guard let sign = sign, err == nil else {
         return
       }
-      completion?(true)
+
+      let param: [String: Any] = [
+        "dgci": cert.uvci,
+        "tanHash": tanHash,
+        "certHash": certHash,
+        "pubKey": pubKey,
+        "signature": sign.base64EncodedData(),
+      ]
+      AF.request(serverURI + claimEndpoint, method: .get, parameters: param, encoding: JSONEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
+        guard
+          case .success(_) = $0.result,
+          let status = $0.response?.statusCode,
+          status == 204
+        else {
+          completion?(false)
+          return
+        }
+        completion?(true)
+      }
     }
   }
 }
