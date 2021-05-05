@@ -71,7 +71,7 @@ struct GatewayConnection {
           let status = $0.response?.statusCode,
           status == 204
         else {
-          completion?(true)
+          completion?(false)
           return
         }
         completion?(true)
