@@ -64,7 +64,7 @@ struct GatewayConnection {
         "certhash": certHash,
         "publicKey": keyParam,
         "signature": sign.base64EncodedString(),
-        "sigAlg": "ES256",
+        "sigAlg": "SHA256withECDSA",
       ]
       AF.request(serverURI + claimEndpoint, method: .get, parameters: param, encoding: JSONEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
         guard
