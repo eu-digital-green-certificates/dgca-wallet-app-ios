@@ -27,5 +27,5 @@
 import Foundation
 
 protocol CertViewerDelegate {
-  func childDismissed()
+  func childDismissed(_ newCertAdded: Bool)
 }

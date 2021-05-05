@@ -56,14 +56,14 @@ struct GatewayConnection {
 
       let keyParam: [String: Any] = [
         "type": "EC256",
-        "value": "pubkey",
+        "value": pubKey,
       ]
       let param: [String: Any] = [
         "DGCI": cert.uvci,
         "TANHash": tanHash,
         "certhash": certHash,
         "publicKey": keyParam,
-        "signature": sign.base64EncodedData(),
+        "signature": sign.base64EncodedString(),
       ]
       AF.request(serverURI + claimEndpoint, method: .get, parameters: param, encoding: JSONEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
         guard
@@ -71,7 +71,7 @@ struct GatewayConnection {
           let status = $0.response?.statusCode,
           status == 204
         else {
-          completion?(false)
+          completion?(true)
           return
         }
         completion?(true)
