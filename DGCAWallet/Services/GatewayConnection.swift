@@ -66,7 +66,7 @@ struct GatewayConnection {
         "signature": sign.base64EncodedString(),
         "sigAlg": "SHA256withECDSA",
       ]
-      AF.request(serverURI + claimEndpoint, method: .get, parameters: param, encoding: JSONEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
+      AF.request(serverURI + claimEndpoint, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
         guard
           case .success(_) = $0.result,
           let status = $0.response?.statusCode,
