@@ -49,7 +49,7 @@ struct GatewayConnection {
 
     let toBeSigned = tanHash + ";" + certHash + ";" + pubKey
     let toBeSignedData = Data(toBeSigned.encode())
-    Enclave.sign(data: toBeSignedData, with: cert.keyPair) { sign, err in
+    Enclave.sign(data: toBeSignedData, with: cert.keyPair, using: .ecdsaSignatureMessageX962SHA256) { sign, err in
       guard let sign = sign, err == nil else {
         return
       }
@@ -64,6 +64,7 @@ struct GatewayConnection {
         "certhash": certHash,
         "publicKey": keyParam,
         "signature": sign.base64EncodedString(),
+        "sigAlg": "ES256",
       ]
       AF.request(serverURI + claimEndpoint, method: .get, parameters: param, encoding: JSONEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
         guard
