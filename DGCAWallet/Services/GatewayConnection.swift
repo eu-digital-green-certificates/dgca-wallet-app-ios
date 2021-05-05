@@ -32,7 +32,7 @@ import SwiftyJSON
 
 struct GatewayConnection {
   static let serverURI = "https://dgca-issuance-web.cfapps.eu10.hana.ondemand.com/"
-  static let claimEndpoint = "dgci/wallet/claim"
+  static let claimEndpoint = "dgca-issuance-service/dgci/wallet/claim"
 
   public static func claim(cert: HCert, with tan: String?, completion: ((Bool) -> Void)?) {
     guard var tan = tan, !tan.isEmpty else {
