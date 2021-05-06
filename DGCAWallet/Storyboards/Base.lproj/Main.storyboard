@@ -33,77 +33,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="WAh-yr-kBl" kind="relationship" relationship="rootViewController" id="oId-Lu-4lF"/>
+                        <segue destination="ysI-lD-MMP" kind="relationship" relationship="rootViewController" id="hVY-v2-aWx"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5eU-tP-IWk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1504" y="106"/>
-        </scene>
-        <!--HomeVC-->
-        <scene sceneID="bL6-rz-qET">
-            <objects>
-                <viewController id="WAh-yr-kBl" customClass="HomeVC" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="TSz-Wk-1F3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wallet_icon" translatesAutoresizingMaskIntoConstraints="NO" id="SJI-m9-dcF">
-                                <rect key="frame" x="151" y="142.5" width="112" height="150"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="112" id="R7i-Mx-pc4"/>
-                                    <constraint firstAttribute="height" constant="150" id="bZz-MV-Uqc"/>
-                                </constraints>
-                            </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U1k-Fz-tlt">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="134.5"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NXa-E7-6vV">
-                                <rect key="frame" x="133.5" y="300.5" width="147.5" height="36"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SnU-NM-uwu">
-                                <rect key="frame" x="0.0" y="746.5" width="414" height="149.5"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_eu_logo" translatesAutoresizingMaskIntoConstraints="NO" id="69c-5J-Njm">
-                                <rect key="frame" x="117" y="778.5" width="180" height="51.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="69c-5J-Njm" secondAttribute="height" multiplier="7:2" id="M24-Iq-Kzc"/>
-                                    <constraint firstAttribute="width" constant="180" id="xGF-P2-WEp"/>
-                                </constraints>
-                            </imageView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="Eo3-Vz-9CR"/>
-                        <color key="backgroundColor" name="blue"/>
-                        <constraints>
-                            <constraint firstItem="SJI-m9-dcF" firstAttribute="top" secondItem="U1k-Fz-tlt" secondAttribute="bottom" constant="8" id="6jC-ko-79y"/>
-                            <constraint firstAttribute="trailing" secondItem="SnU-NM-uwu" secondAttribute="trailing" id="Agf-JR-qgn"/>
-                            <constraint firstItem="U1k-Fz-tlt" firstAttribute="leading" secondItem="TSz-Wk-1F3" secondAttribute="leading" id="EnG-PV-xVf"/>
-                            <constraint firstAttribute="bottom" secondItem="SnU-NM-uwu" secondAttribute="bottom" id="Gb3-2j-P5W"/>
-                            <constraint firstItem="Eo3-Vz-9CR" firstAttribute="bottom" secondItem="69c-5J-Njm" secondAttribute="bottom" constant="32" id="Gl5-Xp-V82"/>
-                            <constraint firstItem="SJI-m9-dcF" firstAttribute="centerX" secondItem="TSz-Wk-1F3" secondAttribute="centerX" id="J8i-HJ-Mz8"/>
-                            <constraint firstAttribute="trailing" secondItem="U1k-Fz-tlt" secondAttribute="trailing" id="OGa-o0-tJV"/>
-                            <constraint firstItem="69c-5J-Njm" firstAttribute="centerX" secondItem="TSz-Wk-1F3" secondAttribute="centerX" id="PeV-gt-gBw"/>
-                            <constraint firstItem="U1k-Fz-tlt" firstAttribute="top" secondItem="TSz-Wk-1F3" secondAttribute="top" id="cdZ-XD-qKo"/>
-                            <constraint firstItem="NXa-E7-6vV" firstAttribute="top" secondItem="SJI-m9-dcF" secondAttribute="bottom" constant="8" id="eK4-uU-snd"/>
-                            <constraint firstItem="69c-5J-Njm" firstAttribute="top" secondItem="SnU-NM-uwu" secondAttribute="top" constant="32" id="jZM-r0-jp4"/>
-                            <constraint firstItem="NXa-E7-6vV" firstAttribute="centerX" secondItem="TSz-Wk-1F3" secondAttribute="centerX" id="mL1-PH-CIz"/>
-                            <constraint firstItem="SnU-NM-uwu" firstAttribute="leading" secondItem="TSz-Wk-1F3" secondAttribute="leading" id="pWb-aN-K7H"/>
-                            <constraint firstItem="U1k-Fz-tlt" firstAttribute="height" secondItem="TSz-Wk-1F3" secondAttribute="height" multiplier="0.15" id="w13-2b-J2X"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="gBj-fB-LXt"/>
-                    <connections>
-                        <segue destination="BcE-gA-Tuj" kind="show" identifier="list" id="ZNx-l8-RZx"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="e7E-wh-c4L" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-674" y="106"/>
         </scene>
         <!--ListVC-->
         <scene sceneID="C6e-2t-4NZ">
@@ -218,6 +153,71 @@
             </objects>
             <point key="canvasLocation" x="182.60869565217394" y="105.80357142857143"/>
         </scene>
+        <!--HomeVC-->
+        <scene sceneID="6EO-ab-Dh1">
+            <objects>
+                <viewController id="ysI-lD-MMP" customClass="HomeVC" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nK0-Ka-oxK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wallet_icon" translatesAutoresizingMaskIntoConstraints="NO" id="bgA-BE-q6I">
+                                <rect key="frame" x="151" y="142.5" width="112" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="112" id="43a-Jz-rXG"/>
+                                    <constraint firstAttribute="height" constant="150" id="llq-cN-N2Z"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y0y-FM-nxg">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="134.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N7y-9d-COU">
+                                <rect key="frame" x="133.5" y="300.5" width="147" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4uz-H9-TEA">
+                                <rect key="frame" x="0.0" y="754.5" width="414" height="141.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EU_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Yx8-qg-PWV">
+                                <rect key="frame" x="117" y="778.5" width="180" height="51.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="12L-4m-T4d"/>
+                                    <constraint firstAttribute="width" secondItem="Yx8-qg-PWV" secondAttribute="height" multiplier="7:2" id="vQY-Up-OpN"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="2IL-4a-0QH"/>
+                        <color key="backgroundColor" name="blue"/>
+                        <constraints>
+                            <constraint firstItem="Y0y-FM-nxg" firstAttribute="height" secondItem="nK0-Ka-oxK" secondAttribute="height" multiplier="0.15" id="063-fn-psP"/>
+                            <constraint firstItem="2IL-4a-0QH" firstAttribute="bottom" secondItem="Yx8-qg-PWV" secondAttribute="bottom" constant="32" id="5iX-L0-KYG"/>
+                            <constraint firstItem="N7y-9d-COU" firstAttribute="top" secondItem="bgA-BE-q6I" secondAttribute="bottom" constant="8" id="Kcp-bY-ngv"/>
+                            <constraint firstAttribute="bottom" secondItem="4uz-H9-TEA" secondAttribute="bottom" id="Nf8-2D-RJX"/>
+                            <constraint firstItem="Y0y-FM-nxg" firstAttribute="top" secondItem="nK0-Ka-oxK" secondAttribute="top" id="RzH-PP-GTn"/>
+                            <constraint firstAttribute="trailing" secondItem="Y0y-FM-nxg" secondAttribute="trailing" id="TCR-cd-c89"/>
+                            <constraint firstItem="Y0y-FM-nxg" firstAttribute="leading" secondItem="nK0-Ka-oxK" secondAttribute="leading" id="YLV-On-uAX"/>
+                            <constraint firstItem="Yx8-qg-PWV" firstAttribute="top" secondItem="4uz-H9-TEA" secondAttribute="top" constant="24" id="ZcQ-gu-zK3"/>
+                            <constraint firstItem="bgA-BE-q6I" firstAttribute="centerX" secondItem="nK0-Ka-oxK" secondAttribute="centerX" id="deP-Kv-Hzf"/>
+                            <constraint firstAttribute="trailing" secondItem="4uz-H9-TEA" secondAttribute="trailing" id="jwk-iZ-8BZ"/>
+                            <constraint firstItem="bgA-BE-q6I" firstAttribute="top" secondItem="Y0y-FM-nxg" secondAttribute="bottom" constant="8" id="mFm-n7-dLO"/>
+                            <constraint firstItem="4uz-H9-TEA" firstAttribute="leading" secondItem="nK0-Ka-oxK" secondAttribute="leading" id="oIn-3D-Dnv"/>
+                            <constraint firstItem="Yx8-qg-PWV" firstAttribute="centerX" secondItem="nK0-Ka-oxK" secondAttribute="centerX" id="tqT-ge-NdB"/>
+                            <constraint firstItem="N7y-9d-COU" firstAttribute="centerX" secondItem="nK0-Ka-oxK" secondAttribute="centerX" id="y1Y-R2-9vl"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="OA6-WB-Bsu"/>
+                    <connections>
+                        <segue destination="BcE-gA-Tuj" kind="show" identifier="list" id="GGI-dr-YbQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="k79-Ja-kNa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-641" y="106"/>
+        </scene>
     </scenes>
     <designables>
         <designable name="MID-ne-Jur">
@@ -225,7 +225,7 @@
         </designable>
     </designables>
     <resources>
-        <image name="main_eu_logo" width="162" height="42"/>
+        <image name="EU_logo" width="72" height="48"/>
         <image name="wallet_icon" width="112" height="112"/>
         <namedColor name="blue">
             <color red="0.0" green="0.2669999897480011" blue="0.57999998331069946" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
