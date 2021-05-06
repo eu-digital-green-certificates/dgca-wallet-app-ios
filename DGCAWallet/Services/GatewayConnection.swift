@@ -32,7 +32,7 @@ import SwiftyJSON
 
 struct GatewayConnection {
   static let serverURI = "https://dgca-issuance-web.cfapps.eu10.hana.ondemand.com/"
-  static let claimEndpoint = "dgci/wallet/claim"
+  static let claimEndpoint = "dgca-issuance-service/dgci/wallet/claim"
 
   public static func claim(cert: HCert, with tan: String?, completion: ((Bool) -> Void)?) {
     guard var tan = tan, !tan.isEmpty else {
@@ -47,9 +47,9 @@ struct GatewayConnection {
     let certHash = cert.certHash
     let pubKey = (X509.derPubKey(for: cert.keyPair) ?? Data()).base64EncodedString()
 
-    let toBeSigned = tanHash + ";" + certHash + ";" + pubKey
+    let toBeSigned = tanHash + certHash + pubKey
     let toBeSignedData = Data(toBeSigned.encode())
-    Enclave.sign(data: toBeSignedData, with: cert.keyPair) { sign, err in
+    Enclave.sign(data: toBeSignedData, with: cert.keyPair, using: .ecdsaSignatureMessageX962SHA256) { sign, err in
       guard let sign = sign, err == nil else {
         return
       }
@@ -64,8 +64,9 @@ struct GatewayConnection {
         "certhash": certHash,
         "publicKey": keyParam,
         "signature": sign.base64EncodedString(),
+        "sigAlg": "SHA256withECDSA",
       ]
-      AF.request(serverURI + claimEndpoint, method: .get, parameters: param, encoding: JSONEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
+      AF.request(serverURI + claimEndpoint, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
         guard
           case .success(_) = $0.result,
           let status = $0.response?.statusCode,
