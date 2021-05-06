@@ -44,7 +44,7 @@ class CertificateViewerVC: UIViewController {
   func draw() {
     nameLabel.text = hCert.fullName
     if !isSaved {
-      dismissButton.setTitle("Save", for: .normal)
+      dismissButton.setTitle(l10n("btn.save"), for: .normal)
     }
     headerBackground.backgroundColor = isSaved ? .blue : .grey10
     nameLabel.textColor = isSaved ? .white : .black
@@ -88,9 +88,9 @@ class CertificateViewerVC: UIViewController {
 
   func saveCert() {
     showInputDialog(
-      title: "Confirm TAN",
-      subtitle: "Please enter the TAN that was provided together with your certificate:",
-      inputPlaceholder: "XYZ12345"
+      title: l10n("tan.confirm.title"),
+      subtitle: l10n("tan.confirm.text"),
+      inputPlaceholder: l10n("tan.confirm.placeholder")
     ) { [weak self] in
       guard let cert = self?.hCert else {
         return
@@ -103,15 +103,15 @@ class CertificateViewerVC: UIViewController {
           LocalData.add(cert, with: newTan)
           self?.newCertAdded = true
           self?.showAlert(
-            title: "Success",
-            subtitle: "Certificate was saved to wallet!"
+            title: l10n("tan.confirm.success.title"),
+            subtitle: l10n("tan.confirm.success.text")
           ) { _ in
             self?.dismiss(animated: true, completion: nil)
           }
         } else {
           self?.showAlert(
-            title: "Failure",
-            subtitle: "Check the TAN and try again."
+            title: l10n("tan.confirm.fail.title"),
+            subtitle: l10n("tan.confirm.fail.text")
           )
         }
       }

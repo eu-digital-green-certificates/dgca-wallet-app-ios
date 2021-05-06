@@ -27,13 +27,14 @@
 
 
 import UIKit
+import SwiftDGC
 
 extension UIViewController {
   func showInputDialog(
     title: String? = nil,
     subtitle: String? = nil,
-    actionTitle: String? = "Okay",
-    cancelTitle: String? = "Cancel",
+    actionTitle: String? = l10n("btn.okay"),
+    cancelTitle: String? = l10n("btn.cancel"),
     inputPlaceholder: String? = nil,
     inputKeyboardType: UIKeyboardType = UIKeyboardType.default,
     handler: ((_ text: String?) -> Void)? = nil
@@ -59,7 +60,7 @@ extension UIViewController {
   func showAlert(
     title: String? = nil,
     subtitle: String? = nil,
-    actionTitle: String? = "Okay",
+    actionTitle: String? = l10n("btn.okay"),
     cancelTitle: String? = nil,
     handler: ((Bool) -> Void)? = nil
   ) {
