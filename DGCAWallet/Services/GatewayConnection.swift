@@ -34,7 +34,7 @@ struct GatewayConnection {
   static let serverURI = "https://dgca-issuance-web.cfapps.eu10.hana.ondemand.com/"
   static let claimEndpoint = "dgca-issuance-service/dgci/wallet/claim"
 
-  public static func claim(cert: HCert, with tan: String?, completion: ((Bool) -> Void)?) {
+  public static func claim(cert: HCert, with tan: String?, completion: ((Bool, String?) -> Void)?) {
     guard var tan = tan, !tan.isEmpty else {
       return
     }
@@ -71,10 +71,14 @@ struct GatewayConnection {
           let status = $0.response?.statusCode,
           status == 204
         else {
-          completion?(false)
+          completion?(false, nil)
           return
         }
-        completion?(true)
+
+        let response = String(data: $0.data ?? .init(), encoding: .utf8)
+        let json = JSON(parseJSON: response ?? "")
+        let newTAN = json["newTAN"].string
+        completion?(true, newTAN)
       }
     }
   }

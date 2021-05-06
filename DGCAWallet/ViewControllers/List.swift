@@ -68,7 +68,7 @@ class ListVC: UIViewController {
   var presentingViewer: CertificateViewerVC?
   var newHCertScanned: HCert?
 
-  func presentViewer(for certificate: HCert, isSaved: Bool = true) {
+  func presentViewer(for certificate: HCert, with tan: String? = nil, isSaved: Bool = true) {
     guard
       presentingViewer == nil,
       let contentVC = UIStoryboard(name: "CertificateViewer", bundle: nil)
@@ -80,6 +80,7 @@ class ListVC: UIViewController {
 
     viewer.isSaved = isSaved
     viewer.hCert = certificate
+    viewer.tan = tan
     viewer.childDismissedDelegate = self
     let fpc = FloatingPanelController()
     fpc.set(contentViewController: viewer)
@@ -149,7 +150,7 @@ extension ListVC: UITableViewDelegate {
     else {
       return
     }
-    presentViewer(for: cert)
+    presentViewer(for: cert, with: listElements[indexPath.row].storedTAN)
   }
 }
 

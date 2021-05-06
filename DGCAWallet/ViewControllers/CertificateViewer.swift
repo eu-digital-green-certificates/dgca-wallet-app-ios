@@ -37,6 +37,7 @@ class CertificateViewerVC: UIViewController {
   @IBOutlet weak var cancelButtonConstraint: NSLayoutConstraint!
 
   var hCert: HCert!
+  var tan: String?
   var childDismissedDelegate: CertViewerDelegate?
   public var isSaved = true
 
@@ -94,12 +95,12 @@ class CertificateViewerVC: UIViewController {
       guard let cert = self?.hCert else {
         return
       }
-      GatewayConnection.claim(cert: cert, with: $0) {
-        if $0 {
+      GatewayConnection.claim(cert: cert, with: $0) { success, newTan in
+        if success {
           guard let cert = self?.hCert else {
             return
           }
-          LocalData.add(cert)
+          LocalData.add(cert, with: newTan)
           self?.newCertAdded = true
           self?.showAlert(
             title: "Success",
