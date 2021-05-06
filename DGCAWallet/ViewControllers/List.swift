@@ -54,8 +54,10 @@ class ListVC: UIViewController {
   }
 
   @IBOutlet weak var table: UITableView!
+  @IBOutlet weak var emptyView: UIView!
 
   func reloadTable() {
+    emptyView.alpha = listElements.isEmpty ? 1 : 0
     table.reloadData()
   }
 
@@ -68,7 +70,7 @@ class ListVC: UIViewController {
   var presentingViewer: CertificateViewerVC?
   var newHCertScanned: HCert?
 
-  func presentViewer(for certificate: HCert, isSaved: Bool = true) {
+  func presentViewer(for certificate: HCert, with tan: String? = nil, isSaved: Bool = true) {
     guard
       presentingViewer == nil,
       let contentVC = UIStoryboard(name: "CertificateViewer", bundle: nil)
@@ -80,6 +82,7 @@ class ListVC: UIViewController {
 
     viewer.isSaved = isSaved
     viewer.hCert = certificate
+    viewer.tan = tan
     viewer.childDismissedDelegate = self
     let fpc = FloatingPanelController()
     fpc.set(contentViewController: viewer)
@@ -122,8 +125,12 @@ extension ListVC: ScanVCDelegate {
 }
 
 extension ListVC: UITableViewDataSource {
+  var listElements: [DatedCertString] {
+    LocalData.sharedInstance.certStrings.reversed()
+  }
+
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    LocalData.sharedInstance.certStrings.count
+    listElements.count
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -132,7 +139,7 @@ extension ListVC: UITableViewDataSource {
       return cell
     }
 
-    walletCell.draw(LocalData.sharedInstance.certStrings[indexPath.row])
+    walletCell.draw(listElements[indexPath.row])
     return walletCell
   }
 }
@@ -141,11 +148,11 @@ extension ListVC: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     table.deselectRow(at: indexPath, animated: true)
     guard
-      let cert = LocalData.sharedInstance.certStrings[indexPath.row].cert
+      let cert = listElements[indexPath.row].cert
     else {
       return
     }
-    presentViewer(for: cert)
+    presentViewer(for: cert, with: listElements[indexPath.row].storedTAN)
   }
 }
 

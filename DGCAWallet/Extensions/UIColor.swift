@@ -34,4 +34,5 @@ extension UIColor {
   static var blue: UIColor! { UIColor(named: "blue") }
   static var black: UIColor! { UIColor(named: "black") }
   static var disabledText: UIColor! { UIColor(named: "disabledText") }
+  static var grey10: UIColor! { UIColor(named: "grey10") }
 }

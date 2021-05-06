@@ -30,14 +30,18 @@ import UIKit
 
 class CertCodeVC: UIViewController {
   @IBOutlet weak var imageView: UIImageView!
+  @IBOutlet weak var tanLabel: UILabel!
 
-  var hCert: HCert! {
-    (parent as? CertPagesVC)?.embeddingVC.hCert
-  }
+  var hCert: HCert! { (parent as? CertPagesVC)?.embeddingVC.hCert }
+  var tan: String? { (parent as? CertPagesVC)?.embeddingVC.tan }
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
     imageView.image = hCert.qrCode
+    tanLabel.text = ""
+    if let tan = tan {
+      tanLabel.text = "TAN: \(tan)"
+    }
   }
 }

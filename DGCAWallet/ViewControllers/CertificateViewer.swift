@@ -30,34 +30,32 @@ import FloatingPanel
 import SwiftDGC
 
 class CertificateViewerVC: UIViewController {
+  @IBOutlet weak var headerBackground: UIView!
   @IBOutlet weak var nameLabel: UILabel!
-  @IBOutlet weak var typeSegments: UISegmentedControl!
   @IBOutlet weak var dismissButton: UIButton!
+  @IBOutlet weak var cancelButton: UIButton!
+  @IBOutlet weak var cancelButtonConstraint: NSLayoutConstraint!
 
   var hCert: HCert!
+  var tan: String?
   var childDismissedDelegate: CertViewerDelegate?
   public var isSaved = true
 
   func draw() {
     nameLabel.text = hCert.fullName
-    typeSegments.selectedSegmentIndex = [
-      HCertType.test,
-      HCertType.vaccine,
-      HCertType.recovery
-    ].firstIndex(of: hCert.type) ?? 0
     if !isSaved {
       dismissButton.setTitle("Save", for: .normal)
     }
+    headerBackground.backgroundColor = isSaved ? .blue : .grey10
+    nameLabel.textColor = isSaved ? .white : .black
+    cancelButton.alpha = isSaved ? 0 : 1
+    cancelButtonConstraint.priority = .init(isSaved ? 997 : 999)
+    view.layoutIfNeeded()
   }
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    // selected option color
-    typeSegments.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black!], for: .selected)
-    // color of other options
-    typeSegments.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.disabledText!], for: .normal)
-    typeSegments.backgroundColor = UIColor(white: 1.0, alpha: 0.06)
     draw()
   }
 
@@ -76,11 +74,16 @@ class CertificateViewerVC: UIViewController {
   }
 
   @IBAction
-  func closeButton() {
+  func closeButtonClick() {
     if isSaved {
       return dismiss(animated: true, completion: nil)
     }
     saveCert()
+  }
+
+  @IBAction
+  func cancelButtonClick() {
+    dismiss(animated: true, completion: nil)
   }
 
   func saveCert() {
@@ -92,12 +95,12 @@ class CertificateViewerVC: UIViewController {
       guard let cert = self?.hCert else {
         return
       }
-      GatewayConnection.claim(cert: cert, with: $0) {
-        if $0 {
+      GatewayConnection.claim(cert: cert, with: $0) { success, newTan in
+        if success {
           guard let cert = self?.hCert else {
             return
           }
-          LocalData.add(cert)
+          LocalData.add(cert, with: newTan)
           self?.newCertAdded = true
           self?.showAlert(
             title: "Success",
