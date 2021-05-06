@@ -29,6 +29,7 @@
 import Foundation
 import UIKit
 import LocalAuthentication
+import SwiftDGC
 
 struct SecureBackground {
   static var imageView: UIImageView?
@@ -66,8 +67,8 @@ struct SecureBackground {
     }
     paused = true
     let context = LAContext()
-    context.localizedCancelTitle = "Try Later"
-    let reason = "Confirm Identity"
+    context.localizedCancelTitle = l10n("auth.later")
+    let reason = l10n("auth.confirm")
     var error: NSError?
     guard context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) else {
       paused = false
