@@ -26,7 +26,7 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a9u-Ia-KEX" customClass="RoundedButton" customModule="DGCAWallet" customModuleProvider="target">
-                                        <rect key="frame" x="305" y="664.66666666666663" width="54" height="53.333333333333371"/>
+                                        <rect key="frame" x="281" y="664.66666666666663" width="78" height="53.333333333333371"/>
                                         <color key="backgroundColor" name="blue"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                         <state key="normal" title="Done">
@@ -247,7 +247,7 @@
     </scenes>
     <designables>
         <designable name="a9u-Ia-KEX">
-            <size key="intrinsicContentSize" width="54" height="39"/>
+            <size key="intrinsicContentSize" width="78" height="51"/>
         </designable>
     </designables>
     <resources>

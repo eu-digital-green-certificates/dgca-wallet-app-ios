@@ -54,8 +54,10 @@ class ListVC: UIViewController {
   }
 
   @IBOutlet weak var table: UITableView!
+  @IBOutlet weak var emptyView: UIView!
 
   func reloadTable() {
+    emptyView.alpha = listElements.isEmpty ? 1 : 0
     table.reloadData()
   }
 
