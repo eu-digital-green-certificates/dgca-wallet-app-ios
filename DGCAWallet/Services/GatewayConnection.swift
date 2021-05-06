@@ -36,7 +36,6 @@ struct GatewayConnection {
 
   public static func claim(cert: HCert, with tan: String?, completion: ((Bool) -> Void)?) {
     guard var tan = tan, !tan.isEmpty else {
-      completion?(false)
       return
     }
     // Replace dashes, spaces, etc. and turn into uppercase.
@@ -55,7 +54,7 @@ struct GatewayConnection {
       }
 
       let keyParam: [String: Any] = [
-        "type": "EC256",
+        "type": "EC",
         "value": pubKey,
       ]
       let param: [String: Any] = [
