@@ -85,35 +85,36 @@
                                             <rect key="frame" x="0.0" y="0.0" width="384.5" height="164"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vaccination Shot 1 of 2" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Md0-O5-XZH">
-                                                    <rect key="frame" x="20" y="27" width="356.5" height="24"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vaccination Shot 1 of 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="Md0-O5-XZH">
+                                                    <rect key="frame" x="20" y="27" width="356.5" height="25.5"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Max Mustermann" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6NN-i3-YUv">
-                                                    <rect key="frame" x="20" y="67" width="221.5" height="70"/>
+                                                    <rect key="frame" x="20" y="68.5" width="340.5" height="37.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="scanned 2021-04-01" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="APa-yy-a1r">
-                                                    <rect key="frame" x="257.5" y="122" width="119" height="15"/>
+                                                    <rect key="frame" x="36" y="122" width="340.5" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" name="blue"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="APa-yy-a1r" firstAttribute="leading" secondItem="6NN-i3-YUv" secondAttribute="trailing" constant="16" id="5pY-rs-i85"/>
                                                 <constraint firstItem="6NN-i3-YUv" firstAttribute="top" secondItem="Md0-O5-XZH" secondAttribute="bottom" constant="16" id="G7X-Kg-G9n"/>
                                                 <constraint firstItem="Md0-O5-XZH" firstAttribute="leading" secondItem="m3f-OR-BSb" secondAttribute="leadingMargin" id="RIv-q4-GJN"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Md0-O5-XZH" secondAttribute="trailing" id="UC5-Se-Y5x"/>
                                                 <constraint firstItem="Md0-O5-XZH" firstAttribute="top" secondItem="m3f-OR-BSb" secondAttribute="topMargin" constant="16" id="c5q-qS-b9t"/>
+                                                <constraint firstItem="APa-yy-a1r" firstAttribute="leading" secondItem="m3f-OR-BSb" secondAttribute="leadingMargin" constant="16" id="g7l-40-0Jk"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="APa-yy-a1r" secondAttribute="trailing" id="gtM-xa-4f4"/>
-                                                <constraint firstItem="6NN-i3-YUv" firstAttribute="bottom" secondItem="m3f-OR-BSb" secondAttribute="bottomMargin" constant="-16" id="hrz-Gp-N7H"/>
                                                 <constraint firstItem="APa-yy-a1r" firstAttribute="bottom" secondItem="m3f-OR-BSb" secondAttribute="bottomMargin" constant="-16" id="kme-C0-ptJ"/>
                                                 <constraint firstItem="6NN-i3-YUv" firstAttribute="leading" secondItem="m3f-OR-BSb" secondAttribute="leadingMargin" id="sBt-6B-WYJ"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="6NN-i3-YUv" secondAttribute="trailing" constant="16" id="tci-Dc-H16"/>
+                                                <constraint firstItem="APa-yy-a1r" firstAttribute="top" secondItem="6NN-i3-YUv" secondAttribute="bottom" constant="16" id="ugT-lX-dg7"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

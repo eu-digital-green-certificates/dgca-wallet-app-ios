@@ -122,8 +122,12 @@ extension ListVC: ScanVCDelegate {
 }
 
 extension ListVC: UITableViewDataSource {
+  var listElements: [DatedCertString] {
+    LocalData.sharedInstance.certStrings.reversed()
+  }
+
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    LocalData.sharedInstance.certStrings.count
+    listElements.count
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -132,7 +136,7 @@ extension ListVC: UITableViewDataSource {
       return cell
     }
 
-    walletCell.draw(LocalData.sharedInstance.certStrings[indexPath.row])
+    walletCell.draw(listElements[indexPath.row])
     return walletCell
   }
 }
@@ -141,7 +145,7 @@ extension ListVC: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     table.deselectRow(at: indexPath, animated: true)
     guard
-      let cert = LocalData.sharedInstance.certStrings[indexPath.row].cert
+      let cert = listElements[indexPath.row].cert
     else {
       return
     }
