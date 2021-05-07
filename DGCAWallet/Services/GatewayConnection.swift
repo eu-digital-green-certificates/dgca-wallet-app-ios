@@ -42,12 +42,12 @@ struct GatewayConnection {
     let set = CharacterSet(charactersIn: "0123456789").union(.capitalizedLetters)
     tan = tan.uppercased().components(separatedBy: set.inverted).joined()
 
-    let tanHash = SHA256.stringDigest(input: Data(tan.encode()))
+    let tanHash = SHA256.stringDigest(input: Data(tan.data(using: .utf8) ?? .init()))
     let certHash = cert.certHash
     let pubKey = (X509.derPubKey(for: cert.keyPair) ?? Data()).base64EncodedString()
 
     let toBeSigned = tanHash + certHash + pubKey
-    let toBeSignedData = Data(toBeSigned.encode())
+    let toBeSignedData = Data(toBeSigned.data(using: .utf8) ?? .init())
     Enclave.sign(data: toBeSignedData, with: cert.keyPair, using: .ecdsaSignatureMessageX962SHA256) { sign, err in
       guard let sign = sign, err == nil else {
         return
