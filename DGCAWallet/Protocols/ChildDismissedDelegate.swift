@@ -26,7 +26,7 @@
 
 import Foundation
 
-protocol CertViewerDelegate {
+protocol CertViewerDelegate: class {
   func childDismissed()
   func openSettings()
 }

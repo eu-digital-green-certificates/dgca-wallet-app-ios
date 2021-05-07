@@ -24,7 +24,6 @@
 //  
 //  Created by Yannick Spreen on 4/30/21.
 //  
-        
 
 import UIKit
 
@@ -34,7 +33,7 @@ class CertPagesVC: UIPageViewController {
   var index = 0
   let vcs: [UIViewController] = [
     UIStoryboard(name: "CertificateViewer", bundle: .main).instantiateViewController(withIdentifier: "code"),
-    UIStoryboard(name: "CertificateViewer", bundle: .main).instantiateViewController(withIdentifier: "infoTable"),
+    UIStoryboard(name: "CertificateViewer", bundle: .main).instantiateViewController(withIdentifier: "infoTable")
   ]
 
   override func viewDidLoad() {
@@ -65,12 +64,18 @@ class CertPagesVC: UIPageViewController {
 }
 
 extension CertPagesVC: UIPageViewControllerDataSource {
-  func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+  func pageViewController(
+    _ pageViewController: UIPageViewController,
+    viewControllerBefore viewController: UIViewController
+  ) -> UIViewController? {
     let index = vcs.firstIndex(of: viewController) ?? 0
     return index == 0 ? nil : vcs[index - 1]
   }
 
-  func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+  func pageViewController(
+    _ pageViewController: UIPageViewController,
+    viewControllerAfter viewController: UIViewController
+  ) -> UIViewController? {
     let index = vcs.firstIndex(of: viewController) ?? vcs.count - 1
     return index == vcs.count - 1 ? nil : vcs[index + 1]
   }
@@ -93,11 +98,11 @@ extension CertPagesVC: UIPageViewControllerDelegate {
   ) {
     guard
       completed,
-      let vc = pageViewController.viewControllers?.first
+      let controller = pageViewController.viewControllers?.first
     else {
       return
     }
-    index = vcs.firstIndex(of: vc) ?? 0
+    index = vcs.firstIndex(of: controller) ?? 0
     setBrightness()
   }
 }

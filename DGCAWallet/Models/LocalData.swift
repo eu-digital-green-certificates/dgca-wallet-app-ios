@@ -23,8 +23,7 @@
 //  DGCAWallet
 //  
 //  Created by Yannick Spreen on 4/25/21.
-//  
-        
+//
 
 import Foundation
 import SwiftDGC
@@ -32,7 +31,7 @@ import SwiftDGC
 struct DatedCertString: Codable {
   var date: Date
   var certString: String
-  var storedTAN : String?
+  var storedTAN: String?
   var cert: HCert? {
     HCert(from: certString)
   }

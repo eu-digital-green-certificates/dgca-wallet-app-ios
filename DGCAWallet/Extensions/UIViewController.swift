@@ -25,7 +25,6 @@
 //  Created by Yannick Spreen on 5/3/21.
 //  
 
-
 import UIKit
 import SwiftDGC
 
@@ -40,12 +39,12 @@ extension UIViewController {
     handler: ((_ text: String?) -> Void)? = nil
   ) {
     let alert = UIAlertController(title: title, message: subtitle, preferredStyle: .alert)
-    alert.addTextField { (textField:UITextField) in
+    alert.addTextField { (textField: UITextField) in
       textField.placeholder = inputPlaceholder
       textField.keyboardType = inputKeyboardType
     }
-    alert.addAction(UIAlertAction(title: actionTitle, style: .default) { action in
-      guard let textField =  alert.textFields?.first else {
+    alert.addAction(UIAlertAction(title: actionTitle, style: .default) { _ in
+      guard let textField = alert.textFields?.first else {
         handler?(nil)
         return
       }
@@ -65,7 +64,7 @@ extension UIViewController {
     handler: ((Bool) -> Void)? = nil
   ) {
     let alert = UIAlertController(title: title, message: subtitle, preferredStyle: .alert)
-    alert.addAction(UIAlertAction(title: actionTitle, style: .default) { action in
+    alert.addAction(UIAlertAction(title: actionTitle, style: .default) { _ in
       handler?(true)
     })
     if let cancelTitle = cancelTitle {
