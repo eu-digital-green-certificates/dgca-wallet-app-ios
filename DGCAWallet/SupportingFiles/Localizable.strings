@@ -38,3 +38,5 @@
 "tan.confirm.fail.title" = "Failure";
 "tan.confirm.fail.text" = "Check the TAN and try again.";
 "tan.label" = "TAN: %@";
+"auth.confirm" = "Confirm Identity";
+"auth.later" = "Try Later";
