@@ -1,4 +1,3 @@
-//
 /*-
  * ---license-start
  * eu-digital-green-certificates / dgca-wallet-app-ios
@@ -18,30 +17,24 @@
  * limitations under the License.
  * ---license-end
  */
-//  
-//  CertTable.swift
-//  DGCAWallet
-//  
-//  Created by Yannick Spreen on 4/30/21.
-//  
+/*
+  Localizable.strings
+  DGCAWallet
 
-import SwiftDGC
-import UIKit
+  Created by Yannick Spreen on 5/6/21.
+  
+*/
 
-class CertCodeVC: UIViewController {
-  @IBOutlet weak var imageView: UIImageView!
-  @IBOutlet weak var tanLabel: UILabel!
-
-  var hCert: HCert! { (parent as? CertPagesVC)?.embeddingVC.hCert }
-  var tan: String? { (parent as? CertPagesVC)?.embeddingVC.tan }
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
-
-    imageView.image = hCert.qrCode
-    tanLabel.text = ""
-    if let tan = tan {
-      tanLabel.text = String(format: l10n("tan.label"), tan)
-    }
-  }
-}
+"log.certs-loaded" = "%d certs loaded.";
+"list.cell.scanned-at" = "Scanned %@";
+"btn.okay" = "Okay";
+"btn.cancel" = "Cancel";
+"btn.save" = "Save";
+"tan.confirm.title" = "Confirm TAN";
+"tan.confirm.text" = "Please enter the TAN that was provided together with your certificate:";
+"tan.confirm.placeholder" = "XYZ12345";
+"tan.confirm.success.title" = "Success";
+"tan.confirm.success.text" = "Certificate was saved to wallet!";
+"tan.confirm.fail.title" = "Failure";
+"tan.confirm.fail.text" = "Check the TAN and try again.";
+"tan.label" = "TAN: %@";

@@ -15,6 +15,7 @@
 		CE1D1EF6263597A2004C8919 /* LocalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1D1EF5263597A2004C8919 /* LocalData.swift */; };
 		CE1F155C2639F9E700736D48 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = CE1F155B2639F9E700736D48 /* SwiftyJSON */; };
 		CE260F56263DD1720083A200 /* WalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE260F55263DD1720083A200 /* WalletCell.swift */; };
+		CE345FB826447A9F003B457E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE345FB726447A9F003B457E /* Localizable.strings */; };
 		CE37B643263867D700DEE13D /* SecureBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37B642263867D700DEE13D /* SecureBackground.swift */; };
 		CE56B5052639F48E00FB31B1 /* SwiftDGC in Frameworks */ = {isa = PBXBuildFile; productRef = CE56B5042639F48E00FB31B1 /* SwiftDGC */; };
 		CE56BC07264068110044FD3F /* GatewayConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE56BC06264068110044FD3F /* GatewayConnection.swift */; };
@@ -22,7 +23,6 @@
 		CE81533A263FF7EC0030D777 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CE815339263FF7EC0030D777 /* README.md */; };
 		CE8912FB2634C6B900CB92AF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CE8912FA2634C6B900CB92AF /* Alamofire */; };
 		CE891305263581D900CB92AF /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE891304263581D900CB92AF /* Home.swift */; };
-		CEA1555D262F63B30024B7AC /* EuDgcSchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA1555C262F63B30024B7AC /* EuDgcSchema.swift */; };
 		CEA15563262F6DAB0024B7AC /* CertViewerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA15562262F6DAB0024B7AC /* CertViewerDelegate.swift */; };
 		CEA1556B262F784E0024B7AC /* SelfSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA1556A262F784E0024B7AC /* SelfSizedTableView.swift */; };
 		CEA15570262F79DE0024B7AC /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA1556F262F79DE0024B7AC /* InfoCell.swift */; };
@@ -68,12 +68,12 @@
 		CE13CF22262DDF810070C80E /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		CE1D1EF5263597A2004C8919 /* LocalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalData.swift; sourceTree = "<group>"; };
 		CE260F55263DD1720083A200 /* WalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCell.swift; sourceTree = "<group>"; };
+		CE345FB726447A9F003B457E /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		CE37B642263867D700DEE13D /* SecureBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureBackground.swift; sourceTree = "<group>"; };
 		CE56BC06264068110044FD3F /* GatewayConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewayConnection.swift; sourceTree = "<group>"; };
 		CE8096D8263B07BB00A65AD6 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		CE815339263FF7EC0030D777 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		CE891304263581D900CB92AF /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
-		CEA1555C262F63B30024B7AC /* EuDgcSchema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EuDgcSchema.swift; sourceTree = "<group>"; };
 		CEA15562262F6DAB0024B7AC /* CertViewerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertViewerDelegate.swift; sourceTree = "<group>"; };
 		CEA1556A262F784E0024B7AC /* SelfSizedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizedTableView.swift; sourceTree = "<group>"; };
 		CEA1556F262F79DE0024B7AC /* InfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
@@ -197,7 +197,7 @@
 				CEA6D6ED261F8D2700715333 /* SceneDelegate.swift */,
 				CEA6D6F4261F8D2900715333 /* Assets.xcassets */,
 				CEA6D6F9261F8D2900715333 /* Info.plist */,
-				CEA1555C262F63B30024B7AC /* EuDgcSchema.swift */,
+				CE345FB726447A9F003B457E /* Localizable.strings */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -396,6 +396,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE13CF05262DCDCD0070C80E /* CertificateViewer.storyboard in Resources */,
+				CE345FB826447A9F003B457E /* Localizable.strings in Resources */,
 				CEA6D6F8261F8D2900715333 /* LaunchScreen.storyboard in Resources */,
 				CE81533A263FF7EC0030D777 /* README.md in Resources */,
 				CEA6D6F5261F8D2900715333 /* Assets.xcassets in Resources */,
@@ -436,7 +437,6 @@
 				CED2726026398683003D47A9 /* UIFont.swift in Sources */,
 				CEE9DA55263C7D4000A31532 /* CertCode.swift in Sources */,
 				CE56BC07264068110044FD3F /* GatewayConnection.swift in Sources */,
-				CEA1555D262F63B30024B7AC /* EuDgcSchema.swift in Sources */,
 				CEA6D6F0261F8D2700715333 /* Scan.swift in Sources */,
 				CE13CF23262DDF810070C80E /* RoundedButton.swift in Sources */,
 				CEA6E561264058B50066DC8E /* UIViewController.swift in Sources */,

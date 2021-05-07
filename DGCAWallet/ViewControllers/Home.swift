@@ -20,7 +20,7 @@
  */
 //  
 //  Home.swift
-//  PatientScannerDemo
+//  DGCAWallet
 //  
 //  Created by Yannick Spreen on 4/25/21.
 //  

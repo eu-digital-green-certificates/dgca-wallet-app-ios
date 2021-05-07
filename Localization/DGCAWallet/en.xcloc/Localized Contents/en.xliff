@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="DGCAWallet/Storyboards/Base.lproj/LaunchScreen.storyboard" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="12.5" build-num="12E262"/>
+    </header>
+    <body>
+      <trans-unit id="JUh-sx-2bS.text" xml:space="preserve">
+        <source>Wallet App</source>
+        <target>Wallet App</target>
+        <note>Class = "UILabel"; text = "Wallet App"; ObjectID = "JUh-sx-2bS";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="DGCAWallet/Storyboards/Base.lproj/Main.storyboard" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="12.5" build-num="12E262"/>
+    </header>
+    <body>
+      <trans-unit id="6NN-i3-YUv.text" xml:space="preserve">
+        <source>Max Mustermann</source>
+        <target>Max Mustermann</target>
+        <note>Class = "UILabel"; text = "Max Mustermann"; ObjectID = "6NN-i3-YUv";</note>
+      </trans-unit>
+      <trans-unit id="APa-yy-a1r.text" xml:space="preserve">
+        <source>scanned 2021-04-01</source>
+        <target>scanned 2021-04-01</target>
+        <note>Class = "UILabel"; text = "scanned 2021-04-01"; ObjectID = "APa-yy-a1r";</note>
+      </trans-unit>
+      <trans-unit id="MID-ne-Jur.normalTitle" xml:space="preserve">
+        <source>Scan Code</source>
+        <target>Scan Code</target>
+        <note>Class = "UIButton"; normalTitle = "Scan Code"; ObjectID = "MID-ne-Jur";</note>
+      </trans-unit>
+      <trans-unit id="Md0-O5-XZH.text" xml:space="preserve">
+        <source>Vaccination Shot 1 of 2</source>
+        <target>Vaccination Shot 1 of 2</target>
+        <note>Class = "UILabel"; text = "Vaccination Shot 1 of 2"; ObjectID = "Md0-O5-XZH";</note>
+      </trans-unit>
+      <trans-unit id="N7y-9d-COU.text" xml:space="preserve">
+        <source>Wallet App</source>
+        <target>Wallet App</target>
+        <note>Class = "UILabel"; text = "Wallet App"; ObjectID = "N7y-9d-COU";</note>
+      </trans-unit>
+      <trans-unit id="Q38-2s-CMN.text" xml:space="preserve">
+        <source>Certificate Wallet</source>
+        <target>Certificate Wallet</target>
+        <note>Class = "UILabel"; text = "Certificate Wallet"; ObjectID = "Q38-2s-CMN";</note>
+      </trans-unit>
+      <trans-unit id="f0r-gi-rzF.text" xml:space="preserve">
+        <source>Wallet Empty</source>
+        <target>Wallet Empty</target>
+        <note>Class = "UILabel"; text = "Wallet Empty"; ObjectID = "f0r-gi-rzF";</note>
+      </trans-unit>
+      <trans-unit id="xvs-y5-Iav.text" xml:space="preserve">
+        <source>Press the button below to scan your code.</source>
+        <target>Press the button below to scan your code.</target>
+        <note>Class = "UILabel"; text = "Press the button below to scan your code."; ObjectID = "xvs-y5-Iav";</note>
+      </trans-unit>
+    </body>
+  </file>
+  <file original="DGCAWallet/SupportingFiles/en.lproj/InfoPlist.strings" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="12.5" build-num="12E262"/>
+    </header>
+    <body>
+      <trans-unit id="CFBundleDisplayName" xml:space="preserve">
+        <source>Wallet App</source>
+        <target>Wallet App</target>
+        <note>Bundle display name</note>
+      </trans-unit>
+      <trans-unit id="CFBundleName" xml:space="preserve">
+        <source>DGCAWallet</source>
+        <target>DGCAWallet</target>
+        <note>Bundle name</note>
+      </trans-unit>
+      <trans-unit id="NSCameraUsageDescription" xml:space="preserve">
+        <source>Scan barcodes with your camera.</source>
+        <target>Scan barcodes with your camera.</target>
+        <note>Privacy - Camera Usage Description</note>
+      </trans-unit>
+      <trans-unit id="NSFaceIDUsageDescription" xml:space="preserve">
+        <source>Unlock sensitive data.</source>
+        <target>Unlock sensitive data.</target>
+        <note>Privacy - Face ID Usage Description</note>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
