@@ -69,7 +69,7 @@ struct GatewayConnection {
         guard
           case .success(_) = $0.result,
           let status = $0.response?.statusCode,
-          status == 204
+          status / 100 == 2
         else {
           completion?(false, nil)
           return
