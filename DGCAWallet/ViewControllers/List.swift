@@ -46,6 +46,7 @@ class ListVC: UIViewController {
 
     table.dataSource = self
     table.delegate = self
+    reloadTable()
   }
 
   @IBAction

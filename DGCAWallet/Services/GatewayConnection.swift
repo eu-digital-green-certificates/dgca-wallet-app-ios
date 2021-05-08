@@ -71,13 +71,13 @@ struct GatewayConnection {
           let status = $0.response?.statusCode,
           status == 204
         else {
-          completion?(true, nil)
+          completion?(false, nil)
           return
         }
 
         let response = String(data: $0.data ?? .init(), encoding: .utf8)
         let json = JSON(parseJSON: response ?? "")
-        let newTAN = json["newTAN"].string
+        let newTAN = json["tan"].string
         completion?(true, newTAN)
       }
     }

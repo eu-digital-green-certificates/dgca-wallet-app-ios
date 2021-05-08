@@ -26,11 +26,14 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a9u-Ia-KEX" customClass="RoundedButton" customModule="DGCAWallet" customModuleProvider="target">
-                                        <rect key="frame" x="305" y="664.66666666666663" width="54" height="53.333333333333371"/>
-                                        <color key="backgroundColor" name="blue"/>
+                                        <rect key="frame" x="147.66666666666666" y="631" width="80" height="51"/>
+                                        <color key="backgroundColor" name="yellow"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="8Pr-DR-H2m"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                         <state key="normal" title="Done">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleColor" name="black"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="padding">
@@ -48,7 +51,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsC-7e-Skh">
-                                        <rect key="frame" x="0.0" y="124.33333333333331" width="375" height="536.33333333333348"/>
+                                        <rect key="frame" x="0.0" y="124.33333333333334" width="375" height="502.66666666666663"/>
                                         <connections>
                                             <segue destination="PGK-qk-zXH" kind="embed" id="qHl-nM-9kf"/>
                                         </connections>
@@ -64,28 +67,28 @@
                                         </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EU_logo" translatesAutoresizingMaskIntoConstraints="NO" id="zGf-U8-pn3">
-                                        <rect key="frame" x="16" y="667.33333333333337" width="74.666666666666671" height="48"/>
+                                        <rect key="frame" x="165.66666666666666" y="698" width="43.666666666666657" height="28"/>
                                         <constraints>
+                                            <constraint firstAttribute="height" constant="28" id="fTf-OJ-OO7"/>
                                             <constraint firstAttribute="width" secondItem="zGf-U8-pn3" secondAttribute="height" multiplier="14:9" id="nDE-5U-ZWG"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="zGf-U8-pn3" firstAttribute="top" secondItem="a9u-Ia-KEX" secondAttribute="bottom" constant="16" id="5qd-XO-Lib"/>
                                     <constraint firstItem="DVW-2y-e4I" firstAttribute="top" secondItem="yEe-AH-rsr" secondAttribute="top" priority="999" constant="70" id="695-CS-7M3"/>
                                     <constraint firstItem="DVW-2y-e4I" firstAttribute="top" secondItem="yEe-AH-rsr" secondAttribute="top" priority="998" constant="32" id="6Py-fR-Th3"/>
                                     <constraint firstAttribute="trailing" secondItem="DVW-2y-e4I" secondAttribute="trailing" constant="16" id="7qh-Db-iAm"/>
-                                    <constraint firstAttribute="bottom" secondItem="a9u-Ia-KEX" secondAttribute="bottom" constant="16" id="DIh-vB-0ut"/>
-                                    <constraint firstItem="zGf-U8-pn3" firstAttribute="leading" secondItem="yEe-AH-rsr" secondAttribute="leading" constant="16" id="DXu-AK-qsU"/>
-                                    <constraint firstAttribute="trailing" secondItem="a9u-Ia-KEX" secondAttribute="trailing" constant="16" id="Fvw-Wg-v6P"/>
+                                    <constraint firstItem="a9u-Ia-KEX" firstAttribute="centerX" secondItem="yEe-AH-rsr" secondAttribute="centerX" id="CMV-FL-jZv"/>
                                     <constraint firstItem="dsC-7e-Skh" firstAttribute="top" secondItem="DVW-2y-e4I" secondAttribute="bottom" constant="16" id="IOq-Nn-KSI"/>
                                     <constraint firstItem="YeB-JS-Q1Q" firstAttribute="leading" secondItem="yEe-AH-rsr" secondAttribute="leading" constant="16" id="KST-2b-3cu"/>
                                     <constraint firstItem="YeB-JS-Q1Q" firstAttribute="top" secondItem="yEe-AH-rsr" secondAttribute="top" constant="32" id="c9J-hn-P8Z"/>
                                     <constraint firstAttribute="trailing" secondItem="dsC-7e-Skh" secondAttribute="trailing" id="csD-4w-284"/>
                                     <constraint firstItem="dsC-7e-Skh" firstAttribute="leading" secondItem="yEe-AH-rsr" secondAttribute="leading" id="fGR-NQ-ao6"/>
                                     <constraint firstItem="DVW-2y-e4I" firstAttribute="leading" secondItem="yEe-AH-rsr" secondAttribute="leading" constant="16" id="iQB-29-cRZ"/>
+                                    <constraint firstItem="zGf-U8-pn3" firstAttribute="centerX" secondItem="yEe-AH-rsr" secondAttribute="centerX" id="jLF-YC-vTd"/>
                                     <constraint firstItem="a9u-Ia-KEX" firstAttribute="top" secondItem="dsC-7e-Skh" secondAttribute="bottom" constant="4" id="kyo-Ax-A3w"/>
-                                    <constraint firstItem="zGf-U8-pn3" firstAttribute="centerY" secondItem="a9u-Ia-KEX" secondAttribute="centerY" id="mFX-bT-z3z"/>
-                                    <constraint firstItem="zGf-U8-pn3" firstAttribute="height" secondItem="a9u-Ia-KEX" secondAttribute="height" multiplier="0.9" id="yaf-tB-Xn4"/>
+                                    <constraint firstAttribute="bottom" secondItem="zGf-U8-pn3" secondAttribute="bottom" constant="8" id="utt-Vx-cic"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -247,7 +250,7 @@
     </scenes>
     <designables>
         <designable name="a9u-Ia-KEX">
-            <size key="intrinsicContentSize" width="54" height="39"/>
+            <size key="intrinsicContentSize" width="78" height="51"/>
         </designable>
     </designables>
     <resources>
@@ -261,6 +264,9 @@
         </namedColor>
         <namedColor name="grey10">
             <color red="0.92199999094009399" green="0.92199999094009399" blue="0.92199999094009399" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="yellow">
+            <color red="1" green="0.83921568627450982" blue="0.090196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
