@@ -39,7 +39,7 @@ struct GatewayConnection {
       return
     }
     // Replace dashes, spaces, etc. and turn into uppercase.
-    let set = CharacterSet(charactersIn: "0123456789").union(.capitalizedLetters)
+    let set = CharacterSet(charactersIn: "0123456789").union(.uppercaseLetters)
     tan = tan.uppercased().components(separatedBy: set.inverted).joined()
 
     let tanHash = SHA256.stringDigest(input: Data(tan.data(using: .utf8) ?? .init()))
