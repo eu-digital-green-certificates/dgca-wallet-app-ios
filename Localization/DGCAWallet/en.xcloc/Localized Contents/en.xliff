@@ -86,4 +86,104 @@
       </trans-unit>
     </body>
   </file>
+  <file original="DGCAWallet/SupportingFiles/en.lproj/Localizable.strings" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="12.5" build-num="12E262"/>
+    </header>
+    <body>
+      <trans-unit id="auth.confirm" xml:space="preserve">
+        <source>Confirm Identity</source>
+        <target>Confirm Identity</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="auth.later" xml:space="preserve">
+        <source>Try Later</source>
+        <target>Try Later</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="btn.cancel" xml:space="preserve">
+        <source>Cancel</source>
+        <target>Cancel</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="btn.confirm" xml:space="preserve">
+        <source>Confirm</source>
+        <target>Confirm</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="btn.okay" xml:space="preserve">
+        <source>Okay</source>
+        <target>Okay</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="btn.save" xml:space="preserve">
+        <source>Save</source>
+        <target>Save</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="cert.delete.body" xml:space="preserve">
+        <source>Are you sure you want to delete this certificate? This action cannot be undone.</source>
+        <target>Are you sure you want to delete this certificate? This action cannot be undone.</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="cert.delete.title" xml:space="preserve">
+        <source>Delete Certificate</source>
+        <target>Delete Certificate</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="list.cell.scanned-at" xml:space="preserve">
+        <source>Scanned %@</source>
+        <target>Scanned %@</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="log.certs-loaded" xml:space="preserve">
+        <source>%d certs loaded.</source>
+        <target>%d certs loaded.</target>
+        <note>Localizable.strings
+  DGCAWallet
+
+  Created by Yannick Spreen on 5/6/21.</note>
+      </trans-unit>
+      <trans-unit id="tan.confirm.fail.text" xml:space="preserve">
+        <source>Check the TAN and try again.</source>
+        <target>Check the TAN and try again.</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="tan.confirm.fail.title" xml:space="preserve">
+        <source>Failure</source>
+        <target>Failure</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="tan.confirm.placeholder" xml:space="preserve">
+        <source>XYZ12345</source>
+        <target>XYZ12345</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="tan.confirm.success.text" xml:space="preserve">
+        <source>Certificate was saved to wallet!</source>
+        <target>Certificate was saved to wallet!</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="tan.confirm.success.title" xml:space="preserve">
+        <source>Success</source>
+        <target>Success</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="tan.confirm.text" xml:space="preserve">
+        <source>Please enter the TAN that was provided together with your certificate:</source>
+        <target>Please enter the TAN that was provided together with your certificate:</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="tan.confirm.title" xml:space="preserve">
+        <source>Confirm TAN</source>
+        <target>Confirm TAN</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="tan.label" xml:space="preserve">
+        <source>TAN: %@</source>
+        <target>TAN: %@</target>
+        <note/>
+      </trans-unit>
+    </body>
+  </file>
 </xliff>
