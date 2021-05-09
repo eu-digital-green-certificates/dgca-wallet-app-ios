@@ -30,6 +30,7 @@
 "btn.okay" = "Okay";
 "btn.cancel" = "Cancel";
 "btn.save" = "Save";
+"btn.confirm" = "Confirm";
 "tan.confirm.title" = "Confirm TAN";
 "tan.confirm.text" = "Please enter the TAN that was provided together with your certificate:";
 "tan.confirm.placeholder" = "XYZ12345";
@@ -40,3 +41,5 @@
 "tan.label" = "TAN: %@";
 "auth.confirm" = "Confirm Identity";
 "auth.later" = "Try Later";
+"cert.delete.title" = "Delete Certificate";
+"cert.delete.body" = "Are you sure you want to delete this certificate? This action cannot be undone.";

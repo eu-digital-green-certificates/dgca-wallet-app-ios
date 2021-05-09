@@ -154,6 +154,28 @@ extension ListVC: UITableViewDelegate {
     }
     presentViewer(for: cert, with: listElements[indexPath.row].storedTAN)
   }
+
+  func tableView(
+    _ tableView: UITableView,
+    commit editingStyle: UITableViewCell.EditingStyle,
+    forRowAt indexPath: IndexPath
+  ) {
+    let cert = listElements[indexPath.row]
+    showAlert(
+      title: l10n("cert.delete.title"),
+      subtitle: l10n("cert.delete.body"),
+      actionTitle: l10n("btn.confirm"),
+      cancelTitle: l10n("btn.cancel")
+    ) { [weak self] in
+      if $0 {
+        LocalData.sharedInstance.certStrings.removeAll {
+          $0.date == cert.date
+        }
+        LocalData.sharedInstance.save()
+        self?.reloadTable()
+      }
+    }
+  }
 }
 
 extension ListVC: FloatingPanelControllerDelegate {
