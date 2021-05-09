@@ -24,7 +24,7 @@
 //  
 //  Created by Yannick Spreen on 4/30/21.
 //  
-        
+
 import SwiftDGC
 import UIKit
 
@@ -43,7 +43,6 @@ class CertTableVC: UIViewController {
     table.reloadData()
   }
 }
-
 
 extension CertTableVC: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

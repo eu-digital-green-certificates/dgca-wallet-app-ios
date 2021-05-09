@@ -25,7 +25,6 @@
 //  Created by Yannick Spreen on 4/27/21.
 //  
 
-
 import Foundation
 import UIKit
 import LocalAuthentication
@@ -52,7 +51,9 @@ struct SecureBackground {
   public static func disable() {
     if imageView != nil {
       if activation.timeIntervalSinceNow < -1 {
-        (UIApplication.shared.windows[0].rootViewController as? UINavigationController)?.popToRootViewController(animated: false)
+        (
+          UIApplication.shared.windows[0].rootViewController as? UINavigationController
+        )?.popToRootViewController(animated: false)
       }
       imageView?.removeFromSuperview()
       imageView = nil
@@ -75,7 +76,7 @@ struct SecureBackground {
       completion?(true)
       return
     }
-    context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason ) { success, error in
+    context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason ) { success, _ in
       if success {
         // Move to the main thread because a state update triggers UI changes.
         DispatchQueue.main.async {

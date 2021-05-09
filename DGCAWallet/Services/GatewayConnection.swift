@@ -39,7 +39,7 @@ struct GatewayConnection {
       return
     }
     // Replace dashes, spaces, etc. and turn into uppercase.
-    let set = CharacterSet(charactersIn: "0123456789").union(.capitalizedLetters)
+    let set = CharacterSet(charactersIn: "0123456789").union(.uppercaseLetters)
     tan = tan.uppercased().components(separatedBy: set.inverted).joined()
 
     let tanHash = SHA256.stringDigest(input: Data(tan.data(using: .utf8) ?? .init()))
@@ -53,23 +53,28 @@ struct GatewayConnection {
         return
       }
 
-      let keyParam: [String: Any] = [
-        "type": "EC",
-        "value": pubKey,
-      ]
+      let keyParam: [String: Any] = [ "type": "EC", "value": pubKey ]
       let param: [String: Any] = [
         "DGCI": cert.uvci,
         "TANHash": tanHash,
         "certhash": certHash,
         "publicKey": keyParam,
         "signature": sign.base64EncodedString(),
-        "sigAlg": "SHA256withECDSA",
+        "sigAlg": "SHA256withECDSA"
       ]
-      AF.request(serverURI + claimEndpoint, method: .post, parameters: param, encoding: JSONEncoding.default, headers: nil, interceptor: nil, requestModifier: nil).response {
+      AF.request(
+        serverURI + claimEndpoint,
+        method: .post,
+        parameters: param,
+        encoding: JSONEncoding.default,
+        headers: nil,
+        interceptor: nil,
+        requestModifier: nil
+      ).response {
         guard
           case .success(_) = $0.result,
           let status = $0.response?.statusCode,
-          status == 204
+          status / 100 == 2
         else {
           completion?(false, nil)
           return

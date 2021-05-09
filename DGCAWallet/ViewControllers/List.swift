@@ -24,7 +24,6 @@
 //  
 //  Created by Yannick Spreen on 4/25/21.
 //  
-        
 
 import Foundation
 import UIKit
@@ -158,7 +157,11 @@ extension ListVC: UITableViewDelegate {
 }
 
 extension ListVC: FloatingPanelControllerDelegate {
-  func floatingPanel(_ fpc: FloatingPanelController, shouldRemoveAt location: CGPoint, with velocity: CGVector) -> Bool {
+  func floatingPanel(
+    _ fpc: FloatingPanelController,
+    shouldRemoveAt location: CGPoint,
+    with velocity: CGVector
+  ) -> Bool {
     let pos = location.y / view.bounds.height
     if pos >= 0.33 {
       return true

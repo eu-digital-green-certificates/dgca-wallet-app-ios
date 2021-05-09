@@ -38,7 +38,7 @@ class CertificateViewerVC: UIViewController {
 
   var hCert: HCert!
   var tan: String?
-  var childDismissedDelegate: CertViewerDelegate?
+  weak var childDismissedDelegate: CertViewerDelegate?
   public var isSaved = true
 
   func draw() {

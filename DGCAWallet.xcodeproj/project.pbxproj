@@ -288,6 +288,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CEA6D712261F8D2900715333 /* Build configuration list for PBXNativeTarget "DGCAWallet" */;
 			buildPhases = (
+				CE17E3342645A0C100029D95 /* ShellScript */,
 				CEA6D6E4261F8D2700715333 /* Sources */,
 				CEA6D6E5261F8D2700715333 /* Frameworks */,
 				CEA6D6E6261F8D2700715333 /* Resources */,
@@ -419,6 +420,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CE17E3342645A0C100029D95 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CEA6D6E4261F8D2700715333 /* Sources */ = {
@@ -634,7 +655,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.t-systems.DGCAWallet.dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -654,7 +675,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.t-systems.DGCAWallet.dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

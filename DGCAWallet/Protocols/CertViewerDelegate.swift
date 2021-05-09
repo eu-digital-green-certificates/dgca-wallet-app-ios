@@ -26,6 +26,6 @@
 
 import Foundation
 
-protocol CertViewerDelegate {
+protocol CertViewerDelegate: AnyObject {
   func childDismissed(_ newCertAdded: Bool)
 }
