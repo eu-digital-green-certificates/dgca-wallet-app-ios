@@ -33,7 +33,8 @@ class HomeVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    HCert.prefetchAllCodes = true
+    HCert.config.prefetchAllCodes = true
+    HCert.config.checkSignatures = false
     LocalData.initialize {
       DispatchQueue.main.async { [weak self] in
         guard let self = self else {
