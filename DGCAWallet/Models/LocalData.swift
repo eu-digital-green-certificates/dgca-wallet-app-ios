@@ -27,6 +27,7 @@
 
 import Foundation
 import SwiftDGC
+import SwiftyJSON
 
 struct DatedCertString: Codable {
   var date: Date
@@ -38,9 +39,11 @@ struct DatedCertString: Codable {
 }
 
 struct LocalData: Codable {
+  static let appVersion = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "?.?.?"
   static var sharedInstance = LocalData()
 
   var certStrings = [DatedCertString]()
+  var config = Config.load()
 
   public func save() {
     Self.storage.save(self)
@@ -63,5 +66,12 @@ struct LocalData: Codable {
       LocalData.sharedInstance = result
       completion()
     }
+  }
+
+  var versionedConfig: JSON {
+    if config["versions"][Self.appVersion].exists() {
+      return config["versions"][Self.appVersion]
+    }
+    return config["versions"]["default"]
   }
 }

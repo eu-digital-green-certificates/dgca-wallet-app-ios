@@ -30,10 +30,7 @@ import Alamofire
 import SwiftDGC
 import SwiftyJSON
 
-struct GatewayConnection {
-  static let serverURI = "https://dgca-issuance-web.cfapps.eu10.hana.ondemand.com/"
-  static let claimEndpoint = "dgca-issuance-service/dgci/wallet/claim"
-
+struct GatewayConnection: ContextConnection {
   public static func claim(cert: HCert, with tan: String?, completion: ((Bool, String?) -> Void)?) {
     guard var tan = tan, !tan.isEmpty else {
       return
@@ -62,14 +59,11 @@ struct GatewayConnection {
         "signature": sign.base64EncodedString(),
         "sigAlg": "SHA256withECDSA"
       ]
-      AF.request(
-        serverURI + claimEndpoint,
+      request(
+        ["endpoints", "claim"],
         method: .post,
         parameters: param,
-        encoding: JSONEncoding.default,
-        headers: nil,
-        interceptor: nil,
-        requestModifier: nil
+        encoding: JSONEncoding.default
       ).response {
         guard
           case .success(_) = $0.result,
@@ -86,5 +80,24 @@ struct GatewayConnection {
         completion?(true, newTAN)
       }
     }
+  }
+
+  public static func fetchContext() {
+    request(
+      ["context"]
+    ).response {
+      guard
+        let data = $0.data,
+        let string = String(data: data, encoding: .utf8)
+      else {
+        return
+      }
+      let json = JSON(parseJSONC: string)
+      LocalData.sharedInstance.config.merge(other: json)
+      LocalData.sharedInstance.save()
+    }
+  }
+  static var config: JSON {
+    LocalData.sharedInstance.versionedConfig
   }
 }
