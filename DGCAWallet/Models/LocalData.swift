@@ -65,6 +65,7 @@ struct LocalData: Codable {
       print(String.localizedStringWithFormat(format, result.certStrings.count))
       LocalData.sharedInstance = result
       completion()
+      GatewayConnection.fetchContext()
     }
   }
 
