@@ -44,6 +44,7 @@ struct LocalData: Codable {
 
   var certStrings = [DatedCertString]()
   var config = Config.load()
+  var lastLaunchedAppVersion = Self.appVersion
 
   public func save() {
     Self.storage.save(self)
@@ -58,11 +59,14 @@ struct LocalData: Codable {
 
   static func initialize(completion: @escaping () -> Void) {
     storage.loadOverride(fallback: LocalData.sharedInstance) { success in
-      guard let result = success else {
+      guard var result = success else {
         return
       }
       let format = l10n("log.certs-loaded")
       print(String.localizedStringWithFormat(format, result.certStrings.count))
+      if result.lastLaunchedAppVersion != Self.appVersion {
+        result.config = LocalData.sharedInstance.config
+      }
       LocalData.sharedInstance = result
       completion()
       GatewayConnection.fetchContext()
