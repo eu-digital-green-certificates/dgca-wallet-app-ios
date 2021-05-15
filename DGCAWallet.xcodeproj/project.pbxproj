@@ -34,7 +34,6 @@
 		CEA6D6F8261F8D2900715333 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEA6D6F6261F8D2900715333 /* LaunchScreen.storyboard */; };
 		CEA6D703261F8D2900715333 /* DGCAWalletTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6D702261F8D2900715333 /* DGCAWalletTests.swift */; };
 		CEA6D70E261F8D2900715333 /* DGCAWalletUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6D70D261F8D2900715333 /* DGCAWalletUITests.swift */; };
-		CEA6E561264058B50066DC8E /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6E560264058B50066DC8E /* UIViewController.swift */; };
 		CEC7FEDF264C5A41005561BA /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = CEC7FEDE264C5A41005561BA /* context.jsonc */; };
 		CED2726026398683003D47A9 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2725F26398683003D47A9 /* UIFont.swift */; };
 		CED949CA263B50CE00883558 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED949C9263B50CE00883558 /* List.swift */; };
@@ -159,7 +158,6 @@
 			children = (
 				CED2725F26398683003D47A9 /* UIFont.swift */,
 				CE8096D8263B07BB00A65AD6 /* UIColor.swift */,
-				CEA6E560264058B50066DC8E /* UIViewController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -464,7 +462,6 @@
 				CE56BC07264068110044FD3F /* GatewayConnection.swift in Sources */,
 				CEA6D6F0261F8D2700715333 /* Scan.swift in Sources */,
 				CE13CF23262DDF810070C80E /* RoundedButton.swift in Sources */,
-				CEA6E561264058B50066DC8E /* UIViewController.swift in Sources */,
 				CEA6D6EC261F8D2700715333 /* AppDelegate.swift in Sources */,
 				CE891305263581D900CB92AF /* Home.swift in Sources */,
 				CEA15563262F6DAB0024B7AC /* CertViewerDelegate.swift in Sources */,
