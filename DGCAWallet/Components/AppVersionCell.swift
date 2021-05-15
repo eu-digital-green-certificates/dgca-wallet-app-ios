@@ -24,19 +24,20 @@
 //  
 //  Created by Paul Ballmann on 14.05.21.
 //  
-        
 
+#if os(iOS)
 import UIKit
 import SwiftDGC
 
 class AppVersionCell: UITableViewCell {
-    @IBOutlet weak var versionLabel: UILabel!
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-        let format = l10n("app-version")
-        versionLabel.text = String(format: format, version ?? "?")
-    }
+  @IBOutlet weak var versionLabel: UILabel!
+
+  override func layoutSubviews() {
+    super.layoutSubviews()
+
+    let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+    let format = l10n("app-version")
+    versionLabel.text = String(format: format, version ?? "?")
+  }
 }
+#endif
