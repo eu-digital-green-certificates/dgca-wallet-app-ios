@@ -43,3 +43,4 @@
 "auth.later" = "Try Later";
 "cert.delete.title" = "Delete Certificate";
 "cert.delete.body" = "Are you sure you want to delete this certificate? This action cannot be undone.";
+"app-version" = "App Version %@";

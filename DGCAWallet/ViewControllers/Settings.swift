@@ -48,8 +48,8 @@ class SettingsVC: UINavigationController {
 class SettingsTableVC: UITableViewController {
 
     @IBAction func didPressPrivacyButton(_ sender: UIButton) {
-        let link = LocalData.sharedInstance.versionedConfig["privacyUrl"]
-        openUrl(link.rawString())
+      let link = LocalData.sharedInstance.versionedConfig["privacyUrl"].string ?? ""
+      openUrl(link)
     }
     
     @IBAction

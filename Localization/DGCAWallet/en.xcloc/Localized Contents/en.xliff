@@ -1,5 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.2" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 http://docs.oasis-open.org/xliff/v1.2/os/xliff-core-1.2-strict.xsd">
+  <file original="DGCAWallet/Storyboards/Base.lproj/CertificateViewer.storyboard" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="12.5" build-num="12E262"/>
+    </header>
+    <body>
+      <trans-unit id="BmW-aV-sN6.text" xml:space="preserve">
+        <source>TAN: GIWHX3</source>
+        <target>TAN: GIWHX3</target>
+        <note>Class = "UILabel"; text = "TAN: GIWHX3"; ObjectID = "BmW-aV-sN6";</note>
+      </trans-unit>
+      <trans-unit id="DVW-2y-e4I.text" xml:space="preserve">
+        <source>Max Mustermann</source>
+        <target>Max Mustermann</target>
+        <note>Class = "UILabel"; text = "Max Mustermann"; ObjectID = "DVW-2y-e4I";</note>
+      </trans-unit>
+      <trans-unit id="YeB-JS-Q1Q.normalTitle" xml:space="preserve">
+        <source>Cancel</source>
+        <target>Cancel</target>
+        <note>Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "YeB-JS-Q1Q";</note>
+      </trans-unit>
+      <trans-unit id="a9u-Ia-KEX.normalTitle" xml:space="preserve">
+        <source>Done</source>
+        <target>Done</target>
+        <note>Class = "UIButton"; normalTitle = "Done"; ObjectID = "a9u-Ia-KEX";</note>
+      </trans-unit>
+      <trans-unit id="bxm-hI-f1t.text" xml:space="preserve">
+        <source>Identification Number</source>
+        <target>Identification Number</target>
+        <note>Class = "UILabel"; text = "Identification Number"; ObjectID = "bxm-hI-f1t";</note>
+      </trans-unit>
+      <trans-unit id="gn8-3g-ntq.text" xml:space="preserve">
+        <source>DE4382974329</source>
+        <target>DE4382974329</target>
+        <note>Class = "UILabel"; text = "DE4382974329"; ObjectID = "gn8-3g-ntq";</note>
+      </trans-unit>
+    </body>
+  </file>
   <file original="DGCAWallet/Storyboards/Base.lproj/LaunchScreen.storyboard" source-language="en" target-language="en" datatype="plaintext">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="12.5" build-num="12E262"/>
@@ -59,6 +96,38 @@
       </trans-unit>
     </body>
   </file>
+  <file original="DGCAWallet/Storyboards/Base.lproj/Settings.storyboard" source-language="en" target-language="en" datatype="plaintext">
+    <header>
+      <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="12.5" build-num="12E262"/>
+    </header>
+    <body>
+      <trans-unit id="OQB-kV-Lgy.normalTitle" xml:space="preserve">
+        <source>Privacy Information</source>
+        <target>Privacy Information</target>
+        <note>Class = "UIButton"; normalTitle = "Privacy Information"; ObjectID = "OQB-kV-Lgy";</note>
+      </trans-unit>
+      <trans-unit id="Rdn-TW-8aO.text" xml:space="preserve">
+        <source>app-version</source>
+        <target>app-version</target>
+        <note>Class = "UILabel"; text = "app-version"; ObjectID = "Rdn-TW-8aO";</note>
+      </trans-unit>
+      <trans-unit id="fbO-s8-6gg.headerTitle" xml:space="preserve">
+        <source>Links</source>
+        <target>Links</target>
+        <note>Class = "UITableViewSection"; headerTitle = "Links"; ObjectID = "fbO-s8-6gg";</note>
+      </trans-unit>
+      <trans-unit id="nbb-SQ-pYn.title" xml:space="preserve">
+        <source>Cancel</source>
+        <target>Cancel</target>
+        <note>Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "nbb-SQ-pYn";</note>
+      </trans-unit>
+      <trans-unit id="nqQ-GZ-nBR.title" xml:space="preserve">
+        <source>Settings</source>
+        <target>Settings</target>
+        <note>Class = "UINavigationItem"; title = "Settings"; ObjectID = "nqQ-GZ-nBR";</note>
+      </trans-unit>
+    </body>
+  </file>
   <file original="DGCAWallet/SupportingFiles/en.lproj/InfoPlist.strings" source-language="en" target-language="en" datatype="plaintext">
     <header>
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="12.5" build-num="12E262"/>
@@ -91,6 +160,11 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="12.5" build-num="12E262"/>
     </header>
     <body>
+      <trans-unit id="app-version" xml:space="preserve">
+        <source>App Version %@</source>
+        <target>App Version %@</target>
+        <note/>
+      </trans-unit>
       <trans-unit id="auth.confirm" xml:space="preserve">
         <source>Confirm Identity</source>
         <target>Confirm Identity</target>
