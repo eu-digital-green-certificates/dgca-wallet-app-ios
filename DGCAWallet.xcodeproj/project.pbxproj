@@ -18,6 +18,7 @@
 		CE4BD254264FF28900689FD6 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4BD253264FF28900689FD6 /* Settings.swift */; };
 		CE4BD255264FF39400689FD6 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE4BD257264FF39400689FD6 /* Settings.storyboard */; };
 		CE4BD258264FF39D00689FD6 /* CertificateViewer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE4BD25A264FF39D00689FD6 /* CertificateViewer.storyboard */; };
+		CE4BD25C264FF50500689FD6 /* AppVersionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4BD25B264FF50500689FD6 /* AppVersionCell.swift */; };
 		CE56B5052639F48E00FB31B1 /* SwiftDGC in Frameworks */ = {isa = PBXBuildFile; productRef = CE56B5042639F48E00FB31B1 /* SwiftDGC */; };
 		CE56BC07264068110044FD3F /* GatewayConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE56BC06264068110044FD3F /* GatewayConnection.swift */; };
 		CE6D4A44264835F100A5D33D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE6D4A46264835F100A5D33D /* Localizable.strings */; };
@@ -74,6 +75,7 @@
 		CE4BD253264FF28900689FD6 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		CE4BD256264FF39400689FD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		CE4BD259264FF39D00689FD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/CertificateViewer.storyboard; sourceTree = "<group>"; };
+		CE4BD25B264FF50500689FD6 /* AppVersionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppVersionCell.swift; sourceTree = "<group>"; };
 		CE56BC06264068110044FD3F /* GatewayConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GatewayConnection.swift; sourceTree = "<group>"; };
 		CE6D4A45264835F100A5D33D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CE8096D8263B07BB00A65AD6 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				CE260F55263DD1720083A200 /* WalletCell.swift */,
 				CEA1556A262F784E0024B7AC /* SelfSizedTableView.swift */,
 				CEA1556F262F79DE0024B7AC /* InfoCell.swift */,
+				CE4BD25B264FF50500689FD6 /* AppVersionCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 				CE260F56263DD1720083A200 /* WalletCell.swift in Sources */,
 				CEA15570262F79DE0024B7AC /* InfoCell.swift in Sources */,
 				CED949CA263B50CE00883558 /* List.swift in Sources */,
+				CE4BD25C264FF50500689FD6 /* AppVersionCell.swift in Sources */,
 				CEA6D6EE261F8D2700715333 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
