@@ -25,7 +25,6 @@
 //  Created by Paul Ballmann on 14.05.21.
 //  
 
-
 import Foundation
 import UIKit
 import FloatingPanel
@@ -56,7 +55,6 @@ class SettingsTableVC: UITableViewController {
     switch indexPath.row {
     case 0:
       openPrivacyDoc()
-      break
     default:
       return
     }

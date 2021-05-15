@@ -53,13 +53,11 @@ class ListVC: UIViewController {
     performSegue(withIdentifier: "scanner", sender: self)
   }
 
-    
     @IBAction func settingsTapped(_ sender: UIButton) {
         guard let settingsVC = UIStoryboard(name: "Settings", bundle: nil).instantiateInitialViewController(),
               let viewer = settingsVC as? SettingsVC else {
             return
         }
-    
         showFloatingPanel(for: viewer)
     }
 
@@ -75,7 +73,7 @@ class ListVC: UIViewController {
 
         present(fpc, animated: true, completion: nil)
     }
-    
+  
   @IBOutlet weak var table: UITableView!
   @IBOutlet weak var emptyView: UIView!
 
