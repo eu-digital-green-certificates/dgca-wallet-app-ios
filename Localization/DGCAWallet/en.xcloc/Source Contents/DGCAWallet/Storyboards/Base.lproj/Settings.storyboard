@@ -19,26 +19,25 @@
                         <sections>
                             <tableViewSection headerTitle="Links" id="fbO-s8-6gg">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationLevel="1" indentationWidth="0.0" rowHeight="50" id="ro4-HH-hS8">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" accessoryType="disclosureIndicator" indentationLevel="1" indentationWidth="0.0" rowHeight="50" id="ro4-HH-hS8">
                                         <rect key="frame" x="0.0" y="49.5" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ro4-HH-hS8" id="8p8-zb-Nnw">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="384.5" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OQB-kV-Lgy">
-                                                    <rect key="frame" x="20" y="0.0" width="402" height="50"/>
-                                                    <state key="normal" title="Privacy Information"/>
-                                                    <connections>
-                                                        <action selector="didPressPrivacyButton:" destination="Cs8-8v-zm5" eventType="touchUpInside" id="9qI-zw-25y"/>
-                                                    </connections>
-                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hky-ZS-URO">
+                                                    <rect key="frame" x="20" y="11" width="356.5" height="28"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" systemColor="linkColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="OQB-kV-Lgy" secondAttribute="trailingMargin" id="6bZ-4i-drn"/>
-                                                <constraint firstAttribute="bottom" secondItem="OQB-kV-Lgy" secondAttribute="bottom" id="6tR-nQ-te9"/>
-                                                <constraint firstItem="OQB-kV-Lgy" firstAttribute="top" secondItem="8p8-zb-Nnw" secondAttribute="top" id="epz-jt-iTh"/>
-                                                <constraint firstItem="OQB-kV-Lgy" firstAttribute="leading" secondItem="8p8-zb-Nnw" secondAttribute="leadingMargin" id="xq9-gc-ajo"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="hky-ZS-URO" secondAttribute="bottom" id="Cc7-Eq-8TV"/>
+                                                <constraint firstItem="hky-ZS-URO" firstAttribute="top" secondItem="8p8-zb-Nnw" secondAttribute="topMargin" id="Tp8-VN-AYQ"/>
+                                                <constraint firstItem="hky-ZS-URO" firstAttribute="leading" secondItem="8p8-zb-Nnw" secondAttribute="leadingMargin" id="WTe-IV-ycF"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="hky-ZS-URO" secondAttribute="trailing" id="olK-Us-axD"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -113,6 +112,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

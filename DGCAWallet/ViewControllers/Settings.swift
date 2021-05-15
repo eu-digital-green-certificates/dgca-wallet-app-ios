@@ -24,7 +24,7 @@
 //  
 //  Created by Paul Ballmann on 14.05.21.
 //  
-        
+
 
 import Foundation
 import UIKit
@@ -33,33 +33,43 @@ import SwiftDGC
 
 class SettingsVC: UINavigationController {
 
-    override func viewDidLoad() {
-      super.viewDidLoad()
+  override func viewDidLoad() {
+    super.viewDidLoad()
 
-      additionalSafeAreaInsets.top = 16.0
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-      super.viewDidDisappear(animated)
-
-    }
+    additionalSafeAreaInsets.top = 16.0
   }
+
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+
+  }
+}
 
 class SettingsTableVC: UITableViewController {
 
-    @IBAction func didPressPrivacyButton(_ sender: UIButton) {
-      let link = LocalData.sharedInstance.versionedConfig["privacyUrl"].string ?? ""
-      openUrl(link)
-    }
-    
-    @IBAction
-    func cancelButton() {
-      dismiss(animated: true, completion: nil)
-    }
+  @IBAction
+  func cancelButton() {
+    dismiss(animated: true, completion: nil)
+  }
 
-    func openUrl(_ string: String!) {
-        if let url = URL(string: string) {
-            UIApplication.shared.open(url)
-        }
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    switch indexPath.row {
+    case 0:
+      openPrivacyDoc()
+      break
+    default:
+      return
     }
+  }
+
+  func openPrivacyDoc() {
+    let link = LocalData.sharedInstance.versionedConfig["privacyUrl"].stringValue
+    openUrl(link)
+  }
+
+  func openUrl(_ string: String!) {
+    if let url = URL(string: string) {
+      UIApplication.shared.open(url)
+    }
+  }
 }
