@@ -43,6 +43,9 @@
 		CEE9DA55263C7D4000A31532 /* CertCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9DA54263C7D4000A31532 /* CertCode.swift */; };
 		CEE9DA5D263C865200A31532 /* Brightness.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9DA5C263C865200A31532 /* Brightness.swift */; };
 		CEFAD87F262714C4009AFEF9 /* EHNTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFAD87E262714C4009AFEF9 /* EHNTests.swift */; };
+		DA114D57264E818D00ADFD52 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA114D56264E818D00ADFD52 /* Settings.swift */; };
+		DA114D5B264E87EF00ADFD52 /* AppVersionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA114D5A264E87EF00ADFD52 /* AppVersionCell.swift */; };
+		DA114D5D264E8C0700ADFD52 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA114D5C264E8C0700ADFD52 /* Settings.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,7 +96,7 @@
 		CEA6D70D261F8D2900715333 /* DGCAWalletUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DGCAWalletUITests.swift; sourceTree = "<group>"; };
 		CEA6D70F261F8D2900715333 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEA6E560264058B50066DC8E /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
-		CEC7FEDE264C5A41005561BA /* context.jsonc */ = {isa = PBXFileReference; lastKnownFileType = file; path = context.jsonc; sourceTree = SOURCE_ROOT; };
+		CEC7FEDE264C5A41005561BA /* context.jsonc */ = {isa = PBXFileReference; lastKnownFileType = text; path = context.jsonc; sourceTree = SOURCE_ROOT; };
 		CED2725F26398683003D47A9 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		CED949C9263B50CE00883558 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		CEDABD3F263C5FF4007A9B97 /* CertTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertTable.swift; sourceTree = "<group>"; };
@@ -103,6 +106,9 @@
 		CEE9DA54263C7D4000A31532 /* CertCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertCode.swift; sourceTree = "<group>"; };
 		CEE9DA5C263C865200A31532 /* Brightness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brightness.swift; sourceTree = "<group>"; };
 		CEFAD87E262714C4009AFEF9 /* EHNTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EHNTests.swift; sourceTree = "<group>"; };
+		DA114D56264E818D00ADFD52 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		DA114D5A264E87EF00ADFD52 /* AppVersionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionCell.swift; sourceTree = "<group>"; };
+		DA114D5C264E8C0700ADFD52 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +146,7 @@
 				CEA6D6F6261F8D2900715333 /* LaunchScreen.storyboard */,
 				CEA6D6F1261F8D2700715333 /* Main.storyboard */,
 				CE13CF04262DCDCD0070C80E /* CertificateViewer.storyboard */,
+				DA114D5C264E8C0700ADFD52 /* Settings.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -174,6 +181,7 @@
 				CE891304263581D900CB92AF /* Home.swift */,
 				CEDABD48263C70EF007A9B97 /* CertPages.swift */,
 				CEDABD3F263C5FF4007A9B97 /* CertTable.swift */,
+				DA114D56264E818D00ADFD52 /* Settings.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -186,6 +194,7 @@
 				CE260F55263DD1720083A200 /* WalletCell.swift */,
 				CEA1556A262F784E0024B7AC /* SelfSizedTableView.swift */,
 				CEA1556F262F79DE0024B7AC /* InfoCell.swift */,
+				DA114D5A264E87EF00ADFD52 /* AppVersionCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -402,6 +411,7 @@
 				CE13CF05262DCDCD0070C80E /* CertificateViewer.storyboard in Resources */,
 				CE6D4A44264835F100A5D33D /* Localizable.strings in Resources */,
 				CEA6D6F8261F8D2900715333 /* LaunchScreen.storyboard in Resources */,
+				DA114D5D264E8C0700ADFD52 /* Settings.storyboard in Resources */,
 				CEC7FEDF264C5A41005561BA /* context.jsonc in Resources */,
 				CE81533A263FF7EC0030D777 /* README.md in Resources */,
 				CEA6D6F5261F8D2900715333 /* Assets.xcassets in Resources */,
@@ -458,6 +468,7 @@
 				CEA1556B262F784E0024B7AC /* SelfSizedTableView.swift in Sources */,
 				CE8096D9263B07BB00A65AD6 /* UIColor.swift in Sources */,
 				CEDABD49263C70EF007A9B97 /* CertPages.swift in Sources */,
+				DA114D57264E818D00ADFD52 /* Settings.swift in Sources */,
 				CE1D1EF6263597A2004C8919 /* LocalData.swift in Sources */,
 				CED2726026398683003D47A9 /* UIFont.swift in Sources */,
 				CEE9DA55263C7D4000A31532 /* CertCode.swift in Sources */,
@@ -471,6 +482,7 @@
 				CE260F56263DD1720083A200 /* WalletCell.swift in Sources */,
 				CEA15570262F79DE0024B7AC /* InfoCell.swift in Sources */,
 				CED949CA263B50CE00883558 /* List.swift in Sources */,
+				DA114D5B264E87EF00ADFD52 /* AppVersionCell.swift in Sources */,
 				CEA6D6EE261F8D2700715333 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
