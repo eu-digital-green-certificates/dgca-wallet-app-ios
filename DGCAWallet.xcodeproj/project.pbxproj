@@ -46,6 +46,9 @@
 		CEE9DA55263C7D4000A31532 /* CertCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9DA54263C7D4000A31532 /* CertCode.swift */; };
 		CEE9DA5D263C865200A31532 /* Brightness.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9DA5C263C865200A31532 /* Brightness.swift */; };
 		CEFAD87F262714C4009AFEF9 /* EHNTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFAD87E262714C4009AFEF9 /* EHNTests.swift */; };
+		DA114D57264E818D00ADFD52 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA114D56264E818D00ADFD52 /* Settings.swift */; };
+		DA114D5B264E87EF00ADFD52 /* AppVersionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA114D5A264E87EF00ADFD52 /* AppVersionCell.swift */; };
+		DA114D5D264E8C0700ADFD52 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA114D5C264E8C0700ADFD52 /* Settings.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +112,9 @@
 		CEE9DA54263C7D4000A31532 /* CertCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertCode.swift; sourceTree = "<group>"; };
 		CEE9DA5C263C865200A31532 /* Brightness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brightness.swift; sourceTree = "<group>"; };
 		CEFAD87E262714C4009AFEF9 /* EHNTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EHNTests.swift; sourceTree = "<group>"; };
+		DA114D56264E818D00ADFD52 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		DA114D5A264E87EF00ADFD52 /* AppVersionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionCell.swift; sourceTree = "<group>"; };
+		DA114D5C264E8C0700ADFD52 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
