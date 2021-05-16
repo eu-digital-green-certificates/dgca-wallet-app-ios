@@ -38,6 +38,16 @@ class AppVersionCell: UITableViewCell {
     let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
     let format = l10n("app-version")
     versionLabel.text = String(format: format, version ?? "?")
+
+    for subview in subviews {
+      if
+        subview != contentView,
+        abs(subview.frame.width - frame.width) <= 0.1,
+        subview.frame.height < 2
+      {
+        subview.alpha = 0
+      }
+    }
   }
 }
 #endif
