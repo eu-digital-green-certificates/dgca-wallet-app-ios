@@ -115,6 +115,7 @@ class ListVC: UIViewController {
     presentingViewer = viewer
 
     present(fpc, animated: true, completion: nil)
+    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
   }
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

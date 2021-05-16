@@ -101,10 +101,10 @@
       <tool tool-id="com.apple.dt.xcode" tool-name="Xcode" tool-version="12.5" build-num="12E262"/>
     </header>
     <body>
-      <trans-unit id="OQB-kV-Lgy.normalTitle" xml:space="preserve">
-        <source>Privacy Information</source>
-        <target>Privacy Information</target>
-        <note>Class = "UIButton"; normalTitle = "Privacy Information"; ObjectID = "OQB-kV-Lgy";</note>
+      <trans-unit id="5Lw-xZ-YJu.text" xml:space="preserve">
+        <source>GitHub Page</source>
+        <target>GitHub Page</target>
+        <note>Class = "UILabel"; text = "GitHub Page"; ObjectID = "5Lw-xZ-YJu";</note>
       </trans-unit>
       <trans-unit id="Rdn-TW-8aO.text" xml:space="preserve">
         <source>app-version</source>
@@ -116,6 +116,11 @@
         <target>Links</target>
         <note>Class = "UITableViewSection"; headerTitle = "Links"; ObjectID = "fbO-s8-6gg";</note>
       </trans-unit>
+      <trans-unit id="hky-ZS-URO.text" xml:space="preserve">
+        <source>Privacy Information</source>
+        <target>Privacy Information</target>
+        <note>Class = "UILabel"; text = "Privacy Information"; ObjectID = "hky-ZS-URO";</note>
+      </trans-unit>
       <trans-unit id="nbb-SQ-pYn.title" xml:space="preserve">
         <source>Cancel</source>
         <target>Cancel</target>
@@ -125,6 +130,11 @@
         <source>Settings</source>
         <target>Settings</target>
         <note>Class = "UINavigationItem"; title = "Settings"; ObjectID = "nqQ-GZ-nBR";</note>
+      </trans-unit>
+      <trans-unit id="phM-g4-Hab.text" xml:space="preserve">
+        <source>EU Digital Green Certificate</source>
+        <target>EU Digital Green Certificate</target>
+        <note>Class = "UILabel"; text = "EU Digital Green Certificate"; ObjectID = "phM-g4-Hab";</note>
       </trans-unit>
     </body>
   </file>

@@ -53,7 +53,7 @@
                                 <color key="backgroundColor" name="blue"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MID-ne-Jur" customClass="RoundedButton" customModule="DGCAWallet" customModuleProvider="target">
-                                <rect key="frame" x="161.5" y="812" width="91" height="34"/>
+                                <rect key="frame" x="149.5" y="800" width="115" height="46"/>
                                 <color key="backgroundColor" name="green"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                 <state key="normal" title="Scan Code">
@@ -75,7 +75,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="emV-oh-VSt">
-                                <rect key="frame" x="0.0" y="130.5" width="414" height="665.5"/>
+                                <rect key="frame" x="0.0" y="130.5" width="414" height="653.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="walletCell" rowHeight="164" id="JcT-Kw-bMh" customClass="WalletCell" customModule="DGCAWallet" customModuleProvider="target">
@@ -126,16 +126,16 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W03-Gm-CHU">
-                                <rect key="frame" x="0.0" y="130.5" width="414" height="681.5"/>
+                                <rect key="frame" x="0.0" y="130.5" width="414" height="669.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet Empty" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f0r-gi-rzF">
-                                        <rect key="frame" x="145" y="277" width="124" height="24"/>
+                                        <rect key="frame" x="145" y="271" width="124" height="24"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <color key="textColor" name="disabledText"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Press the button below to scan your code." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xvs-y5-Iav">
-                                        <rect key="frame" x="83" y="317" width="248" height="48"/>
+                                        <rect key="frame" x="83" y="311" width="248" height="48"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" name="disabledText"/>
                                         <nil key="highlightedColor"/>
@@ -151,7 +151,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bG5-p7-TbQ">
-                                <rect key="frame" x="366" y="82.5" width="32" height="32"/>
+                                <rect key="frame" x="366" y="79.5" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="bG5-p7-TbQ" secondAttribute="height" multiplier="1:1" id="Rqx-rj-r07"/>
                                 </constraints>
@@ -164,7 +164,7 @@
                         <viewLayoutGuide key="safeArea" id="uNl-GU-yxp"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="emV-oh-VSt" firstAttribute="top" secondItem="bG5-p7-TbQ" secondAttribute="bottom" constant="16" id="39y-oa-PvU"/>
+                            <constraint firstItem="bG5-p7-TbQ" firstAttribute="centerY" secondItem="Q38-2s-CMN" secondAttribute="centerY" id="7tJ-BP-pn0"/>
                             <constraint firstItem="uNl-GU-yxp" firstAttribute="trailing" secondItem="emV-oh-VSt" secondAttribute="trailing" id="8WI-H8-cdQ"/>
                             <constraint firstItem="cE2-eV-IV4" firstAttribute="leading" secondItem="UFr-2P-Rlu" secondAttribute="leading" id="9cu-kA-qbU"/>
                             <constraint firstItem="cE2-eV-IV4" firstAttribute="bottom" secondItem="Q38-2s-CMN" secondAttribute="bottom" constant="16" id="Dl1-7l-S6E"/>
@@ -172,7 +172,6 @@
                             <constraint firstItem="Q38-2s-CMN" firstAttribute="leading" secondItem="uNl-GU-yxp" secondAttribute="leading" constant="16" id="KNg-EC-1F1"/>
                             <constraint firstItem="W03-Gm-CHU" firstAttribute="leading" secondItem="UFr-2P-Rlu" secondAttribute="leading" id="MCk-nt-IE4"/>
                             <constraint firstItem="uNl-GU-yxp" firstAttribute="trailing" secondItem="bG5-p7-TbQ" secondAttribute="trailing" constant="16" id="Quo-Rt-SrD"/>
-                            <constraint firstItem="emV-oh-VSt" firstAttribute="top" secondItem="bG5-p7-TbQ" secondAttribute="bottom" constant="16" id="RCw-TZ-bow"/>
                             <constraint firstItem="MID-ne-Jur" firstAttribute="top" secondItem="emV-oh-VSt" secondAttribute="bottom" constant="16" id="bin-s2-AUs"/>
                             <constraint firstItem="emV-oh-VSt" firstAttribute="top" secondItem="cE2-eV-IV4" secondAttribute="bottom" id="c0G-cv-PAJ"/>
                             <constraint firstItem="MID-ne-Jur" firstAttribute="top" secondItem="W03-Gm-CHU" secondAttribute="bottom" id="cdj-Np-KPj"/>
@@ -266,7 +265,7 @@
     </scenes>
     <designables>
         <designable name="MID-ne-Jur">
-            <size key="intrinsicContentSize" width="91" height="34"/>
+            <size key="intrinsicContentSize" width="115" height="46"/>
         </designable>
     </designables>
     <resources>
