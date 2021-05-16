@@ -48,32 +48,32 @@ class ListVC: UIViewController {
     reloadTable()
   }
 
-    @IBAction
+  @IBAction
   func scanNewCert() {
     performSegue(withIdentifier: "scanner", sender: self)
   }
 
-    @IBAction func settingsTapped(_ sender: UIButton) {
-        guard let settingsVC = UIStoryboard(name: "Settings", bundle: nil).instantiateInitialViewController(),
-              let viewer = settingsVC as? SettingsVC else {
-            return
-        }
-        showFloatingPanel(for: viewer)
+  @IBAction func settingsTapped(_ sender: UIButton) {
+    guard let settingsVC = UIStoryboard(name: "Settings", bundle: nil).instantiateInitialViewController(),
+          let viewer = settingsVC as? SettingsVC else {
+      return
     }
+    showFloatingPanel(for: viewer)
+  }
 
-    func showFloatingPanel(for controller: UIViewController) {
-        let fpc = FloatingPanelController()
-        fpc.set(contentViewController: controller)
-        fpc.isRemovalInteractionEnabled = true
-        fpc.layout = FullFloatingPanelLayout()
-        fpc.surfaceView.layer.cornerRadius = 24.0
-        fpc.surfaceView.clipsToBounds = true
-        fpc.delegate = self
-        presentingViewer = controller
+  func showFloatingPanel(for controller: UIViewController) {
+    let fpc = FloatingPanelController()
+    fpc.set(contentViewController: controller)
+    fpc.isRemovalInteractionEnabled = true
+    fpc.layout = FullFloatingPanelLayout()
+    fpc.surfaceView.layer.cornerRadius = 24.0
+    fpc.surfaceView.clipsToBounds = true
+    fpc.delegate = self
+    presentingViewer = controller
 
-        present(fpc, animated: true, completion: nil)
-    }
-  
+    present(fpc, animated: true, completion: nil)
+  }
+
   @IBOutlet weak var table: UITableView!
   @IBOutlet weak var emptyView: UIView!
 
@@ -212,13 +212,13 @@ extension ListVC: FloatingPanelControllerDelegate {
     let threshold: CGFloat = 5.0
     switch fpc.layout.position {
     case .top:
-        return (velocity.dy <= -threshold)
+      return (velocity.dy <= -threshold)
     case .left:
-        return (velocity.dx <= -threshold)
+      return (velocity.dx <= -threshold)
     case .bottom:
-        return (velocity.dy >= threshold)
+      return (velocity.dy >= threshold)
     case .right:
-        return (velocity.dx >= threshold)
+      return (velocity.dx >= threshold)
     }
   }
 }
