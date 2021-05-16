@@ -64,6 +64,10 @@ class HomeVC: UIViewController {
   }
 
   func checkId() {
+    if LocalData.sharedInstance.versionedConfig["outdated"].bool == true {
+      showAlert(title: l10n("info.outdated"), subtitle: l10n("info.outdated.body"))
+      return
+    }
     SecureBackground.checkId { [weak self] in
       if $0 {
         self?.performSegue(withIdentifier: "list", sender: self)
