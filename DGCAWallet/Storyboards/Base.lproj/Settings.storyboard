@@ -96,7 +96,7 @@
                             </tableViewSection>
                             <tableViewSection id="pbR-sX-7xs">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationLevel="1" indentationWidth="0.0" rowHeight="71" id="WeO-6m-Lot" customClass="AppVersionCell" customModule="DGCAWallet" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationLevel="1" indentationWidth="0.0" rowHeight="71" id="WeO-6m-Lot" customClass="AppVersionCell" customModule="SwiftDGC">
                                         <rect key="frame" x="0.0" y="235.5" width="414" height="71"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WeO-6m-Lot" id="bty-ns-uju">
