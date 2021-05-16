@@ -5,10 +5,6 @@
     "default": {
       // catch-all for normal versions
       "privacyUrl": "https://publications.europa.eu/en/web/about-us/legal-notices/eu-mobile-apps",
-      "githubUrl":
-        "https://github.com/eu-digital-green-certificates",
-      "euDocUrl":
-        "https://ec.europa.eu/health/ehealth/covid-19_en",
       "context": {
         "url": "https://dgca-issuance-web.cfapps.eu10.hana.ondemand.com/dgca-issuance-service/context",
         "pubKeys": ["Ef6tLK887tpTdkiVkSG7ioXCgNEJsbIgKcAU+dxTTag="]

@@ -54,28 +54,28 @@ class SettingsTableVC: UITableViewController {
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     switch indexPath.row {
     case 0:
-      openEuCertDoc()
-    case 1:
-      openGitHubSource()
-    case 2:
       openPrivacyDoc()
+    case 1:
+      openEuCertDoc()
+    case 2:
+      openGitHubSource()
     default:
       return
     }
   }
 
   func openPrivacyDoc() {
-    let link = LocalData.sharedInstance.versionedConfig["privacyUrl"].stringValue
+    let link = LocalData.sharedInstance.versionedConfig["privacyUrl"].string ?? ""
     openUrl(link)
   }
 
   func openEuCertDoc() {
-    let link = LocalData.sharedInstance.versionedConfig["euDocUrl"].stringValue
+    let link = "https://ec.europa.eu/health/ehealth/covid-19_en"
     openUrl(link)
   }
 
   func openGitHubSource() {
-    let link = LocalData.sharedInstance.versionedConfig["githubUrl"].stringValue
+    let link = "https://github.com/eu-digital-green-certificates"
     openUrl(link)
   }
 
