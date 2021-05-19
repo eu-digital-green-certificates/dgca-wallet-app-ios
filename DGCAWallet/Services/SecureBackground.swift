@@ -62,7 +62,7 @@ struct SecureBackground {
 
   static var paused = false
   static var activation = Date()
-  public static func checkId(completion: ((Bool) -> Void)?) {
+  public static func checkId(from controller: UIViewController? = nil, completion: ((Bool) -> Void)?) {
     guard !paused else {
       return
     }
@@ -76,16 +76,19 @@ struct SecureBackground {
       completion?(true)
       return
     }
-    context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason ) { success, _ in
+    context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason ) { success, err in
       if success {
-        // Move to the main thread because a state update triggers UI changes.
-        DispatchQueue.main.async {
-          paused = false
-          completion?(true)
-        }
+        paused = false
+        completion?(true)
       } else {
         paused = false
-        completion?(false)
+        if controller == nil || (err as? LAError)?.code != LAError.passcodeNotSet {
+          completion?(false)
+          return
+        }
+        controller?.showAlert(title: l10n("auth.confirm"), subtitle: l10n("auth.error")) { _ in
+          completion?(false)
+        }
       }
     }
   }
