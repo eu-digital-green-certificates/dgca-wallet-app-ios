@@ -180,6 +180,11 @@
         <target>Confirm Identity</target>
         <note/>
       </trans-unit>
+      <trans-unit id="auth.error" xml:space="preserve">
+        <source>Could not verify device ownership. Please try setting a passcode for this device before opening the app.</source>
+        <target>Could not verify device ownership. Please try setting a passcode for this device before opening the app.</target>
+        <note/>
+      </trans-unit>
       <trans-unit id="auth.later" xml:space="preserve">
         <source>Try Later</source>
         <target>Try Later</target>
@@ -266,6 +271,11 @@
       <trans-unit id="tan.label" xml:space="preserve">
         <source>TAN: %@</source>
         <target>TAN: %@</target>
+        <note/>
+      </trans-unit>
+      <trans-unit id="tap-to-reveal" xml:space="preserve">
+        <source>tap to reveal</source>
+        <target>tap to reveal</target>
         <note/>
       </trans-unit>
     </body>

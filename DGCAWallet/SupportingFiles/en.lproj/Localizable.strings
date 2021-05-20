@@ -44,4 +44,5 @@
 "auth.error" = "Could not verify device ownership. Please try setting a passcode for this device before opening the app.";
 "cert.delete.title" = "Delete Certificate";
 "cert.delete.body" = "Are you sure you want to delete this certificate? This action cannot be undone.";
+"tap-to-reveal" = "tap to reveal";
 "app-version" = "App Version %@";
