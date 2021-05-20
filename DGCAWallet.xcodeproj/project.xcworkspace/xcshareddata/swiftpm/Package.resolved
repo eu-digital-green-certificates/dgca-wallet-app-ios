@@ -15,7 +15,7 @@
         "repositoryURL": "https://github.com/eu-digital-green-certificates/dgca-app-core-ios",
         "state": {
           "branch": "main",
-          "revision": "0792980147e02bf6db0738af157bb2a8d31ea3cf",
+          "revision": "98c54595046e40068b570b69bd04a15668874569",
           "version": null
         }
       },
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/SCENEE/FloatingPanel",
         "state": {
           "branch": null,
-          "revision": "16fea625be25d9a713630a4a43cbc0778740ebf4",
-          "version": "2.3.0"
+          "revision": "da4668aa2b8277dd8ce2741ac5c39394431400fc",
+          "version": "2.3.1"
         }
       },
       {

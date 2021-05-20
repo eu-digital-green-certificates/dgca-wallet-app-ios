@@ -36,12 +36,15 @@ class CertificateViewerVC: UIViewController {
   @IBOutlet weak var cancelButton: UIButton!
   @IBOutlet weak var cancelButtonConstraint: NSLayoutConstraint!
 
-  var hCert: HCert!
+  var hCert: HCert?
   var tan: String?
   weak var childDismissedDelegate: CertViewerDelegate?
   public var isSaved = true
 
   func draw() {
+    guard let hCert = hCert else {
+      return
+    }
     nameLabel.text = hCert.fullName
     if !isSaved {
       dismissButton.setTitle(l10n("btn.save"), for: .normal)
@@ -53,16 +56,16 @@ class CertificateViewerVC: UIViewController {
     view.layoutIfNeeded()
   }
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
 
-    draw()
-  }
-
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-
-    return
+    if #available(iOS 13.0, *) {
+      draw()
+    } else {
+      DispatchQueue.main.async { [weak self] in
+        self?.draw()
+      }
+    }
   }
 
   var newCertAdded = false
