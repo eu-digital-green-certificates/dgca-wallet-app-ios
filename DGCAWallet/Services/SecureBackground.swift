@@ -70,12 +70,6 @@ struct SecureBackground {
     let context = LAContext()
     context.localizedCancelTitle = l10n("auth.later")
     let reason = l10n("auth.confirm")
-    var error: NSError?
-    guard context.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) else {
-      paused = false
-      completion?(true)
-      return
-    }
     context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason ) { success, err in
       if success {
         paused = false
