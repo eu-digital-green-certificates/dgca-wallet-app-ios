@@ -32,6 +32,8 @@ import SwiftDGC
 
 class SettingsVC: UINavigationController {
 
+  weak var childDismissedDelegate: CertViewerDelegate?
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -41,6 +43,7 @@ class SettingsVC: UINavigationController {
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
 
+    childDismissedDelegate?.childDismissed(false)
   }
 }
 

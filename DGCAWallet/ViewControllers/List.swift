@@ -62,6 +62,7 @@ class ListVC: UIViewController {
           let viewer = settingsVC as? SettingsVC else {
       return
     }
+    viewer.childDismissedDelegate = self
     showFloatingPanel(for: viewer)
   }
 
