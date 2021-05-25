@@ -93,7 +93,8 @@ class CertificateViewerVC: UIViewController {
     showInputDialog(
       title: l10n("tan.confirm.title"),
       subtitle: l10n("tan.confirm.text"),
-      inputPlaceholder: l10n("tan.confirm.placeholder")
+      inputPlaceholder: l10n("tan.confirm.placeholder"),
+      capitalization: .allCharacters
     ) { [weak self] in
       guard let cert = self?.hCert else {
         return
