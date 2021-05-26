@@ -80,8 +80,10 @@ struct SecureBackground {
           completion?(false)
           return
         }
-        controller?.showAlert(title: l10n("auth.confirm"), subtitle: l10n("auth.error")) { _ in
-          completion?(false)
+        DispatchQueue.main.async {
+          controller?.showAlert(title: l10n("auth.confirm"), subtitle: l10n("auth.error")) { _ in
+            completion?(false)
+          }
         }
       }
     }
