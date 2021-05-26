@@ -68,11 +68,13 @@ class HomeVC: UIViewController {
       showAlert(title: l10n("info.outdated"), subtitle: l10n("info.outdated.body"))
       return
     }
-    SecureBackground.checkId { [weak self] in
-      if $0 {
-        self?.performSegue(withIdentifier: "list", sender: self)
-      } else {
-        self?.checkId()
+    SecureBackground.checkId(from: self) { success in
+      DispatchQueue.main.async { [weak self] in
+        if success {
+          self?.performSegue(withIdentifier: "list", sender: self)
+        } else {
+          self?.checkId()
+        }
       }
     }
   }

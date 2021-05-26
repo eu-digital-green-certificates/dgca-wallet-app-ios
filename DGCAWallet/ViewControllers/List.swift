@@ -40,6 +40,10 @@ class ListVC: UIViewController {
     }
   }
 
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -58,6 +62,7 @@ class ListVC: UIViewController {
           let viewer = settingsVC as? SettingsVC else {
       return
     }
+    viewer.childDismissedDelegate = self
     showFloatingPanel(for: viewer)
   }
 
@@ -138,6 +143,14 @@ extension ListVC: CertViewerDelegate {
 }
 
 extension ListVC: ScanVCDelegate {
+  func disableBackgroundDetection() {
+    SecureBackground.paused = true
+  }
+
+  func enableBackgroundDetection() {
+    SecureBackground.paused = false
+  }
+
   func hCertScanned(_ cert: HCert) {
     newHCertScanned = cert
     DispatchQueue.main.async { [weak self] in
