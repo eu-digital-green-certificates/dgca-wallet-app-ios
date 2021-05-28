@@ -51,6 +51,7 @@ Important Info: SPM and the SwiftDGC [core module](https://github.com/eu-digital
     - `dgca-app-core-ios`
     - `dgca-wallet-app-ios`
 - Otherwise it will be pulled by Xcode like all other SPM modules.
+    - Make sure the core module is up to date by clicking File > Swift Packages > Update Packages.
 
 Build steps
 - Set the development team to any Apple Developer Account
