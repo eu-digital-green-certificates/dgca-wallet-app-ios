@@ -1,0 +1,18 @@
+
+/* Class = "UILabel"; text = "TAN: GIWHX3"; ObjectID = "BmW-aV-sN6"; */
+"BmW-aV-sN6.text" = "TAN: GIWHX3";
+
+/* Class = "UILabel"; text = "Max Mustermann"; ObjectID = "DVW-2y-e4I"; */
+"DVW-2y-e4I.text" = "Max Mustermann";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "YeB-JS-Q1Q"; */
+"YeB-JS-Q1Q.normalTitle" = "Abbrechen";
+
+/* Class = "UIButton"; normalTitle = "Done"; ObjectID = "a9u-Ia-KEX"; */
+"a9u-Ia-KEX.normalTitle" = "Fertig";
+
+/* Class = "UILabel"; text = "Identification Number"; ObjectID = "bxm-hI-f1t"; */
+"bxm-hI-f1t.text" = "Identifikationsnummer";
+
+/* Class = "UILabel"; text = "DE4382974329"; ObjectID = "gn8-3g-ntq"; */
+"gn8-3g-ntq.text" = "DE4382974329";

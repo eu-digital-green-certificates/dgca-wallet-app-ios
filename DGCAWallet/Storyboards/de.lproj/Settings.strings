@@ -1,0 +1,30 @@
+
+/* Class = "UINavigationItem"; title = "Licenses"; ObjectID = "365-Yn-xtr"; */
+"365-Yn-xtr.title" = "Lizenzen";
+
+/* Class = "UILabel"; text = "Licenses"; ObjectID = "5Lw-xZ-YJu"; */
+"5Lw-xZ-YJu.text" = "Lizenzen";
+
+/* Class = "UILabel"; text = "app-version"; ObjectID = "Rdn-TW-8aO"; */
+"Rdn-TW-8aO.text" = "app-version";
+
+/* Class = "UILabel"; text = "Alamofire"; ObjectID = "XSt-XR-IVq"; */
+"XSt-XR-IVq.text" = "Alamofire";
+
+/* Class = "UITableViewSection"; headerTitle = "Links"; ObjectID = "fbO-s8-6gg"; */
+"fbO-s8-6gg.headerTitle" = "Links";
+
+/* Class = "UITableViewController"; title = "Licenses"; ObjectID = "geQ-ZR-Hrz"; */
+"geQ-ZR-Hrz.title" = "Lizenzen";
+
+/* Class = "UILabel"; text = "Privacy Information"; ObjectID = "hky-ZS-URO"; */
+"hky-ZS-URO.text" = "Informationen zum Datenschutz";
+
+/* Class = "UILabel"; text = "Package Name"; ObjectID = "jyp-2v-rEh"; */
+"jyp-2v-rEh.text" = "Paketname";
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "nbb-SQ-pYn"; */
+"nbb-SQ-pYn.title" = "Abbrechen";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "nqQ-GZ-nBR"; */
+"nqQ-GZ-nBR.title" = "Einstellungen";
