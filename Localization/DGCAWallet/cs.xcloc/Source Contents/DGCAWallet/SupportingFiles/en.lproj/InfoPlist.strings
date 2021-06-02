@@ -1,0 +1,8 @@
+/* Bundle display name */
+"CFBundleDisplayName" = "Wallet App";
+/* Bundle name */
+"CFBundleName" = "DGCAWallet";
+/* Privacy - Camera Usage Description */
+"NSCameraUsageDescription" = "Scan barcodes with your camera.";
+/* Privacy - Face ID Usage Description */
+"NSFaceIDUsageDescription" = "Unlock sensitive data.";
