@@ -235,7 +235,7 @@
       </trans-unit>
       <trans-unit id="tan.confirm.fail.text" xml:space="preserve">
         <source>Check the TAN and try again.</source>
-        <target>Ellenőrizze a TAN azonosítót, majd próbálja újra.</target>
+        <target>Ellenőrizze a TAN azonosítót, majd próbálja meg újra.</target>
         <note/>
       </trans-unit>
       <trans-unit id="tan.confirm.fail.title" xml:space="preserve">
