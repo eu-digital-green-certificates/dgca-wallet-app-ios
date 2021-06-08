@@ -27,7 +27,6 @@
 
 import Foundation
 import UIKit
-import FloatingPanel
 import SwiftDGC
 
 class SettingsVC: UINavigationController {
