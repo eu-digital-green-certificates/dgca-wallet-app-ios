@@ -28,7 +28,6 @@
 import Foundation
 import UIKit
 import SwiftDGC
-import FloatingPanel
 
 class ListVC: UIViewController {
   override func viewDidAppear(_ animated: Bool) {
@@ -63,20 +62,7 @@ class ListVC: UIViewController {
       return
     }
     viewer.childDismissedDelegate = self
-    showFloatingPanel(for: viewer)
-  }
-
-  func showFloatingPanel(for controller: UIViewController) {
-    let fpc = FloatingPanelController()
-    fpc.set(contentViewController: controller)
-    fpc.isRemovalInteractionEnabled = true
-    fpc.layout = FullFloatingPanelLayout()
-    fpc.surfaceView.layer.cornerRadius = 24.0
-    fpc.surfaceView.clipsToBounds = true
-    fpc.delegate = self
-    presentingViewer = controller
-
-    present(fpc, animated: true, completion: nil)
+    present(viewer, animated: true)
   }
 
   @IBOutlet weak var table: UITableView!
@@ -110,16 +96,8 @@ class ListVC: UIViewController {
     viewer.hCert = certificate
     viewer.tan = tan
     viewer.childDismissedDelegate = self
-    let fpc = FloatingPanelController()
-    fpc.set(contentViewController: viewer)
-    fpc.isRemovalInteractionEnabled = true // Let it removable by a swipe-down
-    fpc.layout = FullFloatingPanelLayout()
-    fpc.surfaceView.layer.cornerRadius = 24.0
-    fpc.surfaceView.clipsToBounds = true
-    fpc.delegate = self
-    presentingViewer = viewer
 
-    present(fpc, animated: true, completion: nil)
+    present(viewer, animated: true, completion: nil)
     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
   }
 
@@ -209,30 +187,6 @@ extension ListVC: UITableViewDelegate {
         LocalData.sharedInstance.save()
         self?.reloadTable()
       }
-    }
-  }
-}
-
-extension ListVC: FloatingPanelControllerDelegate {
-  func floatingPanel(
-    _ fpc: FloatingPanelController,
-    shouldRemoveAt location: CGPoint,
-    with velocity: CGVector
-  ) -> Bool {
-    let pos = location.y / view.bounds.height
-    if pos >= 0.33 {
-      return true
-    }
-    let threshold: CGFloat = 5.0
-    switch fpc.layout.position {
-    case .top:
-      return (velocity.dy <= -threshold)
-    case .left:
-      return (velocity.dx <= -threshold)
-    case .bottom:
-      return (velocity.dy >= threshold)
-    case .right:
-      return (velocity.dx >= threshold)
     }
   }
 }

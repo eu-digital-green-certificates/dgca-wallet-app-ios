@@ -20,15 +20,6 @@
         }
       },
       {
-        "package": "FloatingPanel",
-        "repositoryURL": "https://github.com/SCENEE/FloatingPanel",
-        "state": {
-          "branch": null,
-          "revision": "da4668aa2b8277dd8ce2741ac5c39394431400fc",
-          "version": "2.3.1"
-        }
-      },
-      {
         "package": "JSONSchema",
         "repositoryURL": "https://github.com/eu-digital-green-certificates/JSONSchema.swift",
         "state": {

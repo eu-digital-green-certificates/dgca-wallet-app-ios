@@ -28,7 +28,6 @@
 
 import UIKit
 import SwiftDGC
-import FloatingPanel
 
 class ScanVC: SwiftDGC.ScanVC {
   override func viewDidLoad() {
