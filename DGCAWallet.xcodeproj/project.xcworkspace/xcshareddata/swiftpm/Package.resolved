@@ -15,7 +15,7 @@
         "repositoryURL": "https://github.com/eu-digital-green-certificates/dgca-app-core-ios",
         "state": {
           "branch": "main",
-          "revision": "31acce3b9ade4dfe7446eb6cf3956863ca6e71c0",
+          "revision": "2f9ce82dada06cd44147316ac9d8edbcef919690",
           "version": null
         }
       },
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/SCENEE/FloatingPanel",
         "state": {
           "branch": null,
-          "revision": "da4668aa2b8277dd8ce2741ac5c39394431400fc",
-          "version": "2.3.1"
+          "revision": "b8fcb50874f50bb511173700f87b09344c568c6a",
+          "version": "2.4.0"
         }
       },
       {
@@ -57,11 +57,11 @@
       },
       {
         "package": "SwiftCBOR",
-        "repositoryURL": "https://github.com/unrelentingtech/SwiftCBOR",
+        "repositoryURL": "https://github.com/eu-digital-green-certificates/SwiftCBOR",
         "state": {
-          "branch": null,
-          "revision": "668c26fc3373d5f1bccbaad7665ca6048797e324",
-          "version": "0.4.3"
+          "branch": "master",
+          "revision": "b76024995f6909e4615f943c7a03268fd29778fc",
+          "version": null
         }
       },
       {
