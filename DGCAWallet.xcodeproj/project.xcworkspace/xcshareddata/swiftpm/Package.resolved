@@ -11,11 +11,20 @@
         }
       },
       {
+        "package": "ASN1Decoder",
+        "repositoryURL": "https://github.com/filom/ASN1Decoder",
+        "state": {
+          "branch": null,
+          "revision": "65953a42a0f039f53c73e48fd88c02809f7db607",
+          "version": "1.8.0"
+        }
+      },
+      {
         "package": "SwiftDGC",
         "repositoryURL": "https://github.com/eu-digital-green-certificates/dgca-app-core-ios",
         "state": {
           "branch": "main",
-          "revision": "2f9ce82dada06cd44147316ac9d8edbcef919690",
+          "revision": "96a5bf0ec02fc56bb5c59a4fd579f381f5da9a55",
           "version": null
         }
       },
