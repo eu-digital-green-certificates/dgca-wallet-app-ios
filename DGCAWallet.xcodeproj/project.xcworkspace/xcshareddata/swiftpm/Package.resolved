@@ -11,11 +11,29 @@
         }
       },
       {
+        "package": "ASN1Decoder",
+        "repositoryURL": "https://github.com/filom/ASN1Decoder",
+        "state": {
+          "branch": null,
+          "revision": "65953a42a0f039f53c73e48fd88c02809f7db607",
+          "version": "1.8.0"
+        }
+      },
+      {
+        "package": "CertLogic",
+        "repositoryURL": "https://github.com/eu-digital-green-certificates/dgc-certlogic-ios.git",
+        "state": {
+          "branch": "main",
+          "revision": "14bcdce4ed19e151a9a3df1ea253db9a6238eeb7",
+          "version": null
+        }
+      },
+      {
         "package": "SwiftDGC",
         "repositoryURL": "https://github.com/eu-digital-green-certificates/dgca-app-core-ios",
         "state": {
           "branch": "main",
-          "revision": "2f9ce82dada06cd44147316ac9d8edbcef919690",
+          "revision": "96a5bf0ec02fc56bb5c59a4fd579f381f5da9a55",
           "version": null
         }
       },
@@ -26,6 +44,15 @@
           "branch": null,
           "revision": "b8fcb50874f50bb511173700f87b09344c568c6a",
           "version": "2.4.0"
+        }
+      },
+      {
+        "package": "jsonlogic",
+        "repositoryURL": "https://github.com/eu-digital-green-certificates/json-logic-swift.git",
+        "state": {
+          "branch": null,
+          "revision": "8dc339147b27ae633a1857503ed8d091c7935d0d",
+          "version": "1.1.5"
         }
       },
       {

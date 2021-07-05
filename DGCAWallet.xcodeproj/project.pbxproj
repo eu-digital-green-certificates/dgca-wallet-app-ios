@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5CE07C762692E0D900A032F9 /* CertLogic in Frameworks */ = {isa = PBXBuildFile; productRef = 5CE07C752692E0D900A032F9 /* CertLogic */; };
+		5CE07C7A2692E1CD00A032F9 /* CountryDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE07C772692E1CC00A032F9 /* CountryDataStorage.swift */; };
+		5CE07C7B2692E1CD00A032F9 /* CountryDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE07C772692E1CC00A032F9 /* CountryDataStorage.swift */; };
+		5CE07C7C2692E1CD00A032F9 /* CountryDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE07C772692E1CC00A032F9 /* CountryDataStorage.swift */; };
+		5CE07C7D2692E1CD00A032F9 /* ValueSetsDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE07C782692E1CD00A032F9 /* ValueSetsDataStorage.swift */; };
+		5CE07C7E2692E1CD00A032F9 /* ValueSetsDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE07C782692E1CD00A032F9 /* ValueSetsDataStorage.swift */; };
+		5CE07C7F2692E1CD00A032F9 /* ValueSetsDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE07C782692E1CD00A032F9 /* ValueSetsDataStorage.swift */; };
+		5CE07C802692E1CD00A032F9 /* RulesDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE07C792692E1CD00A032F9 /* RulesDataStorage.swift */; };
+		5CE07C812692E1CD00A032F9 /* RulesDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE07C792692E1CD00A032F9 /* RulesDataStorage.swift */; };
+		5CE07C822692E1CD00A032F9 /* RulesDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE07C792692E1CD00A032F9 /* RulesDataStorage.swift */; };
+		5CE07C842692E21E00A032F9 /* CertLogicEngineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE07C832692E21E00A032F9 /* CertLogicEngineManager.swift */; };
+		5CE07C852692E21E00A032F9 /* CertLogicEngineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE07C832692E21E00A032F9 /* CertLogicEngineManager.swift */; };
+		5CE07C862692E21E00A032F9 /* CertLogicEngineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE07C832692E21E00A032F9 /* CertLogicEngineManager.swift */; };
 		CE13CF00262DCC180070C80E /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = CE13CEFF262DCC180070C80E /* FloatingPanel */; };
 		CE13CF0A262DCDDA0070C80E /* CertificateViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13CF09262DCDDA0070C80E /* CertificateViewer.swift */; };
 		CE13CF0F262DD0D80070C80E /* FullFloatingPanelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13CF0E262DD0D80070C80E /* FullFloatingPanelLayout.swift */; };
@@ -70,6 +83,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5CE07C772692E1CC00A032F9 /* CountryDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryDataStorage.swift; sourceTree = "<group>"; };
+		5CE07C782692E1CD00A032F9 /* ValueSetsDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueSetsDataStorage.swift; sourceTree = "<group>"; };
+		5CE07C792692E1CD00A032F9 /* RulesDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesDataStorage.swift; sourceTree = "<group>"; };
+		5CE07C832692E21E00A032F9 /* CertLogicEngineManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertLogicEngineManager.swift; sourceTree = "<group>"; };
 		CE13CF09262DCDDA0070C80E /* CertificateViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateViewer.swift; sourceTree = "<group>"; };
 		CE13CF0E262DD0D80070C80E /* FullFloatingPanelLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullFloatingPanelLayout.swift; sourceTree = "<group>"; };
 		CE13CF22262DDF810070C80E /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
@@ -123,6 +140,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE8912FB2634C6B900CB92AF /* Alamofire in Frameworks */,
+				5CE07C762692E0D900A032F9 /* CertLogic in Frameworks */,
 				CE56B5052639F48E00FB31B1 /* SwiftDGC in Frameworks */,
 				CE6B330E2651A54800845B8E /* SwiftDGC in Frameworks */,
 				CE1F155C2639F9E700736D48 /* SwiftyJSON in Frameworks */,
@@ -165,6 +183,7 @@
 				CE37B642263867D700DEE13D /* SecureBackground.swift */,
 				CEE9DA5C263C865200A31532 /* Brightness.swift */,
 				CE56BC06264068110044FD3F /* GatewayConnection.swift */,
+				5CE07C832692E21E00A032F9 /* CertLogicEngineManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -228,6 +247,9 @@
 			isa = PBXGroup;
 			children = (
 				CE1D1EF5263597A2004C8919 /* LocalData.swift */,
+				5CE07C772692E1CC00A032F9 /* CountryDataStorage.swift */,
+				5CE07C792692E1CD00A032F9 /* RulesDataStorage.swift */,
+				5CE07C782692E1CD00A032F9 /* ValueSetsDataStorage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -325,6 +347,7 @@
 				CE56B5042639F48E00FB31B1 /* SwiftDGC */,
 				CE1F155B2639F9E700736D48 /* SwiftyJSON */,
 				CE6B330D2651A54800845B8E /* SwiftDGC */,
+				5CE07C752692E0D900A032F9 /* CertLogic */,
 			);
 			productName = DGCAWallet;
 			productReference = CEA6D6E8261F8D2700715333 /* DGCAWallet.app */;
@@ -402,6 +425,7 @@
 				CE8912F92634C6B900CB92AF /* XCRemoteSwiftPackageReference "Alamofire" */,
 				CE1F155A2639F9E700736D48 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				CE6B330C2651A54800845B8E /* XCRemoteSwiftPackageReference "dgca-app-core-ios" */,
+				5CE07C742692E0D900A032F9 /* XCRemoteSwiftPackageReference "dgc-certlogic-ios" */,
 			);
 			productRefGroup = CEA6D6E9261F8D2700715333 /* Products */;
 			projectDirPath = "";
@@ -478,11 +502,13 @@
 				CEDABD40263C5FF4007A9B97 /* CertTable.swift in Sources */,
 				CE37B643263867D700DEE13D /* SecureBackground.swift in Sources */,
 				CE13CF0F262DD0D80070C80E /* FullFloatingPanelLayout.swift in Sources */,
+				5CE07C7D2692E1CD00A032F9 /* ValueSetsDataStorage.swift in Sources */,
 				CEA1556B262F784E0024B7AC /* SelfSizedTableView.swift in Sources */,
 				CE8096D9263B07BB00A65AD6 /* UIColor.swift in Sources */,
 				CEDABD49263C70EF007A9B97 /* CertPages.swift in Sources */,
 				CE4BD254264FF28900689FD6 /* Settings.swift in Sources */,
 				CE1D1EF6263597A2004C8919 /* LocalData.swift in Sources */,
+				5CE07C842692E21E00A032F9 /* CertLogicEngineManager.swift in Sources */,
 				CED2726026398683003D47A9 /* UIFont.swift in Sources */,
 				CEE9DA55263C7D4000A31532 /* CertCode.swift in Sources */,
 				CE56BC07264068110044FD3F /* GatewayConnection.swift in Sources */,
@@ -495,9 +521,11 @@
 				CEA15563262F6DAB0024B7AC /* CertViewerDelegate.swift in Sources */,
 				CE260F56263DD1720083A200 /* WalletCell.swift in Sources */,
 				CEA15570262F79DE0024B7AC /* InfoCell.swift in Sources */,
+				5CE07C7A2692E1CD00A032F9 /* CountryDataStorage.swift in Sources */,
 				CED949CA263B50CE00883558 /* List.swift in Sources */,
 				DA01662226558B2F005B73A1 /* LicenseVC.swift in Sources */,
 				CEA6D6EE261F8D2700715333 /* SceneDelegate.swift in Sources */,
+				5CE07C802692E1CD00A032F9 /* RulesDataStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,8 +533,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CE07C7E2692E1CD00A032F9 /* ValueSetsDataStorage.swift in Sources */,
 				CEA6D703261F8D2900715333 /* DGCAWalletTests.swift in Sources */,
+				5CE07C852692E21E00A032F9 /* CertLogicEngineManager.swift in Sources */,
+				5CE07C812692E1CD00A032F9 /* RulesDataStorage.swift in Sources */,
 				CEFAD87F262714C4009AFEF9 /* EHNTests.swift in Sources */,
+				5CE07C7B2692E1CD00A032F9 /* CountryDataStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,7 +546,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CE07C7C2692E1CD00A032F9 /* CountryDataStorage.swift in Sources */,
 				CEA6D70E261F8D2900715333 /* DGCAWalletUITests.swift in Sources */,
+				5CE07C7F2692E1CD00A032F9 /* ValueSetsDataStorage.swift in Sources */,
+				5CE07C862692E21E00A032F9 /* CertLogicEngineManager.swift in Sources */,
+				5CE07C822692E1CD00A032F9 /* RulesDataStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -699,7 +735,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KH99XNF745;
+				DEVELOPMENT_TEAM = 82EG8LG7YH;
 				INFOPLIST_FILE = DGCAWallet/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -720,7 +756,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KH99XNF745;
+				DEVELOPMENT_TEAM = 82EG8LG7YH;
 				INFOPLIST_FILE = DGCAWallet/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -861,6 +897,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5CE07C742692E0D900A032F9 /* XCRemoteSwiftPackageReference "dgc-certlogic-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/eu-digital-green-certificates/dgc-certlogic-ios.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		CE13CEFE262DCC180070C80E /* XCRemoteSwiftPackageReference "FloatingPanel" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SCENEE/FloatingPanel";
@@ -896,6 +940,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5CE07C752692E0D900A032F9 /* CertLogic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5CE07C742692E0D900A032F9 /* XCRemoteSwiftPackageReference "dgc-certlogic-ios" */;
+			productName = CertLogic;
+		};
 		CE13CEFF262DCC180070C80E /* FloatingPanel */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CE13CEFE262DCC180070C80E /* XCRemoteSwiftPackageReference "FloatingPanel" */;
