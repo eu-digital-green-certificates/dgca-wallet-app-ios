@@ -1,0 +1,24 @@
+
+/* Class = "UILabel"; text = "Max Mustermann"; ObjectID = "6NN-i3-YUv"; */
+"6NN-i3-YUv.text" = "Max Mustermann";
+
+/* Class = "UILabel"; text = "scanned 2021-04-01"; ObjectID = "APa-yy-a1r"; */
+"APa-yy-a1r.text" = "eingescannt 2021-04-01";
+
+/* Class = "UIButton"; normalTitle = "Scan Code"; ObjectID = "MID-ne-Jur"; */
+"MID-ne-Jur.normalTitle" = "Code einscannen";
+
+/* Class = "UILabel"; text = "Vaccination Shot 1 of 2"; ObjectID = "Md0-O5-XZH"; */
+"Md0-O5-XZH.text" = "Impfdosis 1 von 2";
+
+/* Class = "UILabel"; text = "Wallet App"; ObjectID = "N7y-9d-COU"; */
+"N7y-9d-COU.text" = "Wallet App";
+
+/* Class = "UILabel"; text = "Certificate Wallet"; ObjectID = "Q38-2s-CMN"; */
+"Q38-2s-CMN.text" = "Zertifikate Wallet";
+
+/* Class = "UILabel"; text = "Wallet Empty"; ObjectID = "f0r-gi-rzF"; */
+"f0r-gi-rzF.text" = "Wallet leer";
+
+/* Class = "UILabel"; text = "Press the button below to scan your code."; ObjectID = "xvs-y5-Iav"; */
+"xvs-y5-Iav.text" = "Drücken Sie den unteren Button, um Ihren Code zu scannen.";

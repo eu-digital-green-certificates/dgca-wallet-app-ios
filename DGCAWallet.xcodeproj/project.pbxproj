@@ -70,6 +70,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		06B423CA2667BAC8009C94BE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		06B423CB2667BAC9009C94BE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
+		06B423CC2667BAC9009C94BE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/CertificateViewer.strings; sourceTree = "<group>"; };
+		06B423CD2667BAC9009C94BE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Settings.strings; sourceTree = "<group>"; };
+		06B423CE2667BAC9009C94BE /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CE13CF09262DCDDA0070C80E /* CertificateViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateViewer.swift; sourceTree = "<group>"; };
 		CE13CF0E262DD0D80070C80E /* FullFloatingPanelLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullFloatingPanelLayout.swift; sourceTree = "<group>"; };
 		CE13CF22262DDF810070C80E /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
@@ -395,6 +400,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = CEA6D6DF261F8D2700715333;
 			packageReferences = (
@@ -538,6 +544,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				CE4BD256264FF39400689FD6 /* Base */,
+				06B423CD2667BAC9009C94BE /* de */,
 			);
 			name = Settings.storyboard;
 			sourceTree = "<group>";
@@ -546,6 +553,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				CE4BD259264FF39D00689FD6 /* Base */,
+				06B423CC2667BAC9009C94BE /* de */,
 			);
 			name = CertificateViewer.storyboard;
 			sourceTree = "<group>";
@@ -554,6 +562,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				CE6D4A45264835F100A5D33D /* en */,
+				06B423CE2667BAC9009C94BE /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -562,6 +571,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				CEA6D6F2261F8D2700715333 /* Base */,
+				06B423CB2667BAC9009C94BE /* de */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -570,6 +580,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				CEA6D6F7261F8D2900715333 /* Base */,
+				06B423CA2667BAC8009C94BE /* de */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -581,6 +592,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -642,6 +654,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
