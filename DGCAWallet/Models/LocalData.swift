@@ -39,8 +39,16 @@ struct DatedCertString: Codable {
 }
 
 struct LocalData: Codable {
-  static let appVersion = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "?.?.?"
+  private enum Constants {
+    static let pubKeysStorageFilename = "secure"
+    static let bundleVersion = "CFBundleShortVersionString"
+    static let unknown = "?.?.?"
+    static let versions = "versions"
+    static let defaultVer = "default"
+  }
+  static let appVersion = (Bundle.main.infoDictionary?[Constants.bundleVersion] as? String) ?? Constants.unknown
   static var sharedInstance = LocalData()
+  static let storage = SecureStorage<LocalData>(fileName: Constants.pubKeysStorageFilename)
 
   var certStrings = [DatedCertString]()
   var config = Config.load()
@@ -49,14 +57,10 @@ struct LocalData: Codable {
   public func save() {
     Self.storage.save(self)
   }
-
   public static func add(_ cert: HCert, with tan: String?) {
     sharedInstance.certStrings.append(.init(date: Date(), certString: cert.payloadString, storedTAN: tan))
     sharedInstance.save()
   }
-
-  static let storage = SecureStorage<LocalData>(fileName: "secure")
-
   static func initialize(completion: @escaping () -> Void) {
     storage.loadOverride(fallback: LocalData.sharedInstance) { success in
       guard var result = success else {
@@ -72,11 +76,10 @@ struct LocalData: Codable {
       GatewayConnection.fetchContext()
     }
   }
-
   var versionedConfig: JSON {
-    if config["versions"][Self.appVersion].exists() {
-      return config["versions"][Self.appVersion]
+    if config[Constants.versions][Self.appVersion].exists() {
+      return config[Constants.versions][Self.appVersion]
     }
-    return config["versions"]["default"]
+    return config[Constants.versions][Constants.defaultVer]
   }
 }
