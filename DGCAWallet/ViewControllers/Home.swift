@@ -36,6 +36,8 @@ class HomeVC: UIViewController {
     HCert.config.prefetchAllCodes = true
     HCert.config.checkSignatures = false
     
+    GatewayConnection.countryList { _ in
+    }
     let loadingGroup = DispatchGroup()
     loadingGroup.enter()
     RulesDataStorage.initialize {
@@ -58,10 +60,6 @@ class HomeVC: UIViewController {
       GatewayConnection.loadValueSetsFromServer { _ in
         loadingGroup.leave()
       }
-    }
-    loadingGroup.enter()
-    GatewayConnection.countryList { _ in
-      loadingGroup.leave()
     }
     loadingGroup.enter()
     LocalData.initialize {
