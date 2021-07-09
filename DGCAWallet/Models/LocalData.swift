@@ -73,7 +73,8 @@ struct LocalData: Codable {
       }
       LocalData.sharedInstance = result
       completion()
-      GatewayConnection.fetchContext()
+      //WARNING mocked data
+//      GatewayConnection.fetchContext()
     }
   }
   var versionedConfig: JSON {

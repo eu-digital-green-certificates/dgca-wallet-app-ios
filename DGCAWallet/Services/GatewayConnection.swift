@@ -184,7 +184,7 @@ extension GatewayConnection {
           downloadingGroup.leave()
         }
       }
-      downloadingGroup.notify(queue: DispatchQueue.global(qos: .background)) {
+      downloadingGroup.notify(queue: .main) {
         completion?(rulesItems)
         print("Finished all requests.")
       }
@@ -258,7 +258,7 @@ extension GatewayConnection {
           downloadingGroup.leave()
         }
       }
-      downloadingGroup.notify(queue: DispatchQueue.global(qos: .background)) {
+      downloadingGroup.notify(queue: .main) {
         completion?(valueSetsItems)
         print("Finished all requests.")
       }

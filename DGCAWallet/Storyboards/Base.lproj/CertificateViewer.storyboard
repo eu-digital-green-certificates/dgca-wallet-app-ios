@@ -90,6 +90,9 @@
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="NO"/>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="checkValidityAction:" destination="WCj-Xf-fml" eventType="touchUpInside" id="0yd-PI-Ex4"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -130,6 +133,7 @@
                     <connections>
                         <outlet property="cancelButton" destination="YeB-JS-Q1Q" id="QVM-rn-qUM"/>
                         <outlet property="cancelButtonConstraint" destination="695-CS-7M3" id="tgr-gH-8ZQ"/>
+                        <outlet property="checkValidityButton" destination="9zn-iE-p4i" id="mbe-qx-Vcb"/>
                         <outlet property="dismissButton" destination="a9u-Ia-KEX" id="Jy0-Qx-2Y9"/>
                         <outlet property="headerBackground" destination="fKu-7E-jAI" id="TKR-ve-HDL"/>
                         <outlet property="nameLabel" destination="DVW-2y-e4I" id="cyN-o4-vZQ"/>
