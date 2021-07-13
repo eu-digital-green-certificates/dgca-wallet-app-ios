@@ -62,6 +62,8 @@ class CellWithDateAndCountryTVC: UITableViewCell {
     }
   }
   func setupView() {
+    destinationLabel.text = l10n("destination_country")
+    dateLabel.text = l10n("destination_date")
     countryPicker.delegate = self
     countryPicker.dataSource = self
     datePicker.minimumDate = Date()
@@ -82,10 +84,6 @@ class CellWithDateAndCountryTVC: UITableViewCell {
 extension CellWithDateAndCountryTVC {
   @objc func dateChanged(_ sender: UIDatePicker) {
     dataHandler?(sender.date)
-//      let components = Calendar.current.dateComponents([.year, .month, .day], from: sender.date)
-//      if let day = components.day, let month = components.month, let year = components.year {
-//          print("\(day) \(month) \(year)")
-//      }
   }
 }
 

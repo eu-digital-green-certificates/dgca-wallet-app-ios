@@ -34,8 +34,8 @@ final class CheckValidityVC: UIViewController {
   private enum Constants {
     static let titleCellIndentifier = "CellWithTitleAndDescriptionTVC"
     static let countryCellIndentifier = "CellWithDateAndCountryTVC"
-  }
-  
+    static let bottomOffset: CGFloat = 32.0
+  }  
   @IBOutlet private weak var closeButton: UIButton!
   @IBOutlet private weak var checkValidityButton: UIButton!
   @IBOutlet private weak var tableView: UITableView!
@@ -43,7 +43,6 @@ final class CheckValidityVC: UIViewController {
   private var hCert: HCert?
   private var selectedDate = Date()
   private var selectedCountryCode: String?
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupView()
@@ -52,39 +51,30 @@ final class CheckValidityVC: UIViewController {
   @IBAction func closeButtonAction(_ sender: Any) {
     self.dismiss(animated: true, completion: nil)
   }
-  
   private func setupView() {
     setupInitialDate()
     setupTableView()
     tableView.reloadData()
   }
-  
   private func setupTableView() {
     tableView.dataSource = self
     tableView.register(UINib(nibName: Constants.titleCellIndentifier, bundle: nil),
                        forCellReuseIdentifier: Constants.titleCellIndentifier)
     tableView.register(UINib(nibName: Constants.countryCellIndentifier, bundle: nil),
                        forCellReuseIdentifier: Constants.countryCellIndentifier)
-    tableView.contentInset = .init(top: 0, left: 0, bottom: 32, right: 0)
+    tableView.contentInset = .init(top: .zero, left: .zero, bottom: Constants.bottomOffset, right: .zero)
 
   }
-  
   private func setupInitialDate() {
-    let text = """
-      Terms and Conditions agreements act as a legal contract between you (the company) who has the website or mobile app and the user who access your website and mobile app.
-      Having a Terms and Conditions agreement is completely optional. No laws require you to have one. Not even the super-strict and wide-reaching General Data Protection Regulation (GDPR).
-      Terms and Conditions are also known as Terms of Service or Terms of Use.
-      """
-    items.append(ValidityCellModel(title: "Validity of your certifivate", description: text, needChangeTitleFont: true))
+    items.append(ValidityCellModel(title: l10n("validity_of_certificate"),
+                                   description: l10n("country_certificate_text"),
+                                   needChangeTitleFont: true))
     items.append(ValidityCellModel(cellType: .countryAndTimeSelection))
-    items.append(ValidityCellModel(title: "Disclaimer", description: text))
-    items.append(ValidityCellModel(title: "Datenschutz", description: text))
+    items.append(ValidityCellModel(title: l10n("disclaimer"), description: l10n("disclaimer_text")))
   }
-  
   func setHCert(cert: HCert?) {
     self.hCert = cert
   }
-  
   @IBAction func checkValidityAction(_ sender: Any) {
     let ruleValidationVC = RuleValidationResultVC.loadFromNib()
     ruleValidationVC.closeHandler = {

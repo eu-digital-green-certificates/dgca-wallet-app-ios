@@ -46,16 +46,12 @@ final class RuleValidationResultVC: UIViewController {
   @IBOutlet weak var noWarrantyLabel: UILabel!
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-  
   private var hCert: HCert?
   private var selectedDate = Date()
   var closeHandler: OnCloseHandler?
-
   var items: [InfoSection] = []
-  
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     setupLabels()
     setupTableView()
     activityIndicator.startAnimating()
@@ -66,19 +62,16 @@ final class RuleValidationResultVC: UIViewController {
     tableView.register(UINib(nibName: Constants.ruleCellId, bundle: nil), forCellReuseIdentifier: Constants.ruleCellId)
     tableView.contentInset = .init(top: 0, left: 0, bottom: 32, right: 0)
   }
-  
   private func setupLabels() {
-    resultLabel.text = "Validating certificate with country rules"
-    resultDescriptionLabel.text = "Please wait we are validating your certificate"
-    noWarrantyLabel.text = "Please note that this information is without guaranty. This functions checks if the certificate matches the rules of the country you are travelling to at the given date."
+    resultLabel.text = l10n("validate_certificate_with_rules")
+    resultDescriptionLabel.text = l10n("please_wait")
+    noWarrantyLabel.text = l10n("info_without_waranty")
   }
-  
   @IBAction func closeAction(_ sender: Any) {
     self.dismiss(animated: true) { [weak self] in
       self?.closeHandler?()
     }
   }
-  
   @IBAction func backAction(_ sender: Any) {
     self.dismiss(animated: true, completion: nil)
   }
@@ -88,18 +81,18 @@ final class RuleValidationResultVC: UIViewController {
     self.selectedDate = selectedDate
     let validity: HCertValidity = self.validateCertLogicRules()
     if validity == .valid {
-      resultLabel.text = "Valid certificate"
-      resultDescriptionLabel.text = "Your certificate allows you to enter the chosen country"
-      resultIcon.image = UIImage(named: "pass-icon")
+      resultLabel.text = l10n("valid_certificate")
+      resultDescriptionLabel.text = l10n("your_certificate_allow")
+      resultIcon.image = UIImage(named: "icon_large_valid")
     }
     if validity == .invalid {
-      resultLabel.text = "Invalid certificate"
-      resultDescriptionLabel.text = "Your certificate did not allows you to enter the chosen country"
+      resultLabel.text = l10n("invalid_certificate")
+      resultDescriptionLabel.text = l10n("your_certificate_did_not_allow")
     }
     if validity == .ruleInvalid {
-      resultLabel.text = "Certificate has limitation"
-      resultDescriptionLabel.text = "Your certificate if valid but has the following restrictions:"
-      resultIcon.image = UIImage(named: "warning-icon")
+      resultLabel.text = l10n("certificate_limitation")
+      resultDescriptionLabel.text = l10n("certification_has_limitation")
+      resultIcon.image = UIImage(named: "icon_large_warning")
     }
     activityIndicator.stopAnimating()
     resultIcon.isHidden = false
