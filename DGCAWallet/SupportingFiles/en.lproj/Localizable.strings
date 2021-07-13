@@ -65,7 +65,7 @@
 "invalid_certificate" = "Invalid certificate";
 "your_certificate_did_not_allow" = "Your certificate did not allows you to enter the chosen country";
 "certificate_limitation" = "Certificate has limitation";
-"certification_has_limitation" = "Your certificate valid but has the following restrictions:";
+"certification_has_limitation" = "Your certificate is valid but has the following restrictions:";
 "validate_certificate_with_rules" = "Validating certificate with country rules";
 "please_wait" = "Please wait we are validating your certificate";
 "info_without_waranty" = "Please note that this information is without guaranty. This functions checks if the certificate matches the rules of the country you are travelling to at the given date.";

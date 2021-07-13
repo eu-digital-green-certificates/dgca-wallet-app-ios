@@ -66,8 +66,8 @@ final class CheckValidityVC: UIViewController {
 
   }
   private func setupInitialDate() {
-    items.append(ValidityCellModel(title: l10n("validity_of_certificate"),
-                                   description: l10n("country_certificate_text"),
+    items.append(ValidityCellModel(title: l10n("country_certificate_text"),
+                                   description: "",
                                    needChangeTitleFont: true))
     items.append(ValidityCellModel(cellType: .countryAndTimeSelection))
     items.append(ValidityCellModel(title: l10n("disclaimer"), description: l10n("disclaimer_text")))

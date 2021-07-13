@@ -64,7 +64,7 @@ final class RuleValidationResultVC: UIViewController {
   }
   private func setupLabels() {
     resultLabel.text = l10n("validate_certificate_with_rules")
-    resultDescriptionLabel.text = l10n("please_wait")
+    resultDescriptionLabel.text = ""
     noWarrantyLabel.text = l10n("info_without_waranty")
   }
   @IBAction func closeAction(_ sender: Any) {
