@@ -1089,7 +1089,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/eu-digital-green-certificates/dgca-app-core-ios";
 			requirement = {
-				branch = bugfix/hc1;
+				branch = main;
 				kind = branch;
 			};
 		};
