@@ -35,48 +35,34 @@ class HomeVC: UIViewController {
 
     HCert.config.prefetchAllCodes = true
     HCert.config.checkSignatures = false
-    
-    GatewayConnection.countryList { _ in
-    }
-    let loadingGroup = DispatchGroup()
-    loadingGroup.enter()
+        
     RulesDataStorage.initialize {
       GatewayConnection.rulesList { _ in
         CertLogicEngineManager.sharedInstance.setRules(ruleList: RulesDataStorage.sharedInstance.rules)
-        loadingGroup.leave()
-      }
-      loadingGroup.enter()
-      GatewayConnection.loadRulesFromServer { _ in
-        CertLogicEngineManager.sharedInstance.setRules(ruleList: RulesDataStorage.sharedInstance.rules)
-        loadingGroup.leave()
-      }
-    }
-    loadingGroup.enter()
-    ValueSetsDataStorage.initialize {
-      GatewayConnection.valueSetsList { _ in
-        loadingGroup.leave()
-      }
-      loadingGroup.enter()
-      GatewayConnection.loadValueSetsFromServer { _ in
-        loadingGroup.leave()
+        GatewayConnection.loadRulesFromServer { _ in
+          CertLogicEngineManager.sharedInstance.setRules(ruleList: RulesDataStorage.sharedInstance.rules)
+          ValueSetsDataStorage.initialize {
+            GatewayConnection.valueSetsList { _ in
+              GatewayConnection.loadValueSetsFromServer { _ in
+                GatewayConnection.countryList { _ in
+                }
+              }
+            }
+          }
+        }
       }
     }
-    loadingGroup.enter()
     LocalData.initialize {
       DispatchQueue.main.async { [weak self] in
         guard let self = self else {
-          loadingGroup.leave()
           return
         }
         let renderer = UIGraphicsImageRenderer(size: self.view.bounds.size)
         SecureBackground.image = renderer.image { rendererContext in
           self.view.layer.render(in: rendererContext.cgContext)
         }
-        loadingGroup.leave()
+        self.loadComplete()
       }
-    }
-    loadingGroup.notify(queue: .main) {
-      self.loadComplete()
     }
   }
 

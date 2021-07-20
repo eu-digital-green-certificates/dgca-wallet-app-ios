@@ -49,6 +49,9 @@ class CertificateViewerVC: UIViewController {
     nameLabel.text = hCert.fullName
     if !isSaved {
       dismissButton.setTitle(l10n("btn.save"), for: .normal)
+      checkValidityButton.isHidden = true
+    } else {
+      checkValidityButton.isHidden = false
     }
     headerBackground.backgroundColor = isSaved ? .blue : .grey10
     nameLabel.textColor = isSaved ? .white : .black

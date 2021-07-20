@@ -58,7 +58,7 @@ struct LocalData: Codable {
     Self.storage.save(self)
   }
   public static func add(_ cert: HCert, with tan: String?) {
-    sharedInstance.certStrings.append(.init(date: Date(), certString: cert.payloadString, storedTAN: tan))
+    sharedInstance.certStrings.append(.init(date: Date(), certString: cert.fullPayloadString, storedTAN: tan))
     sharedInstance.save()
   }
   static func initialize(completion: @escaping () -> Void) {
