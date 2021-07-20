@@ -35,6 +35,23 @@ class HomeVC: UIViewController {
 
     HCert.config.prefetchAllCodes = true
     HCert.config.checkSignatures = false
+        
+    RulesDataStorage.initialize {
+      GatewayConnection.rulesList { _ in
+        CertLogicEngineManager.sharedInstance.setRules(ruleList: RulesDataStorage.sharedInstance.rules)
+        GatewayConnection.loadRulesFromServer { _ in
+          CertLogicEngineManager.sharedInstance.setRules(ruleList: RulesDataStorage.sharedInstance.rules)
+          ValueSetsDataStorage.initialize {
+            GatewayConnection.valueSetsList { _ in
+              GatewayConnection.loadValueSetsFromServer { _ in
+                GatewayConnection.countryList { _ in
+                }
+              }
+            }
+          }
+        }
+      }
+    }
     LocalData.initialize {
       DispatchQueue.main.async { [weak self] in
         guard let self = self else {

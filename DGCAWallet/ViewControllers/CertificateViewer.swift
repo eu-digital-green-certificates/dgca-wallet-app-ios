@@ -35,7 +35,8 @@ class CertificateViewerVC: UIViewController {
   @IBOutlet weak var dismissButton: UIButton!
   @IBOutlet weak var cancelButton: UIButton!
   @IBOutlet weak var cancelButtonConstraint: NSLayoutConstraint!
-
+  @IBOutlet weak var checkValidityButton: UIButton!
+  
   var hCert: HCert?
   var tan: String?
   weak var childDismissedDelegate: CertViewerDelegate?
@@ -48,11 +49,15 @@ class CertificateViewerVC: UIViewController {
     nameLabel.text = hCert.fullName
     if !isSaved {
       dismissButton.setTitle(l10n("btn.save"), for: .normal)
+      checkValidityButton.isHidden = true
+    } else {
+      checkValidityButton.isHidden = false
     }
     headerBackground.backgroundColor = isSaved ? .blue : .grey10
     nameLabel.textColor = isSaved ? .white : .black
     cancelButton.alpha = isSaved ? 0 : 1
     cancelButtonConstraint.priority = .init(isSaved ? 997 : 999)
+    checkValidityButton.setTitle(l10n("button_check_validity"), for: .normal)
     view.layoutIfNeeded()
   }
 
@@ -89,12 +94,17 @@ class CertificateViewerVC: UIViewController {
     dismiss(animated: true, completion: nil)
   }
 
+  @IBAction func checkValidityAction(_ sender: Any) {
+    let checkValidityVC = CheckValidityVC.loadFromNib()
+    checkValidityVC.setHCert(cert: self.hCert)
+    self.present(checkValidityVC, animated: true, completion: nil)
+  }
+  
   func saveCert() {
     showInputDialog(
       title: l10n("tan.confirm.title"),
       subtitle: l10n("tan.confirm.text"),
-      inputPlaceholder: l10n("tan.confirm.placeholder"),
-      capitalization: .allCharacters
+      inputPlaceholder: l10n("tan.confirm.placeholder")
     ) { [weak self] in
       guard let cert = self?.hCert else {
         return

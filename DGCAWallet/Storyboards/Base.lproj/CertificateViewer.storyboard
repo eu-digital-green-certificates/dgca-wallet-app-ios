@@ -26,10 +26,11 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a9u-Ia-KEX" customClass="RoundedButton" customModule="DGCAWallet" customModuleProvider="target">
-                                        <rect key="frame" x="147.66666666666666" y="631" width="80" height="51"/>
+                                        <rect key="frame" x="147.66666666666666" y="632" width="80" height="50"/>
                                         <color key="backgroundColor" name="grey10"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="8Pr-DR-H2m"/>
+                                            <constraint firstAttribute="height" constant="50" id="spI-CH-SFa"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                         <state key="normal" title="Done">
@@ -51,7 +52,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsC-7e-Skh">
-                                        <rect key="frame" x="0.0" y="124.33333333333334" width="375" height="502.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="124.33333333333334" width="375" height="441.66666666666663"/>
                                         <connections>
                                             <segue destination="PGK-qk-zXH" kind="embed" id="qHl-nM-9kf"/>
                                         </connections>
@@ -73,9 +74,31 @@
                                             <constraint firstAttribute="width" secondItem="zGf-U8-pn3" secondAttribute="height" multiplier="14:9" id="nDE-5U-ZWG"/>
                                         </constraints>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9zn-iE-p4i">
+                                        <rect key="frame" x="20" y="574" width="335" height="50"/>
+                                        <color key="backgroundColor" name="blue"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="GYm-fv-UcD"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                        <state key="normal" title="Check Validity">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="NO"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="checkValidityAction:" destination="WCj-Xf-fml" eventType="touchUpInside" id="0yd-PI-Ex4"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="a9u-Ia-KEX" firstAttribute="top" secondItem="9zn-iE-p4i" secondAttribute="bottom" constant="8" id="15Y-1f-X2p"/>
                                     <constraint firstAttribute="trailing" secondItem="YeB-JS-Q1Q" secondAttribute="trailing" constant="16" id="4a9-1n-6Ht"/>
+                                    <constraint firstAttribute="trailing" secondItem="9zn-iE-p4i" secondAttribute="trailing" constant="20" id="5Cg-bD-bak"/>
                                     <constraint firstItem="zGf-U8-pn3" firstAttribute="top" secondItem="a9u-Ia-KEX" secondAttribute="bottom" constant="16" id="5qd-XO-Lib"/>
                                     <constraint firstItem="DVW-2y-e4I" firstAttribute="top" secondItem="yEe-AH-rsr" secondAttribute="top" priority="999" constant="70" id="695-CS-7M3"/>
                                     <constraint firstItem="DVW-2y-e4I" firstAttribute="top" secondItem="yEe-AH-rsr" secondAttribute="top" priority="998" constant="32" id="6Py-fR-Th3"/>
@@ -83,13 +106,14 @@
                                     <constraint firstItem="a9u-Ia-KEX" firstAttribute="centerX" secondItem="yEe-AH-rsr" secondAttribute="centerX" id="CMV-FL-jZv"/>
                                     <constraint firstItem="dsC-7e-Skh" firstAttribute="top" secondItem="DVW-2y-e4I" secondAttribute="bottom" constant="16" id="IOq-Nn-KSI"/>
                                     <constraint firstItem="YeB-JS-Q1Q" firstAttribute="leading" secondItem="yEe-AH-rsr" secondAttribute="leading" constant="16" id="KST-2b-3cu"/>
+                                    <constraint firstItem="9zn-iE-p4i" firstAttribute="top" secondItem="dsC-7e-Skh" secondAttribute="bottom" constant="8" id="YyA-kR-Pm1"/>
                                     <constraint firstItem="YeB-JS-Q1Q" firstAttribute="top" secondItem="yEe-AH-rsr" secondAttribute="top" constant="32" id="c9J-hn-P8Z"/>
                                     <constraint firstAttribute="trailing" secondItem="dsC-7e-Skh" secondAttribute="trailing" id="csD-4w-284"/>
                                     <constraint firstItem="dsC-7e-Skh" firstAttribute="leading" secondItem="yEe-AH-rsr" secondAttribute="leading" id="fGR-NQ-ao6"/>
                                     <constraint firstItem="DVW-2y-e4I" firstAttribute="leading" secondItem="yEe-AH-rsr" secondAttribute="leading" constant="16" id="iQB-29-cRZ"/>
                                     <constraint firstItem="zGf-U8-pn3" firstAttribute="centerX" secondItem="yEe-AH-rsr" secondAttribute="centerX" id="jLF-YC-vTd"/>
-                                    <constraint firstItem="a9u-Ia-KEX" firstAttribute="top" secondItem="dsC-7e-Skh" secondAttribute="bottom" constant="4" id="kyo-Ax-A3w"/>
                                     <constraint firstAttribute="bottom" secondItem="zGf-U8-pn3" secondAttribute="bottom" constant="8" id="utt-Vx-cic"/>
+                                    <constraint firstItem="9zn-iE-p4i" firstAttribute="leading" secondItem="yEe-AH-rsr" secondAttribute="leading" constant="20" id="z4c-KE-cZy"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -109,6 +133,7 @@
                     <connections>
                         <outlet property="cancelButton" destination="YeB-JS-Q1Q" id="QVM-rn-qUM"/>
                         <outlet property="cancelButtonConstraint" destination="695-CS-7M3" id="tgr-gH-8ZQ"/>
+                        <outlet property="checkValidityButton" destination="9zn-iE-p4i" id="mbe-qx-Vcb"/>
                         <outlet property="dismissButton" destination="a9u-Ia-KEX" id="Jy0-Qx-2Y9"/>
                         <outlet property="headerBackground" destination="fKu-7E-jAI" id="TKR-ve-HDL"/>
                         <outlet property="nameLabel" destination="DVW-2y-e4I" id="cyN-o4-vZQ"/>
