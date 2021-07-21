@@ -49,6 +49,9 @@
 		5C50CF3E26983E090015EE29 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF3D26983E090015EE29 /* UITableView+.swift */; };
 		5C50CF3F26983E090015EE29 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF3D26983E090015EE29 /* UITableView+.swift */; };
 		5C50CF4026983E090015EE29 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF3D26983E090015EE29 /* UITableView+.swift */; };
+		5C9C65A126A8486C00F14FC2 /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB1A269DBB4C00074F66 /* context.jsonc */; };
+		5C9C65A226A8486D00F14FC2 /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB1A269DBB4C00074F66 /* context.jsonc */; };
+		5C9C65A326A8486D00F14FC2 /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB1A269DBB4C00074F66 /* context.jsonc */; };
 		5CE07C762692E0D900A032F9 /* CertLogic in Frameworks */ = {isa = PBXBuildFile; productRef = 5CE07C752692E0D900A032F9 /* CertLogic */; };
 		5CE07C7A2692E1CD00A032F9 /* CountryDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE07C772692E1CC00A032F9 /* CountryDataStorage.swift */; };
 		5CE07C7B2692E1CD00A032F9 /* CountryDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE07C772692E1CC00A032F9 /* CountryDataStorage.swift */; };
@@ -62,9 +65,6 @@
 		5CE07C842692E21E00A032F9 /* CertLogicEngineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE07C832692E21E00A032F9 /* CertLogicEngineManager.swift */; };
 		5CE07C852692E21E00A032F9 /* CertLogicEngineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE07C832692E21E00A032F9 /* CertLogicEngineManager.swift */; };
 		5CE07C862692E21E00A032F9 /* CertLogicEngineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE07C832692E21E00A032F9 /* CertLogicEngineManager.swift */; };
-		5CEF300526A5CDDD005ED86B /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB18269DBB4C00074F66 /* context.jsonc */; };
-		5CEF300626A5CDDD005ED86B /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB18269DBB4C00074F66 /* context.jsonc */; };
-		5CEF300726A5CDDE005ED86B /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB18269DBB4C00074F66 /* context.jsonc */; };
 		CE13CF00262DCC180070C80E /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = CE13CEFF262DCC180070C80E /* FloatingPanel */; };
 		CE13CF0A262DCDDA0070C80E /* CertificateViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13CF09262DCDDA0070C80E /* CertificateViewer.swift */; };
 		CE13CF0F262DD0D80070C80E /* FullFloatingPanelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13CF0E262DD0D80070C80E /* FullFloatingPanelLayout.swift */; };
@@ -567,9 +567,9 @@
 				DA01661E26554992005B73A1 /* OpenSourceNotices.json in Resources */,
 				CEA6D6F5261F8D2900715333 /* Assets.xcassets in Resources */,
 				5C50CF0C269700550015EE29 /* CheckValidityVC.xib in Resources */,
+				5C9C65A126A8486C00F14FC2 /* context.jsonc in Resources */,
 				CEA6D6F3261F8D2700715333 /* Main.storyboard in Resources */,
 				5C50CF14269700710015EE29 /* RuleValidationResultVC.xib in Resources */,
-				5CEF300526A5CDDD005ED86B /* context.jsonc in Resources */,
 				DA017DE626552259006E4D49 /* Licenses.storyboard in Resources */,
 				5C50CF2A26972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.xib in Resources */,
 			);
@@ -580,8 +580,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C50CF15269700710015EE29 /* RuleValidationResultVC.xib in Resources */,
+				5C9C65A226A8486D00F14FC2 /* context.jsonc in Resources */,
 				5C50CF2B26972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.xib in Resources */,
-				5CEF300626A5CDDD005ED86B /* context.jsonc in Resources */,
 				5C50CF3326972BFD0015EE29 /* CellWithDateAndCountryTVC.xib in Resources */,
 				5C50CF0D269700550015EE29 /* CheckValidityVC.xib in Resources */,
 				5C50CF1F2697023B0015EE29 /* RuleErrorTVC.xib in Resources */,
@@ -593,8 +593,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C50CF16269700710015EE29 /* RuleValidationResultVC.xib in Resources */,
+				5C9C65A326A8486D00F14FC2 /* context.jsonc in Resources */,
 				5C50CF2C26972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.xib in Resources */,
-				5CEF300726A5CDDE005ED86B /* context.jsonc in Resources */,
 				5C50CF3426972BFD0015EE29 /* CellWithDateAndCountryTVC.xib in Resources */,
 				5C50CF0E269700550015EE29 /* CheckValidityVC.xib in Resources */,
 				5C50CF202697023B0015EE29 /* RuleErrorTVC.xib in Resources */,
@@ -894,7 +894,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 9FH6TNGWF2;
 				INFOPLIST_FILE = DGCAWallet/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -918,7 +918,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = 9FH6TNGWF2;
 				INFOPLIST_FILE = DGCAWallet/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
