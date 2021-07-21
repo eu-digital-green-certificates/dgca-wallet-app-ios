@@ -34,7 +34,7 @@ struct DatedCertString: Codable {
   var certString: String
   var storedTAN: String?
   var cert: HCert? {
-    HCert(from: certString)
+    HCert(from: certString, applicationType: .wallet)
   }
 }
 

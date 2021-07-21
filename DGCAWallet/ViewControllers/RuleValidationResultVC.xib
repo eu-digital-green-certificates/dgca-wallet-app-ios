@@ -73,7 +73,7 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z27-xN-xd3">
                     <rect key="frame" x="16" y="306" width="382" height="70"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="70" id="fAY-aK-Eqc"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="70" id="fAY-aK-Eqc"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
@@ -82,7 +82,7 @@
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="th8-cR-WNX">
                     <rect key="frame" x="16" y="761" width="382" height="61"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="61" id="tAE-gv-xX0"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="61" id="tAE-gv-xX0"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <nil key="textColor"/>
