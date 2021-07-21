@@ -98,16 +98,19 @@ final class RuleValidationResultVC: UIViewController {
     resultIcon.isHidden = false
     tableView.isHidden = false
     noWarrantyLabel.isHidden = false
+    resultDescriptionLabel.sizeToFit()
+    noWarrantyLabel.sizeToFit()
   }
 }
 
 extension RuleValidationResultVC: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if items.count == 0 {
-      self.tableView.setEmptyMessage("Sorry! \n no rules for this country")
-    } else {
-      self.tableView.restore()
-    }
+    // Please uncomment this if you need to show message about no rules for selected country
+//    if items.count == 0 {
+//      self.tableView.setEmptyMessage("Sorry! \n no rules for this country")
+//    } else {
+//      self.tableView.restore()
+//    }
     return items.count
   }
   func numberOfSections(in tableView: UITableView) -> Int {
