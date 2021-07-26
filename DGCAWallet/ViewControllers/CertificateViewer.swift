@@ -49,6 +49,10 @@ class CertificateViewerVC: UIViewController {
     nameLabel.text = hCert.fullName
     if !isSaved {
       dismissButton.setTitle(l10n("btn.save"), for: .normal)
+      dismissButton.isHidden = false
+      if !hCert.isValid {
+        dismissButton.isHidden = true
+      }
       checkValidityButton.isHidden = true
     } else {
       checkValidityButton.isHidden = false
