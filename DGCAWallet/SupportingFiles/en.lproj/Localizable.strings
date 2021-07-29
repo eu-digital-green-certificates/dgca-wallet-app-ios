@@ -71,3 +71,4 @@
 "info_without_waranty" = "This check gives an indication on eligibility to travel based on your certificate. Restriction of free movement in response to the coronavirus pandemic are subject to change and might be based on additional information not available to and within this application.";
 "issuer.country" = "Issuer Country";
 "test.type" = "Type of Test";
+"section.name" = "Name";
