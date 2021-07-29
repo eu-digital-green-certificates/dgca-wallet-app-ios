@@ -24,7 +24,7 @@
         "repositoryURL": "https://github.com/eu-digital-green-certificates/dgc-certlogic-ios.git",
         "state": {
           "branch": "main",
-          "revision": "80c9ff3697b3e3e0e875e5e0a41b2dbbfa4a9ca6",
+          "revision": "8f07a22ec2adc2335b4a4cb75b408c8c93d86208",
           "version": null
         }
       },
@@ -33,7 +33,7 @@
         "repositoryURL": "https://github.com/eu-digital-green-certificates/dgca-app-core-ios",
         "state": {
           "branch": "main",
-          "revision": "3125cb47aea8b8ebf1491122ac0d452f63606c68",
+          "revision": "ea7f671dd19260ba93681114ff6518eae9725129",
           "version": null
         }
       },

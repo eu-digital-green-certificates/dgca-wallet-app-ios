@@ -34,6 +34,7 @@ class ScanVC: SwiftDGC.ScanVC {
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    applicationType = .wallet
     createBackButton()
   }
 }
