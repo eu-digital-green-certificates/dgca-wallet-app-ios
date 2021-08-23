@@ -29,8 +29,22 @@ import Foundation
 import UIKit
 import SwiftDGC
 import FloatingPanel
+import SwiftCBOR
+import CoreImage
+import PDFKit
+import UniformTypeIdentifiers
+import MobileCoreServices
+import CoreServices
 
 class ListVC: UIViewController {
+  
+  @IBOutlet weak var addButton: RoundedButton!
+  
+  var picker = UIImagePickerController()
+  var alert: UIAlertController?
+  var viewController: UIViewController?
+  var pickImageCallback : ((UIImage) -> Void)?
+
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
 
@@ -53,10 +67,89 @@ class ListVC: UIViewController {
   }
 
   @IBAction
-  func scanNewCert() {
+  func addNew() {
+    let menuActionSheet =  UIAlertController(title: "Add new?",
+                                             message: "Did you want to add new certificate, image or PDF file?",
+                                             preferredStyle: UIAlertController.Style.actionSheet)
+    menuActionSheet.addAction(UIAlertAction(title: "Scan certificate",
+                                            style: UIAlertAction.Style.default,
+                                            handler: {[weak self] _ in
+      self?.scanNewCertificate()
+    }))
+    menuActionSheet.addAction(UIAlertAction(title: "Export certificate from image or export image",
+                                            style: UIAlertAction.Style.default,
+                                            handler: { [weak self] _ in
+      self?.addImage()
+     }))
+    menuActionSheet.addAction(UIAlertAction(title: "PDF file export",
+                                            style: UIAlertAction.Style.default,
+                                            handler: { [weak self] _ in
+      self?.addPdf()
+     }))
+    menuActionSheet.addAction(UIAlertAction(title: "NFC Export",
+                                            style: UIAlertAction.Style.default,
+                                            handler: { [weak self] _ in
+      self?.scanNFC()
+     }))
+    
+    menuActionSheet.addAction(UIAlertAction(title: "Cancel",
+                                            style: UIAlertAction.Style.destructive,
+                                            handler: nil))
+    present(menuActionSheet, animated: true, completion: nil)
+  }
+  
+  private func scanNewCertificate() {
     performSegue(withIdentifier: "scanner", sender: self)
   }
 
+  private func addImage() {
+    getImageFrom()
+  }
+
+  private func addPdf() {
+    let pdfPicker: UIDocumentPickerViewController?
+    if #available(iOS 14.0, *) {
+      let supportedTypes: [UTType] = [UTType.pdf]
+      pdfPicker = UIDocumentPickerViewController(forOpeningContentTypes: supportedTypes, asCopy: true)
+    } else {
+      pdfPicker = UIDocumentPickerViewController(documentTypes: [kUTTypePDF as String], in: .open)
+    }
+    pdfPicker?.delegate = self
+    guard let pdfPicker = pdfPicker else {
+      return
+    }
+    present(pdfPicker, animated: true, completion: nil)
+  }
+
+  private func scanNFC() {
+    let helper = NFCHelper()
+    helper.onNFCResult = onNFCResult(success:msg:)
+    helper.restartSession()
+  }
+
+  func onNFCResult(success: Bool, msg: String) {
+    DispatchQueue.main.async { [weak self] in
+      print("\(msg)")
+      if success, let hCert = HCert(from: msg, applicationType: .wallet) {
+        self?.saveQrCode(cert: hCert)
+      } else {
+        let alertController: UIAlertController = {
+            let controller = UIAlertController(title: "Error",
+                                               message: "Reading DCC from NFC",
+                                               preferredStyle: .alert)
+          let actionRetry = UIAlertAction(title: "Retry", style: .default) { _ in
+            self?.scanNFC()
+          }
+            controller.addAction(actionRetry)
+          let actionOk = UIAlertAction(title: "OK", style: .default)
+          controller.addAction(actionOk)
+            return controller
+        }()
+        self?.viewController?.present(alertController, animated: true)
+      }
+    }
+  }
+  
   @IBAction func settingsTapped(_ sender: UIButton) {
     guard let settingsVC = UIStoryboard(name: "Settings", bundle: nil).instantiateInitialViewController(),
           let viewer = settingsVC as? SettingsVC else {
@@ -234,5 +327,134 @@ extension ListVC: FloatingPanelControllerDelegate {
     case .right:
       return (velocity.dx >= threshold)
     }
+  }
+}
+
+extension ListVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+  
+  private func getImageFrom() {
+    alert = UIAlertController(title: "Get Image From", message: nil, preferredStyle: .actionSheet)
+    let cameraAction = UIAlertAction(title: "Camera", style: .default) {[weak self] _ in
+      self?.openCamera()
+    }
+    let galleryAction = UIAlertAction(title: "Gallery", style: .default) {[weak self] _ in
+      self?.openGallery()
+    }
+    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+    
+    // Add the actions
+    picker.delegate = self
+    alert?.addAction(cameraAction)
+    alert?.addAction(galleryAction)
+    alert?.addAction(cancelAction)
+    guard let alert = alert else { return }
+    present(alert, animated: true, completion: nil)
+  }
+
+  func pickImage(_ viewController: UIViewController, _ callback: @escaping ((UIImage) -> Void)) {
+      pickImageCallback = callback
+      self.viewController = viewController
+//      alert.popoverPresentationController?.sourceView = self.viewController!.view
+  }
+  func openCamera() {
+      alert?.dismiss(animated: true, completion: nil)
+      if(UIImagePickerController.isSourceTypeAvailable(.camera)) {
+          picker.sourceType = .camera
+          present(picker, animated: true, completion: nil)
+      } else {
+          let alertController: UIAlertController = {
+              let controller = UIAlertController(title: "Warning",
+                                                 message: "You don't have camera",
+                                                 preferredStyle: .alert)
+              let action = UIAlertAction(title: "OK", style: .default)
+              controller.addAction(action)
+              return controller
+          }()
+          viewController?.present(alertController, animated: true)
+      }
+  }
+  func openGallery() {
+      alert?.dismiss(animated: true, completion: nil)
+      picker.sourceType = .photoLibrary
+      present(picker, animated: true, completion: nil)
+  }
+  
+  func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+      picker.dismiss(animated: true, completion: nil)
+  }
+
+  func imagePickerController(_ picker: UIImagePickerController,
+                             didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    picker.dismiss(animated: true, completion: nil)
+    guard let image = info[.originalImage] as? UIImage else {
+      fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
+    }
+    tryFoundQRCodeIn(image: image)
+  }
+
+  @objc func imagePickerController(_ picker: UIImagePickerController, pickedImage: UIImage?) {
+    guard let pickedImage = pickedImage else { return }
+    tryFoundQRCodeIn(image: pickedImage)
+  }
+
+}
+
+extension ListVC {
+  private func tryFoundQRCodeIn(image: UIImage) {
+    if let qrString = image.qrCodeString(), let hCert = HCert(from: qrString, applicationType: .wallet) {
+        saveQrCode(cert: hCert)
+        return
+    }
+    self.saveImage(image: image)
+  }
+  
+  private func saveQrCode(cert: HCert) {
+    presentViewer(for: cert, with: nil, isSaved: false)
+  }
+  
+  private func saveImage(image: UIImage) {
+    
+  }
+}
+
+extension ListVC: UIDocumentPickerDelegate {
+  func convertPDF(at sourceURL: URL, dpi: CGFloat = 200) throws -> [UIImage] {
+    let pdfDocument = CGPDFDocument(sourceURL as CFURL)!
+    let colorSpace = CGColorSpaceCreateDeviceRGB()
+    let bitmapInfo = CGImageAlphaInfo.noneSkipLast.rawValue
+    
+    var images = [UIImage]()
+    DispatchQueue.concurrentPerform(iterations: pdfDocument.numberOfPages) { index in
+      // Page number starts at 1, not 0
+      let pdfPage = pdfDocument.page(at: index + 1)!
+      
+      let mediaBoxRect = pdfPage.getBoxRect(.mediaBox)
+      let scale = dpi / 72.0
+      let width = Int(mediaBoxRect.width * scale)
+      let height = Int(mediaBoxRect.height * scale)
+      
+      let context = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: bitmapInfo)!
+      context.interpolationQuality = .high
+      context.setFillColor(UIColor.white.cgColor)
+      context.fill(CGRect(x: 0, y: 0, width: width, height: height))
+      context.scaleBy(x: scale, y: scale)
+      context.drawPDFPage(pdfPage)
+      
+      let image = context.makeImage()!
+      images.append(UIImage(cgImage: image))
+    }
+    return images
+  }
+  
+  func savePDFFile() {
+//    let pdfView = PDFView()
+    //pdfView.document = PDFDocument(data: data)
+  }
+  
+  private func documentPicker(controller: UIDocumentPickerViewController, didPickDocumentAtURL url: NSURL) {
+    if controller.documentPickerMode == UIDocumentPickerMode.import {
+          // This is what it should be
+          //self.newNoteBody.text = String(contentsOfFile: url.path!)
+      }
   }
 }
