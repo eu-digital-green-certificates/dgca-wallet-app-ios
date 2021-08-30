@@ -28,6 +28,7 @@ import Foundation
 import UIKit
 import FloatingPanel
 import SwiftDGC
+import PDFKit
 
 class CertificateViewerVC: UIViewController {
   @IBOutlet weak var headerBackground: UIView!
@@ -136,5 +137,59 @@ class CertificateViewerVC: UIViewController {
     if let child = segue.destination as? CertPagesVC {
       child.embeddingVC = self
     }
+  }
+  
+  @IBAction func shareAction(_ sender: Any) {
+    let menuActionSheet =  UIAlertController(title: l10n("share.qr.code"),
+                                             message: l10n("want.share"),
+                                             preferredStyle: UIAlertController.Style.actionSheet)
+    menuActionSheet.addAction(UIAlertAction(title: l10n("image.export"),
+                                            style: UIAlertAction.Style.default,
+                                            handler: { [weak self] _ in
+                                              self?.shareQRCodeLikeImage()
+                                            }))
+    menuActionSheet.addAction(UIAlertAction(title: l10n("pdf.export"),
+                                            style: UIAlertAction.Style.default,
+                                            handler: { [weak self] _ in
+                                              self?.shareQrCodeLikePDF()
+                                            }))
+    menuActionSheet.addAction(UIAlertAction(title: l10n("cancel"),
+                                            style: UIAlertAction.Style.destructive,
+                                            handler: nil))
+    present(menuActionSheet, animated: true, completion: nil)
+  }
+}
+
+extension CertificateViewerVC {
+  private func shareQRCodeLikeImage() {
+    guard let hCert = hCert else {
+      return
+    }
+    guard let savedImage = hCert.qrCode else {
+      return
+    }
+    let imageToShare = [ savedImage ]
+    let activityViewController = UIActivityViewController(activityItems: imageToShare as [Any],
+                                                          applicationActivities: nil)
+    activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+    self.present(activityViewController, animated: true, completion: nil)
+  }
+  private func shareQrCodeLikePDF() {
+    guard let hCert = hCert else {
+      return
+    }
+    guard let savedImage = hCert.qrCode else {
+      return
+    }
+    let pdfDocument = PDFDocument()
+    let pdfPage = PDFPage(image: savedImage)
+    pdfDocument.insert(pdfPage!, at: 0)
+    let data = pdfDocument.dataRepresentation()
+    let pdfToShare = [ data ]
+    let activityViewController = UIActivityViewController(activityItems: pdfToShare as [Any],
+                                                          applicationActivities: nil)
+    activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+    self.present(activityViewController, animated: true, completion: nil)
+
   }
 }

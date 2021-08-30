@@ -11,6 +11,39 @@
 		5C00071C26D38CC3002E5013 /* NFCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00071B26D38CC3002E5013 /* NFCHelper.swift */; };
 		5C00071D26D38CC3002E5013 /* NFCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00071B26D38CC3002E5013 /* NFCHelper.swift */; };
 		5C00071E26D38CC3002E5013 /* NFCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00071B26D38CC3002E5013 /* NFCHelper.swift */; };
+		5C00072226D3A40E002E5013 /* SavedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00072126D3A40E002E5013 /* SavedImage.swift */; };
+		5C00072326D3A40E002E5013 /* SavedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00072126D3A40E002E5013 /* SavedImage.swift */; };
+		5C00072426D3A40E002E5013 /* SavedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00072126D3A40E002E5013 /* SavedImage.swift */; };
+		5C00072626D3A6CD002E5013 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00072526D3A6CD002E5013 /* String+.swift */; };
+		5C00072726D3A6CD002E5013 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00072526D3A6CD002E5013 /* String+.swift */; };
+		5C00072826D3A6CD002E5013 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00072526D3A6CD002E5013 /* String+.swift */; };
+		5C00072A26D3A77D002E5013 /* ImageDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00072926D3A77D002E5013 /* ImageDataStorage.swift */; };
+		5C00072B26D3A77D002E5013 /* ImageDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00072926D3A77D002E5013 /* ImageDataStorage.swift */; };
+		5C00072C26D3A77D002E5013 /* ImageDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00072926D3A77D002E5013 /* ImageDataStorage.swift */; };
+		5C00072E26D3AC11002E5013 /* SavedPDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00072D26D3AC11002E5013 /* SavedPDF.swift */; };
+		5C00072F26D3AC11002E5013 /* SavedPDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00072D26D3AC11002E5013 /* SavedPDF.swift */; };
+		5C00073026D3AC11002E5013 /* SavedPDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00072D26D3AC11002E5013 /* SavedPDF.swift */; };
+		5C00073226D3AEDE002E5013 /* PdfDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00073126D3AEDE002E5013 /* PdfDataStorage.swift */; };
+		5C00073326D3AEDE002E5013 /* PdfDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00073126D3AEDE002E5013 /* PdfDataStorage.swift */; };
+		5C00073426D3AEDE002E5013 /* PdfDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00073126D3AEDE002E5013 /* PdfDataStorage.swift */; };
+		5C00073626D625D0002E5013 /* PDFTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00073526D625D0002E5013 /* PDFTableViewCell.swift */; };
+		5C00073726D625D0002E5013 /* PDFTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00073526D625D0002E5013 /* PDFTableViewCell.swift */; };
+		5C00073826D625D0002E5013 /* PDFTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00073526D625D0002E5013 /* PDFTableViewCell.swift */; };
+		5C00073A26D625DE002E5013 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00073926D625DE002E5013 /* ImageTableViewCell.swift */; };
+		5C00073B26D625DE002E5013 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00073926D625DE002E5013 /* ImageTableViewCell.swift */; };
+		5C00073C26D625DE002E5013 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00073926D625DE002E5013 /* ImageTableViewCell.swift */; };
+		5C00073F26D641CC002E5013 /* ImageViewerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00073D26D641CC002E5013 /* ImageViewerVC.swift */; };
+		5C00074026D641CC002E5013 /* ImageViewerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00073D26D641CC002E5013 /* ImageViewerVC.swift */; };
+		5C00074126D641CC002E5013 /* ImageViewerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00073D26D641CC002E5013 /* ImageViewerVC.swift */; };
+		5C00074226D641CC002E5013 /* ImageViewerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C00073E26D641CC002E5013 /* ImageViewerVC.xib */; };
+		5C00074326D641CC002E5013 /* ImageViewerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C00073E26D641CC002E5013 /* ImageViewerVC.xib */; };
+		5C00074426D641CC002E5013 /* ImageViewerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C00073E26D641CC002E5013 /* ImageViewerVC.xib */; };
+		5C00074726D641E2002E5013 /* PDFViewerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00074526D641E2002E5013 /* PDFViewerVC.swift */; };
+		5C00074826D641E2002E5013 /* PDFViewerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00074526D641E2002E5013 /* PDFViewerVC.swift */; };
+		5C00074926D641E2002E5013 /* PDFViewerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00074526D641E2002E5013 /* PDFViewerVC.swift */; };
+		5C00074A26D641E2002E5013 /* PDFViewerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C00074626D641E2002E5013 /* PDFViewerVC.xib */; };
+		5C00074B26D641E2002E5013 /* PDFViewerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C00074626D641E2002E5013 /* PDFViewerVC.xib */; };
+		5C00074C26D641E2002E5013 /* PDFViewerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C00074626D641E2002E5013 /* PDFViewerVC.xib */; };
 		5C07263F26B2F484006C4986 /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB1A269DBB4C00074F66 /* context.jsonc */; };
 		5C07264026B2F485006C4986 /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB1A269DBB4C00074F66 /* context.jsonc */; };
 		5C07264126B2F485006C4986 /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB1A269DBB4C00074F66 /* context.jsonc */; };
@@ -135,6 +168,17 @@
 		5C00071B26D38CC3002E5013 /* NFCHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCHelper.swift; sourceTree = "<group>"; };
 		5C00071F26D38D58002E5013 /* DGCAWallet.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = DGCAWallet.entitlements; sourceTree = SOURCE_ROOT; };
 		5C00072026D38D6D002E5013 /* DGCAWallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DGCAWallet.entitlements; sourceTree = "<group>"; };
+		5C00072126D3A40E002E5013 /* SavedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedImage.swift; sourceTree = "<group>"; };
+		5C00072526D3A6CD002E5013 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		5C00072926D3A77D002E5013 /* ImageDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDataStorage.swift; sourceTree = "<group>"; };
+		5C00072D26D3AC11002E5013 /* SavedPDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPDF.swift; sourceTree = "<group>"; };
+		5C00073126D3AEDE002E5013 /* PdfDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfDataStorage.swift; sourceTree = "<group>"; };
+		5C00073526D625D0002E5013 /* PDFTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFTableViewCell.swift; sourceTree = "<group>"; };
+		5C00073926D625DE002E5013 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
+		5C00073D26D641CC002E5013 /* ImageViewerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewerVC.swift; sourceTree = "<group>"; };
+		5C00073E26D641CC002E5013 /* ImageViewerVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageViewerVC.xib; sourceTree = "<group>"; };
+		5C00074526D641E2002E5013 /* PDFViewerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewerVC.swift; sourceTree = "<group>"; };
+		5C00074626D641E2002E5013 /* PDFViewerVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PDFViewerVC.xib; sourceTree = "<group>"; };
 		5C50CF07269700540015EE29 /* CheckValidityVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckValidityVC.swift; sourceTree = "<group>"; };
 		5C50CF08269700540015EE29 /* CheckValidityVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckValidityVC.xib; sourceTree = "<group>"; };
 		5C50CF0F269700710015EE29 /* RuleValidationResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleValidationResultVC.swift; sourceTree = "<group>"; };
@@ -318,6 +362,7 @@
 				5C50CF3926973D9D0015EE29 /* UserDefaults+.swift */,
 				5C50CF3D26983E090015EE29 /* UITableView+.swift */,
 				5C00071826CFAED2002E5013 /* UIImage+.swift */,
+				5C00072526D3A6CD002E5013 /* String+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -339,6 +384,10 @@
 				5C50CF08269700540015EE29 /* CheckValidityVC.xib */,
 				5C50CF0F269700710015EE29 /* RuleValidationResultVC.swift */,
 				5C50CF10269700710015EE29 /* RuleValidationResultVC.xib */,
+				5C00073D26D641CC002E5013 /* ImageViewerVC.swift */,
+				5C00073E26D641CC002E5013 /* ImageViewerVC.xib */,
+				5C00074526D641E2002E5013 /* PDFViewerVC.swift */,
+				5C00074626D641E2002E5013 /* PDFViewerVC.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -354,6 +403,8 @@
 				CEA1556A262F784E0024B7AC /* SelfSizedTableView.swift */,
 				CEA1556F262F79DE0024B7AC /* InfoCell.swift */,
 				DA01661F26554E02005B73A1 /* LicenseCell.swift */,
+				5C00073526D625D0002E5013 /* PDFTableViewCell.swift */,
+				5C00073926D625DE002E5013 /* ImageTableViewCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -382,6 +433,10 @@
 				5CE07C792692E1CD00A032F9 /* RulesDataStorage.swift */,
 				5CE07C782692E1CD00A032F9 /* ValueSetsDataStorage.swift */,
 				5C50CF352697315B0015EE29 /* ValidityCellModel.swift */,
+				5C00072126D3A40E002E5013 /* SavedImage.swift */,
+				5C00072926D3A77D002E5013 /* ImageDataStorage.swift */,
+				5C00072D26D3AC11002E5013 /* SavedPDF.swift */,
+				5C00073126D3AEDE002E5013 /* PdfDataStorage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -577,6 +632,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C00074226D641CC002E5013 /* ImageViewerVC.xib in Resources */,
 				CE4BD258264FF39D00689FD6 /* CertificateViewer.storyboard in Resources */,
 				CE6D4A44264835F100A5D33D /* Localizable.strings in Resources */,
 				5C50CF3226972BFD0015EE29 /* CellWithDateAndCountryTVC.xib in Resources */,
@@ -589,6 +645,7 @@
 				5C50CF0C269700550015EE29 /* CheckValidityVC.xib in Resources */,
 				5C07263F26B2F484006C4986 /* context.jsonc in Resources */,
 				CEA6D6F3261F8D2700715333 /* Main.storyboard in Resources */,
+				5C00074A26D641E2002E5013 /* PDFViewerVC.xib in Resources */,
 				5C50CF14269700710015EE29 /* RuleValidationResultVC.xib in Resources */,
 				DA017DE626552259006E4D49 /* Licenses.storyboard in Resources */,
 				5C50CF2A26972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.xib in Resources */,
@@ -600,9 +657,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C50CF15269700710015EE29 /* RuleValidationResultVC.xib in Resources */,
+				5C00074326D641CC002E5013 /* ImageViewerVC.xib in Resources */,
 				5C07264026B2F485006C4986 /* context.jsonc in Resources */,
 				5C50CF2B26972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.xib in Resources */,
 				5C50CF3326972BFD0015EE29 /* CellWithDateAndCountryTVC.xib in Resources */,
+				5C00074B26D641E2002E5013 /* PDFViewerVC.xib in Resources */,
 				5C50CF0D269700550015EE29 /* CheckValidityVC.xib in Resources */,
 				5C50CF1F2697023B0015EE29 /* RuleErrorTVC.xib in Resources */,
 			);
@@ -613,9 +672,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C50CF16269700710015EE29 /* RuleValidationResultVC.xib in Resources */,
+				5C00074426D641CC002E5013 /* ImageViewerVC.xib in Resources */,
 				5C07264126B2F485006C4986 /* context.jsonc in Resources */,
 				5C50CF2C26972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.xib in Resources */,
 				5C50CF3426972BFD0015EE29 /* CellWithDateAndCountryTVC.xib in Resources */,
+				5C00074C26D641E2002E5013 /* PDFViewerVC.xib in Resources */,
 				5C50CF0E269700550015EE29 /* CheckValidityVC.xib in Resources */,
 				5C50CF202697023B0015EE29 /* RuleErrorTVC.xib in Resources */,
 			);
@@ -655,7 +716,9 @@
 				CEDABD40263C5FF4007A9B97 /* CertTable.swift in Sources */,
 				CE37B643263867D700DEE13D /* SecureBackground.swift in Sources */,
 				CE13CF0F262DD0D80070C80E /* FullFloatingPanelLayout.swift in Sources */,
+				5C00072A26D3A77D002E5013 /* ImageDataStorage.swift in Sources */,
 				5CE07C7D2692E1CD00A032F9 /* ValueSetsDataStorage.swift in Sources */,
+				5C00073226D3AEDE002E5013 /* PdfDataStorage.swift in Sources */,
 				CEA1556B262F784E0024B7AC /* SelfSizedTableView.swift in Sources */,
 				5C00071926CFAED2002E5013 /* UIImage+.swift in Sources */,
 				CE8096D9263B07BB00A65AD6 /* UIColor.swift in Sources */,
@@ -672,6 +735,7 @@
 				DA01662026554E02005B73A1 /* LicenseCell.swift in Sources */,
 				CEA6D6EC261F8D2700715333 /* AppDelegate.swift in Sources */,
 				DA01661C265541C0005B73A1 /* LicenseList.swift in Sources */,
+				5C00073626D625D0002E5013 /* PDFTableViewCell.swift in Sources */,
 				CE891305263581D900CB92AF /* Home.swift in Sources */,
 				5C00071C26D38CC3002E5013 /* NFCHelper.swift in Sources */,
 				CEA15563262F6DAB0024B7AC /* CertViewerDelegate.swift in Sources */,
@@ -681,12 +745,18 @@
 				CED949CA263B50CE00883558 /* List.swift in Sources */,
 				5C50CF11269700710015EE29 /* RuleValidationResultVC.swift in Sources */,
 				DA01662226558B2F005B73A1 /* LicenseVC.swift in Sources */,
+				5C00072E26D3AC11002E5013 /* SavedPDF.swift in Sources */,
 				5C50CF1B2697023B0015EE29 /* RuleErrorTVC.swift in Sources */,
 				5C50CF09269700550015EE29 /* CheckValidityVC.swift in Sources */,
 				5C50CF3E26983E090015EE29 /* UITableView+.swift in Sources */,
 				CEA6D6EE261F8D2700715333 /* SceneDelegate.swift in Sources */,
+				5C00073A26D625DE002E5013 /* ImageTableViewCell.swift in Sources */,
 				5C50CF22269704240015EE29 /* UIViewController+.swift in Sources */,
 				5CE07C802692E1CD00A032F9 /* RulesDataStorage.swift in Sources */,
+				5C00074726D641E2002E5013 /* PDFViewerVC.swift in Sources */,
+				5C00073F26D641CC002E5013 /* ImageViewerVC.swift in Sources */,
+				5C00072226D3A40E002E5013 /* SavedImage.swift in Sources */,
+				5C00072626D3A6CD002E5013 /* String+.swift in Sources */,
 				5C50CF2F26972BFD0015EE29 /* CellWithDateAndCountryTVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -695,19 +765,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C00074826D641E2002E5013 /* PDFViewerVC.swift in Sources */,
 				5C50CF2826972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.swift in Sources */,
 				5C00071D26D38CC3002E5013 /* NFCHelper.swift in Sources */,
+				5C00072F26D3AC11002E5013 /* SavedPDF.swift in Sources */,
 				5C50CF0A269700550015EE29 /* CheckValidityVC.swift in Sources */,
 				5C50CF3B26973D9D0015EE29 /* UserDefaults+.swift in Sources */,
 				5C50CF3F26983E090015EE29 /* UITableView+.swift in Sources */,
+				5C00073B26D625DE002E5013 /* ImageTableViewCell.swift in Sources */,
+				5C00073326D3AEDE002E5013 /* PdfDataStorage.swift in Sources */,
 				5C50CF1C2697023B0015EE29 /* RuleErrorTVC.swift in Sources */,
 				5CE07C7E2692E1CD00A032F9 /* ValueSetsDataStorage.swift in Sources */,
+				5C00072B26D3A77D002E5013 /* ImageDataStorage.swift in Sources */,
+				5C00072326D3A40E002E5013 /* SavedImage.swift in Sources */,
 				5C50CF12269700710015EE29 /* RuleValidationResultVC.swift in Sources */,
 				CEA6D703261F8D2900715333 /* DGCAWalletTests.swift in Sources */,
+				5C00072726D3A6CD002E5013 /* String+.swift in Sources */,
+				5C00073726D625D0002E5013 /* PDFTableViewCell.swift in Sources */,
 				5C50CF23269704240015EE29 /* UIViewController+.swift in Sources */,
 				5CE07C852692E21E00A032F9 /* CertLogicEngineManager.swift in Sources */,
 				5C50CF372697315B0015EE29 /* ValidityCellModel.swift in Sources */,
 				5C50CF3026972BFD0015EE29 /* CellWithDateAndCountryTVC.swift in Sources */,
+				5C00074026D641CC002E5013 /* ImageViewerVC.swift in Sources */,
 				5CE07C812692E1CD00A032F9 /* RulesDataStorage.swift in Sources */,
 				CEFAD87F262714C4009AFEF9 /* EHNTests.swift in Sources */,
 				5CE07C7B2692E1CD00A032F9 /* CountryDataStorage.swift in Sources */,
@@ -718,10 +797,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C00073826D625D0002E5013 /* PDFTableViewCell.swift in Sources */,
 				5CE07C7C2692E1CD00A032F9 /* CountryDataStorage.swift in Sources */,
+				5C00072426D3A40E002E5013 /* SavedImage.swift in Sources */,
+				5C00073C26D625DE002E5013 /* ImageTableViewCell.swift in Sources */,
+				5C00073026D3AC11002E5013 /* SavedPDF.swift in Sources */,
 				5C50CF382697315B0015EE29 /* ValidityCellModel.swift in Sources */,
+				5C00073426D3AEDE002E5013 /* PdfDataStorage.swift in Sources */,
 				5C50CF3C26973D9D0015EE29 /* UserDefaults+.swift in Sources */,
 				5C50CF4026983E090015EE29 /* UITableView+.swift in Sources */,
+				5C00074926D641E2002E5013 /* PDFViewerVC.swift in Sources */,
 				CEA6D70E261F8D2900715333 /* DGCAWalletUITests.swift in Sources */,
 				5CE07C7F2692E1CD00A032F9 /* ValueSetsDataStorage.swift in Sources */,
 				5C50CF3126972BFD0015EE29 /* CellWithDateAndCountryTVC.swift in Sources */,
@@ -731,8 +816,11 @@
 				5C00071E26D38CC3002E5013 /* NFCHelper.swift in Sources */,
 				5C50CF13269700710015EE29 /* RuleValidationResultVC.swift in Sources */,
 				5C50CF24269704240015EE29 /* UIViewController+.swift in Sources */,
+				5C00072826D3A6CD002E5013 /* String+.swift in Sources */,
 				5CE07C822692E1CD00A032F9 /* RulesDataStorage.swift in Sources */,
+				5C00074126D641CC002E5013 /* ImageViewerVC.swift in Sources */,
 				5C50CF2926972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.swift in Sources */,
+				5C00072C26D3A77D002E5013 /* ImageDataStorage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

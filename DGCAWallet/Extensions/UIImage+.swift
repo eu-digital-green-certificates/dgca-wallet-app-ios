@@ -46,4 +46,8 @@ extension UIImage {
     }
     return qrAsString.isEmpty ? nil : qrAsString
   }
+  
+  func convertImageToBase64String () -> String {
+      return self.jpegData(compressionQuality: 1)?.base64EncodedString() ?? ""
+  }
 }

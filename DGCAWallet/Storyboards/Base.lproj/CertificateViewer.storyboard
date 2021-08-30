@@ -26,10 +26,9 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a9u-Ia-KEX" customClass="RoundedButton" customModule="DGCAWallet" customModuleProvider="target">
-                                        <rect key="frame" x="147.66666666666666" y="632" width="80" height="50"/>
+                                        <rect key="frame" x="16" y="632" width="163.66666666666666" height="50"/>
                                         <color key="backgroundColor" name="grey10"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="8Pr-DR-H2m"/>
                                             <constraint firstAttribute="height" constant="50" id="spI-CH-SFa"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
@@ -94,25 +93,52 @@
                                             <action selector="checkValidityAction:" destination="WCj-Xf-fml" eventType="touchUpInside" id="0yd-PI-Ex4"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WJ5-9S-W9j">
+                                        <rect key="frame" x="195.66666666666663" y="632" width="163.33333333333337" height="50"/>
+                                        <color key="backgroundColor" name="blue"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="hPx-Fc-xPE"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                        <state key="normal" title="Share">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="NO"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="shareAction:" destination="WCj-Xf-fml" eventType="touchUpInside" id="UQP-P0-rgr"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="a9u-Ia-KEX" firstAttribute="top" secondItem="9zn-iE-p4i" secondAttribute="bottom" constant="8" id="15Y-1f-X2p"/>
                                     <constraint firstAttribute="trailing" secondItem="YeB-JS-Q1Q" secondAttribute="trailing" constant="16" id="4a9-1n-6Ht"/>
                                     <constraint firstAttribute="trailing" secondItem="9zn-iE-p4i" secondAttribute="trailing" constant="20" id="5Cg-bD-bak"/>
                                     <constraint firstItem="zGf-U8-pn3" firstAttribute="top" secondItem="a9u-Ia-KEX" secondAttribute="bottom" constant="16" id="5qd-XO-Lib"/>
+                                    <constraint firstItem="WJ5-9S-W9j" firstAttribute="top" secondItem="9zn-iE-p4i" secondAttribute="bottom" constant="8" symbolic="YES" id="5t5-A8-z3b"/>
                                     <constraint firstItem="DVW-2y-e4I" firstAttribute="top" secondItem="yEe-AH-rsr" secondAttribute="top" priority="999" constant="70" id="695-CS-7M3"/>
                                     <constraint firstItem="DVW-2y-e4I" firstAttribute="top" secondItem="yEe-AH-rsr" secondAttribute="top" priority="998" constant="32" id="6Py-fR-Th3"/>
                                     <constraint firstAttribute="trailing" secondItem="DVW-2y-e4I" secondAttribute="trailing" constant="16" id="7qh-Db-iAm"/>
-                                    <constraint firstItem="a9u-Ia-KEX" firstAttribute="centerX" secondItem="yEe-AH-rsr" secondAttribute="centerX" id="CMV-FL-jZv"/>
                                     <constraint firstItem="dsC-7e-Skh" firstAttribute="top" secondItem="DVW-2y-e4I" secondAttribute="bottom" constant="16" id="IOq-Nn-KSI"/>
                                     <constraint firstItem="YeB-JS-Q1Q" firstAttribute="leading" secondItem="yEe-AH-rsr" secondAttribute="leading" constant="16" id="KST-2b-3cu"/>
+                                    <constraint firstItem="WJ5-9S-W9j" firstAttribute="leading" secondItem="a9u-Ia-KEX" secondAttribute="trailing" constant="16" id="RNw-54-oUB"/>
+                                    <constraint firstItem="a9u-Ia-KEX" firstAttribute="top" secondItem="9zn-iE-p4i" secondAttribute="bottom" constant="8" symbolic="YES" id="VBf-R7-jQU"/>
+                                    <constraint firstItem="zGf-U8-pn3" firstAttribute="top" secondItem="WJ5-9S-W9j" secondAttribute="bottom" constant="16" id="WwI-eY-2Js"/>
+                                    <constraint firstItem="a9u-Ia-KEX" firstAttribute="leading" secondItem="yEe-AH-rsr" secondAttribute="leading" constant="16" id="YVX-Ft-sJ4"/>
+                                    <constraint firstAttribute="bottom" secondItem="a9u-Ia-KEX" secondAttribute="bottom" constant="52" id="Ylj-6k-vl1"/>
                                     <constraint firstItem="9zn-iE-p4i" firstAttribute="top" secondItem="dsC-7e-Skh" secondAttribute="bottom" constant="8" id="YyA-kR-Pm1"/>
+                                    <constraint firstAttribute="trailing" secondItem="WJ5-9S-W9j" secondAttribute="trailing" constant="16" id="bs7-LJ-dJd"/>
                                     <constraint firstItem="YeB-JS-Q1Q" firstAttribute="top" secondItem="yEe-AH-rsr" secondAttribute="top" constant="32" id="c9J-hn-P8Z"/>
                                     <constraint firstAttribute="trailing" secondItem="dsC-7e-Skh" secondAttribute="trailing" id="csD-4w-284"/>
                                     <constraint firstItem="dsC-7e-Skh" firstAttribute="leading" secondItem="yEe-AH-rsr" secondAttribute="leading" id="fGR-NQ-ao6"/>
                                     <constraint firstItem="DVW-2y-e4I" firstAttribute="leading" secondItem="yEe-AH-rsr" secondAttribute="leading" constant="16" id="iQB-29-cRZ"/>
                                     <constraint firstItem="zGf-U8-pn3" firstAttribute="centerX" secondItem="yEe-AH-rsr" secondAttribute="centerX" id="jLF-YC-vTd"/>
                                     <constraint firstAttribute="bottom" secondItem="zGf-U8-pn3" secondAttribute="bottom" constant="8" id="utt-Vx-cic"/>
+                                    <constraint firstItem="WJ5-9S-W9j" firstAttribute="width" secondItem="a9u-Ia-KEX" secondAttribute="width" id="yAl-fm-WBD"/>
                                     <constraint firstItem="9zn-iE-p4i" firstAttribute="leading" secondItem="yEe-AH-rsr" secondAttribute="leading" constant="20" id="z4c-KE-cZy"/>
                                 </constraints>
                             </view>

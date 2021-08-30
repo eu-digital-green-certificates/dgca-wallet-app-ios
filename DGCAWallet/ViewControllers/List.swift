@@ -25,6 +25,8 @@
 //  Created by Yannick Spreen on 4/25/21.
 //  
 
+// swiftlint:disable file_length
+
 import Foundation
 import UIKit
 import SwiftDGC
@@ -38,12 +40,19 @@ import CoreServices
 
 class ListVC: UIViewController {
   
+  private enum TableSection: Int {
+    case certificates = 0
+    case images
+    case pdfs
+    static var count: Int { return 3}
+  }
+  
   @IBOutlet weak var addButton: RoundedButton!
   
   var picker = UIImagePickerController()
   var alert: UIAlertController?
   var viewController: UIViewController?
-  var pickImageCallback : ((UIImage) -> Void)?
+  var pickImageCallback: ((UIImage) -> Void)?
 
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
@@ -61,38 +70,44 @@ class ListVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    table.dataSource = self
-    table.delegate = self
-    reloadTable()
+    ImageDataStorage.initialize {
+      PdfDataStorage.initialize {
+        DispatchQueue.main.async { [weak self] in
+          self?.table.dataSource = self
+          self?.table.delegate = self
+          self?.reloadTable()
+        }
+      }
+    }
   }
 
   @IBAction
   func addNew() {
-    let menuActionSheet =  UIAlertController(title: "Add new?",
-                                             message: "Did you want to add new certificate, image or PDF file?",
+    let menuActionSheet =  UIAlertController(title: l10n("add.new"),
+                                             message: l10n("want.add"),
                                              preferredStyle: UIAlertController.Style.actionSheet)
-    menuActionSheet.addAction(UIAlertAction(title: "Scan certificate",
+    menuActionSheet.addAction(UIAlertAction(title: l10n("scan.certificate"),
                                             style: UIAlertAction.Style.default,
                                             handler: {[weak self] _ in
       self?.scanNewCertificate()
     }))
-    menuActionSheet.addAction(UIAlertAction(title: "Export certificate from image or export image",
+    menuActionSheet.addAction(UIAlertAction(title: l10n("image.import"),
                                             style: UIAlertAction.Style.default,
                                             handler: { [weak self] _ in
       self?.addImage()
      }))
-    menuActionSheet.addAction(UIAlertAction(title: "PDF file export",
+    menuActionSheet.addAction(UIAlertAction(title: l10n("pdf.import"),
                                             style: UIAlertAction.Style.default,
                                             handler: { [weak self] _ in
       self?.addPdf()
      }))
-    menuActionSheet.addAction(UIAlertAction(title: "NFC Export",
+    menuActionSheet.addAction(UIAlertAction(title: l10n("nfc.import"),
                                             style: UIAlertAction.Style.default,
                                             handler: { [weak self] _ in
       self?.scanNFC()
      }))
     
-    menuActionSheet.addAction(UIAlertAction(title: "Cancel",
+    menuActionSheet.addAction(UIAlertAction(title: l10n("cancel"),
                                             style: UIAlertAction.Style.destructive,
                                             handler: nil))
     present(menuActionSheet, animated: true, completion: nil)
@@ -114,10 +129,10 @@ class ListVC: UIViewController {
     } else {
       pdfPicker = UIDocumentPickerViewController(documentTypes: [kUTTypePDF as String], in: .open)
     }
-    pdfPicker?.delegate = self
     guard let pdfPicker = pdfPicker else {
       return
     }
+    pdfPicker.delegate = self
     present(pdfPicker, animated: true, completion: nil)
   }
 
@@ -134,14 +149,14 @@ class ListVC: UIViewController {
         self?.saveQrCode(cert: hCert)
       } else {
         let alertController: UIAlertController = {
-            let controller = UIAlertController(title: "Error",
-                                               message: "Reading DCC from NFC",
+            let controller = UIAlertController(title: l10n("error"),
+                                               message: l10n("read.dcc.from.nfc"),
                                                preferredStyle: .alert)
-          let actionRetry = UIAlertAction(title: "Retry", style: .default) { _ in
+          let actionRetry = UIAlertAction(title: l10n("retry"), style: .default) { _ in
             self?.scanNFC()
           }
             controller.addAction(actionRetry)
-          let actionOk = UIAlertAction(title: "OK", style: .default)
+          let actionOk = UIAlertAction(title: l10n("ok"), style: .default)
           controller.addAction(actionOk)
             return controller
         }()
@@ -176,7 +191,9 @@ class ListVC: UIViewController {
   @IBOutlet weak var emptyView: UIView!
 
   func reloadTable() {
-    emptyView.alpha = listElements.isEmpty ? 1 : 0
+    emptyView.alpha = listCertElements.isEmpty
+      && listImageElements.isEmpty
+      && listPdfElements.isEmpty ? 1 : 0
     table.reloadData()
   }
 
@@ -253,34 +270,104 @@ extension ListVC: ScanVCDelegate {
 }
 
 extension ListVC: UITableViewDataSource {
-  var listElements: [DatedCertString] {
+  var listCertElements: [DatedCertString] {
     LocalData.sharedInstance.certStrings.reversed()
   }
 
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    listElements.count
+  var listImageElements: [SavedImage] {
+    ImageDataStorage.sharedInstance.images
   }
 
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = table.dequeueReusableCell(withIdentifier: "walletCell", for: indexPath)
-    guard let walletCell = cell as? WalletCell else {
-      return cell
-    }
+  var listPdfElements: [SavedPDF] {
+    PdfDataStorage.sharedInstance.pdfs
+  }
 
-    walletCell.draw(listElements[indexPath.row])
-    return walletCell
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    if section == TableSection.certificates.rawValue {
+      return listCertElements.count
+    }
+    if section == TableSection.images.rawValue {
+      return listImageElements.count
+    }
+    if section == TableSection.pdfs.rawValue {
+      return listPdfElements.count
+    }
+    return .zero
+  }
+  
+  func numberOfSections(in tableView: UITableView) -> Int {
+    TableSection.count
+  }
+
+  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    if section == TableSection.certificates.rawValue {
+      return l10n("section.certificates")
+    }
+    if section == TableSection.images.rawValue {
+      return l10n("section.images")
+    }
+    if section == TableSection.pdfs.rawValue {
+      return l10n("section.pdf")
+    }
+    return ":"
+
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    if indexPath.section == TableSection.certificates.rawValue {
+      let cell = table.dequeueReusableCell(withIdentifier: "walletCell", for: indexPath)
+      guard let walletCell = cell as? WalletCell else {
+        return cell
+      }
+      walletCell.draw(listCertElements[indexPath.row])
+      return walletCell
+    }
+    if indexPath.section == TableSection.images.rawValue {
+      let cell = table.dequeueReusableCell(withIdentifier: "ImageTableViewCell", for: indexPath)
+      guard let imageCell = cell as? ImageTableViewCell else {
+        return cell
+      }
+      imageCell.setImage(image: listImageElements[indexPath.row])
+      return imageCell
+    }
+    if indexPath.section == TableSection.pdfs.rawValue {
+      let cell = table.dequeueReusableCell(withIdentifier: "PDFTableViewCell", for: indexPath)
+      guard let imageCell = cell as? PDFTableViewCell else {
+        return cell
+      }
+      imageCell.setPDF(pdf: listPdfElements[indexPath.row])
+      return imageCell
+    }
+    return UITableViewCell()
+  }
+  
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    if indexPath.section == TableSection.certificates.rawValue {
+      return UITableView.automaticDimension
+    } else {
+      return 140
+    }
   }
 }
 
 extension ListVC: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     table.deselectRow(at: indexPath, animated: true)
-    guard
-      let cert = listElements[indexPath.row].cert
-    else {
-      return
+    if indexPath.section == TableSection.certificates.rawValue {
+      guard
+        let cert = listCertElements[indexPath.row].cert
+      else {
+        return
+      }
+      presentViewer(for: cert, with: listCertElements[indexPath.row].storedTAN)
     }
-    presentViewer(for: cert, with: listElements[indexPath.row].storedTAN)
+    if indexPath.section == TableSection.images.rawValue {
+      showImage(image: listImageElements[indexPath.row])
+    }
+    if indexPath.section == TableSection.pdfs.rawValue {
+      showPdfFile(pdf: listPdfElements[indexPath.row])
+    }
+    return
   }
 
   func tableView(
@@ -288,7 +375,7 @@ extension ListVC: UITableViewDelegate {
     commit editingStyle: UITableViewCell.EditingStyle,
     forRowAt indexPath: IndexPath
   ) {
-    let cert = listElements[indexPath.row]
+    let cert = listCertElements[indexPath.row]
     showAlert(
       title: l10n("cert.delete.title"),
       subtitle: l10n("cert.delete.body"),
@@ -333,14 +420,14 @@ extension ListVC: FloatingPanelControllerDelegate {
 extension ListVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
   private func getImageFrom() {
-    alert = UIAlertController(title: "Get Image From", message: nil, preferredStyle: .actionSheet)
-    let cameraAction = UIAlertAction(title: "Camera", style: .default) {[weak self] _ in
+    alert = UIAlertController(title: l10n("get.image.from"), message: nil, preferredStyle: .actionSheet)
+    let cameraAction = UIAlertAction(title: l10n("camera"), style: .default) {[weak self] _ in
       self?.openCamera()
     }
-    let galleryAction = UIAlertAction(title: "Gallery", style: .default) {[weak self] _ in
+    let galleryAction = UIAlertAction(title: l10n("galery"), style: .default) {[weak self] _ in
       self?.openGallery()
     }
-    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+    let cancelAction = UIAlertAction(title: l10n("cancel"), style: .cancel)
     
     // Add the actions
     picker.delegate = self
@@ -358,15 +445,15 @@ extension ListVC: UIImagePickerControllerDelegate, UINavigationControllerDelegat
   }
   func openCamera() {
       alert?.dismiss(animated: true, completion: nil)
-      if(UIImagePickerController.isSourceTypeAvailable(.camera)) {
+      if UIImagePickerController.isSourceTypeAvailable(.camera) {
           picker.sourceType = .camera
           present(picker, animated: true, completion: nil)
       } else {
           let alertController: UIAlertController = {
-              let controller = UIAlertController(title: "Warning",
-                                                 message: "You don't have camera",
+              let controller = UIAlertController(title: l10n("error"),
+                                                 message: l10n("dont.have.camera"),
                                                  preferredStyle: .alert)
-              let action = UIAlertAction(title: "OK", style: .default)
+              let action = UIAlertAction(title: l10n("ok"), style: .default)
               controller.addAction(action)
               return controller
           }()
@@ -384,7 +471,7 @@ extension ListVC: UIImagePickerControllerDelegate, UINavigationControllerDelegat
   }
 
   func imagePickerController(_ picker: UIImagePickerController,
-                             didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+                             didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
     picker.dismiss(animated: true, completion: nil)
     guard let image = info[.originalImage] as? UIImage else {
       fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
@@ -413,7 +500,16 @@ extension ListVC {
   }
   
   private func saveImage(image: UIImage) {
-    
+    showInputDialog(
+      title: l10n("image.confirm.title"),
+      subtitle: l10n("image.confirm.text"),
+      inputPlaceholder: l10n("image.confirm.placeholder")
+    ) { fileName in
+      ImageDataStorage.sharedInstance.add(savedImage: SavedImage(fileName: fileName ?? UUID().uuidString, image: image))
+      DispatchQueue.main.async { [weak self] in
+        self?.reloadTable()
+      }
+    }
   }
 }
 
@@ -422,39 +518,85 @@ extension ListVC: UIDocumentPickerDelegate {
     let pdfDocument = CGPDFDocument(sourceURL as CFURL)!
     let colorSpace = CGColorSpaceCreateDeviceRGB()
     let bitmapInfo = CGImageAlphaInfo.noneSkipLast.rawValue
-    
     var images = [UIImage]()
     DispatchQueue.concurrentPerform(iterations: pdfDocument.numberOfPages) { index in
       // Page number starts at 1, not 0
       let pdfPage = pdfDocument.page(at: index + 1)!
-      
       let mediaBoxRect = pdfPage.getBoxRect(.mediaBox)
       let scale = dpi / 72.0
       let width = Int(mediaBoxRect.width * scale)
       let height = Int(mediaBoxRect.height * scale)
-      
-      let context = CGContext(data: nil, width: width, height: height, bitsPerComponent: 8, bytesPerRow: 0, space: colorSpace, bitmapInfo: bitmapInfo)!
+      let context = CGContext(data: nil,
+                              width: width,
+                              height: height,
+                              bitsPerComponent: 8,
+                              bytesPerRow: 0,
+                              space: colorSpace,
+                              bitmapInfo: bitmapInfo)!
       context.interpolationQuality = .high
       context.setFillColor(UIColor.white.cgColor)
       context.fill(CGRect(x: 0, y: 0, width: width, height: height))
       context.scaleBy(x: scale, y: scale)
       context.drawPDFPage(pdfPage)
-      
       let image = context.makeImage()!
       images.append(UIImage(cgImage: image))
     }
     return images
   }
   
-  func savePDFFile() {
-//    let pdfView = PDFView()
-    //pdfView.document = PDFDocument(data: data)
+  func checkQRCodesInPDFFile(url: NSURL) {
+    let images = try? convertPDF(at: url as URL)
+    if images != nil && !(images?.isEmpty ?? true) {
+      for image in images! {
+        if let qrString = image.qrCodeString(), let hCert = HCert(from: qrString, applicationType: .wallet) {
+            saveQrCode(cert: hCert)
+            return
+        }
+      }
+      savePDFFile(url: url)
+    } else {
+      savePDFFile(url: url)
+    }
   }
   
+  func savePDFFile(url: NSURL) {
+    showInputDialog(
+      title: l10n("pdf.confirm.title"),
+      subtitle: l10n("pdf.confirm.text"),
+      inputPlaceholder: l10n("pdf.confirm.placeholder")
+    ) { fileName in
+      PdfDataStorage.sharedInstance.add(savedPdf: SavedPDF(fileName: fileName ?? UUID().uuidString, pdfUrl: url as URL))
+      DispatchQueue.main.async { [weak self] in
+        self?.reloadTable()
+      }
+
+    }
+  }
+  
+  func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+    if controller.documentPickerMode == UIDocumentPickerMode.import {
+      guard let url = urls.first else {
+        return
+      }
+      checkQRCodesInPDFFile(url: url as NSURL)
+    }
+  }
   private func documentPicker(controller: UIDocumentPickerViewController, didPickDocumentAtURL url: NSURL) {
     if controller.documentPickerMode == UIDocumentPickerMode.import {
-          // This is what it should be
-          //self.newNoteBody.text = String(contentsOfFile: url.path!)
-      }
+      checkQRCodesInPDFFile(url: url)
+    }
+  }
+}
+
+extension ListVC {
+  func showImage(image: SavedImage) {
+    let imageVC = ImageViewerVC.loadFromNib()
+    imageVC.setImage(image: image)
+    present(imageVC, animated: true)
+  }
+  func showPdfFile(pdf: SavedPDF) {
+    let pdfVC = PDFViewerVC.loadFromNib()
+    pdfVC.setPDF(pdf: pdf)
+    present(pdfVC, animated: true)
   }
 }
