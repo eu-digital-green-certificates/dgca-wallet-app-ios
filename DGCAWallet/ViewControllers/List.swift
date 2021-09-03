@@ -137,6 +137,12 @@ class ListVC: UIViewController {
   }
 
   private func scanNFC() {
+    let appDelegate = UIApplication.shared.delegate as? AppDelegate
+    appDelegate?.isNFCFunctionality = true
+    if #available(iOS 13.0, *) {
+      let scene = self.sceneDelegate
+      scene?.isNFCFunctionality = true
+    }
     let helper = NFCHelper()
     helper.onNFCResult = onNFCResult(success:msg:)
     helper.restartSession()
@@ -145,6 +151,12 @@ class ListVC: UIViewController {
   func onNFCResult(success: Bool, msg: String) {
     DispatchQueue.main.async { [weak self] in
       print("\(msg)")
+      let appDelegate = UIApplication.shared.delegate as? AppDelegate
+      appDelegate?.isNFCFunctionality = false
+      if #available(iOS 13.0, *) {
+        let scene = self?.sceneDelegate
+        scene?.isNFCFunctionality = false
+      }
       if success, let hCert = HCert(from: msg, applicationType: .wallet) {
         self?.saveQrCode(cert: hCert)
       } else {
@@ -201,6 +213,15 @@ class ListVC: UIViewController {
     super.viewWillDisappear(animated)
 
     presentingViewer?.dismiss(animated: true, completion: nil)
+  }
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    let appDelegate = UIApplication.shared.delegate as? AppDelegate
+    appDelegate?.isNFCFunctionality = false
+    if #available(iOS 13.0, *) {
+      let scene = self.sceneDelegate
+      scene?.isNFCFunctionality = false
+    }
   }
 
   var presentingViewer: UIViewController?

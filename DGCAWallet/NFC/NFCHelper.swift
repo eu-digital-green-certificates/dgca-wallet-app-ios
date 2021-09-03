@@ -32,7 +32,7 @@ import CoreNFC
 class NFCHelper: NSObject, NFCNDEFReaderSessionDelegate {
   var onNFCResult: ((Bool, String) -> ())?
   func restartSession() {
-    let session = NFCNDEFReaderSession(delegate: self, queue: nil, invalidateAfterFirstRead: false)
+    let session = NFCNDEFReaderSession(delegate: self, queue: DispatchQueue.main, invalidateAfterFirstRead: false)
     session.begin()
   }
   
@@ -43,6 +43,7 @@ class NFCHelper: NSObject, NFCNDEFReaderSessionDelegate {
   }
   
   func readerSession(_ session: NFCNDEFReaderSession, didDetectNDEFs messages: [NFCNDEFMessage]) {
+    session.invalidate()
     guard let onNFCResult = onNFCResult else { return }
     
     print("Detected NDEF")
@@ -58,8 +59,7 @@ class NFCHelper: NSObject, NFCNDEFReaderSessionDelegate {
         payload += "\(record.payload)\n"
         payload += "\(record.type)\n"
         payload += "\(record.typeNameFormat)\n"
-        
-        
+
         if let resultString = String(data: record.payload, encoding: .utf8) {
           onNFCResult(true, resultString)
         } else {

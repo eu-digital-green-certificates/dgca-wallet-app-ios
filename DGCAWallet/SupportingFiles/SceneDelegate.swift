@@ -29,6 +29,7 @@ import UIKit
 @available(iOS 13.0, *)
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   var window: UIWindow?
+  var isNFCFunctionality = false
   func scene(_ scene: UIScene,
              willConnectTo session: UISceneSession,
              options connectionOptions: UIScene.ConnectionOptions) {
@@ -40,10 +41,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   }
 
   func sceneWillResignActive(_ scene: UIScene) {
-    SecureBackground.enable()
+    if !isNFCFunctionality {
+      SecureBackground.enable()
+    }
   }
 
   func sceneDidBecomeActive(_ scene: UIScene) {
+    isNFCFunctionality = false
     SecureBackground.disable()
   }
 

@@ -44,9 +44,6 @@
 		5C00074A26D641E2002E5013 /* PDFViewerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C00074626D641E2002E5013 /* PDFViewerVC.xib */; };
 		5C00074B26D641E2002E5013 /* PDFViewerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C00074626D641E2002E5013 /* PDFViewerVC.xib */; };
 		5C00074C26D641E2002E5013 /* PDFViewerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C00074626D641E2002E5013 /* PDFViewerVC.xib */; };
-		5C07263F26B2F484006C4986 /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB1A269DBB4C00074F66 /* context.jsonc */; };
-		5C07264026B2F485006C4986 /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB1A269DBB4C00074F66 /* context.jsonc */; };
-		5C07264126B2F485006C4986 /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB1A269DBB4C00074F66 /* context.jsonc */; };
 		5C50CF09269700550015EE29 /* CheckValidityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF07269700540015EE29 /* CheckValidityVC.swift */; };
 		5C50CF0A269700550015EE29 /* CheckValidityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF07269700540015EE29 /* CheckValidityVC.swift */; };
 		5C50CF0B269700550015EE29 /* CheckValidityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF07269700540015EE29 /* CheckValidityVC.swift */; };
@@ -89,6 +86,9 @@
 		5C50CF3E26983E090015EE29 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF3D26983E090015EE29 /* UITableView+.swift */; };
 		5C50CF3F26983E090015EE29 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF3D26983E090015EE29 /* UITableView+.swift */; };
 		5C50CF4026983E090015EE29 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF3D26983E090015EE29 /* UITableView+.swift */; };
+		5CA450A226DE68F70029324E /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB1A269DBB4C00074F66 /* context.jsonc */; };
+		5CA450A326DE68F80029324E /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB1A269DBB4C00074F66 /* context.jsonc */; };
+		5CA450A426DE68F80029324E /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB1A269DBB4C00074F66 /* context.jsonc */; };
 		5CE07C762692E0D900A032F9 /* CertLogic in Frameworks */ = {isa = PBXBuildFile; productRef = 5CE07C752692E0D900A032F9 /* CertLogic */; };
 		5CE07C7A2692E1CD00A032F9 /* CountryDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE07C772692E1CC00A032F9 /* CountryDataStorage.swift */; };
 		5CE07C7B2692E1CD00A032F9 /* CountryDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE07C772692E1CC00A032F9 /* CountryDataStorage.swift */; };
@@ -642,8 +642,8 @@
 				5C50CF1E2697023B0015EE29 /* RuleErrorTVC.xib in Resources */,
 				DA01661E26554992005B73A1 /* OpenSourceNotices.json in Resources */,
 				CEA6D6F5261F8D2900715333 /* Assets.xcassets in Resources */,
+				5CA450A226DE68F70029324E /* context.jsonc in Resources */,
 				5C50CF0C269700550015EE29 /* CheckValidityVC.xib in Resources */,
-				5C07263F26B2F484006C4986 /* context.jsonc in Resources */,
 				CEA6D6F3261F8D2700715333 /* Main.storyboard in Resources */,
 				5C00074A26D641E2002E5013 /* PDFViewerVC.xib in Resources */,
 				5C50CF14269700710015EE29 /* RuleValidationResultVC.xib in Resources */,
@@ -658,10 +658,10 @@
 			files = (
 				5C50CF15269700710015EE29 /* RuleValidationResultVC.xib in Resources */,
 				5C00074326D641CC002E5013 /* ImageViewerVC.xib in Resources */,
-				5C07264026B2F485006C4986 /* context.jsonc in Resources */,
 				5C50CF2B26972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.xib in Resources */,
 				5C50CF3326972BFD0015EE29 /* CellWithDateAndCountryTVC.xib in Resources */,
 				5C00074B26D641E2002E5013 /* PDFViewerVC.xib in Resources */,
+				5CA450A326DE68F80029324E /* context.jsonc in Resources */,
 				5C50CF0D269700550015EE29 /* CheckValidityVC.xib in Resources */,
 				5C50CF1F2697023B0015EE29 /* RuleErrorTVC.xib in Resources */,
 			);
@@ -673,10 +673,10 @@
 			files = (
 				5C50CF16269700710015EE29 /* RuleValidationResultVC.xib in Resources */,
 				5C00074426D641CC002E5013 /* ImageViewerVC.xib in Resources */,
-				5C07264126B2F485006C4986 /* context.jsonc in Resources */,
 				5C50CF2C26972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.xib in Resources */,
 				5C50CF3426972BFD0015EE29 /* CellWithDateAndCountryTVC.xib in Resources */,
 				5C00074C26D641E2002E5013 /* PDFViewerVC.xib in Resources */,
+				5CA450A426DE68F80029324E /* context.jsonc in Resources */,
 				5C50CF0E269700550015EE29 /* CheckValidityVC.xib in Resources */,
 				5C50CF202697023B0015EE29 /* RuleErrorTVC.xib in Resources */,
 			);
@@ -1007,7 +1007,7 @@
 				CODE_SIGN_ENTITLEMENTS = DGCAWallet/DGCAWallet.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 82EG8LG7YH;
 				INFOPLIST_FILE = DGCAWallet/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1015,7 +1015,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0.1;
+				MARKETING_VERSION = 1.2.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.t-systems.pu-ds.dgca.wallet.dev2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1032,7 +1032,7 @@
 				CODE_SIGN_ENTITLEMENTS = DGCAWallet/DGCAWallet.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 82EG8LG7YH;
 				INFOPLIST_FILE = DGCAWallet/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -1040,7 +1040,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0.1;
+				MARKETING_VERSION = 1.2.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.t-systems.pu-ds.dgca.wallet.dev2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
