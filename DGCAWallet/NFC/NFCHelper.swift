@@ -43,7 +43,6 @@ class NFCHelper: NSObject, NFCNDEFReaderSessionDelegate {
   }
   
   func readerSession(_ session: NFCNDEFReaderSession, didDetectNDEFs messages: [NFCNDEFMessage]) {
-    session.invalidate()
     guard let onNFCResult = onNFCResult else { return }
     
     print("Detected NDEF")
@@ -62,8 +61,10 @@ class NFCHelper: NSObject, NFCNDEFReaderSessionDelegate {
 
         if let resultString = String(data: record.payload, encoding: .utf8) {
           onNFCResult(true, resultString)
+          session.invalidate()
         } else {
           onNFCResult(false, "don't found any info")
+          session.invalidate()
         }
       }
     }
