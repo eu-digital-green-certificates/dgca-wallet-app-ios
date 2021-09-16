@@ -19,27 +19,20 @@
  * ---license-end
  */
 //  
-//  File.swift
+//  String+.swift
 //  DGCAWallet
 //  
-//  Created by Alexandr Chernyy on 08.07.2021.
+//  Created by Alexandr Chernyy on 23.08.2021.
 //  
         
 
+import Foundation
 import UIKit
 
-extension UIViewController {
-  static func loadFromNib() -> Self {
-    func instantiateFromNib<T: UIViewController>() -> T {
-      return T.init(nibName: String(describing: T.self), bundle: Bundle.init(for: Self.self))
-    }
-    return instantiateFromNib()
-  }
-
-  @available(iOS 13.0, *)
-  var sceneDelegate: SceneDelegate? {
-    guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-          let delegate = windowScene.delegate as? SceneDelegate else { return nil }
-    return delegate
+extension String {
+  func convertBase64StringToImage () -> UIImage? {
+    guard let imageData = Data.init(base64Encoded: self, options: .init(rawValue: 0)) else { return nil }
+      let image = UIImage(data: imageData)
+      return image
   }
 }

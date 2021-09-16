@@ -22,10 +22,14 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NFCReaderUsageDescription</key>
+	<string>Import certificate by NFC</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Scan barcodes with your camera.</string>
+	<string>Scan barcodes and images with your camera.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Unlock sensitive data.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app requires access to the photo library.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

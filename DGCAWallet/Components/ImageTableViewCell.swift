@@ -19,27 +19,46 @@
  * ---license-end
  */
 //  
-//  File.swift
+//  ImageTableViewCell.swift
 //  DGCAWallet
 //  
-//  Created by Alexandr Chernyy on 08.07.2021.
+//  Created by Alexandr Chernyy on 25.08.2021.
 //  
         
 
 import UIKit
 
-extension UIViewController {
-  static func loadFromNib() -> Self {
-    func instantiateFromNib<T: UIViewController>() -> T {
-      return T.init(nibName: String(describing: T.self), bundle: Bundle.init(for: Self.self))
+final class ImageTableViewCell: UITableViewCell {
+
+  @IBOutlet weak var imagePreviewView: UIImageView!
+  @IBOutlet weak var nameLabel: UILabel!
+  @IBOutlet weak var timeLabel: UILabel!
+
+  private var savedImage: SavedImage? {
+    didSet {
+      setupView()
     }
-    return instantiateFromNib()
+  }
+  
+  override func awakeFromNib() {
+    super.awakeFromNib()
+    // Initialization code
+    setupView()
+  }
+  
+  public func setImage(image: SavedImage) {
+    savedImage = image
+  }
+  
+  private func setupView() {
+    guard let savedImage = savedImage else {
+      imagePreviewView.image = nil
+      nameLabel.text = ""
+      return
+    }
+    imagePreviewView.image = savedImage.image
+    nameLabel.text = savedImage.fileName
+    timeLabel.text = savedImage.dateString
   }
 
-  @available(iOS 13.0, *)
-  var sceneDelegate: SceneDelegate? {
-    guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-          let delegate = windowScene.delegate as? SceneDelegate else { return nil }
-    return delegate
-  }
 }

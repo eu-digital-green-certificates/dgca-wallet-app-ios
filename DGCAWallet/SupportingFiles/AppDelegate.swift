@@ -29,6 +29,7 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
+  var isNFCFunctionality = false
   func application(
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
@@ -44,11 +45,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   func applicationWillResignActive(_ application: UIApplication) {
-    SecureBackground.enable()
+    if !isNFCFunctionality {
+      SecureBackground.enable()
+    }
   }
 
   func applicationDidBecomeActive(_ application: UIApplication) {
+    isNFCFunctionality = false
     SecureBackground.disable()
   }
-
 }
