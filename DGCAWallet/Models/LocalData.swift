@@ -73,7 +73,7 @@ struct LocalData: Codable {
       }
       LocalData.sharedInstance = result
       completion()
-      //GatewayConnection.fetchContext()
+      GatewayConnection.fetchContext()
     }
   }
   var versionedConfig: JSON {
