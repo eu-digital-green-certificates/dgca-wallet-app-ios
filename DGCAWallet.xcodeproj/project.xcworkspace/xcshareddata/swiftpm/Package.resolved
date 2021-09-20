@@ -24,7 +24,7 @@
         "repositoryURL": "https://github.com/eu-digital-green-certificates/dgc-certlogic-ios.git",
         "state": {
           "branch": "main",
-          "revision": "80c9ff3697b3e3e0e875e5e0a41b2dbbfa4a9ca6",
+          "revision": "5da95101196898090ef36e6189cb32f32b60ddc7",
           "version": null
         }
       },
@@ -33,7 +33,7 @@
         "repositoryURL": "https://github.com/eu-digital-green-certificates/dgca-app-core-ios",
         "state": {
           "branch": "main",
-          "revision": "ea7f671dd19260ba93681114ff6518eae9725129",
+          "revision": "4dbecb01a8e48e7ea9aabbe5aae5a615f7ce3934",
           "version": null
         }
       },
@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/SCENEE/FloatingPanel",
         "state": {
           "branch": null,
-          "revision": "b8fcb50874f50bb511173700f87b09344c568c6a",
-          "version": "2.4.0"
+          "revision": "3a0831a3346c99952b064303037e3a2d11594df7",
+          "version": "2.4.1"
         }
       },
       {
@@ -51,8 +51,8 @@
         "repositoryURL": "https://github.com/eu-digital-green-certificates/json-logic-swift.git",
         "state": {
           "branch": null,
-          "revision": "8dc339147b27ae633a1857503ed8d091c7935d0d",
-          "version": "1.1.5"
+          "revision": "e59a317e03491abe1f04c87b965a52abae243ddd",
+          "version": "1.1.8"
         }
       },
       {
@@ -60,7 +60,7 @@
         "repositoryURL": "https://github.com/eu-digital-green-certificates/JSONSchema.swift",
         "state": {
           "branch": "master",
-          "revision": "4809e8a105b3fd2818a08caf9e3cbcdd7d319af2",
+          "revision": "addef0a5c7ed181d877f1fdfde1e3fc1c6c28cfe",
           "version": null
         }
       },
@@ -87,7 +87,7 @@
         "repositoryURL": "https://github.com/eu-digital-green-certificates/SwiftCBOR",
         "state": {
           "branch": "master",
-          "revision": "b76024995f6909e4615f943c7a03268fd29778fc",
+          "revision": "642e9e93fb4a51b564c1bf21bf3c5b4c6bc79416",
           "version": null
         }
       },
