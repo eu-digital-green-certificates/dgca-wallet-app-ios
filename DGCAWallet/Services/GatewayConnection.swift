@@ -309,9 +309,10 @@ extension GatewayConnection {
       completion?(ValueSetsDataStorage.sharedInstance.valueSets)
     }
   }
-  static func requestListOfServices(token: String, completion : (([String]?) -> Void)? = nil) {
-    let headers = HTTPHeaders([HTTPHeader(name: "Authorization: Bearer", value: token),HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")])
-    request(["https://dgca-booking-demo-backend-eu-test.cfapps.eu10.hana.ondemand.com/identity"], externalLink: nil, method: .get, parameters: nil, headers: headers).response { response in
+  static func requestListOfServices(ticketingInfo : TicketingQR, completion : (([String]?) -> Void)? = nil) {
+    let headers = HTTPHeaders([HTTPHeader(name: "Authorization: Bearer", value: ticketingInfo.token),HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")])
+    let url = "https://" + ticketingInfo.serviceIdentity
+    request([url], externalLink: nil, method: .get, parameters: nil, headers: headers).response { response in
       guard
         case let .success(result) = response.result,
         let response = result,
