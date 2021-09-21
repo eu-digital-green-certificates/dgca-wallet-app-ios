@@ -288,6 +288,13 @@ extension ListVC: ScanVCDelegate {
       self?.navigationController?.popViewController(animated: true)
     }
   }
+  
+  func ticketingInfoScanned(_ ticketing:SwiftDGC.TicketingQR) {
+    GatewayConnection.requestListOfServices(ticketingInfo: ticketing) { services in
+      print("List of services : \(services)")
+    }
+  }
+  
 }
 
 extension ListVC: UITableViewDataSource {
