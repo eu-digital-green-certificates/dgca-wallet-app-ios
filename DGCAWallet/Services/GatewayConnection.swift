@@ -32,6 +32,7 @@ import SwiftyJSON
 import UIKit
 import CertLogic
 import CryptoKit
+import SwiftUI
 
 struct GatewayConnection: ContextConnection {
   public static func claim(cert: HCert, with tan: String?, completion: ((Bool, String?) -> Void)?) {
@@ -308,6 +309,32 @@ extension GatewayConnection {
       ValueSetsDataStorage.sharedInstance.save()
       completion?(ValueSetsDataStorage.sharedInstance.valueSets)
     }
+  }
+  static func requestListOfServices(ticketingInfo : TicketingQR, completion : @escaping (([ValidationService]?) -> Void)) {
+    let decoder = JSONDecoder()
+    let headers = HTTPHeaders([HTTPHeader(name: "Authorization: Bearer", value: ticketingInfo.token),HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")])
+    
+    let url = URL(string: ticketingInfo.serviceIdentity)!
+    var request = URLRequest(url: url)
+    request.headers = headers
+    
+    let session = URLSession.shared.dataTask(with: request, completionHandler: { data,response,error in
+      if let responseData = data {
+        var validationServices = [ValidationService]()
+        let servicesJson = try! JSON(data: responseData)["service"]
+        
+        servicesJson.forEach { str,json in
+          let service = try! decoder.decode(ValidationService.self, from: json.rawData())
+          validationServices.append(service)
+        }
+        
+        completion(validationServices)
+      } else {
+        completion(nil)
+      }
+      
+    })
+    session.resume()
   }
 }
 

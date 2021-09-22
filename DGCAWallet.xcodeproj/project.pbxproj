@@ -145,7 +145,6 @@
 		CE4BD254264FF28900689FD6 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4BD253264FF28900689FD6 /* Settings.swift */; };
 		CE4BD255264FF39400689FD6 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE4BD257264FF39400689FD6 /* Settings.storyboard */; };
 		CE4BD258264FF39D00689FD6 /* CertificateViewer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE4BD25A264FF39D00689FD6 /* CertificateViewer.storyboard */; };
-		CE56B5052639F48E00FB31B1 /* SwiftDGC in Frameworks */ = {isa = PBXBuildFile; productRef = CE56B5042639F48E00FB31B1 /* SwiftDGC */; };
 		CE56BC07264068110044FD3F /* GatewayConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE56BC06264068110044FD3F /* GatewayConnection.swift */; };
 		CE6B330E2651A54800845B8E /* SwiftDGC in Frameworks */ = {isa = PBXBuildFile; productRef = CE6B330D2651A54800845B8E /* SwiftDGC */; };
 		CE6D4A44264835F100A5D33D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE6D4A46264835F100A5D33D /* Localizable.strings */; };
@@ -296,7 +295,6 @@
 			files = (
 				CE8912FB2634C6B900CB92AF /* Alamofire in Frameworks */,
 				5CE07C762692E0D900A032F9 /* CertLogic in Frameworks */,
-				CE56B5052639F48E00FB31B1 /* SwiftDGC in Frameworks */,
 				CE6B330E2651A54800845B8E /* SwiftDGC in Frameworks */,
 				CE1F155C2639F9E700736D48 /* SwiftyJSON in Frameworks */,
 				CE13CF00262DCC180070C80E /* FloatingPanel in Frameworks */,
@@ -605,7 +603,6 @@
 			packageProductDependencies = (
 				CE13CEFF262DCC180070C80E /* FloatingPanel */,
 				CE8912FA2634C6B900CB92AF /* Alamofire */,
-				CE56B5042639F48E00FB31B1 /* SwiftDGC */,
 				CE1F155B2639F9E700736D48 /* SwiftyJSON */,
 				CE6B330D2651A54800845B8E /* SwiftDGC */,
 				5CE07C752692E0D900A032F9 /* CertLogic */,
@@ -788,7 +785,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n#if which swiftlint >/dev/null; then\n#  swiftlint\n#else\n#  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\n#fi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1307,7 +1304,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/eu-digital-green-certificates/dgca-app-core-ios";
 			requirement = {
-				branch = main;
+				branch = feature/ticketing;
 				kind = branch;
 			};
 		};
@@ -1336,10 +1333,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE1F155A2639F9E700736D48 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
 			productName = SwiftyJSON;
-		};
-		CE56B5042639F48E00FB31B1 /* SwiftDGC */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SwiftDGC;
 		};
 		CE6B330D2651A54800845B8E /* SwiftDGC */ = {
 			isa = XCSwiftPackageProductDependency;
