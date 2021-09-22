@@ -34,7 +34,7 @@ class ServerTVC: UITableViewCell {
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var descriptionLabel: UILabel!
   
-  private var hCert: HCert? {
+  private var service: ValidationService? {
     didSet {
       setupView()
     }
@@ -47,16 +47,16 @@ class ServerTVC: UITableViewCell {
   }
     
   private func setupView() {
-    if let hCert = hCert {
-      nameLabel.text = hCert.fullName
-      descriptionLabel.text = hCert.exp.dateString
+    if let service = service {
+      nameLabel.text = service.name
+      descriptionLabel.text = service.serviceEndpoint
     } else {
       nameLabel.text = ""
       descriptionLabel.text = ""
     }
   }
 
-  public func setCertificate(cert: HCert) {
-    hCert = cert
+  public func setService(serv: ValidationService) {
+    service = serv
   }
 }

@@ -38,7 +38,7 @@ class ServersListVC: UIViewController {
     static let cellIndentifier = "ServerTVC"
   }
   
-  private var listOfCert: [HCert]? {
+  private var listOfServices: [ValidationService]? {
     didSet {
       setupView()
     }
@@ -65,25 +65,25 @@ class ServersListVC: UIViewController {
     tableView.reloadData()
   }
   
-  public func setCertsWith(items: [HCert]) {
-    listOfCert = items
+  public func setServices(items: [ValidationService]) {
+    listOfServices = items
   }
 }
 
 extension ServersListVC: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return listOfCert?.count ?? .zero
+    return listOfServices?.count ?? .zero
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let hCert = listOfCert?[indexPath.row]
+    let service = listOfServices?[indexPath.row]
     let base = tableView.dequeueReusableCell(withIdentifier: Constants.cellIndentifier, for: indexPath)
-    guard let cell = base as? CertificateTVC else {
+    guard let cell = base as? ServerTVC else {
       return base
     }
-    if let hCert = hCert {
-      cell.setCertificate(cert: hCert)
+    if let service = service {
+      cell.setService(serv: service)
     }
     return cell
   }
