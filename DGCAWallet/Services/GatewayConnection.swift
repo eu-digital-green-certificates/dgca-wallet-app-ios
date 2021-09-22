@@ -336,5 +336,29 @@ extension GatewayConnection {
     })
     session.resume()
   }
+  
+  static func getAccessTokenFor(servicePath : String, publicKey : String, completion : @escaping (AccessTokenResponse?) -> Void) {
+    let decoder = JSONDecoder()
+    let json: [String: Any] = ["service": servicePath,
+                               "pubKey": publicKey]
+
+    let jsonData = try? JSONSerialization.data(withJSONObject: json)
+    let url = URL(string: "https://dgca-booking-demo-eu-test.cfapps.eu10.hana.ondemand.com/token")!
+    
+    var request = URLRequest(url: url)
+    request.httpBody = jsonData
+    let session = URLSession.shared.dataTask(with: request, completionHandler: { data,response,error in
+      
+      if let responseData = data {
+        let acccesTokectResponse = try! decoder.decode(AccessTokenResponse.self, from: responseData)
+        completion(acccesTokectResponse)
+      } else {
+        completion(nil)
+      }
+      
+    })
+    session.resume()
+    
+  }
 }
 
