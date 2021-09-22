@@ -86,6 +86,36 @@
 		5C50CF3E26983E090015EE29 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF3D26983E090015EE29 /* UITableView+.swift */; };
 		5C50CF3F26983E090015EE29 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF3D26983E090015EE29 /* UITableView+.swift */; };
 		5C50CF4026983E090015EE29 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF3D26983E090015EE29 /* UITableView+.swift */; };
+		5C556D4126F9DAF7007E2C2E /* TicketCodeAcceptViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D3F26F9DAF6007E2C2E /* TicketCodeAcceptViewController.xib */; };
+		5C556D4226F9DAF7007E2C2E /* TicketCodeAcceptViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D3F26F9DAF6007E2C2E /* TicketCodeAcceptViewController.xib */; };
+		5C556D4326F9DAF7007E2C2E /* TicketCodeAcceptViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D3F26F9DAF6007E2C2E /* TicketCodeAcceptViewController.xib */; };
+		5C556D4426F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4026F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift */; };
+		5C556D4526F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4026F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift */; };
+		5C556D4626F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4026F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift */; };
+		5C556D4926F9F8AC007E2C2E /* CertificatesListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4726F9F8AC007E2C2E /* CertificatesListVC.swift */; };
+		5C556D4A26F9F8AC007E2C2E /* CertificatesListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4726F9F8AC007E2C2E /* CertificatesListVC.swift */; };
+		5C556D4B26F9F8AC007E2C2E /* CertificatesListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4726F9F8AC007E2C2E /* CertificatesListVC.swift */; };
+		5C556D4C26F9F8AC007E2C2E /* CertificatesListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D4826F9F8AC007E2C2E /* CertificatesListVC.xib */; };
+		5C556D4D26F9F8AC007E2C2E /* CertificatesListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D4826F9F8AC007E2C2E /* CertificatesListVC.xib */; };
+		5C556D4E26F9F8AC007E2C2E /* CertificatesListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D4826F9F8AC007E2C2E /* CertificatesListVC.xib */; };
+		5C556D5126F9F8C6007E2C2E /* ServersListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4F26F9F8C6007E2C2E /* ServersListVC.swift */; };
+		5C556D5226F9F8C6007E2C2E /* ServersListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4F26F9F8C6007E2C2E /* ServersListVC.swift */; };
+		5C556D5326F9F8C6007E2C2E /* ServersListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4F26F9F8C6007E2C2E /* ServersListVC.swift */; };
+		5C556D5426F9F8C6007E2C2E /* ServersListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D5026F9F8C6007E2C2E /* ServersListVC.xib */; };
+		5C556D5526F9F8C6007E2C2E /* ServersListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D5026F9F8C6007E2C2E /* ServersListVC.xib */; };
+		5C556D5626F9F8C6007E2C2E /* ServersListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D5026F9F8C6007E2C2E /* ServersListVC.xib */; };
+		5C556D5B26F9F95B007E2C2E /* CertificateTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D5926F9F95B007E2C2E /* CertificateTVC.swift */; };
+		5C556D5C26F9F95C007E2C2E /* CertificateTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D5926F9F95B007E2C2E /* CertificateTVC.swift */; };
+		5C556D5D26F9F95C007E2C2E /* CertificateTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D5926F9F95B007E2C2E /* CertificateTVC.swift */; };
+		5C556D5E26F9F95C007E2C2E /* CertificateTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D5A26F9F95B007E2C2E /* CertificateTVC.xib */; };
+		5C556D5F26F9F95C007E2C2E /* CertificateTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D5A26F9F95B007E2C2E /* CertificateTVC.xib */; };
+		5C556D6026F9F95C007E2C2E /* CertificateTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D5A26F9F95B007E2C2E /* CertificateTVC.xib */; };
+		5C556D6326F9F97E007E2C2E /* ServerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D6126F9F97E007E2C2E /* ServerTVC.swift */; };
+		5C556D6426F9F97E007E2C2E /* ServerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D6126F9F97E007E2C2E /* ServerTVC.swift */; };
+		5C556D6526F9F97E007E2C2E /* ServerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D6126F9F97E007E2C2E /* ServerTVC.swift */; };
+		5C556D6626F9F97E007E2C2E /* ServerTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D6226F9F97E007E2C2E /* ServerTVC.xib */; };
+		5C556D6726F9F97E007E2C2E /* ServerTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D6226F9F97E007E2C2E /* ServerTVC.xib */; };
+		5C556D6826F9F97E007E2C2E /* ServerTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D6226F9F97E007E2C2E /* ServerTVC.xib */; };
 		5CA450B026E20B690029324E /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB18269DBB4C00074F66 /* context.jsonc */; };
 		5CA450B126E20B6A0029324E /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB18269DBB4C00074F66 /* context.jsonc */; };
 		5CA450B226E20B6A0029324E /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB18269DBB4C00074F66 /* context.jsonc */; };
@@ -195,6 +225,16 @@
 		5C50CF352697315B0015EE29 /* ValidityCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidityCellModel.swift; sourceTree = "<group>"; };
 		5C50CF3926973D9D0015EE29 /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
 		5C50CF3D26983E090015EE29 /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
+		5C556D3F26F9DAF6007E2C2E /* TicketCodeAcceptViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketCodeAcceptViewController.xib; sourceTree = "<group>"; };
+		5C556D4026F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketCodeAcceptViewController.swift; sourceTree = "<group>"; };
+		5C556D4726F9F8AC007E2C2E /* CertificatesListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificatesListVC.swift; sourceTree = "<group>"; };
+		5C556D4826F9F8AC007E2C2E /* CertificatesListVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CertificatesListVC.xib; sourceTree = "<group>"; };
+		5C556D4F26F9F8C6007E2C2E /* ServersListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersListVC.swift; sourceTree = "<group>"; };
+		5C556D5026F9F8C6007E2C2E /* ServersListVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServersListVC.xib; sourceTree = "<group>"; };
+		5C556D5926F9F95B007E2C2E /* CertificateTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateTVC.swift; sourceTree = "<group>"; };
+		5C556D5A26F9F95B007E2C2E /* CertificateTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CertificateTVC.xib; sourceTree = "<group>"; };
+		5C556D6126F9F97E007E2C2E /* ServerTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerTVC.swift; sourceTree = "<group>"; };
+		5C556D6226F9F97E007E2C2E /* ServerTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServerTVC.xib; sourceTree = "<group>"; };
 		5CE07C772692E1CC00A032F9 /* CountryDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryDataStorage.swift; sourceTree = "<group>"; };
 		5CE07C782692E1CD00A032F9 /* ValueSetsDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueSetsDataStorage.swift; sourceTree = "<group>"; };
 		5CE07C792692E1CD00A032F9 /* RulesDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesDataStorage.swift; sourceTree = "<group>"; };
@@ -309,6 +349,24 @@
 			path = RuleCell;
 			sourceTree = "<group>";
 		};
+		5C556D5726F9F942007E2C2E /* CertificateCell */ = {
+			isa = PBXGroup;
+			children = (
+				5C556D5926F9F95B007E2C2E /* CertificateTVC.swift */,
+				5C556D5A26F9F95B007E2C2E /* CertificateTVC.xib */,
+			);
+			path = CertificateCell;
+			sourceTree = "<group>";
+		};
+		5C556D5826F9F942007E2C2E /* ServerCell */ = {
+			isa = PBXGroup;
+			children = (
+				5C556D6126F9F97E007E2C2E /* ServerTVC.swift */,
+				5C556D6226F9F97E007E2C2E /* ServerTVC.xib */,
+			);
+			path = ServerCell;
+			sourceTree = "<group>";
+		};
 		5CFEDB16269DBB4C00074F66 /* Context */ = {
 			isa = PBXGroup;
 			children = (
@@ -394,6 +452,12 @@
 				5C00074626D641E2002E5013 /* PDFViewerVC.xib */,
 				5CEA55CE26F3528900269702 /* QRTicketCodeDetailsViewController.swift */,
 				5CEA55CF26F3528900269702 /* QRTicketCodeDetailsViewController.xib */,
+				5C556D4026F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift */,
+				5C556D3F26F9DAF6007E2C2E /* TicketCodeAcceptViewController.xib */,
+				5C556D4726F9F8AC007E2C2E /* CertificatesListVC.swift */,
+				5C556D4826F9F8AC007E2C2E /* CertificatesListVC.xib */,
+				5C556D4F26F9F8C6007E2C2E /* ServersListVC.swift */,
+				5C556D5026F9F8C6007E2C2E /* ServersListVC.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -401,6 +465,8 @@
 		CE13CF1D262DDE730070C80E /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				5C556D5726F9F942007E2C2E /* CertificateCell */,
+				5C556D5826F9F942007E2C2E /* ServerCell */,
 				5C50CF18269700B30015EE29 /* RuleCell */,
 				5C50CF172697009E0015EE29 /* CheckValidityCells */,
 				CE13CF0E262DD0D80070C80E /* FullFloatingPanelLayout.swift */,
@@ -647,14 +713,19 @@
 				CE4BD255264FF39400689FD6 /* Settings.storyboard in Resources */,
 				CE81533A263FF7EC0030D777 /* README.md in Resources */,
 				5C50CF1E2697023B0015EE29 /* RuleErrorTVC.xib in Resources */,
+				5C556D5E26F9F95C007E2C2E /* CertificateTVC.xib in Resources */,
+				5C556D5426F9F8C6007E2C2E /* ServersListVC.xib in Resources */,
 				5CEA55D126F3528900269702 /* QRTicketCodeDetailsViewController.xib in Resources */,
 				DA01661E26554992005B73A1 /* OpenSourceNotices.json in Resources */,
+				5C556D4126F9DAF7007E2C2E /* TicketCodeAcceptViewController.xib in Resources */,
 				CEA6D6F5261F8D2900715333 /* Assets.xcassets in Resources */,
 				5C50CF0C269700550015EE29 /* CheckValidityVC.xib in Resources */,
 				CEA6D6F3261F8D2700715333 /* Main.storyboard in Resources */,
 				5C00074A26D641E2002E5013 /* PDFViewerVC.xib in Resources */,
 				5C50CF14269700710015EE29 /* RuleValidationResultVC.xib in Resources */,
 				DA017DE626552259006E4D49 /* Licenses.storyboard in Resources */,
+				5C556D4C26F9F8AC007E2C2E /* CertificatesListVC.xib in Resources */,
+				5C556D6626F9F97E007E2C2E /* ServerTVC.xib in Resources */,
 				5C50CF2A26972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -664,12 +735,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C50CF15269700710015EE29 /* RuleValidationResultVC.xib in Resources */,
+				5C556D6726F9F97E007E2C2E /* ServerTVC.xib in Resources */,
+				5C556D5526F9F8C6007E2C2E /* ServersListVC.xib in Resources */,
+				5C556D4226F9DAF7007E2C2E /* TicketCodeAcceptViewController.xib in Resources */,
+				5C556D5F26F9F95C007E2C2E /* CertificateTVC.xib in Resources */,
 				5CA450B126E20B6A0029324E /* context.jsonc in Resources */,
 				5C00074326D641CC002E5013 /* ImageViewerVC.xib in Resources */,
 				5C50CF2B26972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.xib in Resources */,
 				5C50CF3326972BFD0015EE29 /* CellWithDateAndCountryTVC.xib in Resources */,
 				5C00074B26D641E2002E5013 /* PDFViewerVC.xib in Resources */,
 				5C50CF0D269700550015EE29 /* CheckValidityVC.xib in Resources */,
+				5C556D4D26F9F8AC007E2C2E /* CertificatesListVC.xib in Resources */,
 				5C50CF1F2697023B0015EE29 /* RuleErrorTVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -679,12 +755,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C50CF16269700710015EE29 /* RuleValidationResultVC.xib in Resources */,
+				5C556D6826F9F97E007E2C2E /* ServerTVC.xib in Resources */,
+				5C556D5626F9F8C6007E2C2E /* ServersListVC.xib in Resources */,
+				5C556D4326F9DAF7007E2C2E /* TicketCodeAcceptViewController.xib in Resources */,
+				5C556D6026F9F95C007E2C2E /* CertificateTVC.xib in Resources */,
 				5CA450B226E20B6A0029324E /* context.jsonc in Resources */,
 				5C00074426D641CC002E5013 /* ImageViewerVC.xib in Resources */,
 				5C50CF2C26972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.xib in Resources */,
 				5C50CF3426972BFD0015EE29 /* CellWithDateAndCountryTVC.xib in Resources */,
 				5C00074C26D641E2002E5013 /* PDFViewerVC.xib in Resources */,
 				5C50CF0E269700550015EE29 /* CheckValidityVC.xib in Resources */,
+				5C556D4E26F9F8AC007E2C2E /* CertificatesListVC.xib in Resources */,
 				5C50CF202697023B0015EE29 /* RuleErrorTVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -726,6 +807,7 @@
 				5CEA55D026F3528900269702 /* QRTicketCodeDetailsViewController.swift in Sources */,
 				5C00072A26D3A77D002E5013 /* ImageDataStorage.swift in Sources */,
 				5CE07C7D2692E1CD00A032F9 /* ValueSetsDataStorage.swift in Sources */,
+				5C556D4926F9F8AC007E2C2E /* CertificatesListVC.swift in Sources */,
 				5C00073226D3AEDE002E5013 /* PdfDataStorage.swift in Sources */,
 				CEA1556B262F784E0024B7AC /* SelfSizedTableView.swift in Sources */,
 				5C00071926CFAED2002E5013 /* UIImage+.swift in Sources */,
@@ -739,10 +821,12 @@
 				CE56BC07264068110044FD3F /* GatewayConnection.swift in Sources */,
 				CEA6D6F0261F8D2700715333 /* Scan.swift in Sources */,
 				CE13CF23262DDF810070C80E /* RoundedButton.swift in Sources */,
+				5C556D5126F9F8C6007E2C2E /* ServersListVC.swift in Sources */,
 				5C50CF2726972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.swift in Sources */,
 				DA01662026554E02005B73A1 /* LicenseCell.swift in Sources */,
 				CEA6D6EC261F8D2700715333 /* AppDelegate.swift in Sources */,
 				DA01661C265541C0005B73A1 /* LicenseList.swift in Sources */,
+				5C556D5B26F9F95B007E2C2E /* CertificateTVC.swift in Sources */,
 				5C00073626D625D0002E5013 /* PDFTableViewCell.swift in Sources */,
 				CE891305263581D900CB92AF /* Home.swift in Sources */,
 				5C00071C26D38CC3002E5013 /* NFCHelper.swift in Sources */,
@@ -754,6 +838,7 @@
 				5C50CF11269700710015EE29 /* RuleValidationResultVC.swift in Sources */,
 				DA01662226558B2F005B73A1 /* LicenseVC.swift in Sources */,
 				5C00072E26D3AC11002E5013 /* SavedPDF.swift in Sources */,
+				5C556D4426F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift in Sources */,
 				5C50CF1B2697023B0015EE29 /* RuleErrorTVC.swift in Sources */,
 				5C50CF09269700550015EE29 /* CheckValidityVC.swift in Sources */,
 				5C50CF3E26983E090015EE29 /* UITableView+.swift in Sources */,
@@ -764,6 +849,7 @@
 				5C00074726D641E2002E5013 /* PDFViewerVC.swift in Sources */,
 				5C00073F26D641CC002E5013 /* ImageViewerVC.swift in Sources */,
 				5C00072226D3A40E002E5013 /* SavedImage.swift in Sources */,
+				5C556D6326F9F97E007E2C2E /* ServerTVC.swift in Sources */,
 				5C00072626D3A6CD002E5013 /* String+.swift in Sources */,
 				5C50CF2F26972BFD0015EE29 /* CellWithDateAndCountryTVC.swift in Sources */,
 			);
@@ -778,13 +864,16 @@
 				5C00071D26D38CC3002E5013 /* NFCHelper.swift in Sources */,
 				5C00072F26D3AC11002E5013 /* SavedPDF.swift in Sources */,
 				5C50CF0A269700550015EE29 /* CheckValidityVC.swift in Sources */,
+				5C556D4526F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift in Sources */,
 				5C50CF3B26973D9D0015EE29 /* UserDefaults+.swift in Sources */,
 				5C50CF3F26983E090015EE29 /* UITableView+.swift in Sources */,
 				5C00073B26D625DE002E5013 /* ImageTableViewCell.swift in Sources */,
 				5C00073326D3AEDE002E5013 /* PdfDataStorage.swift in Sources */,
 				5C50CF1C2697023B0015EE29 /* RuleErrorTVC.swift in Sources */,
 				5CE07C7E2692E1CD00A032F9 /* ValueSetsDataStorage.swift in Sources */,
+				5C556D6426F9F97E007E2C2E /* ServerTVC.swift in Sources */,
 				5C00072B26D3A77D002E5013 /* ImageDataStorage.swift in Sources */,
+				5C556D5226F9F8C6007E2C2E /* ServersListVC.swift in Sources */,
 				5C00072326D3A40E002E5013 /* SavedImage.swift in Sources */,
 				5C50CF12269700710015EE29 /* RuleValidationResultVC.swift in Sources */,
 				CEA6D703261F8D2900715333 /* DGCAWalletTests.swift in Sources */,
@@ -792,9 +881,11 @@
 				5C00073726D625D0002E5013 /* PDFTableViewCell.swift in Sources */,
 				5C50CF23269704240015EE29 /* UIViewController+.swift in Sources */,
 				5CE07C852692E21E00A032F9 /* CertLogicEngineManager.swift in Sources */,
+				5C556D5C26F9F95C007E2C2E /* CertificateTVC.swift in Sources */,
 				5C50CF372697315B0015EE29 /* ValidityCellModel.swift in Sources */,
 				5C50CF3026972BFD0015EE29 /* CellWithDateAndCountryTVC.swift in Sources */,
 				5C00074026D641CC002E5013 /* ImageViewerVC.swift in Sources */,
+				5C556D4A26F9F8AC007E2C2E /* CertificatesListVC.swift in Sources */,
 				5CE07C812692E1CD00A032F9 /* RulesDataStorage.swift in Sources */,
 				CEFAD87F262714C4009AFEF9 /* EHNTests.swift in Sources */,
 				5CE07C7B2692E1CD00A032F9 /* CountryDataStorage.swift in Sources */,
@@ -812,13 +903,18 @@
 				5C00073026D3AC11002E5013 /* SavedPDF.swift in Sources */,
 				5C50CF382697315B0015EE29 /* ValidityCellModel.swift in Sources */,
 				5C00073426D3AEDE002E5013 /* PdfDataStorage.swift in Sources */,
+				5C556D6526F9F97E007E2C2E /* ServerTVC.swift in Sources */,
 				5C50CF3C26973D9D0015EE29 /* UserDefaults+.swift in Sources */,
 				5C50CF4026983E090015EE29 /* UITableView+.swift in Sources */,
+				5C556D4626F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift in Sources */,
+				5C556D4B26F9F8AC007E2C2E /* CertificatesListVC.swift in Sources */,
+				5C556D5D26F9F95C007E2C2E /* CertificateTVC.swift in Sources */,
 				5C00074926D641E2002E5013 /* PDFViewerVC.swift in Sources */,
 				CEA6D70E261F8D2900715333 /* DGCAWalletUITests.swift in Sources */,
 				5CE07C7F2692E1CD00A032F9 /* ValueSetsDataStorage.swift in Sources */,
 				5C50CF3126972BFD0015EE29 /* CellWithDateAndCountryTVC.swift in Sources */,
 				5C50CF0B269700550015EE29 /* CheckValidityVC.swift in Sources */,
+				5C556D5326F9F8C6007E2C2E /* ServersListVC.swift in Sources */,
 				5C50CF1D2697023B0015EE29 /* RuleErrorTVC.swift in Sources */,
 				5CE07C862692E21E00A032F9 /* CertLogicEngineManager.swift in Sources */,
 				5C00071E26D38CC3002E5013 /* NFCHelper.swift in Sources */,

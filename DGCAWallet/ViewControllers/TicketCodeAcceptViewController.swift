@@ -28,18 +28,15 @@
 
 import UIKit
 
-class QRTicketCodeDetailsViewController: UIViewController {
+class TicketCodeAcceptViewController: UIViewController {
 
-  @IBOutlet weak var qrCodeTitle: UILabel!
-  @IBOutlet weak var subjectLabel: UILabel!
-  @IBOutlet weak var subjectDetailsLabel: UILabel!
-  @IBOutlet weak var serviceTitleLabel: UILabel!
-  @IBOutlet weak var servceDescriptionLabel: UILabel!
+  @IBOutlet weak var certificateTitle: UILabel!
+  @IBOutlet weak var validToLabel: UILabel!
   @IBOutlet weak var consetsLabel: UILabel!
   @IBOutlet weak var infoLabel: UILabel!
   
-  @IBOutlet weak var denyButton: UIButton!
-  @IBOutlet weak var allowButton: UIButton!
+  @IBOutlet weak var cancelButton: UIButton!
+  @IBOutlet weak var grandButton: UIButton!
   
   override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,12 +46,11 @@ class QRTicketCodeDetailsViewController: UIViewController {
 
   private func setuppView() { }
   
-  @IBAction func denyButtonAction(_ sender: Any) {
+  @IBAction func cancelButtonAction(_ sender: Any) {
   }
   
-  @IBAction func allowButtonAction(_ sender: Any) {
+  @IBAction func grandButtonAction(_ sender: Any) {
   }
-  
   
     /*
     // MARK: - Navigation
