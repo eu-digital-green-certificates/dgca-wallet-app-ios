@@ -51,11 +51,20 @@ class ServersListVC: UIViewController {
     guard let selectedIndexPath = tableView.indexPathForSelectedRow else { return }
     let service = listOfServices![selectedIndexPath.row]
     
+    guard let privateKey = Enclave.loadOrGenerateKey(with: "validationKey") else { return }
+    let publicKey = SecKeyCopyPublicKey(privateKey)
+    var base64PublicKeyString = ""
+    var error:Unmanaged<CFError>?
+    if let cfdata = SecKeyCopyExternalRepresentation(publicKey!, &error) {
+       let data:Data = cfdata as Data
+       base64PublicKeyString = data.base64EncodedString()
+    }
+    
     guard let validationMethod = serverListInfo?.verificationMethod.first(where: {
       $0.controller == service.serviceEndpoint
     }) else { return }
     
-    GatewayConnection.getAccessTokenFor(servicePath: validationMethod.id, publicKey: validationMethod.publicKeyJwk.x5c) { response in
+    GatewayConnection.getAccessTokenFor(servicePath: validationMethod.id, publicKey: base64PublicKeyString) { response in
         print(response)
     }
   }
