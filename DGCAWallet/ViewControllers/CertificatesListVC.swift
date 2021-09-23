@@ -68,6 +68,20 @@ class CertificatesListVC: UIViewController {
   public func setCertsWith(items: [HCert]) {
     listOfCert = items
   }
+  
+  private func deselectAllCert() {
+    for i in 0..<(listOfCert?.count ?? 0) {
+      if listOfCert?[i].isSelected ?? false {
+        listOfCert?[i].isSelected = false
+      }
+    }
+  }
+  
+  public func getSelectedCert() -> HCert? {
+    listOfCert?.filter({ hcert in
+      hcert.isSelected
+    }).first
+  }
 }
 
 extension CertificatesListVC: UITableViewDataSource, UITableViewDelegate {
@@ -83,8 +97,21 @@ extension CertificatesListVC: UITableViewDataSource, UITableViewDelegate {
       return base
     }
     if let hCert = hCert {
+      if hCert.isSelected  {
+        cell.accessoryType = .checkmark
+      } else {
+        cell.accessoryType = .none
+      }
       cell.setCertificate(cert: hCert)
     }
     return cell
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    if let cell = tableView.cellForRow(at: indexPath) {
+      deselectAllCert()
+      listOfCert?[indexPath.row].isSelected = true
+      cell.accessoryType = .checkmark
+    }
   }
 }
