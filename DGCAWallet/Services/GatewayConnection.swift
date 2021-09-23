@@ -348,7 +348,7 @@ extension GatewayConnection {
     let session = URLSession.shared.dataTask(with: request, completionHandler: { data,response,error in
       
       if let responseData = data, responseData.count > 0 {
-        let acccesTokectResponse = try! decoder.decode(AccessTokenResponse.self, from: responseData)
+        let acccesTokectResponse = try? decoder.decode(AccessTokenResponse.self, from: responseData)
         completion(acccesTokectResponse)
       } else {
         completion(nil)
