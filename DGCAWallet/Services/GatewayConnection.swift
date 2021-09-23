@@ -310,7 +310,7 @@ extension GatewayConnection {
       completion?(ValueSetsDataStorage.sharedInstance.valueSets)
     }
   }
-  static func requestListOfServices(ticketingInfo : TicketingQR, completion : @escaping (([ValidationService]?) -> Void)) {
+  static func requestListOfServices(ticketingInfo : TicketingQR, completion : @escaping ((ServerListResponse?) -> Void)) {
     let decoder = JSONDecoder()
     let headers = HTTPHeaders([HTTPHeader(name: "Authorization: Bearer", value: ticketingInfo.token),HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")])
     
@@ -320,15 +320,10 @@ extension GatewayConnection {
     
     let session = URLSession.shared.dataTask(with: request, completionHandler: { data,response,error in
       if let responseData = data {
-        var validationServices = [ValidationService]()
-        let servicesJson = try! JSON(data: responseData)["service"]
         
-        servicesJson.forEach { str,json in
-          let service = try! decoder.decode(ValidationService.self, from: json.rawData())
-          validationServices.append(service)
-        }
+        let responseModel = try! decoder.decode(ServerListResponse.self, from: responseData)
         
-        completion(validationServices)
+        completion(responseModel)
       } else {
         completion(nil)
       }
@@ -346,7 +341,10 @@ extension GatewayConnection {
     let url = URL(string: "https://dgca-booking-demo-eu-test.cfapps.eu10.hana.ondemand.com/token")!
     
     var request = URLRequest(url: url)
+    request.httpMethod = "POST"
     request.httpBody = jsonData
+    
+    request.headers  = [HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")]
     let session = URLSession.shared.dataTask(with: request, completionHandler: { data,response,error in
       
       if let responseData = data {

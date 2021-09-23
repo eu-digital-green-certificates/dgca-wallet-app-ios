@@ -287,6 +287,7 @@
 		DA01661F26554E02005B73A1 /* LicenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseCell.swift; sourceTree = "<group>"; };
 		DA01662126558B2F005B73A1 /* LicenseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseVC.swift; sourceTree = "<group>"; };
 		DA017DE526552259006E4D49 /* Licenses.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Licenses.storyboard; sourceTree = "<group>"; };
+		FE02F9CC26FCDCBA003B03F5 /* dgca-app-core-ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "dgca-app-core-ios"; path = "../dgca-app-core-ios"; sourceTree = "<group>"; };
 		FEAEA96426FBB13600B94FFF /* AccessTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -532,6 +533,7 @@
 		CEA6D6DF261F8D2700715333 = {
 			isa = PBXGroup;
 			children = (
+				FE02F9CC26FCDCBA003B03F5 /* dgca-app-core-ios */,
 				CEA6D6EA261F8D2700715333 /* DGCAWallet */,
 				CEA6D701261F8D2900715333 /* DGCAWalletTests */,
 				CEA6D70C261F8D2900715333 /* DGCAWalletUITests */,

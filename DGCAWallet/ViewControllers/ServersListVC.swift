@@ -38,11 +38,8 @@ class ServersListVC: UIViewController {
     static let cellIndentifier = "ServerTVC"
   }
   
-  private var listOfServices: [ValidationService]? {
-    didSet {
-      setupView()
-    }
-  }
+  private var serverListInfo : ServerListResponse?
+  private var listOfServices: [ValidationService]?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -51,6 +48,16 @@ class ServersListVC: UIViewController {
   }
 
   @IBAction func nextButtonAction(_ sender: Any) {
+    guard let selectedIndexPath = tableView.indexPathForSelectedRow else { return }
+    let service = listOfServices![selectedIndexPath.row]
+    
+    guard let validationMethod = serverListInfo?.verificationMethod.first(where: {
+      $0.controller == service.serviceEndpoint
+    }) else { return }
+    
+    GatewayConnection.getAccessTokenFor(servicePath: validationMethod.id, publicKey: validationMethod.publicKeyJwk.x5c) { response in
+        print(response)
+    }
   }
   
   private func setupView() {
@@ -65,8 +72,9 @@ class ServersListVC: UIViewController {
     tableView.reloadData()
   }
   
-  public func setServices(items: [ValidationService]) {
-    listOfServices = items
+  public func setServices(info: ServerListResponse) {
+    serverListInfo = info
+    listOfServices = serverListInfo?.service
   }
 }
 
