@@ -24,13 +24,13 @@
 //  
 //  Created by Alexandr Chernyy on 21.09.2021.
 //  
-        
+
 
 import UIKit
 import SwiftDGC
 
 class ServersListVC: UIViewController {
-
+  
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var nextButton: UIButton!
   
@@ -46,7 +46,7 @@ class ServersListVC: UIViewController {
     
     setupTableView()
   }
-
+  
   @IBAction func nextButtonAction(_ sender: Any) {
     guard let selectedIndexPath = tableView.indexPathForSelectedRow else { return }
     let service = listOfServices![selectedIndexPath.row]
@@ -56,16 +56,27 @@ class ServersListVC: UIViewController {
     var base64PublicKeyString = ""
     var error:Unmanaged<CFError>?
     if let cfdata = SecKeyCopyExternalRepresentation(publicKey!, &error) {
-       let data:Data = cfdata as Data
-       base64PublicKeyString = data.base64EncodedString()
+      let data:Data = cfdata as Data
+      base64PublicKeyString = data.base64EncodedString()
     }
     
-    guard let validationMethod = serverListInfo?.verificationMethod.first(where: {
-      $0.controller == service.serviceEndpoint
-    }) else { return }
+    let accessTokenService = serverListInfo?.service.first(where: {
+      $0.type == "AccessTokenService"
+    })
     
-    GatewayConnection.getAccessTokenFor(servicePath: validationMethod.id, publicKey: base64PublicKeyString) { response in
-        print(response)
+    let url = URL(string: accessTokenService!.serviceEndpoint)!
+    guard let serviceURL = URL(string: service.serviceEndpoint) else { return }
+    GatewayConnection.getServiceInfo(url: serviceURL) { [weak self] resultString in
+      print(resultString)
+    }
+    
+    GatewayConnection.getAccessTokenFor(url: url,servicePath: service.id, publicKey: base64PublicKeyString) { response in
+      DispatchQueue.main.async { [weak self] in
+        let vc = CertificatesListVC()
+        guard let firstName = response?.vc?.gnt,let lastName = response?.vc?.fnt else { return }
+        vc.setCertsWith(fullName: firstName + lastName)
+        self?.navigationController?.pushViewController(vc, animated: true)
+      }
     }
   }
   
@@ -83,7 +94,9 @@ class ServersListVC: UIViewController {
   
   public func setServices(info: ServerListResponse) {
     serverListInfo = info
-    listOfServices = serverListInfo?.service
+    listOfServices = serverListInfo?.service.filter{
+      $0.type == "ValidationService"
+    }
   }
 }
 
@@ -92,7 +105,7 @@ extension ServersListVC: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return listOfServices?.count ?? .zero
   }
-
+  
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let service = listOfServices?[indexPath.row]
     let base = tableView.dequeueReusableCell(withIdentifier: Constants.cellIndentifier, for: indexPath)

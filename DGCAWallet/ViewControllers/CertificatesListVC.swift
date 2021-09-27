@@ -38,11 +38,7 @@ class CertificatesListVC: UIViewController {
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var nextButton: UIButton!
   
-  private var listOfCert: [HCert]? {
-    didSet {
-      setupView()
-    }
-  }
+  private var listOfCert: [DatedCertString]?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -65,8 +61,8 @@ class CertificatesListVC: UIViewController {
     tableView.reloadData()
   }
   
-  public func setCertsWith(items: [HCert]) {
-    listOfCert = items
+  public func setCertsWith(fullName : String) {
+    listOfCert = LocalData.sharedInstance.certStrings.filter { $0.cert!.fullName == fullName}.reversed()
   }
 }
 
@@ -82,7 +78,7 @@ extension CertificatesListVC: UITableViewDataSource, UITableViewDelegate {
     guard let cell = base as? CertificateTVC else {
       return base
     }
-    if let hCert = hCert {
+    if let hCert = hCert?.cert {
       cell.setCertificate(cert: hCert)
     }
     return cell

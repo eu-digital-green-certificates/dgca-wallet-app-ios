@@ -27,32 +27,32 @@
         
 
 import Foundation
+
 struct AccessTokenResponse : Codable {
   var jti : String?
-  var lss : String
-  var iat : Int
-  var sub : String
-  var aud : String
-  var exp : Int
-  var t   : Int
-  var v   : String
-  var vc  : ValidationCertificate
+  var lss : String?
+  var iat : Int?
+  var sub : String?
+  var aud : String?
+  var exp : Int?
+  var t   : Int?
+  var v   : String?
+  var vc  : ValidationCertificate?
 }
 
 struct ValidationCertificate : Codable {
-  var hash            : String?
-  var lang            : String
-  var fnt             : String
-  var gnt             : String
+  var lang            : String?
+  var fnt             : String?
+  var gnt             : String?
   var dob             : String?
-  var coa             : String
-  var cod             : String
-  var roa             : String
-  var rod             : String
-  var type            : [String]
-  var category        : [String]
-  var validationClock : Date
-  var validFrom       : Date
-  var validTo         : Date
+  var coa             : String?
+  var cod             : String?
+  var roa             : String?
+  var rod             : String?
+  var type            : [String]?
+  var category        : [String]?
+  var validationClock : String?
+  var validFrom       : String?
+  var validTo         : String?
 }
 

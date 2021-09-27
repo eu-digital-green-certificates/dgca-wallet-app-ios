@@ -33,6 +33,7 @@ import UIKit
 import CertLogic
 import CryptoKit
 import SwiftUI
+import JWTDecode
 
 struct GatewayConnection: ContextConnection {
   public static func claim(cert: HCert, with tan: String?, completion: ((Bool, String?) -> Void)?) {
@@ -42,18 +43,18 @@ struct GatewayConnection: ContextConnection {
     // Replace dashes, spaces, etc. and turn into uppercase.
     let set = CharacterSet(charactersIn: "0123456789").union(.uppercaseLetters)
     tan = tan.uppercased().components(separatedBy: set.inverted).joined()
-
+    
     let tanHash = SHA256.stringDigest(input: Data(tan.data(using: .utf8) ?? .init()))
     let certHash = cert.certHash
     let pubKey = (X509.derPubKey(for: cert.keyPair) ?? Data()).base64EncodedString()
-
+    
     let toBeSigned = tanHash + certHash + pubKey
     let toBeSignedData = Data(toBeSigned.data(using: .utf8) ?? .init())
     Enclave.sign(data: toBeSignedData, with: cert.keyPair, using: .ecdsaSignatureMessageX962SHA256) { sign, err in
       guard let sign = sign, err == nil else {
         return
       }
-
+      
       let keyParam: [String: Any] = [ "type": "EC", "value": pubKey ]
       let param: [String: Any] = [
         "DGCI": cert.uvci,
@@ -77,7 +78,7 @@ struct GatewayConnection: ContextConnection {
           completion?(false, nil)
           return
         }
-
+        
         let response = String(data: $0.data ?? .init(), encoding: .utf8)
         let json = JSON(parseJSON: response ?? "")
         let newTAN = json["tan"].string
@@ -85,7 +86,7 @@ struct GatewayConnection: ContextConnection {
       }
     }
   }
-
+  
   public static func fetchContext() {
     request(
       ["context"]
@@ -166,9 +167,9 @@ extension GatewayConnection {
       let ruleHashes: [RuleHash] = CertLogicEngine.getItems(from: responseStr)
       // Remove old hashes
       RulesDataStorage.sharedInstance.rules = RulesDataStorage.sharedInstance.rules.filter { rule in
-          return !ruleHashes.contains(where: { ruleHash in
-              return ruleHash.hash == rule.hash
-          })
+        return !ruleHashes.contains(where: { ruleHash in
+          return ruleHash.hash == rule.hash
+        })
       }
       // Downloading new hashes
       var rulesItems = [CertLogic.Rule]()
@@ -217,7 +218,7 @@ extension GatewayConnection {
   }
   static func rulesList(completion: (([CertLogic.Rule]) -> Void)? = nil) {
     RulesDataStorage.initialize {
-        completion?(RulesDataStorage.sharedInstance.rules)
+      completion?(RulesDataStorage.sharedInstance.rules)
     }
   }
   
@@ -245,9 +246,9 @@ extension GatewayConnection {
       let valueSetsHashes: [ValueSetHash] = CertLogicEngine.getItems(from: responseStr)
       // Remove old hashes
       ValueSetsDataStorage.sharedInstance.valueSets = ValueSetsDataStorage.sharedInstance.valueSets.filter { valueSet in
-          return !valueSetsHashes.contains(where: { valueSetHashe in
-              return valueSetHashe.hash == valueSet.hash
-          })
+        return !valueSetsHashes.contains(where: { valueSetHashe in
+          return valueSetHashe.hash == valueSet.hash
+        })
       }
       // Downloading new hashes
       var valueSetsItems = [CertLogic.ValueSet]()
@@ -296,10 +297,10 @@ extension GatewayConnection {
   }
   static func valueSetsList(completion: (([CertLogic.ValueSet]) -> Void)? = nil) {
     ValueSetsDataStorage.initialize {
-        completion?(ValueSetsDataStorage.sharedInstance.valueSets)
+      completion?(ValueSetsDataStorage.sharedInstance.valueSets)
     }
   }
-
+  
   static func loadValueSetsFromServer(completion: (([CertLogic.ValueSet]) -> Void)? = nil){
     getListOfValueSets { valueSetsList in
       valueSetsList.forEach { valueSet in
@@ -312,7 +313,9 @@ extension GatewayConnection {
   }
   static func requestListOfServices(ticketingInfo : TicketingQR, completion : @escaping ((ServerListResponse?) -> Void)) {
     let decoder = JSONDecoder()
-    let headers = HTTPHeaders([HTTPHeader(name: "Authorization: Bearer", value: ticketingInfo.token),HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")])
+    
+    UserDefaults.standard.set(ticketingInfo.token, forKey: "TicketingToken")
+    let headers = HTTPHeaders([HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")])
     
     let url = URL(string: ticketingInfo.serviceIdentity)!
     var request = URLRequest(url: url)
@@ -332,27 +335,62 @@ extension GatewayConnection {
     session.resume()
   }
   
-  static func getAccessTokenFor(servicePath : String, publicKey : String, completion : @escaping (AccessTokenResponse?) -> Void) {
+  static func getServiceInfo(url : URL, completion: @escaping (String?) -> Void) {
+    let headers = HTTPHeaders([HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")])
+    
+    var request = URLRequest(url: url)
+    request.headers = headers
+    
+    let session = URLSession.shared.dataTask(with: request, completionHandler: { data,response,error in
+      guard let data = data else {
+        completion(nil)
+        return
+      }
+      completion(String(data: data, encoding: .utf8))
+    })
+    session.resume()
+  }
+  
+  static func getAccessTokenFor(url : URL,servicePath : String, publicKey : String, completion : @escaping (AccessTokenResponse?) -> Void) {
     let decoder = JSONDecoder()
     let json: [String: Any] = ["service": servicePath,
                                "pubKey": publicKey]
-
-    let jsonData = try? JSONSerialization.data(withJSONObject: json)
-    let url = URL(string: "https://dgca-booking-demo-eu-test.cfapps.eu10.hana.ondemand.com/token")!
+    
+    let jsonData = try? JSONSerialization.data(withJSONObject: json,options: .prettyPrinted)
     
     var request = URLRequest(url: url)
     request.httpMethod = "POST"
     request.httpBody = jsonData
+    let token = UserDefaults.standard.object(forKey: "TicketingToken") as! String
     
-    request.headers  = [HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")]
+    request.headers  = [HTTPHeader(name: "Authorization", value: "Bearer " + token),HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")]
+    
     let session = URLSession.shared.dataTask(with: request, completionHandler: { data,response,error in
+      var accessTokenResponse : AccessTokenResponse?
       
-      if let responseData = data, responseData.count > 0 {
-        let acccesTokectResponse = try? decoder.decode(AccessTokenResponse.self, from: responseData)
-        completion(acccesTokectResponse)
-      } else {
+      guard let responseData = data,
+            let tokenJWT = String(data: responseData, encoding: .utf8),
+            responseData.count > 0 else {
+              completion(nil)
+              return
+            }
+      
+      guard let decodedToken = try? decode(jwt: tokenJWT),
+            let jsonData = try? JSONSerialization.data(withJSONObject: decodedToken.body)
+      else {
         completion(nil)
+        return
       }
+      
+      do {
+        accessTokenResponse = try decoder.decode(AccessTokenResponse.self, from: jsonData)
+      } catch let parseError {
+        print(parseError)
+      }
+      
+      
+      UserDefaults.standard.set(tokenJWT, forKey: "AccessToken")
+      completion(accessTokenResponse)
       
     })
     session.resume()
