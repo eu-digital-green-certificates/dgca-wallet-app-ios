@@ -30,6 +30,7 @@ import SwiftDGC
 import SwiftyJSON
 
 struct DatedCertString: Codable {
+  var isSelected : Bool = false
   var date: Date
   var certString: String
   var storedTAN: String?

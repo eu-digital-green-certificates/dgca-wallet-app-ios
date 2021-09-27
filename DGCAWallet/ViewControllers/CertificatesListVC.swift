@@ -73,7 +73,7 @@ class CertificatesListVC: UIViewController {
     }
   }
   
-  public func getSelectedCert() -> HCert? {
+  public func getSelectedCert() -> DatedCertString? {
     listOfCert?.filter({ hcert in
       hcert.isSelected
     }).first
@@ -92,7 +92,7 @@ extension CertificatesListVC: UITableViewDataSource, UITableViewDelegate {
     guard let cell = base as? CertificateTVC else {
       return base
     }
-    if let hCert = hCert {
+    if let hCert = hCert?.cert {
       if hCert.isSelected  {
         cell.accessoryType = .checkmark
       } else {
@@ -106,7 +106,7 @@ extension CertificatesListVC: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if let cell = tableView.cellForRow(at: indexPath) {
       deselectAllCert()
-      listOfCert?[indexPath.row].isSelected = true
+//      listOfCert?[indexPath.row].isSelected = true
       cell.accessoryType = .checkmark
     }
   }

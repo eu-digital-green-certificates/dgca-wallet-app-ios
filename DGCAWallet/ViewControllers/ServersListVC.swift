@@ -109,7 +109,7 @@ class ServersListVC: UIViewController {
   
   public func getSelectedServer() -> ValidationService? {
     listOfServices?.filter({ serv in
-      serv.isSelected
+      serv.isSelected!
     }).first
   }
 }
@@ -127,7 +127,7 @@ extension ServersListVC: UITableViewDataSource, UITableViewDelegate {
       return base
     }
     if let service = service {
-      if service.isSelected  {
+      if let selected = service.isSelected, selected  {
         cell.accessoryType = .checkmark
       } else {
         cell.accessoryType = .none
