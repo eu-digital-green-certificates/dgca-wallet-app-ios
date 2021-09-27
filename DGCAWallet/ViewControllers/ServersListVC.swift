@@ -66,6 +66,7 @@ class ServersListVC: UIViewController {
     
     let url = URL(string: accessTokenService!.serviceEndpoint)!
     guard let serviceURL = URL(string: service.serviceEndpoint) else { return }
+    
     GatewayConnection.getServiceInfo(url: serviceURL) { [weak self] resultString in
       print(resultString)
     }

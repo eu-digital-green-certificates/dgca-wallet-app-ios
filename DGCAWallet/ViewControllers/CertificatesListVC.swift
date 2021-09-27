@@ -62,7 +62,8 @@ class CertificatesListVC: UIViewController {
   }
   
   public func setCertsWith(fullName : String) {
-    listOfCert = LocalData.sharedInstance.certStrings.filter { $0.cert!.fullName == fullName}.reversed()
+//    .filter { $0.cert!.fullName == fullName}
+    listOfCert = LocalData.sharedInstance.certStrings.reversed()
   }
   
   private func deselectAllCert() {
@@ -106,7 +107,7 @@ extension CertificatesListVC: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if let cell = tableView.cellForRow(at: indexPath) {
       deselectAllCert()
-//      listOfCert?[indexPath.row].isSelected = true
+      listOfCert?[indexPath.row].isSelected = true
       cell.accessoryType = .checkmark
     }
   }
