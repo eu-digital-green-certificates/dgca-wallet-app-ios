@@ -98,6 +98,20 @@ class ServersListVC: UIViewController {
       $0.type == "ValidationService"
     }
   }
+  
+  private func deselectAllServers() {
+    for i in 0..<(listOfServices?.count ?? 0) {
+      if listOfServices?[i].isSelected ?? false {
+        listOfServices?[i].isSelected = false
+      }
+    }
+  }
+  
+  public func getSelectedServer() -> ValidationService? {
+    listOfServices?.filter({ serv in
+      serv.isSelected
+    }).first
+  }
 }
 
 extension ServersListVC: UITableViewDataSource, UITableViewDelegate {
@@ -113,8 +127,21 @@ extension ServersListVC: UITableViewDataSource, UITableViewDelegate {
       return base
     }
     if let service = service {
+      if service.isSelected  {
+        cell.accessoryType = .checkmark
+      } else {
+        cell.accessoryType = .none
+      }
       cell.setService(serv: service)
     }
     return cell
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    if let cell = tableView.cellForRow(at: indexPath) {
+      deselectAllServers()
+      listOfServices?[indexPath.row].isSelected = true
+      cell.accessoryType = .checkmark
+    }
   }
 }
