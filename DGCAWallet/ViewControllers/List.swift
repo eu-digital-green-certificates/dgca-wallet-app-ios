@@ -53,7 +53,8 @@ class ListVC: UIViewController {
   var alert: UIAlertController?
   var viewController: UIViewController?
   var pickImageCallback: ((UIImage) -> Void)?
-
+  private var scannedToken: String = ""
+  
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
 
@@ -289,14 +290,18 @@ extension ListVC: ScanVCDelegate {
     }
   }
   
-  func ticketingInfoScanned(_ ticketing:SwiftDGC.TicketingQR) {
-    let vc = ServersListVC()
-    
+  func ticketingInfoScanned(_ ticketing: SwiftDGC.TicketingQR) {
+    if scannedToken == ticketing.token || navigationController?.viewControllers.last is ServersListVC {
+      return
+    }
+    scannedToken = ticketing.token
     GatewayConnection.requestListOfServices(ticketingInfo: ticketing) { [weak self] services in
+      self?.scannedToken = ""
       if let listOfServices = services {
-        vc.setServices(info: listOfServices)
         DispatchQueue.main.async { [weak self] in
-          self?.navigationController?.pushViewController(vc, animated: true)
+          let vc = ServersListVC()
+          vc.setServices(info: listOfServices)
+          self?.navigationController?.pushViewController(vc, animated: false)
         }
       }
     }

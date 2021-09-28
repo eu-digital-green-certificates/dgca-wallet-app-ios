@@ -22,7 +22,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="EWr-DQ-UuB">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="819"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="775"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m0E-6F-WLv">
@@ -47,7 +47,7 @@
                 <constraint firstItem="m0E-6F-WLv" firstAttribute="top" secondItem="EWr-DQ-UuB" secondAttribute="bottom" constant="17" id="A1W-J9-tZ7"/>
                 <constraint firstItem="EWr-DQ-UuB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="IGm-bf-hjx"/>
                 <constraint firstItem="EWr-DQ-UuB" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="nSq-70-jK4"/>
-                <constraint firstItem="EWr-DQ-UuB" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="o1N-tk-xNp"/>
+                <constraint firstItem="EWr-DQ-UuB" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="o1N-tk-xNp"/>
                 <constraint firstItem="m0E-6F-WLv" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailingMargin" id="r7z-3Z-W8S"/>
             </constraints>
             <point key="canvasLocation" x="139" y="125"/>

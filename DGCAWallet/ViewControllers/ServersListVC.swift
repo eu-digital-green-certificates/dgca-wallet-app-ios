@@ -48,8 +48,18 @@ class ServersListVC: UIViewController {
   }
   
   @IBAction func nextButtonAction(_ sender: Any) {
-    guard let selectedIndexPath = tableView.indexPathForSelectedRow else { return }
-    let service = listOfServices![selectedIndexPath.row]
+    guard let service = getSelectedServer() else {
+      let alertController: UIAlertController = {
+          let controller = UIAlertController(title: "please select one of service server",
+                                             message: "",
+                                             preferredStyle: .alert)
+        let actionOk = UIAlertAction(title: l10n("ok"), style: .default)
+        controller.addAction(actionOk)
+          return controller
+      }()
+      self.present(alertController, animated: true)
+      return
+    }
     
     guard let privateKey = Enclave.loadOrGenerateKey(with: "validationKey") else { return }
     let publicKey = SecKeyCopyPublicKey(privateKey)
@@ -108,9 +118,9 @@ class ServersListVC: UIViewController {
     }
   }
   
-  public func getSelectedServer() -> ValidationService? {
+  private func getSelectedServer() -> ValidationService? {
     listOfServices?.filter({ serv in
-      serv.isSelected!
+      serv.isSelected ?? false
     }).first
   }
 }
@@ -133,6 +143,7 @@ extension ServersListVC: UITableViewDataSource, UITableViewDelegate {
       } else {
         cell.accessoryType = .none
       }
+      cell.selectionStyle = .none
       cell.setService(serv: service)
     }
     return cell
@@ -142,7 +153,7 @@ extension ServersListVC: UITableViewDataSource, UITableViewDelegate {
     if let cell = tableView.cellForRow(at: indexPath) {
       deselectAllServers()
       listOfServices?[indexPath.row].isSelected = true
-      cell.accessoryType = .checkmark
+      tableView.reloadData()
     }
   }
 }
