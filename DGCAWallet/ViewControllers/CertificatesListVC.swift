@@ -24,29 +24,38 @@
 //  
 //  Created by Alexandr Chernyy on 21.09.2021.
 //  
-        
+
 
 import UIKit
 import SwiftDGC
 
 class CertificatesListVC: UIViewController {
-
+  
   private enum Constants {
     static let hcertCellIndentifier = "CertificateTVC"
   }
   
-  @IBOutlet weak var tableView: UITableView!
-  @IBOutlet weak var nextButton: UIButton!
+  @IBOutlet weak var tableView      : UITableView!
+  @IBOutlet weak var nextButton     : UIButton!
   
-  private var listOfCert: [DatedCertString]?
+  private var listOfCert            : [DatedCertString]?
+  
+  private var validationServiceInfo : ServerListResponse?
+  private var accessTokenInfo       : AccessTokenResponse?
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     setupTableView()
   }
-
+  
   @IBAction func nextButtonAction(_ sender: Any) {
+    let vc = TicketCodeAcceptViewController()
+    
+    present(vc, animated: true, completion: {
+      
+    })
   }
   
   private func setupView() {
@@ -61,8 +70,11 @@ class CertificatesListVC: UIViewController {
     tableView.reloadData()
   }
   
-  public func setCertsWith(fullName : String) {
-//    .filter { $0.cert!.fullName == fullName}
+  public func setCertsWith(_ validationInfo: ServerListResponse,_ accessTokenModel : AccessTokenResponse) {
+    //    TODO: Make filtering by all predicates (dob, validFrom/To, fullName)
+    //    .filter { $0.cert!.fullName == fullName}
+    validationServiceInfo = validationInfo
+    accessTokenInfo = accessTokenModel
     listOfCert = LocalData.sharedInstance.certStrings.reversed()
   }
   
@@ -86,7 +98,7 @@ extension CertificatesListVC: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return listOfCert?.count ?? .zero
   }
-
+  
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let hCert = listOfCert?[indexPath.row]
     let base = tableView.dequeueReusableCell(withIdentifier: Constants.hcertCellIndentifier, for: indexPath)

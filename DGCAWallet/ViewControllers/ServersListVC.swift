@@ -28,6 +28,7 @@
 
 import UIKit
 import SwiftDGC
+import Security
 
 class ServersListVC: UIViewController {
   
@@ -63,32 +64,38 @@ class ServersListVC: UIViewController {
     
     guard let privateKey = Enclave.loadOrGenerateKey(with: "validationKey") else { return }
     let publicKey = SecKeyCopyPublicKey(privateKey)
+    
     var base64PublicKeyString = ""
+    
     var error:Unmanaged<CFError>?
+    
     if let cfdata = SecKeyCopyExternalRepresentation(publicKey!, &error) {
       let data:Data = cfdata as Data
       base64PublicKeyString = data.base64EncodedString()
     }
     
-    let accessTokenService = serverListInfo?.service.first(where: {
+    let accessTokenService = serverListInfo?.service?.first(where: {
       $0.type == "AccessTokenService"
     })
     
     let url = URL(string: accessTokenService!.serviceEndpoint)!
     guard let serviceURL = URL(string: service.serviceEndpoint) else { return }
     
-    GatewayConnection.getServiceInfo(url: serviceURL) { [weak self] resultString in
-      print(resultString)
-    }
-    
-    GatewayConnection.getAccessTokenFor(url: url,servicePath: service.id, publicKey: base64PublicKeyString) { response in
-      DispatchQueue.main.async { [weak self] in
-        let vc = CertificatesListVC()
-        guard let firstName = response?.vc?.gnt,let lastName = response?.vc?.fnt else { return }
-        vc.setCertsWith(fullName: firstName + lastName)
-        self?.navigationController?.pushViewController(vc, animated: true)
+    GatewayConnection.getServiceInfo(url: serviceURL) { [weak self] validationServiceInfo in
+//      TODO: Show UI message with error if fail to fetch serviceInfo
+      guard let serviceInfo = validationServiceInfo else { return }
+      
+      GatewayConnection.getAccessTokenFor(url: url,servicePath: service.id, publicKey: base64PublicKeyString) { response in
+        DispatchQueue.main.async { [weak self] in
+          let vc = CertificatesListVC()
+          
+          guard let accessTokenResponse = response else { return }
+          vc.setCertsWith(serviceInfo, accessTokenResponse)
+          self?.navigationController?.pushViewController(vc, animated: true)
+        }
       }
     }
+    
   }
   
   private func setupView() {
@@ -105,7 +112,7 @@ class ServersListVC: UIViewController {
   
   public func setServices(info: ServerListResponse) {
     serverListInfo = info
-    listOfServices = serverListInfo?.service.filter{
+    listOfServices = serverListInfo?.service?.filter{
       $0.type == "ValidationService"
     }
   }

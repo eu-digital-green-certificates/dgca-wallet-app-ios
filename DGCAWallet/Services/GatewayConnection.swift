@@ -335,7 +335,8 @@ extension GatewayConnection {
     session.resume()
   }
   
-  static func getServiceInfo(url : URL, completion: @escaping (String?) -> Void) {
+  static func getServiceInfo(url : URL, completion: @escaping (ServerListResponse?) -> Void) {
+    let decoder = JSONDecoder()
     let headers = HTTPHeaders([HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")])
     
     var request = URLRequest(url: url)
@@ -346,7 +347,8 @@ extension GatewayConnection {
         completion(nil)
         return
       }
-      completion(String(data: data, encoding: .utf8))
+      let responseModel = try! decoder.decode(ServerListResponse.self, from: data)
+      completion(responseModel)
     })
     session.resume()
   }
@@ -395,6 +397,24 @@ extension GatewayConnection {
     })
     session.resume()
     
+  }
+  
+  static func validateTicketing(url : URL, parameters : [String: String]?, completion : @escaping (String?) -> Void ) {
+    
+    let headers = HTTPHeaders([HTTPHeader(name: "X-Version", value: UserDefaults.standard.object(forKey: "AccessToken") as! String),HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")])
+    
+    var request = URLRequest(url: url)
+    request.headers = headers
+    request.httpBody = Data()
+    
+    let session = URLSession.shared.dataTask(with: request, completionHandler: { data,response,error in
+      guard let data = data else {
+        completion(nil)
+        return
+      }
+      completion("responseModel")
+    })
+    session.resume()
   }
 }
 
