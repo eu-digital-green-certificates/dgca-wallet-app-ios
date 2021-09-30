@@ -111,16 +111,15 @@ extension CertificatesListVC: UITableViewDataSource, UITableViewDelegate {
       } else {
         cell.accessoryType = .none
       }
+      cell.selectionStyle = .none
       cell.setCertificate(cert: hCert)
     }
     return cell
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    if let cell = tableView.cellForRow(at: indexPath) {
       deselectAllCert()
       listOfCert?[indexPath.row].isSelected = true
-      cell.accessoryType = .checkmark
-    }
+      tableView.reloadData()
   }
 }

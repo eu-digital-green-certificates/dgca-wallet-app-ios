@@ -74,7 +74,7 @@ class ServersListVC: UIViewController {
       base64PublicKeyString = data.base64EncodedString()
     }
     
-    let accessTokenService = serverListInfo?.service?.first(where: {
+    let accessTokenService = serverListInfo?.service.first(where: {
       $0.type == "AccessTokenService"
     })
     
@@ -112,7 +112,7 @@ class ServersListVC: UIViewController {
   
   public func setServices(info: ServerListResponse) {
     serverListInfo = info
-    listOfServices = serverListInfo?.service?.filter{
+    listOfServices = serverListInfo?.service.filter{
       $0.type == "ValidationService"
     }
   }
@@ -157,10 +157,8 @@ extension ServersListVC: UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    if let cell = tableView.cellForRow(at: indexPath) {
       deselectAllServers()
       listOfServices?[indexPath.row].isSelected = true
       tableView.reloadData()
-    }
   }
 }
