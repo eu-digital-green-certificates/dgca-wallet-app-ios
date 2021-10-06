@@ -24,13 +24,13 @@
 //  
 //  Created by Alexandr Chernyy on 16.09.2021.
 //  
-        
+
 
 import UIKit
 import SwiftDGC
 
 class TicketCodeAcceptViewController: UIViewController {
-
+  
   @IBOutlet weak var certificateTitle: UILabel!
   @IBOutlet weak var validToLabel: UILabel!
   @IBOutlet weak var consetsLabel: UILabel!
@@ -43,21 +43,46 @@ class TicketCodeAcceptViewController: UIViewController {
   private var accessTokenInfo       : AccessTokenResponse?
   
   override func viewDidLoad() {
-        super.viewDidLoad()
+    super.viewDidLoad()
+  }
+  
+  private func setuppView(isValidation: Bool) {
+    if isValidation {
+      certificateTitle.text = "Vaccination 1 of 1"
+      validToLabel.text = "No expiration date"
+      consetsLabel.text = "Consent"
+      infoLabel.text = "Do you agree share the vaccination certificate 2 with Airline.com?"
     }
-
-  private func setuppView() { }
+  }
   
   public func setCertsWith(_ validationInfo: ServerListResponse,_ accessTokenModel : AccessTokenResponse) {
     validationServiceInfo = validationInfo
     accessTokenInfo = accessTokenModel
+    setuppView(isValidation: true)
   }
   
   @IBAction func cancelButtonAction(_ sender: Any) {
+    dismiss(animated: true, completion: nil)
   }
   
   @IBAction func grandButtonAction(_ sender: Any) {
+    guard let urlPath = accessTokenInfo?.aud!,
+          let url = URL(string: urlPath),
+          let iv = UserDefaults.standard.object(forKey: "xnonce")
+    else
+    { return }
     
+    let dic = ["2": "B", "1": "A", "3": "C"]
+    let encoder = JSONEncoder()
+    if let jsonData = try? encoder.encode(dic) {
+        if let jsonString = String(data: jsonData, encoding: .utf8) {
+            print(jsonString)
+        }
+    }
+    
+    GatewayConnection.validateTicketing(url: url, parameters: nil) { resultStr in
+      print(resultStr)
+    }
   }
-
+  
 }

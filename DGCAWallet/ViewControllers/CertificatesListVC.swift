@@ -53,8 +53,8 @@ class CertificatesListVC: UIViewController {
   @IBAction func nextButtonAction(_ sender: Any) {
     let vc = TicketCodeAcceptViewController()
     
-    present(vc, animated: true, completion: {
-      
+    present(vc, animated: true, completion: { [weak self] in
+      vc.setCertsWith((self?.validationServiceInfo)!, (self?.accessTokenInfo)!)
     })
   }
   
@@ -120,6 +120,6 @@ extension CertificatesListVC: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       deselectAllCert()
       listOfCert?[indexPath.row].isSelected = true
-      tableView.reloadData()
+      tableView.reloadRows(at: [indexPath], with: .automatic)
   }
 }

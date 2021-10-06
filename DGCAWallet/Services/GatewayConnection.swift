@@ -390,6 +390,9 @@ extension GatewayConnection {
         print(parseError)
       }
       
+      if let httpResponse = response as? HTTPURLResponse {
+        UserDefaults.standard.set(httpResponse.allHeaderFields["x-nonce"], forKey: "xnonce")
+      }
       
       UserDefaults.standard.set(tokenJWT, forKey: "AccessToken")
       completion(accessTokenResponse)
