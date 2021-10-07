@@ -170,6 +170,7 @@
 		CEE9DA55263C7D4000A31532 /* CertCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9DA54263C7D4000A31532 /* CertCode.swift */; };
 		CEE9DA5D263C865200A31532 /* Brightness.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9DA5C263C865200A31532 /* Brightness.swift */; };
 		CEFAD87F262714C4009AFEF9 /* EHNTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFAD87E262714C4009AFEF9 /* EHNTests.swift */; };
+		D2AE0613270DC94200384920 /* dgca-app-core-ios in Resources */ = {isa = PBXBuildFile; fileRef = FECE1B4D2704B26E0005CFFC /* dgca-app-core-ios */; };
 		DA01661C265541C0005B73A1 /* LicenseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01661B265541C0005B73A1 /* LicenseList.swift */; };
 		DA01661E26554992005B73A1 /* OpenSourceNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = DA01661D26554992005B73A1 /* OpenSourceNotices.json */; };
 		DA01662026554E02005B73A1 /* LicenseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01661F26554E02005B73A1 /* LicenseCell.swift */; };
@@ -730,6 +731,7 @@
 				5C00074A26D641E2002E5013 /* PDFViewerVC.xib in Resources */,
 				5C50CF14269700710015EE29 /* RuleValidationResultVC.xib in Resources */,
 				DA017DE626552259006E4D49 /* Licenses.storyboard in Resources */,
+				D2AE0613270DC94200384920 /* dgca-app-core-ios in Resources */,
 				5C556D4C26F9F8AC007E2C2E /* CertificatesListVC.xib in Resources */,
 				5C556D6626F9F97E007E2C2E /* ServerTVC.xib in Resources */,
 				5C50CF2A26972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.xib in Resources */,

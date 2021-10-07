@@ -22,11 +22,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="EWr-DQ-UuB">
-                    <rect key="frame" x="0.0" y="44" width="414" height="775"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="761"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m0E-6F-WLv">
-                    <rect key="frame" x="215" y="836" width="179" height="40"/>
+                    <rect key="frame" x="215" y="822" width="179" height="40"/>
                     <color key="backgroundColor" name="yellow"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="179" id="Ebh-Ff-dVc"/>
@@ -43,7 +43,7 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="m0E-6F-WLv" secondAttribute="bottom" constant="20" id="4BC-br-2Xa"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="m0E-6F-WLv" secondAttribute="bottom" id="4BC-br-2Xa"/>
                 <constraint firstItem="m0E-6F-WLv" firstAttribute="top" secondItem="EWr-DQ-UuB" secondAttribute="bottom" constant="17" id="A1W-J9-tZ7"/>
                 <constraint firstItem="EWr-DQ-UuB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="IGm-bf-hjx"/>
                 <constraint firstItem="EWr-DQ-UuB" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="nSq-70-jK4"/>

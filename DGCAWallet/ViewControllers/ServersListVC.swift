@@ -40,23 +40,22 @@ class ServersListVC: UIViewController {
   }
   
   private var serverListInfo : ServerListResponse?
-  private var listOfServices: [ValidationService]?
+  private var listOfServices = [ValidationService]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    setupTableView()
+    title = l10n("services")
   }
   
   @IBAction func nextButtonAction(_ sender: Any) {
     guard let service = getSelectedServer() else {
       let alertController: UIAlertController = {
-          let controller = UIAlertController(title: "please select one of service server",
-                                             message: "",
-                                             preferredStyle: .alert)
+          let controller = UIAlertController(title: l10n("please select one of service server"),
+             message: "",
+             preferredStyle: .alert)
         let actionOk = UIAlertAction(title: l10n("ok"), style: .default)
         controller.addAction(actionOk)
-          return controller
+        return controller
       }()
       self.present(alertController, animated: true)
       return
@@ -74,7 +73,7 @@ class ServersListVC: UIViewController {
       base64PublicKeyString = data.base64EncodedString()
     }
     
-    let accessTokenService = serverListInfo?.service?.first(where: {
+      let accessTokenService = serverListInfo?.service.first(where: {
       $0.type == "AccessTokenService"
     })
     
@@ -95,70 +94,47 @@ class ServersListVC: UIViewController {
         }
       }
     }
-    
   }
-  
-  private func setupView() {
-    tableView.reloadData()
-  }
-  
-  private func setupTableView() {
-    tableView.delegate = self
-    tableView.dataSource = self
-    tableView.register(UINib(nibName: Constants.cellIndentifier, bundle: nil),
-                       forCellReuseIdentifier: Constants.cellIndentifier)
-    tableView.reloadData()
-  }
-  
+      
   public func setServices(info: ServerListResponse) {
     serverListInfo = info
-    listOfServices = serverListInfo?.service?.filter{
+      listOfServices = serverListInfo?.service.filter{
       $0.type == "ValidationService"
-    }
+      } ?? []
   }
   
   private func deselectAllServers() {
-    for i in 0..<(listOfServices?.count ?? 0) {
-      if listOfServices?[i].isSelected ?? false {
-        listOfServices?[i].isSelected = false
+    for i in 0..<listOfServices.count {
+      if listOfServices[i].isSelected ?? false {
+        listOfServices[i].isSelected = false
       }
     }
   }
   
   private func getSelectedServer() -> ValidationService? {
-    listOfServices?.filter({ serv in
-      serv.isSelected ?? false
-    }).first
+      listOfServices.filter({ $0.isSelected ?? false }).first
   }
 }
 
 extension ServersListVC: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return listOfServices?.count ?? .zero
+      return listOfServices.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let service = listOfServices?[indexPath.row]
-    let base = tableView.dequeueReusableCell(withIdentifier: Constants.cellIndentifier, for: indexPath)
-    guard let cell = base as? ServerTVC else {
-      return base
-    }
-    if let service = service {
-      if let selected = service.isSelected, selected  {
-        cell.accessoryType = .checkmark
-      } else {
-        cell.accessoryType = .none
-      }
-      cell.selectionStyle = .none
-      cell.setService(serv: service)
-    }
+    let service = listOfServices[indexPath.row]
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellIndentifier,
+        for: indexPath) as? ServerTVC else { return UITableViewCell() }
+      
+    cell.accessoryType = (service.isSelected ?? false) ? .checkmark : .none
+    cell.setService(serv: service)
     return cell
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       deselectAllServers()
-      listOfServices?[indexPath.row].isSelected = true
+      listOfServices[indexPath.row].isSelected = true
       tableView.reloadData()
   }
 }

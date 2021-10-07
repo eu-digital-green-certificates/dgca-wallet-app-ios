@@ -39,13 +39,7 @@ class ServerTVC: UITableViewCell {
       setupView()
     }
   }
-  
-  override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    setupView()
-  }
-    
+      
   private func setupView() {
     if let service = service {
       nameLabel.text = service.name

@@ -34,7 +34,33 @@ class ScanVC: SwiftDGC.ScanVC {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    applicationType = .wallet
-    createBackButton()
+      applicationType = .wallet
+      createDismissButton()
   }
+    
+   func createDismissButton() {
+      let button = UIButton(frame: .zero)
+      button.translatesAutoresizingMaskIntoConstraints = false
+      button.backgroundColor = .clear
+      button.setAttributedTitle(
+        NSAttributedString(
+          string: l10n("btn.cancel"),
+          attributes: [
+            .font: UIFont.systemFont(ofSize: 22, weight: .semibold),
+            .foregroundColor: UIColor.white
+          ]
+        ), for: .normal
+      )
+      button.addTarget(self, action: #selector(dismissScaner), for: .touchUpInside)
+      view.addSubview(button)
+       
+      NSLayoutConstraint.activate([
+        button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16.0),
+        button.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16.0)
+      ])
+    }
+    
+    @objc func dismissScaner() {
+        self.dismiss(animated: true, completion: nil)
+    }
 }

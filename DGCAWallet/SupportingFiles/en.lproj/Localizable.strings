@@ -103,3 +103,5 @@
 "camera" = "Camera";
 "galery" = "Gallery";
 "dont.have.camera" = "You don't have camera";
+"services" = "Services";
+"please select one of service server" = "Please select one of the services";

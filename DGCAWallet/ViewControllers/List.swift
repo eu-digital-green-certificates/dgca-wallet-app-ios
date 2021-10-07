@@ -40,16 +40,21 @@ import CoreServices
 
 class ListVC: UIViewController {
   
+    struct SegueIdentifiers {
+        static let showScannerSegue = "showScannerSegue"
+        static let showServicesList = "showServicesList"
+    }
+
   private enum TableSection: Int {
     case certificates = 0
     case images
     case pdfs
-    static var count: Int { return 3}
+    static var count: Int { return 3 }
   }
   
   @IBOutlet weak var addButton: RoundedButton!
   
-  var picker = UIImagePickerController()
+  let picker = UIImagePickerController()
   var alert: UIAlertController?
   var viewController: UIViewController?
   var pickImageCallback: ((UIImage) -> Void)?
@@ -70,7 +75,7 @@ class ListVC: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    
     ImageDataStorage.initialize {
       PdfDataStorage.initialize {
         DispatchQueue.main.async { [weak self] in
@@ -84,30 +89,29 @@ class ListVC: UIViewController {
 
   @IBAction
   func addNew() {
-    let menuActionSheet =  UIAlertController(title: l10n("add.new"),
-                                             message: l10n("want.add"),
-                                             preferredStyle: UIAlertController.Style.actionSheet)
-    menuActionSheet.addAction(UIAlertAction(title: l10n("scan.certificate"),
-                                            style: UIAlertAction.Style.default,
-                                            handler: {[weak self] _ in
-      self?.scanNewCertificate()
-    }))
+    let menuActionSheet = UIAlertController(title: l10n("add.new"),
+       message: l10n("want.add"),
+       preferredStyle: UIAlertController.Style.actionSheet)
+       menuActionSheet.addAction(UIAlertAction(title: l10n("scan.certificate"),
+       style: UIAlertAction.Style.default,
+       handler: {[weak self] _ in
+           self?.scanNewCertificate()
+       }))
     menuActionSheet.addAction(UIAlertAction(title: l10n("image.import"),
                                             style: UIAlertAction.Style.default,
                                             handler: { [weak self] _ in
       self?.addImage()
-     }))
+    }))
     menuActionSheet.addAction(UIAlertAction(title: l10n("pdf.import"),
                                             style: UIAlertAction.Style.default,
                                             handler: { [weak self] _ in
       self?.addPdf()
-     }))
+    }))
     menuActionSheet.addAction(UIAlertAction(title: l10n("nfc.import"),
                                             style: UIAlertAction.Style.default,
                                             handler: { [weak self] _ in
       self?.scanNFC()
-     }))
-    
+    }))
     menuActionSheet.addAction(UIAlertAction(title: l10n("cancel"),
                                             style: UIAlertAction.Style.destructive,
                                             handler: nil))
@@ -115,7 +119,7 @@ class ListVC: UIViewController {
   }
   
   private func scanNewCertificate() {
-    performSegue(withIdentifier: "scanner", sender: self)
+      performSegue(withIdentifier: SegueIdentifiers.showScannerSegue, sender: nil)
   }
 
   private func addImage() {
@@ -215,14 +219,22 @@ class ListVC: UIViewController {
 
     presentingViewer?.dismiss(animated: true, completion: nil)
   }
+    override func viewDidDisappear(_ animated: Bool) {
+      super.viewDidDisappear(animated)
+
+        self.navigationController?.isNavigationBarHidden = false
+    }
+
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+      
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
     appDelegate?.isNFCFunctionality = false
     if #available(iOS 13.0, *) {
       let scene = self.sceneDelegate
       scene?.isNFCFunctionality = false
     }
+    self.navigationController?.isNavigationBarHidden = true
   }
 
   var presentingViewer: UIViewController?
@@ -256,12 +268,23 @@ class ListVC: UIViewController {
   }
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    super.prepare(for: segue, sender: sender)
 
-    if let scan = segue.destination as? ScanVC {
-      scan.delegate = self
-      return
-    }
+      switch segue.identifier {
+      case SegueIdentifiers.showScannerSegue:
+          guard let scanController = segue.destination as? ScanVC else { return }
+          
+          scanController.modalPresentationStyle = .fullScreen
+          scanController.delegate = self
+          
+      case SegueIdentifiers.showServicesList:
+          guard let serviceController = segue.destination as? ServersListVC else { return }
+          guard let listOfServices = sender as?  ServerListResponse else { return }
+          
+          serviceController.setServices(info: listOfServices)
+
+      default:
+          break
+      }
   }
 }
 
@@ -297,16 +320,13 @@ extension ListVC: ScanVCDelegate {
     scannedToken = ticketing.token
     GatewayConnection.requestListOfServices(ticketingInfo: ticketing) { [weak self] services in
       self?.scannedToken = ""
-      if let listOfServices = services {
-        DispatchQueue.main.async { [weak self] in
-          let vc = ServersListVC()
-          vc.setServices(info: listOfServices)
-          self?.navigationController?.pushViewController(vc, animated: false)
-        }
+
+      DispatchQueue.main.async { [weak self] in
+        self?.dismiss(animated: true, completion: nil)
+        self?.performSegue(withIdentifier: SegueIdentifiers.showServicesList, sender: services)
       }
     }
   }
-  
 }
 
 extension ListVC: UITableViewDataSource {
