@@ -44,9 +44,8 @@ class CertificateViewerVC: UIViewController {
   public var isSaved = true
 
   func draw() {
-    guard let hCert = hCert else {
-      return
-    }
+    guard let hCert = hCert else { return }
+      
     nameLabel.text = hCert.fullName
     if !isSaved {
       dismissButton.setTitle(l10n("btn.save"), for: .normal)
@@ -82,16 +81,14 @@ class CertificateViewerVC: UIViewController {
     childDismissedDelegate?.childDismissed(newCertAdded)
   }
 
-  @IBAction
-  func closeButtonClick() {
+  @IBAction func closeButtonClick() {
     if isSaved {
       return dismiss(animated: true, completion: nil)
     }
     saveCert()
   }
 
-  @IBAction
-  func cancelButtonClick() {
+  @IBAction func cancelButtonClick() {
     dismiss(animated: true, completion: nil)
   }
 
@@ -107,14 +104,12 @@ class CertificateViewerVC: UIViewController {
       subtitle: l10n("tan.confirm.text"),
       inputPlaceholder: l10n("tan.confirm.placeholder")
     ) { [weak self] in
-      guard let cert = self?.hCert else {
-        return
-      }
+      guard let cert = self?.hCert else { return }
+        
       GatewayConnection.claim(cert: cert, with: $0) { success, newTan in
         if success {
-          guard let cert = self?.hCert else {
-            return
-          }
+          guard let cert = self?.hCert else { return }
+            
           LocalData.add(cert, with: newTan)
           self?.newCertAdded = true
           self?.showAlert(
@@ -162,34 +157,25 @@ class CertificateViewerVC: UIViewController {
 
 extension CertificateViewerVC {
   private func shareQRCodeLikeImage() {
-    guard let hCert = hCert else {
-      return
-    }
-    guard let savedImage = hCert.qrCode else {
-      return
-    }
+    guard let hCert = hCert, let savedImage = hCert.qrCode else { return }
+      
     let imageToShare = [ savedImage ]
     let activityViewController = UIActivityViewController(activityItems: imageToShare as [Any],
-                                                          applicationActivities: nil)
+      applicationActivities: nil)
     activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
     self.present(activityViewController, animated: true, completion: nil)
   }
   private func shareQrCodeLikePDF() {
-    guard let hCert = hCert else {
-      return
-    }
-    guard let savedImage = hCert.qrCode else {
-      return
-    }
+    guard let hCert = hCert, let savedImage = hCert.qrCode else { return }
+      
     let pdfDocument = PDFDocument()
     let pdfPage = PDFPage(image: savedImage)
     pdfDocument.insert(pdfPage!, at: 0)
     let data = pdfDocument.dataRepresentation()
     let pdfToShare = [ data ]
     let activityViewController = UIActivityViewController(activityItems: pdfToShare as [Any],
-                                                          applicationActivities: nil)
+      applicationActivities: nil)
     activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
     self.present(activityViewController, animated: true, completion: nil)
-
   }
 }

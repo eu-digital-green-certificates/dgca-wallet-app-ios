@@ -39,13 +39,7 @@ class CertificateTVC: UITableViewCell {
       setupView()
     }
   }
-  
-  override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    setupView()
-  }
-    
+      
   private func setupView() {
     if let hCert = hCert {
       nameLabel.text = hCert.fullName

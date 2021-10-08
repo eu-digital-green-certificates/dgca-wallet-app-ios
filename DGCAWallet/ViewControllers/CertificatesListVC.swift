@@ -25,7 +25,6 @@
 //  Created by Alexandr Chernyy on 21.09.2021.
 //  
 
-
 import UIKit
 import SwiftDGC
 
@@ -38,38 +37,25 @@ class CertificatesListVC: UIViewController {
   @IBOutlet weak var tableView      : UITableView!
   @IBOutlet weak var nextButton     : UIButton!
   
-  private var listOfCert            : [DatedCertString]?
-  
+  private var listOfCert = [DatedCertString]()
   private var validationServiceInfo : ServerListResponse?
   private var accessTokenInfo       : AccessTokenResponse?
   
-  
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    setupTableView()
+      title = l10n("certificates")
   }
   
   @IBAction func nextButtonAction(_ sender: Any) {
-    let vc = TicketCodeAcceptViewController()
-    
-    present(vc, animated: true, completion: { [weak self] in
-      vc.setCertsWith((self?.validationServiceInfo)!, (self?.accessTokenInfo)!)
-    })
+    let ticketController = TicketCodeAcceptViewController()
+    guard let validationServiceInfo = self.validationServiceInfo,
+          let accessTokenInfo = self.accessTokenInfo else { return }
+    present(ticketController, animated: true, completion: {
+        ticketController.setCertsWith(validationServiceInfo, accessTokenInfo)
+      }
+    )
   }
-  
-  private func setupView() {
-    tableView.reloadData()
-  }
-  
-  private func setupTableView() {
-    tableView.delegate = self
-    tableView.dataSource = self
-    tableView.register(UINib(nibName: Constants.hcertCellIndentifier, bundle: nil),
-                       forCellReuseIdentifier: Constants.hcertCellIndentifier)
-    tableView.reloadData()
-  }
-  
+
   public func setCertsWith(_ validationInfo: ServerListResponse,_ accessTokenModel : AccessTokenResponse) {
     //    TODO: Make filtering by all predicates (dob, validFrom/To, fullName)
     //    .filter { $0.cert!.fullName == fullName}
@@ -79,47 +65,36 @@ class CertificatesListVC: UIViewController {
   }
   
   private func deselectAllCert() {
-    for i in 0..<(listOfCert?.count ?? 0) {
-      if listOfCert?[i].isSelected ?? false {
-        listOfCert?[i].isSelected = false
-      }
+    for i in 0..<listOfCert.count {
+        listOfCert[i].isSelected = false
     }
   }
   
   public func getSelectedCert() -> DatedCertString? {
-    listOfCert?.filter({ hcert in
-      hcert.isSelected
-    }).first
+     return listOfCert.filter({ $0.isSelected }).first
   }
 }
 
 extension CertificatesListVC: UITableViewDataSource, UITableViewDelegate {
-  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return listOfCert?.count ?? .zero
+    return listOfCert.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let hCert = listOfCert?[indexPath.row]
-    let base = tableView.dequeueReusableCell(withIdentifier: Constants.hcertCellIndentifier, for: indexPath)
-    guard let cell = base as? CertificateTVC else {
-      return base
-    }
-    if let hCert = hCert?.cert {
-      if hCert.isSelected  {
-        cell.accessoryType = .checkmark
-      } else {
-        cell.accessoryType = .none
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.hcertCellIndentifier,
+          for: indexPath) as? CertificateTVC else { return UITableViewCell() }
+      let hCert = listOfCert[indexPath.row]
+
+      cell.accessoryType = hCert.isSelected ? .checkmark : .none
+      if let cert = hCert.cert {
+          cell.setCertificate(cert: cert)
       }
-      cell.selectionStyle = .none
-      cell.setCertificate(cert: hCert)
-    }
-    return cell
+      return cell
   }
-  
+    
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       deselectAllCert()
-      listOfCert?[indexPath.row].isSelected = true
+      listOfCert[indexPath.row].isSelected = true
       tableView.reloadRows(at: [indexPath], with: .automatic)
   }
 }

@@ -25,19 +25,19 @@
 //  Created by Alexandr Chernyy on 21.09.2021.
 //  
 
-
 import UIKit
 import SwiftDGC
 import Security
 
 class ServersListVC: UIViewController {
   
+    private enum Constants {
+      static let cellIndentifier = "ServerTVC"
+      static let showCertificatesList = "showCertificatesList"
+    }
+
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var nextButton: UIButton!
-  
-  private enum Constants {
-    static let cellIndentifier = "ServerTVC"
-  }
   
   private var serverListInfo : ServerListResponse?
   private var listOfServices = [ValidationService]()
@@ -47,11 +47,15 @@ class ServersListVC: UIViewController {
     title = l10n("services")
   }
   
+  override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
+        self.navigationController?.isNavigationBarHidden = (parent == nil)
+  }
+
   @IBAction func nextButtonAction(_ sender: Any) {
     guard let service = getSelectedServer() else {
       let alertController: UIAlertController = {
-          let controller = UIAlertController(title: l10n("please select one of service server"),
-             message: "",
+          let controller = UIAlertController(title: l10n("please select one of service server"), message: "",
              preferredStyle: .alert)
         let actionOk = UIAlertAction(title: l10n("ok"), style: .default)
         controller.addAction(actionOk)
@@ -61,72 +65,71 @@ class ServersListVC: UIViewController {
       return
     }
     
-    guard let privateKey = Enclave.loadOrGenerateKey(with: "validationKey") else { return }
-    let publicKey = SecKeyCopyPublicKey(privateKey)
+    guard let privateKey = Enclave.loadOrGenerateKey(with: "validationKey"),
+        let publicKey = SecKeyCopyPublicKey(privateKey) else { return }
     
     var base64PublicKeyString = ""
-    
     var error:Unmanaged<CFError>?
     
-    if let cfdata = SecKeyCopyExternalRepresentation(publicKey!, &error) {
+    if let cfdata = SecKeyCopyExternalRepresentation(publicKey, &error) {
       let data:Data = cfdata as Data
       base64PublicKeyString = data.base64EncodedString()
     }
     
-      let accessTokenService = serverListInfo?.service.first(where: {
-      $0.type == "AccessTokenService"
-    })
-    
-    let url = URL(string: accessTokenService!.serviceEndpoint)!
-    guard let serviceURL = URL(string: service.serviceEndpoint) else { return }
+    guard let accessTokenService = serverListInfo?.service.first(where: { $0.type == "AccessTokenService" }),
+      let url = URL(string: accessTokenService.serviceEndpoint),
+        let serviceURL = URL(string: service.serviceEndpoint) else { return }
     
     GatewayConnection.getServiceInfo(url: serviceURL) { [weak self] validationServiceInfo in
 //      TODO: Show UI message with error if fail to fetch serviceInfo
       guard let serviceInfo = validationServiceInfo else { return }
       
-      GatewayConnection.getAccessTokenFor(url: url,servicePath: service.id, publicKey: base64PublicKeyString) { response in
-        DispatchQueue.main.async { [weak self] in
-          let vc = CertificatesListVC()
-          
-          guard let accessTokenResponse = response else { return }
-          vc.setCertsWith(serviceInfo, accessTokenResponse)
-          self?.navigationController?.pushViewController(vc, animated: true)
+      GatewayConnection.getAccessTokenFor(url: url, servicePath: service.id, publicKey: base64PublicKeyString) { response in
+        guard let accessTokenResponse = response else { return }
+        DispatchQueue.main.async {
+            self?.performSegue(withIdentifier: Constants.showCertificatesList, sender: (serviceInfo, accessTokenResponse))
         }
       }
     }
   }
-      
+  
   public func setServices(info: ServerListResponse) {
     serverListInfo = info
-      listOfServices = serverListInfo?.service.filter{
-      $0.type == "ValidationService"
-      } ?? []
+    listOfServices = serverListInfo?.service.filter{ $0.type == "ValidationService" } ?? []
   }
   
   private func deselectAllServers() {
     for i in 0..<listOfServices.count {
-      if listOfServices[i].isSelected ?? false {
         listOfServices[i].isSelected = false
-      }
     }
   }
   
   private func getSelectedServer() -> ValidationService? {
       listOfServices.filter({ $0.isSelected ?? false }).first
   }
+    
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    switch segue.identifier {
+    case Constants.showCertificatesList:
+        guard let certController = segue.destination as? CertificatesListVC,
+            let (serviceInfo,tokenResponse) = sender as? (ServerListResponse, AccessTokenResponse) else { return }
+        certController.setCertsWith(serviceInfo, tokenResponse)
+        
+    default:
+        break
+    }
+  }
 }
 
 extension ServersListVC: UITableViewDataSource, UITableViewDelegate {
-  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       return listOfServices.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let service = listOfServices[indexPath.row]
     guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellIndentifier,
         for: indexPath) as? ServerTVC else { return UITableViewCell() }
-      
+    let service = listOfServices[indexPath.row]
     cell.accessoryType = (service.isSelected ?? false) ? .checkmark : .none
     cell.setService(serv: service)
     return cell

@@ -336,9 +336,7 @@ extension GatewayConnection {
   }
   
   static func getServiceInfo(url : URL, completion: @escaping (ServerListResponse?) -> Void) {
-    let decoder = JSONDecoder()
     let headers = HTTPHeaders([HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")])
-    
     var request = URLRequest(url: url)
     request.headers = headers
     
@@ -347,8 +345,12 @@ extension GatewayConnection {
         completion(nil)
         return
       }
-      let responseModel = try! decoder.decode(ServerListResponse.self, from: data)
-      completion(responseModel)
+      let decoder = JSONDecoder()
+        if let responseModel = try? decoder.decode(ServerListResponse.self, from: data) {
+            completion(responseModel)
+        } else {
+            completion(nil)
+        }
     })
     session.resume()
   }

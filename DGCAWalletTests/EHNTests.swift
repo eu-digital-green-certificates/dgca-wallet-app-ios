@@ -62,11 +62,11 @@ class EHNTests: XCTestCase {
     for case let elem: Dictionary in trust {
       if
         kid == Data(hexString: (elem["kid"] as? String) ?? "")?.uint,
-        let xParam = (elem["coord"] as? [String])?[0],
-        let yParam = (elem["coord"] as? [String])?[1]
+        let xParam = (elem["coord"] as? [String])?[0]
+        //let yParam = (elem["coord"] as? [String])?[1]
       {
         print("We know this KID - check if this sig works...")
-        if COSE.verify(data, with: xParam, and: yParam) {
+          if COSE.verify(_cbor: data, with: xParam) {
           print("All is well! Payload: ", payload)
           return
         }
@@ -128,7 +128,7 @@ class EHNTests: XCTestCase {
       }
       let encodedCert = body.base64EncodedString()
       XCTAssert(KID.string(from: KID.from(encodedCert)) == kid)
-      if COSE.verify(data, with: encodedCert) {
+        if COSE.verify(_cbor: data, with: encodedCert) {
         expectation.fulfill()
       } else {
         XCTAssert(false)

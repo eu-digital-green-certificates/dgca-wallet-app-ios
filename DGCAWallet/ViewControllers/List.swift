@@ -40,16 +40,13 @@ import CoreServices
 
 class ListVC: UIViewController {
   
-    struct SegueIdentifiers {
+    fileprivate enum SegueIdentifiers {
         static let showScannerSegue = "showScannerSegue"
         static let showServicesList = "showServicesList"
     }
 
-  private enum TableSection: Int {
-    case certificates = 0
-    case images
-    case pdfs
-    static var count: Int { return 3 }
+  private enum TableSection: Int, CaseIterable {
+    case certificates, images, pdfs
   }
   
   @IBOutlet weak var addButton: RoundedButton!
@@ -59,7 +56,7 @@ class ListVC: UIViewController {
   var viewController: UIViewController?
   var pickImageCallback: ((UIImage) -> Void)?
   private var scannedToken: String = ""
-  
+    
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
 
@@ -79,16 +76,13 @@ class ListVC: UIViewController {
     ImageDataStorage.initialize {
       PdfDataStorage.initialize {
         DispatchQueue.main.async { [weak self] in
-          self?.table.dataSource = self
-          self?.table.delegate = self
           self?.reloadTable()
         }
       }
     }
   }
 
-  @IBAction
-  func addNew() {
+  @IBAction func addNew() {
     let menuActionSheet = UIAlertController(title: l10n("add.new"),
        message: l10n("want.add"),
        preferredStyle: UIAlertController.Style.actionSheet)
@@ -113,7 +107,7 @@ class ListVC: UIViewController {
       self?.scanNFC()
     }))
     menuActionSheet.addAction(UIAlertAction(title: l10n("cancel"),
-                                            style: UIAlertAction.Style.destructive,
+                                            style: UIAlertAction.Style.cancel,
                                             handler: nil))
     present(menuActionSheet, animated: true, completion: nil)
   }
@@ -127,16 +121,15 @@ class ListVC: UIViewController {
   }
 
   private func addPdf() {
-    let pdfPicker: UIDocumentPickerViewController?
+    var pdfPicker: UIDocumentPickerViewController?
     if #available(iOS 14.0, *) {
       let supportedTypes: [UTType] = [UTType.pdf]
       pdfPicker = UIDocumentPickerViewController(forOpeningContentTypes: supportedTypes, asCopy: true)
     } else {
       pdfPicker = UIDocumentPickerViewController(documentTypes: [kUTTypePDF as String], in: .open)
     }
-    guard let pdfPicker = pdfPicker else {
-      return
-    }
+    guard let pdfPicker = pdfPicker else { return }
+      
     pdfPicker.delegate = self
     present(pdfPicker, animated: true, completion: nil)
   }
@@ -219,12 +212,7 @@ class ListVC: UIViewController {
 
     presentingViewer?.dismiss(animated: true, completion: nil)
   }
-    override func viewDidDisappear(_ animated: Bool) {
-      super.viewDidDisappear(animated)
-
-        self.navigationController?.isNavigationBarHidden = false
-    }
-
+    
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
       
@@ -234,15 +222,13 @@ class ListVC: UIViewController {
       let scene = self.sceneDelegate
       scene?.isNFCFunctionality = false
     }
-    self.navigationController?.isNavigationBarHidden = true
   }
 
   var presentingViewer: UIViewController?
   var newHCertScanned: HCert?
 
   func presentViewer(for certificate: HCert, with tan: String? = nil, isSaved: Bool = true) {
-    guard
-      presentingViewer == nil,
+    guard presentingViewer == nil,
       let contentVC = UIStoryboard(name: "CertificateViewer", bundle: nil)
         .instantiateInitialViewController(),
       let viewer = contentVC as? CertificateViewerVC
@@ -309,7 +295,8 @@ extension ListVC: ScanVCDelegate {
   func hCertScanned(_ cert: HCert) {
     newHCertScanned = cert
     DispatchQueue.main.async { [weak self] in
-      self?.navigationController?.popViewController(animated: true)
+      self?.dismiss(animated: true, completion: nil)
+      //self?.navigationController?.popViewController(animated: true)
     }
   }
   
@@ -321,7 +308,7 @@ extension ListVC: ScanVCDelegate {
     GatewayConnection.requestListOfServices(ticketingInfo: ticketing) { [weak self] services in
       self?.scannedToken = ""
 
-      DispatchQueue.main.async { [weak self] in
+      DispatchQueue.main.async {
         self?.dismiss(animated: true, completion: nil)
         self?.performSegue(withIdentifier: SegueIdentifiers.showServicesList, sender: services)
       }
@@ -343,62 +330,57 @@ extension ListVC: UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if section == TableSection.certificates.rawValue {
-      return listCertElements.count
-    }
-    if section == TableSection.images.rawValue {
-      return listImageElements.count
-    }
-    if section == TableSection.pdfs.rawValue {
-      return listPdfElements.count
-    }
-    return .zero
+      switch section {
+      case TableSection.certificates.rawValue:
+          return listCertElements.count
+      case TableSection.images.rawValue:
+          return listImageElements.count
+      case  TableSection.pdfs.rawValue:
+          return listPdfElements.count
+      default:
+          return .zero
+      }
   }
   
   func numberOfSections(in tableView: UITableView) -> Int {
-    TableSection.count
+      return TableSection.allCases.count
   }
 
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    if section == TableSection.certificates.rawValue {
-      return l10n("section.certificates")
-    }
-    if section == TableSection.images.rawValue {
-      return l10n("section.images")
-    }
-    if section == TableSection.pdfs.rawValue {
-      return l10n("section.pdf")
-    }
-    return ":"
-
+      switch section {
+      case TableSection.certificates.rawValue:
+          return l10n("section.certificates")
+      case TableSection.images.rawValue:
+          return l10n("section.images")
+      case  TableSection.pdfs.rawValue:
+          return l10n("section.pdf")
+      default:
+          return ":"
+      }
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    if indexPath.section == TableSection.certificates.rawValue {
-      let cell = table.dequeueReusableCell(withIdentifier: "walletCell", for: indexPath)
-      guard let walletCell = cell as? WalletCell else {
-        return cell
+      switch indexPath.section {
+      case TableSection.certificates.rawValue:
+        guard let walletCell = table.dequeueReusableCell(withIdentifier: "walletCell", for: indexPath) as? WalletCell else { return UITableViewCell() }
+        
+        walletCell.draw(listCertElements[indexPath.row])
+        return walletCell
+          
+      case TableSection.images.rawValue:
+          guard let imageCell = table.dequeueReusableCell(withIdentifier: "ImageTableViewCell", for: indexPath) as? ImageTableViewCell else { return UITableViewCell() }
+        imageCell.setImage(image: listImageElements[indexPath.row])
+        return imageCell
+          
+      case  TableSection.pdfs.rawValue:
+          guard let imageCell = table.dequeueReusableCell(withIdentifier: "PDFTableViewCell", for: indexPath) as? PDFTableViewCell else { return UITableViewCell() }
+           
+        imageCell.setPDF(pdf: listPdfElements[indexPath.row])
+        return imageCell
+          
+      default:
+          return UITableViewCell()
       }
-      walletCell.draw(listCertElements[indexPath.row])
-      return walletCell
-    }
-    if indexPath.section == TableSection.images.rawValue {
-      let cell = table.dequeueReusableCell(withIdentifier: "ImageTableViewCell", for: indexPath)
-      guard let imageCell = cell as? ImageTableViewCell else {
-        return cell
-      }
-      imageCell.setImage(image: listImageElements[indexPath.row])
-      return imageCell
-    }
-    if indexPath.section == TableSection.pdfs.rawValue {
-      let cell = table.dequeueReusableCell(withIdentifier: "PDFTableViewCell", for: indexPath)
-      guard let imageCell = cell as? PDFTableViewCell else {
-        return cell
-      }
-      imageCell.setPDF(pdf: listPdfElements[indexPath.row])
-      return imageCell
-    }
-    return UITableViewCell()
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -413,26 +395,23 @@ extension ListVC: UITableViewDataSource {
 extension ListVC: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     table.deselectRow(at: indexPath, animated: true)
-    if indexPath.section == TableSection.certificates.rawValue {
-      guard
-        let cert = listCertElements[indexPath.row].cert
-      else {
-        return
-      }
-      presentViewer(for: cert, with: listCertElements[indexPath.row].storedTAN)
+    switch indexPath.section {
+      case TableSection.certificates.rawValue:
+          guard let cert = listCertElements[indexPath.row].cert else { return }
+          presentViewer(for: cert, with: listCertElements[indexPath.row].storedTAN)
+          
+      case TableSection.images.rawValue:
+          showImage(image: listImageElements[indexPath.row])
+
+      case  TableSection.pdfs.rawValue:
+          showPdfFile(pdf: listPdfElements[indexPath.row])
+        
+      default:
+          break
     }
-    if indexPath.section == TableSection.images.rawValue {
-      showImage(image: listImageElements[indexPath.row])
-    }
-    if indexPath.section == TableSection.pdfs.rawValue {
-      showPdfFile(pdf: listPdfElements[indexPath.row])
-    }
-    return
   }
 
-  func tableView(
-    _ tableView: UITableView,
-    commit editingStyle: UITableViewCell.EditingStyle,
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle,
     forRowAt indexPath: IndexPath
   ) {
     let cert = listCertElements[indexPath.row]
@@ -454,11 +433,8 @@ extension ListVC: UITableViewDelegate {
 }
 
 extension ListVC: FloatingPanelControllerDelegate {
-  func floatingPanel(
-    _ fpc: FloatingPanelController,
-    shouldRemoveAt location: CGPoint,
-    with velocity: CGVector
-  ) -> Bool {
+  func floatingPanel(_ fpc: FloatingPanelController, shouldRemoveAt location: CGPoint,
+    with velocity: CGVector) -> Bool {
     let pos = location.y / view.bounds.height
     if pos >= 0.33 {
       return true
@@ -501,8 +477,8 @@ extension ListVC: UIImagePickerControllerDelegate, UINavigationControllerDelegat
   func pickImage(_ viewController: UIViewController, _ callback: @escaping ((UIImage) -> Void)) {
       pickImageCallback = callback
       self.viewController = viewController
-//      alert.popoverPresentationController?.sourceView = self.viewController!.view
   }
+    
   func openCamera() {
       alert?.dismiss(animated: true, completion: nil)
       if UIImagePickerController.isSourceTypeAvailable(.camera) {
@@ -511,8 +487,8 @@ extension ListVC: UIImagePickerControllerDelegate, UINavigationControllerDelegat
       } else {
           let alertController: UIAlertController = {
               let controller = UIAlertController(title: l10n("error"),
-                                                 message: l10n("dont.have.camera"),
-                                                 preferredStyle: .alert)
+                 message: l10n("dont.have.camera"),
+                 preferredStyle: .alert)
               let action = UIAlertAction(title: l10n("ok"), style: .default)
               controller.addAction(action)
               return controller
@@ -531,7 +507,7 @@ extension ListVC: UIImagePickerControllerDelegate, UINavigationControllerDelegat
   }
 
   func imagePickerController(_ picker: UIImagePickerController,
-                             didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
     picker.dismiss(animated: true, completion: nil)
     guard let image = info[.originalImage] as? UIImage else {
       fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
@@ -543,7 +519,6 @@ extension ListVC: UIImagePickerControllerDelegate, UINavigationControllerDelegat
     guard let pickedImage = pickedImage else { return }
     tryFoundQRCodeIn(image: pickedImage)
   }
-
 }
 
 extension ListVC {
@@ -605,18 +580,17 @@ extension ListVC: UIDocumentPickerDelegate {
   }
   
   func checkQRCodesInPDFFile(url: NSURL) {
-    let images = try? convertPDF(at: url as URL)
-    if images != nil && !(images?.isEmpty ?? true) {
-      for image in images! {
+      guard let images = try? convertPDF(at: url as URL), !images.isEmpty else {
+          savePDFFile(url: url)
+          return
+      }
+      for image in images {
         if let qrString = image.qrCodeString(), let hCert = HCert(from: qrString, applicationType: .wallet) {
             saveQrCode(cert: hCert)
             return
         }
       }
       savePDFFile(url: url)
-    } else {
-      savePDFFile(url: url)
-    }
   }
   
   func savePDFFile(url: NSURL) {
@@ -629,20 +603,18 @@ extension ListVC: UIDocumentPickerDelegate {
       DispatchQueue.main.async { [weak self] in
         self?.reloadTable()
       }
-
     }
   }
   
   func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-    if controller.documentPickerMode == UIDocumentPickerMode.import {
-      guard let url = urls.first else {
-        return
-      }
+    guard let url = urls.first else { return }
+
+    if controller.documentPickerMode == .import {
       checkQRCodesInPDFFile(url: url as NSURL)
     }
   }
   private func documentPicker(controller: UIDocumentPickerViewController, didPickDocumentAtURL url: NSURL) {
-    if controller.documentPickerMode == UIDocumentPickerMode.import {
+    if controller.documentPickerMode == .import {
       checkQRCodesInPDFFile(url: url)
     }
   }
@@ -654,6 +626,7 @@ extension ListVC {
     imageVC.setImage(image: image)
     present(imageVC, animated: true)
   }
+    
   func showPdfFile(pdf: SavedPDF) {
     let pdfVC = PDFViewerVC.loadFromNib()
     pdfVC.setPDF(pdf: pdf)
