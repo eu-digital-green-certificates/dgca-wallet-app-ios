@@ -1,0 +1,48 @@
+/*-
+ * ---license-start
+ * eu-digital-green-certificates / dgca-wallet-app-ios
+ * ---
+ * Copyright (C) 2021 T-Systems International GmbH and all other contributors
+ * ---
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ---license-end
+ */
+/*
+  Localizable.strings
+  DGCAWallet
+
+  Created by Yannick Spreen on 5/6/21.
+  
+*/
+
+"log.certs-loaded" = "%d betöltött igazolvány.";
+"list.cell.scanned-at" = "%@ szkennelt";
+"btn.okay" = "Oké";
+"btn.cancel" = "Mégsem";
+"btn.save" = "Mentés";
+"btn.confirm" = "Megerősítés";
+"tan.confirm.title" = "TAN megerősítése";
+"tan.confirm.text" = "Adja meg a TAN azonosítót amit az igazolvánnyal adtak meg:";
+"tan.confirm.placeholder" = "XYZ12345";
+"tan.confirm.success.title" = "Siker";
+"tan.confirm.success.text" = "Az Igazolvány el lett mentve az Apple Wallet-be!";
+"tan.confirm.fail.title" = "Sikertelen";
+"tan.confirm.fail.text" = "Ellenőrizze a TAN azonosítót, majd próbálja újra.";
+"tan.label" = "TAN: %@";
+"auth.confirm" = "Személyazonosság igazolása";
+"auth.later" = "Később";
+"auth.error" = "Nem sikerült az eszköz tulajdonjogának ellenőrzése. Próbáljon jelszót rakni az eszközhöz mielőtt megnyitja az alkalmazást.";
+"cert.delete.title" = "Igazolvány törlése";
+"cert.delete.body" = "Biztosan törölné ezt az igazolványt? A művelet nem visszavonható.";
+"tap-to-reveal" = "kappintson a felfedéshez";
+"app-version" = "App Verzió %@";

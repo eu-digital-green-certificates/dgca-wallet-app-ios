@@ -1,0 +1,8 @@
+/* Bundle display name */
+"CFBundleDisplayName" = "Wallet App";
+/* Bundle name */
+"CFBundleName" = "DGCAWallet";
+/* Privacy - Camera Usage Description */
+"NSCameraUsageDescription" = "Vonalkódok szkennelése a kamerával.";
+/* Privacy - Face ID Usage Description */
+"NSFaceIDUsageDescription" = "Szenzitív adatok feloldása.";
