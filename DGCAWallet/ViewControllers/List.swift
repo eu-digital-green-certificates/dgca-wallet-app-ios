@@ -27,7 +27,6 @@
 
 // swiftlint:disable file_length
 
-import Foundation
 import UIKit
 import SwiftDGC
 import FloatingPanel
@@ -43,6 +42,7 @@ class ListVC: UIViewController {
     fileprivate enum SegueIdentifiers {
         static let showScannerSegue = "showScannerSegue"
         static let showServicesList = "showServicesList"
+        static let showSettingsController = "showSettingsController"
     }
 
   private enum TableSection: Int, CaseIterable {
@@ -50,21 +50,10 @@ class ListVC: UIViewController {
   }
   
   @IBOutlet weak var addButton: RoundedButton!
-  
-  let picker = UIImagePickerController()
-  var alert: UIAlertController?
-  var viewController: UIViewController?
-  var pickImageCallback: ((UIImage) -> Void)?
-  private var scannedToken: String = ""
-    
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
+  @IBOutlet weak var table: UITableView!
+  @IBOutlet weak var emptyView: UIView!
 
-    if let cert = newHCertScanned {
-      newHCertScanned = nil
-      presentViewer(for: cert, isSaved: false)
-    }
-  }
+  private var scannedToken: String = ""
 
   override var preferredStatusBarStyle: UIStatusBarStyle {
     return .lightContent
@@ -75,11 +64,22 @@ class ListVC: UIViewController {
     
     ImageDataStorage.initialize {
       PdfDataStorage.initialize {
-        DispatchQueue.main.async { [weak self] in
-          self?.reloadTable()
+        DispatchQueue.main.async {
+          self.reloadTable()
         }
       }
     }
+  }
+
+  override func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(animated)
+        
+      let appDelegate = UIApplication.shared.delegate as? AppDelegate
+      appDelegate?.isNFCFunctionality = false
+      if #available(iOS 13.0, *) {
+        let scene = self.sceneDelegate
+        scene?.isNFCFunctionality = false
+      }
   }
 
   @IBAction func addNew() {
@@ -92,23 +92,23 @@ class ListVC: UIViewController {
            self?.scanNewCertificate()
        }))
     menuActionSheet.addAction(UIAlertAction(title: l10n("image.import"),
-                                            style: UIAlertAction.Style.default,
-                                            handler: { [weak self] _ in
-      self?.addImage()
+        style: UIAlertAction.Style.default,
+        handler: { [weak self] _ in
+      self?.addImageActivity()
     }))
     menuActionSheet.addAction(UIAlertAction(title: l10n("pdf.import"),
-                                            style: UIAlertAction.Style.default,
-                                            handler: { [weak self] _ in
+        style: UIAlertAction.Style.default,
+        handler: { [weak self] _ in
       self?.addPdf()
     }))
     menuActionSheet.addAction(UIAlertAction(title: l10n("nfc.import"),
-                                            style: UIAlertAction.Style.default,
-                                            handler: { [weak self] _ in
+        style: UIAlertAction.Style.default,
+        handler: { [weak self] _ in
       self?.scanNFC()
     }))
     menuActionSheet.addAction(UIAlertAction(title: l10n("cancel"),
-                                            style: UIAlertAction.Style.cancel,
-                                            handler: nil))
+        style: UIAlertAction.Style.cancel,
+        handler: nil))
     present(menuActionSheet, animated: true, completion: nil)
   }
   
@@ -116,20 +116,14 @@ class ListVC: UIViewController {
       performSegue(withIdentifier: SegueIdentifiers.showScannerSegue, sender: nil)
   }
 
-  private func addImage() {
-    getImageFrom()
-  }
-
   private func addPdf() {
-    var pdfPicker: UIDocumentPickerViewController?
+    let pdfPicker: UIDocumentPickerViewController
     if #available(iOS 14.0, *) {
       let supportedTypes: [UTType] = [UTType.pdf]
       pdfPicker = UIDocumentPickerViewController(forOpeningContentTypes: supportedTypes, asCopy: true)
     } else {
       pdfPicker = UIDocumentPickerViewController(documentTypes: [kUTTypePDF as String], in: .open)
     }
-    guard let pdfPicker = pdfPicker else { return }
-      
     pdfPicker.delegate = self
     present(pdfPicker, animated: true, completion: nil)
   }
@@ -170,16 +164,14 @@ class ListVC: UIViewController {
           controller.addAction(actionOk)
             return controller
         }()
-        self?.viewController?.present(alertController, animated: true)
+        self?.present(alertController, animated: true)
       }
     }
   }
   
   @IBAction func settingsTapped(_ sender: UIButton) {
     guard let settingsVC = UIStoryboard(name: "Settings", bundle: nil).instantiateInitialViewController(),
-          let viewer = settingsVC as? SettingsVC else {
-      return
-    }
+          let viewer = settingsVC as? SettingsVC else { return }
     viewer.childDismissedDelegate = self
     showFloatingPanel(for: viewer)
   }
@@ -192,13 +184,9 @@ class ListVC: UIViewController {
     fpc.surfaceView.layer.cornerRadius = 24.0
     fpc.surfaceView.clipsToBounds = true
     fpc.delegate = self
-    presentingViewer = controller
 
     present(fpc, animated: true, completion: nil)
   }
-
-  @IBOutlet weak var table: UITableView!
-  @IBOutlet weak var emptyView: UIView!
 
   func reloadTable() {
     emptyView.alpha = listCertElements.isEmpty
@@ -207,47 +195,20 @@ class ListVC: UIViewController {
     table.reloadData()
   }
 
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
-
-    presentingViewer?.dismiss(animated: true, completion: nil)
-  }
-    
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-      
-    let appDelegate = UIApplication.shared.delegate as? AppDelegate
-    appDelegate?.isNFCFunctionality = false
-    if #available(iOS 13.0, *) {
-      let scene = self.sceneDelegate
-      scene?.isNFCFunctionality = false
-    }
-  }
-
-  var presentingViewer: UIViewController?
-  var newHCertScanned: HCert?
-
   func presentViewer(for certificate: HCert, with tan: String? = nil, isSaved: Bool = true) {
-    guard presentingViewer == nil,
-      let contentVC = UIStoryboard(name: "CertificateViewer", bundle: nil)
-        .instantiateInitialViewController(),
-      let viewer = contentVC as? CertificateViewerVC
-    else {
-      return
-    }
+    guard let certViewerController = UIStoryboard(name: "CertificateViewer", bundle: nil).instantiateInitialViewController() as? CertificateViewerVC else { return }
 
-    viewer.isSaved = isSaved
-    viewer.hCert = certificate
-    viewer.tan = tan
-    viewer.childDismissedDelegate = self
+    certViewerController.isSaved = isSaved
+    certViewerController.hCert = certificate
+    certViewerController.tan = tan
+    certViewerController.childDismissedDelegate = self
     let fpc = FloatingPanelController()
-    fpc.set(contentViewController: viewer)
+    fpc.set(contentViewController: certViewerController)
     fpc.isRemovalInteractionEnabled = true // Let it removable by a swipe-down
     fpc.layout = FullFloatingPanelLayout()
     fpc.surfaceView.layer.cornerRadius = 24.0
     fpc.surfaceView.clipsToBounds = true
     fpc.delegate = self
-    presentingViewer = viewer
 
     present(fpc, animated: true, completion: nil)
     UIImpactFeedbackGenerator(style: .medium).impactOccurred()
@@ -275,10 +236,9 @@ class ListVC: UIViewController {
 
 extension ListVC: CertViewerDelegate {
   func childDismissed(_ newCertAdded: Bool) {
-    if newCertAdded {
-      reloadTable()
+    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
+        self.reloadTable()
     }
-    presentingViewer = nil
   }
 }
 
@@ -291,11 +251,11 @@ extension ListVC: ScanWalletDelegate {
     SecureBackground.paused = false
   }
 
-  func hCertScanned(_ cert: HCert) {
-    newHCertScanned = cert
+  func walletController(_ controller: ScanWalletController, didScan certificate: HCert) {
     DispatchQueue.main.async { [weak self] in
-      self?.dismiss(animated: true, completion: nil)
-      //self?.navigationController?.popViewController(animated: true)
+        self?.dismiss(animated: true, completion: {
+            self?.presentViewer(for: certificate, isSaved: false)
+        })
     }
   }
   
@@ -308,8 +268,9 @@ extension ListVC: ScanWalletDelegate {
       self?.scannedToken = ""
 
       DispatchQueue.main.async {
-        self?.dismiss(animated: true, completion: nil)
-        self?.performSegue(withIdentifier: SegueIdentifiers.showServicesList, sender: services)
+          self?.dismiss(animated: true, completion: {
+              self?.performSegue(withIdentifier: SegueIdentifiers.showServicesList, sender: services)
+          })
       }
     }
   }
@@ -413,21 +374,34 @@ extension ListVC: UITableViewDelegate {
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle,
     forRowAt indexPath: IndexPath
   ) {
-    let cert = listCertElements[indexPath.row]
-    showAlert(
-      title: l10n("cert.delete.title"),
-      subtitle: l10n("cert.delete.body"),
-      actionTitle: l10n("btn.confirm"),
-      cancelTitle: l10n("btn.cancel")
-    ) { [weak self] in
-      if $0 {
-        LocalData.sharedInstance.certStrings.removeAll {
-          $0.date == cert.date
-        }
-        LocalData.sharedInstance.save()
-        self?.reloadTable()
+      switch indexPath.section {
+      case 0:
+          let cert = listCertElements[indexPath.row]
+          showAlert(
+            title: l10n("cert.delete.title"),
+            subtitle: l10n("cert.delete.body"),
+            actionTitle: l10n("btn.confirm"),
+            cancelTitle: l10n("btn.cancel")) { [weak self] in
+                if $0 {
+                    LocalData.sharedInstance.certStrings.removeAll {
+                        $0.date == cert.date
+                }
+                LocalData.sharedInstance.save()
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
+                    self?.reloadTable()
+                }
+
+              }
+            }
+      case 1:
+          break
+      case 2:
+          break
+      case 3:
+          break
+      default:
+          break
       }
-    }
   }
 }
 
@@ -454,33 +428,33 @@ extension ListVC: FloatingPanelControllerDelegate {
 
 extension ListVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
-  private func getImageFrom() {
-    alert = UIAlertController(title: l10n("get.image.from"), message: nil, preferredStyle: .actionSheet)
+  private func addImageActivity() {
+    let alert = UIAlertController(title: l10n("get.image.from"), message: nil, preferredStyle: .actionSheet)
     let cameraAction = UIAlertAction(title: l10n("camera"), style: .default) {[weak self] _ in
+      alert.dismiss(animated: true, completion: nil)
       self?.openCamera()
     }
     let galleryAction = UIAlertAction(title: l10n("galery"), style: .default) {[weak self] _ in
+      alert.dismiss(animated: true, completion: nil)
       self?.openGallery()
     }
     let cancelAction = UIAlertAction(title: l10n("cancel"), style: .cancel)
     
     // Add the actions
-    picker.delegate = self
-    alert?.addAction(cameraAction)
-    alert?.addAction(galleryAction)
-    alert?.addAction(cancelAction)
-    guard let alert = alert else { return }
+    alert.addAction(cameraAction)
+    alert.addAction(galleryAction)
+    alert.addAction(cancelAction)
     present(alert, animated: true, completion: nil)
   }
 
   func pickImage(_ viewController: UIViewController, _ callback: @escaping ((UIImage) -> Void)) {
-      pickImageCallback = callback
-      self.viewController = viewController
+      ()
   }
     
   func openCamera() {
-      alert?.dismiss(animated: true, completion: nil)
       if UIImagePickerController.isSourceTypeAvailable(.camera) {
+          let picker = UIImagePickerController()
+          picker.delegate = self
           picker.sourceType = .camera
           present(picker, animated: true, completion: nil)
       } else {
@@ -492,11 +466,14 @@ extension ListVC: UIImagePickerControllerDelegate, UINavigationControllerDelegat
               controller.addAction(action)
               return controller
           }()
-          viewController?.present(alertController, animated: true)
+          self.present(alertController, animated: true)
       }
   }
+    
   func openGallery() {
-      alert?.dismiss(animated: true, completion: nil)
+      let picker = UIImagePickerController()
+      picker.delegate = self
+
       picker.sourceType = .photoLibrary
       present(picker, animated: true, completion: nil)
   }
@@ -540,9 +517,9 @@ extension ListVC {
       inputPlaceholder: l10n("image.confirm.placeholder")
     ) { fileName in
       ImageDataStorage.sharedInstance.add(savedImage: SavedImage(fileName: fileName ?? UUID().uuidString, image: image))
-      DispatchQueue.main.async { [weak self] in
-        self?.reloadTable()
-      }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {  [weak self] in
+            self?.reloadTable()
+        }
     }
   }
 }
@@ -599,9 +576,9 @@ extension ListVC: UIDocumentPickerDelegate {
       inputPlaceholder: l10n("pdf.confirm.placeholder")
     ) { fileName in
       PdfDataStorage.sharedInstance.add(savedPdf: SavedPDF(fileName: fileName ?? UUID().uuidString, pdfUrl: url as URL))
-      DispatchQueue.main.async { [weak self] in
-        self?.reloadTable()
-      }
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {  [weak self] in
+            self?.reloadTable()
+        }
     }
   }
   

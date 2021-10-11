@@ -54,9 +54,8 @@ class HomeVC: UIViewController {
     }
     LocalData.initialize {
       DispatchQueue.main.async { [weak self] in
-        guard let self = self else {
-          return
-        }
+        guard let self = self else { return }
+          
         let renderer = UIGraphicsImageRenderer(size: self.view.bounds.size)
         SecureBackground.image = renderer.image { rendererContext in
           self.view.layer.render(in: rendererContext.cgContext)
