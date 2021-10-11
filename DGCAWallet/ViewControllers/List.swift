@@ -254,7 +254,6 @@ class ListVC: UIViewController {
   }
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
       switch segue.identifier {
       case SegueIdentifiers.showScannerSegue:
           guard let scanController = segue.destination as? ScanVC else { return }
