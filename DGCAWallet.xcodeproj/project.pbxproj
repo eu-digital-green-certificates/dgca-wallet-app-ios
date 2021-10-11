@@ -95,27 +95,15 @@
 		5C556D4926F9F8AC007E2C2E /* CertificatesListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4726F9F8AC007E2C2E /* CertificatesListVC.swift */; };
 		5C556D4A26F9F8AC007E2C2E /* CertificatesListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4726F9F8AC007E2C2E /* CertificatesListVC.swift */; };
 		5C556D4B26F9F8AC007E2C2E /* CertificatesListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4726F9F8AC007E2C2E /* CertificatesListVC.swift */; };
-		5C556D4C26F9F8AC007E2C2E /* CertificatesListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D4826F9F8AC007E2C2E /* CertificatesListVC.xib */; };
-		5C556D4D26F9F8AC007E2C2E /* CertificatesListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D4826F9F8AC007E2C2E /* CertificatesListVC.xib */; };
-		5C556D4E26F9F8AC007E2C2E /* CertificatesListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D4826F9F8AC007E2C2E /* CertificatesListVC.xib */; };
 		5C556D5126F9F8C6007E2C2E /* ServersListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4F26F9F8C6007E2C2E /* ServersListVC.swift */; };
 		5C556D5226F9F8C6007E2C2E /* ServersListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4F26F9F8C6007E2C2E /* ServersListVC.swift */; };
 		5C556D5326F9F8C6007E2C2E /* ServersListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4F26F9F8C6007E2C2E /* ServersListVC.swift */; };
-		5C556D5426F9F8C6007E2C2E /* ServersListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D5026F9F8C6007E2C2E /* ServersListVC.xib */; };
-		5C556D5526F9F8C6007E2C2E /* ServersListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D5026F9F8C6007E2C2E /* ServersListVC.xib */; };
-		5C556D5626F9F8C6007E2C2E /* ServersListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D5026F9F8C6007E2C2E /* ServersListVC.xib */; };
 		5C556D5B26F9F95B007E2C2E /* CertificateTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D5926F9F95B007E2C2E /* CertificateTVC.swift */; };
 		5C556D5C26F9F95C007E2C2E /* CertificateTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D5926F9F95B007E2C2E /* CertificateTVC.swift */; };
 		5C556D5D26F9F95C007E2C2E /* CertificateTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D5926F9F95B007E2C2E /* CertificateTVC.swift */; };
-		5C556D5E26F9F95C007E2C2E /* CertificateTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D5A26F9F95B007E2C2E /* CertificateTVC.xib */; };
-		5C556D5F26F9F95C007E2C2E /* CertificateTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D5A26F9F95B007E2C2E /* CertificateTVC.xib */; };
-		5C556D6026F9F95C007E2C2E /* CertificateTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D5A26F9F95B007E2C2E /* CertificateTVC.xib */; };
 		5C556D6326F9F97E007E2C2E /* ServerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D6126F9F97E007E2C2E /* ServerTVC.swift */; };
 		5C556D6426F9F97E007E2C2E /* ServerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D6126F9F97E007E2C2E /* ServerTVC.swift */; };
 		5C556D6526F9F97E007E2C2E /* ServerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D6126F9F97E007E2C2E /* ServerTVC.swift */; };
-		5C556D6626F9F97E007E2C2E /* ServerTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D6226F9F97E007E2C2E /* ServerTVC.xib */; };
-		5C556D6726F9F97E007E2C2E /* ServerTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D6226F9F97E007E2C2E /* ServerTVC.xib */; };
-		5C556D6826F9F97E007E2C2E /* ServerTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D6226F9F97E007E2C2E /* ServerTVC.xib */; };
 		5CA450B026E20B690029324E /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB18269DBB4C00074F66 /* context.jsonc */; };
 		5CA450B126E20B6A0029324E /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB18269DBB4C00074F66 /* context.jsonc */; };
 		5CA450B226E20B6A0029324E /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB18269DBB4C00074F66 /* context.jsonc */; };
@@ -157,7 +145,6 @@
 		CEA15570262F79DE0024B7AC /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA1556F262F79DE0024B7AC /* InfoCell.swift */; };
 		CEA6D6EC261F8D2700715333 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6D6EB261F8D2700715333 /* AppDelegate.swift */; };
 		CEA6D6EE261F8D2700715333 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6D6ED261F8D2700715333 /* SceneDelegate.swift */; };
-		CEA6D6F0261F8D2700715333 /* Scan.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6D6EF261F8D2700715333 /* Scan.swift */; };
 		CEA6D6F3261F8D2700715333 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEA6D6F1261F8D2700715333 /* Main.storyboard */; };
 		CEA6D6F5261F8D2900715333 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEA6D6F4261F8D2900715333 /* Assets.xcassets */; };
 		CEA6D6F8261F8D2900715333 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEA6D6F6261F8D2900715333 /* LaunchScreen.storyboard */; };
@@ -230,13 +217,9 @@
 		5C556D3F26F9DAF6007E2C2E /* TicketCodeAcceptViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketCodeAcceptViewController.xib; sourceTree = "<group>"; };
 		5C556D4026F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketCodeAcceptViewController.swift; sourceTree = "<group>"; };
 		5C556D4726F9F8AC007E2C2E /* CertificatesListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificatesListVC.swift; sourceTree = "<group>"; };
-		5C556D4826F9F8AC007E2C2E /* CertificatesListVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CertificatesListVC.xib; sourceTree = "<group>"; };
 		5C556D4F26F9F8C6007E2C2E /* ServersListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersListVC.swift; sourceTree = "<group>"; };
-		5C556D5026F9F8C6007E2C2E /* ServersListVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServersListVC.xib; sourceTree = "<group>"; };
 		5C556D5926F9F95B007E2C2E /* CertificateTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateTVC.swift; sourceTree = "<group>"; };
-		5C556D5A26F9F95B007E2C2E /* CertificateTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CertificateTVC.xib; sourceTree = "<group>"; };
 		5C556D6126F9F97E007E2C2E /* ServerTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerTVC.swift; sourceTree = "<group>"; };
-		5C556D6226F9F97E007E2C2E /* ServerTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ServerTVC.xib; sourceTree = "<group>"; };
 		5CE07C772692E1CC00A032F9 /* CountryDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryDataStorage.swift; sourceTree = "<group>"; };
 		5CE07C782692E1CD00A032F9 /* ValueSetsDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueSetsDataStorage.swift; sourceTree = "<group>"; };
 		5CE07C792692E1CD00A032F9 /* RulesDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesDataStorage.swift; sourceTree = "<group>"; };
@@ -265,7 +248,6 @@
 		CEA6D6E8261F8D2700715333 /* DGCAWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DGCAWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEA6D6EB261F8D2700715333 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEA6D6ED261F8D2700715333 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CEA6D6EF261F8D2700715333 /* Scan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scan.swift; sourceTree = "<group>"; };
 		CEA6D6F2261F8D2700715333 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CEA6D6F4261F8D2900715333 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEA6D6F7261F8D2900715333 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -353,24 +335,6 @@
 			path = RuleCell;
 			sourceTree = "<group>";
 		};
-		5C556D5726F9F942007E2C2E /* CertificateCell */ = {
-			isa = PBXGroup;
-			children = (
-				5C556D5926F9F95B007E2C2E /* CertificateTVC.swift */,
-				5C556D5A26F9F95B007E2C2E /* CertificateTVC.xib */,
-			);
-			path = CertificateCell;
-			sourceTree = "<group>";
-		};
-		5C556D5826F9F942007E2C2E /* ServerCell */ = {
-			isa = PBXGroup;
-			children = (
-				5C556D6126F9F97E007E2C2E /* ServerTVC.swift */,
-				5C556D6226F9F97E007E2C2E /* ServerTVC.xib */,
-			);
-			path = ServerCell;
-			sourceTree = "<group>";
-		};
 		5CFEDB16269DBB4C00074F66 /* Context */ = {
 			isa = PBXGroup;
 			children = (
@@ -438,7 +402,6 @@
 			children = (
 				CE13CF09262DCDDA0070C80E /* CertificateViewer.swift */,
 				CED949C9263B50CE00883558 /* List.swift */,
-				CEA6D6EF261F8D2700715333 /* Scan.swift */,
 				CEE9DA54263C7D4000A31532 /* CertCode.swift */,
 				CE891304263581D900CB92AF /* Home.swift */,
 				CEDABD48263C70EF007A9B97 /* CertPages.swift */,
@@ -459,9 +422,7 @@
 				5C556D4026F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift */,
 				5C556D3F26F9DAF6007E2C2E /* TicketCodeAcceptViewController.xib */,
 				5C556D4726F9F8AC007E2C2E /* CertificatesListVC.swift */,
-				5C556D4826F9F8AC007E2C2E /* CertificatesListVC.xib */,
 				5C556D4F26F9F8C6007E2C2E /* ServersListVC.swift */,
-				5C556D5026F9F8C6007E2C2E /* ServersListVC.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -469,8 +430,7 @@
 		CE13CF1D262DDE730070C80E /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				5C556D5726F9F942007E2C2E /* CertificateCell */,
-				5C556D5826F9F942007E2C2E /* ServerCell */,
+				D2A68B682714384E009A77D9 /* Cells */,
 				5C50CF18269700B30015EE29 /* RuleCell */,
 				5C50CF172697009E0015EE29 /* CheckValidityCells */,
 				CE13CF0E262DD0D80070C80E /* FullFloatingPanelLayout.swift */,
@@ -589,6 +549,15 @@
 				CEA6D70F261F8D2900715333 /* Info.plist */,
 			);
 			path = DGCAWalletUITests;
+			sourceTree = "<group>";
+		};
+		D2A68B682714384E009A77D9 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				5C556D5926F9F95B007E2C2E /* CertificateTVC.swift */,
+				5C556D6126F9F97E007E2C2E /* ServerTVC.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -720,8 +689,6 @@
 				CE4BD255264FF39400689FD6 /* Settings.storyboard in Resources */,
 				CE81533A263FF7EC0030D777 /* README.md in Resources */,
 				5C50CF1E2697023B0015EE29 /* RuleErrorTVC.xib in Resources */,
-				5C556D5E26F9F95C007E2C2E /* CertificateTVC.xib in Resources */,
-				5C556D5426F9F8C6007E2C2E /* ServersListVC.xib in Resources */,
 				5CEA55D126F3528900269702 /* QRTicketCodeDetailsViewController.xib in Resources */,
 				DA01661E26554992005B73A1 /* OpenSourceNotices.json in Resources */,
 				5C556D4126F9DAF7007E2C2E /* TicketCodeAcceptViewController.xib in Resources */,
@@ -732,8 +699,6 @@
 				5C50CF14269700710015EE29 /* RuleValidationResultVC.xib in Resources */,
 				DA017DE626552259006E4D49 /* Licenses.storyboard in Resources */,
 				D2AE0613270DC94200384920 /* dgca-app-core-ios in Resources */,
-				5C556D4C26F9F8AC007E2C2E /* CertificatesListVC.xib in Resources */,
-				5C556D6626F9F97E007E2C2E /* ServerTVC.xib in Resources */,
 				5C50CF2A26972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -743,17 +708,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C50CF15269700710015EE29 /* RuleValidationResultVC.xib in Resources */,
-				5C556D6726F9F97E007E2C2E /* ServerTVC.xib in Resources */,
-				5C556D5526F9F8C6007E2C2E /* ServersListVC.xib in Resources */,
 				5C556D4226F9DAF7007E2C2E /* TicketCodeAcceptViewController.xib in Resources */,
-				5C556D5F26F9F95C007E2C2E /* CertificateTVC.xib in Resources */,
 				5CA450B126E20B6A0029324E /* context.jsonc in Resources */,
 				5C00074326D641CC002E5013 /* ImageViewerVC.xib in Resources */,
 				5C50CF2B26972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.xib in Resources */,
 				5C50CF3326972BFD0015EE29 /* CellWithDateAndCountryTVC.xib in Resources */,
 				5C00074B26D641E2002E5013 /* PDFViewerVC.xib in Resources */,
 				5C50CF0D269700550015EE29 /* CheckValidityVC.xib in Resources */,
-				5C556D4D26F9F8AC007E2C2E /* CertificatesListVC.xib in Resources */,
 				5C50CF1F2697023B0015EE29 /* RuleErrorTVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -763,17 +724,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C50CF16269700710015EE29 /* RuleValidationResultVC.xib in Resources */,
-				5C556D6826F9F97E007E2C2E /* ServerTVC.xib in Resources */,
-				5C556D5626F9F8C6007E2C2E /* ServersListVC.xib in Resources */,
 				5C556D4326F9DAF7007E2C2E /* TicketCodeAcceptViewController.xib in Resources */,
-				5C556D6026F9F95C007E2C2E /* CertificateTVC.xib in Resources */,
 				5CA450B226E20B6A0029324E /* context.jsonc in Resources */,
 				5C00074426D641CC002E5013 /* ImageViewerVC.xib in Resources */,
 				5C50CF2C26972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.xib in Resources */,
 				5C50CF3426972BFD0015EE29 /* CellWithDateAndCountryTVC.xib in Resources */,
 				5C00074C26D641E2002E5013 /* PDFViewerVC.xib in Resources */,
 				5C50CF0E269700550015EE29 /* CheckValidityVC.xib in Resources */,
-				5C556D4E26F9F8AC007E2C2E /* CertificatesListVC.xib in Resources */,
 				5C50CF202697023B0015EE29 /* RuleErrorTVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -828,7 +785,6 @@
 				CEE9DA55263C7D4000A31532 /* CertCode.swift in Sources */,
 				CE56BC07264068110044FD3F /* GatewayConnection.swift in Sources */,
 				FEAEA96526FBB13600B94FFF /* AccessTokenResponse.swift in Sources */,
-				CEA6D6F0261F8D2700715333 /* Scan.swift in Sources */,
 				CE13CF23262DDF810070C80E /* RoundedButton.swift in Sources */,
 				5C556D5126F9F8C6007E2C2E /* ServersListVC.swift in Sources */,
 				5C50CF2726972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.swift in Sources */,

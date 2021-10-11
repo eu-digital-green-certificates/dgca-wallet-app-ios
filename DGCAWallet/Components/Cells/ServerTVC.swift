@@ -19,17 +19,18 @@
  * ---license-end
  */
 //  
-//  ServerTVC.swift
+//  ServerCell.swift
 //  DGCAWallet
 //  
 //  Created by Alexandr Chernyy on 21.09.2021.
 //  
-        
+//  Updated by Igor Khomiak on 11.10.2021.
+
 
 import UIKit
 import SwiftDGC
 
-class ServerTVC: UITableViewCell {
+class ServerCell: UITableViewCell {
 
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var descriptionLabel: UILabel!
@@ -53,4 +54,9 @@ class ServerTVC: UITableViewCell {
   public func setService(serv: ValidationService) {
     service = serv
   }
+    
+  override func prepareForReuse() {
+    service = nil
+  }
+
 }

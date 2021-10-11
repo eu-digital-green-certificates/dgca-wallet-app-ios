@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--ScanVC-->
+        <!--Scan Wallet Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ScanVC" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ScanWalletController" customModule="SwiftDGC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -34,10 +34,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="hvv-8l-Bni">
-                                <rect key="frame" x="0.0" y="44" width="414" height="762"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="754"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ServerTVC" rowHeight="70" id="qpL-Hx-UWm" customClass="ServerTVC" customModule="DGCAWallet" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ServerCell" rowHeight="70" id="qpL-Hx-UWm" customClass="ServerCell" customModule="DGCAWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qpL-Hx-UWm" id="lgi-kp-ZN2">
@@ -85,7 +85,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rcx-o5-KDY" customClass="RoundedButton" customModule="DGCAWallet" customModuleProvider="target">
-                                <rect key="frame" x="227" y="822" width="179" height="40"/>
+                                <rect key="frame" x="227" y="814" width="179" height="40"/>
                                 <color key="backgroundColor" name="yellow"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="179" id="GLJ-JX-LXm"/>
@@ -113,7 +113,7 @@
                             <constraint firstItem="Rcx-o5-KDY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Zam-g7-Act" secondAttribute="leading" constant="20" id="LlO-hU-r6m"/>
                             <constraint firstItem="hvv-8l-Bni" firstAttribute="top" secondItem="Zam-g7-Act" secondAttribute="top" id="SUz-oC-cdU"/>
                             <constraint firstItem="hvv-8l-Bni" firstAttribute="leading" secondItem="Zam-g7-Act" secondAttribute="leading" id="lnx-we-XaO"/>
-                            <constraint firstItem="Rcx-o5-KDY" firstAttribute="bottom" secondItem="Zam-g7-Act" secondAttribute="bottom" id="uS5-Vk-Pet"/>
+                            <constraint firstItem="Rcx-o5-KDY" firstAttribute="bottom" secondItem="Zam-g7-Act" secondAttribute="bottom" constant="-8" id="uS5-Vk-Pet"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="eCU-te-fnC"/>
@@ -136,10 +136,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="sKg-PA-Rtf">
-                                <rect key="frame" x="0.0" y="44" width="414" height="762"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="754"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CertificateTVC" rowHeight="70" id="jYu-JM-UXs" customClass="CertificateTVC" customModule="DGCAWallet" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CertificateCell" rowHeight="70" id="jYu-JM-UXs" customClass="CertificateCell" customModule="DGCAWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jYu-JM-UXs" id="bd7-IO-9sW">
@@ -187,7 +187,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WbA-kC-hOb" customClass="RoundedButton" customModule="DGCAWallet" customModuleProvider="target">
-                                <rect key="frame" x="215" y="822" width="179" height="40"/>
+                                <rect key="frame" x="215" y="814" width="179" height="40"/>
                                 <color key="backgroundColor" name="yellow"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="179" id="XFO-FO-gF6"/>
@@ -211,7 +211,7 @@
                         <constraints>
                             <constraint firstItem="WbA-kC-hOb" firstAttribute="top" secondItem="sKg-PA-Rtf" secondAttribute="bottom" constant="16" id="Chk-Qx-cG3"/>
                             <constraint firstItem="sKg-PA-Rtf" firstAttribute="leading" secondItem="YzT-Kx-FjW" secondAttribute="leading" id="MX4-Qg-nrG"/>
-                            <constraint firstItem="WbA-kC-hOb" firstAttribute="bottom" secondItem="YzT-Kx-FjW" secondAttribute="bottom" id="QW3-6l-xxe"/>
+                            <constraint firstItem="WbA-kC-hOb" firstAttribute="bottom" secondItem="YzT-Kx-FjW" secondAttribute="bottom" constant="-8" id="QW3-6l-xxe"/>
                             <constraint firstItem="YzT-Kx-FjW" firstAttribute="trailing" secondItem="WbA-kC-hOb" secondAttribute="trailing" constant="20" id="TWV-Ut-VaR"/>
                             <constraint firstItem="sKg-PA-Rtf" firstAttribute="top" secondItem="YzT-Kx-FjW" secondAttribute="top" id="fF9-BR-rLn"/>
                             <constraint firstItem="WbA-kC-hOb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YzT-Kx-FjW" secondAttribute="leading" constant="20" id="gBJ-nr-ilN"/>
@@ -571,6 +571,12 @@
     <designables>
         <designable name="MID-ne-Jur">
             <size key="intrinsicContentSize" width="97" height="46"/>
+        </designable>
+        <designable name="Rcx-o5-KDY">
+            <size key="intrinsicContentSize" width="56" height="42"/>
+        </designable>
+        <designable name="WbA-kC-hOb">
+            <size key="intrinsicContentSize" width="56" height="42"/>
         </designable>
     </designables>
     <resources>

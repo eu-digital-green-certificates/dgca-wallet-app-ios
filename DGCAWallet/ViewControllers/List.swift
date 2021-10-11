@@ -256,7 +256,7 @@ class ListVC: UIViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
       switch segue.identifier {
       case SegueIdentifiers.showScannerSegue:
-          guard let scanController = segue.destination as? ScanVC else { return }
+          guard let scanController = segue.destination as? ScanWalletController else { return }
           
           scanController.modalPresentationStyle = .fullScreen
           scanController.delegate = self
@@ -282,7 +282,7 @@ extension ListVC: CertViewerDelegate {
   }
 }
 
-extension ListVC: ScanVCDelegate {
+extension ListVC: ScanWalletDelegate {
   func disableBackgroundDetection() {
     SecureBackground.paused = true
   }
@@ -561,12 +561,12 @@ extension ListVC: UIDocumentPickerDelegate {
       let width = Int(mediaBoxRect.width * scale)
       let height = Int(mediaBoxRect.height * scale)
       let context = CGContext(data: nil,
-                              width: width,
-                              height: height,
-                              bitsPerComponent: 8,
-                              bytesPerRow: 0,
-                              space: colorSpace,
-                              bitmapInfo: bitmapInfo)!
+          width: width,
+          height: height,
+          bitsPerComponent: 8,
+          bytesPerRow: 0,
+          space: colorSpace,
+          bitmapInfo: bitmapInfo)!
       context.interpolationQuality = .high
       context.setFillColor(UIColor.white.cgColor)
       context.fill(CGRect(x: 0, y: 0, width: width, height: height))

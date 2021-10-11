@@ -19,17 +19,18 @@
  * ---license-end
  */
 //  
-//  CertificateTVC.swift
+//  CertificateCell.swift
 //  DGCAWallet
 //  
 //  Created by Alexandr Chernyy on 21.09.2021.
-//  
+//
+//  Updated by Igor Khomiak on 11.10.2021.
         
 
 import UIKit
 import SwiftDGC
 
-class CertificateTVC: UITableViewCell {
+class CertificateCell: UITableViewCell {
 
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var descriptionLabel: UILabel!
@@ -52,5 +53,9 @@ class CertificateTVC: UITableViewCell {
 
   public func setCertificate(cert: HCert) {
     hCert = cert
+  }
+  
+  override func prepareForReuse() {
+    hCert = nil
   }
 }

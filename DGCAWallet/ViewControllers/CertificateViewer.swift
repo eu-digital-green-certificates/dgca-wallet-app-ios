@@ -149,7 +149,7 @@ class CertificateViewerVC: UIViewController {
                                               self?.shareQrCodeLikePDF()
                                             }))
     menuActionSheet.addAction(UIAlertAction(title: l10n("cancel"),
-                                            style: UIAlertAction.Style.destructive,
+                                            style: UIAlertAction.Style.cancel,
                                             handler: nil))
     present(menuActionSheet, animated: true, completion: nil)
   }

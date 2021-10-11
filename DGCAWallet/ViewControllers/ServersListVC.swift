@@ -32,7 +32,7 @@ import Security
 class ServersListVC: UIViewController {
   
     private enum Constants {
-      static let cellIndentifier = "ServerTVC"
+      static let cellIndentifier = "ServerCell"
       static let showCertificatesList = "showCertificatesList"
     }
 
@@ -114,7 +114,6 @@ class ServersListVC: UIViewController {
         guard let certController = segue.destination as? CertificatesListVC,
             let (serviceInfo,tokenResponse) = sender as? (ServerListResponse, AccessTokenResponse) else { return }
         certController.setCertsWith(serviceInfo, tokenResponse)
-        
     default:
         break
     }
@@ -128,10 +127,12 @@ extension ServersListVC: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellIndentifier,
-        for: indexPath) as? ServerTVC else { return UITableViewCell() }
+        for: indexPath) as? ServerCell else { return UITableViewCell() }
+      
     let service = listOfServices[indexPath.row]
     cell.accessoryType = (service.isSelected ?? false) ? .checkmark : .none
     cell.setService(serv: service)
+      
     return cell
   }
   

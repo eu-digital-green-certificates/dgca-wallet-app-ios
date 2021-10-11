@@ -31,7 +31,7 @@ import SwiftDGC
 class CertificatesListVC: UIViewController {
   
   private enum Constants {
-    static let hcertCellIndentifier = "CertificateTVC"
+    static let hcertCellIndentifier = "CertificateCell"
   }
   
   @IBOutlet weak var tableView      : UITableView!
@@ -82,7 +82,7 @@ extension CertificatesListVC: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.hcertCellIndentifier,
-          for: indexPath) as? CertificateTVC else { return UITableViewCell() }
+          for: indexPath) as? CertificateCell else { return UITableViewCell() }
       let hCert = listOfCert[indexPath.row]
 
       cell.accessoryType = hCert.isSelected ? .checkmark : .none
