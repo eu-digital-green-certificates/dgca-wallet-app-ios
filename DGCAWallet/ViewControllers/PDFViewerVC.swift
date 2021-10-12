@@ -49,9 +49,8 @@ class PDFViewerVC: UIViewController {
   }
   
   private func setupView() {
-    guard let savedPDF = savedPDF, let pdfView = pdfView else {
-      return
-    }
+    guard let savedPDF = savedPDF, let pdfView = pdfView else { return }
+      
     if pdfViewer == nil {
       pdfViewer = PDFView(frame: pdfView.bounds)
     }
@@ -66,15 +65,13 @@ class PDFViewerVC: UIViewController {
   }
   
   @IBAction func shareAction(_ sender: Any) {
-    guard let savedPDF = savedPDF else {
-      return
-    }
+    guard let savedPDF = savedPDF else { return }
+      
     let pdfToShare = [ savedPDF.pdfData ]
     let activityViewController = UIActivityViewController(activityItems: pdfToShare as [Any],
-                                                          applicationActivities: nil)
+        applicationActivities: nil)
     activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
     self.present(activityViewController, animated: true, completion: nil)
-
   }
   
   @IBAction func backAction(_ sender: Any) {

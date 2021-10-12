@@ -51,9 +51,7 @@ struct GatewayConnection: ContextConnection {
     let toBeSigned = tanHash + certHash + pubKey
     let toBeSignedData = Data(toBeSigned.data(using: .utf8) ?? .init())
     Enclave.sign(data: toBeSignedData, with: cert.keyPair, using: .ecdsaSignatureMessageX962SHA256) { sign, err in
-      guard let sign = sign, err == nil else {
-        return
-      }
+      guard let sign = sign, err == nil else { return }
       
       let keyParam: [String: Any] = [ "type": "EC", "value": pubKey ]
       let param: [String: Any] = [
@@ -70,8 +68,7 @@ struct GatewayConnection: ContextConnection {
         parameters: param,
         encoding: JSONEncoding.default
       ).response {
-        guard
-          case .success(_) = $0.result,
+        guard case .success(_) = $0.result,
           let status = $0.response?.statusCode,
           status / 100 == 2
         else {
@@ -88,15 +85,9 @@ struct GatewayConnection: ContextConnection {
   }
   
   public static func fetchContext() {
-    request(
-      ["context"]
-    ).response {
-      guard
-        let data = $0.data,
-        let string = String(data: data, encoding: .utf8)
-      else {
-        return
-      }
+    request( ["context"] ).response {
+      guard let data = $0.data, let string = String(data: data, encoding: .utf8) else { return }
+        
       let json = JSON(parseJSONC: string)
       LocalData.sharedInstance.config.merge(other: json)
       LocalData.sharedInstance.save()
@@ -118,14 +109,12 @@ extension GatewayConnection {
   // Country list
   public static func getListOfCountry(completion: (([CountryModel]) -> Void)?) {
     request(["endpoints", "countryList"], method: .get).response {
-      guard
-        case let .success(result) = $0.result,
+      guard case let .success(result) = $0.result,
         let response = result,
         let responseStr = String(data: response, encoding: .utf8),
         let json = JSON(parseJSON: responseStr).array
-      else {
-        return
-      }
+      else { return }
+        
       let codes = json.compactMap { $0.string }
       var countryList: [CountryModel] = []
       codes.forEach { code in
@@ -157,13 +146,11 @@ extension GatewayConnection {
   // Rules
   public static func getListOfRules(completion: (([CertLogic.Rule]) -> Void)?) {
     request(["endpoints", "rules"], method: .get).response {
-      guard
-        case let .success(result) = $0.result,
+      guard case let .success(result) = $0.result,
         let response = result,
         let responseStr = String(data: response, encoding: .utf8)
-      else {
-        return
-      }
+      else { return }
+        
       let ruleHashes: [RuleHash] = CertLogicEngine.getItems(from: responseStr)
       // Remove old hashes
       RulesDataStorage.sharedInstance.rules = RulesDataStorage.sharedInstance.rules.filter { rule in
@@ -195,8 +182,7 @@ extension GatewayConnection {
   }
   public static func getRules(ruleHash: CertLogic.RuleHash, completion: ((CertLogic.Rule?) -> Void)?) {
     request(["endpoints", "rules"], externalLink: "/\(ruleHash.country)/\(ruleHash.hash)", method: .get).response {
-      guard
-        case let .success(result) = $0.result,
+      guard case let .success(result) = $0.result,
         let response = result,
         let responseStr = String(data: response, encoding: .utf8)
       else {
@@ -323,14 +309,11 @@ extension GatewayConnection {
     
     let session = URLSession.shared.dataTask(with: request, completionHandler: { data,response,error in
       if let responseData = data {
-        
         let responseModel = try! decoder.decode(ServerListResponse.self, from: responseData)
-        
         completion(responseModel)
       } else {
         completion(nil)
       }
-      
     })
     session.resume()
   }
@@ -357,8 +340,7 @@ extension GatewayConnection {
   
   static func getAccessTokenFor(url : URL,servicePath : String, publicKey : String, completion : @escaping (AccessTokenResponse?) -> Void) {
     let decoder = JSONDecoder()
-    let json: [String: Any] = ["service": servicePath,
-                               "pubKey": publicKey]
+    let json: [String: Any] = ["service": servicePath, "pubKey": publicKey]
     
     let jsonData = try? JSONSerialization.data(withJSONObject: json,options: .prettyPrinted)
     
@@ -401,7 +383,6 @@ extension GatewayConnection {
       
     })
     session.resume()
-    
   }
   
   static func validateTicketing(url : URL, parameters : [String: String]?, completion : @escaping (String?) -> Void ) {
@@ -422,4 +403,3 @@ extension GatewayConnection {
     session.resume()
   }
 }
-

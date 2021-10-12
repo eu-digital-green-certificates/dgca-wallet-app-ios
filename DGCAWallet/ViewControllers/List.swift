@@ -251,7 +251,7 @@ extension ListVC: ScanWalletDelegate {
     SecureBackground.paused = false
   }
 
-  func walletController(_ controller: ScanWalletController, didScan certificate: HCert) {
+  func walletController(_ controller: ScanWalletController, didScanCertificate certificate: HCert) {
     DispatchQueue.main.async { [weak self] in
         self?.dismiss(animated: true, completion: {
             self?.presentViewer(for: certificate, isSaved: false)
@@ -259,7 +259,7 @@ extension ListVC: ScanWalletDelegate {
     }
   }
   
-  func ticketingInfoScanned(_ ticketing: SwiftDGC.TicketingQR) {
+  func walletController(_ controller: ScanWalletController, didScanInfo ticketing: SwiftDGC.TicketingQR) {
     if scannedToken == ticketing.token || navigationController?.viewControllers.last is ServersListVC {
       return
     }

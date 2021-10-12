@@ -46,10 +46,12 @@ final class RuleValidationResultVC: UIViewController {
   @IBOutlet weak var noWarrantyLabel: UILabel!
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
   private var hCert: HCert?
   private var selectedDate = Date()
   var closeHandler: OnCloseHandler?
   var items: [InfoSection] = []
+    
   override func viewDidLoad() {
     super.viewDidLoad()
     setupLabels()
@@ -62,16 +64,19 @@ final class RuleValidationResultVC: UIViewController {
     tableView.register(UINib(nibName: Constants.ruleCellId, bundle: nil), forCellReuseIdentifier: Constants.ruleCellId)
     tableView.contentInset = .init(top: 0, left: 0, bottom: 32, right: 0)
   }
+    
   private func setupLabels() {
     resultLabel.text = l10n("validate_certificate_with_rules")
     resultDescriptionLabel.text = ""
     noWarrantyLabel.text = l10n("info_without_waranty")
   }
+    
   @IBAction func closeAction(_ sender: Any) {
     self.dismiss(animated: true) { [weak self] in
       self?.closeHandler?()
     }
   }
+    
   @IBAction func backAction(_ sender: Any) {
     self.dismiss(animated: true, completion: nil)
   }
@@ -113,6 +118,7 @@ extension RuleValidationResultVC: UITableViewDataSource {
 //    }
     return items.count
   }
+    
   func numberOfSections(in tableView: UITableView) -> Int {
     return 1
   }
@@ -120,9 +126,8 @@ extension RuleValidationResultVC: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let item: InfoSection = items[indexPath.row]
     let base = tableView.dequeueReusableCell(withIdentifier: Constants.ruleCellId, for: indexPath)
-    guard let cell = base as? RuleErrorTVC else {
-      return base
-    }
+    guard let cell = base as? RuleErrorTVC else { return base }
+      
     cell.setupCell(with: item)
     return cell
   }
@@ -131,9 +136,8 @@ extension RuleValidationResultVC: UITableViewDataSource {
 extension RuleValidationResultVC {
   func validateCertLogicRules() -> HCertValidity {
     var validity: HCertValidity = .valid
-    guard let hCert = hCert else {
-      return validity
-    }
+    guard let hCert = hCert else { return validity }
+      
     let certType = getCertificationType(type: hCert.type)
     if let countryCode = hCert.ruleCountryCode {
       let valueSets = ValueSetsDataStorage.sharedInstance.getValueSetsForExternalParameters()
@@ -148,9 +152,7 @@ extension RuleValidationResultVC {
                                                  kid: hCert.kidStr)
       let result = CertLogicEngineManager.sharedInstance.validate(filter: filterParameter, external: externalParameters,
                                                                   payload: hCert.body.description)
-      let failsAndOpen = result.filter { validationResult in
-        return validationResult.result != .passed
-      }
+      let failsAndOpen = result.filter { validationResult in return validationResult.result != .passed }
       if failsAndOpen.count > 0 {
         validity = .ruleInvalid
         result.sorted(by: { vdResultOne, vdResultTwo in

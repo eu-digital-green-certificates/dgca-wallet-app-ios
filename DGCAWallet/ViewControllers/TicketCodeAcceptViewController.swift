@@ -69,8 +69,7 @@ class TicketCodeAcceptViewController: UIViewController {
     guard let urlPath = accessTokenInfo?.aud!,
           let url = URL(string: urlPath),
           let iv = UserDefaults.standard.object(forKey: "xnonce")
-    else
-    { return }
+    else { return }
     
     let dic = ["2": "B", "1": "A", "3": "C"]
     let encoder = JSONEncoder()
@@ -84,5 +83,4 @@ class TicketCodeAcceptViewController: UIViewController {
       print(resultStr)
     }
   }
-  
 }

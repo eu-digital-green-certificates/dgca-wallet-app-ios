@@ -39,7 +39,7 @@ class ServersListVC: UIViewController {
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var nextButton: UIButton!
   
-  private var serverListInfo : ServerListResponse?
+  private var serverListInfo: ServerListResponse?
   private var listOfServices = [ValidationService]()
   
   override func viewDidLoad() {
@@ -76,7 +76,7 @@ class ServersListVC: UIViewController {
       base64PublicKeyString = data.base64EncodedString()
     }
     
-    guard let accessTokenService = serverListInfo?.service.first(where: { $0.type == "AccessTokenService" }),
+    guard let accessTokenService = serverListInfo?.service?.first(where: { $0.type == "AccessTokenService" }),
       let url = URL(string: accessTokenService.serviceEndpoint),
         let serviceURL = URL(string: service.serviceEndpoint) else { return }
     
@@ -84,10 +84,12 @@ class ServersListVC: UIViewController {
 //      TODO: Show UI message with error if fail to fetch serviceInfo
       guard let serviceInfo = validationServiceInfo else { return }
       
-      GatewayConnection.getAccessTokenFor(url: url, servicePath: service.id, publicKey: base64PublicKeyString) { response in
+      GatewayConnection.getAccessTokenFor(url: url, servicePath: service.id,
+        publicKey: base64PublicKeyString) { response in
         guard let accessTokenResponse = response else { return }
         DispatchQueue.main.async {
-            self?.performSegue(withIdentifier: Constants.showCertificatesList, sender: (serviceInfo, accessTokenResponse))
+            self?.performSegue(withIdentifier: Constants.showCertificatesList,
+                sender: (serviceInfo, accessTokenResponse))
         }
       }
     }
@@ -95,7 +97,7 @@ class ServersListVC: UIViewController {
   
   public func setServices(info: ServerListResponse) {
     serverListInfo = info
-    listOfServices = serverListInfo?.service.filter{ $0.type == "ValidationService" } ?? []
+      listOfServices = serverListInfo?.service?.filter{ $0.type == "ValidationService" } ?? []
   }
   
   private func deselectAllServers() {

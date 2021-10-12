@@ -35,6 +35,7 @@ class ImageViewerVC: UIViewController {
   @IBOutlet weak var shareButton: UIButton!
   @IBOutlet weak var imageView: UIImageView!
   @IBOutlet weak var scrollView: UIScrollView!
+    
   var savedImage: SavedImage? {
     didSet {
       setupView()
@@ -51,9 +52,8 @@ class ImageViewerVC: UIViewController {
   }
 
   private func setupView() {
-    guard let savedImage = savedImage, let scrollView = scrollView, let imageView = imageView else {
-      return
-    }
+    guard let savedImage = savedImage, let scrollView = scrollView, let imageView = imageView else { return }
+      
     scrollView.backgroundColor = .lightGray
     imageView.image = savedImage.image
     scrollView.delegate = self
@@ -64,15 +64,13 @@ class ImageViewerVC: UIViewController {
   }
     
   @IBAction func shareAction(_ sender: Any) {
-    guard let savedImage = savedImage else {
-      return
-    }
+    guard let savedImage = savedImage else { return }
+      
     let imageToShare = [ savedImage.image ]
     let activityViewController = UIActivityViewController(activityItems: imageToShare as [Any],
-                                                          applicationActivities: nil)
+       applicationActivities: nil)
     activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
     self.present(activityViewController, animated: true, completion: nil)
-
   }
   
   @IBAction func backAction(_ sender: Any) {
@@ -86,6 +84,6 @@ class ImageViewerVC: UIViewController {
 
 extension ImageViewerVC: UIScrollViewDelegate {
   func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-       imageView
+     return imageView
   }
 }

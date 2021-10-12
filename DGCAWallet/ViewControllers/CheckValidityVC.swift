@@ -39,10 +39,12 @@ final class CheckValidityVC: UIViewController {
   @IBOutlet private weak var closeButton: UIButton!
   @IBOutlet private weak var checkValidityButton: UIButton!
   @IBOutlet private weak var tableView: UITableView!
+    
   private var items: [ValidityCellModel] = []
   private var hCert: HCert?
   private var selectedDate = Date()
   private var selectedCountryCode: String?
+    
   override func viewDidLoad() {
     super.viewDidLoad()
     setupView()
@@ -75,6 +77,7 @@ final class CheckValidityVC: UIViewController {
   func setHCert(cert: HCert?) {
     self.hCert = cert
   }
+    
   @IBAction func checkValidityAction(_ sender: Any) {
     let ruleValidationVC = RuleValidationResultVC.loadFromNib()
     ruleValidationVC.closeHandler = {
@@ -91,6 +94,7 @@ extension CheckValidityVC: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return items.count
   }
+    
   func numberOfSections(in tableView: UITableView) -> Int {
     return 1
   }
@@ -98,17 +102,14 @@ extension CheckValidityVC: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let item: ValidityCellModel = items[indexPath.row]
     if item.cellType == .titleAndDescription {
-      let base = tableView.dequeueReusableCell(withIdentifier: Constants.titleCellIndentifier, for: indexPath)
-      guard let cell = base as? CellWithTitleAndDescriptionTVC else {
-        return base
-      }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.titleCellIndentifier, for: indexPath) as? CellWithTitleAndDescriptionTVC else { return UITableViewCell() }
+
       cell.setupCell(with: item)
       return cell
+        
     } else {
-      let base = tableView.dequeueReusableCell(withIdentifier: Constants.countryCellIndentifier, for: indexPath)
-      guard let cell = base as? CellWithDateAndCountryTVC else {
-        return base
-      }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.countryCellIndentifier, for: indexPath) as? CellWithDateAndCountryTVC else { return UITableViewCell() }
+
       cell.countryHandler = { [weak self] countryCode in
         self?.hCert?.ruleCountryCode = countryCode
       }

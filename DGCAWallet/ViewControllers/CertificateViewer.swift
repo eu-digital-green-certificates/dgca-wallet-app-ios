@@ -63,14 +63,7 @@ class CertificateViewerVC: UIViewController {
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-
-    if #available(iOS 13.0, *) {
-      draw()
-    } else {
-      DispatchQueue.main.async { [weak self] in
-        self?.draw()
-      }
-    }
+    draw()
   }
 
   var newCertAdded = false
@@ -83,7 +76,7 @@ class CertificateViewerVC: UIViewController {
 
   @IBAction func closeButtonClick() {
     if isSaved {
-      return dismiss(animated: true, completion: nil)
+       dismiss(animated: true, completion: nil)
     }
     saveCert()
   }
