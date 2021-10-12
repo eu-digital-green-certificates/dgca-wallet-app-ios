@@ -124,9 +124,7 @@ extension GatewayConnection {
   static func countryList(completion: (([CountryModel]) -> Void)? = nil) {
     CountryDataStorage.initialize {
       if CountryDataStorage.sharedInstance.countryCodes.count > 0 {
-        completion?(CountryDataStorage.sharedInstance.countryCodes.sorted(by: { countryOne, countryTwo in
-          return countryOne.name < countryTwo.name
-        }))
+        completion?(CountryDataStorage.sharedInstance.countryCodes.sorted(by: { $0.name < $1.name }))
       }
       getListOfCountry { countryList in
         CountryDataStorage.sharedInstance.countryCodes.removeAll()
@@ -135,9 +133,7 @@ extension GatewayConnection {
         }
         CountryDataStorage.sharedInstance.lastFetch = Date()
         CountryDataStorage.sharedInstance.save()
-        completion?(CountryDataStorage.sharedInstance.countryCodes.sorted(by: { countryOne, countryTwo in
-          return countryOne.name < countryTwo.name
-        }))
+          completion?(CountryDataStorage.sharedInstance.countryCodes.sorted(by: { $0.name < $1.name }))
       }
     }
   }
@@ -153,9 +149,7 @@ extension GatewayConnection {
       let ruleHashes: [RuleHash] = CertLogicEngine.getItems(from: responseStr)
       // Remove old hashes
       RulesDataStorage.sharedInstance.rules = RulesDataStorage.sharedInstance.rules.filter { rule in
-        return !ruleHashes.contains(where: { ruleHash in
-          return ruleHash.hash == rule.hash
-        })
+          return !ruleHashes.contains(where: { $0.hash == rule.hash})
       }
       // Downloading new hashes
       var rulesItems = [CertLogic.Rule]()
@@ -209,9 +203,7 @@ extension GatewayConnection {
   
   static func loadRulesFromServer(completion: (([CertLogic.Rule]) -> Void)? = nil) {
     getListOfRules { rulesList in
-      rulesList.forEach { rule in
-        RulesDataStorage.sharedInstance.add(rule: rule)
-      }
+      rulesList.forEach { RulesDataStorage.sharedInstance.add(rule: $0) }
       RulesDataStorage.sharedInstance.lastFetch = Date()
       RulesDataStorage.sharedInstance.save()
       completion?(RulesDataStorage.sharedInstance.rules)
@@ -221,8 +213,7 @@ extension GatewayConnection {
   // ValueSets
   public static func getListOfValueSets(completion: (([CertLogic.ValueSet]) -> Void)?) {
     request(["endpoints", "valuesets"], method: .get).response {
-      guard case let .success(result) = $0.result,
-        let response = result,
+      guard case let .success(result) = $0.result, let response = result,
         let responseStr = String(data: response, encoding: .utf8)
       else { return }
         

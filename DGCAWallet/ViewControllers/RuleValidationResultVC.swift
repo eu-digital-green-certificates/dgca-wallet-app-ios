@@ -121,9 +121,9 @@ extension RuleValidationResultVC: UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let item: InfoSection = items[indexPath.row]
     guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.ruleCellId, for: indexPath) as? RuleErrorTVC else { return UITableViewCell() }
-      
+    let item: InfoSection = items[indexPath.row]
+
     cell.setupCell(with: item)
     return cell
   }

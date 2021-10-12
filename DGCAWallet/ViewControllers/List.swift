@@ -394,8 +394,10 @@ extension ListVC: UITableViewDelegate {
               }
             }
       case 1:
+          //TODO - add remove images
           break
       case 2:
+          //TODO - add remove pdfs
           break
       case 3:
           break
@@ -445,10 +447,6 @@ extension ListVC: UIImagePickerControllerDelegate, UINavigationControllerDelegat
     alert.addAction(galleryAction)
     alert.addAction(cancelAction)
     present(alert, animated: true, completion: nil)
-  }
-
-  func pickImage(_ viewController: UIViewController, _ callback: @escaping ((UIImage) -> Void)) {
-      ()
   }
     
   func openCamera() {
