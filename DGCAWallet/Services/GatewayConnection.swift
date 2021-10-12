@@ -37,9 +37,8 @@ import JWTDecode
 
 struct GatewayConnection: ContextConnection {
   public static func claim(cert: HCert, with tan: String?, completion: ((Bool, String?) -> Void)?) {
-    guard var tan = tan, !tan.isEmpty else {
-      return
-    }
+    guard var tan = tan, !tan.isEmpty else { return }
+      
     // Replace dashes, spaces, etc. and turn into uppercase.
     let set = CharacterSet(charactersIn: "0123456789").union(.uppercaseLetters)
     tan = tan.uppercased().components(separatedBy: set.inverted).joined()
@@ -66,8 +65,7 @@ struct GatewayConnection: ContextConnection {
         ["endpoints", "claim"],
         method: .post,
         parameters: param,
-        encoding: JSONEncoding.default
-      ).response {
+        encoding: JSONEncoding.default).response {
         guard case .success(_) = $0.result,
           let status = $0.response?.statusCode,
           status / 100 == 2
@@ -92,9 +90,8 @@ struct GatewayConnection: ContextConnection {
       LocalData.sharedInstance.config.merge(other: json)
       LocalData.sharedInstance.save()
       if LocalData.sharedInstance.versionedConfig["outdated"].bool == true {
-        (
-          UIApplication.shared.windows[0].rootViewController as? UINavigationController
-        )?.popToRootViewController(animated: false)
+        let controller = UIApplication.shared.windows[0].rootViewController as? UINavigationController
+        controller?.popToRootViewController(animated: false)
       }
     }
   }
@@ -123,6 +120,7 @@ extension GatewayConnection {
       completion?(countryList)
     }
   }
+    
   static func countryList(completion: (([CountryModel]) -> Void)? = nil) {
     CountryDataStorage.initialize {
       if CountryDataStorage.sharedInstance.countryCodes.count > 0 {
@@ -143,6 +141,7 @@ extension GatewayConnection {
       }
     }
   }
+    
   // Rules
   public static func getListOfRules(completion: (([CertLogic.Rule]) -> Void)?) {
     request(["endpoints", "rules"], method: .get).response {
@@ -222,19 +221,15 @@ extension GatewayConnection {
   // ValueSets
   public static func getListOfValueSets(completion: (([CertLogic.ValueSet]) -> Void)?) {
     request(["endpoints", "valuesets"], method: .get).response {
-      guard
-        case let .success(result) = $0.result,
+      guard case let .success(result) = $0.result,
         let response = result,
         let responseStr = String(data: response, encoding: .utf8)
-      else {
-        return
-      }
+      else { return }
+        
       let valueSetsHashes: [ValueSetHash] = CertLogicEngine.getItems(from: responseStr)
       // Remove old hashes
       ValueSetsDataStorage.sharedInstance.valueSets = ValueSetsDataStorage.sharedInstance.valueSets.filter { valueSet in
-        return !valueSetsHashes.contains(where: { valueSetHashe in
-          return valueSetHashe.hash == valueSet.hash
-        })
+        return !valueSetsHashes.contains(where: { $0.hash == valueSet.hash})
       }
       // Downloading new hashes
       var valueSetsItems = [CertLogic.ValueSet]()
@@ -260,8 +255,7 @@ extension GatewayConnection {
   }
   public static func getValueSets(valueSetHash: CertLogic.ValueSetHash, completion: ((CertLogic.ValueSet?) -> Void)?) {
     request(["endpoints", "valuesets"], externalLink: "/\(valueSetHash.hash)", method: .get).response {
-      guard
-        case let .success(result) = $0.result,
+      guard case let .success(result) = $0.result,
         let response = result,
         let responseStr = String(data: response, encoding: .utf8)
       else {
@@ -298,8 +292,6 @@ extension GatewayConnection {
     }
   }
   static func requestListOfServices(ticketingInfo : TicketingQR, completion : @escaping ((ServerListResponse?) -> Void)) {
-    let decoder = JSONDecoder()
-    
     UserDefaults.standard.set(ticketingInfo.token, forKey: "TicketingToken")
     let headers = HTTPHeaders([HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")])
     
@@ -307,6 +299,7 @@ extension GatewayConnection {
     var request = URLRequest(url: url)
     request.headers = headers
     
+    let decoder = JSONDecoder()
     let session = URLSession.shared.dataTask(with: request, completionHandler: { data,response,error in
       if let responseData = data {
         let responseModel = try! decoder.decode(ServerListResponse.self, from: responseData)
@@ -339,7 +332,6 @@ extension GatewayConnection {
   }
   
   static func getAccessTokenFor(url : URL,servicePath : String, publicKey : String, completion : @escaping (AccessTokenResponse?) -> Void) {
-    let decoder = JSONDecoder()
     let json: [String: Any] = ["service": servicePath, "pubKey": publicKey]
     
     let jsonData = try? JSONSerialization.data(withJSONObject: json,options: .prettyPrinted)
@@ -368,6 +360,7 @@ extension GatewayConnection {
         return
       }
       
+      let decoder = JSONDecoder()
       do {
         accessTokenResponse = try decoder.decode(AccessTokenResponse.self, from: jsonData)
       } catch let parseError {
@@ -386,7 +379,6 @@ extension GatewayConnection {
   }
   
   static func validateTicketing(url : URL, parameters : [String: String]?, completion : @escaping (String?) -> Void ) {
-    
     let headers = HTTPHeaders([HTTPHeader(name: "X-Version", value: UserDefaults.standard.object(forKey: "AccessToken") as! String),HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")])
     
     var request = URLRequest(url: url)

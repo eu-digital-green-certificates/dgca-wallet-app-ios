@@ -50,10 +50,9 @@ extension CertTableVC: UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let base = tableView.dequeueReusableCell(withIdentifier: "infoCell", for: indexPath)
-    guard let cell = base as? InfoCell else {
-      return base
-    }
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: "infoCell", for: indexPath) as? InfoCell else {
+          return UITableViewCell()
+      }
     cell.draw(hCert.info[indexPath.row])
     return cell
   }

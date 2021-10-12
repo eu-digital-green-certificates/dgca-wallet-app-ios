@@ -27,11 +27,11 @@
         
 
 import UIKit
+import SwiftDGC
 
 class ImageViewerVC: UIViewController {
 
   @IBOutlet weak var closeButton: UIButton!
-  @IBOutlet weak var backButton: UIButton!
   @IBOutlet weak var shareButton: UIButton!
   @IBOutlet weak var imageView: UIImageView!
   @IBOutlet weak var scrollView: UIScrollView!
@@ -44,6 +44,7 @@ class ImageViewerVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.closeButton.setTitle(l10n("close"), for: .normal)
     setupView()
   }
 
@@ -72,11 +73,7 @@ class ImageViewerVC: UIViewController {
     activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
     self.present(activityViewController, animated: true, completion: nil)
   }
-  
-  @IBAction func backAction(_ sender: Any) {
-    self.dismiss(animated: true)
-  }
-  
+    
   @IBAction func closeAction(_ sender: Any) {
     self.dismiss(animated: true)
   }

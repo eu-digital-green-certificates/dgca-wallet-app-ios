@@ -32,15 +32,6 @@ import SwiftDGC
 import SwiftyJSON
 
 class LicenseList: UINavigationController {
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
-  }
-
-  override func viewDidDisappear(_ animated: Bool) {
-    super.viewDidDisappear(animated)
-  }
-
 }
 
 class LicenseTableVC: UITableViewController {
@@ -62,9 +53,8 @@ class LicenseTableVC: UITableViewController {
 
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: "LicenseCell", for: indexPath) as? LicenseCell
-    else {
-      return UITableViewCell()
-    }
+    else { return UITableViewCell() }
+      
     let index = indexPath.row
     cell.drawLabel(self.licenses[index])
     return cell
@@ -84,21 +74,16 @@ class LicenseTableVC: UITableViewController {
 
   private func loadLicenses() {
     do {
-      guard let licenseFileLocation = Bundle.main.path(forResource: "OpenSourceNotices", ofType: "json")
-      else {
-        return
-      }
-      guard let jsonData = try String(contentsOfFile: licenseFileLocation).data(using: .utf8)
-      else {
-        return
-      }
+      guard let licenseFileLocation = Bundle.main.path(forResource: "OpenSourceNotices", ofType: "json"),
+        let jsonData = try String(contentsOfFile: licenseFileLocation).data(using: .utf8)
+      else { return }
+        
       let jsonDoc = try JSON(data: jsonData)
       self.licenses = jsonDoc["licenses"].array ?? []
     } catch {
       print(error)
       return
     }
-
     print(self.licenses)
   }
 }

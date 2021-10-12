@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -12,9 +12,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CheckValidityVC" customModule="DGCAWallet" customModuleProvider="target">
             <connections>
                 <outlet property="checkValidityButton" destination="C5z-Kx-DhF" id="3uF-Fl-a7g"/>
-                <outlet property="closeButton" destination="KVB-Kz-R59" id="gry-rF-kZD"/>
+                <outlet property="closeButton" destination="rhc-md-4xJ" id="Foa-X7-aKD"/>
                 <outlet property="tableView" destination="ZN5-sX-1Us" id="gjy-of-pSX"/>
-                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="Hbp-NZ-iXS"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -49,23 +49,17 @@
                         <action selector="checkValidityAction:" destination="-1" eventType="touchUpInside" id="AtS-Gk-1TF"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KVB-Kz-R59">
-                    <rect key="frame" x="376" y="60" width="30" height="30"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="30" id="8fi-4N-SUx"/>
-                        <constraint firstAttribute="height" constant="30" id="Uyv-t9-Qqz"/>
-                    </constraints>
-                    <state key="normal" title="X">
-                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </state>
-                    <connections>
-                        <action selector="closeButtonAction:" destination="-1" eventType="touchUpInside" id="igD-Km-sBE"/>
-                    </connections>
-                </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZN5-sX-1Us">
                     <rect key="frame" x="0.0" y="98" width="414" height="662"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rhc-md-4xJ">
+                    <rect key="frame" x="355" y="60" width="39" height="30"/>
+                    <state key="normal" title="Close"/>
+                    <connections>
+                        <action selector="closeButtonAction:" destination="-1" eventType="touchUpInside" id="1MD-0X-8wi"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -73,12 +67,12 @@
                 <constraint firstItem="U56-Rh-cHS" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="9Rs-Gn-1SX"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="U56-Rh-cHS" secondAttribute="bottom" constant="8" id="Bh4-mJ-6YJ"/>
                 <constraint firstItem="C5z-Kx-DhF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="ISg-qo-qNu"/>
-                <constraint firstItem="ZN5-sX-1Us" firstAttribute="top" secondItem="KVB-Kz-R59" secondAttribute="bottom" constant="8" id="Wdz-aj-0wF"/>
+                <constraint firstItem="ZN5-sX-1Us" firstAttribute="top" secondItem="rhc-md-4xJ" secondAttribute="bottom" constant="8" symbolic="YES" id="R89-gg-ZLj"/>
+                <constraint firstItem="rhc-md-4xJ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="XhS-eF-ZxA"/>
                 <constraint firstItem="ZN5-sX-1Us" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Ye1-f1-zLS"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="C5z-Kx-DhF" secondAttribute="trailing" constant="20" id="hwA-UG-8q5"/>
                 <constraint firstItem="ZN5-sX-1Us" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="kXj-lo-vug"/>
-                <constraint firstItem="KVB-Kz-R59" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="ofQ-Pz-PqN"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="KVB-Kz-R59" secondAttribute="trailing" constant="8" id="v6e-5r-HCK"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="rhc-md-4xJ" secondAttribute="trailing" constant="20" id="tWQ-k8-ZEw"/>
                 <constraint firstItem="C5z-Kx-DhF" firstAttribute="top" secondItem="ZN5-sX-1Us" secondAttribute="bottom" constant="8" id="wNd-6l-fFr"/>
                 <constraint firstItem="U56-Rh-cHS" firstAttribute="top" secondItem="C5z-Kx-DhF" secondAttribute="bottom" constant="8" id="yco-wX-Fxm"/>
             </constraints>

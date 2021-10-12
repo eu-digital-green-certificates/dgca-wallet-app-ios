@@ -49,15 +49,19 @@ final class CheckValidityVC: UIViewController {
     super.viewDidLoad()
     setupView()
     checkValidityButton.setTitle(l10n("button_i_agree"), for: .normal)
+    closeButton.setTitle(l10n("close"), for: .normal)
   }
+    
   @IBAction func closeButtonAction(_ sender: Any) {
     self.dismiss(animated: true, completion: nil)
   }
+    
   private func setupView() {
     setupInitialDate()
     setupTableView()
     tableView.reloadData()
   }
+    
   private func setupTableView() {
     tableView.dataSource = self
     tableView.register(UINib(nibName: Constants.titleCellIndentifier, bundle: nil),
@@ -65,8 +69,8 @@ final class CheckValidityVC: UIViewController {
     tableView.register(UINib(nibName: Constants.countryCellIndentifier, bundle: nil),
                        forCellReuseIdentifier: Constants.countryCellIndentifier)
     tableView.contentInset = .init(top: .zero, left: .zero, bottom: Constants.bottomOffset, right: .zero)
-
   }
+    
   private func setupInitialDate() {
     items.append(ValidityCellModel(title: l10n("country_certificate_text"),
                                    description: "",
@@ -74,6 +78,7 @@ final class CheckValidityVC: UIViewController {
     items.append(ValidityCellModel(cellType: .countryAndTimeSelection))
     items.append(ValidityCellModel(title: l10n("disclaimer"), description: l10n("disclaimer_text")))
   }
+    
   func setHCert(cert: HCert?) {
     self.hCert = cert
   }

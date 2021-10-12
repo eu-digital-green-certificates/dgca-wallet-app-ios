@@ -28,11 +28,11 @@
 
 import UIKit
 import PDFKit
+import SwiftDGC
 
 class PDFViewerVC: UIViewController {
 
   @IBOutlet weak var closeButton: UIButton!
-  @IBOutlet weak var backButton: UIButton!
   @IBOutlet weak var shareButton: UIButton!
   @IBOutlet weak var pdfView: UIView!
   var pdfViewer: PDFView?
@@ -57,7 +57,8 @@ class PDFViewerVC: UIViewController {
     pdfViewer?.autoScales = true
     pdfView.addSubview(pdfViewer!)
     pdfViewer?.document = savedPDF.pdf
-    self.navigationItem.title = savedPDF.fileName
+    closeButton.setTitle(l10n("close"), for: .normal)
+    navigationItem.title = savedPDF.fileName
   }
   
   public func setPDF(pdf: SavedPDF) {
@@ -73,11 +74,7 @@ class PDFViewerVC: UIViewController {
     activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
     self.present(activityViewController, animated: true, completion: nil)
   }
-  
-  @IBAction func backAction(_ sender: Any) {
-    self.dismiss(animated: true)
-  }
-  
+    
   @IBAction func closeAction(_ sender: Any) {
     self.dismiss(animated: true)
   }

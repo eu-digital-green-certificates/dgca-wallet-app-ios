@@ -49,8 +49,7 @@ class SettingsVC: UINavigationController {
 
 class SettingsTableVC: UITableViewController {
 
-  @IBAction
-  func cancelButton() {
+  @IBAction func cancelButton() {
     dismiss(animated: true, completion: nil)
   }
 
@@ -70,7 +69,7 @@ class SettingsTableVC: UITableViewController {
     openUrl(link)
   }
 
-  func openUrl(_ string: String!) {
+  func openUrl(_ string: String) {
     if let url = URL(string: string) {
       UIApplication.shared.open(url)
     }

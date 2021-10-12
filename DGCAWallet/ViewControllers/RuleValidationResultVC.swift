@@ -39,7 +39,6 @@ final class RuleValidationResultVC: UIViewController {
   }
   
   @IBOutlet weak var closeButton: UIButton!
-  @IBOutlet weak var backButton: UIButton!
   @IBOutlet weak var resultLabel: UILabel!
   @IBOutlet weak var resultIcon: UIImageView!
   @IBOutlet weak var resultDescriptionLabel: UILabel!
@@ -61,7 +60,8 @@ final class RuleValidationResultVC: UIViewController {
 
   private func setupTableView() {
     tableView.dataSource = self
-    tableView.register(UINib(nibName: Constants.ruleCellId, bundle: nil), forCellReuseIdentifier: Constants.ruleCellId)
+    tableView.register(UINib(nibName: Constants.ruleCellId, bundle: nil),
+        forCellReuseIdentifier: Constants.ruleCellId)
     tableView.contentInset = .init(top: 0, left: 0, bottom: 32, right: 0)
   }
     
@@ -69,36 +69,33 @@ final class RuleValidationResultVC: UIViewController {
     resultLabel.text = l10n("validate_certificate_with_rules")
     resultDescriptionLabel.text = ""
     noWarrantyLabel.text = l10n("info_without_waranty")
+    closeButton.setTitle(l10n("close"), for: .normal)
   }
     
   @IBAction func closeAction(_ sender: Any) {
-    self.dismiss(animated: true) { [weak self] in
+    dismiss(animated: true) { [weak self] in
       self?.closeHandler?()
     }
-  }
-    
-  @IBAction func backAction(_ sender: Any) {
-    self.dismiss(animated: true, completion: nil)
   }
 
   func setupView(with hcert: HCert, selectedDate: Date) {
     self.hCert = hcert
     self.selectedDate = selectedDate
     let validity: HCertValidity = self.validateCertLogicRules()
-    if validity == .valid {
-      resultLabel.text = l10n("valid_certificate")
-      resultDescriptionLabel.text = l10n("your_certificate_allow")
-      resultIcon.image = UIImage(named: "icon_large_valid")
+    switch validity {
+      case .valid:
+          resultLabel.text = l10n("valid_certificate")
+          resultDescriptionLabel.text = l10n("your_certificate_allow")
+          resultIcon.image = UIImage(named: "icon_large_valid")
+      case .invalid:
+          resultLabel.text = l10n("invalid_certificate")
+          resultDescriptionLabel.text = l10n("your_certificate_did_not_allow")
+      case .ruleInvalid:
+          resultLabel.text = l10n("certificate_limitation")
+          resultDescriptionLabel.text = l10n("certification_has_limitation")
+          resultIcon.image = UIImage(named: "icon_large_warning")
     }
-    if validity == .invalid {
-      resultLabel.text = l10n("invalid_certificate")
-      resultDescriptionLabel.text = l10n("your_certificate_did_not_allow")
-    }
-    if validity == .ruleInvalid {
-      resultLabel.text = l10n("certificate_limitation")
-      resultDescriptionLabel.text = l10n("certification_has_limitation")
-      resultIcon.image = UIImage(named: "icon_large_warning")
-    }
+
     activityIndicator.stopAnimating()
     resultIcon.isHidden = false
     tableView.isHidden = false
@@ -125,8 +122,7 @@ extension RuleValidationResultVC: UITableViewDataSource {
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let item: InfoSection = items[indexPath.row]
-    let base = tableView.dequeueReusableCell(withIdentifier: Constants.ruleCellId, for: indexPath)
-    guard let cell = base as? RuleErrorTVC else { return base }
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.ruleCellId, for: indexPath) as? RuleErrorTVC else { return UITableViewCell() }
       
     cell.setupCell(with: item)
     return cell
@@ -142,16 +138,16 @@ extension RuleValidationResultVC {
     if let countryCode = hCert.ruleCountryCode {
       let valueSets = ValueSetsDataStorage.sharedInstance.getValueSetsForExternalParameters()
       let filterParameter = FilterParameter(validationClock: self.selectedDate,
-                                            countryCode: countryCode,
-                                            certificationType: certType)
+        countryCode: countryCode,
+        certificationType: certType)
       let externalParameters = ExternalParameter(validationClock: self.selectedDate,
-                                                 valueSets: valueSets,
-                                                 exp: hCert.exp,
-                                                 iat: hCert.iat,
-                                                 issuerCountryCode: hCert.issCode,
-                                                 kid: hCert.kidStr)
-      let result = CertLogicEngineManager.sharedInstance.validate(filter: filterParameter, external: externalParameters,
-                                                                  payload: hCert.body.description)
+         valueSets: valueSets,
+         exp: hCert.exp,
+         iat: hCert.iat,
+         issuerCountryCode: hCert.issCode,
+         kid: hCert.kidStr)
+      let result = CertLogicEngineManager.sharedInstance.validate(filter: filterParameter,
+        external: externalParameters, payload: hCert.body.description)
       let failsAndOpen = result.filter { validationResult in return validationResult.result != .passed }
       if failsAndOpen.count > 0 {
         validity = .ruleInvalid
