@@ -175,6 +175,7 @@
 		DA01662026554E02005B73A1 /* LicenseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01661F26554E02005B73A1 /* LicenseCell.swift */; };
 		DA01662226558B2F005B73A1 /* LicenseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01662126558B2F005B73A1 /* LicenseVC.swift */; };
 		DA017DE626552259006E4D49 /* Licenses.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA017DE526552259006E4D49 /* Licenses.storyboard */; };
+		FE1D1A6B27148CBE00765A9A /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FE1D1A6A27148CBE00765A9A /* CryptoSwift */; };
 		FE6E78882702033300C142A3 /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = FE6E78872702033300C142A3 /* JWTDecode */; };
 		FEAEA96526FBB13600B94FFF /* AccessTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEAEA96426FBB13600B94FFF /* AccessTokenResponse.swift */; };
 /* End PBXBuildFile section */
@@ -288,8 +289,8 @@
 		DA01661F26554E02005B73A1 /* LicenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseCell.swift; sourceTree = "<group>"; };
 		DA01662126558B2F005B73A1 /* LicenseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseVC.swift; sourceTree = "<group>"; };
 		DA017DE526552259006E4D49 /* Licenses.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Licenses.storyboard; sourceTree = "<group>"; };
+		FE6F225327142AB1003AE754 /* dgca-app-core-ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "dgca-app-core-ios"; path = "../dgca-app-core-ios"; sourceTree = "<group>"; };
 		FEAEA96426FBB13600B94FFF /* AccessTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenResponse.swift; sourceTree = "<group>"; };
-		FECE1B4D2704B26E0005CFFC /* dgca-app-core-ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "dgca-app-core-ios"; path = "../../dgca-app-core-ios"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,6 +304,7 @@
 				CE6B330E2651A54800845B8E /* SwiftDGC in Frameworks */,
 				CE1F155C2639F9E700736D48 /* SwiftyJSON in Frameworks */,
 				CE13CF00262DCC180070C80E /* FloatingPanel in Frameworks */,
+				FE1D1A6B27148CBE00765A9A /* CryptoSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,6 +537,7 @@
 		CEA6D6DF261F8D2700715333 = {
 			isa = PBXGroup;
 			children = (
+				FE6F225327142AB1003AE754 /* dgca-app-core-ios */,
 				CEA6D6EA261F8D2700715333 /* DGCAWallet */,
 				CEA6D701261F8D2900715333 /* DGCAWalletTests */,
 				CEA6D70C261F8D2900715333 /* DGCAWalletUITests */,
@@ -557,7 +560,6 @@
 			isa = PBXGroup;
 			children = (
 				5C00072026D38D6D002E5013 /* DGCAWallet.entitlements */,
-				FECE1B4D2704B26E0005CFFC /* dgca-app-core-ios */,
 				5C00071A26D38C5C002E5013 /* NFC */,
 				CEA15561262F6DA10024B7AC /* Protocols */,
 				CE157F8B262E24EC00FE4821 /* Models */,
@@ -614,6 +616,7 @@
 				CE6B330D2651A54800845B8E /* SwiftDGC */,
 				5CE07C752692E0D900A032F9 /* CertLogic */,
 				FE6E78872702033300C142A3 /* JWTDecode */,
+				FE1D1A6A27148CBE00765A9A /* CryptoSwift */,
 			);
 			productName = DGCAWallet;
 			productReference = CEA6D6E8261F8D2700715333 /* DGCAWallet.app */;
@@ -693,6 +696,7 @@
 				CE6B330C2651A54800845B8E /* XCRemoteSwiftPackageReference "dgca-app-core-ios" */,
 				5CE07C742692E0D900A032F9 /* XCRemoteSwiftPackageReference "dgc-certlogic-ios" */,
 				FE6E78862702033200C142A3 /* XCRemoteSwiftPackageReference "JWTDecode.swift" */,
+				FE1D1A6927148CBE00765A9A /* XCRemoteSwiftPackageReference "CryptoSwift" */,
 			);
 			productRefGroup = CEA6D6E9261F8D2700715333 /* Products */;
 			projectDirPath = "";
@@ -1326,6 +1330,14 @@
 				minimumVersion = 5.4.3;
 			};
 		};
+		FE1D1A6927148CBE00765A9A /* XCRemoteSwiftPackageReference "CryptoSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzyzanowskim/CryptoSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		FE6E78862702033200C142A3 /* XCRemoteSwiftPackageReference "JWTDecode.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/auth0/JWTDecode.swift.git";
@@ -1361,6 +1373,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE8912F92634C6B900CB92AF /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		FE1D1A6A27148CBE00765A9A /* CryptoSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE1D1A6927148CBE00765A9A /* XCRemoteSwiftPackageReference "CryptoSwift" */;
+			productName = CryptoSwift;
 		};
 		FE6E78872702033300C142A3 /* JWTDecode */ = {
 			isa = XCSwiftPackageProductDependency;

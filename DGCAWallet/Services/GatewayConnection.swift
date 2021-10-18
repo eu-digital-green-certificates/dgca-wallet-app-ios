@@ -34,6 +34,7 @@ import CertLogic
 import CryptoKit
 import SwiftUI
 import JWTDecode
+import CryptoSwift
 
 struct GatewayConnection: ContextConnection {
   public static func claim(cert: HCert, with tan: String?, completion: ((Bool, String?) -> Void)?) {
@@ -406,16 +407,23 @@ extension GatewayConnection {
     
     let headers = HTTPHeaders([HTTPHeader(name: "X-Version", value: UserDefaults.standard.object(forKey: "AccessToken") as! String),HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")])
     
+    let encoder = JSONEncoder()
+    guard let parametersData = try? encoder.encode(parameters) else {
+      completion(nil)
+      return
+    }
+    
     var request = URLRequest(url: url)
     request.headers = headers
-    request.httpBody = Data()
+    request.method = .post
+    request.httpBody = parametersData
     
     let session = URLSession.shared.dataTask(with: request, completionHandler: { data,response,error in
       guard let data = data else {
         completion(nil)
         return
       }
-      completion("responseModel")
+      completion(response?.description)
     })
     session.resume()
   }

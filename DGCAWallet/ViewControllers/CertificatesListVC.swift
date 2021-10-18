@@ -54,7 +54,7 @@ class CertificatesListVC: UIViewController {
     let vc = TicketCodeAcceptViewController()
     
     present(vc, animated: true, completion: { [weak self] in
-      vc.setCertsWith((self?.validationServiceInfo)!, (self?.accessTokenInfo)!)
+      vc.setCertsWith((self?.validationServiceInfo)!, (self?.accessTokenInfo)!,(self?.getSelectedCert()!.cert!)!)
     })
   }
   

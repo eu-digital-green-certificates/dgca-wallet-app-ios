@@ -69,7 +69,7 @@ class ServersListVC: UIViewController {
     
     var error:Unmanaged<CFError>?
     
-    if let cfdata = SecKeyCopyExternalRepresentation(publicKey!, &error) {
+    if let cfdata = SecKeyCopyExternalRepresentation(privateKey, &error) {
       let data:Data = cfdata as Data
       base64PublicKeyString = data.base64EncodedString()
     }
@@ -82,7 +82,9 @@ class ServersListVC: UIViewController {
     guard let serviceURL = URL(string: service.serviceEndpoint) else { return }
     
     GatewayConnection.getServiceInfo(url: serviceURL) { [weak self] validationServiceInfo in
+      
 //      TODO: Show UI message with error if fail to fetch serviceInfo
+      
       guard let serviceInfo = validationServiceInfo else { return }
       
       GatewayConnection.getAccessTokenFor(url: url,servicePath: service.id, publicKey: base64PublicKeyString) { response in
