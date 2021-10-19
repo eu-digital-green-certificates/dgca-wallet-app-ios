@@ -99,13 +99,14 @@ class TicketCodeAcceptViewController: UIViewController {
     guard let verificationMethod = validationServiceInfo!.verificationMethod!.first(where: { $0.publicKeyJwk?.use == "enc" }) else { return nil }
     
     
-    let ivData : [UInt8] = Array(Data(base64Encoded: iv)!)
+    let ivData : [UInt8] = Array(base64: iv)
     let dgcData : [UInt8] = Array(dgcString.utf8)
-    let publicKeyData : [UInt8] = Array(verificationMethod.publicKeyJwk!.x5c.utf8)
-    let pubKeyData : [UInt8] = Array(verificationMethod.publicKeyJwk!.x5c.data(using: .utf8)!)
+    
+    let publicKeyData : [UInt8] = Array(base64: verificationMethod.publicKeyJwk!.x5c)
+//    let pubKeyData : [UInt8] = Array(verificationMethod.publicKeyJwk!.x5c.data(using: .utf8)!)
     
     var encryptedDgcData : [UInt8] = Array()
-    var encryptedRSAKey  : [UInt8] = Array()
+//    var encryptedRSAKey  : [UInt8] = Array()
     
     
     // AES GCM
@@ -122,27 +123,12 @@ class TicketCodeAcceptViewController: UIViewController {
         variant: .sha2(.sha256)
     ).calculate()
     
-//    let privateKeyTag = "com.security.validation".data(using: .utf8)!
-//    let privateKeyParams: [String: Any] = [
-//    kSecAttrCanDecrypt as String: true,
-//    kSecAttrIsPermanent as String: true,
-//    kSecAttrApplicationTag as String: privateKeyTag]
-//
-//    let attributes =
-//    [kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
-//    kSecAttrKeySizeInBits as String: 256,
-//    kSecPrivateKeyAttrs as String:
-//    privateKeyParams] as CFDictionary
-//
-//    var publicKeySec, privateKeySec: SecKey?
-//    SecKeyGeneratePair(attributes, &publicKeySec, &privateKeySec)
-    
     guard let privateKey = Enclave.loadOrGenerateKey(with: "validationKey") else { return nil }
     
     let publicSecKey = try! keyFromData(Data(publicKeyData))
     
-    var error: Unmanaged<CFError>?
-    guard let privateKeyData = SecKeyCopyExternalRepresentation(privateKey, &error) as Data? else { return nil }
+//    var error: Unmanaged<CFError>?
+//    guard let privateKeyData = SecKeyCopyExternalRepresentation(privateKey, &error) as Data? else { return nil }
     
     do {
         // In combined mode, the authentication tag is directly appended to the encrypted message. This is usually what you want.
@@ -150,16 +136,18 @@ class TicketCodeAcceptViewController: UIViewController {
         let gcm = GCM(iv: ivData, mode: .combined)
         let aes = try AES(key: key, blockMode: gcm, padding: .noPadding)
         encryptedDgcData = try aes.encrypt(dgcData)
-        encryptedRSAKey = try aes.encrypt(pubKeyData)
+//        encryptedRSAKey = try aes.encrypt(pubKeyData)
         let tag = gcm.authenticationTag
       
     } catch {
         // failed
     }
     
+    
+    
     let errorEncr : UnsafeMutablePointer<Unmanaged<CFError>?>? = nil
 //
-    guard let encryptedKeyData:Data = SecKeyCreateEncryptedData(publicSecKey, .rsaEncryptionOAEPSHA256, privateKeyData as CFData,errorEncr) as Data? else { return nil }
+    guard let encryptedKeyData:Data = SecKeyCreateEncryptedData(publicSecKey, .rsaEncryptionOAEPSHA256, key as! CFData,errorEncr) as Data? else { return nil }
     
     return (Data(encryptedDgcData),encryptedKeyData)
   }
