@@ -80,10 +80,10 @@ class TicketCodeAcceptViewController: UIViewController {
     
     var sig = Data()
     
-    Enclave.sign(data: dccData.0, with: privateKey, using: nil, completion: { (signature,error) in
+    Enclave.sign(data: dccData.0, with: privateKey, using: SecKeyAlgorithm.ecdsaSignatureMessageX962SHA256, completion: { (signature,error) in
       if let sign = signature {
        sig = sign
-        let parameters = [verificationMethod.publicKeyJwk!.kid : "kid", dccData.0.base64EncodedString() :"dcc", sig.base64EncodedString(): "sig",dccData.1.base64EncodedString():"encKey"]
+        let parameters = ["kid" : verificationMethod.publicKeyJwk!.kid, "dcc" : dccData.0.base64EncodedString(), "sig": sig.base64EncodedString(),"encKey" : dccData.1.base64EncodedString(), "sigAlg" : "SHA256withECDSA", "encScheme" : "RSAOAEPWithSHA256AESGCM"]
         
         GatewayConnection.validateTicketing(url: url, parameters: parameters) { resultStr in
           print(resultStr)
@@ -103,10 +103,8 @@ class TicketCodeAcceptViewController: UIViewController {
     let dgcData : [UInt8] = Array(dgcString.utf8)
     
     let publicKeyData : [UInt8] = Array(base64: verificationMethod.publicKeyJwk!.x5c)
-//    let pubKeyData : [UInt8] = Array(verificationMethod.publicKeyJwk!.x5c.data(using: .utf8)!)
     
     var encryptedDgcData : [UInt8] = Array()
-//    var encryptedRSAKey  : [UInt8] = Array()
     
     
     // AES GCM
@@ -122,37 +120,47 @@ class TicketCodeAcceptViewController: UIViewController {
         keyLength: 32, /* AES-256 */
         variant: .sha2(.sha256)
     ).calculate()
-    
-    guard let privateKey = Enclave.loadOrGenerateKey(with: "validationKey") else { return nil }
-    
-    let publicSecKey = try! keyFromData(Data(publicKeyData))
-    
-//    var error: Unmanaged<CFError>?
-//    guard let privateKeyData = SecKeyCopyExternalRepresentation(privateKey, &error) as Data? else { return nil }
+
+    let publicSecKey = TicketCodeAcceptViewController.pubKey(from: verificationMethod.publicKeyJwk!.x5c)
     
     do {
-        // In combined mode, the authentication tag is directly appended to the encrypted message. This is usually what you want.
       
         let gcm = GCM(iv: ivData, mode: .combined)
         let aes = try AES(key: key, blockMode: gcm, padding: .noPadding)
         encryptedDgcData = try aes.encrypt(dgcData)
-//        encryptedRSAKey = try aes.encrypt(pubKeyData)
         let tag = gcm.authenticationTag
       
     } catch {
         // failed
     }
     
-    
-    
     let errorEncr : UnsafeMutablePointer<Unmanaged<CFError>?>? = nil
-//
-    guard let encryptedKeyData:Data = SecKeyCreateEncryptedData(publicSecKey, .rsaEncryptionOAEPSHA256, key as! CFData,errorEncr) as Data? else { return nil }
+    let encryptedKeyData = TicketCodeAcceptViewController.encrypt(data: Data(key), with: publicSecKey!)
     
-    return (Data(encryptedDgcData),encryptedKeyData)
+    return (Data(encryptedDgcData),encryptedKeyData.0!)
+  }
+  
+  static func encrypt(data: Data, with key: SecKey) -> (Data?, String?) {
+    guard let publicKey = SecKeyCopyPublicKey(key) else {
+      return (nil, l10n("err.pub-key-irretrievable"))
+    }
+    guard SecKeyIsAlgorithmSupported(publicKey, .encrypt, SecKeyAlgorithm.rsaEncryptionOAEPSHA256) else {
+      return (nil, l10n("err.alg-not-supported"))
+    }
+    var error: Unmanaged<CFError>?
+    let cipherData = SecKeyCreateEncryptedData(
+      publicKey,
+      SecKeyAlgorithm.rsaEncryptionOAEPSHA256,
+      data as CFData,
+      &error
+    ) as Data?
+    let err = error?.takeRetainedValue().localizedDescription
+    return (cipherData, err)
   }
   
   func keyFromData(_ data: Data) throws -> SecKey {
+    
+    
     let options: [String: Any] = [kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
                                   kSecAttrKeyClass as String: kSecAttrKeyClassPublic,
                                   kSecAttrKeySizeInBits as String : 4096]
@@ -166,81 +174,16 @@ class TicketCodeAcceptViewController: UIViewController {
     return key
   }
   
-  //override fun encryptData(data: ByteArray, publicKey: PublicKey, iv: ByteArray): TicketingEncryptedDgcData {
-  //    if (iv.size > 16 || iv.size < 16 || iv.size % 8 > 0) {
-  //        throw InvalidKeySpecException()
-  //    }
-  //    val keyGen: KeyGenerator = KeyGenerator.getInstance("AES")
-  //    keyGen.init(256) // for example
-  //    val secretKey: SecretKey = keyGen.generateKey()
-  //    val gcmParameterSpec = GCMParameterSpec(iv.size * 8, iv)
-  //    val cipher: Cipher = Cipher.getInstance(DATA_CIPHER)
-  //    cipher.init(Cipher.ENCRYPT_MODE, secretKey, gcmParameterSpec)
-  //    val dataEncrypted = cipher.doFinal(data)
-  //
-  //    // encrypt RSA key
-  //    val keyCipher: Cipher = Cipher.getInstance(KEY_CIPHER)
-  //    val oaepParameterSpec = OAEPParameterSpec(
-  //        "SHA-256", "MGF1", MGF1ParameterSpec.SHA256, PSource.PSpecified.DEFAULT
-  //    )
-  //    keyCipher.init(Cipher.ENCRYPT_MODE, publicKey, oaepParameterSpec)
-  //    val secretKeyBytes: ByteArray = secretKey.encoded
-  //    val encKey = keyCipher.doFinal(secretKeyBytes)
-  //    return TicketingEncryptedDgcData(dataEncrypted, encKey)
-  //}
+  public static func pubKey(from b64EncodedCert: String) -> SecKey? {
+      guard
+        let encodedCertData = Data(base64Encoded: b64EncodedCert),
+        let cert = SecCertificateCreateWithData(nil, encodedCertData as CFData),
+        let publicKey = SecCertificateCopyKey(cert)
+      else {
+        return nil
+      }
+      return publicKey
+  }
   
 }
-
-//     val ticketingEncryptedDgcData: TicketingEncryptedDgcData = ticketingDgcCryptor.encodeDcc(dgcQrString, iv, publicKey)
-
-//fun provideTicketValidationRequest(
-//     dgcQrString: String,
-//     kid: String, publicKey: PublicKey,
-//     base64EncodedIv: String, privateKey: PrivateKey
-// ): ValidateRequest {
-//     val iv = Base64.decode(base64EncodedIv, Base64.NO_WRAP)
-//     val ticketingEncryptedDgcData: TicketingEncryptedDgcData = ticketingDgcCryptor.encodeDcc(dgcQrString, iv, publicKey)
-//     val dcc = Base64.encodeToString(ticketingEncryptedDgcData.dataEncrypted, Base64.NO_WRAP)
-//     val encKey = Base64.encodeToString(ticketingEncryptedDgcData.encKey, Base64.NO_WRAP)
-//     val sig = ticketingDgcSigner.signDcc(ticketingEncryptedDgcData.dataEncrypted, privateKey)
-//     return ValidateRequest(
-//         kid = kid,
-//         dcc = dcc,
-//         sig = sig,
-//         encKey = encKey,
-//     )
-// }
-
-//@Headers(
-//    "X-Version: 1.0.0",
-//    "content-type: application/json"
-//)
-//@POST
-//suspend fun validate(
-//    @Url url: String,
-//    @Header("Authorization") authHeader: String,
-//    @Body body: ValidateRequest
-//): Response<ResponseBody>
-//white_check_mark
-//eyes
-//raised_hands
-//React
-//Reply
-//
-//3:55
-//data class ValidateRequest(
-//@JsonProperty("kid")
-//val kid: String,
-//@JsonProperty("dcc")
-//val dcc: String,
-//@JsonProperty("sig")
-//val sig: String,
-//@JsonProperty("encKey")
-//val encKey: String,
-//@JsonProperty("encScheme")
-//val encScheme: String = "RSAOAEPWithSHA256AESGCM",
-//@JsonProperty("sigAlg")
-//val sigAlg: String = "SHA256withECDSA"
-//)
-
 

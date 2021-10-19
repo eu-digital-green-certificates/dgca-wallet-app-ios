@@ -405,7 +405,7 @@ extension GatewayConnection {
   
   static func validateTicketing(url : URL, parameters : [String: String]?, completion : @escaping (String?) -> Void ) {
     
-    let headers = HTTPHeaders([HTTPHeader(name: "X-Version", value: UserDefaults.standard.object(forKey: "AccessToken") as! String),HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")])
+    let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer " + (UserDefaults.standard.object(forKey: "AccessToken") as! String)),HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")])
     
     let encoder = JSONEncoder()
     guard let parametersData = try? encoder.encode(parameters) else {

@@ -87,7 +87,9 @@ class ServersListVC: UIViewController {
       
       guard let serviceInfo = validationServiceInfo else { return }
       
-      GatewayConnection.getAccessTokenFor(url: url,servicePath: service.id, publicKey: base64PublicKeyString) { response in
+      let pubKey = (X509.derPubKey(for: privateKey) ?? Data()).base64EncodedString()
+      
+      GatewayConnection.getAccessTokenFor(url: url,servicePath: service.id, publicKey: pubKey) { response in
         DispatchQueue.main.async { [weak self] in
           let vc = CertificatesListVC()
           
