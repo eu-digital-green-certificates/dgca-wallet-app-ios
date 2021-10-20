@@ -282,7 +282,7 @@ extension GatewayConnection {
       completion?(ValueSetsDataStorage.sharedInstance.valueSets)
     }
   }
-  static func requestListOfServices(ticketingInfo : TicketingQR, completion : @escaping ((ServerListResponse?) -> Void)) {
+  static func requestListOfServices(ticketingInfo : CheckInQR, completion : @escaping ((ServerListResponse?) -> Void)) {
     UserDefaults.standard.set(ticketingInfo.token, forKey: "TicketingToken")
     let headers = HTTPHeaders([HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")])
     

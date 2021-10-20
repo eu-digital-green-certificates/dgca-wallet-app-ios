@@ -259,7 +259,7 @@ extension ListVC: ScanWalletDelegate {
     }
   }
   
-  func walletController(_ controller: ScanWalletController, didScanInfo ticketing: SwiftDGC.TicketingQR) {
+  func walletController(_ controller: ScanWalletController, didScanInfo ticketing: SwiftDGC.CheckInQR) {
     if scannedToken == ticketing.token || navigationController?.viewControllers.last is ServersListVC {
       return
     }
