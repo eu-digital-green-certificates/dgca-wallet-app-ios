@@ -82,11 +82,7 @@ class ServersListVC: UIViewController {
       
       GatewayConnection.getAccessTokenFor(url: url,servicePath: service.id, publicKey: pubKey) { response in
         DispatchQueue.main.async { [weak self] in
-          let vc = CertificatesListVC()
-          
-          guard let accessTokenResponse = response else { return }
-          vc.setCertsWith(serviceInfo, accessTokenResponse)
-          self?.navigationController?.pushViewController(vc, animated: true)
+          self?.performSegue(withIdentifier: Constants.showCertificatesList, sender: (serviceInfo, response))
         }
       }
     }
