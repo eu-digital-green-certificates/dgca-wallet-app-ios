@@ -180,6 +180,8 @@
 		FEAEA96526FBB13600B94FFF /* AccessTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEAEA96426FBB13600B94FFF /* AccessTokenResponse.swift */; };
 		FEC54BE4271F26990048B6BC /* IdentityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC54BE3271F26990048B6BC /* IdentityService.swift */; };
 		FEC54BE6271F27180048B6BC /* AccessTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC54BE5271F27180048B6BC /* AccessTokenService.swift */; };
+		FEC54BE927201D660048B6BC /* ValidationResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC54BE727201D660048B6BC /* ValidationResultViewController.swift */; };
+		FEC54BEA27201D660048B6BC /* ValidationResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEC54BE827201D660048B6BC /* ValidationResultViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -295,6 +297,8 @@
 		FEAEA96426FBB13600B94FFF /* AccessTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenResponse.swift; sourceTree = "<group>"; };
 		FEC54BE3271F26990048B6BC /* IdentityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityService.swift; sourceTree = "<group>"; };
 		FEC54BE5271F27180048B6BC /* AccessTokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenService.swift; sourceTree = "<group>"; };
+		FEC54BE727201D660048B6BC /* ValidationResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResultViewController.swift; sourceTree = "<group>"; };
+		FEC54BE827201D660048B6BC /* ValidationResultViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ValidationResultViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -467,6 +471,8 @@
 				5C556D4826F9F8AC007E2C2E /* CertificatesListVC.xib */,
 				5C556D4F26F9F8C6007E2C2E /* ServersListVC.swift */,
 				5C556D5026F9F8C6007E2C2E /* ServersListVC.xib */,
+				FEC54BE727201D660048B6BC /* ValidationResultViewController.swift */,
+				FEC54BE827201D660048B6BC /* ValidationResultViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -764,6 +770,7 @@
 				5C00074A26D641E2002E5013 /* PDFViewerVC.xib in Resources */,
 				5C50CF14269700710015EE29 /* RuleValidationResultVC.xib in Resources */,
 				DA017DE626552259006E4D49 /* Licenses.storyboard in Resources */,
+				FEC54BEA27201D660048B6BC /* ValidationResultViewController.xib in Resources */,
 				5C556D4C26F9F8AC007E2C2E /* CertificatesListVC.xib in Resources */,
 				5C556D6626F9F97E007E2C2E /* ServerTVC.xib in Resources */,
 				5C50CF2A26972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.xib in Resources */,
@@ -858,6 +865,7 @@
 				CE1D1EF6263597A2004C8919 /* LocalData.swift in Sources */,
 				5CE07C842692E21E00A032F9 /* CertLogicEngineManager.swift in Sources */,
 				CED2726026398683003D47A9 /* UIFont.swift in Sources */,
+				FEC54BE927201D660048B6BC /* ValidationResultViewController.swift in Sources */,
 				CEE9DA55263C7D4000A31532 /* CertCode.swift in Sources */,
 				CE56BC07264068110044FD3F /* GatewayConnection.swift in Sources */,
 				FEAEA96526FBB13600B94FFF /* AccessTokenResponse.swift in Sources */,
