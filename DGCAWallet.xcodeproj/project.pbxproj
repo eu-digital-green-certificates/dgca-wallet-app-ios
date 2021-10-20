@@ -178,6 +178,8 @@
 		FE1D1A6B27148CBE00765A9A /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FE1D1A6A27148CBE00765A9A /* CryptoSwift */; };
 		FE6E78882702033300C142A3 /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = FE6E78872702033300C142A3 /* JWTDecode */; };
 		FEAEA96526FBB13600B94FFF /* AccessTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEAEA96426FBB13600B94FFF /* AccessTokenResponse.swift */; };
+		FEC54BE4271F26990048B6BC /* IdentityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC54BE3271F26990048B6BC /* IdentityService.swift */; };
+		FEC54BE6271F27180048B6BC /* AccessTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC54BE5271F27180048B6BC /* AccessTokenService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -291,6 +293,8 @@
 		DA017DE526552259006E4D49 /* Licenses.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Licenses.storyboard; sourceTree = "<group>"; };
 		FE6F225327142AB1003AE754 /* dgca-app-core-ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "dgca-app-core-ios"; path = "../dgca-app-core-ios"; sourceTree = "<group>"; };
 		FEAEA96426FBB13600B94FFF /* AccessTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenResponse.swift; sourceTree = "<group>"; };
+		FEC54BE3271F26990048B6BC /* IdentityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityService.swift; sourceTree = "<group>"; };
+		FEC54BE5271F27180048B6BC /* AccessTokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -559,6 +563,7 @@
 		CEA6D6EA261F8D2700715333 /* DGCAWallet */ = {
 			isa = PBXGroup;
 			children = (
+				FEC54BDF271F24120048B6BC /* Ticketing */,
 				5C00072026D38D6D002E5013 /* DGCAWallet.entitlements */,
 				5C00071A26D38C5C002E5013 /* NFC */,
 				CEA15561262F6DA10024B7AC /* Protocols */,
@@ -590,6 +595,31 @@
 				CEA6D70F261F8D2900715333 /* Info.plist */,
 			);
 			path = DGCAWalletUITests;
+			sourceTree = "<group>";
+		};
+		FEC54BDF271F24120048B6BC /* Ticketing */ = {
+			isa = PBXGroup;
+			children = (
+				FEC54BE2271F24F80048B6BC /* Identity */,
+				FEC54BE1271F24290048B6BC /* Validation */,
+			);
+			path = Ticketing;
+			sourceTree = "<group>";
+		};
+		FEC54BE1271F24290048B6BC /* Validation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Validation;
+			sourceTree = "<group>";
+		};
+		FEC54BE2271F24F80048B6BC /* Identity */ = {
+			isa = PBXGroup;
+			children = (
+				FEC54BE3271F26990048B6BC /* IdentityService.swift */,
+				FEC54BE5271F27180048B6BC /* AccessTokenService.swift */,
+			);
+			path = Identity;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -818,6 +848,7 @@
 				5C00072A26D3A77D002E5013 /* ImageDataStorage.swift in Sources */,
 				5CE07C7D2692E1CD00A032F9 /* ValueSetsDataStorage.swift in Sources */,
 				5C556D4926F9F8AC007E2C2E /* CertificatesListVC.swift in Sources */,
+				FEC54BE6271F27180048B6BC /* AccessTokenService.swift in Sources */,
 				5C00073226D3AEDE002E5013 /* PdfDataStorage.swift in Sources */,
 				CEA1556B262F784E0024B7AC /* SelfSizedTableView.swift in Sources */,
 				5C00071926CFAED2002E5013 /* UIImage+.swift in Sources */,
@@ -844,6 +875,7 @@
 				CEA15563262F6DAB0024B7AC /* CertViewerDelegate.swift in Sources */,
 				CE260F56263DD1720083A200 /* WalletCell.swift in Sources */,
 				CEA15570262F79DE0024B7AC /* InfoCell.swift in Sources */,
+				FEC54BE4271F26990048B6BC /* IdentityService.swift in Sources */,
 				5CE07C7A2692E1CD00A032F9 /* CountryDataStorage.swift in Sources */,
 				CED949CA263B50CE00883558 /* List.swift in Sources */,
 				5C50CF11269700710015EE29 /* RuleValidationResultVC.swift in Sources */,

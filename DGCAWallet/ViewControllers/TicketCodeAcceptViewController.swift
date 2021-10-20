@@ -98,14 +98,12 @@ class TicketCodeAcceptViewController: UIViewController {
     guard (iv.count > 16 || iv.count < 16 || iv.count % 8 > 0) else { return nil }
     guard let verificationMethod = validationServiceInfo!.verificationMethod!.first(where: { $0.publicKeyJwk?.use == "enc" }) else { return nil }
     
-    
     let ivData : [UInt8] = Array(base64: iv)
     let dgcData : [UInt8] = Array(dgcString.utf8)
     
     let publicKeyData : [UInt8] = Array(base64: verificationMethod.publicKeyJwk!.x5c)
     
     var encryptedDgcData : [UInt8] = Array()
-    
     
     // AES GCM
     
@@ -128,7 +126,7 @@ class TicketCodeAcceptViewController: UIViewController {
         let gcm = GCM(iv: ivData, mode: .combined)
         let aes = try AES(key: key, blockMode: gcm, padding: .noPadding)
         encryptedDgcData = try aes.encrypt(dgcData)
-        let tag = gcm.authenticationTag
+//        let tag = gcm.authenticationTag
       
     } catch {
         // failed

@@ -63,16 +63,16 @@ class ServersListVC: UIViewController {
     }
     
     guard let privateKey = Enclave.loadOrGenerateKey(with: "validationKey") else { return }
-    let publicKey = SecKeyCopyPublicKey(privateKey)
-    
-    var base64PublicKeyString = ""
-    
-    var error:Unmanaged<CFError>?
-    
-    if let cfdata = SecKeyCopyExternalRepresentation(privateKey, &error) {
-      let data:Data = cfdata as Data
-      base64PublicKeyString = data.base64EncodedString()
-    }
+//    let publicKey = SecKeyCopyPublicKey(privateKey)
+//    
+//    var base64PublicKeyString = ""
+//    
+//    var error:Unmanaged<CFError>?
+//    
+//    if let cfdata = SecKeyCopyExternalRepresentation(privateKey, &error) {
+//      let data:Data = cfdata as Data
+//      base64PublicKeyString = data.base64EncodedString()
+//    }
     
     let accessTokenService = serverListInfo?.service?.first(where: {
       $0.type == "AccessTokenService"
@@ -81,7 +81,7 @@ class ServersListVC: UIViewController {
     let url = URL(string: accessTokenService!.serviceEndpoint)!
     guard let serviceURL = URL(string: service.serviceEndpoint) else { return }
     
-    GatewayConnection.getServiceInfo(url: serviceURL) { [weak self] validationServiceInfo in
+    IdentityService.getServiceInfo(url: serviceURL) { [weak self] validationServiceInfo in
       
 //      TODO: Show UI message with error if fail to fetch serviceInfo
       

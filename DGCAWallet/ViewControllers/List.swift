@@ -290,12 +290,12 @@ extension ListVC: ScanVCDelegate {
     }
   }
   
-  func ticketingInfoScanned(_ ticketing: SwiftDGC.TicketingQR) {
+  func ticketingInfoScanned(_ ticketing: SwiftDGC.CheckInQR) {
     if scannedToken == ticketing.token || navigationController?.viewControllers.last is ServersListVC {
       return
     }
     scannedToken = ticketing.token
-    GatewayConnection.requestListOfServices(ticketingInfo: ticketing) { [weak self] services in
+    IdentityService.requestListOfServices(ticketingInfo: ticketing) { [weak self] services in
       self?.scannedToken = ""
       if let listOfServices = services {
         DispatchQueue.main.async { [weak self] in
