@@ -98,12 +98,6 @@
 		5C556D5126F9F8C6007E2C2E /* ServersListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4F26F9F8C6007E2C2E /* ServersListVC.swift */; };
 		5C556D5226F9F8C6007E2C2E /* ServersListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4F26F9F8C6007E2C2E /* ServersListVC.swift */; };
 		5C556D5326F9F8C6007E2C2E /* ServersListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4F26F9F8C6007E2C2E /* ServersListVC.swift */; };
-		5C556D5B26F9F95B007E2C2E /* CertificateTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D5926F9F95B007E2C2E /* CertificateTVC.swift */; };
-		5C556D5C26F9F95C007E2C2E /* CertificateTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D5926F9F95B007E2C2E /* CertificateTVC.swift */; };
-		5C556D5D26F9F95C007E2C2E /* CertificateTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D5926F9F95B007E2C2E /* CertificateTVC.swift */; };
-		5C556D6326F9F97E007E2C2E /* ServerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D6126F9F97E007E2C2E /* ServerTVC.swift */; };
-		5C556D6426F9F97E007E2C2E /* ServerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D6126F9F97E007E2C2E /* ServerTVC.swift */; };
-		5C556D6526F9F97E007E2C2E /* ServerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D6126F9F97E007E2C2E /* ServerTVC.swift */; };
 		5CA450B026E20B690029324E /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB18269DBB4C00074F66 /* context.jsonc */; };
 		5CA450B126E20B6A0029324E /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB18269DBB4C00074F66 /* context.jsonc */; };
 		5CA450B226E20B6A0029324E /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB18269DBB4C00074F66 /* context.jsonc */; };
@@ -163,8 +157,13 @@
 		DA01662026554E02005B73A1 /* LicenseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01661F26554E02005B73A1 /* LicenseCell.swift */; };
 		DA01662226558B2F005B73A1 /* LicenseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01662126558B2F005B73A1 /* LicenseVC.swift */; };
 		DA017DE626552259006E4D49 /* Licenses.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA017DE526552259006E4D49 /* Licenses.storyboard */; };
+		FE1D1A6B27148CBE00765A9A /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FE1D1A6A27148CBE00765A9A /* CryptoSwift */; };
 		FE6E78882702033300C142A3 /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = FE6E78872702033300C142A3 /* JWTDecode */; };
 		FEAEA96526FBB13600B94FFF /* AccessTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEAEA96426FBB13600B94FFF /* AccessTokenResponse.swift */; };
+		FEC54BE4271F26990048B6BC /* IdentityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC54BE3271F26990048B6BC /* IdentityService.swift */; };
+		FEC54BE6271F27180048B6BC /* AccessTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC54BE5271F27180048B6BC /* AccessTokenService.swift */; };
+		FEC54BE927201D660048B6BC /* ValidationResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC54BE727201D660048B6BC /* ValidationResultViewController.swift */; };
+		FEC54BEA27201D660048B6BC /* ValidationResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEC54BE827201D660048B6BC /* ValidationResultViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -218,8 +217,6 @@
 		5C556D4026F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketCodeAcceptViewController.swift; sourceTree = "<group>"; };
 		5C556D4726F9F8AC007E2C2E /* CertificatesListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificatesListVC.swift; sourceTree = "<group>"; };
 		5C556D4F26F9F8C6007E2C2E /* ServersListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersListVC.swift; sourceTree = "<group>"; };
-		5C556D5926F9F95B007E2C2E /* CertificateTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateTVC.swift; sourceTree = "<group>"; };
-		5C556D6126F9F97E007E2C2E /* ServerTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerTVC.swift; sourceTree = "<group>"; };
 		5CE07C772692E1CC00A032F9 /* CountryDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryDataStorage.swift; sourceTree = "<group>"; };
 		5CE07C782692E1CD00A032F9 /* ValueSetsDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueSetsDataStorage.swift; sourceTree = "<group>"; };
 		5CE07C792692E1CD00A032F9 /* RulesDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesDataStorage.swift; sourceTree = "<group>"; };
@@ -271,8 +268,12 @@
 		DA01661F26554E02005B73A1 /* LicenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseCell.swift; sourceTree = "<group>"; };
 		DA01662126558B2F005B73A1 /* LicenseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseVC.swift; sourceTree = "<group>"; };
 		DA017DE526552259006E4D49 /* Licenses.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Licenses.storyboard; sourceTree = "<group>"; };
+		FE6F225327142AB1003AE754 /* dgca-app-core-ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "dgca-app-core-ios"; path = "../dgca-app-core-ios"; sourceTree = "<group>"; };
 		FEAEA96426FBB13600B94FFF /* AccessTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenResponse.swift; sourceTree = "<group>"; };
-		FECE1B4D2704B26E0005CFFC /* dgca-app-core-ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "dgca-app-core-ios"; path = "../../dgca-app-core-ios"; sourceTree = "<group>"; };
+		FEC54BE3271F26990048B6BC /* IdentityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityService.swift; sourceTree = "<group>"; };
+		FEC54BE5271F27180048B6BC /* AccessTokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenService.swift; sourceTree = "<group>"; };
+		FEC54BE727201D660048B6BC /* ValidationResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResultViewController.swift; sourceTree = "<group>"; };
+		FEC54BE827201D660048B6BC /* ValidationResultViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ValidationResultViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -286,6 +287,7 @@
 				CE6B330E2651A54800845B8E /* SwiftDGC in Frameworks */,
 				CE1F155C2639F9E700736D48 /* SwiftyJSON in Frameworks */,
 				CE13CF00262DCC180070C80E /* FloatingPanel in Frameworks */,
+				FE1D1A6B27148CBE00765A9A /* CryptoSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,6 +425,9 @@
 				5C556D3F26F9DAF6007E2C2E /* TicketCodeAcceptViewController.xib */,
 				5C556D4726F9F8AC007E2C2E /* CertificatesListVC.swift */,
 				5C556D4F26F9F8C6007E2C2E /* ServersListVC.swift */,
+				5C556D5026F9F8C6007E2C2E /* ServersListVC.xib */,
+				FEC54BE727201D660048B6BC /* ValidationResultViewController.swift */,
+				FEC54BE827201D660048B6BC /* ValidationResultViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -496,6 +501,7 @@
 		CEA6D6DF261F8D2700715333 = {
 			isa = PBXGroup;
 			children = (
+				FE6F225327142AB1003AE754 /* dgca-app-core-ios */,
 				CEA6D6EA261F8D2700715333 /* DGCAWallet */,
 				CEA6D701261F8D2900715333 /* DGCAWalletTests */,
 				CEA6D70C261F8D2900715333 /* DGCAWalletUITests */,
@@ -517,8 +523,8 @@
 		CEA6D6EA261F8D2700715333 /* DGCAWallet */ = {
 			isa = PBXGroup;
 			children = (
+				FEC54BDF271F24120048B6BC /* Ticketing */,
 				5C00072026D38D6D002E5013 /* DGCAWallet.entitlements */,
-				FECE1B4D2704B26E0005CFFC /* dgca-app-core-ios */,
 				5C00071A26D38C5C002E5013 /* NFC */,
 				CEA15561262F6DA10024B7AC /* Protocols */,
 				CE157F8B262E24EC00FE4821 /* Models */,
@@ -551,13 +557,29 @@
 			path = DGCAWalletUITests;
 			sourceTree = "<group>";
 		};
-		D2A68B682714384E009A77D9 /* Cells */ = {
+		FEC54BDF271F24120048B6BC /* Ticketing */ = {
 			isa = PBXGroup;
 			children = (
-				5C556D5926F9F95B007E2C2E /* CertificateTVC.swift */,
-				5C556D6126F9F97E007E2C2E /* ServerTVC.swift */,
+				FEC54BE2271F24F80048B6BC /* Identity */,
+				FEC54BE1271F24290048B6BC /* Validation */,
 			);
-			path = Cells;
+			path = Ticketing;
+			sourceTree = "<group>";
+		};
+		FEC54BE1271F24290048B6BC /* Validation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Validation;
+			sourceTree = "<group>";
+		};
+		FEC54BE2271F24F80048B6BC /* Identity */ = {
+			isa = PBXGroup;
+			children = (
+				FEC54BE3271F26990048B6BC /* IdentityService.swift */,
+				FEC54BE5271F27180048B6BC /* AccessTokenService.swift */,
+			);
+			path = Identity;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -584,6 +606,7 @@
 				CE6B330D2651A54800845B8E /* SwiftDGC */,
 				5CE07C752692E0D900A032F9 /* CertLogic */,
 				FE6E78872702033300C142A3 /* JWTDecode */,
+				FE1D1A6A27148CBE00765A9A /* CryptoSwift */,
 			);
 			productName = DGCAWallet;
 			productReference = CEA6D6E8261F8D2700715333 /* DGCAWallet.app */;
@@ -663,6 +686,7 @@
 				CE6B330C2651A54800845B8E /* XCRemoteSwiftPackageReference "dgca-app-core-ios" */,
 				5CE07C742692E0D900A032F9 /* XCRemoteSwiftPackageReference "dgc-certlogic-ios" */,
 				FE6E78862702033200C142A3 /* XCRemoteSwiftPackageReference "JWTDecode.swift" */,
+				FE1D1A6927148CBE00765A9A /* XCRemoteSwiftPackageReference "CryptoSwift" */,
 			);
 			productRefGroup = CEA6D6E9261F8D2700715333 /* Products */;
 			projectDirPath = "";
@@ -698,7 +722,8 @@
 				5C00074A26D641E2002E5013 /* PDFViewerVC.xib in Resources */,
 				5C50CF14269700710015EE29 /* RuleValidationResultVC.xib in Resources */,
 				DA017DE626552259006E4D49 /* Licenses.storyboard in Resources */,
-				D2AE0613270DC94200384920 /* dgca-app-core-ios in Resources */,
+				FEC54BEA27201D660048B6BC /* ValidationResultViewController.xib in Resources */,
+				5C556D4C26F9F8AC007E2C2E /* CertificatesListVC.xib in Resources */,
 				5C50CF2A26972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -773,6 +798,7 @@
 				5C00072A26D3A77D002E5013 /* ImageDataStorage.swift in Sources */,
 				5CE07C7D2692E1CD00A032F9 /* ValueSetsDataStorage.swift in Sources */,
 				5C556D4926F9F8AC007E2C2E /* CertificatesListVC.swift in Sources */,
+				FEC54BE6271F27180048B6BC /* AccessTokenService.swift in Sources */,
 				5C00073226D3AEDE002E5013 /* PdfDataStorage.swift in Sources */,
 				CEA1556B262F784E0024B7AC /* SelfSizedTableView.swift in Sources */,
 				5C00071926CFAED2002E5013 /* UIImage+.swift in Sources */,
@@ -782,6 +808,7 @@
 				CE1D1EF6263597A2004C8919 /* LocalData.swift in Sources */,
 				5CE07C842692E21E00A032F9 /* CertLogicEngineManager.swift in Sources */,
 				CED2726026398683003D47A9 /* UIFont.swift in Sources */,
+				FEC54BE927201D660048B6BC /* ValidationResultViewController.swift in Sources */,
 				CEE9DA55263C7D4000A31532 /* CertCode.swift in Sources */,
 				CE56BC07264068110044FD3F /* GatewayConnection.swift in Sources */,
 				FEAEA96526FBB13600B94FFF /* AccessTokenResponse.swift in Sources */,
@@ -791,13 +818,13 @@
 				DA01662026554E02005B73A1 /* LicenseCell.swift in Sources */,
 				CEA6D6EC261F8D2700715333 /* AppDelegate.swift in Sources */,
 				DA01661C265541C0005B73A1 /* LicenseList.swift in Sources */,
-				5C556D5B26F9F95B007E2C2E /* CertificateTVC.swift in Sources */,
 				5C00073626D625D0002E5013 /* PDFTableViewCell.swift in Sources */,
 				CE891305263581D900CB92AF /* Home.swift in Sources */,
 				5C00071C26D38CC3002E5013 /* NFCHelper.swift in Sources */,
 				CEA15563262F6DAB0024B7AC /* CertViewerDelegate.swift in Sources */,
 				CE260F56263DD1720083A200 /* WalletCell.swift in Sources */,
 				CEA15570262F79DE0024B7AC /* InfoCell.swift in Sources */,
+				FEC54BE4271F26990048B6BC /* IdentityService.swift in Sources */,
 				5CE07C7A2692E1CD00A032F9 /* CountryDataStorage.swift in Sources */,
 				CED949CA263B50CE00883558 /* List.swift in Sources */,
 				5C50CF11269700710015EE29 /* RuleValidationResultVC.swift in Sources */,
@@ -814,7 +841,6 @@
 				5C00074726D641E2002E5013 /* PDFViewerVC.swift in Sources */,
 				5C00073F26D641CC002E5013 /* ImageViewerVC.swift in Sources */,
 				5C00072226D3A40E002E5013 /* SavedImage.swift in Sources */,
-				5C556D6326F9F97E007E2C2E /* ServerTVC.swift in Sources */,
 				5C00072626D3A6CD002E5013 /* String+.swift in Sources */,
 				5C50CF2F26972BFD0015EE29 /* CellWithDateAndCountryTVC.swift in Sources */,
 			);
@@ -836,7 +862,6 @@
 				5C00073326D3AEDE002E5013 /* PdfDataStorage.swift in Sources */,
 				5C50CF1C2697023B0015EE29 /* RuleErrorTVC.swift in Sources */,
 				5CE07C7E2692E1CD00A032F9 /* ValueSetsDataStorage.swift in Sources */,
-				5C556D6426F9F97E007E2C2E /* ServerTVC.swift in Sources */,
 				5C00072B26D3A77D002E5013 /* ImageDataStorage.swift in Sources */,
 				5C556D5226F9F8C6007E2C2E /* ServersListVC.swift in Sources */,
 				5C00072326D3A40E002E5013 /* SavedImage.swift in Sources */,
@@ -846,7 +871,6 @@
 				5C00073726D625D0002E5013 /* PDFTableViewCell.swift in Sources */,
 				5C50CF23269704240015EE29 /* UIViewController+.swift in Sources */,
 				5CE07C852692E21E00A032F9 /* CertLogicEngineManager.swift in Sources */,
-				5C556D5C26F9F95C007E2C2E /* CertificateTVC.swift in Sources */,
 				5C50CF372697315B0015EE29 /* ValidityCellModel.swift in Sources */,
 				5C50CF3026972BFD0015EE29 /* CellWithDateAndCountryTVC.swift in Sources */,
 				5C00074026D641CC002E5013 /* ImageViewerVC.swift in Sources */,
@@ -868,12 +892,10 @@
 				5C00073026D3AC11002E5013 /* SavedPDF.swift in Sources */,
 				5C50CF382697315B0015EE29 /* ValidityCellModel.swift in Sources */,
 				5C00073426D3AEDE002E5013 /* PdfDataStorage.swift in Sources */,
-				5C556D6526F9F97E007E2C2E /* ServerTVC.swift in Sources */,
 				5C50CF3C26973D9D0015EE29 /* UserDefaults+.swift in Sources */,
 				5C50CF4026983E090015EE29 /* UITableView+.swift in Sources */,
 				5C556D4626F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift in Sources */,
 				5C556D4B26F9F8AC007E2C2E /* CertificatesListVC.swift in Sources */,
-				5C556D5D26F9F95C007E2C2E /* CertificateTVC.swift in Sources */,
 				5C00074926D641E2002E5013 /* PDFViewerVC.swift in Sources */,
 				CEA6D70E261F8D2900715333 /* DGCAWalletUITests.swift in Sources */,
 				5CE07C7F2692E1CD00A032F9 /* ValueSetsDataStorage.swift in Sources */,
@@ -1284,6 +1306,14 @@
 				minimumVersion = 5.4.3;
 			};
 		};
+		FE1D1A6927148CBE00765A9A /* XCRemoteSwiftPackageReference "CryptoSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzyzanowskim/CryptoSwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		FE6E78862702033200C142A3 /* XCRemoteSwiftPackageReference "JWTDecode.swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/auth0/JWTDecode.swift.git";
@@ -1319,6 +1349,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE8912F92634C6B900CB92AF /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		FE1D1A6A27148CBE00765A9A /* CryptoSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FE1D1A6927148CBE00765A9A /* XCRemoteSwiftPackageReference "CryptoSwift" */;
+			productName = CryptoSwift;
 		};
 		FE6E78872702033300C142A3 /* JWTDecode */ = {
 			isa = XCSwiftPackageProductDependency;

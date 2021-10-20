@@ -47,13 +47,23 @@ class CertificatesListVC: UIViewController {
   }
   
   @IBAction func nextButtonAction(_ sender: Any) {
-    let ticketController = TicketCodeAcceptViewController()
-    guard let validationServiceInfo = self.validationServiceInfo,
-          let accessTokenInfo = self.accessTokenInfo else { return }
-    present(ticketController, animated: true, completion: {
-        ticketController.setCertsWith(validationServiceInfo, accessTokenInfo)
-      }
-    )
+    let vc = TicketCodeAcceptViewController()
+    
+    present(vc, animated: true, completion: { [weak self] in
+      vc.setCertsWith((self?.validationServiceInfo)!, (self?.accessTokenInfo)!,(self?.getSelectedCert()!.cert!)!)
+    })
+  }
+  
+  private func setupView() {
+    tableView.reloadData()
+  }
+  
+  private func setupTableView() {
+    tableView.delegate = self
+    tableView.dataSource = self
+    tableView.register(UINib(nibName: Constants.hcertCellIndentifier, bundle: nil),
+                       forCellReuseIdentifier: Constants.hcertCellIndentifier)
+    tableView.reloadData()
   }
 
   public func setCertsWith(_ validationInfo: ServerListResponse,_ accessTokenModel : AccessTokenResponse) {

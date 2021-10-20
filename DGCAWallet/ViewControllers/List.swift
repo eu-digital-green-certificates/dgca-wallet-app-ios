@@ -264,7 +264,7 @@ extension ListVC: ScanWalletDelegate {
       return
     }
     scannedToken = ticketing.token
-    GatewayConnection.requestListOfServices(ticketingInfo: ticketing) { [weak self] services in
+    IdentityService.requestListOfServices(ticketingInfo: ticketing) { [weak self] services in
       self?.scannedToken = ""
 
       DispatchQueue.main.async {

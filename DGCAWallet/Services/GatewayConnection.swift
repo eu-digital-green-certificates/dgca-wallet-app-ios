@@ -34,6 +34,7 @@ import CertLogic
 import CryptoKit
 import SwiftUI
 import JWTDecode
+import CryptoSwift
 
 struct GatewayConnection: ContextConnection {
   public static func claim(cert: HCert, with tan: String?, completion: ((Bool, String?) -> Void)?) {
@@ -282,45 +283,49 @@ extension GatewayConnection {
       completion?(ValueSetsDataStorage.sharedInstance.valueSets)
     }
   }
-  static func requestListOfServices(ticketingInfo : CheckInQR, completion : @escaping ((ServerListResponse?) -> Void)) {
-    UserDefaults.standard.set(ticketingInfo.token, forKey: "TicketingToken")
-    let headers = HTTPHeaders([HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")])
-    
-    let url = URL(string: ticketingInfo.serviceIdentity)!
-    var request = URLRequest(url: url)
-    request.headers = headers
-    
-    let decoder = JSONDecoder()
-    let session = URLSession.shared.dataTask(with: request, completionHandler: { data,response,error in
-      if let responseData = data {
-        let responseModel = try! decoder.decode(ServerListResponse.self, from: responseData)
-        completion(responseModel)
-      } else {
-        completion(nil)
-      }
-    })
-    session.resume()
-  }
-  
-  static func getServiceInfo(url : URL, completion: @escaping (ServerListResponse?) -> Void) {
-    let headers = HTTPHeaders([HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")])
-    var request = URLRequest(url: url)
-    request.headers = headers
-    
-    let session = URLSession.shared.dataTask(with: request, completionHandler: { data,response,error in
-      guard let data = data else {
-        completion(nil)
-        return
-      }
-      let decoder = JSONDecoder()
-        if let responseModel = try? decoder.decode(ServerListResponse.self, from: data) {
-            completion(responseModel)
-        } else {
-            completion(nil)
-        }
-    })
-    session.resume()
-  }
+
+//  static func requestListOfServices(ticketingInfo : CheckInQR, completion : @escaping ((ServerListResponse?) -> Void)) {
+//    UserDefaults.standard.set(ticketingInfo.token, forKey: "TicketingToken")
+//    let headers = HTTPHeaders([HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")])
+//
+//    let url = URL(string: ticketingInfo.serviceIdentity)!
+//    var request = URLRequest(url: url)
+//    request.headers = headers
+//
+//    let decoder = JSONDecoder()
+//    let session = URLSession.shared.dataTask(with: request, completionHandler: { data,response,error in
+//      if let responseData = data {
+//        let responseModel = try! decoder.decode(ServerListResponse.self, from: responseData)
+//        completion(responseModel)
+//      } else {
+//        completion(nil)
+//      }
+//    })
+//    session.resume()
+//  }
+//
+//  static func getServiceInfo(url : URL, completion: @escaping (ServerListResponse?) -> Void) {
+//    let headers = HTTPHeaders([HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")])
+//    var request = URLRequest(url: url)
+//    request.headers = headers
+//
+//    let session = URLSession.shared.dataTask(with: request, completionHandler: { data,response,error in
+//      guard let data = data else {
+//        completion(nil)
+//        return
+//      }
+//      let decoder = JSONDecoder()
+//        if let responseModel = try? decoder.decode(ServerListResponse.self, from: data) {
+//            completion(responseModel)
+//        } else {
+//            completion(nil)
+//        }
+//    })
+//    session.resume()
+//  }
+//=======
+//
+//>>>>>>> feature/ticketing-reverted
   
   static func getAccessTokenFor(url : URL,servicePath : String, publicKey : String, completion : @escaping (AccessTokenResponse?) -> Void) {
     let json: [String: Any] = ["service": servicePath, "pubKey": publicKey]
@@ -370,18 +375,26 @@ extension GatewayConnection {
   }
   
   static func validateTicketing(url : URL, parameters : [String: String]?, completion : @escaping (String?) -> Void ) {
-    let headers = HTTPHeaders([HTTPHeader(name: "X-Version", value: UserDefaults.standard.object(forKey: "AccessToken") as! String),HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")])
+
+    let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer " + (UserDefaults.standard.object(forKey: "AccessToken") as! String)),HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")])
+    
+    let encoder = JSONEncoder()
+    guard let parametersData = try? encoder.encode(parameters) else {
+      completion(nil)
+      return
+    }
     
     var request = URLRequest(url: url)
     request.headers = headers
-    request.httpBody = Data()
+    request.method = .post
+    request.httpBody = parametersData
     
     let session = URLSession.shared.dataTask(with: request, completionHandler: { data,response,error in
       guard let data = data else {
         completion(nil)
         return
       }
-      completion("responseModel")
+      completion(response?.description)
     })
     session.resume()
   }

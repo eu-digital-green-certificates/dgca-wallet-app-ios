@@ -65,31 +65,28 @@ class ServersListVC: UIViewController {
       return
     }
     
-    guard let privateKey = Enclave.loadOrGenerateKey(with: "validationKey"),
-        let publicKey = SecKeyCopyPublicKey(privateKey) else { return }
-    
-    var base64PublicKeyString = ""
-    var error:Unmanaged<CFError>?
-    
-    if let cfdata = SecKeyCopyExternalRepresentation(publicKey, &error) {
-      let data:Data = cfdata as Data
-      base64PublicKeyString = data.base64EncodedString()
-    }
+
+    guard let privateKey = Enclave.loadOrGenerateKey(with: "validationKey") else { return }
     
     guard let accessTokenService = serverListInfo?.service?.first(where: { $0.type == "AccessTokenService" }),
       let url = URL(string: accessTokenService.serviceEndpoint),
         let serviceURL = URL(string: service.serviceEndpoint) else { return }
     
-    GatewayConnection.getServiceInfo(url: serviceURL) { [weak self] validationServiceInfo in
+    IdentityService.getServiceInfo(url: serviceURL) { [weak self] validationServiceInfo in
+      
 //      TODO: Show UI message with error if fail to fetch serviceInfo
+      
       guard let serviceInfo = validationServiceInfo else { return }
       
-      GatewayConnection.getAccessTokenFor(url: url, servicePath: service.id,
-        publicKey: base64PublicKeyString) { response in
-        guard let accessTokenResponse = response else { return }
-        DispatchQueue.main.async {
-            self?.performSegue(withIdentifier: Constants.showCertificatesList,
-                sender: (serviceInfo, accessTokenResponse))
+      let pubKey = (X509.derPubKey(for: privateKey) ?? Data()).base64EncodedString()
+      
+      GatewayConnection.getAccessTokenFor(url: url,servicePath: service.id, publicKey: pubKey) { response in
+        DispatchQueue.main.async { [weak self] in
+          let vc = CertificatesListVC()
+          
+          guard let accessTokenResponse = response else { return }
+          vc.setCertsWith(serviceInfo, accessTokenResponse)
+          self?.navigationController?.pushViewController(vc, animated: true)
         }
       }
     }
