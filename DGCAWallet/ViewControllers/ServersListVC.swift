@@ -63,16 +63,6 @@ class ServersListVC: UIViewController {
     }
     
     guard let privateKey = Enclave.loadOrGenerateKey(with: "validationKey") else { return }
-//    let publicKey = SecKeyCopyPublicKey(privateKey)
-//    
-//    var base64PublicKeyString = ""
-//    
-//    var error:Unmanaged<CFError>?
-//    
-//    if let cfdata = SecKeyCopyExternalRepresentation(privateKey, &error) {
-//      let data:Data = cfdata as Data
-//      base64PublicKeyString = data.base64EncodedString()
-//    }
     
     let accessTokenService = serverListInfo?.service?.first(where: {
       $0.type == "AccessTokenService"
