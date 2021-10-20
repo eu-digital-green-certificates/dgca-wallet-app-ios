@@ -86,7 +86,7 @@ class TicketCodeAcceptViewController: UIViewController {
         let parameters = ["kid" : verificationMethod.publicKeyJwk!.kid, "dcc" : dccData.0.base64EncodedString(), "sig": sig.base64EncodedString(),"encKey" : dccData.1.base64EncodedString(), "sigAlg" : "SHA256withECDSA", "encScheme" : "RSAOAEPWithSHA256AESGCM"]
         
         GatewayConnection.validateTicketing(url: url, parameters: parameters) { resultStr in
-          print(resultStr)
+            print(resultStr ?? "")
         }
       }
     })
@@ -99,7 +99,7 @@ class TicketCodeAcceptViewController: UIViewController {
     let ivData : [UInt8] = Array(base64: iv)
     let dgcData : [UInt8] = Array(dgcString.utf8)
     
-    let publicKeyData : [UInt8] = Array(base64: verificationMethod.publicKeyJwk!.x5c)
+      let _ : [UInt8] = Array(base64: verificationMethod.publicKeyJwk!.x5c)
     
     var encryptedDgcData : [UInt8] = Array()
     
@@ -128,7 +128,7 @@ class TicketCodeAcceptViewController: UIViewController {
         // failed
     }
     
-    let errorEncr : UnsafeMutablePointer<Unmanaged<CFError>?>? = nil
+    //let errorEncr : UnsafeMutablePointer<Unmanaged<CFError>?>? = nil
     let encryptedKeyData = TicketCodeAcceptViewController.encrypt(data: Data(key), with: publicSecKey!)
     
     return (Data(encryptedDgcData),encryptedKeyData.0!)

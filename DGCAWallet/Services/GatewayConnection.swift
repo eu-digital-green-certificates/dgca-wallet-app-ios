@@ -390,7 +390,7 @@ extension GatewayConnection {
     request.httpBody = parametersData
     
     let session = URLSession.shared.dataTask(with: request, completionHandler: { data,response,error in
-      guard let data = data else {
+      guard data != nil else {
         completion(nil)
         return
       }

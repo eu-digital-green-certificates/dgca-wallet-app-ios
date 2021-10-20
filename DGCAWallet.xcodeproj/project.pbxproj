@@ -151,7 +151,8 @@
 		CEE9DA55263C7D4000A31532 /* CertCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9DA54263C7D4000A31532 /* CertCode.swift */; };
 		CEE9DA5D263C865200A31532 /* Brightness.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9DA5C263C865200A31532 /* Brightness.swift */; };
 		CEFAD87F262714C4009AFEF9 /* EHNTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFAD87E262714C4009AFEF9 /* EHNTests.swift */; };
-		D2AE0613270DC94200384920 /* dgca-app-core-ios in Resources */ = {isa = PBXBuildFile; fileRef = FECE1B4D2704B26E0005CFFC /* dgca-app-core-ios */; };
+		D23EF7A6272057F40097D82B /* CertificateTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23EF7A4272057F40097D82B /* CertificateTVC.swift */; };
+		D23EF7A7272057F40097D82B /* ServerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23EF7A5272057F40097D82B /* ServerTVC.swift */; };
 		DA01661C265541C0005B73A1 /* LicenseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01661B265541C0005B73A1 /* LicenseList.swift */; };
 		DA01661E26554992005B73A1 /* OpenSourceNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = DA01661D26554992005B73A1 /* OpenSourceNotices.json */; };
 		DA01662026554E02005B73A1 /* LicenseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01661F26554E02005B73A1 /* LicenseCell.swift */; };
@@ -263,6 +264,8 @@
 		CEE9DA54263C7D4000A31532 /* CertCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertCode.swift; sourceTree = "<group>"; };
 		CEE9DA5C263C865200A31532 /* Brightness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brightness.swift; sourceTree = "<group>"; };
 		CEFAD87E262714C4009AFEF9 /* EHNTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EHNTests.swift; sourceTree = "<group>"; };
+		D23EF7A4272057F40097D82B /* CertificateTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateTVC.swift; sourceTree = "<group>"; };
+		D23EF7A5272057F40097D82B /* ServerTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerTVC.swift; sourceTree = "<group>"; };
 		DA01661B265541C0005B73A1 /* LicenseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseList.swift; sourceTree = "<group>"; };
 		DA01661D26554992005B73A1 /* OpenSourceNotices.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = OpenSourceNotices.json; sourceTree = "<group>"; };
 		DA01661F26554E02005B73A1 /* LicenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseCell.swift; sourceTree = "<group>"; };
@@ -425,7 +428,6 @@
 				5C556D3F26F9DAF6007E2C2E /* TicketCodeAcceptViewController.xib */,
 				5C556D4726F9F8AC007E2C2E /* CertificatesListVC.swift */,
 				5C556D4F26F9F8C6007E2C2E /* ServersListVC.swift */,
-				5C556D5026F9F8C6007E2C2E /* ServersListVC.xib */,
 				FEC54BE727201D660048B6BC /* ValidationResultViewController.swift */,
 				FEC54BE827201D660048B6BC /* ValidationResultViewController.xib */,
 			);
@@ -435,7 +437,8 @@
 		CE13CF1D262DDE730070C80E /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				D2A68B682714384E009A77D9 /* Cells */,
+				D23EF7A4272057F40097D82B /* CertificateTVC.swift */,
+				D23EF7A5272057F40097D82B /* ServerTVC.swift */,
 				5C50CF18269700B30015EE29 /* RuleCell */,
 				5C50CF172697009E0015EE29 /* CheckValidityCells */,
 				CE13CF0E262DD0D80070C80E /* FullFloatingPanelLayout.swift */,
@@ -723,7 +726,6 @@
 				5C50CF14269700710015EE29 /* RuleValidationResultVC.xib in Resources */,
 				DA017DE626552259006E4D49 /* Licenses.storyboard in Resources */,
 				FEC54BEA27201D660048B6BC /* ValidationResultViewController.xib in Resources */,
-				5C556D4C26F9F8AC007E2C2E /* CertificatesListVC.xib in Resources */,
 				5C50CF2A26972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -823,6 +825,7 @@
 				5C00071C26D38CC3002E5013 /* NFCHelper.swift in Sources */,
 				CEA15563262F6DAB0024B7AC /* CertViewerDelegate.swift in Sources */,
 				CE260F56263DD1720083A200 /* WalletCell.swift in Sources */,
+				D23EF7A7272057F40097D82B /* ServerTVC.swift in Sources */,
 				CEA15570262F79DE0024B7AC /* InfoCell.swift in Sources */,
 				FEC54BE4271F26990048B6BC /* IdentityService.swift in Sources */,
 				5CE07C7A2692E1CD00A032F9 /* CountryDataStorage.swift in Sources */,
@@ -837,6 +840,7 @@
 				CEA6D6EE261F8D2700715333 /* SceneDelegate.swift in Sources */,
 				5C00073A26D625DE002E5013 /* ImageTableViewCell.swift in Sources */,
 				5C50CF22269704240015EE29 /* UIViewController+.swift in Sources */,
+				D23EF7A6272057F40097D82B /* CertificateTVC.swift in Sources */,
 				5CE07C802692E1CD00A032F9 /* RulesDataStorage.swift in Sources */,
 				5C00074726D641E2002E5013 /* PDFViewerVC.swift in Sources */,
 				5C00073F26D641CC002E5013 /* ImageViewerVC.swift in Sources */,
