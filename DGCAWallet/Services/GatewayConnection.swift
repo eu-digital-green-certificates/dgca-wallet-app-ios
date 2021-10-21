@@ -374,8 +374,9 @@ extension GatewayConnection {
     session.resume()
   }
   
-  static func validateTicketing(url : URL, parameters : [String: String]?, completion : @escaping (String?) -> Void ) {
-
+  static func validateTicketing(url : URL, parameters : [String: String]?, completion : @escaping (AccessTokenResponse?) -> Void ) {
+    var accessTokenResponse : AccessTokenResponse?
+    
     let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer " + (UserDefaults.standard.object(forKey: "AccessToken") as! String)),HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")])
     
     let encoder = JSONEncoder()
@@ -390,11 +391,29 @@ extension GatewayConnection {
     request.httpBody = parametersData
     
     let session = URLSession.shared.dataTask(with: request, completionHandler: { data,response,error in
-      guard data != nil else {
+      
+      guard let responseData = data,
+            let tokenJWT = String(data: responseData, encoding: .utf8)
+      else {
         completion(nil)
         return
       }
-      completion(response?.description)
+      
+      guard let decodedToken = try? decode(jwt: tokenJWT),
+            let jsonData = try? JSONSerialization.data(withJSONObject: decodedToken.body)
+      else {
+        completion(nil)
+        return
+      }
+      
+      let decoder = JSONDecoder()
+      do {
+        accessTokenResponse = try decoder.decode(AccessTokenResponse.self, from: jsonData)
+      } catch let parseError {
+        print(parseError)
+      }
+      
+      completion(accessTokenResponse)
     })
     session.resume()
   }

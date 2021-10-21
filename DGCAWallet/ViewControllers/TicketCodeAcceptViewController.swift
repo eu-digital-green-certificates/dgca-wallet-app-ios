@@ -46,6 +46,7 @@ class TicketCodeAcceptViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    setuppView(isValidation: true)
   }
   
   private func setuppView(isValidation: Bool) {
@@ -61,7 +62,7 @@ class TicketCodeAcceptViewController: UIViewController {
     validationServiceInfo = validationInfo
     accessTokenInfo = accessTokenModel
     cert = certificate
-    setuppView(isValidation: true)
+    
   }
   
   @IBAction func cancelButtonAction(_ sender: Any) {
@@ -85,8 +86,13 @@ class TicketCodeAcceptViewController: UIViewController {
        sig = sign
         let parameters = ["kid" : verificationMethod.publicKeyJwk!.kid, "dcc" : dccData.0.base64EncodedString(), "sig": sig.base64EncodedString(),"encKey" : dccData.1.base64EncodedString(), "sigAlg" : "SHA256withECDSA", "encScheme" : "RSAOAEPWithSHA256AESGCM"]
         
-        GatewayConnection.validateTicketing(url: url, parameters: parameters) { resultStr in
-            print(resultStr ?? "")
+        GatewayConnection.validateTicketing(url: url, parameters: parameters) { [weak self] responseModel in
+          DispatchQueue.main.async {
+            let vc = ValidationResultViewController()
+            vc.validationResultModel = responseModel
+            self?.navigationController?.pushViewController(vc, animated: true)
+          }
+          
         }
       }
     })

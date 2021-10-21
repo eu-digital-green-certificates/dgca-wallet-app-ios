@@ -26,7 +26,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="e20-d3-vCy">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <rect key="frame" x="0.0" y="64" width="414" height="832"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4bj-1p-URm">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
@@ -163,7 +163,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hNe-cz-nYo">
-                            <rect key="frame" x="0.0" y="360" width="414" height="536"/>
+                            <rect key="frame" x="0.0" y="360" width="414" height="472"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </view>
                     </subviews>
@@ -173,7 +173,7 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="e20-d3-vCy" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="2fE-53-HY0"/>
-                <constraint firstItem="e20-d3-vCy" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="JEQ-Qb-3bP"/>
+                <constraint firstItem="e20-d3-vCy" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="JEQ-Qb-3bP"/>
                 <constraint firstAttribute="bottom" secondItem="e20-d3-vCy" secondAttribute="bottom" id="fVf-ZA-6j6"/>
                 <constraint firstItem="e20-d3-vCy" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="vTO-ZI-zV2"/>
             </constraints>

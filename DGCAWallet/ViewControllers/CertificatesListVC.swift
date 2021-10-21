@@ -43,15 +43,20 @@ class CertificatesListVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    tableView.tableFooterView = UIView()
       title = l10n("certificates")
   }
   
   @IBAction func nextButtonAction(_ sender: Any) {
+    guard let tokenInfo = accessTokenInfo,
+          let serviceInfo = validationServiceInfo,
+          let selectedCert = self.getSelectedCert()?.cert
+    else { return }
+    
     let vc = TicketCodeAcceptViewController()
     
-    present(vc, animated: true, completion: { [weak self] in
-      vc.setCertsWith((self?.validationServiceInfo)!, (self?.accessTokenInfo)!,(self?.getSelectedCert()!.cert!)!)
-    })
+    vc.setCertsWith(serviceInfo, tokenInfo, selectedCert)
+    self.navigationController?.pushViewController(vc, animated: true)
   }
   
   private func setupView() {
@@ -67,11 +72,15 @@ class CertificatesListVC: UIViewController {
   }
 
   public func setCertsWith(_ validationInfo: ServerListResponse,_ accessTokenModel : AccessTokenResponse) {
-    //    TODO: Make filtering by all predicates (dob, validFrom/To, fullName)
-    //    .filter { $0.cert!.fullName == fullName}
+    // TODO: Make filtering by all predicates (dob, validFrom/To, fullName)
+        
     validationServiceInfo = validationInfo
     accessTokenInfo = accessTokenModel
-    listOfCert = LocalData.sharedInstance.certStrings.reversed()
+    
+//    || ($0.cert!.certTypeString == accessTokenModel.vc?.type?.first)
+    
+    listOfCert = LocalData.sharedInstance.certStrings.filter { ($0.cert!.fullName.lowercased() == "\(accessTokenModel.vc?.gnt) + \(accessTokenModel.vc?.fnt)".lowercased()) || ($0.cert!.dateOfBirth == accessTokenModel.vc?.dob) }
+    
   }
   
   private func deselectAllCert() {
