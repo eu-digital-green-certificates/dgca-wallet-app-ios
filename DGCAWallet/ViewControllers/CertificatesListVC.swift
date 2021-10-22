@@ -79,8 +79,7 @@ class CertificatesListVC: UIViewController {
     
 //    || ($0.cert!.certTypeString == accessTokenModel.vc?.type?.first)
     
-    listOfCert = LocalData.sharedInstance.certStrings.filter { ($0.cert!.fullName.lowercased() == "\(accessTokenModel.vc?.gnt) + \(accessTokenModel.vc?.fnt)".lowercased()) || ($0.cert!.dateOfBirth == accessTokenModel.vc?.dob) }
-    
+    listOfCert = LocalData.sharedInstance.certStrings.filter { ($0.cert!.fullName.lowercased() == "\(accessTokenModel.vc?.gnt ?? "") + \(accessTokenModel.vc?.fnt ?? "")".lowercased()) || ($0.cert!.dateOfBirth == accessTokenModel.vc?.dob) }
   }
   
   private func deselectAllCert() {
@@ -110,7 +109,23 @@ extension CertificatesListVC: UITableViewDataSource, UITableViewDelegate {
       }
       return cell
   }
-    
+
+  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+       return true
+  }
+
+  // Override to support editing the table view.
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+      if editingStyle == .delete {
+        // Delete the row from the data source
+        tableView.endUpdates()
+        listOfCert.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .fade)
+        tableView.beginUpdates()
+        tableView.reloadData()
+      }
+  }
+
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       deselectAllCert()
       listOfCert[indexPath.row].isSelected = true

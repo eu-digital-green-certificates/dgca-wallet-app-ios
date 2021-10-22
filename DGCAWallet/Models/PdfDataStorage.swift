@@ -27,7 +27,6 @@
         
 
 import Foundation
-
 import SwiftDGC
 
 struct PdfDataStorage: Codable {
@@ -37,10 +36,7 @@ struct PdfDataStorage: Codable {
   var pdfs = [SavedPDF]()
 
   mutating func add(savedPdf: SavedPDF) {
-    let list = pdfs
-    if list.contains(where: { pdf in
-      pdf.identifier == savedPdf.identifier
-    }) {
+    if pdfs.contains(where: { $0.identifier == savedPdf.identifier }) {
       return
     }
     pdfs.append(savedPdf)
@@ -58,15 +54,11 @@ struct PdfDataStorage: Codable {
 
   public func isPdfExistWith(identifier: String) -> Bool {
     let list = pdfs
-    return list.contains(where: { pdf in
-      pdf.identifier == identifier
-    })
+    return list.contains(where: { $0.identifier == identifier })
   }
   static func initialize(completion: @escaping () -> Void) {
     storage.loadOverride(fallback: PdfDataStorage.sharedInstance) { success in
-      guard let result = success else {
-        return
-      }
+      guard let result = success else { return }
       let format = l10n("log.pdfs")
       print(String.localizedStringWithFormat(format, result.pdfs.count))
       PdfDataStorage.sharedInstance = result

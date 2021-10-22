@@ -148,29 +148,27 @@ extension RuleValidationResultVC {
          kid: hCert.kidStr)
       let result = CertLogicEngineManager.sharedInstance.validate(filter: filterParameter,
         external: externalParameters, payload: hCert.body.description)
-      let failsAndOpen = result.filter { validationResult in return validationResult.result != .passed }
+      let failsAndOpen = result.filter { $0.result != .passed }
       if failsAndOpen.count > 0 {
         validity = .ruleInvalid
-        result.sorted(by: { vdResultOne, vdResultTwo in
-          vdResultOne.result.rawValue < vdResultTwo.result.rawValue
-        }).forEach { validationResult in
+        result.sorted(by: { $0.result.rawValue < $1.result.rawValue }).forEach { validationResult in
           if let error = validationResult.validationErrors?.first {
             switch validationResult.result {
             case .fail:
               items.append(InfoSection(header: "CirtLogic Engine error",
-                                                    content: error.localizedDescription,
-                                                    countryName: hCert.ruleCountryCode,
-                                                    ruleValidationResult: SwiftDGC.RuleValidationResult.error))
+                content: error.localizedDescription,
+                countryName: hCert.ruleCountryCode,
+                ruleValidationResult: SwiftDGC.RuleValidationResult.error))
             case .open:
               items.append(InfoSection(header: "CirtLogic Engine error",
-                                                    content: error.localizedDescription,
-                                                    countryName: hCert.ruleCountryCode,
-                                                    ruleValidationResult: SwiftDGC.RuleValidationResult.open))
+                content: error.localizedDescription,
+                countryName: hCert.ruleCountryCode,
+                ruleValidationResult: SwiftDGC.RuleValidationResult.open))
             case .passed:
               items.append(InfoSection(header: "CirtLogic Engine error",
-                                                    content: error.localizedDescription,
-                                                    countryName: hCert.ruleCountryCode,
-                                                    ruleValidationResult: SwiftDGC.RuleValidationResult.passed))
+                content: error.localizedDescription,
+                countryName: hCert.ruleCountryCode,
+                ruleValidationResult: SwiftDGC.RuleValidationResult.passed))
             }
           } else {
             let preferredLanguage = Locale.preferredLanguages[0] as String
@@ -183,7 +181,7 @@ extension RuleValidationResultVC {
             var detailsError = ""
             if let rule = validationResult.rule {
                let dict = CertLogicEngineManager.sharedInstance.getRuleDetailsError(rule: rule,
-                                                                                filter: filterParameter)
+                filter: filterParameter)
               dict.keys.forEach({ key in
                     detailsError += key + ": " + (dict[key] ?? "") + " "
               })
@@ -191,19 +189,19 @@ extension RuleValidationResultVC {
             switch validationResult.result {
             case .fail:
               items.append(InfoSection(header: errorString,
-                                                    content: detailsError,
-                                                    countryName: hCert.ruleCountryCode,
-                                                    ruleValidationResult: SwiftDGC.RuleValidationResult.error))
+                content: detailsError,
+                countryName: hCert.ruleCountryCode,
+                ruleValidationResult: SwiftDGC.RuleValidationResult.error))
             case .open:
               items.append(InfoSection(header: errorString,
-                                                    content: detailsError,
-                                                    countryName: hCert.ruleCountryCode,
-                                                    ruleValidationResult: SwiftDGC.RuleValidationResult.open))
+                content: detailsError,
+                countryName: hCert.ruleCountryCode,
+                ruleValidationResult: SwiftDGC.RuleValidationResult.open))
             case .passed:
               items.append(InfoSection(header: errorString,
-                                                    content: detailsError,
-                                                    countryName: hCert.ruleCountryCode,
-                                                    ruleValidationResult: SwiftDGC.RuleValidationResult.passed))
+                content: detailsError,
+                countryName: hCert.ruleCountryCode,
+                ruleValidationResult: SwiftDGC.RuleValidationResult.passed))
             }
           }
         }

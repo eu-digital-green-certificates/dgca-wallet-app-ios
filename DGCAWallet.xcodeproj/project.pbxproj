@@ -218,7 +218,7 @@
 		5C50CF3D26983E090015EE29 /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
 		5C556D3F26F9DAF6007E2C2E /* TicketCodeAcceptViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketCodeAcceptViewController.xib; sourceTree = "<group>"; };
 		5C556D4026F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketCodeAcceptViewController.swift; sourceTree = "<group>"; };
-		5C556D4726F9F8AC007E2C2E /* CertificatesListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificatesListVC.swift; sourceTree = "<group>"; };
+		5C556D4726F9F8AC007E2C2E /* CertificatesListVC.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CertificatesListVC.swift; sourceTree = "<group>"; tabWidth = 2; };
 		5C556D4F26F9F8C6007E2C2E /* ServersListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersListVC.swift; sourceTree = "<group>"; };
 		5CE07C772692E1CC00A032F9 /* CountryDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryDataStorage.swift; sourceTree = "<group>"; };
 		5CE07C782692E1CD00A032F9 /* ValueSetsDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueSetsDataStorage.swift; sourceTree = "<group>"; };
@@ -231,7 +231,7 @@
 		CE13CF09262DCDDA0070C80E /* CertificateViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateViewer.swift; sourceTree = "<group>"; };
 		CE13CF0E262DD0D80070C80E /* FullFloatingPanelLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullFloatingPanelLayout.swift; sourceTree = "<group>"; };
 		CE13CF22262DDF810070C80E /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
-		CE1D1EF5263597A2004C8919 /* LocalData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalData.swift; sourceTree = "<group>"; };
+		CE1D1EF5263597A2004C8919 /* LocalData.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = LocalData.swift; sourceTree = "<group>"; tabWidth = 2; };
 		CE260F55263DD1720083A200 /* WalletCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCell.swift; sourceTree = "<group>"; };
 		CE37B642263867D700DEE13D /* SecureBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureBackground.swift; sourceTree = "<group>"; };
 		CE4BD253264FF28900689FD6 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };

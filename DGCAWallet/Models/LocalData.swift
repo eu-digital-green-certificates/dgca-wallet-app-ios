@@ -58,15 +58,23 @@ struct LocalData: Codable {
   public func save() {
     Self.storage.save(self)
   }
+    
   public static func add(_ cert: HCert, with tan: String?) {
     sharedInstance.certStrings.append(.init(date: Date(), certString: cert.fullPayloadString, storedTAN: tan))
     sharedInstance.save()
   }
+
+    public static func remove(withTAN tan: String?) {
+      if let ind = sharedInstance.certStrings.firstIndex(where: { $0.storedTAN == tan }) {
+          sharedInstance.certStrings.remove(at: ind)
+          sharedInstance.save()
+      }
+    }
+
   static func initialize(completion: @escaping () -> Void) {
     storage.loadOverride(fallback: LocalData.sharedInstance) { success in
-      guard var result = success else {
-        return
-      }
+      guard var result = success else {  return }
+      
       let format = l10n("log.certs-loaded")
       print(String.localizedStringWithFormat(format, result.certStrings.count))
       if result.lastLaunchedAppVersion != Self.appVersion {
