@@ -32,6 +32,7 @@ class CertificatesListVC: UIViewController {
   
   private enum Constants {
     static let hcertCellIndentifier = "CertificateCell"
+    static let showTicketAccepyController = "showTicketAccepyController"
   }
   
   @IBOutlet weak var tableView      : UITableView!
@@ -45,9 +46,13 @@ class CertificatesListVC: UIViewController {
     super.viewDidLoad()
     tableView.tableFooterView = UIView()
     title = l10n("certificates")
+   }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
     tableView.reloadData()
   }
-  
+
   @IBAction func nextButtonAction(_ sender: Any) {
     guard let tokenInfo = accessTokenInfo,
           let serviceInfo = validationServiceInfo,
@@ -65,8 +70,18 @@ class CertificatesListVC: UIViewController {
         
     validationServiceInfo = validationInfo
     accessTokenInfo = accessTokenModel
-        
-    listOfCert = LocalData.sharedInstance.certStrings.filter { ($0.cert!.fullName.lowercased() == "\(accessTokenModel.vc?.gnt ?? "") + \(accessTokenModel.vc?.fnt ?? "")".lowercased()) || ($0.cert!.dateOfBirth == accessTokenModel.vc?.dob) }
+    let firstName = accessTokenModel.vc?.gnt?.lowercased() ?? ""
+    let lastName = accessTokenModel.vc?.fnt?.lowercased() ?? ""
+    let ticketingFullName: String
+    
+    if !firstName.isEmpty && !lastName.isEmpty {
+      ticketingFullName = firstName + " " + lastName
+    } else if firstName.isEmpty {
+      ticketingFullName = lastName
+    } else {
+      ticketingFullName = firstName
+    }
+    listOfCert = LocalData.sharedInstance.certStrings.filter { $0.cert!.fullName.lowercased() == ticketingFullName || ($0.cert!.dateOfBirth == accessTokenModel.vc?.dob) }
   }
   
   private func deselectAllCert() {

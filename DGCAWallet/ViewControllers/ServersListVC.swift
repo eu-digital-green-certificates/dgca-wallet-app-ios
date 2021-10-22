@@ -47,6 +47,11 @@ class ServersListVC: UIViewController {
     title = l10n("services")
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    tableView.reloadData()
+  }
+    
   override func willMove(toParent parent: UIViewController?) {
         super.willMove(toParent: parent)
         self.navigationController?.isNavigationBarHidden = (parent == nil)
@@ -64,17 +69,15 @@ class ServersListVC: UIViewController {
       self.present(alertController, animated: true)
       return
     }
-    
-
     guard let privateKey = Enclave.loadOrGenerateKey(with: "validationKey") else { return }
     
     guard let accessTokenService = serverListInfo?.service?.first(where: { $0.type == "AccessTokenService" }),
       let url = URL(string: accessTokenService.serviceEndpoint),
-        let serviceURL = URL(string: service.serviceEndpoint) else { return }
+      let serviceURL = URL(string: service.serviceEndpoint) else { return }
     
     IdentityService.getServiceInfo(url: serviceURL) { [weak self] validationServiceInfo in
       
-//      TODO: Show UI message with error if fail to fetch serviceInfo
+//  TODO: Show UI message with error if fail to fetch serviceInfo
       
       guard let serviceInfo = validationServiceInfo else { return }
       
