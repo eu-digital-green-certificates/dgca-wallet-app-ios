@@ -32,7 +32,7 @@ class CertificatesListVC: UIViewController {
   
   private enum Constants {
     static let hcertCellIndentifier = "CertificateCell"
-    static let showTicketAccepyController = "showTicketAccepyController"
+    static let showTicketAcceptController = "showTicketAcceptController"
   }
   
   @IBOutlet weak var tableView      : UITableView!
@@ -54,15 +54,7 @@ class CertificatesListVC: UIViewController {
   }
 
   @IBAction func nextButtonAction(_ sender: Any) {
-    guard let tokenInfo = accessTokenInfo,
-          let serviceInfo = validationServiceInfo,
-          let selectedCert = self.getSelectedCert()?.cert
-    else { return }
-    
-    let vc = TicketCodeAcceptViewController()
-    
-    vc.setCertsWith(serviceInfo, tokenInfo, selectedCert)
-    self.navigationController?.pushViewController(vc, animated: true)
+    self.performSegue(withIdentifier: Constants.showTicketAcceptController, sender: nil)
   }
   
   public func setCertsWith(_ validationInfo: ServerListResponse,_ accessTokenModel : AccessTokenResponse) {
@@ -140,5 +132,20 @@ extension CertificatesListVC: UITableViewDataSource, UITableViewDelegate {
       deselectAllCert()
       listOfCert[indexPath.row].isSelected = true
       tableView.reloadRows(at: [indexPath], with: .automatic)
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    switch segue.identifier {
+    case Constants.showTicketAcceptController:
+      guard let ticketController = segue.destination as? TicketCodeAcceptViewController,
+          let tokenInfo = accessTokenInfo,
+          let serviceInfo = validationServiceInfo,
+          let selectedCert = self.getSelectedCert()?.cert else { return }
+      
+      ticketController.setCertsWith(serviceInfo, tokenInfo, selectedCert)
+
+    default:
+        break
+    }
   }
 }
