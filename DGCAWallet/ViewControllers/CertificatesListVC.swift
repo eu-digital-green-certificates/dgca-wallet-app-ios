@@ -101,10 +101,10 @@ extension CertificatesListVC: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.hcertCellIndentifier,
           for: indexPath) as? CertificateCell else { return UITableViewCell() }
-      let hCert = listOfCert[indexPath.row]
+      let savedCert = listOfCert[indexPath.row]
 
-      cell.accessoryType = hCert.isSelected ? .checkmark : .none
-      if let cert = hCert.cert {
+      cell.accessoryType = savedCert.isSelected ? .checkmark : .none
+      if let cert = savedCert.cert {
           cell.setCertificate(cert: cert)
       }
       return cell
@@ -117,12 +117,24 @@ extension CertificatesListVC: UITableViewDataSource, UITableViewDelegate {
   // Override to support editing the table view.
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
       if editingStyle == .delete {
-        // Delete the row from the data source
-        tableView.endUpdates()
-        listOfCert.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .fade)
-        tableView.beginUpdates()
-        tableView.reloadData()
+        let savedCert = listOfCert[indexPath.row]
+        //tableView.endUpdates()
+        showAlert(
+          title: l10n("cert.delete.title"),
+          subtitle: l10n("cert.delete.body"),
+          actionTitle: l10n("btn.confirm"),
+          cancelTitle: l10n("btn.cancel")) {
+              if $0 {
+                LocalData.remove(withTAN: savedCert.storedTAN)
+                
+              LocalData.sharedInstance.save()
+              DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
+                tableView.reloadData()
+              }
+
+            }
+          }
+
       }
   }
 

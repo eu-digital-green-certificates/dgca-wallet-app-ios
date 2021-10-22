@@ -256,7 +256,7 @@
                                 <color key="backgroundColor" name="blue"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MID-ne-Jur" customClass="RoundedButton" customModule="DGCAWallet" customModuleProvider="target">
-                                <rect key="frame" x="149.5" y="812" width="115" height="34"/>
+                                <rect key="frame" x="149.5" y="800" width="115" height="46"/>
                                 <color key="backgroundColor" name="green"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="115" id="jzU-iO-50E"/>
@@ -275,16 +275,16 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W03-Gm-CHU">
-                                <rect key="frame" x="0.0" y="130.5" width="414" height="681.5"/>
+                                <rect key="frame" x="0.0" y="130.5" width="414" height="669.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet Empty" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f0r-gi-rzF">
-                                        <rect key="frame" x="145" y="277" width="124" height="24"/>
+                                        <rect key="frame" x="145" y="271" width="124" height="24"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <color key="textColor" name="disabledText"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Press the button below to scan your code." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xvs-y5-Iav">
-                                        <rect key="frame" x="83" y="317" width="248" height="48"/>
+                                        <rect key="frame" x="83" y="311" width="248" height="48"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" name="disabledText"/>
                                         <nil key="highlightedColor"/>
@@ -306,7 +306,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="emV-oh-VSt">
-                                <rect key="frame" x="0.0" y="130.5" width="414" height="665.5"/>
+                                <rect key="frame" x="0.0" y="130.5" width="414" height="653.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PDFTableViewCell" rowHeight="140" id="gBl-AR-089" customClass="PDFTableViewCell" customModule="DGCAWallet" customModuleProvider="target">
@@ -568,6 +568,17 @@
             <point key="canvasLocation" x="-726" y="119"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="MID-ne-Jur">
+            <size key="intrinsicContentSize" width="97" height="46"/>
+        </designable>
+        <designable name="Rcx-o5-KDY">
+            <size key="intrinsicContentSize" width="56" height="42"/>
+        </designable>
+        <designable name="WbA-kC-hOb">
+            <size key="intrinsicContentSize" width="56" height="42"/>
+        </designable>
+    </designables>
     <resources>
         <image name="EU_logo" width="72" height="48"/>
         <image name="gear_white" width="22" height="22"/>
