@@ -108,8 +108,6 @@
 		5CE07C842692E21E00A032F9 /* CertLogicEngineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE07C832692E21E00A032F9 /* CertLogicEngineManager.swift */; };
 		5CE07C852692E21E00A032F9 /* CertLogicEngineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE07C832692E21E00A032F9 /* CertLogicEngineManager.swift */; };
 		5CE07C862692E21E00A032F9 /* CertLogicEngineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE07C832692E21E00A032F9 /* CertLogicEngineManager.swift */; };
-		5CEA55D026F3528900269702 /* QRTicketCodeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CEA55CE26F3528900269702 /* QRTicketCodeDetailsViewController.swift */; };
-		5CEA55D126F3528900269702 /* QRTicketCodeDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5CEA55CF26F3528900269702 /* QRTicketCodeDetailsViewController.xib */; };
 		CE13CF00262DCC180070C80E /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = CE13CEFF262DCC180070C80E /* FloatingPanel */; };
 		CE13CF0A262DCDDA0070C80E /* CertificateViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13CF09262DCDDA0070C80E /* CertificateViewer.swift */; };
 		CE13CF0F262DD0D80070C80E /* FullFloatingPanelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13CF0E262DD0D80070C80E /* FullFloatingPanelLayout.swift */; };
@@ -147,6 +145,7 @@
 		CEFAD87F262714C4009AFEF9 /* EHNTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFAD87E262714C4009AFEF9 /* EHNTests.swift */; };
 		D23EF7A6272057F40097D82B /* CertificateTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23EF7A4272057F40097D82B /* CertificateTVC.swift */; };
 		D23EF7A7272057F40097D82B /* ServerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23EF7A5272057F40097D82B /* ServerTVC.swift */; };
+		D24C8951272353610090398A /* ScanWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C8950272353610090398A /* ScanWalletController.swift */; };
 		DA01661C265541C0005B73A1 /* LicenseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01661B265541C0005B73A1 /* LicenseList.swift */; };
 		DA01661E26554992005B73A1 /* OpenSourceNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = DA01661D26554992005B73A1 /* OpenSourceNotices.json */; };
 		DA01662026554E02005B73A1 /* LicenseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01661F26554E02005B73A1 /* LicenseCell.swift */; };
@@ -219,8 +218,6 @@
 		5CE07C782692E1CD00A032F9 /* ValueSetsDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueSetsDataStorage.swift; sourceTree = "<group>"; };
 		5CE07C792692E1CD00A032F9 /* RulesDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesDataStorage.swift; sourceTree = "<group>"; };
 		5CE07C832692E21E00A032F9 /* CertLogicEngineManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertLogicEngineManager.swift; sourceTree = "<group>"; };
-		5CEA55CE26F3528900269702 /* QRTicketCodeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRTicketCodeDetailsViewController.swift; sourceTree = "<group>"; };
-		5CEA55CF26F3528900269702 /* QRTicketCodeDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QRTicketCodeDetailsViewController.xib; sourceTree = "<group>"; };
 		5CFEDB18269DBB4C00074F66 /* context.jsonc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = context.jsonc; sourceTree = "<group>"; };
 		5CFEDB1A269DBB4C00074F66 /* context.jsonc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = context.jsonc; sourceTree = "<group>"; };
 		CE13CF09262DCDDA0070C80E /* CertificateViewer.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CertificateViewer.swift; sourceTree = "<group>"; tabWidth = 2; };
@@ -263,6 +260,7 @@
 		CEFAD87E262714C4009AFEF9 /* EHNTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EHNTests.swift; sourceTree = "<group>"; };
 		D23EF7A4272057F40097D82B /* CertificateTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateTVC.swift; sourceTree = "<group>"; };
 		D23EF7A5272057F40097D82B /* ServerTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerTVC.swift; sourceTree = "<group>"; };
+		D24C8950272353610090398A /* ScanWalletController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ScanWalletController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		DA01661B265541C0005B73A1 /* LicenseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseList.swift; sourceTree = "<group>"; };
 		DA01661D26554992005B73A1 /* OpenSourceNotices.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = OpenSourceNotices.json; sourceTree = "<group>"; };
 		DA01661F26554E02005B73A1 /* LicenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseCell.swift; sourceTree = "<group>"; };
@@ -404,6 +402,7 @@
 			isa = PBXGroup;
 			children = (
 				CE13CF09262DCDDA0070C80E /* CertificateViewer.swift */,
+				D24C8950272353610090398A /* ScanWalletController.swift */,
 				CED949C9263B50CE00883558 /* List.swift */,
 				CEE9DA54263C7D4000A31532 /* CertCode.swift */,
 				CE891304263581D900CB92AF /* Home.swift */,
@@ -420,8 +419,6 @@
 				5C00073E26D641CC002E5013 /* ImageViewerVC.xib */,
 				5C00074526D641E2002E5013 /* PDFViewerVC.swift */,
 				5C00074626D641E2002E5013 /* PDFViewerVC.xib */,
-				5CEA55CE26F3528900269702 /* QRTicketCodeDetailsViewController.swift */,
-				5CEA55CF26F3528900269702 /* QRTicketCodeDetailsViewController.xib */,
 				5C556D4026F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift */,
 				5C556D4726F9F8AC007E2C2E /* CertificatesListVC.swift */,
 				5C556D4F26F9F8C6007E2C2E /* ServersListVC.swift */,
@@ -713,7 +710,6 @@
 				CE4BD255264FF39400689FD6 /* Settings.storyboard in Resources */,
 				CE81533A263FF7EC0030D777 /* README.md in Resources */,
 				5C50CF1E2697023B0015EE29 /* RuleErrorTVC.xib in Resources */,
-				5CEA55D126F3528900269702 /* QRTicketCodeDetailsViewController.xib in Resources */,
 				DA01661E26554992005B73A1 /* OpenSourceNotices.json in Resources */,
 				FEBE53B82721ACEE003B61FB /* context.jsonc in Resources */,
 				CEA6D6F5261F8D2900715333 /* Assets.xcassets in Resources */,
@@ -791,7 +787,6 @@
 				CEDABD40263C5FF4007A9B97 /* CertTable.swift in Sources */,
 				CE37B643263867D700DEE13D /* SecureBackground.swift in Sources */,
 				CE13CF0F262DD0D80070C80E /* FullFloatingPanelLayout.swift in Sources */,
-				5CEA55D026F3528900269702 /* QRTicketCodeDetailsViewController.swift in Sources */,
 				5C00072A26D3A77D002E5013 /* ImageDataStorage.swift in Sources */,
 				5CE07C7D2692E1CD00A032F9 /* ValueSetsDataStorage.swift in Sources */,
 				5C556D4926F9F8AC007E2C2E /* CertificatesListVC.swift in Sources */,
@@ -824,6 +819,7 @@
 				D23EF7A7272057F40097D82B /* ServerTVC.swift in Sources */,
 				CEA15570262F79DE0024B7AC /* InfoCell.swift in Sources */,
 				FEC54BE4271F26990048B6BC /* IdentityService.swift in Sources */,
+				D24C8951272353610090398A /* ScanWalletController.swift in Sources */,
 				5CE07C7A2692E1CD00A032F9 /* CountryDataStorage.swift in Sources */,
 				CED949CA263B50CE00883558 /* List.swift in Sources */,
 				5C50CF11269700710015EE29 /* RuleValidationResultVC.swift in Sources */,

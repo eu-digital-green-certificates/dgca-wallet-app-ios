@@ -395,9 +395,9 @@
                         <outlet property="cancelButton" destination="0hR-4a-oMt" id="OQ6-g5-IHE"/>
                         <outlet property="certificateTitle" destination="sgq-So-IW2" id="8iH-0O-l1B"/>
                         <outlet property="consetsLabel" destination="Kpa-Rx-3St" id="v5U-8c-X4R"/>
+                        <outlet property="grandButton" destination="dV4-Pl-DfX" id="LsZ-Ok-JJb"/>
                         <outlet property="infoLabel" destination="pw2-qr-XFe" id="98g-AQ-5Qw"/>
                         <outlet property="validToLabel" destination="0GY-YP-I3P" id="dke-om-rwW"/>
-                        <outlet property="view" destination="dV4-Pl-DfX" id="Vje-Cf-0Vv"/>
                         <segue destination="bpJ-se-zNP" kind="show" identifier="showValidationResult" id="GHn-kz-cvd"/>
                     </connections>
                 </viewController>

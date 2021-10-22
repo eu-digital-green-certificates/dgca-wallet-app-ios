@@ -39,7 +39,6 @@ class ValidationResultViewController: UIViewController {
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var iconImage: UIImageView!
   @IBOutlet weak var detailLabel: UILabel!
-  
   @IBOutlet weak var limitationsTableView: UITableView!
   
   public var validationResultModel : AccessTokenResponse?

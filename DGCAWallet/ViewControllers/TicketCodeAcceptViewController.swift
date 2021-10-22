@@ -19,7 +19,7 @@
  * ---license-end
  */
 //  
-//  QRTicketCodeDetailsViewController.swift
+//  TicketCodeAcceptViewController.swift
 //  DGCAWallet
 //  
 //  Created by Alexandr Chernyy on 16.09.2021.
@@ -39,7 +39,6 @@ class TicketCodeAcceptViewController: UIViewController {
   @IBOutlet weak var validToLabel: UILabel!
   @IBOutlet weak var consetsLabel: UILabel!
   @IBOutlet weak var infoLabel: UILabel!
-  
   @IBOutlet weak var cancelButton: UIButton!
   @IBOutlet weak var grandButton: UIButton!
   
