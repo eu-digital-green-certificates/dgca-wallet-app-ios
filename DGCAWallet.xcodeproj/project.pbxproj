@@ -86,9 +86,6 @@
 		5C50CF3E26983E090015EE29 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF3D26983E090015EE29 /* UITableView+.swift */; };
 		5C50CF3F26983E090015EE29 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF3D26983E090015EE29 /* UITableView+.swift */; };
 		5C50CF4026983E090015EE29 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF3D26983E090015EE29 /* UITableView+.swift */; };
-		5C556D4126F9DAF7007E2C2E /* TicketCodeAcceptViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D3F26F9DAF6007E2C2E /* TicketCodeAcceptViewController.xib */; };
-		5C556D4226F9DAF7007E2C2E /* TicketCodeAcceptViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D3F26F9DAF6007E2C2E /* TicketCodeAcceptViewController.xib */; };
-		5C556D4326F9DAF7007E2C2E /* TicketCodeAcceptViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C556D3F26F9DAF6007E2C2E /* TicketCodeAcceptViewController.xib */; };
 		5C556D4426F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4026F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift */; };
 		5C556D4526F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4026F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift */; };
 		5C556D4626F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4026F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift */; };
@@ -166,7 +163,6 @@
 		FEC54BE4271F26990048B6BC /* IdentityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC54BE3271F26990048B6BC /* IdentityService.swift */; };
 		FEC54BE6271F27180048B6BC /* AccessTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC54BE5271F27180048B6BC /* AccessTokenService.swift */; };
 		FEC54BE927201D660048B6BC /* ValidationResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC54BE727201D660048B6BC /* ValidationResultViewController.swift */; };
-		FEC54BEA27201D660048B6BC /* ValidationResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEC54BE827201D660048B6BC /* ValidationResultViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -216,10 +212,9 @@
 		5C50CF352697315B0015EE29 /* ValidityCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidityCellModel.swift; sourceTree = "<group>"; };
 		5C50CF3926973D9D0015EE29 /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
 		5C50CF3D26983E090015EE29 /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
-		5C556D3F26F9DAF6007E2C2E /* TicketCodeAcceptViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TicketCodeAcceptViewController.xib; sourceTree = "<group>"; };
-		5C556D4026F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketCodeAcceptViewController.swift; sourceTree = "<group>"; };
+		5C556D4026F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = TicketCodeAcceptViewController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		5C556D4726F9F8AC007E2C2E /* CertificatesListVC.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CertificatesListVC.swift; sourceTree = "<group>"; tabWidth = 2; };
-		5C556D4F26F9F8C6007E2C2E /* ServersListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersListVC.swift; sourceTree = "<group>"; };
+		5C556D4F26F9F8C6007E2C2E /* ServersListVC.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ServersListVC.swift; sourceTree = "<group>"; tabWidth = 2; };
 		5CE07C772692E1CC00A032F9 /* CountryDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryDataStorage.swift; sourceTree = "<group>"; };
 		5CE07C782692E1CD00A032F9 /* ValueSetsDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueSetsDataStorage.swift; sourceTree = "<group>"; };
 		5CE07C792692E1CD00A032F9 /* RulesDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesDataStorage.swift; sourceTree = "<group>"; };
@@ -280,7 +275,6 @@
 		FEC54BE3271F26990048B6BC /* IdentityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityService.swift; sourceTree = "<group>"; };
 		FEC54BE5271F27180048B6BC /* AccessTokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenService.swift; sourceTree = "<group>"; };
 		FEC54BE727201D660048B6BC /* ValidationResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResultViewController.swift; sourceTree = "<group>"; };
-		FEC54BE827201D660048B6BC /* ValidationResultViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ValidationResultViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -429,11 +423,9 @@
 				5CEA55CE26F3528900269702 /* QRTicketCodeDetailsViewController.swift */,
 				5CEA55CF26F3528900269702 /* QRTicketCodeDetailsViewController.xib */,
 				5C556D4026F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift */,
-				5C556D3F26F9DAF6007E2C2E /* TicketCodeAcceptViewController.xib */,
 				5C556D4726F9F8AC007E2C2E /* CertificatesListVC.swift */,
 				5C556D4F26F9F8C6007E2C2E /* ServersListVC.swift */,
 				FEC54BE727201D660048B6BC /* ValidationResultViewController.swift */,
-				FEC54BE827201D660048B6BC /* ValidationResultViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -724,14 +716,12 @@
 				5CEA55D126F3528900269702 /* QRTicketCodeDetailsViewController.xib in Resources */,
 				DA01661E26554992005B73A1 /* OpenSourceNotices.json in Resources */,
 				FEBE53B82721ACEE003B61FB /* context.jsonc in Resources */,
-				5C556D4126F9DAF7007E2C2E /* TicketCodeAcceptViewController.xib in Resources */,
 				CEA6D6F5261F8D2900715333 /* Assets.xcassets in Resources */,
 				5C50CF0C269700550015EE29 /* CheckValidityVC.xib in Resources */,
 				CEA6D6F3261F8D2700715333 /* Main.storyboard in Resources */,
 				5C00074A26D641E2002E5013 /* PDFViewerVC.xib in Resources */,
 				5C50CF14269700710015EE29 /* RuleValidationResultVC.xib in Resources */,
 				DA017DE626552259006E4D49 /* Licenses.storyboard in Resources */,
-				FEC54BEA27201D660048B6BC /* ValidationResultViewController.xib in Resources */,
 				5C50CF2A26972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.xib in Resources */,
 				FEBE53B72721A3EA003B61FB /* LimitationCell.xib in Resources */,
 			);
@@ -743,7 +733,6 @@
 			files = (
 				5C50CF15269700710015EE29 /* RuleValidationResultVC.xib in Resources */,
 				FEBE53B92721ACEE003B61FB /* context.jsonc in Resources */,
-				5C556D4226F9DAF7007E2C2E /* TicketCodeAcceptViewController.xib in Resources */,
 				5C00074326D641CC002E5013 /* ImageViewerVC.xib in Resources */,
 				5C50CF2B26972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.xib in Resources */,
 				5C50CF3326972BFD0015EE29 /* CellWithDateAndCountryTVC.xib in Resources */,
@@ -759,7 +748,6 @@
 			files = (
 				5C50CF16269700710015EE29 /* RuleValidationResultVC.xib in Resources */,
 				FEBE53BA2721ACEE003B61FB /* context.jsonc in Resources */,
-				5C556D4326F9DAF7007E2C2E /* TicketCodeAcceptViewController.xib in Resources */,
 				5C00074426D641CC002E5013 /* ImageViewerVC.xib in Resources */,
 				5C50CF2C26972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.xib in Resources */,
 				5C50CF3426972BFD0015EE29 /* CellWithDateAndCountryTVC.xib in Resources */,

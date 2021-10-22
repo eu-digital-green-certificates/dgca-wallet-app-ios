@@ -31,7 +31,10 @@ import SwiftDGC
 import CryptoSwift
 
 class TicketCodeAcceptViewController: UIViewController {
-  
+  private enum Constants {
+    static let showValidationResult = "showValidationResult"
+  }
+
   @IBOutlet weak var certificateTitle: UILabel!
   @IBOutlet weak var validToLabel: UILabel!
   @IBOutlet weak var consetsLabel: UILabel!
@@ -62,7 +65,6 @@ class TicketCodeAcceptViewController: UIViewController {
     validationServiceInfo = validationInfo
     accessTokenInfo = accessTokenModel
     cert = certificate
-    
   }
   
   @IBAction func cancelButtonAction(_ sender: Any) {
@@ -70,7 +72,6 @@ class TicketCodeAcceptViewController: UIViewController {
   }
   
   @IBAction func grandButtonAction(_ sender: Any) {
-    
     guard let urlPath = accessTokenInfo?.aud!,
           let url = URL(string: urlPath),
           let iv = UserDefaults.standard.object(forKey: "xnonce"),
@@ -88,11 +89,8 @@ class TicketCodeAcceptViewController: UIViewController {
         
         GatewayConnection.validateTicketing(url: url, parameters: parameters) { [weak self] responseModel in
           DispatchQueue.main.async {
-            let vc = ValidationResultViewController()
-            vc.validationResultModel = responseModel
-            self?.navigationController?.pushViewController(vc, animated: true)
+            self?.performSegue(withIdentifier: Constants.showValidationResult, sender: responseModel)
           }
-          
         }
       }
     })
@@ -159,8 +157,6 @@ class TicketCodeAcceptViewController: UIViewController {
   }
   
   func keyFromData(_ data: Data) throws -> SecKey {
-    
-    
     let options: [String: Any] = [kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
                                   kSecAttrKeyClass as String: kSecAttrKeyClassPublic,
                                   kSecAttrKeySizeInBits as String : 4096]
@@ -182,5 +178,18 @@ class TicketCodeAcceptViewController: UIViewController {
         return nil
       }
       return publicKey
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    switch segue.identifier {
+    case Constants.showValidationResult:
+      guard let validationController = segue.destination as? ValidationResultViewController,
+      let responseModel = sender as? AccessTokenResponse else { return }
+      
+      validationController.validationResultModel = responseModel
+
+    default:
+        break
+    }
   }
 }

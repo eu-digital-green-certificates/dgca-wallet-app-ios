@@ -32,6 +32,7 @@ class CertificatesListVC: UIViewController {
   
   private enum Constants {
     static let hcertCellIndentifier = "CertificateCell"
+    static let showTicketAcceptController = "showTicketAcceptController"
   }
   
   @IBOutlet weak var tableView      : UITableView!
@@ -45,19 +46,15 @@ class CertificatesListVC: UIViewController {
     super.viewDidLoad()
     tableView.tableFooterView = UIView()
     title = l10n("certificates")
-    tableView.reloadData()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    tableView.reloadData()
+  }
+
   @IBAction func nextButtonAction(_ sender: Any) {
-    guard let tokenInfo = accessTokenInfo,
-          let serviceInfo = validationServiceInfo,
-          let selectedCert = self.getSelectedCert()?.cert
-    else { return }
-    
-    let vc = TicketCodeAcceptViewController()
-    
-    vc.setCertsWith(serviceInfo, tokenInfo, selectedCert)
-    self.navigationController?.pushViewController(vc, animated: true)
+    self.performSegue(withIdentifier: Constants.showTicketAcceptController, sender: nil)
   }
   
   public func setCertsWith(_ validationInfo: ServerListResponse,_ accessTokenModel : AccessTokenResponse) {
@@ -67,8 +64,16 @@ class CertificatesListVC: UIViewController {
     accessTokenInfo = accessTokenModel
     let firstName = accessTokenModel.vc?.gnt?.lowercased() ?? ""
     let lastName = accessTokenModel.vc?.fnt?.lowercased() ?? ""
-
-    listOfCert = LocalData.sharedInstance.certStrings.filter { ($0.cert!.fullName.lowercased() == (firstName + " " + lastName) || ($0.cert!.dateOfBirth == accessTokenModel.vc?.dob)) }
+    let ticketingFullName: String
+    
+    if !firstName.isEmpty && !lastName.isEmpty {
+      ticketingFullName = firstName + " " + lastName
+    } else if firstName.isEmpty {
+      ticketingFullName = lastName
+    } else {
+      ticketingFullName = firstName
+    }
+    listOfCert = LocalData.sharedInstance.certStrings.filter { $0.cert!.fullName.lowercased() == ticketingFullName || ($0.cert!.dateOfBirth == accessTokenModel.vc?.dob) }
   }
   
   private func deselectAllCert() {
@@ -127,5 +132,20 @@ extension CertificatesListVC: UITableViewDataSource, UITableViewDelegate {
       deselectAllCert()
       listOfCert[indexPath.row].isSelected = true
       tableView.reloadRows(at: [indexPath], with: .automatic)
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    switch segue.identifier {
+    case Constants.showTicketAcceptController:
+      guard let ticketController = segue.destination as? TicketCodeAcceptViewController,
+          let tokenInfo = accessTokenInfo,
+          let serviceInfo = validationServiceInfo,
+          let selectedCert = self.getSelectedCert()?.cert else { return }
+      
+      ticketController.setCertsWith(serviceInfo, tokenInfo, selectedCert)
+
+    default:
+        break
+    }
   }
 }
