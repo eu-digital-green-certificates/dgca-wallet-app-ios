@@ -33,6 +33,7 @@ import SwiftDGC
 class CertificateCell: UITableViewCell {
 
   @IBOutlet weak var nameLabel: UILabel!
+  @IBOutlet weak var certTypeLabel: UILabel!
   @IBOutlet weak var descriptionLabel: UILabel!
   
   private var hCert: HCert? {
@@ -45,6 +46,7 @@ class CertificateCell: UITableViewCell {
     if let hCert = hCert {
       nameLabel.text = hCert.fullName
       descriptionLabel.text = hCert.exp.dateString
+      certTypeLabel.text = hCert.type.rawValue
     } else {
       nameLabel.text = ""
       descriptionLabel.text = ""

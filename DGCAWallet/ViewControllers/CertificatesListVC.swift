@@ -79,7 +79,16 @@ class CertificatesListVC: UIViewController {
     
 //    || ($0.cert!.certTypeString == accessTokenModel.vc?.type?.first)
     
-    listOfCert = LocalData.sharedInstance.certStrings.filter { ($0.cert!.fullName.lowercased() == "\(accessTokenModel.vc?.gnt) + \(accessTokenModel.vc?.fnt)".lowercased()) || ($0.cert!.dateOfBirth == accessTokenModel.vc?.dob) }
+    listOfCert = LocalData.sharedInstance.certStrings.filter { ($0.cert!.fullName.lowercased() == "\(accessTokenModel.vc!.gnt!) \(accessTokenModel.vc!.fnt!)".lowercased()) && ($0.cert!.dateOfBirth == accessTokenModel.vc?.dob)}
+    if let dateValidFrom = Date(rfc3339DateTimeString: accessTokenModel.vc!.validFrom ?? "") {
+      listOfCert = listOfCert.filter{ $0.cert!.iat < dateValidFrom }
+    }
+    
+    if let dateValidUntil = Date(rfc3339DateTimeString: accessTokenModel.vc!.validTo ?? "") {
+      listOfCert = listOfCert.filter {$0.cert!.exp > dateValidUntil }
+    }
+    
+    
     
   }
   
@@ -115,5 +124,9 @@ extension CertificatesListVC: UITableViewDataSource, UITableViewDelegate {
       deselectAllCert()
       listOfCert[indexPath.row].isSelected = true
       tableView.reloadRows(at: [indexPath], with: .automatic)
+  }
+  
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 90.0
   }
 }

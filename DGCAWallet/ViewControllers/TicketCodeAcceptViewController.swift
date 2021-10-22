@@ -51,10 +51,10 @@ class TicketCodeAcceptViewController: UIViewController {
   
   private func setuppView(isValidation: Bool) {
     if isValidation {
-      certificateTitle.text = "Vaccination 1 of 1"
-      validToLabel.text = "No expiration date"
+      certificateTitle.text = cert?.certTypeString
+      validToLabel.text = cert?.exp.localDateString
       consetsLabel.text = "Consent"
-      infoLabel.text = "Do you agree share the vaccination certificate 2 with Airline.com?"
+      infoLabel.text = "Do you agree share the \(cert?.certTypeString ?? "") with Airline.com?"
     }
   }
   
@@ -74,8 +74,9 @@ class TicketCodeAcceptViewController: UIViewController {
     guard let urlPath = accessTokenInfo?.aud!,
           let url = URL(string: urlPath),
           let iv = UserDefaults.standard.object(forKey: "xnonce"),
-          let verificationMethod = validationServiceInfo!.verificationMethod!.first(where: { $0.publicKeyJwk?.use == "enc" }),
-          let dccData = encodeDCC(dgcString: cert!.fullPayloadString, iv: iv as! String),
+          let verificationMethod = validationServiceInfo?.verificationMethod?.first(where: { $0.publicKeyJwk?.use == "enc" }),
+          let certificate = cert,
+          let dccData = encodeDCC(dgcString: certificate.fullPayloadString, iv: iv as! String),
           let privateKey = Enclave.loadOrGenerateKey(with: "validationKey")
     else { return }
     
