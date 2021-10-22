@@ -44,7 +44,8 @@ class CertificatesListVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     tableView.tableFooterView = UIView()
-      title = l10n("certificates")
+    title = l10n("certificates")
+    tableView.reloadData()
   }
   
   @IBAction func nextButtonAction(_ sender: Any) {
@@ -59,26 +60,12 @@ class CertificatesListVC: UIViewController {
     self.navigationController?.pushViewController(vc, animated: true)
   }
   
-  private func setupView() {
-    tableView.reloadData()
-  }
-  
-  private func setupTableView() {
-    tableView.delegate = self
-    tableView.dataSource = self
-    tableView.register(UINib(nibName: Constants.hcertCellIndentifier, bundle: nil),
-                       forCellReuseIdentifier: Constants.hcertCellIndentifier)
-    tableView.reloadData()
-  }
-
   public func setCertsWith(_ validationInfo: ServerListResponse,_ accessTokenModel : AccessTokenResponse) {
     // TODO: Make filtering by all predicates (dob, validFrom/To, fullName)
         
     validationServiceInfo = validationInfo
     accessTokenInfo = accessTokenModel
-    
-//    || ($0.cert!.certTypeString == accessTokenModel.vc?.type?.first)
-    
+        
     listOfCert = LocalData.sharedInstance.certStrings.filter { ($0.cert!.fullName.lowercased() == "\(accessTokenModel.vc?.gnt ?? "") + \(accessTokenModel.vc?.fnt ?? "")".lowercased()) || ($0.cert!.dateOfBirth == accessTokenModel.vc?.dob) }
   }
   
