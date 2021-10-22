@@ -62,18 +62,12 @@ class ListVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    ImageDataStorage.initialize {
-      PdfDataStorage.initialize {
-        DispatchQueue.main.async {
-          self.reloadTable()
-        }
-      }
-    }
   }
 
   override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(animated)
-        
+      self.reloadAllComponents()
+      
       let appDelegate = UIApplication.shared.delegate as? AppDelegate
       appDelegate?.isNFCFunctionality = false
       if #available(iOS 13.0, *) {
@@ -82,6 +76,16 @@ class ListVC: UIViewController {
       }
   }
 
+  func reloadAllComponents() {
+    ImageDataStorage.initialize {
+      PdfDataStorage.initialize {
+        DispatchQueue.main.async {
+          self.reloadTable()
+        }
+      }
+    }
+  }
+  
   @IBAction func addNew() {
     let menuActionSheet = UIAlertController(title: l10n("add.new"),
        message: l10n("want.add"),
@@ -153,9 +157,8 @@ class ListVC: UIViewController {
         self?.saveQrCode(cert: hCert)
       } else {
         let alertController: UIAlertController = {
-            let controller = UIAlertController(title: l10n("error"),
-                                               message: l10n("read.dcc.from.nfc"),
-                                               preferredStyle: .alert)
+            let controller = UIAlertController(title: l10n("error"), message: l10n("read.dcc.from.nfc"),
+                preferredStyle: .alert)
           let actionRetry = UIAlertAction(title: l10n("retry"), style: .default) { _ in
             self?.scanNFC()
           }
@@ -376,21 +379,18 @@ extension ListVC: UITableViewDelegate {
   ) {
       switch indexPath.section {
       case 0:
-          let cert = listCertElements[indexPath.row]
+          let savedCert = listCertElements[indexPath.row]
           showAlert(
             title: l10n("cert.delete.title"),
             subtitle: l10n("cert.delete.body"),
             actionTitle: l10n("btn.confirm"),
             cancelTitle: l10n("btn.cancel")) { [weak self] in
                 if $0 {
-                    LocalData.sharedInstance.certStrings.removeAll {
-                        $0.date == cert.date
-                }
+                LocalData.remove(withTAN: savedCert.storedTAN)
                 LocalData.sharedInstance.save()
                 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
-                    self?.reloadTable()
+                  self?.reloadTable()
                 }
-
               }
             }
       case 1:

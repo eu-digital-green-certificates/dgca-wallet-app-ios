@@ -129,21 +129,21 @@ class CertificateViewerVC: UIViewController {
   
   @IBAction func shareAction(_ sender: Any) {
     let menuActionSheet =  UIAlertController(title: l10n("share.qr.code"),
-                                             message: l10n("want.share"),
-                                             preferredStyle: UIAlertController.Style.actionSheet)
+     message: l10n("want.share"),
+     preferredStyle: UIAlertController.Style.actionSheet)
     menuActionSheet.addAction(UIAlertAction(title: l10n("image.export"),
-                                            style: UIAlertAction.Style.default,
-                                            handler: { [weak self] _ in
-                                              self?.shareQRCodeLikeImage()
-                                            }))
+        style: UIAlertAction.Style.default,
+        handler: { [weak self] _ in
+          self?.shareQRCodeLikeImage()
+        }))
     menuActionSheet.addAction(UIAlertAction(title: l10n("pdf.export"),
-                                            style: UIAlertAction.Style.default,
-                                            handler: { [weak self] _ in
-                                              self?.shareQrCodeLikePDF()
-                                            }))
+        style: UIAlertAction.Style.default,
+        handler: { [weak self] _ in
+          self?.shareQrCodeLikePDF()
+        }))
     menuActionSheet.addAction(UIAlertAction(title: l10n("cancel"),
-                                            style: UIAlertAction.Style.cancel,
-                                            handler: nil))
+        style: UIAlertAction.Style.cancel,
+        handler: nil))
     present(menuActionSheet, animated: true, completion: nil)
   }
 }

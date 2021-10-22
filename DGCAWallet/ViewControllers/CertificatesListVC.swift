@@ -118,23 +118,19 @@ extension CertificatesListVC: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
       if editingStyle == .delete {
         let savedCert = listOfCert[indexPath.row]
-        //tableView.endUpdates()
-        showAlert(
-          title: l10n("cert.delete.title"),
-          subtitle: l10n("cert.delete.body"),
-          actionTitle: l10n("btn.confirm"),
-          cancelTitle: l10n("btn.cancel")) {
-              if $0 {
-                LocalData.remove(withTAN: savedCert.storedTAN)
-                
-              LocalData.sharedInstance.save()
-              DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
-                tableView.reloadData()
-              }
-
-            }
-          }
-
+        showAlert(title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"), actionTitle: l10n("btn.confirm"),
+         cancelTitle: l10n("btn.cancel")) { [weak self] in
+             if $0 {
+               tableView.endUpdates()
+               self?.listOfCert.remove(at: indexPath.row)
+               LocalData.remove(withTAN: savedCert.storedTAN)
+               LocalData.sharedInstance.save()
+               tableView.beginUpdates()
+               DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
+               tableView.reloadData()
+             }
+           }
+         }
       }
   }
 
