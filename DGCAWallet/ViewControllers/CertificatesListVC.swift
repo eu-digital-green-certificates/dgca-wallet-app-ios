@@ -65,8 +65,10 @@ class CertificatesListVC: UIViewController {
         
     validationServiceInfo = validationInfo
     accessTokenInfo = accessTokenModel
-        
-    listOfCert = LocalData.sharedInstance.certStrings.filter { ($0.cert!.fullName.lowercased() == "\(accessTokenModel.vc?.gnt ?? "") + \(accessTokenModel.vc?.fnt ?? "")".lowercased()) || ($0.cert!.dateOfBirth == accessTokenModel.vc?.dob) }
+    let firstName = accessTokenModel.vc?.gnt?.lowercased() ?? ""
+    let lastName = accessTokenModel.vc?.fnt?.lowercased() ?? ""
+
+    listOfCert = LocalData.sharedInstance.certStrings.filter { ($0.cert!.fullName.lowercased() == (firstName + " " + lastName) || ($0.cert!.dateOfBirth == accessTokenModel.vc?.dob)) }
   }
   
   private func deselectAllCert() {
