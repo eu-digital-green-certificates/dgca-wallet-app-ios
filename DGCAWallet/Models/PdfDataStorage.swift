@@ -47,7 +47,7 @@ struct PdfDataStorage: Codable {
     Self.storage.save(self)
   }
 
-  public mutating func deletePdfWith(identifier: String) {
+  public mutating func deletePDF(with identifier: String) {
     self.pdfs = self.pdfs.filter { $0.identifier != identifier }
     save()
   }

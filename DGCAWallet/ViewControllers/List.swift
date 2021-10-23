@@ -189,9 +189,7 @@ class ListVC: UIViewController {
   }
 
   func reloadTable() {
-    emptyView.alpha = listCertElements.isEmpty
-      && listImageElements.isEmpty
-      && listPdfElements.isEmpty ? 1 : 0
+    emptyView.alpha = listCertElements.isEmpty && listImageElements.isEmpty && listPdfElements.isEmpty ? 1 : 0
     table.reloadData()
   }
 
@@ -380,21 +378,34 @@ extension ListVC: UITableViewDelegate {
           showAlert( title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"),
             actionTitle: l10n("btn.confirm"), cancelTitle: l10n("btn.cancel")) { [weak self] in
                 if $0 {
-                LocalData.remove(withTAN: savedCert.storedTAN)
-                LocalData.sharedInstance.save()
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
+                  LocalData.remove(withTAN: savedCert.storedTAN)
+                  DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
                   self?.reloadTable()
                 }
               }
             }
       case 1:
-          //TODO - add remove images
-          break
+        let savedImage = listImageElements[indexPath.row]
+        showAlert( title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"),
+          actionTitle: l10n("btn.confirm"), cancelTitle: l10n("btn.cancel")) { [weak self] in
+              if $0 {
+                ImageDataStorage.sharedInstance.deleteImage(with: savedImage.identifier)
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
+                self?.reloadTable()
+              }
+            }
+          }
       case 2:
-          //TODO - add remove pdfs
-          break
-      case 3:
-          break
+        let savedPDF = listPdfElements[indexPath.row]
+        showAlert( title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"),
+          actionTitle: l10n("btn.confirm"), cancelTitle: l10n("btn.cancel")) { [weak self] in
+              if $0 {
+                PdfDataStorage.sharedInstance.deletePDF(with: savedPDF.identifier)
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
+                self?.reloadTable()
+              }
+            }
+          }
       default:
           break
       }
