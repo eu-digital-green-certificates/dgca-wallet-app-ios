@@ -379,7 +379,7 @@ extension ListVC: UITableViewDelegate {
             actionTitle: l10n("btn.confirm"), cancelTitle: l10n("btn.cancel")) { [weak self] in
                 if $0 {
                   LocalData.remove(withDate: savedCert.date)
-                  DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
+                  DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
                   self?.reloadTable()
                 }
               }
@@ -390,7 +390,7 @@ extension ListVC: UITableViewDelegate {
           actionTitle: l10n("btn.confirm"), cancelTitle: l10n("btn.cancel")) { [weak self] in
               if $0 {
                 ImageDataStorage.sharedInstance.deleteImage(with: savedImage.identifier)
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
                 self?.reloadTable()
               }
             }
@@ -401,7 +401,7 @@ extension ListVC: UITableViewDelegate {
           actionTitle: l10n("btn.confirm"), cancelTitle: l10n("btn.cancel")) { [weak self] in
               if $0 {
                 PdfDataStorage.sharedInstance.deletePDF(with: savedPDF.identifier)
-                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
                 self?.reloadTable()
               }
             }

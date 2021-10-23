@@ -21,6 +21,10 @@ import SwiftyJSON
 }
 
 class ScanWalletController: UIViewController {
+  private enum Constants {
+    static let userDefaultsCountryKey = "UDCountryKey"
+  }
+
   var captureSession: AVCaptureSession?
   weak var delegate: ScanWalletDelegate?
   let applicationType: AppType = .wallet
@@ -32,7 +36,10 @@ class ScanWalletController: UIViewController {
     }
     self.processClassification(request)
   }
-  
+  var selectedCountryCode: String? {
+    return self.selectedCounty?.code
+  }
+
   var camView: UIView!
     
   //Selected country code
@@ -194,7 +201,7 @@ extension ScanWalletController  {
     let decoder = JSONDecoder()
     
     if var hCert = HCert(from: payloadS ?? "", applicationType: applicationType) {
-      hCert.ruleCountryCode = getSelectedCountryCode()
+      hCert.ruleCountryCode = selectedCountryCode
       delegate?.walletController(self, didScanCertificate: hCert)
       return
     } else if let payloadData = (payloadS ?? "").data(using: .utf8),
@@ -244,20 +251,6 @@ extension ScanWalletController {
       withTitle: l10n("err.cam.perm"),
       message: l10n("err.cam.perm.desc")
     )
-  }
-}
-
-
-extension ScanWalletController {
-
-  func getSelectedCountryCode() -> String? {
-    return self.selectedCounty?.code
-  }
-}
-
-extension ScanWalletController {
-  private enum Constants {
-    static let userDefaultsCountryKey = "UDCountryKey"
   }
 }
 

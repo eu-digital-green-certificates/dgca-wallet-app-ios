@@ -612,17 +612,15 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fol-rA-9gU">
                                 <rect key="frame" x="104" y="822" width="294" height="48"/>
+                                <color key="backgroundColor" name="green"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="8NB-up-9vg"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="OK" cornerStyle="fixed">
-                                    <backgroundConfiguration key="background" cornerRadius="6">
-                                        <color key="backgroundColor" name="green"/>
-                                    </backgroundConfiguration>
-                                    <fontDescription key="titleFontDescription" type="system" pointSize="18"/>
-                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="OK">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="onAccept:" destination="bpJ-se-zNP" eventType="touchUpInside" id="y4H-IK-bTB"/>
                                 </connections>

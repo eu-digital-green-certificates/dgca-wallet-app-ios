@@ -28,6 +28,7 @@
 "log.certs-loaded" = "%d certs loaded.";
 "list.cell.scanned-at" = "Scanned %@";
 "btn.okay" = "Okay";
+"btn.ok" = "OK";
 "btn.cancel" = "Cancel";
 "btn.save" = "Save";
 "btn.confirm" = "Confirm";

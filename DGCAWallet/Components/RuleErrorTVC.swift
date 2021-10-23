@@ -42,14 +42,11 @@ class RuleErrorTVC: UITableViewCell {
       setupView()
     }
   }
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    setLabels()
-  }
 
   override func prepareForReuse() {
     setLabels()
   }
+    
   private func setLabels() {
     ruleLabel.text = l10n("rule")
     ruleValueLabel.text = ""

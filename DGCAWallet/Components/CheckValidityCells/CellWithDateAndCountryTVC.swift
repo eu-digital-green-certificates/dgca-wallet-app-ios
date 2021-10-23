@@ -33,13 +33,19 @@ public typealias OnDateChangedHandler = (Date) -> Void
 public typealias OnCountryChangedHandler = (String?) -> Void
 
 class CellWithDateAndCountryTVC: UITableViewCell {
+    private enum Constants {
+      static let userDefaultsCountryKey = "UDWalletCountryKey"
+    }
+
   @IBOutlet weak var destinationLabel: UILabel!
   @IBOutlet weak var countryPicker: UIPickerView!
   @IBOutlet weak var dateLabel: UILabel!
   @IBOutlet weak var datePicker: UIDatePicker!
+    
   private var countryItems: [CountryModel] = []
   var dataHandler: OnDateChangedHandler?
   var countryHandler: OnCountryChangedHandler?
+    
   // Selected country code
   private var selectedCounty: CountryModel? {
     set {
@@ -61,11 +67,10 @@ class CellWithDateAndCountryTVC: UITableViewCell {
       }
     }
   }
+    
   func setupView() {
     destinationLabel.text = l10n("destination_country")
     dateLabel.text = l10n("destination_date")
-    countryPicker.delegate = self
-    countryPicker.dataSource = self
     datePicker.minimumDate = Date()
     if #available(iOS 13.4, *) {
       datePicker.preferredDatePickerStyle = .wheels
@@ -120,13 +125,8 @@ extension CellWithDateAndCountryTVC {
       countryHandler?(self.selectedCounty?.code)
     }
   }
+    
   public func getSelectedCountryCode() -> String? {
     return self.selectedCounty?.code
-  }
-}
-
-extension CellWithDateAndCountryTVC {
-  private enum Constants {
-    static let userDefaultsCountryKey = "UDWalletCountryKey"
   }
 }

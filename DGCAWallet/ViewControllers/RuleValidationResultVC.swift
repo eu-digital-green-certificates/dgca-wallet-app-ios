@@ -33,7 +33,6 @@ import CertLogic
 public typealias OnCloseHandler = () -> Void
 
 final class RuleValidationResultVC: UIViewController {
-
   private enum Constants {
     static let ruleCellId = "RuleErrorTVC"
   }
@@ -54,15 +53,8 @@ final class RuleValidationResultVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupLabels()
-    setupTableView()
-    activityIndicator.startAnimating()
-  }
-
-  private func setupTableView() {
-    tableView.dataSource = self
-    tableView.register(UINib(nibName: Constants.ruleCellId, bundle: nil),
-        forCellReuseIdentifier: Constants.ruleCellId)
     tableView.contentInset = .init(top: 0, left: 0, bottom: 32, right: 0)
+    activityIndicator.startAnimating()
   }
     
   private func setupLabels() {
