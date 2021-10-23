@@ -644,7 +644,7 @@
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="7xK-Rp-7FD">
-                                <rect key="frame" x="16" y="348" width="382" height="456"/>
+                                <rect key="frame" x="16" y="334.5" width="382" height="471.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
@@ -657,7 +657,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="UeK-en-eEn" firstAttribute="trailing" secondItem="fol-rA-9gU" secondAttribute="trailing" constant="16" id="1zD-ml-uW6"/>
-                            <constraint firstItem="7xK-Rp-7FD" firstAttribute="top" secondItem="aRv-1C-RxV" secondAttribute="bottom" constant="29.5" id="BSz-k8-05Q"/>
+                            <constraint firstItem="7xK-Rp-7FD" firstAttribute="top" secondItem="aRv-1C-RxV" secondAttribute="bottom" constant="16" id="BSz-k8-05Q"/>
                             <constraint firstItem="Ik5-iB-ezB" firstAttribute="top" secondItem="VcR-QW-aFJ" secondAttribute="bottom" constant="27" id="EIu-1H-cjI"/>
                             <constraint firstItem="UeK-en-eEn" firstAttribute="trailing" secondItem="bjA-7o-KTc" secondAttribute="trailing" constant="16" id="FgF-kD-fAr"/>
                             <constraint firstAttribute="bottom" secondItem="fol-rA-9gU" secondAttribute="bottom" constant="26" id="ITQ-fe-LuW"/>
@@ -675,7 +675,7 @@
                             <constraint firstItem="fol-rA-9gU" firstAttribute="leading" secondItem="x6b-iE-FAy" secondAttribute="trailing" constant="16" id="p21-lH-o15"/>
                             <constraint firstItem="bjA-7o-KTc" firstAttribute="top" secondItem="Ik5-iB-ezB" secondAttribute="bottom" constant="16" id="psa-Fy-kU6"/>
                             <constraint firstItem="7xK-Rp-7FD" firstAttribute="leading" secondItem="UeK-en-eEn" secondAttribute="leading" constant="16" id="ug0-iK-Kc6"/>
-                            <constraint firstItem="fol-rA-9gU" firstAttribute="top" secondItem="7xK-Rp-7FD" secondAttribute="bottom" constant="18" id="zPn-Kn-ST3"/>
+                            <constraint firstItem="fol-rA-9gU" firstAttribute="top" secondItem="7xK-Rp-7FD" secondAttribute="bottom" constant="16" id="zPn-Kn-ST3"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="4aq-r7-2DB"/>
