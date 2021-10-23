@@ -64,8 +64,8 @@ struct LocalData: Codable {
     sharedInstance.save()
   }
 
-    public static func remove(withTAN tan: String?) {
-      if let ind = sharedInstance.certStrings.firstIndex(where: { $0.storedTAN == tan }) {
+    public static func remove(withDate date: Date) {
+      if let ind = sharedInstance.certStrings.firstIndex(where: { $0.date == date }) {
           sharedInstance.certStrings.remove(at: ind)
           sharedInstance.save()
       }
@@ -82,9 +82,9 @@ struct LocalData: Codable {
       }
       LocalData.sharedInstance = result
       completion()
-//      GatewayConnection.fetchContext()
     }
   }
+  
   var versionedConfig: JSON {
     if config[Constants.versions][Self.appVersion].exists() {
       return config[Constants.versions][Self.appVersion]

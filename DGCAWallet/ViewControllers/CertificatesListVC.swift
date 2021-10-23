@@ -117,7 +117,7 @@ extension CertificatesListVC: UITableViewDataSource, UITableViewDelegate {
              if $0 {
                tableView.endUpdates()
                self?.listOfCert.remove(at: indexPath.row)
-               LocalData.remove(withTAN: savedCert.storedTAN)
+               LocalData.remove(withDate: savedCert.date)
                LocalData.sharedInstance.save()
                tableView.beginUpdates()
                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {

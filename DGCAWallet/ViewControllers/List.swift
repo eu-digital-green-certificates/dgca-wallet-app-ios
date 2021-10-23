@@ -378,7 +378,7 @@ extension ListVC: UITableViewDelegate {
           showAlert( title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"),
             actionTitle: l10n("btn.confirm"), cancelTitle: l10n("btn.cancel")) { [weak self] in
                 if $0 {
-                  LocalData.remove(withTAN: savedCert.storedTAN)
+                  LocalData.remove(withDate: savedCert.date)
                   DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
                   self?.reloadTable()
                 }
