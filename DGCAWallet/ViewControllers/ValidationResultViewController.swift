@@ -49,8 +49,6 @@ class ValidationResultViewController: UIViewController {
   }
   
   func setupUI() {
-    limitationsTableView.register(UINib(nibName: "LimitationCell", bundle: nil),
-                       forCellReuseIdentifier: "limitationCell")
     limitationsTableView.reloadData()
     limitationsTableView.tableFooterView = UIView()
     
@@ -90,7 +88,7 @@ extension ValidationResultViewController : UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "limitationCell", for: indexPath) as! LimitationCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: "LimitationCell", for: indexPath) as! LimitationCell
     if let issueText = validationResultModel?.results?[indexPath.row].details {
       cell.issueTextView.text = issueText
     }

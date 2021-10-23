@@ -647,6 +647,37 @@
                                 <rect key="frame" x="16" y="334.5" width="382" height="471.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LimitationCell" rowHeight="58" id="Ta2-uU-OYm" customClass="LimitationCell" customModule="DGCAWallet" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.5" width="382" height="58"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ta2-uU-OYm" id="wmb-dz-l9j">
+                                            <rect key="frame" x="0.0" y="0.0" width="382" height="58"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="Issue text here" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QtS-md-uhL">
+                                                    <rect key="frame" x="0.0" y="5" width="382" height="48"/>
+                                                    <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="48" id="4aK-qn-hx3"/>
+                                                    </constraints>
+                                                    <color key="textColor" systemColor="labelColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="QtS-md-uhL" firstAttribute="leading" secondItem="wmb-dz-l9j" secondAttribute="leading" id="6Mm-PB-q3b"/>
+                                                <constraint firstAttribute="trailing" secondItem="QtS-md-uhL" secondAttribute="trailing" id="Dma-sK-OHh"/>
+                                                <constraint firstAttribute="bottom" secondItem="QtS-md-uhL" secondAttribute="bottom" constant="5" id="ozJ-vi-6uG"/>
+                                                <constraint firstItem="QtS-md-uhL" firstAttribute="top" secondItem="wmb-dz-l9j" secondAttribute="top" constant="5" id="qdk-uB-z1E"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="issueTextView" destination="QtS-md-uhL" id="8VH-xr-MYO"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="bpJ-se-zNP" id="WpZ-EX-nZ1"/>
                                     <outlet property="delegate" destination="bpJ-se-zNP" id="BWS-S3-Hj1"/>
@@ -688,7 +719,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KHI-3t-Q1b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4001" y="113"/>
+            <point key="canvasLocation" x="4000.0000000000005" y="112.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ET7-36-BP0">

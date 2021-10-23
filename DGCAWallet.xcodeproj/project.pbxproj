@@ -134,7 +134,6 @@
 		FE6E78882702033300C142A3 /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = FE6E78872702033300C142A3 /* JWTDecode */; };
 		FEAEA96526FBB13600B94FFF /* AccessTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEAEA96426FBB13600B94FFF /* AccessTokenResponse.swift */; };
 		FEBE53B62721A3EA003B61FB /* LimitationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBE53B42721A3EA003B61FB /* LimitationCell.swift */; };
-		FEBE53B72721A3EA003B61FB /* LimitationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEBE53B52721A3EA003B61FB /* LimitationCell.xib */; };
 		FEBE53B82721ACEE003B61FB /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB18269DBB4C00074F66 /* context.jsonc */; };
 		FEBE53B92721ACEE003B61FB /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB18269DBB4C00074F66 /* context.jsonc */; };
 		FEBE53BA2721ACEE003B61FB /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB18269DBB4C00074F66 /* context.jsonc */; };
@@ -241,7 +240,6 @@
 		FE6F225327142AB1003AE754 /* dgca-app-core-ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "dgca-app-core-ios"; path = "../dgca-app-core-ios"; sourceTree = "<group>"; };
 		FEAEA96426FBB13600B94FFF /* AccessTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenResponse.swift; sourceTree = "<group>"; };
 		FEBE53B42721A3EA003B61FB /* LimitationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitationCell.swift; sourceTree = "<group>"; };
-		FEBE53B52721A3EA003B61FB /* LimitationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LimitationCell.xib; sourceTree = "<group>"; };
 		FEC54BE3271F26990048B6BC /* IdentityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityService.swift; sourceTree = "<group>"; };
 		FEC54BE5271F27180048B6BC /* AccessTokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenService.swift; sourceTree = "<group>"; };
 		FEC54BE727201D660048B6BC /* ValidationResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResultViewController.swift; sourceTree = "<group>"; };
@@ -400,7 +398,6 @@
 				5C00073526D625D0002E5013 /* PDFTableViewCell.swift */,
 				5C00073926D625DE002E5013 /* ImageTableViewCell.swift */,
 				FEBE53B42721A3EA003B61FB /* LimitationCell.swift */,
-				FEBE53B52721A3EA003B61FB /* LimitationCell.xib */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -669,7 +666,6 @@
 				CEA6D6F5261F8D2900715333 /* Assets.xcassets in Resources */,
 				CEA6D6F3261F8D2700715333 /* Main.storyboard in Resources */,
 				DA017DE626552259006E4D49 /* Licenses.storyboard in Resources */,
-				FEBE53B72721A3EA003B61FB /* LimitationCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
