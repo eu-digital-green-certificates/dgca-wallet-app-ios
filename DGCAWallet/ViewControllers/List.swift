@@ -40,9 +40,11 @@ import CoreServices
 class ListVC: UIViewController {
   
     fileprivate enum SegueIdentifiers {
-        static let showScannerSegue = "showScannerSegue"
-        static let showServicesList = "showServicesList"
-        static let showSettingsController = "showSettingsController"
+      static let showScannerSegue = "showScannerSegue"
+      static let showServicesList = "showServicesList"
+      static let showSettingsController = "showSettingsController"
+      static let showPDFViewer = "showPDFViewer"
+      static let showImageViewer = "showImageViewer"
     }
 
   private enum TableSection: Int, CaseIterable {
@@ -57,11 +59,6 @@ class ListVC: UIViewController {
 
   override var preferredStatusBarStyle: UIStatusBarStyle {
     return .lightContent
-  }
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -230,7 +227,15 @@ class ListVC: UIViewController {
           guard let listOfServices = sender as?  ServerListResponse else { return }
           
           serviceController.setServices(info: listOfServices)
+      case SegueIdentifiers.showPDFViewer:
+        guard let serviceController = segue.destination as? PDFViewerVC else { return }
+        guard let pdf = sender as? SavedPDF else { return }
+        serviceController.setPDF(pdf: pdf)
 
+      case SegueIdentifiers.showImageViewer:
+        guard let serviceController = segue.destination as? ImageViewerVC else { return }
+        guard let savedImage = sender as? SavedImage else { return }
+        serviceController.setImage(image: savedImage)
       default:
           break
       }
@@ -335,7 +340,7 @@ extension ListVC: UITableViewDataSource {
         imageCell.setImage(image: listImageElements[indexPath.row])
         return imageCell
           
-      case  TableSection.pdfs.rawValue:
+      case TableSection.pdfs.rawValue:
           guard let imageCell = table.dequeueReusableCell(withIdentifier: "PDFTableViewCell", for: indexPath) as? PDFTableViewCell else { return UITableViewCell() }
            
         imageCell.setPDF(pdf: listPdfElements[indexPath.row])
@@ -344,14 +349,6 @@ extension ListVC: UITableViewDataSource {
       default:
           return UITableViewCell()
       }
-  }
-  
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    if indexPath.section == TableSection.certificates.rawValue {
-      return UITableView.automaticDimension
-    } else {
-      return 140
-    }
   }
 }
 
@@ -364,10 +361,10 @@ extension ListVC: UITableViewDelegate {
           presentViewer(for: cert, with: listCertElements[indexPath.row].storedTAN)
           
       case TableSection.images.rawValue:
-          showImage(image: listImageElements[indexPath.row])
+        self.performSegue(withIdentifier: SegueIdentifiers.showImageViewer, sender: listImageElements[indexPath.row])
 
-      case  TableSection.pdfs.rawValue:
-          showPdfFile(pdf: listPdfElements[indexPath.row])
+      case TableSection.pdfs.rawValue:
+        self.performSegue(withIdentifier: SegueIdentifiers.showPDFViewer, sender: listPdfElements[indexPath.row])
         
       default:
           break
@@ -380,11 +377,8 @@ extension ListVC: UITableViewDelegate {
       switch indexPath.section {
       case 0:
           let savedCert = listCertElements[indexPath.row]
-          showAlert(
-            title: l10n("cert.delete.title"),
-            subtitle: l10n("cert.delete.body"),
-            actionTitle: l10n("btn.confirm"),
-            cancelTitle: l10n("btn.cancel")) { [weak self] in
+          showAlert( title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"),
+            actionTitle: l10n("btn.confirm"), cancelTitle: l10n("btn.cancel")) { [weak self] in
                 if $0 {
                 LocalData.remove(withTAN: savedCert.storedTAN)
                 LocalData.sharedInstance.save()
@@ -449,7 +443,7 @@ extension ListVC: UIImagePickerControllerDelegate, UINavigationControllerDelegat
     present(alert, animated: true, completion: nil)
   }
     
-  func openCamera() {
+  private func openCamera() {
       if UIImagePickerController.isSourceTypeAvailable(.camera) {
           let picker = UIImagePickerController()
           picker.delegate = self
@@ -523,7 +517,7 @@ extension ListVC {
 }
 
 extension ListVC: UIDocumentPickerDelegate {
-  func convertPDF(at sourceURL: URL, dpi: CGFloat = 200) throws -> [UIImage] {
+  private func convertPDF(at sourceURL: URL, dpi: CGFloat = 200) throws -> [UIImage] {
     let pdfDocument = CGPDFDocument(sourceURL as CFURL)!
     let colorSpace = CGColorSpaceCreateDeviceRGB()
     let bitmapInfo = CGImageAlphaInfo.noneSkipLast.rawValue
@@ -553,7 +547,7 @@ extension ListVC: UIDocumentPickerDelegate {
     return images
   }
   
-  func checkQRCodesInPDFFile(url: NSURL) {
+  private func checkQRCodesInPDFFile(url: NSURL) {
       guard let images = try? convertPDF(at: url as URL), !images.isEmpty else {
           savePDFFile(url: url)
           return
@@ -567,7 +561,7 @@ extension ListVC: UIDocumentPickerDelegate {
       savePDFFile(url: url)
   }
   
-  func savePDFFile(url: NSURL) {
+  private func savePDFFile(url: NSURL) {
     showInputDialog(
       title: l10n("pdf.confirm.title"),
       subtitle: l10n("pdf.confirm.text"),
@@ -587,6 +581,7 @@ extension ListVC: UIDocumentPickerDelegate {
       checkQRCodesInPDFFile(url: url as NSURL)
     }
   }
+  
   private func documentPicker(controller: UIDocumentPickerViewController, didPickDocumentAtURL url: NSURL) {
     if controller.documentPickerMode == .import {
       checkQRCodesInPDFFile(url: url)
@@ -594,16 +589,3 @@ extension ListVC: UIDocumentPickerDelegate {
   }
 }
 
-extension ListVC {
-  func showImage(image: SavedImage) {
-    let imageVC = ImageViewerVC.loadFromNib()
-    imageVC.setImage(image: image)
-    present(imageVC, animated: true)
-  }
-    
-  func showPdfFile(pdf: SavedPDF) {
-    let pdfVC = PDFViewerVC.loadFromNib()
-    pdfVC.setPDF(pdf: pdf)
-    present(pdfVC, animated: true)
-  }
-}

@@ -35,15 +35,9 @@
 		5C00073F26D641CC002E5013 /* ImageViewerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00073D26D641CC002E5013 /* ImageViewerVC.swift */; };
 		5C00074026D641CC002E5013 /* ImageViewerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00073D26D641CC002E5013 /* ImageViewerVC.swift */; };
 		5C00074126D641CC002E5013 /* ImageViewerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00073D26D641CC002E5013 /* ImageViewerVC.swift */; };
-		5C00074226D641CC002E5013 /* ImageViewerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C00073E26D641CC002E5013 /* ImageViewerVC.xib */; };
-		5C00074326D641CC002E5013 /* ImageViewerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C00073E26D641CC002E5013 /* ImageViewerVC.xib */; };
-		5C00074426D641CC002E5013 /* ImageViewerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C00073E26D641CC002E5013 /* ImageViewerVC.xib */; };
 		5C00074726D641E2002E5013 /* PDFViewerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00074526D641E2002E5013 /* PDFViewerVC.swift */; };
 		5C00074826D641E2002E5013 /* PDFViewerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00074526D641E2002E5013 /* PDFViewerVC.swift */; };
 		5C00074926D641E2002E5013 /* PDFViewerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00074526D641E2002E5013 /* PDFViewerVC.swift */; };
-		5C00074A26D641E2002E5013 /* PDFViewerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C00074626D641E2002E5013 /* PDFViewerVC.xib */; };
-		5C00074B26D641E2002E5013 /* PDFViewerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C00074626D641E2002E5013 /* PDFViewerVC.xib */; };
-		5C00074C26D641E2002E5013 /* PDFViewerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C00074626D641E2002E5013 /* PDFViewerVC.xib */; };
 		5C50CF09269700550015EE29 /* CheckValidityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF07269700540015EE29 /* CheckValidityVC.swift */; };
 		5C50CF0A269700550015EE29 /* CheckValidityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF07269700540015EE29 /* CheckValidityVC.swift */; };
 		5C50CF0B269700550015EE29 /* CheckValidityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF07269700540015EE29 /* CheckValidityVC.swift */; };
@@ -194,9 +188,7 @@
 		5C00073526D625D0002E5013 /* PDFTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFTableViewCell.swift; sourceTree = "<group>"; };
 		5C00073926D625DE002E5013 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		5C00073D26D641CC002E5013 /* ImageViewerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewerVC.swift; sourceTree = "<group>"; };
-		5C00073E26D641CC002E5013 /* ImageViewerVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageViewerVC.xib; sourceTree = "<group>"; };
 		5C00074526D641E2002E5013 /* PDFViewerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewerVC.swift; sourceTree = "<group>"; };
-		5C00074626D641E2002E5013 /* PDFViewerVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PDFViewerVC.xib; sourceTree = "<group>"; };
 		5C50CF07269700540015EE29 /* CheckValidityVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckValidityVC.swift; sourceTree = "<group>"; };
 		5C50CF08269700540015EE29 /* CheckValidityVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckValidityVC.xib; sourceTree = "<group>"; };
 		5C50CF0F269700710015EE29 /* RuleValidationResultVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleValidationResultVC.swift; sourceTree = "<group>"; };
@@ -416,9 +408,7 @@
 				5C50CF0F269700710015EE29 /* RuleValidationResultVC.swift */,
 				5C50CF10269700710015EE29 /* RuleValidationResultVC.xib */,
 				5C00073D26D641CC002E5013 /* ImageViewerVC.swift */,
-				5C00073E26D641CC002E5013 /* ImageViewerVC.xib */,
 				5C00074526D641E2002E5013 /* PDFViewerVC.swift */,
-				5C00074626D641E2002E5013 /* PDFViewerVC.xib */,
 				5C556D4026F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift */,
 				5C556D4726F9F8AC007E2C2E /* CertificatesListVC.swift */,
 				5C556D4F26F9F8C6007E2C2E /* ServersListVC.swift */,
@@ -702,7 +692,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C00074226D641CC002E5013 /* ImageViewerVC.xib in Resources */,
 				CE4BD258264FF39D00689FD6 /* CertificateViewer.storyboard in Resources */,
 				CE6D4A44264835F100A5D33D /* Localizable.strings in Resources */,
 				5C50CF3226972BFD0015EE29 /* CellWithDateAndCountryTVC.xib in Resources */,
@@ -715,7 +704,6 @@
 				CEA6D6F5261F8D2900715333 /* Assets.xcassets in Resources */,
 				5C50CF0C269700550015EE29 /* CheckValidityVC.xib in Resources */,
 				CEA6D6F3261F8D2700715333 /* Main.storyboard in Resources */,
-				5C00074A26D641E2002E5013 /* PDFViewerVC.xib in Resources */,
 				5C50CF14269700710015EE29 /* RuleValidationResultVC.xib in Resources */,
 				DA017DE626552259006E4D49 /* Licenses.storyboard in Resources */,
 				5C50CF2A26972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.xib in Resources */,
@@ -729,10 +717,8 @@
 			files = (
 				5C50CF15269700710015EE29 /* RuleValidationResultVC.xib in Resources */,
 				FEBE53B92721ACEE003B61FB /* context.jsonc in Resources */,
-				5C00074326D641CC002E5013 /* ImageViewerVC.xib in Resources */,
 				5C50CF2B26972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.xib in Resources */,
 				5C50CF3326972BFD0015EE29 /* CellWithDateAndCountryTVC.xib in Resources */,
-				5C00074B26D641E2002E5013 /* PDFViewerVC.xib in Resources */,
 				5C50CF0D269700550015EE29 /* CheckValidityVC.xib in Resources */,
 				5C50CF1F2697023B0015EE29 /* RuleErrorTVC.xib in Resources */,
 			);
@@ -744,10 +730,8 @@
 			files = (
 				5C50CF16269700710015EE29 /* RuleValidationResultVC.xib in Resources */,
 				FEBE53BA2721ACEE003B61FB /* context.jsonc in Resources */,
-				5C00074426D641CC002E5013 /* ImageViewerVC.xib in Resources */,
 				5C50CF2C26972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.xib in Resources */,
 				5C50CF3426972BFD0015EE29 /* CellWithDateAndCountryTVC.xib in Resources */,
-				5C00074C26D641E2002E5013 /* PDFViewerVC.xib in Resources */,
 				5C50CF0E269700550015EE29 /* CheckValidityVC.xib in Resources */,
 				5C50CF202697023B0015EE29 /* RuleErrorTVC.xib in Resources */,
 			);

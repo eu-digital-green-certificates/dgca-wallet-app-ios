@@ -100,7 +100,7 @@ class CertificateViewerVC: UIViewController {
       guard let cert = self?.hCert else { return }
         
       GatewayConnection.claim(cert: cert, with: $0) { success, newTan in
-        if !success {
+        if success {
           guard let cert = self?.hCert else { return }
             
           LocalData.add(cert, with: newTan)
