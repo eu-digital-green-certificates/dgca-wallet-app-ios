@@ -38,11 +38,6 @@ class CellWithTitleAndDescriptionTVC: UITableViewCell {
     }
   }
   
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    setInitialStrings()
-  }
-
   override func prepareForReuse() {
     super.prepareForReuse()
     setInitialStrings()
@@ -70,5 +65,4 @@ class CellWithTitleAndDescriptionTVC: UITableViewCell {
       titleLabel.font = UIFont.boldSystemFont(ofSize: 14)
     }
   }
-  
 }

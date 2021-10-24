@@ -32,6 +32,7 @@ class CertificatesListVC: UIViewController {
   
   private enum Constants {
     static let hcertCellIndentifier = "CertificateCell"
+    static let showTicketAcceptController = "showTicketAcceptController"
   }
   
   @IBOutlet weak var tableView      : UITableView!
@@ -44,40 +45,26 @@ class CertificatesListVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     tableView.tableFooterView = UIView()
-      title = l10n("certificates")
+    title = l10n("certificates")
   }
   
-  @IBAction func nextButtonAction(_ sender: Any) {
-    guard let tokenInfo = accessTokenInfo,
-          let serviceInfo = validationServiceInfo,
-          let selectedCert = self.getSelectedCert()?.cert
-    else { return }
-    
-    let vc = TicketCodeAcceptViewController()
-    
-    vc.setCertsWith(serviceInfo, tokenInfo, selectedCert)
-    self.navigationController?.pushViewController(vc, animated: true)
-  }
-  
-  private func setupView() {
-    tableView.reloadData()
-  }
-  
-  private func setupTableView() {
-    tableView.delegate = self
-    tableView.dataSource = self
-    tableView.register(UINib(nibName: Constants.hcertCellIndentifier, bundle: nil),
-                       forCellReuseIdentifier: Constants.hcertCellIndentifier)
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
     tableView.reloadData()
   }
 
+  @IBAction func nextButtonAction(_ sender: Any) {
+    self.performSegue(withIdentifier: Constants.showTicketAcceptController, sender: nil)
+  }
+  
   public func setCertsWith(_ validationInfo: ServerListResponse,_ accessTokenModel : AccessTokenResponse) {
     // TODO: Make filtering by all predicates (dob, validFrom/To, fullName)
         
     validationServiceInfo = validationInfo
     accessTokenInfo = accessTokenModel
-    
-//    || ($0.cert!.certTypeString == accessTokenModel.vc?.type?.first)
+    let firstName = accessTokenModel.vc?.gnt?.lowercased() ?? ""
+    let lastName = accessTokenModel.vc?.fnt?.lowercased() ?? ""
+    let ticketingFullName: String
     
     listOfCert = LocalData.sharedInstance.certStrings.filter { ($0.cert!.fullName.lowercased() == "\(accessTokenModel.vc!.gnt!) \(accessTokenModel.vc!.fnt!)".lowercased()) && ($0.cert!.dateOfBirth == accessTokenModel.vc?.dob)}
     if let dateValidFrom = Date(rfc3339DateTimeString: accessTokenModel.vc!.validFrom ?? "") {
@@ -87,8 +74,6 @@ class CertificatesListVC: UIViewController {
     if let dateValidUntil = Date(rfc3339DateTimeString: accessTokenModel.vc!.validTo ?? "") {
       listOfCert = listOfCert.filter {$0.cert!.exp > dateValidUntil }
     }
-    
-    
     
   }
   
@@ -111,22 +96,62 @@ extension CertificatesListVC: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.hcertCellIndentifier,
           for: indexPath) as? CertificateCell else { return UITableViewCell() }
-      let hCert = listOfCert[indexPath.row]
+      let savedCert = listOfCert[indexPath.row]
 
-      cell.accessoryType = hCert.isSelected ? .checkmark : .none
-      if let cert = hCert.cert {
+      cell.accessoryType = savedCert.isSelected ? .checkmark : .none
+      if let cert = savedCert.cert {
           cell.setCertificate(cert: cert)
       }
       return cell
   }
-    
+
+  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+       return true
+  }
+
+  // Override to support editing the table view.
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+      if editingStyle == .delete {
+        let savedCert = listOfCert[indexPath.row]
+        showAlert(title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"), actionTitle: l10n("btn.confirm"),
+         cancelTitle: l10n("btn.cancel")) { [weak self] in
+             if $0 {
+               tableView.endUpdates()
+               self?.listOfCert.remove(at: indexPath.row)
+               LocalData.remove(withDate: savedCert.date)
+               LocalData.sharedInstance.save()
+               tableView.beginUpdates()
+               DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
+               tableView.reloadData()
+             }
+           }
+         }
+      }
+  }
+
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       deselectAllCert()
       listOfCert[indexPath.row].isSelected = true
       tableView.reloadRows(at: [indexPath], with: .automatic)
   }
   
+
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 90.0
+  }
+
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    switch segue.identifier {
+    case Constants.showTicketAcceptController:
+      guard let ticketController = segue.destination as? TicketCodeAcceptViewController,
+          let tokenInfo = accessTokenInfo,
+          let serviceInfo = validationServiceInfo,
+          let selectedCert = self.getSelectedCert()?.cert else { return }
+      
+      ticketController.setCertsWith(serviceInfo, tokenInfo, selectedCert)
+
+    default:
+        break
+    }
   }
 }

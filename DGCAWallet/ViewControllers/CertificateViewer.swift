@@ -31,6 +31,11 @@ import SwiftDGC
 import PDFKit
 
 class CertificateViewerVC: UIViewController {
+  private enum Constants {
+    static let showValidityController = "showValidityController"
+    static let embedCertPagesController = "embedCertPagesController"
+  }
+  
   @IBOutlet weak var headerBackground: UIView!
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var dismissButton: UIButton!
@@ -42,8 +47,22 @@ class CertificateViewerVC: UIViewController {
   var tan: String?
   weak var childDismissedDelegate: CertViewerDelegate?
   public var isSaved = true
+  var newCertAdded = false
 
-  func draw() {
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    setupInterface()
+  }
+
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+
+    Brightness.reset()
+    childDismissedDelegate?.childDismissed(newCertAdded)
+  }
+
+  func setupInterface() {
     guard let hCert = hCert else { return }
       
     nameLabel.text = hCert.fullName
@@ -61,19 +80,6 @@ class CertificateViewerVC: UIViewController {
     view.layoutIfNeeded()
   }
 
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    draw()
-  }
-
-  var newCertAdded = false
-  override func viewDidDisappear(_ animated: Bool) {
-    super.viewDidDisappear(animated)
-
-    Brightness.reset()
-    childDismissedDelegate?.childDismissed(newCertAdded)
-  }
-
   @IBAction func closeButtonClick() {
     if isSaved {
        dismiss(animated: true, completion: nil)
@@ -86,17 +92,11 @@ class CertificateViewerVC: UIViewController {
   }
 
   @IBAction func checkValidityAction(_ sender: Any) {
-    let checkValidityVC = CheckValidityVC.loadFromNib()
-    checkValidityVC.setHCert(cert: self.hCert)
-    self.present(checkValidityVC, animated: true, completion: nil)
+    self.performSegue(withIdentifier: Constants.showValidityController, sender: nil)
   }
   
   func saveCert() {
-    showInputDialog(
-      title: l10n("tan.confirm.title"),
-      subtitle: l10n("tan.confirm.text"),
-      inputPlaceholder: l10n("tan.confirm.placeholder")
-    ) { [weak self] in
+    showInputDialog(title: l10n("tan.confirm.title"), subtitle: l10n("tan.confirm.text"), actionTitle: l10n("btn.confirm"), inputPlaceholder: l10n("tan.confirm.placeholder") ) { [weak self] in
       guard let cert = self?.hCert else { return }
         
       GatewayConnection.claim(cert: cert, with: $0) { success, newTan in
@@ -105,16 +105,11 @@ class CertificateViewerVC: UIViewController {
             
           LocalData.add(cert, with: newTan)
           self?.newCertAdded = true
-          self?.showAlert(
-            title: l10n("tan.confirm.success.title"),
-            subtitle: l10n("tan.confirm.success.text")
-          ) { _ in
+          self?.showAlert(title: l10n("tan.confirm.success.title"), subtitle: l10n("tan.confirm.success.text"), actionTitle: l10n("btn.confirm")) { _ in
             self?.dismiss(animated: true, completion: nil)
           }
         } else {
-          self?.showAlert(
-            title: l10n("tan.confirm.fail.title"),
-            subtitle: l10n("tan.confirm.fail.text")
+          self?.showAlert(title: l10n("tan.confirm.fail.title"), subtitle: l10n("tan.confirm.fail.text")
           )
         }
       }
@@ -122,28 +117,30 @@ class CertificateViewerVC: UIViewController {
   }
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if let child = segue.destination as? CertPagesVC {
-      child.embeddingVC = self
+    switch segue.identifier {
+    case Constants.showValidityController:
+      guard let checkController = segue.destination as? CheckValidityVC else { return }
+      checkController.setHCert(cert: self.hCert)
+      
+    case Constants.embedCertPagesController:
+      guard let childController = segue.destination as? CertPagesVC else { return }
+      childController.embeddingVC = self
+
+    default:
+      break
     }
   }
   
   @IBAction func shareAction(_ sender: Any) {
-    let menuActionSheet =  UIAlertController(title: l10n("share.qr.code"),
-                                             message: l10n("want.share"),
-                                             preferredStyle: UIAlertController.Style.actionSheet)
-    menuActionSheet.addAction(UIAlertAction(title: l10n("image.export"),
-                                            style: UIAlertAction.Style.default,
-                                            handler: { [weak self] _ in
-                                              self?.shareQRCodeLikeImage()
-                                            }))
-    menuActionSheet.addAction(UIAlertAction(title: l10n("pdf.export"),
-                                            style: UIAlertAction.Style.default,
-                                            handler: { [weak self] _ in
-                                              self?.shareQrCodeLikePDF()
-                                            }))
-    menuActionSheet.addAction(UIAlertAction(title: l10n("cancel"),
-                                            style: UIAlertAction.Style.cancel,
-                                            handler: nil))
+    let menuActionSheet =  UIAlertController(title: l10n("share.qr.code"), message: l10n("want.share"),
+        preferredStyle: .actionSheet)
+    menuActionSheet.addAction(UIAlertAction(title: l10n("image.export"), style: .default, handler: { [weak self] _ in
+          self?.shareQRCodeLikeImage()
+        }))
+    menuActionSheet.addAction(UIAlertAction(title: l10n("pdf.export"), style: .default, handler: { [weak self] _ in
+          self?.shareQrCodeLikePDF()
+        }))
+    menuActionSheet.addAction(UIAlertAction(title: l10n("cancel"), style: .cancel, handler: nil))
     present(menuActionSheet, animated: true, completion: nil)
   }
 }

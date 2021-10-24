@@ -30,12 +30,13 @@ import UIKit
 import SwiftDGC
 
 final class CheckValidityVC: UIViewController {
-
   private enum Constants {
     static let titleCellIndentifier = "CellWithTitleAndDescriptionTVC"
     static let countryCellIndentifier = "CellWithDateAndCountryTVC"
+    static let showRuleValidationResult = "showRuleValidationResult"
     static let bottomOffset: CGFloat = 32.0
-  }  
+  }
+  
   @IBOutlet private weak var closeButton: UIButton!
   @IBOutlet private weak var checkValidityButton: UIButton!
   @IBOutlet private weak var tableView: UITableView!
@@ -58,23 +59,17 @@ final class CheckValidityVC: UIViewController {
     
   private func setupView() {
     setupInitialDate()
-    setupTableView()
+    tableView.contentInset = .init(top: .zero, left: .zero, bottom: Constants.bottomOffset, right: .zero)
     tableView.reloadData()
   }
     
   private func setupTableView() {
-    tableView.dataSource = self
-    tableView.register(UINib(nibName: Constants.titleCellIndentifier, bundle: nil),
-                       forCellReuseIdentifier: Constants.titleCellIndentifier)
-    tableView.register(UINib(nibName: Constants.countryCellIndentifier, bundle: nil),
-                       forCellReuseIdentifier: Constants.countryCellIndentifier)
     tableView.contentInset = .init(top: .zero, left: .zero, bottom: Constants.bottomOffset, right: .zero)
   }
     
   private func setupInitialDate() {
-    items.append(ValidityCellModel(title: l10n("country_certificate_text"),
-                                   description: "",
-                                   needChangeTitleFont: true))
+    items.append(ValidityCellModel(title: l10n("country_certificate_text"), description: "",
+        needChangeTitleFont: true))
     items.append(ValidityCellModel(cellType: .countryAndTimeSelection))
     items.append(ValidityCellModel(title: l10n("disclaimer"), description: l10n("disclaimer_text")))
   }
@@ -84,14 +79,7 @@ final class CheckValidityVC: UIViewController {
   }
     
   @IBAction func checkValidityAction(_ sender: Any) {
-    let ruleValidationVC = RuleValidationResultVC.loadFromNib()
-    ruleValidationVC.closeHandler = {
-      self.closeButtonAction(self)
-    }
-    self.present(ruleValidationVC, animated: true) {
-      guard let hCert = self.hCert else { return }
-      ruleValidationVC.setupView(with: hCert, selectedDate: self.selectedDate)
-    }
+    performSegue(withIdentifier: Constants.showRuleValidationResult, sender: nil)
   }
 }
 
@@ -107,13 +95,14 @@ extension CheckValidityVC: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let item: ValidityCellModel = items[indexPath.row]
     if item.cellType == .titleAndDescription {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.titleCellIndentifier, for: indexPath) as? CellWithTitleAndDescriptionTVC else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.titleCellIndentifier,
+          for: indexPath) as? CellWithTitleAndDescriptionTVC else { return UITableViewCell() }
 
       cell.setupCell(with: item)
       return cell
         
     } else {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.countryCellIndentifier, for: indexPath) as? CellWithDateAndCountryTVC else { return UITableViewCell() }
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.countryCellIndentifier, for: indexPath) as? CellWithDateAndCountryTVC else { return UITableViewCell() }
 
       cell.countryHandler = { [weak self] countryCode in
         self?.hCert?.ruleCountryCode = countryCode
@@ -123,6 +112,18 @@ extension CheckValidityVC: UITableViewDataSource {
       }
       cell.setupView()
       return cell
+    }
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    switch segue.identifier {
+    case Constants.showRuleValidationResult:
+      guard let validationController = segue.destination as? RuleValidationResultVC, let hCert = hCert else { return }
+      validationController.closeHandler = { self.closeButtonAction(self) }
+      validationController.setupView(with: hCert, selectedDate: self.selectedDate)
+
+    default:
+      break
     }
   }
 }

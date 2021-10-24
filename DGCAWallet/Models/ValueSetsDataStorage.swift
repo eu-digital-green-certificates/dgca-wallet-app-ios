@@ -46,9 +46,7 @@ struct ValueSetsDataStorage: Codable {
 
   mutating func add(valueSet: CertLogic.ValueSet) {
     let list = valueSets
-    if list.contains(where: { savedValueSet in
-      savedValueSet.valueSetId == valueSet.valueSetId
-    }) {
+    if list.contains(where: { $0.valueSetId == valueSet.valueSetId }) {
       return
     }
     valueSets.append(valueSet)
@@ -63,9 +61,7 @@ struct ValueSetsDataStorage: Codable {
   }
   public func isValueSetExistWithHash(hash: String) -> Bool {
     let list = valueSets
-    return list.contains(where: { valueSet in
-      valueSet.hash == hash
-    })
+    return list.contains(where: { $0.hash == hash })
   }
   static let storage = SecureStorage<ValueSetsDataStorage>(fileName: "valueSets_secure")
 

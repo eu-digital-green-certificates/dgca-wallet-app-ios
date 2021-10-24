@@ -50,7 +50,7 @@ struct ImageDataStorage: Codable {
     Self.storage.save(self)
   }
 
-  public mutating func deleteImageWith(identifier: String) {
+  public mutating func deleteImage(with identifier: String) {
     self.images = self.images.filter { $0.identifier != identifier }
     save()
   }

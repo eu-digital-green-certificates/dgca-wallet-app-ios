@@ -39,7 +39,6 @@ class ValidationResultViewController: UIViewController {
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var iconImage: UIImageView!
   @IBOutlet weak var detailLabel: UILabel!
-  
   @IBOutlet weak var limitationsTableView: UITableView!
   
   public var validationResultModel : AccessTokenResponse?
@@ -50,32 +49,39 @@ class ValidationResultViewController: UIViewController {
   }
   
   func setupUI() {
-    limitationsTableView.register(UINib(nibName: "LimitationCell", bundle: nil),
-                       forCellReuseIdentifier: "limitationCell")
     limitationsTableView.reloadData()
     limitationsTableView.tableFooterView = UIView()
+    iconImage.image = iconImage.image?.withRenderingMode(.alwaysTemplate)
     
     switch validationResultModel?.result {
     case "OK":
       titleLabel.text = "Valid certificate"
       detailLabel.text = "Your certificate is valid and confirms to the provided country rules. Additional entry requirements might apply, please refer to the Re-open EU website:"
       iconImage.image = UIImage(named: "icon_large_valid")
+      
+      iconImage.tintColor = .green
     case "NOK":
       titleLabel.text = "Invalid certificate"
       detailLabel.text = "Your certificate is not valid. Please refer to the Re-open EU website:"
       iconImage.image = UIImage(named: "icon_large_invalid")
+      
+      iconImage.tintColor = .red
     case "CHK":
       titleLabel.text = "Certificate has limitation"
       detailLabel.text = "Your certificate is valid but has the following restrictions:"
       iconImage.image = UIImage(named: "icon_large_warning")
+      
+      iconImage.tintColor = .yellow
     case .none:
       titleLabel.text = "Invalid certificate"
       detailLabel.text = "Your certificate is not valid. Please refer to the Re-open EU website:"
       iconImage.image = UIImage(named: "icon_large_invalid")
+      iconImage.tintColor = .red
     case .some(_):
       titleLabel.text = "Invalid certificate"
       detailLabel.text = "Your certificate is not valid. Please refer to the Re-open EU website:"
       iconImage.image = UIImage(named: "icon_large_invalid")
+      iconImage.tintColor = .red
     }
   }
   
@@ -91,7 +97,7 @@ extension ValidationResultViewController : UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "limitationCell", for: indexPath) as! LimitationCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: "LimitationCell", for: indexPath) as! LimitationCell
     if let issueText = validationResultModel?.results?[indexPath.row].details {
       cell.issueTextView.text = issueText
     }

@@ -25,11 +25,14 @@
 //  Created by Yannick Spreen on 4/25/21.
 //  
 
-import Foundation
 import UIKit
 import SwiftDGC
 
 class HomeVC: UIViewController {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+      return .lightContent
+    }
+
   override func viewDidLoad() {
     super.viewDidLoad()
 

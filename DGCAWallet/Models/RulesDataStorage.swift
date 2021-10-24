@@ -46,9 +46,7 @@ struct RulesDataStorage: Codable {
 
   mutating func add(rule: CertLogic.Rule) {
     let list = rules
-    if list.contains(where: { savedRule in
-      savedRule.identifier == rule.identifier && savedRule.version == rule.version
-    }) {
+    if list.contains(where: { $0.identifier == rule.identifier && $0.version == rule.version }) {
       return
     }
     rules.append(rule)
@@ -61,17 +59,15 @@ struct RulesDataStorage: Codable {
   public mutating func deleteRuleWithHash(hash: String) {
     self.rules = self.rules.filter { $0.hash != hash }
   }
+    
   public func isRuleExistWithHash(hash: String) -> Bool {
     let list = rules
-    return list.contains(where: { rule in
-      rule.hash == hash
-    })
+    return list.contains(where: { $0.hash == hash })
   }
+    
   static func initialize(completion: @escaping () -> Void) {
     storage.loadOverride(fallback: RulesDataStorage.sharedInstance) { success in
-      guard let result = success else {
-        return
-      }
+      guard let result = success else { return }
       let format = l10n("log.rules")
       print(String.localizedStringWithFormat(format, result.rules.count))
       RulesDataStorage.sharedInstance = result
