@@ -772,6 +772,9 @@
         <designable name="a9u-Ia-KEX">
             <size key="intrinsicContentSize" width="78" height="51"/>
         </designable>
+        <designable name="eOj-kZ-7kv">
+            <size key="intrinsicContentSize" width="56" height="51"/>
+        </designable>
     </designables>
     <resources>
         <image name="EU_logo" width="72" height="48"/>

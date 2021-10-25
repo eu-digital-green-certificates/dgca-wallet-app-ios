@@ -84,12 +84,12 @@ class TicketCodeAcceptViewController: UIViewController {
   
   @IBAction func cancelButtonAction(_ sender: Any) {
     guard loading == false else { return }
-    dismiss(animated: true, completion: nil)
+    self.navigationController?.popViewController(animated: true)
   }
   
   @IBAction func grandButtonAction(_ sender: Any) {
     guard loading == false else { return }
-    
+    self.startActivity()
     guard let urlPath = accessTokenInfo?.aud!,
           let url = URL(string: urlPath),
           let iv = UserDefaults.standard.object(forKey: "xnonce"),
@@ -100,7 +100,7 @@ class TicketCodeAcceptViewController: UIViewController {
     else { return }
     
     var sig = Data()
-    startActivity()
+
     Enclave.sign(data: dccData.0, with: privateKey, using: SecKeyAlgorithm.ecdsaSignatureMessageX962SHA256, completion: { (signature,error) in
       if let sign = signature {
        sig = sign

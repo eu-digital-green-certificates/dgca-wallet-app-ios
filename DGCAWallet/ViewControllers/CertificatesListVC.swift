@@ -150,12 +150,9 @@ extension CertificatesListVC: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     deselectAllCert()
     nextButton.isEnabled = true
-    nextButton.backgroundColor = UIColor(named: "green")
-    for ind in 0..<listOfCert.count {
-      listOfCert[ind].isSelected = false
-    }
+    nextButton.backgroundColor = UIColor(named: "yellow")
     listOfCert[indexPath.row].isSelected = true
-    tableView.reloadRows(at: [indexPath], with: .automatic)
+    tableView.reloadData()
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
