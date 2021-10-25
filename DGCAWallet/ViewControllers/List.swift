@@ -84,9 +84,7 @@ class ListVC: UIViewController {
   func reloadAllComponents(completion: ((Bool) -> Void)? = nil) {
     ImageDataStorage.initialize {
       PdfDataStorage.initialize {
-        DispatchQueue.main.async {
-          completion?(true)
-        }
+        completion?(true)
       }
     }
   }
@@ -570,8 +568,13 @@ extension ListVC {
             let scrollToNum = rowCount > 0 ? rowCount - 1 : 0
             DispatchQueue.main.asyncAfter(deadline: .now()) {
               self?.stopActivity()
-              self?.table.scrollToRow(at: IndexPath(row: scrollToNum, section: 1), at: .bottom, animated: true)
-            }
+              let path = IndexPath(row: scrollToNum, section: 1)
+              self?.table.scrollToRow(at: path, at: .bottom, animated: true)
+              self?.table.selectRow(at: path, animated: true, scrollPosition: .bottom)
+              DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(350)) {
+                self?.table.deselectRow(at: path, animated: true)
+              }
+            } // asynk after
           }
         }
       } // end add
@@ -636,8 +639,14 @@ extension ListVC: UIDocumentPickerDelegate {
               let rowsCount = ImageDataStorage.sharedInstance.images.count
               let scrollToNum = rowsCount > 0 ? rowsCount-1 : 0
               DispatchQueue.main.asyncAfter(deadline: .now()) {
-                self?.table.scrollToRow(at: IndexPath(row: scrollToNum, section: 1), at: .bottom, animated: true)
-              }
+                self?.stopActivity()
+                let path = IndexPath(row: scrollToNum, section: 2)
+                self?.table.scrollToRow(at: path, at: .bottom, animated: true)
+                self?.table.selectRow(at: path, animated: true, scrollPosition: .bottom)
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(350)) {
+                  self?.table.deselectRow(at: path, animated: true)
+                }
+              } // asynk after
             }
           })
       }
