@@ -204,6 +204,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="hvv-8l-Bni">
                                 <rect key="frame" x="0.0" y="44" width="414" height="754"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ServerCell" rowHeight="70" id="qpL-Hx-UWm" customClass="ServerCell" customModule="DGCAWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.5" width="414" height="70"/>
@@ -310,30 +311,40 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="sKg-PA-Rtf">
                                 <rect key="frame" x="0.0" y="44" width="414" height="754"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CertificateCell" rowHeight="70" id="jYu-JM-UXs" customClass="CertificateCell" customModule="DGCAWallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="70"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CertificateCell" rowHeight="90" id="jYu-JM-UXs" customClass="CertificateCell" customModule="DGCAWallet" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jYu-JM-UXs" id="bd7-IO-9sW">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZx-rd-6zb">
-                                                    <rect key="frame" x="20" y="11" width="374" height="20"/>
+                                                    <rect key="frame" x="20" y="11" width="374" height="19"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="Wip-8y-QE8"/>
+                                                        <constraint firstAttribute="height" constant="19" id="nLq-MM-L2m"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YKe-rH-l3u">
-                                                    <rect key="frame" x="20" y="39" width="374" height="20"/>
+                                                    <rect key="frame" x="20" y="64.5" width="374" height="14.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="20" id="AQL-60-RjI"/>
+                                                        <constraint firstAttribute="height" constant="14.5" id="TNa-Q6-hre"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XiI-QU-nZU">
+                                                    <rect key="frame" x="20" y="35" width="374" height="19"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="19" id="TS3-4L-gSp"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                                    <color key="textColor" name="green"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -342,12 +353,15 @@
                                                 <constraint firstItem="YKe-rH-l3u" firstAttribute="leading" secondItem="bd7-IO-9sW" secondAttribute="leading" constant="20" symbolic="YES" id="GFO-QD-56Y"/>
                                                 <constraint firstAttribute="trailing" secondItem="YKe-rH-l3u" secondAttribute="trailing" constant="20" symbolic="YES" id="L2m-Yh-yVR"/>
                                                 <constraint firstItem="EZx-rd-6zb" firstAttribute="leading" secondItem="bd7-IO-9sW" secondAttribute="leadingMargin" id="MMc-Sy-hdy"/>
-                                                <constraint firstItem="YKe-rH-l3u" firstAttribute="top" secondItem="EZx-rd-6zb" secondAttribute="bottom" constant="8" symbolic="YES" id="Mv4-R5-DwJ"/>
                                                 <constraint firstItem="EZx-rd-6zb" firstAttribute="top" secondItem="bd7-IO-9sW" secondAttribute="topMargin" id="Nrb-bP-MqV"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="YKe-rH-l3u" secondAttribute="bottom" id="bEg-Fs-zrO"/>
+                                                <constraint firstItem="XiI-QU-nZU" firstAttribute="top" secondItem="EZx-rd-6zb" secondAttribute="bottom" constant="5" id="dod-5Y-9SY"/>
+                                                <constraint firstItem="XiI-QU-nZU" firstAttribute="leading" secondItem="bd7-IO-9sW" secondAttribute="leading" constant="20" id="gDU-Kn-i69"/>
+                                                <constraint firstAttribute="trailing" secondItem="XiI-QU-nZU" secondAttribute="trailing" constant="20" id="xva-Fn-hCK"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="certTypeLabel" destination="XiI-QU-nZU" id="Xxc-mk-6Zo"/>
                                             <outlet property="descriptionLabel" destination="YKe-rH-l3u" id="bPV-GR-zM7"/>
                                             <outlet property="nameLabel" destination="EZx-rd-6zb" id="udM-ku-z70"/>
                                         </connections>
@@ -403,7 +417,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BgU-EK-kpm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2130" y="119"/>
+            <point key="canvasLocation" x="2128.985507246377" y="118.52678571428571"/>
         </scene>
         <!--Ticket Code Accept View Controller-->
         <scene sceneID="Nns-P2-25y">
@@ -749,8 +763,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="130.5"/>
                                 <color key="backgroundColor" name="blue"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MID-ne-Jur" customClass="RoundedButton" customModule="DGCAWallet" customModuleProvider="target">
-                                <rect key="frame" x="141" y="800" width="132" height="46"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MID-ne-Jur" customClass="RoundedButton" customModule="DGCAWallet" customModuleProvider="target">
+                                <rect key="frame" x="149.5" y="800" width="115" height="46"/>
                                 <color key="backgroundColor" name="green"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="132" id="jzU-iO-50E"/>
@@ -1071,13 +1085,13 @@
     </scenes>
     <designables>
         <designable name="MID-ne-Jur">
-            <size key="intrinsicContentSize" width="99" height="46"/>
+            <size key="intrinsicContentSize" width="97" height="46"/>
         </designable>
         <designable name="Rcx-o5-KDY">
-            <size key="intrinsicContentSize" width="62" height="46"/>
+            <size key="intrinsicContentSize" width="56" height="42"/>
         </designable>
         <designable name="WbA-kC-hOb">
-            <size key="intrinsicContentSize" width="62" height="46"/>
+            <size key="intrinsicContentSize" width="56" height="42"/>
         </designable>
     </designables>
     <resources>

@@ -41,6 +41,7 @@ class IdentityService {
     let decoder = JSONDecoder()
     
     UserDefaults.standard.set(ticketingInfo.token, forKey: "TicketingToken")
+    
     let headers = HTTPHeaders([HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")])
     
     let url = URL(string: ticketingInfo.serviceIdentity)!

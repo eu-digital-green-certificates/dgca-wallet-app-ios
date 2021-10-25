@@ -65,14 +65,15 @@ class CertificatesListVC: UIViewController {
     let lastName = accessTokenModel.vc?.fnt?.lowercased() ?? ""
     let ticketingFullName: String
     
-    if !firstName.isEmpty && !lastName.isEmpty {
-      ticketingFullName = firstName + " " + lastName
-    } else if firstName.isEmpty {
-      ticketingFullName = lastName
-    } else {
-      ticketingFullName = firstName
+    listOfCert = LocalData.sharedInstance.certStrings.filter { ($0.cert!.fullName.lowercased() == "\(accessTokenModel.vc!.gnt!) \(accessTokenModel.vc!.fnt!)".lowercased()) && ($0.cert!.dateOfBirth == accessTokenModel.vc?.dob)}
+    if let dateValidFrom = Date(rfc3339DateTimeString: accessTokenModel.vc!.validFrom ?? "") {
+      listOfCert = listOfCert.filter{ $0.cert!.iat < dateValidFrom }
     }
-    listOfCert = LocalData.sharedInstance.certStrings.filter { $0.cert!.fullName.lowercased() == ticketingFullName || ($0.cert!.dateOfBirth == accessTokenModel.vc?.dob) }
+    
+    if let dateValidUntil = Date(rfc3339DateTimeString: accessTokenModel.vc!.validTo ?? "") {
+      listOfCert = listOfCert.filter {$0.cert!.exp > dateValidUntil }
+    }
+    
   }
   
   private func deselectAllCert() {
@@ -133,6 +134,11 @@ extension CertificatesListVC: UITableViewDataSource, UITableViewDelegate {
       tableView.reloadRows(at: [indexPath], with: .automatic)
   }
   
+
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 90.0
+  }
+
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     switch segue.identifier {
     case Constants.showTicketAcceptController:

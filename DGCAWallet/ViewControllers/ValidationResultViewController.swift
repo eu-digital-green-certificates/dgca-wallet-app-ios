@@ -51,28 +51,37 @@ class ValidationResultViewController: UIViewController {
   private func setupUI() {
     limitationsTableView.reloadData()
     limitationsTableView.tableFooterView = UIView()
+    iconImage.image = iconImage.image?.withRenderingMode(.alwaysTemplate)
     
     switch validationResultModel?.result {
     case "OK":
       titleLabel.text = "Valid certificate"
       detailLabel.text = "Your certificate is valid and confirms to the provided country rules. Additional entry requirements might apply, please refer to the Re-open EU website:"
       iconImage.image = UIImage(named: "icon_large_valid")
+      
+      iconImage.tintColor = .green
     case "NOK":
       titleLabel.text = "Invalid certificate"
       detailLabel.text = "Your certificate is not valid. Please refer to the Re-open EU website:"
       iconImage.image = UIImage(named: "icon_large_invalid")
+      
+      iconImage.tintColor = .red
     case "CHK":
       titleLabel.text = "Certificate has limitation"
       detailLabel.text = "Your certificate is valid but has the following restrictions:"
       iconImage.image = UIImage(named: "icon_large_warning")
+      
+      iconImage.tintColor = .yellow
     case .none:
       titleLabel.text = "Invalid certificate"
       detailLabel.text = "Your certificate is not valid. Please refer to the Re-open EU website:"
       iconImage.image = UIImage(named: "icon_large_invalid")
+      iconImage.tintColor = .red
     case .some(_):
       titleLabel.text = "Invalid certificate"
       detailLabel.text = "Your certificate is not valid. Please refer to the Re-open EU website:"
       iconImage.image = UIImage(named: "icon_large_invalid")
+      iconImage.tintColor = .red
     }
   }
   
