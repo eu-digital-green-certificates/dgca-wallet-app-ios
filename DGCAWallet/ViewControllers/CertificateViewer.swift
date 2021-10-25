@@ -36,20 +36,19 @@ class CertificateViewerVC: UIViewController {
     static let embedCertPagesController = "embedCertPagesController"
   }
   
-  @IBOutlet weak var headerBackground: UIView!
-  @IBOutlet weak var nameLabel: UILabel!
-  @IBOutlet weak var dismissButton: UIButton!
-  @IBOutlet weak var cancelButton: UIButton!
-  @IBOutlet weak var cancelButtonConstraint: NSLayoutConstraint!
-  @IBOutlet weak var checkValidityButton: UIButton!
+  @IBOutlet fileprivate weak var headerBackground: UIView!
+  @IBOutlet fileprivate weak var nameLabel: UILabel!
+  @IBOutlet fileprivate weak var dismissButton: UIButton!
+  @IBOutlet fileprivate weak var cancelButton: UIButton!
+  @IBOutlet fileprivate weak var cancelButtonConstraint: NSLayoutConstraint!
+  @IBOutlet fileprivate weak var checkValidityButton: UIButton!
   
   var hCert: HCert?
   var tan: String?
   weak var childDismissedDelegate: CertViewerDelegate?
   public var isSaved = true
   var newCertAdded = false
-
-
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     setupInterface()
@@ -103,10 +102,11 @@ class CertificateViewerVC: UIViewController {
         if success {
           guard let cert = self?.hCert else { return }
             
-          LocalData.add(cert, with: newTan)
-          self?.newCertAdded = true
-          self?.showAlert(title: l10n("tan.confirm.success.title"), subtitle: l10n("tan.confirm.success.text")) { _ in
-            self?.dismiss(animated: true, completion: nil)
+          LocalData.sharedInstance.add(cert, with: newTan) { _ in
+            self?.newCertAdded = true
+            self?.showAlert(title: l10n("tan.confirm.success.title"), subtitle: l10n("tan.confirm.success.text")) { _ in
+              self?.dismiss(animated: true, completion: nil)
+            }
           }
         } else {
           self?.showAlert(title: l10n("tan.confirm.fail.title"), subtitle: l10n("tan.confirm.fail.text")

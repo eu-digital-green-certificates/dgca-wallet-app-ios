@@ -29,36 +29,34 @@
 import Foundation
 import SwiftDGC
 
-struct PdfDataStorage: Codable {
+class PdfDataStorage: Codable {
   static var sharedInstance = PdfDataStorage()
   static let storage = SecureStorage<PdfDataStorage>(fileName: "pdfs_secure")
 
   var pdfs = [SavedPDF]()
 
-  mutating func add(savedPdf: SavedPDF) {
+  func add(savedPdf: SavedPDF, completion: ((Bool) -> Void)? = nil) {
     if pdfs.contains(where: { $0.identifier == savedPdf.identifier }) {
       return
     }
     pdfs.append(savedPdf)
-    save()
+    Self.storage.save(self, completion: completion)
   }
 
-  public func save() {
-    Self.storage.save(self)
-  }
-
-  public mutating func deletePDF(with identifier: String) {
+  func deletePDF(with identifier: String, completion: ((Bool) -> Void)? = nil) {
     self.pdfs = self.pdfs.filter { $0.identifier != identifier }
-    save()
+    Self.storage.save(self, completion: completion)
   }
 
-  public func isPdfExistWith(identifier: String) -> Bool {
+  func isPdfExistWith(identifier: String) -> Bool {
     let list = pdfs
     return list.contains(where: { $0.identifier == identifier })
   }
+    
   static func initialize(completion: @escaping () -> Void) {
     storage.loadOverride(fallback: PdfDataStorage.sharedInstance) { success in
       guard let result = success else { return }
+        
       let format = l10n("log.pdfs")
       print(String.localizedStringWithFormat(format, result.pdfs.count))
       PdfDataStorage.sharedInstance = result

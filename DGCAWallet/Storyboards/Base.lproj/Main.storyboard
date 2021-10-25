@@ -264,6 +264,9 @@
                                 <state key="normal" title="Next">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <state key="disabled">
+                                    <color key="titleColor" systemColor="systemGray2Color"/>
+                                </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="padding">
                                         <real key="value" value="12"/>
@@ -382,6 +385,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <state key="normal" title="Next">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <state key="disabled">
+                                    <color key="titleColor" systemColor="systemGray2Color"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="radius">
@@ -763,15 +769,19 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="130.5"/>
                                 <color key="backgroundColor" name="blue"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MID-ne-Jur" customClass="RoundedButton" customModule="DGCAWallet" customModuleProvider="target">
-                                <rect key="frame" x="149.5" y="800" width="115" height="46"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MID-ne-Jur" customClass="RoundedButton" customModule="DGCAWallet" customModuleProvider="target">
+                                <rect key="frame" x="141" y="800" width="132" height="46"/>
                                 <color key="backgroundColor" name="green"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="132" id="jzU-iO-50E"/>
+                                    <constraint firstAttribute="height" constant="46" id="q7t-F1-nga"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <state key="normal" title="Add new">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <state key="disabled">
+                                    <color key="titleColor" systemColor="systemGray5Color"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="padding">
@@ -976,10 +986,14 @@
                                     <action selector="settingsTapped:" destination="BcE-gA-Tuj" eventType="touchUpInside" id="lZf-eK-f2f"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Ixr-vD-aU3">
+                                <rect key="frame" x="197" y="438" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="uNl-GU-yxp"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Ixr-vD-aU3" firstAttribute="centerX" secondItem="UFr-2P-Rlu" secondAttribute="centerX" id="3gE-bW-Qnf"/>
                             <constraint firstItem="bG5-p7-TbQ" firstAttribute="centerY" secondItem="Q38-2s-CMN" secondAttribute="centerY" id="7tJ-BP-pn0"/>
                             <constraint firstItem="uNl-GU-yxp" firstAttribute="trailing" secondItem="emV-oh-VSt" secondAttribute="trailing" id="8WI-H8-cdQ"/>
                             <constraint firstItem="cE2-eV-IV4" firstAttribute="leading" secondItem="UFr-2P-Rlu" secondAttribute="leading" id="9cu-kA-qbU"/>
@@ -988,6 +1002,7 @@
                             <constraint firstItem="Q38-2s-CMN" firstAttribute="leading" secondItem="uNl-GU-yxp" secondAttribute="leading" constant="16" id="KNg-EC-1F1"/>
                             <constraint firstItem="W03-Gm-CHU" firstAttribute="leading" secondItem="UFr-2P-Rlu" secondAttribute="leading" id="MCk-nt-IE4"/>
                             <constraint firstItem="uNl-GU-yxp" firstAttribute="trailing" secondItem="bG5-p7-TbQ" secondAttribute="trailing" constant="16" id="Quo-Rt-SrD"/>
+                            <constraint firstItem="Ixr-vD-aU3" firstAttribute="centerY" secondItem="UFr-2P-Rlu" secondAttribute="centerY" id="UbQ-HL-iZv"/>
                             <constraint firstItem="MID-ne-Jur" firstAttribute="top" secondItem="emV-oh-VSt" secondAttribute="bottom" constant="16" id="bin-s2-AUs"/>
                             <constraint firstItem="emV-oh-VSt" firstAttribute="top" secondItem="cE2-eV-IV4" secondAttribute="bottom" id="c0G-cv-PAJ"/>
                             <constraint firstItem="MID-ne-Jur" firstAttribute="top" secondItem="W03-Gm-CHU" secondAttribute="bottom" id="cdj-Np-KPj"/>
@@ -1004,6 +1019,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="K7b-oY-EUm"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="Ixr-vD-aU3" id="yKK-lv-SUQ"/>
                         <outlet property="addButton" destination="MID-ne-Jur" id="bDo-SW-HNv"/>
                         <outlet property="emptyView" destination="W03-Gm-CHU" id="cC1-aC-UeX"/>
                         <outlet property="table" destination="emV-oh-VSt" id="afK-OZ-s2d"/>
@@ -1085,13 +1101,13 @@
     </scenes>
     <designables>
         <designable name="MID-ne-Jur">
-            <size key="intrinsicContentSize" width="97" height="46"/>
+            <size key="intrinsicContentSize" width="99" height="46"/>
         </designable>
         <designable name="Rcx-o5-KDY">
-            <size key="intrinsicContentSize" width="56" height="42"/>
+            <size key="intrinsicContentSize" width="62" height="46"/>
         </designable>
         <designable name="WbA-kC-hOb">
-            <size key="intrinsicContentSize" width="56" height="42"/>
+            <size key="intrinsicContentSize" width="62" height="46"/>
         </designable>
     </designables>
     <resources>
@@ -1120,8 +1136,14 @@
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

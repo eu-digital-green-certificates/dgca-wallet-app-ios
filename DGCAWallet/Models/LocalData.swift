@@ -39,7 +39,7 @@ struct DatedCertString: Codable {
   }
 }
 
-struct LocalData: Codable {
+class LocalData: Codable {
   private enum Constants {
     static let pubKeysStorageFilename = "secure"
     static let bundleVersion = "CFBundleShortVersionString"
@@ -53,27 +53,27 @@ struct LocalData: Codable {
 
   var certStrings = [DatedCertString]()
   var config = Config.load()
-  var lastLaunchedAppVersion = Self.appVersion
-
-  public func save() {
-    Self.storage.save(self)
-  }
-    
-  public static func add(_ cert: HCert, with tan: String?) {
-    sharedInstance.certStrings.append(.init(date: Date(), certString: cert.fullPayloadString, storedTAN: tan))
-    sharedInstance.save()
+  var lastLaunchedAppVersion = LocalData.appVersion
+  
+  func save(completion: ((Bool) -> Void)? = nil) {
+    Self.storage.save(self, completion: completion)
   }
 
-    public static func remove(withDate date: Date) {
-      if let ind = sharedInstance.certStrings.firstIndex(where: { $0.date == date }) {
-          sharedInstance.certStrings.remove(at: ind)
-          sharedInstance.save()
-      }
+  func add(_ cert: HCert, with tan: String?, completion: ((Bool) -> Void)? = nil) {
+    certStrings.append(.init(date: Date(), certString: cert.fullPayloadString, storedTAN: tan))
+    Self.storage.save(self, completion: completion)
+  }
+
+  func remove(withDate date: Date, completion: ((Bool) -> Void)? = nil) {
+    if let ind = certStrings.firstIndex(where: { $0.date == date }) {
+      certStrings.remove(at: ind)
+      Self.storage.save(self, completion: completion)
     }
+  }
 
   static func initialize(completion: @escaping () -> Void) {
     storage.loadOverride(fallback: LocalData.sharedInstance) { success in
-      guard var result = success else {  return }
+      guard let result = success else {  return }
       
       let format = l10n("log.certs-loaded")
       print(String.localizedStringWithFormat(format, result.certStrings.count))

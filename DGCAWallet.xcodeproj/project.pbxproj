@@ -134,11 +134,9 @@
 		FE6E78882702033300C142A3 /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = FE6E78872702033300C142A3 /* JWTDecode */; };
 		FEAEA96526FBB13600B94FFF /* AccessTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEAEA96426FBB13600B94FFF /* AccessTokenResponse.swift */; };
 		FEBE53B62721A3EA003B61FB /* LimitationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBE53B42721A3EA003B61FB /* LimitationCell.swift */; };
-		FEBE53B72721A3EA003B61FB /* LimitationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEBE53B52721A3EA003B61FB /* LimitationCell.xib */; };
 		FEC54BE4271F26990048B6BC /* IdentityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC54BE3271F26990048B6BC /* IdentityService.swift */; };
 		FEC54BE6271F27180048B6BC /* AccessTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC54BE5271F27180048B6BC /* AccessTokenService.swift */; };
 		FEC54BE927201D660048B6BC /* ValidationResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC54BE727201D660048B6BC /* ValidationResultViewController.swift */; };
-		FEC54BEA27201D660048B6BC /* ValidationResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FEC54BE827201D660048B6BC /* ValidationResultViewController.xib */; };
 		FED4C5EE27230F2300581FF3 /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB18269DBB4C00074F66 /* context.jsonc */; };
 		FED4C5EF27230F2400581FF3 /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB18269DBB4C00074F66 /* context.jsonc */; };
 		FED4C5F027230F2400581FF3 /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB18269DBB4C00074F66 /* context.jsonc */; };
@@ -168,9 +166,9 @@
 		5C00072026D38D6D002E5013 /* DGCAWallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DGCAWallet.entitlements; sourceTree = "<group>"; };
 		5C00072126D3A40E002E5013 /* SavedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedImage.swift; sourceTree = "<group>"; };
 		5C00072526D3A6CD002E5013 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
-		5C00072926D3A77D002E5013 /* ImageDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDataStorage.swift; sourceTree = "<group>"; };
+		5C00072926D3A77D002E5013 /* ImageDataStorage.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ImageDataStorage.swift; sourceTree = "<group>"; tabWidth = 2; };
 		5C00072D26D3AC11002E5013 /* SavedPDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPDF.swift; sourceTree = "<group>"; };
-		5C00073126D3AEDE002E5013 /* PdfDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfDataStorage.swift; sourceTree = "<group>"; };
+		5C00073126D3AEDE002E5013 /* PdfDataStorage.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = PdfDataStorage.swift; sourceTree = "<group>"; tabWidth = 2; };
 		5C00073526D625D0002E5013 /* PDFTableViewCell.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = PDFTableViewCell.swift; sourceTree = "<group>"; tabWidth = 2; };
 		5C00073926D625DE002E5013 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; tabWidth = 2; };
 		5C00073D26D641CC002E5013 /* ImageViewerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewerVC.swift; sourceTree = "<group>"; };
@@ -187,8 +185,8 @@
 		5C556D4026F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = TicketCodeAcceptViewController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		5C556D4726F9F8AC007E2C2E /* CertificatesListVC.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CertificatesListVC.swift; sourceTree = "<group>"; tabWidth = 2; };
 		5C556D4F26F9F8C6007E2C2E /* ServersListVC.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ServersListVC.swift; sourceTree = "<group>"; tabWidth = 2; };
-		5CE07C772692E1CC00A032F9 /* CountryDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountryDataStorage.swift; sourceTree = "<group>"; };
-		5CE07C782692E1CD00A032F9 /* ValueSetsDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueSetsDataStorage.swift; sourceTree = "<group>"; };
+		5CE07C772692E1CC00A032F9 /* CountryDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CountryDataStorage.swift; sourceTree = "<group>"; tabWidth = 2; };
+		5CE07C782692E1CD00A032F9 /* ValueSetsDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ValueSetsDataStorage.swift; sourceTree = "<group>"; tabWidth = 2; };
 		5CE07C792692E1CD00A032F9 /* RulesDataStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesDataStorage.swift; sourceTree = "<group>"; };
 		5CE07C832692E21E00A032F9 /* CertLogicEngineManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertLogicEngineManager.swift; sourceTree = "<group>"; };
 		5CFEDB18269DBB4C00074F66 /* context.jsonc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = context.jsonc; sourceTree = "<group>"; };
@@ -665,7 +663,6 @@
 				CE81533A263FF7EC0030D777 /* README.md in Resources */,
 				DA01661E26554992005B73A1 /* OpenSourceNotices.json in Resources */,
 				FED4C5F027230F2400581FF3 /* context.jsonc in Resources */,
-				5C556D4126F9DAF7007E2C2E /* TicketCodeAcceptViewController.xib in Resources */,
 				CEA6D6F5261F8D2900715333 /* Assets.xcassets in Resources */,
 				CEA6D6F3261F8D2700715333 /* Main.storyboard in Resources */,
 				DA017DE626552259006E4D49 /* Licenses.storyboard in Resources */,

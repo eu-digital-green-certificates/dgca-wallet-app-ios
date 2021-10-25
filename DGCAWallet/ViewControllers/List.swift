@@ -51,11 +51,13 @@ class ListVC: UIViewController {
     case certificates, images, pdfs
   }
   
-  @IBOutlet weak var addButton: RoundedButton!
-  @IBOutlet weak var table: UITableView!
-  @IBOutlet weak var emptyView: UIView!
-
+  @IBOutlet fileprivate weak var addButton: RoundedButton!
+  @IBOutlet fileprivate weak var table: UITableView!
+  @IBOutlet fileprivate weak var emptyView: UIView!
+  @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
+  
   private var scannedToken: String = ""
+  private var loading = false
 
   override var preferredStatusBarStyle: UIStatusBarStyle {
     return .lightContent
@@ -63,27 +65,47 @@ class ListVC: UIViewController {
 
   override func viewWillAppear(_ animated: Bool) {
       super.viewWillAppear(animated)
-      self.reloadAllComponents()
+    startActivity()
+    self.reloadAllComponents { [weak self] _ in
+      self?.stopActivity()
+      self?.reloadTable()
+    }
       
-      let appDelegate = UIApplication.shared.delegate as? AppDelegate
-      appDelegate?.isNFCFunctionality = false
-      if #available(iOS 13.0, *) {
-        let scene = self.sceneDelegate
-        scene?.isNFCFunctionality = false
-      }
+    let appDelegate = UIApplication.shared.delegate as? AppDelegate
+    appDelegate?.isNFCFunctionality = false
+    if #available(iOS 13.0, *) {
+      let scene = self.sceneDelegate
+      scene?.isNFCFunctionality = false
+    }
   }
 
-  func reloadAllComponents() {
+  func reloadAllComponents(completion: ((Bool) -> Void)? = nil) {
     ImageDataStorage.initialize {
       PdfDataStorage.initialize {
         DispatchQueue.main.async {
-          self.reloadTable()
+          completion?(true)
         }
       }
     }
   }
   
+  private func startActivity() {
+    loading = true
+    activityIndicator.startAnimating()
+    addButton.isEnabled = false
+    addButton.backgroundColor = UIColor(named: "lightGreen")
+  }
+ 
+  private func stopActivity() {
+    loading = false
+    activityIndicator.stopAnimating()
+    addButton.isEnabled = true
+    addButton.backgroundColor = UIColor(named: "green")
+  }
+
   @IBAction func addNew() {
+    guard loading == false else { return }
+    
     let menuActionSheet = UIAlertController(title: l10n("add.new"),
        message: l10n("want.add"),
        preferredStyle: UIAlertController.Style.actionSheet)
@@ -242,7 +264,7 @@ class ListVC: UIViewController {
 
 extension ListVC: CertViewerDelegate {
   func childDismissed(_ newCertAdded: Bool) {
-    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
+    DispatchQueue.main.asyncAfter(deadline: .now()) {
         self.reloadTable()
     }
   }
@@ -284,15 +306,15 @@ extension ListVC: ScanWalletDelegate {
 
 extension ListVC: UITableViewDataSource {
   var listCertElements: [DatedCertString] {
-    LocalData.sharedInstance.certStrings.reversed()
+    return LocalData.sharedInstance.certStrings.reversed()
   }
 
   var listImageElements: [SavedImage] {
-    ImageDataStorage.sharedInstance.images
+    return ImageDataStorage.sharedInstance.images
   }
 
   var listPdfElements: [SavedPDF] {
-    PdfDataStorage.sharedInstance.pdfs
+    return PdfDataStorage.sharedInstance.pdfs
   }
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -352,6 +374,8 @@ extension ListVC: UITableViewDataSource {
 
 extension ListVC: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    guard loading == false else { return }
+    
     table.deselectRow(at: indexPath, animated: true)
     switch indexPath.section {
       case TableSection.certificates.rawValue:
@@ -378,10 +402,13 @@ extension ListVC: UITableViewDelegate {
           showAlert( title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"),
             actionTitle: l10n("btn.confirm"), cancelTitle: l10n("btn.cancel")) { [weak self] in
                 if $0 {
-                  LocalData.remove(withDate: savedCert.date)
-                  DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
-                  self?.reloadTable()
-                }
+                  self?.startActivity()
+                  LocalData.sharedInstance.remove(withDate: savedCert.date) { _ in
+                    self?.reloadAllComponents(completion: { _ in
+                      self?.stopActivity()
+                      self?.reloadTable()
+                    })
+                  }
               }
             }
       case 1:
@@ -389,10 +416,14 @@ extension ListVC: UITableViewDelegate {
         showAlert( title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"),
           actionTitle: l10n("btn.confirm"), cancelTitle: l10n("btn.cancel")) { [weak self] in
               if $0 {
-                ImageDataStorage.sharedInstance.deleteImage(with: savedImage.identifier)
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
-                self?.reloadTable()
-              }
+                self?.startActivity()
+                ImageDataStorage.sharedInstance.deleteImage(with: savedImage.identifier) { _ in
+                  self?.reloadAllComponents(completion: { _ in
+                    self?.stopActivity()
+                    self?.reloadTable()
+                  })
+
+                }
             }
           }
       case 2:
@@ -400,10 +431,13 @@ extension ListVC: UITableViewDelegate {
         showAlert( title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"),
           actionTitle: l10n("btn.confirm"), cancelTitle: l10n("btn.cancel")) { [weak self] in
               if $0 {
-                PdfDataStorage.sharedInstance.deletePDF(with: savedPDF.identifier)
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(100)) {
-                self?.reloadTable()
-              }
+                self?.startActivity()
+                PdfDataStorage.sharedInstance.deletePDF(with: savedPDF.identifier) { _ in
+                  self?.reloadAllComponents(completion: { _ in
+                    self?.stopActivity()
+                    self?.reloadTable()
+                  })
+                }
             }
           }
       default:
@@ -412,6 +446,7 @@ extension ListVC: UITableViewDelegate {
   }
 }
 
+                          
 extension ListVC: FloatingPanelControllerDelegate {
   func floatingPanel(_ fpc: FloatingPanelController, shouldRemoveAt location: CGPoint,
     with velocity: CGVector) -> Bool {
@@ -514,15 +549,22 @@ extension ListVC {
   }
   
   private func saveImage(image: UIImage) {
-    showInputDialog(
-      title: l10n("image.confirm.title"),
-      subtitle: l10n("image.confirm.text"),
-      inputPlaceholder: l10n("image.confirm.placeholder")
-    ) { fileName in
-      ImageDataStorage.sharedInstance.add(savedImage: SavedImage(fileName: fileName ?? UUID().uuidString, image: image))
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {  [weak self] in
-            self?.reloadTable()
+    showInputDialog(title: l10n("image.confirm.title"), subtitle: l10n("image.confirm.text"),
+      inputPlaceholder: l10n("image.confirm.placeholder")) { [weak self] fileName in
+      let savedImg = SavedImage(fileName: fileName ?? UUID().uuidString, image: image)
+      self?.startActivity()
+      ImageDataStorage.sharedInstance.add(savedImage: savedImg) { _ in
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
+          self?.reloadAllComponents { _ in
+            self?.startActivity()
+            let rowCount = ImageDataStorage.sharedInstance.images.count
+            let scrollToNum = rowCount > 0 ? rowCount - 1 : 0
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
+              self?.table.scrollToRow(at: IndexPath(row: scrollToNum, section: 1), at: .bottom, animated: true)
+            }
+          }
         }
+      }
     }
   }
 }
@@ -573,15 +615,22 @@ extension ListVC: UIDocumentPickerDelegate {
   }
   
   private func savePDFFile(url: NSURL) {
-    showInputDialog(
-      title: l10n("pdf.confirm.title"),
-      subtitle: l10n("pdf.confirm.text"),
-      inputPlaceholder: l10n("pdf.confirm.placeholder")
-    ) { fileName in
-      PdfDataStorage.sharedInstance.add(savedPdf: SavedPDF(fileName: fileName ?? UUID().uuidString, pdfUrl: url as URL))
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {  [weak self] in
-            self?.reloadTable()
+    showInputDialog(title: l10n("pdf.confirm.title"), subtitle: l10n("pdf.confirm.text"),
+      inputPlaceholder: l10n("pdf.confirm.placeholder")) { [weak self] fileName in
+      let pdf = SavedPDF(fileName: fileName ?? UUID().uuidString, pdfUrl: url as URL)
+      self?.startActivity()
+      PdfDataStorage.sharedInstance.add(savedPdf: pdf) { _ in
+        DispatchQueue.main.asyncAfter(deadline: .now()) {
+          self?.reloadAllComponents(completion: { _ in
+            self?.startActivity()
+            let rowsCount = ImageDataStorage.sharedInstance.images.count
+            let scrollToNum = rowsCount > 0 ? rowsCount-1 : 0
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
+              self?.table.scrollToRow(at: IndexPath(row: scrollToNum, section: 1), at: .bottom, animated: true)
+            }
+          })
         }
+      }
     }
   }
   
@@ -599,4 +648,3 @@ extension ListVC: UIDocumentPickerDelegate {
     }
   }
 }
-

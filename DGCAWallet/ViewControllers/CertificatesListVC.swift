@@ -41,10 +41,17 @@ class CertificatesListVC: UIViewController {
   private var validationServiceInfo : ServerListResponse?
   private var accessTokenInfo       : AccessTokenResponse?
   
+  private var isNavigationEnabled: Bool {
+    return accessTokenInfo != nil && validationServiceInfo != nil &&
+      getSelectedCert()?.cert != nil
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     tableView.tableFooterView = UIView()
     title = l10n("certificates")
+    nextButton.isEnabled = false
+    nextButton.backgroundColor = UIColor(named: "lightYellow")
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -53,6 +60,8 @@ class CertificatesListVC: UIViewController {
   }
 
   @IBAction func nextButtonAction(_ sender: Any) {
+    guard isNavigationEnabled else { return }
+
     self.performSegue(withIdentifier: Constants.showTicketAcceptController, sender: nil)
   }
   
@@ -61,9 +70,6 @@ class CertificatesListVC: UIViewController {
         
     validationServiceInfo = validationInfo
     accessTokenInfo = accessTokenModel
-    let firstName = accessTokenModel.vc?.gnt?.lowercased() ?? ""
-    let lastName = accessTokenModel.vc?.fnt?.lowercased() ?? ""
-    let ticketingFullName: String
     
     listOfCert = LocalData.sharedInstance.certStrings.filter { ($0.cert!.fullName.lowercased() == "\(accessTokenModel.vc!.gnt!) \(accessTokenModel.vc!.fnt!)".lowercased()) && ($0.cert!.dateOfBirth == accessTokenModel.vc?.dob)}
     let validDateFrom = accessTokenModel.vc!.validFrom ?? ""
@@ -74,7 +80,6 @@ class CertificatesListVC: UIViewController {
     if let dateValidUntil = Date(rfc3339DateTimeString: validDateTo ) {
       listOfCert = listOfCert.filter {$0.cert!.exp > dateValidUntil }
     }
-    
   }
   
   private func deselectAllCert() {
@@ -106,40 +111,33 @@ extension CertificatesListVC: UITableViewDataSource, UITableViewDelegate {
   }
 
   func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-       return true
+    return true
   }
 
-  // Override to support editing the table view.
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-      if editingStyle == .delete {
-        let savedCert = listOfCert[indexPath.row]
-        showAlert(title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"), actionTitle: l10n("btn.confirm"),
-         cancelTitle: l10n("btn.cancel")) { [weak self] in
-             if $0 {
-               tableView.endUpdates()
-               self?.listOfCert.remove(at: indexPath.row)
-               LocalData.remove(withDate: savedCert.date)
-               LocalData.sharedInstance.save()
-               tableView.beginUpdates()
-               DispatchQueue.main.asyncAfter(deadline: DispatchTime.now()) {
+    if editingStyle == .delete {
+      let savedCert = listOfCert[indexPath.row]
+      showAlert(title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"), actionTitle: l10n("btn.confirm"),
+       cancelTitle: l10n("btn.cancel")) {
+           if $0 {
+             LocalData.sharedInstance.remove(withDate: savedCert.date) { _ in
+               DispatchQueue.main.asyncAfter(deadline: .now()) {
                tableView.reloadData()
              }
            }
          }
-      }
+       }
+    }
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      deselectAllCert()
-      listOfCert[indexPath.row].isSelected = true
-      tableView.reloadRows(at: [indexPath], with: .automatic)
+    deselectAllCert()
+    nextButton.isEnabled = true
+    nextButton.backgroundColor = UIColor(named: "green")
+    listOfCert[indexPath.row].isSelected = true
+    tableView.reloadRows(at: [indexPath], with: .automatic)
   }
   
-
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 90.0
-  }
-
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     switch segue.identifier {
     case Constants.showTicketAcceptController:

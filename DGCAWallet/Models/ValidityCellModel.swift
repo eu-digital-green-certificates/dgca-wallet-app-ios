@@ -33,7 +33,7 @@ enum ValidityCellModelType: Int {
   case countryAndTimeSelection
 }
 
-public final class ValidityCellModel {
+final class ValidityCellModel {
   var cellType: ValidityCellModelType = .titleAndDescription
   var title: String?
   var description: String?

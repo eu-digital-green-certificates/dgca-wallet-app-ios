@@ -29,43 +29,37 @@
 import Foundation
 import SwiftDGC
 
-struct ImageDataStorage: Codable {
+class ImageDataStorage: Codable {
   static var sharedInstance = ImageDataStorage()
   static let storage = SecureStorage<ImageDataStorage>(fileName: "images_secure")
 
   var images = [SavedImage]()
 
-  mutating func add(savedImage: SavedImage) {
+  func add(savedImage: SavedImage, completion: ((Bool) -> Void)? = nil) {
     let list = images
-    if list.contains(where: { image in
-      image.identifier == savedImage.identifier
-    }) {
+    if list.contains(where: { $0.identifier == savedImage.identifier }) {
       return
     }
     images.append(savedImage)
-    save()
+    Self.storage.save(self, completion: completion)
   }
 
-  public func save() {
-    Self.storage.save(self)
-  }
-
-  public mutating func deleteImage(with identifier: String) {
+  func deleteImage(with identifier: String, completion: ((Bool) -> Void)? = nil) {
     self.images = self.images.filter { $0.identifier != identifier }
-    save()
+    Self.storage.save(self, completion: completion)
   }
 
-  public func isImageExistWith(identifier: String) -> Bool {
+  func isImageExistWith(identifier: String) -> Bool {
     let list = images
     return list.contains(where: { image in
       image.identifier == identifier
     })
   }
+  
   static func initialize(completion: @escaping () -> Void) {
     storage.loadOverride(fallback: ImageDataStorage.sharedInstance) { success in
-      guard let result = success else {
-        return
-      }
+      guard let result = success else { return }
+      
       let format = l10n("log.images")
       print(String.localizedStringWithFormat(format, result.images.count))
       ImageDataStorage.sharedInstance = result
