@@ -67,8 +67,10 @@ class ListVC: UIViewController {
       super.viewWillAppear(animated)
     startActivity()
     self.reloadAllComponents { [weak self] _ in
-      self?.stopActivity()
-      self?.reloadTable()
+      DispatchQueue.main.async {
+        self?.stopActivity()
+        self?.reloadTable()
+      }
     }
       
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
@@ -401,43 +403,49 @@ extension ListVC: UITableViewDelegate {
           let savedCert = listCertElements[indexPath.row]
           showAlert( title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"),
             actionTitle: l10n("btn.confirm"), cancelTitle: l10n("btn.cancel")) { [weak self] in
-                if $0 {
-                  self?.startActivity()
-                  LocalData.sharedInstance.remove(withDate: savedCert.date) { _ in
-                    self?.reloadAllComponents(completion: { _ in
+              if $0 {
+                self?.startActivity()
+                LocalData.sharedInstance.remove(withDate: savedCert.date) { _ in
+                  self?.reloadAllComponents(completion: { _ in
+                    DispatchQueue.main.async {
+                      self?.table.reloadData()
                       self?.stopActivity()
                       self?.reloadTable()
-                    })
-                  }
+                    }
+                  })
+                }
               }
             }
       case 1:
         let savedImage = listImageElements[indexPath.row]
         showAlert( title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"),
           actionTitle: l10n("btn.confirm"), cancelTitle: l10n("btn.cancel")) { [weak self] in
-              if $0 {
-                self?.startActivity()
-                ImageDataStorage.sharedInstance.deleteImage(with: savedImage.identifier) { _ in
-                  self?.reloadAllComponents(completion: { _ in
+            if $0 {
+              self?.startActivity()
+              ImageDataStorage.sharedInstance.deleteImage(with: savedImage.identifier) { _ in
+                self?.reloadAllComponents(completion: { _ in
+                  DispatchQueue.main.async {
                     self?.stopActivity()
                     self?.reloadTable()
-                  })
-
-                }
+                  }
+                })
+              }
             }
           }
       case 2:
         let savedPDF = listPdfElements[indexPath.row]
         showAlert( title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"),
           actionTitle: l10n("btn.confirm"), cancelTitle: l10n("btn.cancel")) { [weak self] in
-              if $0 {
-                self?.startActivity()
-                PdfDataStorage.sharedInstance.deletePDF(with: savedPDF.identifier) { _ in
-                  self?.reloadAllComponents(completion: { _ in
+            if $0 {
+              self?.startActivity()
+              PdfDataStorage.sharedInstance.deletePDF(with: savedPDF.identifier) { _ in
+                self?.reloadAllComponents(completion: { _ in
+                  DispatchQueue.main.async {
                     self?.stopActivity()
                     self?.reloadTable()
-                  })
-                }
+                  }
+                })
+              }
             }
           }
       default:
@@ -552,19 +560,21 @@ extension ListVC {
     showInputDialog(title: l10n("image.confirm.title"), subtitle: l10n("image.confirm.text"),
       inputPlaceholder: l10n("image.confirm.placeholder")) { [weak self] fileName in
       let savedImg = SavedImage(fileName: fileName ?? UUID().uuidString, image: image)
+      
       self?.startActivity()
       ImageDataStorage.sharedInstance.add(savedImage: savedImg) { _ in
-        DispatchQueue.main.asyncAfter(deadline: .now()) {
-          self?.reloadAllComponents { _ in
-            self?.startActivity()
+        self?.reloadAllComponents { _ in
+          DispatchQueue.main.async {
+            self?.table.reloadData()
             let rowCount = ImageDataStorage.sharedInstance.images.count
             let scrollToNum = rowCount > 0 ? rowCount - 1 : 0
             DispatchQueue.main.asyncAfter(deadline: .now()) {
+              self?.stopActivity()
               self?.table.scrollToRow(at: IndexPath(row: scrollToNum, section: 1), at: .bottom, animated: true)
             }
           }
         }
-      }
+      } // end add
     }
   }
 }
@@ -620,16 +630,16 @@ extension ListVC: UIDocumentPickerDelegate {
       let pdf = SavedPDF(fileName: fileName ?? UUID().uuidString, pdfUrl: url as URL)
       self?.startActivity()
       PdfDataStorage.sharedInstance.add(savedPdf: pdf) { _ in
-        DispatchQueue.main.asyncAfter(deadline: .now()) {
           self?.reloadAllComponents(completion: { _ in
-            self?.startActivity()
-            let rowsCount = ImageDataStorage.sharedInstance.images.count
-            let scrollToNum = rowsCount > 0 ? rowsCount-1 : 0
-            DispatchQueue.main.asyncAfter(deadline: .now()) {
-              self?.table.scrollToRow(at: IndexPath(row: scrollToNum, section: 1), at: .bottom, animated: true)
+            DispatchQueue.main.async {
+              self?.table.reloadData()
+              let rowsCount = ImageDataStorage.sharedInstance.images.count
+              let scrollToNum = rowsCount > 0 ? rowsCount-1 : 0
+              DispatchQueue.main.asyncAfter(deadline: .now()) {
+                self?.table.scrollToRow(at: IndexPath(row: scrollToNum, section: 1), at: .bottom, animated: true)
+              }
             }
           })
-        }
       }
     }
   }
