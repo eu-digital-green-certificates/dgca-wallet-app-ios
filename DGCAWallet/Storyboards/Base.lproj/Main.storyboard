@@ -527,7 +527,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="cancelButtonAction:" destination="GVQ-Q1-tWE" eventType="touchUpInside" id="z4Q-Xo-fqa"/>
+                                                    <action selector="cancelButtonAction:" destination="GVQ-Q1-tWE" eventType="touchUpInside" id="Iph-j1-Lfe"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dV4-Pl-DfX">
