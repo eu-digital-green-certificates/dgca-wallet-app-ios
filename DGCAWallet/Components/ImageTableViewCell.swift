@@ -29,7 +29,6 @@
 import UIKit
 
 final class ImageTableViewCell: UITableViewCell {
-
   @IBOutlet weak var imagePreviewView: UIImageView!
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var timeLabel: UILabel!
@@ -39,14 +38,8 @@ final class ImageTableViewCell: UITableViewCell {
       setupView()
     }
   }
-  
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    // Initialization code
-    setupView()
-  }
-  
-  public func setImage(image: SavedImage) {
+    
+  func setImage(image: SavedImage) {
     savedImage = image
   }
   
@@ -60,5 +53,8 @@ final class ImageTableViewCell: UITableViewCell {
     nameLabel.text = savedImage.fileName
     timeLabel.text = savedImage.dateString
   }
-
+  
+  override func prepareForReuse() {
+      savedImage = nil
+  }
 }

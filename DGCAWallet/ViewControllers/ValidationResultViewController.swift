@@ -48,7 +48,7 @@ class ValidationResultViewController: UIViewController {
     setupUI()
   }
   
-  func setupUI() {
+  private func setupUI() {
     limitationsTableView.reloadData()
     limitationsTableView.tableFooterView = UIView()
     
@@ -92,10 +92,8 @@ extension ValidationResultViewController : UITableViewDataSource {
     if let issueText = validationResultModel?.results?[indexPath.row].details {
       cell.issueTextView.text = issueText
     }
-    
     return cell
   }
-  
 }
 
 extension ValidationResultViewController : UITableViewDelegate {

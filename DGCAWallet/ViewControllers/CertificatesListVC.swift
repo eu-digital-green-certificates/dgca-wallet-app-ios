@@ -29,7 +29,6 @@ import UIKit
 import SwiftDGC
 
 class CertificatesListVC: UIViewController {
-  
   private enum Constants {
     static let hcertCellIndentifier = "CertificateCell"
     static let showTicketAcceptController = "showTicketAcceptController"
@@ -57,7 +56,7 @@ class CertificatesListVC: UIViewController {
     self.performSegue(withIdentifier: Constants.showTicketAcceptController, sender: nil)
   }
   
-  public func setCertsWith(_ validationInfo: ServerListResponse,_ accessTokenModel : AccessTokenResponse) {
+  func setCertsWith(_ validationInfo: ServerListResponse,_ accessTokenModel : AccessTokenResponse) {
     // TODO: Make filtering by all predicates (dob, validFrom/To, fullName)
         
     validationServiceInfo = validationInfo
@@ -82,7 +81,7 @@ class CertificatesListVC: UIViewController {
     }
   }
   
-  public func getSelectedCert() -> DatedCertString? {
+  private func getSelectedCert() -> DatedCertString? {
      return listOfCert.filter({ $0.isSelected }).first
   }
 }
@@ -140,7 +139,7 @@ extension CertificatesListVC: UITableViewDataSource, UITableViewDelegate {
       guard let ticketController = segue.destination as? TicketCodeAcceptViewController,
           let tokenInfo = accessTokenInfo,
           let serviceInfo = validationServiceInfo,
-          let selectedCert = self.getSelectedCert()?.cert else { return }
+          let selectedCert = getSelectedCert()?.cert else { return }
       
       ticketController.setCertsWith(serviceInfo, tokenInfo, selectedCert)
 

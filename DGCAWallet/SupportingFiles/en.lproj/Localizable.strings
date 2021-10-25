@@ -37,7 +37,7 @@
 "tan.confirm.placeholder" = "XYZ12345";
 "tan.confirm.success.title" = "Success";
 "tan.confirm.success.text" = "Certificate was saved to wallet!";
-"tan.confirm.fail.title" = "Failure";
+"tan.confirm.fail.title" = "Cannot save";
 "tan.confirm.fail.text" = "Check the TAN and try again.";
 "tan.label" = "TAN: %@";
 "auth.confirm" = "Confirm Identity";
@@ -83,9 +83,9 @@
 "log.images" = "%d images loaded.";
 "log.pdfs" = "%d pdf files loaded.";
 "share.qr.code" = "Share QR Code?";
-"want.share" = "Do you want share DCC certificate via image or PDF file?";
-"image.export" = "Image export";
-"pdf.export" = "PDF Export";
+"want.share" = "Do you want to share DCC certificate via image or PDF file?";
+"image.export" = "Export as Image";
+"pdf.export" = "Export as PDF";
 "cancel" = "Cancel";
 "add.new" = "Add new?";
 "want.add" = "Do you want to add new certificate, image or PDF file?";
@@ -103,7 +103,7 @@
 "get.image.from" = "Get Image From";
 "camera" = "Camera";
 "galery" = "Gallery";
-"dont.have.camera" = "You don't have camera";
+"dont.have.camera" = "You don't have a camera";
 "services" = "Services";
 "certificates" = "Certificates";
 "please select one of service server" = "Please select one of the services";

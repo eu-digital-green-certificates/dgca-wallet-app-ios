@@ -55,6 +55,7 @@ class RuleErrorTVC: UITableViewCell {
     resultLabel.text = l10n("result")
     resultValueLabel.text = ""
   }
+    
   private func setupView() {
     guard let infoItem = infoItem else { return }
     ruleValueLabel.text = infoItem.header

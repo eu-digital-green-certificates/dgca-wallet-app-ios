@@ -105,7 +105,7 @@ class CertificateViewerVC: UIViewController {
             
           LocalData.add(cert, with: newTan)
           self?.newCertAdded = true
-          self?.showAlert(title: l10n("tan.confirm.success.title"), subtitle: l10n("tan.confirm.success.text"), actionTitle: l10n("btn.confirm")) { _ in
+          self?.showAlert(title: l10n("tan.confirm.success.title"), subtitle: l10n("tan.confirm.success.text")) { _ in
             self?.dismiss(animated: true, completion: nil)
           }
         } else {
@@ -120,7 +120,7 @@ class CertificateViewerVC: UIViewController {
     switch segue.identifier {
     case Constants.showValidityController:
       guard let checkController = segue.destination as? CheckValidityVC else { return }
-      checkController.setHCert(cert: self.hCert)
+      checkController.setupCheckValidity(with: hCert)
       
     case Constants.embedCertPagesController:
       guard let childController = segue.destination as? CertPagesVC else { return }

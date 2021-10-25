@@ -30,7 +30,6 @@ import SwiftDGC
 import Security
 
 class ServersListVC: UIViewController {
-  
     private enum Constants {
       static let cellIndentifier = "ServerCell"
       static let showCertificatesList = "showCertificatesList"
@@ -91,7 +90,7 @@ class ServersListVC: UIViewController {
     }
   }
   
-  public func setServices(info: ServerListResponse) {
+  func setServices(info: ServerListResponse) {
     serverListInfo = info
       listOfServices = serverListInfo?.service?.filter{ $0.type == "ValidationService" } ?? []
   }

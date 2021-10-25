@@ -43,36 +43,30 @@ final class RuleValidationResultVC: UIViewController {
   @IBOutlet weak var resultDescriptionLabel: UILabel!
   @IBOutlet weak var noWarrantyLabel: UILabel!
   @IBOutlet weak var tableView: UITableView!
-  @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
+ 
+  var closeHandler: OnCloseHandler?
+
   private var hCert: HCert?
   private var selectedDate = Date()
-  var closeHandler: OnCloseHandler?
-  var items: [InfoSection] = []
+  private var items: [InfoSection] = []
     
   override func viewDidLoad() {
     super.viewDidLoad()
-    setupLabels()
-    tableView.contentInset = .init(top: 0, left: 0, bottom: 32, right: 0)
-    activityIndicator.startAnimating()
+    setupInterface()
+  }
+  
+  func setupRuleValidation(with hcert: HCert, selectedDate: Date) {
+    self.hCert = hcert
+    self.selectedDate = selectedDate
   }
     
-  private func setupLabels() {
+  private func setupInterface() {
     resultLabel.text = l10n("validate_certificate_with_rules")
     resultDescriptionLabel.text = ""
     noWarrantyLabel.text = l10n("info_without_waranty")
     closeButton.setTitle(l10n("close"), for: .normal)
-  }
-    
-  @IBAction func closeAction(_ sender: Any) {
-    dismiss(animated: true) { [weak self] in
-      self?.closeHandler?()
-    }
-  }
+    tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 32, right: 0)
 
-  func setupView(with hcert: HCert, selectedDate: Date) {
-    self.hCert = hcert
-    self.selectedDate = selectedDate
     let validity: HCertValidity = self.validateCertLogicRules()
     switch validity {
       case .valid:
@@ -88,13 +82,19 @@ final class RuleValidationResultVC: UIViewController {
           resultIcon.image = UIImage(named: "icon_large_warning")
     }
 
-    activityIndicator.stopAnimating()
     resultIcon.isHidden = false
     tableView.isHidden = false
     noWarrantyLabel.isHidden = false
     resultDescriptionLabel.sizeToFit()
     noWarrantyLabel.sizeToFit()
   }
+    
+  @IBAction func closeAction(_ sender: Any) {
+    dismiss(animated: true) { [weak self] in
+      self?.closeHandler?()
+    }
+  }
+
 }
 
 extension RuleValidationResultVC: UITableViewDataSource {
@@ -140,6 +140,7 @@ extension RuleValidationResultVC {
          kid: hCert.kidStr)
       let result = CertLogicEngineManager.sharedInstance.validate(filter: filterParameter,
         external: externalParameters, payload: hCert.body.description)
+        
       let failsAndOpen = result.filter { $0.result != .passed }
       if failsAndOpen.count > 0 {
         validity = .ruleInvalid
@@ -175,7 +176,7 @@ extension RuleValidationResultVC {
                let dict = CertLogicEngineManager.sharedInstance.getRuleDetailsError(rule: rule,
                 filter: filterParameter)
               dict.keys.forEach({ key in
-                    detailsError += key + ": " + (dict[key] ?? "") + " "
+                detailsError += key + ": " + (dict[key] ?? "") + " "
               })
             }
             switch validationResult.result {

@@ -36,11 +36,7 @@ class ImageViewerVC: UIViewController {
   @IBOutlet weak var imageView: UIImageView!
   @IBOutlet weak var scrollView: UIScrollView!
     
-  var savedImage: SavedImage? {
-    didSet {
-      setupView()
-    }
-  }
+  var savedImage: SavedImage?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -48,7 +44,7 @@ class ImageViewerVC: UIViewController {
     setupView()
   }
 
-  func setImage( image: SavedImage? = nil) {
+  func setImage(image: SavedImage? = nil) {
     savedImage = image
   }
 

@@ -74,7 +74,7 @@ final class CheckValidityVC: UIViewController {
     items.append(ValidityCellModel(title: l10n("disclaimer"), description: l10n("disclaimer_text")))
   }
     
-  func setHCert(cert: HCert?) {
+  func setupCheckValidity(with cert: HCert?) {
     self.hCert = cert
   }
     
@@ -120,7 +120,7 @@ extension CheckValidityVC: UITableViewDataSource {
     case Constants.showRuleValidationResult:
       guard let validationController = segue.destination as? RuleValidationResultVC, let hCert = hCert else { return }
       validationController.closeHandler = { self.closeButtonAction(self) }
-      validationController.setupView(with: hCert, selectedDate: self.selectedDate)
+      validationController.setupRuleValidation(with: hCert, selectedDate: self.selectedDate)
 
     default:
       break

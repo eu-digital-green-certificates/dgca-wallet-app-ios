@@ -30,4 +30,9 @@ import UIKit
 
 class LimitationCell: UITableViewCell {
   @IBOutlet weak var issueTextView: UITextView!
+    
+    override func prepareForReuse() {
+        issueTextView.text = ""
+    }
+
 }

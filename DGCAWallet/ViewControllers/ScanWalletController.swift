@@ -25,7 +25,7 @@ class ScanWalletController: UIViewController {
     static let userDefaultsCountryKey = "UDCountryKey"
   }
 
-  var captureSession: AVCaptureSession?
+  private var captureSession: AVCaptureSession?
   weak var delegate: ScanWalletDelegate?
   let applicationType: AppType = .wallet
   
@@ -36,11 +36,11 @@ class ScanWalletController: UIViewController {
     }
     self.processClassification(request)
   }
-  var selectedCountryCode: String? {
+  private var selectedCountryCode: String? {
     return self.selectedCounty?.code
   }
 
-  var camView: UIView!
+  private var camView: UIView!
     
   //Selected country code
   private var selectedCounty: CountryModel? {
@@ -64,7 +64,7 @@ class ScanWalletController: UIViewController {
     }
   }
   
-  open override func viewDidLoad() {
+  override func viewDidLoad() {
     super.viewDidLoad()
     camView = UIView(frame: .zero)
     camView.translatesAutoresizingMaskIntoConstraints = false
@@ -104,7 +104,7 @@ class ScanWalletController: UIViewController {
     captureSession?.startRunning()
   }
   
-  func createDismissButton() {
+  private func createDismissButton() {
        let button = UIButton(frame: .zero)
        button.translatesAutoresizingMaskIntoConstraints = false
        button.backgroundColor = .clear
@@ -168,7 +168,7 @@ extension ScanWalletController  {
     configurePreviewLayer()
   }
   
-  func processClassification(_ request: VNRequest) {
+  private func processClassification(_ request: VNRequest) {
     guard let barcodes = request.results else { return }
     DispatchQueue.main.async { [self] in
       if captureSession?.isRunning == true {

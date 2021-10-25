@@ -61,7 +61,7 @@ class PDFViewerVC: UIViewController {
     navigationItem.title = savedPDF.fileName
   }
   
-  public func setPDF(pdf: SavedPDF) {
+  func setPDF(pdf: SavedPDF) {
     savedPDF = pdf
   }
   

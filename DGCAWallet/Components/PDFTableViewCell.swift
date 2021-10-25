@@ -42,11 +42,6 @@ class PDFTableViewCell: UITableViewCell {
   }
   private var pdfViewer: PDFView?
   
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    // Initialization code
-    setupView()
-  }
   
   public func setPDF(pdf: SavedPDF) {
     savedPDF = pdf
@@ -72,4 +67,9 @@ class PDFTableViewCell: UITableViewCell {
     nameLabel.text = savedPDF.fileName
     timeLabel.text = savedPDF.dateString
   }
+    
+  override func prepareForReuse() {
+      savedPDF = nil
+  }
+
 }
