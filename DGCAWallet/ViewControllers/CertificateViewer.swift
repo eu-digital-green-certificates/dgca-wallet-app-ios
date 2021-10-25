@@ -104,13 +104,16 @@ class CertificateViewerVC: UIViewController {
             
           LocalData.sharedInstance.add(cert, with: newTan) { _ in
             self?.newCertAdded = true
-            self?.showAlert(title: l10n("tan.confirm.success.title"), subtitle: l10n("tan.confirm.success.text")) { _ in
-              self?.dismiss(animated: true, completion: nil)
+            DispatchQueue.main.async {
+              self?.showAlert(title: l10n("tan.confirm.success.title"), subtitle: l10n("tan.confirm.success.text")) { _ in
+                self?.dismiss(animated: true, completion: nil)
+              }
             }
           }
         } else {
-          self?.showAlert(title: l10n("tan.confirm.fail.title"), subtitle: l10n("tan.confirm.fail.text")
-          )
+          DispatchQueue.main.async {
+            self?.showAlert(title: l10n("tan.confirm.fail.title"), subtitle: l10n("tan.confirm.fail.text"))
+          }
         }
       }
     }

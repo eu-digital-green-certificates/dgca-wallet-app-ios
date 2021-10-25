@@ -265,7 +265,7 @@ class ListVC: UIViewController {
 extension ListVC: CertViewerDelegate {
   func childDismissed(_ newCertAdded: Bool) {
     DispatchQueue.main.asyncAfter(deadline: .now()) {
-        self.reloadTable()
+      self.reloadTable()
     }
   }
 }

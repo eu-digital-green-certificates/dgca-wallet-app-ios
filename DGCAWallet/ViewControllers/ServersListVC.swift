@@ -94,13 +94,7 @@ class ServersListVC: UIViewController {
     serverListInfo = info
       listOfServices = serverListInfo?.service?.filter{ $0.type == "ValidationService" } ?? []
   }
-  
-  private func deselectAllServers() {
-    for i in 0..<listOfServices.count {
-        listOfServices[i].isSelected = false
-    }
-  }
-  
+    
   private func getSelectedServer() -> ValidationService? {
       listOfServices.filter({ $0.isSelected ?? false }).first
   }
@@ -134,8 +128,10 @@ extension ServersListVC: UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      deselectAllServers()
-      listOfServices[indexPath.row].isSelected = true
-      tableView.reloadData()
+    for i in 0..<listOfServices.count {
+        listOfServices[i].isSelected = false
+    }
+    listOfServices[indexPath.row].isSelected = true
+    tableView.reloadData()
   }
 }

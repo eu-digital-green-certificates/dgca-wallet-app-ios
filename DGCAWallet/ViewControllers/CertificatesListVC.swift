@@ -82,6 +82,21 @@ class CertificatesListVC: UIViewController {
     }
   }
   
+  func reloadComponents() {
+    guard let accessTokenModel = accessTokenInfo else { return }
+          accessTokenInfo = accessTokenModel
+
+    listOfCert = LocalData.sharedInstance.certStrings.filter { ($0.cert!.fullName.lowercased() == "\(accessTokenModel.vc!.gnt!) \(accessTokenModel.vc!.fnt!)".lowercased()) && ($0.cert!.dateOfBirth == accessTokenModel.vc?.dob)}
+    let validDateFrom = accessTokenModel.vc!.validFrom ?? ""
+    if let dateValidFrom = Date(rfc3339DateTimeString: validDateFrom) {
+      listOfCert = listOfCert.filter{ $0.cert!.iat < dateValidFrom }
+    }
+    let validDateTo = accessTokenModel.vc!.validTo ?? ""
+    if let dateValidUntil = Date(rfc3339DateTimeString: validDateTo ) {
+      listOfCert = listOfCert.filter {$0.cert!.exp > dateValidUntil }
+    }
+  }
+  
   private func deselectAllCert() {
     for i in 0..<listOfCert.count {
         listOfCert[i].isSelected = false
@@ -114,14 +129,16 @@ extension CertificatesListVC: UITableViewDataSource, UITableViewDelegate {
     return true
   }
 
-  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle,
+        forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
       let savedCert = listOfCert[indexPath.row]
       showAlert(title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"), actionTitle: l10n("btn.confirm"),
        cancelTitle: l10n("btn.cancel")) {
-           if $0 {
-             LocalData.sharedInstance.remove(withDate: savedCert.date) { _ in
-               DispatchQueue.main.asyncAfter(deadline: .now()) {
+          if $0 {
+           LocalData.sharedInstance.remove(withDate: savedCert.date) { [weak self] _ in
+             self?.reloadComponents()
+             DispatchQueue.main.asyncAfter(deadline: .now()) {
                tableView.reloadData()
              }
            }
@@ -134,6 +151,9 @@ extension CertificatesListVC: UITableViewDataSource, UITableViewDelegate {
     deselectAllCert()
     nextButton.isEnabled = true
     nextButton.backgroundColor = UIColor(named: "green")
+    for ind in 0..<listOfCert.count {
+      listOfCert[ind].isSelected = false
+    }
     listOfCert[indexPath.row].isSelected = true
     tableView.reloadRows(at: [indexPath], with: .automatic)
   }

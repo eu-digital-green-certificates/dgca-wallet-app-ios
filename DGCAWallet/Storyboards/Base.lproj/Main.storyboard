@@ -569,18 +569,24 @@
                                     <constraint firstAttribute="bottom" secondItem="wUD-Wr-dv7" secondAttribute="bottom" constant="8" id="ofl-Zf-DSu"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="2Bn-TZ-xdi">
+                                <rect key="frame" x="177.5" y="416" width="20" height="20"/>
+                                <color key="color" systemColor="systemGrayColor"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8Qi-Oo-Y7o"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="RYY-wA-rxY" firstAttribute="trailing" secondItem="8Qi-Oo-Y7o" secondAttribute="trailing" id="00Z-rR-QYo"/>
                             <constraint firstItem="HLo-do-mH9" firstAttribute="trailing" secondItem="8Qi-Oo-Y7o" secondAttribute="trailing" id="0kf-R4-jCE"/>
+                            <constraint firstItem="2Bn-TZ-xdi" firstAttribute="top" secondItem="HLo-do-mH9" secondAttribute="bottom" constant="20" id="1Np-sp-h60"/>
                             <constraint firstItem="t2m-ZH-y1K" firstAttribute="leading" secondItem="3gU-YO-tVd" secondAttribute="leading" id="2dJ-9o-3aj"/>
                             <constraint firstItem="Q0e-dz-J4z" firstAttribute="leading" secondItem="8Qi-Oo-Y7o" secondAttribute="leading" id="38e-jD-Oes"/>
                             <constraint firstAttribute="trailing" secondItem="t2m-ZH-y1K" secondAttribute="trailing" id="96X-8h-hbM"/>
                             <constraint firstItem="7Yf-Xf-kAe" firstAttribute="trailing" secondItem="8Qi-Oo-Y7o" secondAttribute="trailing" id="Djq-mE-jGd"/>
                             <constraint firstItem="3p1-6b-sXp" firstAttribute="leading" secondItem="8Qi-Oo-Y7o" secondAttribute="leading" id="LJz-I1-J6W"/>
                             <constraint firstItem="HLo-do-mH9" firstAttribute="top" secondItem="3p1-6b-sXp" secondAttribute="bottom" constant="16" id="Svc-dI-kDI"/>
+                            <constraint firstItem="2Bn-TZ-xdi" firstAttribute="centerX" secondItem="3gU-YO-tVd" secondAttribute="centerX" id="UJK-co-kqC"/>
                             <constraint firstItem="RYY-wA-rxY" firstAttribute="leading" secondItem="8Qi-Oo-Y7o" secondAttribute="leading" id="XST-l9-82M"/>
                             <constraint firstItem="RYY-wA-rxY" firstAttribute="top" secondItem="t2m-ZH-y1K" secondAttribute="bottom" id="Z90-OM-do9"/>
                             <constraint firstItem="Q0e-dz-J4z" firstAttribute="top" secondItem="7Yf-Xf-kAe" secondAttribute="bottom" id="eWJ-3H-IMG"/>
@@ -595,6 +601,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="hxa-hl-LOn"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="2Bn-TZ-xdi" id="VlS-dl-145"/>
                         <outlet property="cancelButton" destination="0hR-4a-oMt" id="OQ6-g5-IHE"/>
                         <outlet property="certificateTitle" destination="sgq-So-IW2" id="8iH-0O-l1B"/>
                         <outlet property="consetsLabel" destination="Kpa-Rx-3St" id="v5U-8c-X4R"/>
@@ -1124,6 +1131,9 @@
         <designable name="WbA-kC-hOb">
             <size key="intrinsicContentSize" width="66" height="47"/>
         </designable>
+        <designable name="fol-rA-9gU">
+            <size key="intrinsicContentSize" width="56" height="51"/>
+        </designable>
     </designables>
     <resources>
         <image name="EU_logo" width="72" height="48"/>
@@ -1153,6 +1163,9 @@
         </systemColor>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
