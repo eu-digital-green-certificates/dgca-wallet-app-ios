@@ -35,28 +35,44 @@ class TicketCodeAcceptViewController: UIViewController {
     static let showValidationResult = "showValidationResult"
   }
 
-  @IBOutlet weak var certificateTitle: UILabel!
-  @IBOutlet weak var validToLabel: UILabel!
-  @IBOutlet weak var consetsLabel: UILabel!
-  @IBOutlet weak var infoLabel: UILabel!
-  @IBOutlet weak var cancelButton: UIButton!
-  @IBOutlet weak var grandButton: UIButton!
-  
+  @IBOutlet fileprivate weak var certificateTitle: UILabel!
+  @IBOutlet fileprivate weak var validToLabel: UILabel!
+  @IBOutlet fileprivate weak var consetsLabel: UILabel!
+  @IBOutlet fileprivate weak var infoLabel: UILabel!
+  @IBOutlet fileprivate weak var cancelButton: UIButton!
+  @IBOutlet fileprivate weak var grandButton: UIButton!
+  @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
+ 
   private var validationServiceInfo : ServerListResponse?
   private var accessTokenInfo       : AccessTokenResponse?
   private var cert                  : HCert?
-  
+  private var loading = false
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    setuppView(isValidation: true)
+    setupView(isValidation: true)
   }
   
-  private func setuppView(isValidation: Bool) {
+  private func startActivity() {
+    loading = true
+    activityIndicator.startAnimating()
+    cancelButton.isEnabled = false
+    grandButton.isEnabled = false
+  }
+ 
+  private func stopActivity() {
+    loading = false
+    activityIndicator.stopAnimating()
+    cancelButton.isEnabled = true
+    grandButton.isEnabled = true
+  }
+
+  private func setupView(isValidation: Bool) {
     if isValidation {
       certificateTitle.text = cert?.certTypeString
       validToLabel.text = cert?.exp.localDateString
       consetsLabel.text = "Consent"
-      infoLabel.text = "Do you agree share the \(cert?.certTypeString ?? "") with Airline.com?"
+      infoLabel.text = "Do you agree to share the \(cert?.certTypeString ?? "") with Airline.com?"
     }
   }
   
@@ -67,10 +83,13 @@ class TicketCodeAcceptViewController: UIViewController {
   }
   
   @IBAction func cancelButtonAction(_ sender: Any) {
+    guard loading == false else { return }
     dismiss(animated: true, completion: nil)
   }
   
   @IBAction func grandButtonAction(_ sender: Any) {
+    guard loading == false else { return }
+    
     guard let urlPath = accessTokenInfo?.aud!,
           let url = URL(string: urlPath),
           let iv = UserDefaults.standard.object(forKey: "xnonce"),
@@ -81,7 +100,7 @@ class TicketCodeAcceptViewController: UIViewController {
     else { return }
     
     var sig = Data()
-    
+    startActivity()
     Enclave.sign(data: dccData.0, with: privateKey, using: SecKeyAlgorithm.ecdsaSignatureMessageX962SHA256, completion: { (signature,error) in
       if let sign = signature {
        sig = sign
@@ -91,6 +110,7 @@ class TicketCodeAcceptViewController: UIViewController {
         
         GatewayConnection.validateTicketing(url: url, parameters: parameters) { [weak self] responseModel in
           DispatchQueue.main.async {
+            self?.stopActivity()
             self?.performSegue(withIdentifier: Constants.showValidationResult, sender: responseModel)
           }
         }

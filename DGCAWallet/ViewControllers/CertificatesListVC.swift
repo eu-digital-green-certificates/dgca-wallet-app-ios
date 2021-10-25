@@ -34,8 +34,8 @@ class CertificatesListVC: UIViewController {
     static let showTicketAcceptController = "showTicketAcceptController"
   }
   
-  @IBOutlet weak var tableView      : UITableView!
-  @IBOutlet weak var nextButton     : UIButton!
+  @IBOutlet fileprivate weak var tableView      : UITableView!
+  @IBOutlet fileprivate weak var nextButton     : UIButton!
   
   private var listOfCert = [DatedCertString]()
   private var validationServiceInfo : ServerListResponse?
