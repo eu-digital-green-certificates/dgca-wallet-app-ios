@@ -94,7 +94,6 @@ final class RuleValidationResultVC: UIViewController {
       self?.closeHandler?()
     }
   }
-
 }
 
 extension RuleValidationResultVC: UITableViewDataSource {

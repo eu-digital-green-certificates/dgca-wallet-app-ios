@@ -632,7 +632,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fol-rA-9gU">
-                                <rect key="frame" x="104" y="822" width="294" height="48"/>
+                                <rect key="frame" x="104" y="792" width="294" height="48"/>
                                 <color key="backgroundColor" name="green"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="8NB-up-9vg"/>
@@ -646,13 +646,6 @@
                                     <action selector="onAccept:" destination="bpJ-se-zNP" eventType="touchUpInside" id="y4H-IK-bTB"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EU_logo" translatesAutoresizingMaskIntoConstraints="NO" id="x6b-iE-FAy">
-                                <rect key="frame" x="16" y="822" width="72" height="48"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="48" id="DoV-sT-otT"/>
-                                    <constraint firstAttribute="width" constant="72" id="dm4-Vd-HCU"/>
-                                </constraints>
-                            </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="https://reopen.europa.eu/" translatesAutoresizingMaskIntoConstraints="NO" id="aRv-1C-RxV">
                                 <rect key="frame" x="16" y="291.5" width="382" height="27"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -665,7 +658,7 @@
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
                             </textView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="7xK-Rp-7FD">
-                                <rect key="frame" x="16" y="334.5" width="382" height="471.5"/>
+                                <rect key="frame" x="16" y="334.5" width="382" height="441.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
@@ -704,17 +697,24 @@
                                     <outlet property="delegate" destination="bpJ-se-zNP" id="BWS-S3-Hj1"/>
                                 </connections>
                             </tableView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EU_logo" translatesAutoresizingMaskIntoConstraints="NO" id="x6b-iE-FAy">
+                                <rect key="frame" x="16" y="792" width="72" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="DoV-sT-otT"/>
+                                    <constraint firstAttribute="width" constant="72" id="dm4-Vd-HCU"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="UeK-en-eEn"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="UeK-en-eEn" firstAttribute="trailing" secondItem="fol-rA-9gU" secondAttribute="trailing" constant="16" id="1zD-ml-uW6"/>
                             <constraint firstItem="7xK-Rp-7FD" firstAttribute="top" secondItem="aRv-1C-RxV" secondAttribute="bottom" constant="16" id="BSz-k8-05Q"/>
+                            <constraint firstItem="x6b-iE-FAy" firstAttribute="centerY" secondItem="fol-rA-9gU" secondAttribute="centerY" id="DXi-G0-9Is"/>
                             <constraint firstItem="Ik5-iB-ezB" firstAttribute="top" secondItem="VcR-QW-aFJ" secondAttribute="bottom" constant="27" id="EIu-1H-cjI"/>
                             <constraint firstItem="UeK-en-eEn" firstAttribute="trailing" secondItem="bjA-7o-KTc" secondAttribute="trailing" constant="16" id="FgF-kD-fAr"/>
-                            <constraint firstAttribute="bottom" secondItem="fol-rA-9gU" secondAttribute="bottom" constant="26" id="ITQ-fe-LuW"/>
+                            <constraint firstAttribute="bottom" secondItem="fol-rA-9gU" secondAttribute="bottom" constant="56" id="ITQ-fe-LuW"/>
                             <constraint firstItem="bjA-7o-KTc" firstAttribute="leading" secondItem="UeK-en-eEn" secondAttribute="leading" constant="16" id="KS7-hk-IRm"/>
-                            <constraint firstItem="x6b-iE-FAy" firstAttribute="bottom" secondItem="UeK-en-eEn" secondAttribute="bottom" constant="8" id="Rs7-L3-rpg"/>
                             <constraint firstItem="UeK-en-eEn" firstAttribute="trailing" secondItem="aRv-1C-RxV" secondAttribute="trailing" constant="16" id="TMb-Kd-hXq"/>
                             <constraint firstItem="Ik5-iB-ezB" firstAttribute="centerX" secondItem="sEP-mn-kG0" secondAttribute="centerX" id="TtL-xw-2Tr"/>
                             <constraint firstItem="aRv-1C-RxV" firstAttribute="top" secondItem="bjA-7o-KTc" secondAttribute="bottom" constant="8" id="Ycv-oz-q4U"/>
