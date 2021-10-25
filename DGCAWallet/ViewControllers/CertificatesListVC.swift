@@ -66,11 +66,12 @@ class CertificatesListVC: UIViewController {
     let ticketingFullName: String
     
     listOfCert = LocalData.sharedInstance.certStrings.filter { ($0.cert!.fullName.lowercased() == "\(accessTokenModel.vc!.gnt!) \(accessTokenModel.vc!.fnt!)".lowercased()) && ($0.cert!.dateOfBirth == accessTokenModel.vc?.dob)}
-    if let dateValidFrom = Date(rfc3339DateTimeString: accessTokenModel.vc!.validFrom ?? "") {
+    let validDateFrom = accessTokenModel.vc!.validFrom ?? ""
+    if let dateValidFrom = Date(rfc3339DateTimeString: validDateFrom) {
       listOfCert = listOfCert.filter{ $0.cert!.iat < dateValidFrom }
     }
-    
-    if let dateValidUntil = Date(rfc3339DateTimeString: accessTokenModel.vc!.validTo ?? "") {
+    let validDateTo = accessTokenModel.vc!.validTo ?? ""
+    if let dateValidUntil = Date(rfc3339DateTimeString: validDateTo ) {
       listOfCert = listOfCert.filter {$0.cert!.exp > dateValidUntil }
     }
     
