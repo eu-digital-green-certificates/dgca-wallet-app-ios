@@ -182,7 +182,7 @@ class ListVC: UIViewController {
             self?.scanNFC()
           }
             controller.addAction(actionRetry)
-          let actionOk = UIAlertAction(title: l10n("ok"), style: .default)
+          let actionOk = UIAlertAction(title: l10n("btn.ok"), style: .default)
           controller.addAction(actionOk)
             return controller
         }()
@@ -506,7 +506,7 @@ extension ListVC: UIImagePickerControllerDelegate, UINavigationControllerDelegat
               let controller = UIAlertController(title: l10n("error"),
                  message: l10n("dont.have.camera"),
                  preferredStyle: .alert)
-              let action = UIAlertAction(title: l10n("ok"), style: .default)
+              let action = UIAlertAction(title: l10n("btn.ok"), style: .default)
               controller.addAction(action)
               return controller
           }()

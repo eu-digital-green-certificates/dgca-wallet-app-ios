@@ -61,7 +61,7 @@ class ServersListVC: UIViewController {
       let alertController: UIAlertController = {
           let controller = UIAlertController(title: l10n("please select one of service server"), message: "",
              preferredStyle: .alert)
-        let actionOk = UIAlertAction(title: l10n("ok"), style: .default)
+        let actionOk = UIAlertAction(title: l10n("btn.ok"), style: .default)
         controller.addAction(actionOk)
         return controller
       }()
