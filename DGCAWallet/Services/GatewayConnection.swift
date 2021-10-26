@@ -63,19 +63,15 @@ struct GatewayConnection: ContextConnection {
         "sigAlg": "SHA256withECDSA"
       ]
         
-      request(
-        ["endpoints", "claim"],
-        method: .post,
-        parameters: param,
-        encoding: JSONEncoding.default).response {
-        guard case .success(_) = $0.result,
-          let status = $0.response?.statusCode,
-          status / 100 == 2
-        else {
-          completion?(false, nil)
-          return
-        }
-        
+        request( ["endpoints", "claim"], method: .post, parameters: param, encoding: JSONEncoding.default,
+            headers: HTTPHeaders([HTTPHeader(name: "content-type", value: "application/json")])).response {
+          guard case .success(_) = $0.result,
+            let status = $0.response?.statusCode,
+            status / 100 == 2
+          else {
+            completion?(false, nil)
+            return
+          }
         let response = String(data: $0.data ?? .init(), encoding: .utf8)
         let json = JSON(parseJSON: response ?? "")
         let newTAN = json["tan"].string
