@@ -62,8 +62,6 @@ struct GatewayConnection: ContextConnection {
         "signature": sign.base64EncodedString(),
         "sigAlg": "SHA256withECDSA"
       ]
-    print("\nAlamofire -----------------------------------------------------")
-    print("Alamofire - param: \(param)")
         
       request(
         ["endpoints", "claim"],
