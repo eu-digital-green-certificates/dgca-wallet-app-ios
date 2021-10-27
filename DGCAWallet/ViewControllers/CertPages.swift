@@ -45,7 +45,7 @@ class CertPagesVC: UIPageViewController {
     setViewControllers([vcs[index]], direction: .forward, animated: false)
     let appearance = UIPageControl.appearance(whenContainedInInstancesOf: [UIPageViewController.self])
     appearance.pageIndicatorTintColor = UIColor.disabledText
-    appearance.currentPageIndicatorTintColor = UIColor.black
+    appearance.currentPageIndicatorTintColor = UIColor.walletBlack
   }
 
   override func viewDidAppear(_ animated: Bool) {

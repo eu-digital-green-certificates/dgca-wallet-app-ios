@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WCj-Xf-fml">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WCj-Xf-fml">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fKu-7E-jAI">
-                                <rect key="frame" x="0.0" y="0.0" width="390" height="168.33333333333334"/>
+                                <rect key="frame" x="0.0" y="0.0" width="390" height="114.33333333333333"/>
                                 <color key="backgroundColor" name="grey10"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yEe-AH-rsr" userLabel="Container">
@@ -33,7 +33,7 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                         <state key="normal" title="Done">
-                                            <color key="titleColor" name="black"/>
+                                            <color key="titleColor" name="walletBlack"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="padding">
@@ -48,20 +48,23 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max Mustermann" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DVW-2y-e4I">
-                                        <rect key="frame" x="16" y="70" width="358" height="38.333333333333343"/>
+                                        <rect key="frame" x="16.000000000000014" y="16.000000000000004" width="251.33333333333337" height="38.333333333333343"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
                                         <color key="textColor" name="black"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsC-7e-Skh">
-                                        <rect key="frame" x="0.0" y="124.33333333333334" width="390" height="473.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="70.333333333333314" width="390" height="519.66666666666674"/>
                                         <connections>
                                             <segue destination="PGK-qk-zXH" kind="embed" identifier="embedCertPagesController" id="qHl-nM-9kf"/>
                                         </connections>
                                     </containerView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YeB-JS-Q1Q">
-                                        <rect key="frame" x="16" y="20" width="358" height="33"/>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <rect key="frame" x="315" y="18.666666666666664" width="55" height="33"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="vjf-Er-cpM"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" name="blue"/>
                                         </state>
@@ -69,16 +72,9 @@
                                             <action selector="cancelButtonClick" destination="WCj-Xf-fml" eventType="touchUpInside" id="JXr-tj-T3U"/>
                                         </connections>
                                     </button>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EU_logo" translatesAutoresizingMaskIntoConstraints="NO" id="zGf-U8-pn3">
-                                        <rect key="frame" x="173.33333333333334" y="730" width="43.333333333333343" height="28"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="28" id="fTf-OJ-OO7"/>
-                                            <constraint firstAttribute="width" secondItem="zGf-U8-pn3" secondAttribute="height" multiplier="14:9" id="nDE-5U-ZWG"/>
-                                        </constraints>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9zn-iE-p4i" customClass="RoundedButton" customModule="DGCAWallet" customModuleProvider="target">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9zn-iE-p4i" customClass="RoundedButton" customModule="DGCAWallet" customModuleProvider="target">
                                         <rect key="frame" x="20" y="606" width="350" height="50"/>
-                                        <color key="backgroundColor" name="blue"/>
+                                        <color key="backgroundColor" name="walletBlue"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="GYm-fv-UcD"/>
                                         </constraints>
@@ -104,7 +100,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WJ5-9S-W9j" customClass="RoundedButton" customModule="DGCAWallet" customModuleProvider="target">
                                         <rect key="frame" x="203" y="664" width="171" height="50"/>
-                                        <color key="backgroundColor" name="blue"/>
+                                        <color key="backgroundColor" name="walletBlue"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="hPx-Fc-xPE"/>
                                         </constraints>
@@ -128,31 +124,78 @@
                                             <action selector="shareAction:" destination="WCj-Xf-fml" eventType="touchUpInside" id="UQP-P0-rgr"/>
                                         </connections>
                                     </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KkS-4l-iTy" customClass="RoundedButton" customModule="DGCAWallet" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="664" width="350" height="50"/>
+                                        <color key="backgroundColor" name="walletRed"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="XMr-Sq-a84"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                        <state key="normal" title="Delete Certificate">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="NO"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="radius">
+                                                <real key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="padding">
+                                                <real key="value" value="12"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="deleteCertificateAction" destination="WCj-Xf-fml" eventType="touchUpInside" id="pGp-Xj-stb"/>
+                                        </connections>
+                                    </button>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8fY-LF-Mko">
+                                        <rect key="frame" x="339" y="18.666666666666664" width="31" height="33"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                        <state key="normal" title="Edit">
+                                            <color key="titleColor" name="blue"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="editAction" destination="WCj-Xf-fml" eventType="touchUpInside" id="kpl-WI-I6Y"/>
+                                        </connections>
+                                    </button>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EU_logo" translatesAutoresizingMaskIntoConstraints="NO" id="zGf-U8-pn3">
+                                        <rect key="frame" x="173.33333333333334" y="730" width="43.333333333333343" height="28"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="28" id="fTf-OJ-OO7"/>
+                                            <constraint firstAttribute="width" secondItem="zGf-U8-pn3" secondAttribute="height" multiplier="14:9" id="nDE-5U-ZWG"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="a9u-Ia-KEX" firstAttribute="top" secondItem="9zn-iE-p4i" secondAttribute="bottom" constant="8" id="15Y-1f-X2p"/>
-                                    <constraint firstAttribute="trailing" secondItem="YeB-JS-Q1Q" secondAttribute="trailing" constant="16" id="4a9-1n-6Ht"/>
+                                    <constraint firstItem="WJ5-9S-W9j" firstAttribute="leading" secondItem="a9u-Ia-KEX" secondAttribute="trailing" constant="16" id="2W9-Hf-mpU"/>
+                                    <constraint firstItem="8fY-LF-Mko" firstAttribute="centerY" secondItem="DVW-2y-e4I" secondAttribute="centerY" id="38T-Kj-b6W"/>
+                                    <constraint firstItem="zGf-U8-pn3" firstAttribute="top" secondItem="WJ5-9S-W9j" secondAttribute="bottom" constant="16" id="56k-nK-YOa"/>
                                     <constraint firstAttribute="trailing" secondItem="9zn-iE-p4i" secondAttribute="trailing" constant="20" id="5Cg-bD-bak"/>
                                     <constraint firstItem="zGf-U8-pn3" firstAttribute="top" secondItem="a9u-Ia-KEX" secondAttribute="bottom" constant="16" id="5qd-XO-Lib"/>
                                     <constraint firstItem="WJ5-9S-W9j" firstAttribute="top" secondItem="9zn-iE-p4i" secondAttribute="bottom" constant="8" symbolic="YES" id="5t5-A8-z3b"/>
-                                    <constraint firstItem="DVW-2y-e4I" firstAttribute="top" secondItem="yEe-AH-rsr" secondAttribute="top" priority="999" constant="70" id="695-CS-7M3"/>
-                                    <constraint firstItem="DVW-2y-e4I" firstAttribute="top" secondItem="yEe-AH-rsr" secondAttribute="top" priority="998" constant="32" id="6Py-fR-Th3"/>
-                                    <constraint firstAttribute="trailing" secondItem="DVW-2y-e4I" secondAttribute="trailing" constant="16" id="7qh-Db-iAm"/>
+                                    <constraint firstItem="KkS-4l-iTy" firstAttribute="top" secondItem="dsC-7e-Skh" secondAttribute="bottom" constant="74" id="7xa-ai-Ux2"/>
+                                    <constraint firstAttribute="trailing" secondItem="8fY-LF-Mko" secondAttribute="trailing" constant="20" symbolic="YES" id="94H-T6-763"/>
                                     <constraint firstItem="dsC-7e-Skh" firstAttribute="top" secondItem="DVW-2y-e4I" secondAttribute="bottom" constant="16" id="IOq-Nn-KSI"/>
-                                    <constraint firstItem="YeB-JS-Q1Q" firstAttribute="leading" secondItem="yEe-AH-rsr" secondAttribute="leading" constant="16" id="KST-2b-3cu"/>
-                                    <constraint firstItem="WJ5-9S-W9j" firstAttribute="leading" secondItem="a9u-Ia-KEX" secondAttribute="trailing" constant="16" id="RNw-54-oUB"/>
+                                    <constraint firstItem="KkS-4l-iTy" firstAttribute="leading" secondItem="yEe-AH-rsr" secondAttribute="leading" constant="20" symbolic="YES" id="IZi-gz-Bb4"/>
+                                    <constraint firstItem="zGf-U8-pn3" firstAttribute="top" secondItem="KkS-4l-iTy" secondAttribute="bottom" constant="16" id="KsB-8i-6DG"/>
+                                    <constraint firstAttribute="trailing" secondItem="WJ5-9S-W9j" secondAttribute="trailing" constant="16" id="Mkd-1y-7eg"/>
+                                    <constraint firstAttribute="trailing" secondItem="KkS-4l-iTy" secondAttribute="trailing" constant="20" symbolic="YES" id="PYd-2u-gBr"/>
                                     <constraint firstItem="a9u-Ia-KEX" firstAttribute="top" secondItem="9zn-iE-p4i" secondAttribute="bottom" constant="8" symbolic="YES" id="VBf-R7-jQU"/>
-                                    <constraint firstItem="zGf-U8-pn3" firstAttribute="top" secondItem="WJ5-9S-W9j" secondAttribute="bottom" constant="16" id="WwI-eY-2Js"/>
+                                    <constraint firstAttribute="trailing" secondItem="YeB-JS-Q1Q" secondAttribute="trailing" constant="20" symbolic="YES" id="WpQ-ME-KBq"/>
                                     <constraint firstItem="a9u-Ia-KEX" firstAttribute="leading" secondItem="yEe-AH-rsr" secondAttribute="leading" constant="16" id="YVX-Ft-sJ4"/>
                                     <constraint firstAttribute="bottom" secondItem="a9u-Ia-KEX" secondAttribute="bottom" constant="52" id="Ylj-6k-vl1"/>
-                                    <constraint firstItem="9zn-iE-p4i" firstAttribute="top" secondItem="dsC-7e-Skh" secondAttribute="bottom" constant="8" id="YyA-kR-Pm1"/>
-                                    <constraint firstAttribute="trailing" secondItem="WJ5-9S-W9j" secondAttribute="trailing" constant="16" id="bs7-LJ-dJd"/>
-                                    <constraint firstItem="YeB-JS-Q1Q" firstAttribute="top" secondItem="yEe-AH-rsr" secondAttribute="top" constant="20" id="c9J-hn-P8Z"/>
+                                    <constraint firstItem="9zn-iE-p4i" firstAttribute="top" secondItem="dsC-7e-Skh" secondAttribute="bottom" constant="16" id="YyA-kR-Pm1"/>
                                     <constraint firstAttribute="trailing" secondItem="dsC-7e-Skh" secondAttribute="trailing" id="csD-4w-284"/>
                                     <constraint firstItem="dsC-7e-Skh" firstAttribute="leading" secondItem="yEe-AH-rsr" secondAttribute="leading" id="fGR-NQ-ao6"/>
                                     <constraint firstItem="DVW-2y-e4I" firstAttribute="leading" secondItem="yEe-AH-rsr" secondAttribute="leading" constant="16" id="iQB-29-cRZ"/>
                                     <constraint firstItem="zGf-U8-pn3" firstAttribute="centerX" secondItem="yEe-AH-rsr" secondAttribute="centerX" id="jLF-YC-vTd"/>
+                                    <constraint firstItem="DVW-2y-e4I" firstAttribute="top" secondItem="yEe-AH-rsr" secondAttribute="top" constant="16" id="mLW-Ml-UXk"/>
+                                    <constraint firstItem="YeB-JS-Q1Q" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DVW-2y-e4I" secondAttribute="trailing" constant="20" id="oV5-YM-uS3"/>
+                                    <constraint firstItem="YeB-JS-Q1Q" firstAttribute="centerY" secondItem="DVW-2y-e4I" secondAttribute="centerY" id="quR-pQ-2ki"/>
                                     <constraint firstAttribute="bottom" secondItem="zGf-U8-pn3" secondAttribute="bottom" constant="8" id="utt-Vx-cic"/>
+                                    <constraint firstItem="8fY-LF-Mko" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DVW-2y-e4I" secondAttribute="trailing" constant="20" id="vHo-YF-S8L"/>
                                     <constraint firstItem="WJ5-9S-W9j" firstAttribute="width" secondItem="a9u-Ia-KEX" secondAttribute="width" id="yAl-fm-WBD"/>
                                     <constraint firstItem="9zn-iE-p4i" firstAttribute="leading" secondItem="yEe-AH-rsr" secondAttribute="leading" constant="20" id="z4c-KE-cZy"/>
                                 </constraints>
@@ -172,10 +215,11 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="cancelButton" destination="YeB-JS-Q1Q" id="QVM-rn-qUM"/>
-                        <outlet property="cancelButtonConstraint" destination="695-CS-7M3" id="tgr-gH-8ZQ"/>
+                        <outlet property="cancelButton" destination="YeB-JS-Q1Q" id="xQU-gp-tsD"/>
                         <outlet property="checkValidityButton" destination="9zn-iE-p4i" id="mbe-qx-Vcb"/>
+                        <outlet property="deleteButton" destination="KkS-4l-iTy" id="6wM-f0-XY6"/>
                         <outlet property="dismissButton" destination="a9u-Ia-KEX" id="Jy0-Qx-2Y9"/>
+                        <outlet property="editButton" destination="8fY-LF-Mko" id="6V0-Gz-z3s"/>
                         <outlet property="headerBackground" destination="fKu-7E-jAI" id="TKR-ve-HDL"/>
                         <outlet property="nameLabel" destination="DVW-2y-e4I" id="cyN-o4-vZQ"/>
                         <segue destination="faH-nl-VQM" kind="presentation" identifier="showValidityController" id="BRM-mY-bxt"/>
@@ -343,7 +387,7 @@
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xY8-6t-NMi">
                                 <rect key="frame" x="325" y="16" width="45" height="33"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <state key="normal" title="Close"/>
                                 <connections>
                                     <action selector="closeButtonAction:" destination="faH-nl-VQM" eventType="touchUpInside" id="uu6-BI-VSk"/>
@@ -766,6 +810,9 @@
         <designable name="9zn-iE-p4i">
             <size key="intrinsicContentSize" width="171" height="51"/>
         </designable>
+        <designable name="KkS-4l-iTy">
+            <size key="intrinsicContentSize" width="205" height="51"/>
+        </designable>
         <designable name="WJ5-9S-W9j">
             <size key="intrinsicContentSize" width="84" height="51"/>
         </designable>
@@ -793,6 +840,15 @@
             <color red="0.92199999094009399" green="0.92199999094009399" blue="0.92199999094009399" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="red">
+            <color red="0.85500001907348633" green="0.1289999932050705" blue="0.19200000166893005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="walletBlack">
+            <color red="0.25099998712539673" green="0.25099998712539673" blue="0.25099998712539673" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="walletBlue">
+            <color red="0.0" green="0.2669999897480011" blue="0.57999998331069946" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="walletRed">
             <color red="0.85500001907348633" green="0.1289999932050705" blue="0.19200000166893005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">

@@ -304,6 +304,22 @@ extension ListVC: ScanWalletDelegate {
   }
 }
 
+extension ListVC: CertificateDeleting {
+  func certificateViewer(_ controller: CertificateViewerVC, didDeleteCertificate cert: HCert) {
+    self.startActivity()
+    LocalData.sharedInstance.remove(withDate: cert.date) {[weak self] _ in
+      self?.reloadAllComponents(completion: { _ in
+        DispatchQueue.main.async {
+          self?.table.reloadData()
+          self?.stopActivity()
+          self?.reloadTable()
+        }
+      })
+    } // LocalData
+
+  }
+}
+
 extension ListVC: UITableViewDataSource {
   var listCertElements: [DatedCertString] {
     return LocalData.sharedInstance.certStrings.reversed()
@@ -411,7 +427,7 @@ extension ListVC: UITableViewDelegate {
                       self?.reloadTable()
                     }
                   })
-                }
+                } // LocalData
               }
             }
       case 1:

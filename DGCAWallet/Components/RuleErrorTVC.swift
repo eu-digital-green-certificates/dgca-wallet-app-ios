@@ -62,13 +62,13 @@ class RuleErrorTVC: UITableViewCell {
     currentValueLabel.text = infoItem.content
     switch infoItem.ruleValidationResult {
     case .error:
-      failedLabel.textColor = .red
+      failedLabel.textColor = .walletRed
       failedLabel.text = l10n("failed")
     case .passed:
-      failedLabel.textColor = .green
+      failedLabel.textColor = .walletGreen
       failedLabel.text = l10n("passed")
     case .open:
-      failedLabel.textColor = .green
+      failedLabel.textColor = .walletGreen
       failedLabel.text = l10n("open")
     }
 

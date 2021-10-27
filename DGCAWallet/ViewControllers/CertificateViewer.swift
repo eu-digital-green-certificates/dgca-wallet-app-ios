@@ -30,6 +30,10 @@ import FloatingPanel
 import SwiftDGC
 import PDFKit
 
+protocol CertificateDeleting: AnyObject {
+  func certificateViewer(_ controller: CertificateViewerVC, didDeleteCertificate cert: HCert)
+}
+
 class CertificateViewerVC: UIViewController {
   private enum Constants {
     static let showValidityController = "showValidityController"
@@ -40,7 +44,8 @@ class CertificateViewerVC: UIViewController {
   @IBOutlet fileprivate weak var nameLabel: UILabel!
   @IBOutlet fileprivate weak var dismissButton: UIButton!
   @IBOutlet fileprivate weak var cancelButton: UIButton!
-  @IBOutlet fileprivate weak var cancelButtonConstraint: NSLayoutConstraint!
+  @IBOutlet fileprivate weak var editButton: UIButton!
+  @IBOutlet fileprivate weak var deleteButton: UIButton!
   @IBOutlet fileprivate weak var checkValidityButton: UIButton!
   
   var hCert: HCert?
@@ -48,6 +53,9 @@ class CertificateViewerVC: UIViewController {
   weak var childDismissedDelegate: CertViewerDelegate?
   public var isSaved = true
   var newCertAdded = false
+  private var isEditMode = false
+  weak var delegate: CertificateDeleting?
+  
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
@@ -68,13 +76,26 @@ class CertificateViewerVC: UIViewController {
     if !isSaved {
       dismissButton.setTitle(l10n("btn.save"), for: .normal)
       checkValidityButton.isHidden = true
+      editButton.isHidden = true
+      cancelButton.isHidden = false
+      deleteButton.isHidden = true
+      nameLabel.textColor = .walletBlack
+      headerBackground.backgroundColor = .walletGray10
     } else {
       checkValidityButton.isHidden = false
+      editButton.isHidden = false
+      cancelButton.isHidden = true
+      if isEditMode {
+        editButton.setTitle("Done", for: .normal)
+        deleteButton.isHidden = false
+      } else {
+        editButton.setTitle("Edit", for: .normal)
+        deleteButton.isHidden = true
+      }
+      nameLabel.textColor = .white
+      headerBackground.backgroundColor = .walletBlue
     }
-    headerBackground.backgroundColor = isSaved ? .blue : .grey10
-    nameLabel.textColor = isSaved ? .white : .black
-    cancelButton.alpha = isSaved ? 0 : 1
-    cancelButtonConstraint.priority = .init(isSaved ? 997 : 999)
+    
     checkValidityButton.setTitle(l10n("button_check_validity"), for: .normal)
     view.layoutIfNeeded()
   }
@@ -92,6 +113,20 @@ class CertificateViewerVC: UIViewController {
 
   @IBAction func checkValidityAction(_ sender: Any) {
     self.performSegue(withIdentifier: Constants.showValidityController, sender: nil)
+  }
+  
+  @IBAction func editAction() {
+    isEditMode = !isEditMode
+    setupInterface()
+  }
+
+  @IBAction func deleteCertificateAction() {
+    showAlert( title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"),
+      actionTitle: l10n("btn.confirm"), cancelTitle: l10n("btn.cancel")) { [weak self] in
+        if $0 {
+          self?.delegate?.certificateViewer(self!, didDeleteCertificate: self!.hCert!)
+        }
+      }
   }
   
   func saveCert() {

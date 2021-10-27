@@ -59,13 +59,13 @@ class ValidationResultViewController: UIViewController {
       detailLabel.text = "Your certificate is valid and confirms to the provided country rules. Additional entry requirements might apply, please refer to the Re-open EU website:"
       iconImage.image = UIImage(named: "icon_large_valid")
       
-      iconImage.tintColor = .green
+      iconImage.tintColor = .walletGreen
     case "NOK":
       titleLabel.text = "Invalid certificate"
       detailLabel.text = "Your certificate is not valid. Please refer to the Re-open EU website:"
       iconImage.image = UIImage(named: "icon_large_invalid")
       
-      iconImage.tintColor = .red
+      iconImage.tintColor = .walletRed
     case "CHK":
       titleLabel.text = "Certificate has limitation"
       detailLabel.text = "Your certificate is valid but has the following restrictions:"
@@ -76,12 +76,12 @@ class ValidationResultViewController: UIViewController {
       titleLabel.text = "Invalid certificate"
       detailLabel.text = "Your certificate is not valid. Please refer to the Re-open EU website:"
       iconImage.image = UIImage(named: "icon_large_invalid")
-      iconImage.tintColor = .red
+      iconImage.tintColor = .walletRed
     case .some(_):
       titleLabel.text = "Invalid certificate"
       detailLabel.text = "Your certificate is not valid. Please refer to the Re-open EU website:"
       iconImage.image = UIImage(named: "icon_large_invalid")
-      iconImage.tintColor = .red
+      iconImage.tintColor = .walletRed
     }
   }
   

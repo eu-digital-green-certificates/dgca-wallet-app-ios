@@ -28,10 +28,10 @@
 import UIKit
 
 extension UIColor {
-  static var red: UIColor! { UIColor(named: "red") }
-  static var green: UIColor! { UIColor(named: "green") }
-  static var blue: UIColor! { UIColor(named: "blue") }
-  static var black: UIColor! { UIColor(named: "black") }
+  static var walletRed: UIColor! { UIColor(named: "walletRed") }
+  static var walletGreen: UIColor! { UIColor(named: "walletGreen") }
+  static var walletBlue: UIColor! { UIColor(named: "walletBlue") }
+  static var walletBlack: UIColor! { UIColor(named: "walletBlack") }
   static var disabledText: UIColor! { UIColor(named: "disabledText") }
-  static var grey10: UIColor! { UIColor(named: "grey10") }
+  static var walletGray10: UIColor! { UIColor(named: "walletGray10") }
 }
