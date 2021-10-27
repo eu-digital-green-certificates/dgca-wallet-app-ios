@@ -284,7 +284,6 @@ extension MainListController: CertificateManaging {
     startActivity()
     reloadAllComponents(completion: {[weak self] _ in
       DispatchQueue.main.async {
-        self?.table.reloadData()
         self?.stopActivity()
         self?.reloadTable()
       }
@@ -295,7 +294,6 @@ extension MainListController: CertificateManaging {
     startActivity()
     reloadAllComponents(completion: {[weak self] _ in
       DispatchQueue.main.async {
-        self?.table.reloadData()
         self?.stopActivity()
         self?.reloadTable()
       }

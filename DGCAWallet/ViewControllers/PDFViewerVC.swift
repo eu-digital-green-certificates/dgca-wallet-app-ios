@@ -24,7 +24,7 @@
 //  
 //  Created by Alexandr Chernyy on 25.08.2021.
 //  
-        
+
 
 import UIKit
 import PDFKit
@@ -35,6 +35,7 @@ class PDFViewerVC: UIViewController {
   @IBOutlet fileprivate weak var closeButton: UIButton!
   @IBOutlet fileprivate weak var shareButton: UIButton!
   @IBOutlet fileprivate weak var pdfView: UIView!
+  
   var pdfViewer: PDFView?
   
   var savedPDF: SavedPDF? {

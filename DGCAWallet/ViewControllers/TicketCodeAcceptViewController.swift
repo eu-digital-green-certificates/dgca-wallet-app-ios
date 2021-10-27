@@ -72,7 +72,7 @@ class TicketCodeAcceptViewController: UIViewController {
       certificateTitle.text = cert?.certTypeString
       validToLabel.text = cert?.exp.localDateString
       consetsLabel.text = "Consent"
-      infoLabel.text = "Do you agree to share the \(cert?.certTypeString ?? "") with Airline.com?"
+      infoLabel.text = "Do you agree to share the \(cert?.certTypeString ?? "") certificate with Airline.com?"
     }
   }
   

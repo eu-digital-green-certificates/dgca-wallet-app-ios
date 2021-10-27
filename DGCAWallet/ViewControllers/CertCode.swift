@@ -32,8 +32,12 @@ class CertCodeVC: UIViewController {
   @IBOutlet fileprivate weak var imageView: UIImageView!
   @IBOutlet fileprivate weak var tanLabel: UILabel!
 
-  var hCert: HCert! { (parent as? CertPagesVC)?.embeddingVC.hCert }
-  var tan: String? { (parent as? CertPagesVC)?.embeddingVC.tan }
+  var hCert: HCert! {
+      (parent as? CertPagesVC)?.embeddingVC.hCert
+  }
+  var tan: String? {
+      (parent as? CertPagesVC)?.embeddingVC.tan
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()

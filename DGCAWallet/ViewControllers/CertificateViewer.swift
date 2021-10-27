@@ -43,6 +43,7 @@ class CertificateViewerVC: UIViewController {
   @IBOutlet fileprivate weak var nameLabel: UILabel!
   @IBOutlet fileprivate weak var dismissButton: UIButton!
   @IBOutlet fileprivate weak var cancelButton: UIButton!
+  @IBOutlet fileprivate weak var shareButton: UIButton!
   @IBOutlet fileprivate weak var editButton: UIButton!
   @IBOutlet fileprivate weak var deleteButton: UIButton!
   @IBOutlet fileprivate weak var checkValidityButton: UIButton!
@@ -73,26 +74,31 @@ class CertificateViewerVC: UIViewController {
     nameLabel.text = hCert.fullName
     if !isSaved {
       dismissButton.setTitle(l10n("btn.save"), for: .normal)
-      checkValidityButton.isHidden = true
       editButton.isHidden = true
       cancelButton.isHidden = false
+      
       deleteButton.isHidden = true
+      checkValidityButton.isHidden = true
+      shareButton.isHidden = false
+      dismissButton.isHidden = false
       nameLabel.textColor = .walletBlack
       headerBackground.backgroundColor = .walletGray10
     } else {
-      checkValidityButton.isHidden = false
       editButton.isHidden = false
       cancelButton.isHidden = true
+      
       if isEditMode {
         editButton.setTitle("Done", for: .normal)
         deleteButton.isHidden = false
         checkValidityButton.isHidden = true
         dismissButton.isHidden = true
+        shareButton.isHidden = true
       } else {
         editButton.setTitle("Edit", for: .normal)
         deleteButton.isHidden = true
         checkValidityButton.isHidden = false
         dismissButton.isHidden = false
+        shareButton.isHidden = false
       }
       nameLabel.textColor = .white
       headerBackground.backgroundColor = .walletBlue
@@ -130,8 +136,10 @@ class CertificateViewerVC: UIViewController {
       actionTitle: l10n("btn.confirm"), cancelTitle: l10n("btn.cancel")) { [weak self] in
         if $0 {
           LocalData.sharedInstance.remove(withDate: certDate) {[weak self] _ in
-            self?.delegate?.certificateViewer(self!, didDeleteCertificate: self!.hCert!)
-            self?.dismiss(animated: true, completion: nil)
+            DispatchQueue.main.async {
+              self?.delegate?.certificateViewer(self!, didDeleteCertificate: self!.hCert!)
+              self?.dismiss(animated: true, completion: nil)
+            }
           } // LocalData
         }
       }

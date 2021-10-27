@@ -25,28 +25,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yEe-AH-rsr" userLabel="Container">
                                 <rect key="frame" x="0.0" y="44" width="390" height="766"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a9u-Ia-KEX" customClass="RoundedButton" customModule="DGCAWallet" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="664" width="171" height="50"/>
-                                        <color key="backgroundColor" name="walletGray10"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="spI-CH-SFa"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                                        <state key="normal" title="Done">
-                                            <color key="titleColor" name="walletBlack"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="padding">
-                                                <real key="value" value="12"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="radius">
-                                                <real key="value" value="6"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="closeButtonClick" destination="WCj-Xf-fml" eventType="touchUpInside" id="F45-1e-sPf"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max Mustermann" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DVW-2y-e4I">
                                         <rect key="frame" x="16.000000000000014" y="16.000000000000004" width="251.33333333333337" height="38.333333333333343"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="32"/>
@@ -98,32 +76,6 @@
                                             <action selector="checkValidityAction:" destination="WCj-Xf-fml" eventType="touchUpInside" id="0yd-PI-Ex4"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WJ5-9S-W9j" customClass="RoundedButton" customModule="DGCAWallet" customModuleProvider="target">
-                                        <rect key="frame" x="203" y="664" width="171" height="50"/>
-                                        <color key="backgroundColor" name="walletBlue"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="hPx-Fc-xPE"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
-                                        <state key="normal" title="Share">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="NO"/>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="radius">
-                                                <real key="value" value="6"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="padding">
-                                                <real key="value" value="12"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="shareAction:" destination="WCj-Xf-fml" eventType="touchUpInside" id="UQP-P0-rgr"/>
-                                        </connections>
-                                    </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KkS-4l-iTy" customClass="RoundedButton" customModule="DGCAWallet" customModuleProvider="target">
                                         <rect key="frame" x="20" y="664" width="350" height="50"/>
                                         <color key="backgroundColor" name="walletRed"/>
@@ -150,6 +102,32 @@
                                             <action selector="deleteCertificateAction" destination="WCj-Xf-fml" eventType="touchUpInside" id="pGp-Xj-stb"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WJ5-9S-W9j" customClass="RoundedButton" customModule="DGCAWallet" customModuleProvider="target">
+                                        <rect key="frame" x="203" y="664" width="167" height="50"/>
+                                        <color key="backgroundColor" name="walletBlue"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="hPx-Fc-xPE"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                        <state key="normal" title="Share">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="NO"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="radius">
+                                                <real key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="padding">
+                                                <real key="value" value="12"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="shareAction:" destination="WCj-Xf-fml" eventType="touchUpInside" id="UQP-P0-rgr"/>
+                                        </connections>
+                                    </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8fY-LF-Mko">
                                         <rect key="frame" x="339" y="18.666666666666664" width="31" height="33"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
@@ -158,6 +136,28 @@
                                         </state>
                                         <connections>
                                             <action selector="editAction" destination="WCj-Xf-fml" eventType="touchUpInside" id="kpl-WI-I6Y"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a9u-Ia-KEX" customClass="RoundedButton" customModule="DGCAWallet" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="664" width="167" height="50"/>
+                                        <color key="backgroundColor" name="walletGray10"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="spI-CH-SFa"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                        <state key="normal" title="Done">
+                                            <color key="titleColor" name="walletBlack"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="padding">
+                                                <real key="value" value="12"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="radius">
+                                                <real key="value" value="6"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="closeButtonClick" destination="WCj-Xf-fml" eventType="touchUpInside" id="F45-1e-sPf"/>
                                         </connections>
                                     </button>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EU_logo" translatesAutoresizingMaskIntoConstraints="NO" id="zGf-U8-pn3">
@@ -172,23 +172,24 @@
                                     <constraint firstItem="WJ5-9S-W9j" firstAttribute="leading" secondItem="a9u-Ia-KEX" secondAttribute="trailing" constant="16" id="2W9-Hf-mpU"/>
                                     <constraint firstItem="8fY-LF-Mko" firstAttribute="centerY" secondItem="DVW-2y-e4I" secondAttribute="centerY" id="38T-Kj-b6W"/>
                                     <constraint firstItem="zGf-U8-pn3" firstAttribute="top" secondItem="WJ5-9S-W9j" secondAttribute="bottom" constant="16" id="56k-nK-YOa"/>
-                                    <constraint firstAttribute="trailing" secondItem="9zn-iE-p4i" secondAttribute="trailing" constant="20" id="5Cg-bD-bak"/>
                                     <constraint firstItem="zGf-U8-pn3" firstAttribute="top" secondItem="a9u-Ia-KEX" secondAttribute="bottom" constant="16" id="5qd-XO-Lib"/>
                                     <constraint firstItem="WJ5-9S-W9j" firstAttribute="top" secondItem="9zn-iE-p4i" secondAttribute="bottom" constant="8" symbolic="YES" id="5t5-A8-z3b"/>
                                     <constraint firstItem="KkS-4l-iTy" firstAttribute="top" secondItem="dsC-7e-Skh" secondAttribute="bottom" constant="74" id="7xa-ai-Ux2"/>
                                     <constraint firstAttribute="trailing" secondItem="8fY-LF-Mko" secondAttribute="trailing" constant="20" symbolic="YES" id="94H-T6-763"/>
                                     <constraint firstItem="dsC-7e-Skh" firstAttribute="top" secondItem="DVW-2y-e4I" secondAttribute="bottom" constant="16" id="IOq-Nn-KSI"/>
                                     <constraint firstItem="KkS-4l-iTy" firstAttribute="leading" secondItem="yEe-AH-rsr" secondAttribute="leading" constant="20" symbolic="YES" id="IZi-gz-Bb4"/>
+                                    <constraint firstItem="9zn-iE-p4i" firstAttribute="leading" secondItem="yEe-AH-rsr" secondAttribute="leading" constant="20" symbolic="YES" id="JqC-cR-bsK"/>
+                                    <constraint firstAttribute="trailing" secondItem="WJ5-9S-W9j" secondAttribute="trailing" constant="20" symbolic="YES" id="K9i-Bv-xrF"/>
                                     <constraint firstItem="zGf-U8-pn3" firstAttribute="top" secondItem="KkS-4l-iTy" secondAttribute="bottom" constant="16" id="KsB-8i-6DG"/>
-                                    <constraint firstAttribute="trailing" secondItem="WJ5-9S-W9j" secondAttribute="trailing" constant="16" id="Mkd-1y-7eg"/>
                                     <constraint firstAttribute="trailing" secondItem="KkS-4l-iTy" secondAttribute="trailing" constant="20" symbolic="YES" id="PYd-2u-gBr"/>
+                                    <constraint firstItem="a9u-Ia-KEX" firstAttribute="leading" secondItem="yEe-AH-rsr" secondAttribute="leading" constant="20" symbolic="YES" id="Tsj-gQ-joc"/>
                                     <constraint firstItem="a9u-Ia-KEX" firstAttribute="top" secondItem="9zn-iE-p4i" secondAttribute="bottom" constant="8" symbolic="YES" id="VBf-R7-jQU"/>
                                     <constraint firstAttribute="trailing" secondItem="YeB-JS-Q1Q" secondAttribute="trailing" constant="20" symbolic="YES" id="WpQ-ME-KBq"/>
-                                    <constraint firstItem="a9u-Ia-KEX" firstAttribute="leading" secondItem="yEe-AH-rsr" secondAttribute="leading" constant="16" id="YVX-Ft-sJ4"/>
                                     <constraint firstAttribute="bottom" secondItem="a9u-Ia-KEX" secondAttribute="bottom" constant="52" id="Ylj-6k-vl1"/>
                                     <constraint firstItem="9zn-iE-p4i" firstAttribute="top" secondItem="dsC-7e-Skh" secondAttribute="bottom" constant="16" id="YyA-kR-Pm1"/>
                                     <constraint firstAttribute="trailing" secondItem="dsC-7e-Skh" secondAttribute="trailing" id="csD-4w-284"/>
                                     <constraint firstItem="dsC-7e-Skh" firstAttribute="leading" secondItem="yEe-AH-rsr" secondAttribute="leading" id="fGR-NQ-ao6"/>
+                                    <constraint firstAttribute="trailing" secondItem="9zn-iE-p4i" secondAttribute="trailing" constant="20" symbolic="YES" id="hyX-KZ-rvc"/>
                                     <constraint firstItem="DVW-2y-e4I" firstAttribute="leading" secondItem="yEe-AH-rsr" secondAttribute="leading" constant="16" id="iQB-29-cRZ"/>
                                     <constraint firstItem="zGf-U8-pn3" firstAttribute="centerX" secondItem="yEe-AH-rsr" secondAttribute="centerX" id="jLF-YC-vTd"/>
                                     <constraint firstItem="DVW-2y-e4I" firstAttribute="top" secondItem="yEe-AH-rsr" secondAttribute="top" constant="16" id="mLW-Ml-UXk"/>
@@ -197,7 +198,6 @@
                                     <constraint firstAttribute="bottom" secondItem="zGf-U8-pn3" secondAttribute="bottom" constant="8" id="utt-Vx-cic"/>
                                     <constraint firstItem="8fY-LF-Mko" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DVW-2y-e4I" secondAttribute="trailing" constant="20" id="vHo-YF-S8L"/>
                                     <constraint firstItem="WJ5-9S-W9j" firstAttribute="width" secondItem="a9u-Ia-KEX" secondAttribute="width" id="yAl-fm-WBD"/>
-                                    <constraint firstItem="9zn-iE-p4i" firstAttribute="leading" secondItem="yEe-AH-rsr" secondAttribute="leading" constant="20" id="z4c-KE-cZy"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -222,12 +222,13 @@
                         <outlet property="editButton" destination="8fY-LF-Mko" id="6V0-Gz-z3s"/>
                         <outlet property="headerBackground" destination="fKu-7E-jAI" id="TKR-ve-HDL"/>
                         <outlet property="nameLabel" destination="DVW-2y-e4I" id="cyN-o4-vZQ"/>
+                        <outlet property="shareButton" destination="WJ5-9S-W9j" id="tZZ-Is-DDy"/>
                         <segue destination="faH-nl-VQM" kind="presentation" identifier="showValidityController" id="BRM-mY-bxt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9ZE-rf-pHy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="40" y="105"/>
+            <point key="canvasLocation" x="40" y="104.50236966824644"/>
         </scene>
         <!--Cert PagesVC-->
         <scene sceneID="epa-ao-EQs">
@@ -253,7 +254,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Dz-da-bIa">
-                                <rect key="frame" x="20" y="662" width="350" height="50"/>
+                                <rect key="frame" x="16" y="662" width="358" height="50"/>
                                 <color key="backgroundColor" name="walletBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="RrE-Wb-wOA"/>
@@ -400,13 +401,13 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="xY8-6t-NMi" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XcQ-ut-cew" secondAttribute="leading" constant="20" id="9Hu-hK-O0B"/>
-                            <constraint firstItem="7Dz-da-bIa" firstAttribute="leading" secondItem="XcQ-ut-cew" secondAttribute="leading" constant="20" id="EW7-4H-0rI"/>
-                            <constraint firstItem="XcQ-ut-cew" firstAttribute="trailing" secondItem="7Dz-da-bIa" secondAttribute="trailing" constant="20" id="Gd4-qw-zKc"/>
                             <constraint firstItem="el4-fh-MYD" firstAttribute="trailing" secondItem="XcQ-ut-cew" secondAttribute="trailing" id="HXn-Bz-oN5"/>
                             <constraint firstItem="w1E-Jo-IbM" firstAttribute="top" secondItem="7Dz-da-bIa" secondAttribute="bottom" constant="8" id="LHk-4y-xxS"/>
+                            <constraint firstItem="XcQ-ut-cew" firstAttribute="trailing" secondItem="7Dz-da-bIa" secondAttribute="trailing" constant="16" id="QiJ-Cu-uoo"/>
                             <constraint firstItem="XcQ-ut-cew" firstAttribute="trailing" secondItem="xY8-6t-NMi" secondAttribute="trailing" constant="20" id="S42-Tf-Wfn"/>
                             <constraint firstItem="XcQ-ut-cew" firstAttribute="bottom" secondItem="w1E-Jo-IbM" secondAttribute="bottom" constant="8" id="SP5-Qw-kmg"/>
                             <constraint firstItem="xY8-6t-NMi" firstAttribute="top" secondItem="XcQ-ut-cew" secondAttribute="top" constant="16" id="Wfo-Ng-Sg5"/>
+                            <constraint firstItem="7Dz-da-bIa" firstAttribute="leading" secondItem="XcQ-ut-cew" secondAttribute="leading" constant="16" id="YCX-6a-Qow"/>
                             <constraint firstItem="el4-fh-MYD" firstAttribute="top" secondItem="xY8-6t-NMi" secondAttribute="bottom" constant="8" symbolic="YES" id="cKZ-qm-aaD"/>
                             <constraint firstItem="el4-fh-MYD" firstAttribute="leading" secondItem="XcQ-ut-cew" secondAttribute="leading" id="dzb-Ad-CVx"/>
                             <constraint firstItem="w1E-Jo-IbM" firstAttribute="centerX" secondItem="w41-en-kdb" secondAttribute="centerX" id="mgH-C6-Tw6"/>
@@ -422,7 +423,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ets-pw-8xQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="858.39999999999998" y="677.58620689655174"/>
+            <point key="canvasLocation" x="856.92307692307691" y="677.48815165876772"/>
         </scene>
         <!--Rule Validation ResultVC-->
         <scene sceneID="5CU-uj-UDS">
