@@ -25,25 +25,16 @@
 //  Created by Paul Ballmann on 14.05.21.
 //  
 
-import Foundation
+
 import UIKit
-import FloatingPanel
 import SwiftDGC
 
 class SettingsVC: UINavigationController {
-
-  weak var childDismissedDelegate: CertViewerDelegate?
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
     additionalSafeAreaInsets.top = 16.0
-  }
-
-  override func viewDidDisappear(_ animated: Bool) {
-    super.viewDidDisappear(animated)
-
-    childDismissedDelegate?.childDismissed(false)
   }
 }
 

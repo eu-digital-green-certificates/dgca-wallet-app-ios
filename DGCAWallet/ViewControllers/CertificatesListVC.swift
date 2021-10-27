@@ -51,7 +51,7 @@ class CertificatesListVC: UIViewController {
     tableView.tableFooterView = UIView()
     title = l10n("certificates")
     nextButton.isEnabled = false
-    nextButton.backgroundColor = UIColor(named: "lightYellow")
+    nextButton.backgroundColor = UIColor.walletLightYellow
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -61,7 +61,6 @@ class CertificatesListVC: UIViewController {
 
   @IBAction func nextButtonAction(_ sender: Any) {
     guard isNavigationEnabled else { return }
-
     self.performSegue(withIdentifier: Constants.showTicketAcceptController, sender: nil)
   }
   
@@ -150,7 +149,7 @@ extension CertificatesListVC: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     deselectAllCert()
     nextButton.isEnabled = true
-    nextButton.backgroundColor = UIColor(named: "yellow")
+    nextButton.backgroundColor = UIColor.walletYellow
     listOfCert[indexPath.row].isSelected = true
     tableView.reloadData()
   }

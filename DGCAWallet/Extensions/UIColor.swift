@@ -34,4 +34,8 @@ extension UIColor {
   static var walletBlack: UIColor! { UIColor(named: "walletBlack") }
   static var disabledText: UIColor! { UIColor(named: "disabledText") }
   static var walletGray10: UIColor! { UIColor(named: "walletGray10") }
+  static var walletYellow: UIColor! { UIColor(named: "walletYellow") }
+  static var walletLightYellow: UIColor! { UIColor(named: "walletLightYellow") }
+  static var walletLightGreen: UIColor! { UIColor(named: "walletLightGreen") }
+  static var walletLightBlue: UIColor! { UIColor(named: "walletLightBlue") }
 }

@@ -24,14 +24,13 @@
 //  Created by Yannick Spreen on 4/19/21.
 //
 
-import Foundation
 import UIKit
-import FloatingPanel
 import SwiftDGC
 import PDFKit
 
-protocol CertificateDeleting: AnyObject {
+protocol CertificateManaging: AnyObject {
   func certificateViewer(_ controller: CertificateViewerVC, didDeleteCertificate cert: HCert)
+  func certificateViewer(_ controller: CertificateViewerVC, didAddCeCertificate cert: HCert)
 }
 
 class CertificateViewerVC: UIViewController {
@@ -49,13 +48,11 @@ class CertificateViewerVC: UIViewController {
   @IBOutlet fileprivate weak var checkValidityButton: UIButton!
   
   var hCert: HCert?
-  var tan: String?
-  weak var childDismissedDelegate: CertViewerDelegate?
-  public var isSaved = true
-  var newCertAdded = false
-  private var isEditMode = false
-  weak var delegate: CertificateDeleting?
+  var certDate: Date?
   
+  public var isSaved = true
+  private var isEditMode = false
+  weak var delegate: CertificateManaging?
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
@@ -66,7 +63,6 @@ class CertificateViewerVC: UIViewController {
     super.viewDidDisappear(animated)
 
     Brightness.reset()
-    childDismissedDelegate?.childDismissed(newCertAdded)
   }
 
   func setupInterface() {
@@ -121,10 +117,14 @@ class CertificateViewerVC: UIViewController {
   }
 
   @IBAction func deleteCertificateAction() {
+    guard let certDate = certDate else { return }
+    
     showAlert( title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"),
       actionTitle: l10n("btn.confirm"), cancelTitle: l10n("btn.cancel")) { [weak self] in
         if $0 {
-          self?.delegate?.certificateViewer(self!, didDeleteCertificate: self!.hCert!)
+          LocalData.sharedInstance.remove(withDate: certDate) {[weak self] _ in
+            self?.delegate?.certificateViewer(self!, didDeleteCertificate: self!.hCert!)
+          } // LocalData
         }
       }
   }
@@ -138,10 +138,11 @@ class CertificateViewerVC: UIViewController {
           guard let cert = self?.hCert else { return }
             
           LocalData.sharedInstance.add(cert, with: newTan) { _ in
-            self?.newCertAdded = true
             DispatchQueue.main.async {
               self?.showAlert(title: l10n("tan.confirm.success.title"), subtitle: l10n("tan.confirm.success.text")) { _ in
-                self?.dismiss(animated: true, completion: nil)
+                self?.dismiss(animated: true) {
+                  self?.delegate?.certificateViewer(self!, didAddCeCertificate: cert)
+                }
               }
             }
           }

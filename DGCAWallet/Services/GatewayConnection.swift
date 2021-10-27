@@ -280,49 +280,6 @@ extension GatewayConnection {
       completion?(ValueSetsDataStorage.sharedInstance.valueSets)
     }
   }
-
-//  static func requestListOfServices(ticketingInfo : CheckInQR, completion : @escaping ((ServerListResponse?) -> Void)) {
-//    UserDefaults.standard.set(ticketingInfo.token, forKey: "TicketingToken")
-//    let headers = HTTPHeaders([HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")])
-//
-//    let url = URL(string: ticketingInfo.serviceIdentity)!
-//    var request = URLRequest(url: url)
-//    request.headers = headers
-//
-//    let decoder = JSONDecoder()
-//    let session = URLSession.shared.dataTask(with: request, completionHandler: { data,response,error in
-//      if let responseData = data {
-//        let responseModel = try! decoder.decode(ServerListResponse.self, from: responseData)
-//        completion(responseModel)
-//      } else {
-//        completion(nil)
-//      }
-//    })
-//    session.resume()
-//  }
-//
-//  static func getServiceInfo(url : URL, completion: @escaping (ServerListResponse?) -> Void) {
-//    let headers = HTTPHeaders([HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")])
-//    var request = URLRequest(url: url)
-//    request.headers = headers
-//
-//    let session = URLSession.shared.dataTask(with: request, completionHandler: { data,response,error in
-//      guard let data = data else {
-//        completion(nil)
-//        return
-//      }
-//      let decoder = JSONDecoder()
-//        if let responseModel = try? decoder.decode(ServerListResponse.self, from: data) {
-//            completion(responseModel)
-//        } else {
-//            completion(nil)
-//        }
-//    })
-//    session.resume()
-//  }
-//=======
-//
-//>>>>>>> feature/ticketing-reverted
   
   static func getAccessTokenFor(url : URL,servicePath : String, publicKey : String, completion : @escaping (AccessTokenResponse?) -> Void) {
     let json: [String: Any] = ["service": servicePath, "pubKey": publicKey]

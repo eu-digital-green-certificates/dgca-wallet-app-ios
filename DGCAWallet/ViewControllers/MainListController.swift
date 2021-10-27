@@ -19,7 +19,7 @@
  * ---license-end
  */
 //  
-//  Home.swift
+//  MainListController.swift
 //  DGCAWallet
 //  
 //  Created by Yannick Spreen on 4/25/21.
@@ -29,7 +29,6 @@
 
 import UIKit
 import SwiftDGC
-import FloatingPanel
 import SwiftCBOR
 import CoreImage
 import PDFKit
@@ -37,12 +36,13 @@ import UniformTypeIdentifiers
 import MobileCoreServices
 import CoreServices
 
-class ListVC: UIViewController {
+class MainListController: UIViewController {
   
     fileprivate enum SegueIdentifiers {
       static let showScannerSegue = "showScannerSegue"
       static let showServicesList = "showServicesList"
       static let showSettingsController = "showSettingsController"
+      static let showCertificateViewer = "showCertificateViewer"
       static let showPDFViewer = "showPDFViewer"
       static let showImageViewer = "showImageViewer"
     }
@@ -93,14 +93,14 @@ class ListVC: UIViewController {
     loading = true
     activityIndicator.startAnimating()
     addButton.isEnabled = false
-    addButton.backgroundColor = UIColor(named: "lightGreen")
+    addButton.backgroundColor = UIColor.walletLightBlue
   }
  
   private func stopActivity() {
     loading = false
     activityIndicator.stopAnimating()
     addButton.isEnabled = true
-    addButton.backgroundColor = UIColor(named: "green")
+    addButton.backgroundColor = UIColor.walletBlue
   }
 
   @IBAction func addNew() {
@@ -192,22 +192,7 @@ class ListVC: UIViewController {
   }
   
   @IBAction func settingsTapped(_ sender: UIButton) {
-    guard let settingsVC = UIStoryboard(name: "Settings", bundle: nil).instantiateInitialViewController(),
-          let viewer = settingsVC as? SettingsVC else { return }
-    viewer.childDismissedDelegate = self
-    showFloatingPanel(for: viewer)
-  }
-
-  func showFloatingPanel(for controller: UIViewController) {
-    let fpc = FloatingPanelController()
-    fpc.set(contentViewController: controller)
-    fpc.isRemovalInteractionEnabled = true
-    fpc.layout = FullFloatingPanelLayout()
-    fpc.surfaceView.layer.cornerRadius = 24.0
-    fpc.surfaceView.clipsToBounds = true
-    fpc.delegate = self
-
-    present(fpc, animated: true, completion: nil)
+    self.performSegue(withIdentifier: SegueIdentifiers.showSettingsController, sender: nil)
   }
 
   func reloadTable() {
@@ -215,38 +200,21 @@ class ListVC: UIViewController {
     table.reloadData()
   }
 
-  func presentViewer(for certificate: HCert, with tan: String? = nil, isSaved: Bool = true) {
-    guard let certViewerController = UIStoryboard(name: "CertificateViewer", bundle: nil).instantiateInitialViewController() as? CertificateViewerVC else { return }
-
-    certViewerController.isSaved = isSaved
-    certViewerController.hCert = certificate
-    certViewerController.tan = tan
-    certViewerController.childDismissedDelegate = self
-    let fpc = FloatingPanelController()
-    fpc.set(contentViewController: certViewerController)
-    fpc.isRemovalInteractionEnabled = true // Let it removable by a swipe-down
-    fpc.layout = FullFloatingPanelLayout()
-    fpc.surfaceView.layer.cornerRadius = 24.0
-    fpc.surfaceView.clipsToBounds = true
-    fpc.delegate = self
-
-    present(fpc, animated: true, completion: nil)
-    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-  }
-
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
       switch segue.identifier {
       case SegueIdentifiers.showScannerSegue:
           guard let scanController = segue.destination as? ScanWalletController else { return }
-          
           scanController.modalPresentationStyle = .fullScreen
           scanController.delegate = self
-          
+        
+      case SegueIdentifiers.showSettingsController:
+        guard let scanController = segue.destination as? SettingsVC else { return }
+
       case SegueIdentifiers.showServicesList:
           guard let serviceController = segue.destination as? ServersListVC else { return }
           guard let listOfServices = sender as?  ServerListResponse else { return }
-          
           serviceController.setServices(info: listOfServices)
+        
       case SegueIdentifiers.showPDFViewer:
         guard let serviceController = segue.destination as? PDFViewerVC else { return }
         guard let pdf = sender as? SavedPDF else { return }
@@ -256,13 +224,24 @@ class ListVC: UIViewController {
         guard let serviceController = segue.destination as? ImageViewerVC else { return }
         guard let savedImage = sender as? SavedImage else { return }
         serviceController.setImage(image: savedImage)
+      
+      case SegueIdentifiers.showCertificateViewer:
+        guard let serviceController = segue.destination as? CertificateViewerVC else { return }
+        if let savedCertificate = sender as? DatedCertString {
+          serviceController.hCert = savedCertificate.cert
+          serviceController.isSaved = true
+          serviceController.certDate = savedCertificate.date
+        } else if let certificate = sender as? HCert {
+          serviceController.hCert = certificate
+          serviceController.isSaved = false
+        }
       default:
           break
       }
   }
 }
 
-extension ListVC: CertViewerDelegate {
+extension MainListController: CertViewerDelegate {
   func childDismissed(_ newCertAdded: Bool) {
     DispatchQueue.main.asyncAfter(deadline: .now()) {
       self.reloadTable()
@@ -270,7 +249,7 @@ extension ListVC: CertViewerDelegate {
   }
 }
 
-extension ListVC: ScanWalletDelegate {
+extension MainListController: ScanWalletDelegate {
   func disableBackgroundDetection() {
     SecureBackground.paused = true
   }
@@ -282,13 +261,13 @@ extension ListVC: ScanWalletDelegate {
   func walletController(_ controller: ScanWalletController, didScanCertificate certificate: HCert) {
     DispatchQueue.main.async { [weak self] in
         self?.dismiss(animated: true, completion: {
-            self?.presentViewer(for: certificate, isSaved: false)
+          self?.performSegue(withIdentifier: SegueIdentifiers.showCertificateViewer, sender: certificate)
         })
     }
   }
   
   func walletController(_ controller: ScanWalletController, didScanInfo ticketing: SwiftDGC.CheckInQR) {
-    if scannedToken == ticketing.token || navigationController?.viewControllers.last is ServersListVC {
+    if scannedToken == ticketing.token {
       return
     }
     scannedToken = ticketing.token
@@ -304,23 +283,31 @@ extension ListVC: ScanWalletDelegate {
   }
 }
 
-extension ListVC: CertificateDeleting {
+extension MainListController: CertificateManaging {
   func certificateViewer(_ controller: CertificateViewerVC, didDeleteCertificate cert: HCert) {
-    self.startActivity()
-    LocalData.sharedInstance.remove(withDate: cert.date) {[weak self] _ in
-      self?.reloadAllComponents(completion: { _ in
-        DispatchQueue.main.async {
-          self?.table.reloadData()
-          self?.stopActivity()
-          self?.reloadTable()
-        }
-      })
-    } // LocalData
-
+    startActivity()
+    reloadAllComponents(completion: {[weak self] _ in
+      DispatchQueue.main.async {
+        self?.table.reloadData()
+        self?.stopActivity()
+        self?.reloadTable()
+      }
+    })
+  }
+  
+  func certificateViewer(_ controller: CertificateViewerVC, didAddCeCertificate cert: HCert) {
+    startActivity()
+    reloadAllComponents(completion: {[weak self] _ in
+      DispatchQueue.main.async {
+        self?.table.reloadData()
+        self?.stopActivity()
+        self?.reloadTable()
+      }
+    })
   }
 }
 
-extension ListVC: UITableViewDataSource {
+extension MainListController: UITableViewDataSource {
   var listCertElements: [DatedCertString] {
     return LocalData.sharedInstance.certStrings.reversed()
   }
@@ -388,22 +375,21 @@ extension ListVC: UITableViewDataSource {
   }
 }
 
-extension ListVC: UITableViewDelegate {
+extension MainListController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard loading == false else { return }
     
     table.deselectRow(at: indexPath, animated: true)
     switch indexPath.section {
       case TableSection.certificates.rawValue:
-          guard let cert = listCertElements[indexPath.row].cert else { return }
-          presentViewer(for: cert, with: listCertElements[indexPath.row].storedTAN)
+        self.performSegue(withIdentifier: SegueIdentifiers.showCertificateViewer, sender: listCertElements[indexPath.row])
           
       case TableSection.images.rawValue:
         self.performSegue(withIdentifier: SegueIdentifiers.showImageViewer, sender: listImageElements[indexPath.row])
 
       case TableSection.pdfs.rawValue:
         self.performSegue(withIdentifier: SegueIdentifiers.showPDFViewer, sender: listPdfElements[indexPath.row])
-        
+      
       default:
           break
     }
@@ -413,7 +399,7 @@ extension ListVC: UITableViewDelegate {
     forRowAt indexPath: IndexPath
   ) {
       switch indexPath.section {
-      case 0:
+      case TableSection.certificates.rawValue:
           let savedCert = listCertElements[indexPath.row]
           showAlert( title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"),
             actionTitle: l10n("btn.confirm"), cancelTitle: l10n("btn.cancel")) { [weak self] in
@@ -430,7 +416,7 @@ extension ListVC: UITableViewDelegate {
                 } // LocalData
               }
             }
-      case 1:
+      case TableSection.images.rawValue:
         let savedImage = listImageElements[indexPath.row]
         showAlert( title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"),
           actionTitle: l10n("btn.confirm"), cancelTitle: l10n("btn.cancel")) { [weak self] in
@@ -446,7 +432,7 @@ extension ListVC: UITableViewDelegate {
               }
             }
           }
-      case 2:
+      case TableSection.pdfs.rawValue:
         let savedPDF = listPdfElements[indexPath.row]
         showAlert( title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"),
           actionTitle: l10n("btn.confirm"), cancelTitle: l10n("btn.cancel")) { [weak self] in
@@ -467,31 +453,8 @@ extension ListVC: UITableViewDelegate {
       }
   }
 }
-
                           
-extension ListVC: FloatingPanelControllerDelegate {
-  func floatingPanel(_ fpc: FloatingPanelController, shouldRemoveAt location: CGPoint,
-    with velocity: CGVector) -> Bool {
-    let pos = location.y / view.bounds.height
-    if pos >= 0.33 {
-      return true
-    }
-    let threshold: CGFloat = 5.0
-    switch fpc.layout.position {
-    case .top:
-      return (velocity.dy <= -threshold)
-    case .left:
-      return (velocity.dx <= -threshold)
-    case .bottom:
-      return (velocity.dy >= threshold)
-    case .right:
-      return (velocity.dx >= threshold)
-    }
-  }
-}
-
-extension ListVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-  
+extension MainListController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   private func addImageActivity() {
     let alert = UIAlertController(title: l10n("get.image.from"), message: nil, preferredStyle: .actionSheet)
     let cameraAction = UIAlertAction(title: l10n("camera"), style: .default) {[weak self] _ in
@@ -510,7 +473,7 @@ extension ListVC: UIImagePickerControllerDelegate, UINavigationControllerDelegat
     alert.addAction(cancelAction)
     present(alert, animated: true, completion: nil)
   }
-    
+  
   private func openCamera() {
       if UIImagePickerController.isSourceTypeAvailable(.camera) {
           let picker = UIImagePickerController()
@@ -529,11 +492,10 @@ extension ListVC: UIImagePickerControllerDelegate, UINavigationControllerDelegat
           self.present(alertController, animated: true)
       }
   }
-    
+  
   func openGallery() {
       let picker = UIImagePickerController()
       picker.delegate = self
-
       picker.sourceType = .photoLibrary
       present(picker, animated: true, completion: nil)
   }
@@ -557,7 +519,7 @@ extension ListVC: UIImagePickerControllerDelegate, UINavigationControllerDelegat
   }
 }
 
-extension ListVC {
+extension MainListController {
   private func tryFoundQRCodeIn(image: UIImage) {
     if let qrString = image.qrCodeString(), let hCert = HCert(from: qrString, applicationType: .wallet) {
         saveQrCode(cert: hCert)
@@ -567,7 +529,7 @@ extension ListVC {
   }
   
   private func saveQrCode(cert: HCert) {
-    presentViewer(for: cert, with: nil, isSaved: false)
+    self.performSegue(withIdentifier: SegueIdentifiers.showCertificateViewer, sender: cert)
   }
   
   private func saveImage(image: UIImage) {
@@ -584,7 +546,7 @@ extension ListVC {
             let scrollToNum = rowCount > 0 ? rowCount - 1 : 0
             DispatchQueue.main.asyncAfter(deadline: .now()) {
               self?.stopActivity()
-              let path = IndexPath(row: scrollToNum, section: 1)
+              let path = IndexPath(row: scrollToNum, section: TableSection.images.rawValue)
               self?.table.scrollToRow(at: path, at: .bottom, animated: true)
               self?.table.selectRow(at: path, animated: true, scrollPosition: .bottom)
               DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(350)) {
@@ -598,7 +560,7 @@ extension ListVC {
   }
 }
 
-extension ListVC: UIDocumentPickerDelegate {
+extension MainListController: UIDocumentPickerDelegate {
   private func convertPDF(at sourceURL: URL, dpi: CGFloat = 200) throws -> [UIImage] {
     let pdfDocument = CGPDFDocument(sourceURL as CFURL)!
     let colorSpace = CGColorSpaceCreateDeviceRGB()
@@ -649,24 +611,24 @@ extension ListVC: UIDocumentPickerDelegate {
       let pdf = SavedPDF(fileName: fileName ?? UUID().uuidString, pdfUrl: url as URL)
       self?.startActivity()
       PdfDataStorage.sharedInstance.add(savedPdf: pdf) { _ in
-          self?.reloadAllComponents(completion: { _ in
-            DispatchQueue.main.async {
-              self?.table.reloadData()
-              let rowsCount = ImageDataStorage.sharedInstance.images.count
-              let scrollToNum = rowsCount > 0 ? rowsCount-1 : 0
-              DispatchQueue.main.asyncAfter(deadline: .now()) {
-                self?.stopActivity()
-                let path = IndexPath(row: scrollToNum, section: 2)
-                self?.table.scrollToRow(at: path, at: .bottom, animated: true)
-                self?.table.selectRow(at: path, animated: true, scrollPosition: .bottom)
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(350)) {
-                  self?.table.deselectRow(at: path, animated: true)
-                }
-              } // asynk after
-            }
-          })
-      }
-    }
+        self?.reloadAllComponents(completion: { _ in
+          DispatchQueue.main.async {
+            self?.table.reloadData()
+            let rowsCount = ImageDataStorage.sharedInstance.images.count
+            let scrollToNum = rowsCount > 0 ? rowsCount-1 : 0
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
+              self?.stopActivity()
+              let path = IndexPath(row: scrollToNum, section: TableSection.pdfs.rawValue)
+              self?.table.scrollToRow(at: path, at: .bottom, animated: true)
+              self?.table.selectRow(at: path, animated: true, scrollPosition: .bottom)
+              DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(350)) {
+                self?.table.deselectRow(at: path, animated: true)
+              }
+            } // end asynk after
+          }
+        }) //end reload components
+      } // end add
+    } // end alert action
   }
   
   func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
