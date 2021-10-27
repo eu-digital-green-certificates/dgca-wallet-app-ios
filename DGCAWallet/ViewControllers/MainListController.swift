@@ -82,9 +82,11 @@ class MainListController: UIViewController {
   }
 
   private func reloadAllComponents(completion: ((Bool) -> Void)? = nil) {
-    ImageDataStorage.initialize {
-      PdfDataStorage.initialize {
-        completion?(true)
+    LocalData.initialize {
+      ImageDataStorage.initialize {
+        PdfDataStorage.initialize {
+          completion?(true)
+        }
       }
     }
   }

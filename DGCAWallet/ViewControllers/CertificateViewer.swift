@@ -86,9 +86,13 @@ class CertificateViewerVC: UIViewController {
       if isEditMode {
         editButton.setTitle("Done", for: .normal)
         deleteButton.isHidden = false
+        checkValidityButton.isHidden = true
+        dismissButton.isHidden = true
       } else {
         editButton.setTitle("Edit", for: .normal)
         deleteButton.isHidden = true
+        checkValidityButton.isHidden = false
+        dismissButton.isHidden = false
       }
       nameLabel.textColor = .white
       headerBackground.backgroundColor = .walletBlue
@@ -127,6 +131,7 @@ class CertificateViewerVC: UIViewController {
         if $0 {
           LocalData.sharedInstance.remove(withDate: certDate) {[weak self] _ in
             self?.delegate?.certificateViewer(self!, didDeleteCertificate: self!.hCert!)
+            self?.dismiss(animated: true, completion: nil)
           } // LocalData
         }
       }
