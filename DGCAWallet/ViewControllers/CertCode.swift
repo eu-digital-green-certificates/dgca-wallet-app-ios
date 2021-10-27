@@ -29,8 +29,8 @@ import SwiftDGC
 import UIKit
 
 class CertCodeVC: UIViewController {
-  @IBOutlet weak var imageView: UIImageView!
-  @IBOutlet weak var tanLabel: UILabel!
+  @IBOutlet fileprivate weak var imageView: UIImageView!
+  @IBOutlet fileprivate weak var tanLabel: UILabel!
 
   var hCert: HCert! { (parent as? CertPagesVC)?.embeddingVC.hCert }
   var tan: String? { (parent as? CertPagesVC)?.embeddingVC.tan }

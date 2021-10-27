@@ -32,9 +32,9 @@ import SwiftDGC
 
 class CertificateCell: UITableViewCell {
 
-  @IBOutlet weak var nameLabel: UILabel!
-  @IBOutlet weak var certTypeLabel: UILabel!
-  @IBOutlet weak var descriptionLabel: UILabel!
+  @IBOutlet fileprivate weak var nameLabel: UILabel!
+  @IBOutlet fileprivate weak var certTypeLabel: UILabel!
+  @IBOutlet fileprivate weak var descriptionLabel: UILabel!
   
   private var hCert: HCert? {
     didSet {
@@ -53,7 +53,7 @@ class CertificateCell: UITableViewCell {
     }
   }
 
-  public func setCertificate(cert: HCert) {
+  func setCertificate(cert: HCert) {
     hCert = cert
   }
   

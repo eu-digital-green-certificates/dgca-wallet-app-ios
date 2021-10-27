@@ -29,7 +29,7 @@ import SwiftDGC
 import UIKit
 
 class CertTableVC: UIViewController {
-  @IBOutlet weak var table: UITableView!
+  @IBOutlet fileprivate weak var table: UITableView!
 
   var hCert: HCert! {
     (parent as? CertPagesVC)?.embeddingVC.hCert
@@ -53,7 +53,7 @@ extension CertTableVC: UITableViewDataSource {
       guard let cell = tableView.dequeueReusableCell(withIdentifier: "infoCell", for: indexPath) as? InfoCell else {
           return UITableViewCell()
       }
-    cell.draw(hCert.info[indexPath.row])
+    cell.setupCell(hCert.info[indexPath.row])
     return cell
   }
 }

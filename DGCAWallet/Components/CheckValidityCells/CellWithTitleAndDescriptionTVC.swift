@@ -29,8 +29,8 @@
 import UIKit
 
 class CellWithTitleAndDescriptionTVC: UITableViewCell {
-  @IBOutlet weak var titleLabel: UILabel!
-  @IBOutlet weak var descriptionLabel: UILabel!
+  @IBOutlet fileprivate weak var titleLabel: UILabel!
+  @IBOutlet fileprivate weak var descriptionLabel: UILabel!
   
   private weak var cellModel: ValidityCellModel? {
     didSet {
@@ -39,7 +39,6 @@ class CellWithTitleAndDescriptionTVC: UITableViewCell {
   }
   
   override func prepareForReuse() {
-    super.prepareForReuse()
     setInitialStrings()
   }
   

@@ -29,9 +29,9 @@
 import UIKit
 
 final class ImageTableViewCell: UITableViewCell {
-  @IBOutlet weak var imagePreviewView: UIImageView!
-  @IBOutlet weak var nameLabel: UILabel!
-  @IBOutlet weak var timeLabel: UILabel!
+  @IBOutlet fileprivate weak var imagePreviewView: UIImageView!
+  @IBOutlet fileprivate weak var nameLabel: UILabel!
+  @IBOutlet fileprivate weak var timeLabel: UILabel!
 
   private var savedImage: SavedImage? {
     didSet {

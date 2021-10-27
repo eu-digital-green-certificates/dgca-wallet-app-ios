@@ -43,9 +43,9 @@ class TicketCodeAcceptViewController: UIViewController {
   @IBOutlet fileprivate weak var grandButton: UIButton!
   @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
  
-  private var validationServiceInfo : ServerListResponse?
-  private var accessTokenInfo       : AccessTokenResponse?
-  private var cert                  : HCert?
+  private var validationServiceInfo: ServerListResponse?
+  private var accessTokenInfo      : AccessTokenResponse?
+  private var cert                 : HCert?
   private var loading = false
 
   override func viewDidLoad() {
@@ -94,10 +94,10 @@ class TicketCodeAcceptViewController: UIViewController {
           let url = URL(string: urlPath),
           let iv = UserDefaults.standard.object(forKey: "xnonce"),
           let verificationMethod = validationServiceInfo?.verificationMethod?.first(where: { $0.publicKeyJwk?.use == "enc" }),
-          let certificate = cert,
-          let dccData = encodeDCC(dgcString: certificate.fullPayloadString, iv: iv as! String),
-          let privateKey = Enclave.loadOrGenerateKey(with: "validationKey")
-    else { return }
+          let certificate = cert else { return }
+    
+    guard let dccData = encodeDCC(dgcString: certificate.fullPayloadString, iv: iv as! String),
+          let privateKey = Enclave.loadOrGenerateKey(with: "validationKey") else { return }
     
     var sig = Data()
 

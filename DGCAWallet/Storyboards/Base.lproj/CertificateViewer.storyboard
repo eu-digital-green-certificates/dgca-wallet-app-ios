@@ -284,7 +284,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Iq-oZ-9d6">
-                                                    <rect key="frame" x="16" y="8" width="358" height="17"/>
+                                                    <rect key="frame" x="20" y="8" width="350" height="17"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -297,13 +297,13 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="8Iq-oZ-9d6" secondAttribute="trailing" constant="16" id="8V6-CL-Xal"/>
+                                                <constraint firstItem="8Iq-oZ-9d6" firstAttribute="leading" secondItem="VM9-6c-Az6" secondAttribute="leading" constant="20" symbolic="YES" id="GdD-Af-9KK"/>
                                                 <constraint firstItem="8Hv-8b-imR" firstAttribute="trailing" secondItem="VM9-6c-Az6" secondAttribute="trailingMargin" id="Mgd-eg-Lin"/>
                                                 <constraint firstItem="8Iq-oZ-9d6" firstAttribute="top" secondItem="VM9-6c-Az6" secondAttribute="top" constant="8" id="Ogr-CU-5Mq"/>
-                                                <constraint firstItem="8Iq-oZ-9d6" firstAttribute="leading" secondItem="VM9-6c-Az6" secondAttribute="leading" constant="16" id="VAG-f5-HEG"/>
                                                 <constraint firstAttribute="bottom" secondItem="8Hv-8b-imR" secondAttribute="bottom" constant="6.3300000000000001" id="dIQ-PS-hsg"/>
                                                 <constraint firstItem="8Hv-8b-imR" firstAttribute="leading" secondItem="VM9-6c-Az6" secondAttribute="leadingMargin" id="klk-bZ-TkR"/>
                                                 <constraint firstItem="8Hv-8b-imR" firstAttribute="top" secondItem="8Iq-oZ-9d6" secondAttribute="bottom" constant="8" symbolic="YES" id="p1l-k5-A4N"/>
+                                                <constraint firstAttribute="trailing" secondItem="8Iq-oZ-9d6" secondAttribute="trailing" constant="20" symbolic="YES" id="uO5-E4-HHL"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

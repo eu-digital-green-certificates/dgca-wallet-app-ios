@@ -19,7 +19,7 @@
  * ---license-end
  */
 //  
-//  Home.swift
+//  HomeController.swift
 //  DGCAWallet
 //  
 //  Created by Yannick Spreen on 4/25/21.
@@ -28,7 +28,10 @@
 import UIKit
 import SwiftDGC
 
-class HomeVC: UIViewController {
+class HomeController: UIViewController {
+    
+    @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
       return .lightContent
     }
@@ -39,33 +42,7 @@ class HomeVC: UIViewController {
     HCert.config.prefetchAllCodes = true
     HCert.config.checkSignatures = false
         
-    RulesDataStorage.initialize {
-      GatewayConnection.rulesList { _ in
-        CertLogicEngineManager.sharedInstance.setRules(ruleList: RulesDataStorage.sharedInstance.rules)
-        GatewayConnection.loadRulesFromServer { _ in
-          CertLogicEngineManager.sharedInstance.setRules(ruleList: RulesDataStorage.sharedInstance.rules)
-          ValueSetsDataStorage.initialize {
-            GatewayConnection.valueSetsList { _ in
-              GatewayConnection.loadValueSetsFromServer { _ in
-                GatewayConnection.countryList { _ in
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-    LocalData.initialize {
-      DispatchQueue.main.async { [weak self] in
-        guard let self = self else { return }
-          
-        let renderer = UIGraphicsImageRenderer(size: self.view.bounds.size)
-        SecureBackground.image = renderer.image { rendererContext in
-          self.view.layer.render(in: rendererContext.cgContext)
-        }
-        self.loadComplete()
-      }
-    }
+    performServicesInitialization()
   }
 
   override func viewDidAppear(_ animated: Bool) {
@@ -77,9 +54,40 @@ class HomeVC: UIViewController {
   }
 
   var loaded = false
+    
   func loadComplete() {
     loaded = true
     checkId()
+  }
+
+  private func performServicesInitialization() {
+    self.activityIndicator.startAnimating()
+    RulesDataStorage.initialize {
+      GatewayConnection.rulesList { _ in
+        CertLogicEngineManager.sharedInstance.setRules(ruleList: RulesDataStorage.sharedInstance.rules)
+        GatewayConnection.loadRulesFromServer { _ in
+          CertLogicEngineManager.sharedInstance.setRules(ruleList: RulesDataStorage.sharedInstance.rules)
+          ValueSetsDataStorage.initialize {
+            GatewayConnection.valueSetsList { _ in
+              GatewayConnection.loadValueSetsFromServer { _ in
+                GatewayConnection.countryList { _ in
+                    LocalData.initialize {
+                      DispatchQueue.main.async { [unowned self] in
+                        self.activityIndicator.stopAnimating()
+                        let renderer = UIGraphicsImageRenderer(size: self.view.bounds.size)
+                        SecureBackground.image = renderer.image { rendererContext in
+                          self.view.layer.render(in: rendererContext.cgContext)
+                        }
+                        self.loadComplete()
+                      }
+                    } // end localData init
+                }
+              }
+            }
+          }
+        }
+      }
+    } // End of Rules
   }
 
   func checkId() {

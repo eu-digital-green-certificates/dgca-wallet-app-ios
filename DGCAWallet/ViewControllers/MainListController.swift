@@ -38,14 +38,14 @@ import CoreServices
 
 class MainListController: UIViewController {
   
-    fileprivate enum SegueIdentifiers {
-      static let showScannerSegue = "showScannerSegue"
-      static let showServicesList = "showServicesList"
-      static let showSettingsController = "showSettingsController"
-      static let showCertificateViewer = "showCertificateViewer"
-      static let showPDFViewer = "showPDFViewer"
-      static let showImageViewer = "showImageViewer"
-    }
+  fileprivate enum SegueIdentifiers {
+    static let showScannerSegue = "showScannerSegue"
+    static let showServicesList = "showServicesList"
+    static let showSettingsController = "showSettingsController"
+    static let showCertificateViewer = "showCertificateViewer"
+    static let showPDFViewer = "showPDFViewer"
+    static let showImageViewer = "showImageViewer"
+  }
 
   private enum TableSection: Int, CaseIterable {
     case certificates, images, pdfs
@@ -81,7 +81,7 @@ class MainListController: UIViewController {
     }
   }
 
-  func reloadAllComponents(completion: ((Bool) -> Void)? = nil) {
+  private func reloadAllComponents(completion: ((Bool) -> Void)? = nil) {
     ImageDataStorage.initialize {
       PdfDataStorage.initialize {
         completion?(true)
@@ -203,17 +203,17 @@ class MainListController: UIViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
       switch segue.identifier {
       case SegueIdentifiers.showScannerSegue:
-          guard let scanController = segue.destination as? ScanWalletController else { return }
-          scanController.modalPresentationStyle = .fullScreen
-          scanController.delegate = self
+        guard let scanController = segue.destination as? ScanWalletController else { return }
+        scanController.modalPresentationStyle = .fullScreen
+        scanController.delegate = self
         
       case SegueIdentifiers.showSettingsController:
-        guard let scanController = segue.destination as? SettingsVC else { return }
+        break
 
       case SegueIdentifiers.showServicesList:
-          guard let serviceController = segue.destination as? ServersListVC else { return }
-          guard let listOfServices = sender as?  ServerListResponse else { return }
-          serviceController.setServices(info: listOfServices)
+        guard let serviceController = segue.destination as? ServersListVC else { return }
+        guard let listOfServices = sender as?  ServerListResponse else { return }
+        serviceController.setServices(info: listOfServices)
         
       case SegueIdentifiers.showPDFViewer:
         guard let serviceController = segue.destination as? PDFViewerVC else { return }
@@ -231,21 +231,15 @@ class MainListController: UIViewController {
           serviceController.hCert = savedCertificate.cert
           serviceController.isSaved = true
           serviceController.certDate = savedCertificate.date
+          serviceController.tan = savedCertificate.storedTAN
         } else if let certificate = sender as? HCert {
           serviceController.hCert = certificate
           serviceController.isSaved = false
         }
+        
       default:
-          break
+        break
       }
-  }
-}
-
-extension MainListController: CertViewerDelegate {
-  func childDismissed(_ newCertAdded: Bool) {
-    DispatchQueue.main.asyncAfter(deadline: .now()) {
-      self.reloadTable()
-    }
   }
 }
 
@@ -355,7 +349,7 @@ extension MainListController: UITableViewDataSource {
       case TableSection.certificates.rawValue:
         guard let walletCell = table.dequeueReusableCell(withIdentifier: "walletCell", for: indexPath) as? WalletCell else { return UITableViewCell() }
         
-        walletCell.draw(listCertElements[indexPath.row])
+        walletCell.setupCell(listCertElements[indexPath.row])
         return walletCell
           
       case TableSection.images.rawValue:

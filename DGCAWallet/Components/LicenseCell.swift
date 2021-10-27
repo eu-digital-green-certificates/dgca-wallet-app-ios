@@ -30,7 +30,7 @@ import SwiftDGC
 import SwiftyJSON
 
 class LicenseCell: UITableViewCell {
-  @IBOutlet weak var cellLabel: UILabel!
+  @IBOutlet fileprivate weak var cellLabel: UILabel!
 
   public var licenseObject: JSON = []
 

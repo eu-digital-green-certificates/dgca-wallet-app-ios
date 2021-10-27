@@ -32,9 +32,9 @@ import SwiftDGC
 
 class PDFViewerVC: UIViewController {
 
-  @IBOutlet weak var closeButton: UIButton!
-  @IBOutlet weak var shareButton: UIButton!
-  @IBOutlet weak var pdfView: UIView!
+  @IBOutlet fileprivate weak var closeButton: UIButton!
+  @IBOutlet fileprivate weak var shareButton: UIButton!
+  @IBOutlet fileprivate weak var pdfView: UIView!
   var pdfViewer: PDFView?
   
   var savedPDF: SavedPDF? {

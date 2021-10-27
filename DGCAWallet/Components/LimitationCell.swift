@@ -34,5 +34,4 @@ class LimitationCell: UITableViewCell {
     override func prepareForReuse() {
         issueTextView.text = ""
     }
-
 }

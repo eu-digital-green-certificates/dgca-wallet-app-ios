@@ -62,7 +62,6 @@ class LicenseTableVC: UITableViewController {
     if let cell = tableView.cellForRow(at: indexPath) as? LicenseCell {
       self.selectedLicense = cell.licenseObject
     }
-    // segue to the vc
     performSegue(withIdentifier: "licenseSegue", sender: nil)
   }
 

@@ -30,13 +30,14 @@ import SwiftDGC
 
 class RuleErrorTVC: UITableViewCell {
 
-  @IBOutlet weak var ruleLabel: UILabel!
-  @IBOutlet weak var ruleValueLabel: UILabel!
-  @IBOutlet weak var currentLabel: UILabel!
-  @IBOutlet weak var currentValueLabel: UILabel!
-  @IBOutlet weak var resultLabel: UILabel!
-  @IBOutlet weak var resultValueLabel: UILabel!
-  @IBOutlet weak var failedLabel: UILabel!
+  @IBOutlet fileprivate weak var ruleLabel: UILabel!
+  @IBOutlet fileprivate weak var ruleValueLabel: UILabel!
+  @IBOutlet fileprivate weak var currentLabel: UILabel!
+  @IBOutlet fileprivate weak var currentValueLabel: UILabel!
+  @IBOutlet fileprivate weak var resultLabel: UILabel!
+  @IBOutlet fileprivate weak var resultValueLabel: UILabel!
+  @IBOutlet fileprivate weak var failedLabel: UILabel!
+    
   private var infoItem: InfoSection? {
     didSet {
       setupView()
@@ -92,7 +93,8 @@ class RuleErrorTVC: UITableViewCell {
       }
     }
   }
-  public func setupCell(with info: InfoSection) {
+    
+  func setupCell(with info: InfoSection) {
     self.infoItem = info
   }
 }

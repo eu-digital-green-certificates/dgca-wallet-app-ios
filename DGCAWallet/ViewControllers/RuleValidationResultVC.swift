@@ -37,12 +37,12 @@ final class RuleValidationResultVC: UIViewController {
     static let ruleCellId = "RuleErrorTVC"
   }
   
-  @IBOutlet weak var closeButton: UIButton!
-  @IBOutlet weak var resultLabel: UILabel!
-  @IBOutlet weak var resultIcon: UIImageView!
-  @IBOutlet weak var resultDescriptionLabel: UILabel!
-  @IBOutlet weak var noWarrantyLabel: UILabel!
-  @IBOutlet weak var tableView: UITableView!
+  @IBOutlet fileprivate weak var closeButton: UIButton!
+  @IBOutlet fileprivate weak var resultLabel: UILabel!
+  @IBOutlet fileprivate weak var resultIcon: UIImageView!
+  @IBOutlet fileprivate weak var resultDescriptionLabel: UILabel!
+  @IBOutlet fileprivate weak var noWarrantyLabel: UILabel!
+  @IBOutlet fileprivate weak var tableView: UITableView!
  
   var closeHandler: OnCloseHandler?
 
@@ -121,7 +121,7 @@ extension RuleValidationResultVC: UITableViewDataSource {
 }
 
 extension RuleValidationResultVC {
-  func validateCertLogicRules() -> HCertValidity {
+  private func validateCertLogicRules() -> HCertValidity {
     var validity: HCertValidity = .valid
     guard let hCert = hCert else { return validity }
       
@@ -206,7 +206,7 @@ extension RuleValidationResultVC {
 
 // MARK: External CertType from HCert type
 extension RuleValidationResultVC {
-  func getCertificationType(type: SwiftDGC.HCertType) -> CertificateType {
+  private func getCertificationType(type: SwiftDGC.HCertType) -> CertificateType {
     var certType: CertificateType = .general
     switch type {
     case .recovery:

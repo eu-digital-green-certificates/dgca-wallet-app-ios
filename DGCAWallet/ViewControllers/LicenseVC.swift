@@ -30,9 +30,9 @@ import SwiftyJSON
 import WebKit
 
 class LicenseVC: UIViewController, WKNavigationDelegate {
-  @IBOutlet weak var packageNameLabel: UILabel!
-  @IBOutlet weak var licenseWebView: WKWebView!
-  @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+  @IBOutlet fileprivate weak var packageNameLabel: UILabel!
+  @IBOutlet fileprivate weak var licenseWebView: WKWebView!
+  @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
 
   var licenseObject: JSON = []
 

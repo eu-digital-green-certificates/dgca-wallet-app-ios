@@ -103,8 +103,7 @@
 		CE8096D9263B07BB00A65AD6 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8096D8263B07BB00A65AD6 /* UIColor.swift */; };
 		CE81533A263FF7EC0030D777 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = CE815339263FF7EC0030D777 /* README.md */; };
 		CE8912FB2634C6B900CB92AF /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CE8912FA2634C6B900CB92AF /* Alamofire */; };
-		CE891305263581D900CB92AF /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE891304263581D900CB92AF /* Home.swift */; };
-		CEA1556B262F784E0024B7AC /* SelfSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA1556A262F784E0024B7AC /* SelfSizedTableView.swift */; };
+		CE891305263581D900CB92AF /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE891304263581D900CB92AF /* HomeController.swift */; };
 		CEA15570262F79DE0024B7AC /* InfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA1556F262F79DE0024B7AC /* InfoCell.swift */; };
 		CEA6D6EC261F8D2700715333 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6D6EB261F8D2700715333 /* AppDelegate.swift */; };
 		CEA6D6EE261F8D2700715333 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6D6ED261F8D2700715333 /* SceneDelegate.swift */; };
@@ -201,8 +200,7 @@
 		CE6D4A45264835F100A5D33D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CE8096D8263B07BB00A65AD6 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		CE815339263FF7EC0030D777 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
-		CE891304263581D900CB92AF /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
-		CEA1556A262F784E0024B7AC /* SelfSizedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizedTableView.swift; sourceTree = "<group>"; };
+		CE891304263581D900CB92AF /* HomeController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		CEA1556F262F79DE0024B7AC /* InfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCell.swift; sourceTree = "<group>"; };
 		CEA6D6E8261F8D2700715333 /* DGCAWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DGCAWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEA6D6EB261F8D2700715333 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -360,7 +358,7 @@
 				CE13CF09262DCDDA0070C80E /* CertificateViewer.swift */,
 				CED949C9263B50CE00883558 /* MainListController.swift */,
 				CEE9DA54263C7D4000A31532 /* CertCode.swift */,
-				CE891304263581D900CB92AF /* Home.swift */,
+				CE891304263581D900CB92AF /* HomeController.swift */,
 				CEDABD48263C70EF007A9B97 /* CertPages.swift */,
 				CEDABD3F263C5FF4007A9B97 /* CertTable.swift */,
 				CE4BD253264FF28900689FD6 /* Settings.swift */,
@@ -387,7 +385,6 @@
 				5C50CF172697009E0015EE29 /* CheckValidityCells */,
 				CE13CF22262DDF810070C80E /* RoundedButton.swift */,
 				CE260F55263DD1720083A200 /* WalletCell.swift */,
-				CEA1556A262F784E0024B7AC /* SelfSizedTableView.swift */,
 				CEA1556F262F79DE0024B7AC /* InfoCell.swift */,
 				DA01661F26554E02005B73A1 /* LicenseCell.swift */,
 				5C00073526D625D0002E5013 /* PDFTableViewCell.swift */,
@@ -717,7 +714,6 @@
 				5C556D4926F9F8AC007E2C2E /* CertificatesListVC.swift in Sources */,
 				FEC54BE6271F27180048B6BC /* AccessTokenService.swift in Sources */,
 				5C00073226D3AEDE002E5013 /* PdfDataStorage.swift in Sources */,
-				CEA1556B262F784E0024B7AC /* SelfSizedTableView.swift in Sources */,
 				5C00071926CFAED2002E5013 /* UIImage+.swift in Sources */,
 				FEBE53B62721A3EA003B61FB /* LimitationCell.swift in Sources */,
 				CE8096D9263B07BB00A65AD6 /* UIColor.swift in Sources */,
@@ -737,7 +733,7 @@
 				CEA6D6EC261F8D2700715333 /* AppDelegate.swift in Sources */,
 				DA01661C265541C0005B73A1 /* LicenseList.swift in Sources */,
 				5C00073626D625D0002E5013 /* PDFTableViewCell.swift in Sources */,
-				CE891305263581D900CB92AF /* Home.swift in Sources */,
+				CE891305263581D900CB92AF /* HomeController.swift in Sources */,
 				5C00071C26D38CC3002E5013 /* NFCHelper.swift in Sources */,
 				CE260F56263DD1720083A200 /* WalletCell.swift in Sources */,
 				D23EF7A7272057F40097D82B /* ServerTVC.swift in Sources */,

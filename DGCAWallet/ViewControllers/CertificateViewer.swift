@@ -49,10 +49,12 @@ class CertificateViewerVC: UIViewController {
   
   var hCert: HCert?
   var certDate: Date?
+  var tan: String?
   
+  weak var delegate: CertificateManaging?
+
   public var isSaved = true
   private var isEditMode = false
-  weak var delegate: CertificateManaging?
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
@@ -99,8 +101,9 @@ class CertificateViewerVC: UIViewController {
   @IBAction func closeButtonClick() {
     if isSaved {
        dismiss(animated: true, completion: nil)
+    } else {
+      saveCert()
     }
-    saveCert()
   }
 
   @IBAction func cancelButtonClick() {

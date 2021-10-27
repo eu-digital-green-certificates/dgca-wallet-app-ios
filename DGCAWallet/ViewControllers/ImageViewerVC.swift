@@ -31,10 +31,10 @@ import SwiftDGC
 
 class ImageViewerVC: UIViewController {
 
-  @IBOutlet weak var closeButton: UIButton!
-  @IBOutlet weak var shareButton: UIButton!
-  @IBOutlet weak var imageView: UIImageView!
-  @IBOutlet weak var scrollView: UIScrollView!
+  @IBOutlet fileprivate weak var closeButton: UIButton!
+  @IBOutlet fileprivate weak var shareButton: UIButton!
+  @IBOutlet fileprivate weak var imageView: UIImageView!
+  @IBOutlet fileprivate weak var scrollView: UIScrollView!
     
   var savedImage: SavedImage?
   

@@ -28,10 +28,10 @@ import UIKit
 import SwiftDGC
 
 class InfoCell: UITableViewCell {
-  @IBOutlet weak var headerLabel: UILabel!
-  @IBOutlet weak var contentLabel: UILabel!
+  @IBOutlet fileprivate weak var headerLabel: UILabel!
+  @IBOutlet fileprivate weak var contentLabel: UILabel!
 
-  func draw(_ info: InfoSection) {
+  func setupCell(_ info: InfoSection) {
     headerLabel?.text = info.header
     contentLabel?.text = info.content
     let fontSize = contentLabel.font.pointSize

@@ -27,7 +27,6 @@ class ScanWalletController: UIViewController {
 
   private var captureSession: AVCaptureSession?
   weak var delegate: ScanWalletDelegate?
-  let applicationType: AppType = .wallet
   
   lazy var detectBarcodeRequest = VNDetectBarcodesRequest { request, error in
     guard error == nil else {
@@ -120,10 +119,8 @@ class ScanWalletController: UIViewController {
        button.translatesAutoresizingMaskIntoConstraints = false
        button.backgroundColor = .clear
        button.setAttributedTitle(
-         NSAttributedString(
-           string: l10n("btn.cancel"),
-           attributes: [.font: UIFont.systemFont(ofSize: 22, weight: .semibold),
-             .foregroundColor: UIColor.white]), for: .normal)
+         NSAttributedString(string: l10n("btn.cancel"), attributes: [.font: UIFont.systemFont(ofSize: 22,
+            weight: .semibold), .foregroundColor: UIColor.white]), for: .normal)
        button.addTarget(self, action: #selector(dismissScaner), for: .touchUpInside)
        view.addSubview(button)
         
@@ -152,7 +149,7 @@ extension ScanWalletController  {
     case .denied, .restricted:
       showPermissionsAlert()
     default:
-      return
+      break
     }
   }
   
@@ -200,7 +197,6 @@ extension ScanWalletController  {
             else { return }
             potentialQRCode = potentialCode
           }
-          
           print(potentialQRCode.symbology)
           observationHandler(payloadS: potentialQRCode.payloadStringValue)
         }
@@ -209,14 +205,12 @@ extension ScanWalletController  {
   }
   
   func observationHandler(payloadS: String?) {
-    let decoder = JSONDecoder()
-    
-    if var hCert = HCert(from: payloadS ?? "", applicationType: applicationType) {
+    if var hCert = HCert(from: payloadS ?? "", applicationType: .wallet) {
       hCert.ruleCountryCode = selectedCountryCode
       delegate?.walletController(self, didScanCertificate: hCert)
       return
     } else if let payloadData = (payloadS ?? "").data(using: .utf8),
-        let ticketing = try? decoder.decode(CheckInQR.self, from: payloadData), applicationType == .wallet {
+        let ticketing = try? JSONDecoder().decode(CheckInQR.self, from: payloadData) {
         delegate?.walletController(self, didScanInfo: ticketing)
     } else {
         //TODO Add error handler
@@ -233,7 +227,7 @@ extension ScanWalletController: AVCaptureVideoDataOutputSampleBufferDelegate {
     do {
       try imageRequestHandler.perform([detectBarcodeRequest])
     } catch {
-      print(error)
+      print(error.localizedDescription)
     }
   }
 }

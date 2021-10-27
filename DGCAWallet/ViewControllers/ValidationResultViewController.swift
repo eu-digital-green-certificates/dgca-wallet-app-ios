@@ -36,10 +36,10 @@ enum ValidationResultType {
 
 class ValidationResultViewController: UIViewController {
   
-  @IBOutlet weak var titleLabel: UILabel!
-  @IBOutlet weak var iconImage: UIImageView!
-  @IBOutlet weak var detailLabel: UILabel!
-  @IBOutlet weak var limitationsTableView: UITableView!
+  @IBOutlet fileprivate weak var titleLabel: UILabel!
+  @IBOutlet fileprivate weak var iconImage: UIImageView!
+  @IBOutlet fileprivate weak var detailLabel: UILabel!
+  @IBOutlet fileprivate weak var limitationsTableView: UITableView!
   
   public var validationResultModel : AccessTokenResponse?
   

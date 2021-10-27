@@ -35,8 +35,8 @@ class ServersListVC: UIViewController {
       static let showCertificatesList = "showCertificatesList"
     }
 
-  @IBOutlet weak var tableView: UITableView!
-  @IBOutlet weak var nextButton: UIButton!
+  @IBOutlet fileprivate weak var tableView: UITableView!
+  @IBOutlet fileprivate weak var nextButton: UIButton!
   
   private var serverListInfo: ServerListResponse?
   private var listOfServices = [ValidationService]()

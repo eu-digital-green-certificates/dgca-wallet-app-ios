@@ -32,8 +32,8 @@ import SwiftDGC
 
 class ServerCell: UITableViewCell {
 
-  @IBOutlet weak var nameLabel: UILabel!
-  @IBOutlet weak var descriptionLabel: UILabel!
+  @IBOutlet fileprivate  weak var nameLabel: UILabel!
+  @IBOutlet fileprivate  weak var descriptionLabel: UILabel!
   
   private var service: ValidationService? {
     didSet {
@@ -51,7 +51,7 @@ class ServerCell: UITableViewCell {
     }
   }
 
-  public func setService(serv: ValidationService) {
+  func setService(serv: ValidationService) {
     service = serv
   }
     

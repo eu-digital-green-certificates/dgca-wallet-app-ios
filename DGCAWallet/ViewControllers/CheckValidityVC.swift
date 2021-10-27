@@ -37,9 +37,9 @@ final class CheckValidityVC: UIViewController {
     static let bottomOffset: CGFloat = 32.0
   }
   
-  @IBOutlet private weak var closeButton: UIButton!
-  @IBOutlet private weak var checkValidityButton: UIButton!
-  @IBOutlet private weak var tableView: UITableView!
+  @IBOutlet fileprivate weak var closeButton: UIButton!
+  @IBOutlet fileprivate weak var checkValidityButton: UIButton!
+  @IBOutlet fileprivate weak var tableView: UITableView!
     
   private var items: [ValidityCellModel] = []
   private var hCert: HCert?

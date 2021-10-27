@@ -37,10 +37,10 @@ class CellWithDateAndCountryTVC: UITableViewCell {
       static let userDefaultsCountryKey = "UDWalletCountryKey"
     }
 
-  @IBOutlet weak var destinationLabel: UILabel!
-  @IBOutlet weak var countryPicker: UIPickerView!
-  @IBOutlet weak var dateLabel: UILabel!
-  @IBOutlet weak var datePicker: UIDatePicker!
+  @IBOutlet fileprivate weak var destinationLabel: UILabel!
+  @IBOutlet fileprivate weak var countryPicker: UIPickerView!
+  @IBOutlet fileprivate weak var dateLabel: UILabel!
+  @IBOutlet fileprivate weak var datePicker: UIDatePicker!
     
   private var countryItems: [CountryModel] = []
   var dataHandler: OnDateChangedHandler?

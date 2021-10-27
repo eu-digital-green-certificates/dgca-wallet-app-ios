@@ -1086,10 +1086,10 @@
             </objects>
             <point key="canvasLocation" x="215.94202898550725" y="118.52678571428571"/>
         </scene>
-        <!--HomeVC-->
+        <!--Home Controller-->
         <scene sceneID="6EO-ab-Dh1">
             <objects>
-                <viewController id="ysI-lD-MMP" customClass="HomeVC" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ysI-lD-MMP" customClass="HomeController" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="nK0-Ka-oxK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1122,11 +1122,17 @@
                                     <constraint firstAttribute="width" secondItem="Yx8-qg-PWV" secondAttribute="height" multiplier="7:2" id="vQY-Up-OpN"/>
                                 </constraints>
                             </imageView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="9nO-9e-hKR">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2IL-4a-0QH"/>
                         <color key="backgroundColor" name="walletBlue"/>
                         <constraints>
                             <constraint firstItem="Y0y-FM-nxg" firstAttribute="height" secondItem="nK0-Ka-oxK" secondAttribute="height" multiplier="0.15" id="063-fn-psP"/>
+                            <constraint firstItem="9nO-9e-hKR" firstAttribute="centerX" secondItem="nK0-Ka-oxK" secondAttribute="centerX" id="0zh-Vr-Azd"/>
+                            <constraint firstItem="9nO-9e-hKR" firstAttribute="centerY" secondItem="nK0-Ka-oxK" secondAttribute="centerY" id="1EC-kR-o8z"/>
                             <constraint firstItem="2IL-4a-0QH" firstAttribute="bottom" secondItem="Yx8-qg-PWV" secondAttribute="bottom" constant="32" id="5iX-L0-KYG"/>
                             <constraint firstItem="N7y-9d-COU" firstAttribute="top" secondItem="bgA-BE-q6I" secondAttribute="bottom" constant="8" id="Kcp-bY-ngv"/>
                             <constraint firstAttribute="bottom" secondItem="4uz-H9-TEA" secondAttribute="bottom" id="Nf8-2D-RJX"/>
@@ -1144,6 +1150,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="OA6-WB-Bsu"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="9nO-9e-hKR" id="cNx-Wq-0Wh"/>
                         <segue destination="BcE-gA-Tuj" kind="show" identifier="list" id="GGI-dr-YbQ"/>
                     </connections>
                 </viewController>
@@ -1154,16 +1161,16 @@
     </scenes>
     <designables>
         <designable name="MID-ne-Jur">
-            <size key="intrinsicContentSize" width="77" height="35"/>
+            <size key="intrinsicContentSize" width="101" height="47"/>
         </designable>
         <designable name="Rcx-o5-KDY">
-            <size key="intrinsicContentSize" width="42" height="35"/>
+            <size key="intrinsicContentSize" width="66" height="47"/>
         </designable>
         <designable name="WbA-kC-hOb">
-            <size key="intrinsicContentSize" width="42" height="35"/>
+            <size key="intrinsicContentSize" width="66" height="47"/>
         </designable>
         <designable name="fol-rA-9gU">
-            <size key="intrinsicContentSize" width="32" height="39"/>
+            <size key="intrinsicContentSize" width="56" height="51"/>
         </designable>
     </designables>
     <resources>
