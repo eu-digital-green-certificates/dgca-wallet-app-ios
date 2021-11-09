@@ -210,6 +210,7 @@ extension CertificateViewerVC {
     activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
     self.present(activityViewController, animated: true, completion: nil)
   }
+  
   private func shareQrCodeLikePDF() {
     guard let hCert = hCert, let savedImage = hCert.qrCode else { return }
       

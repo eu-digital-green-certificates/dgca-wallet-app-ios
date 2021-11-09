@@ -31,13 +31,16 @@ import SwiftDGC
 class CertLogicManager {
   static var shared = CertLogicManager()
 
-  var certLogicEngine: CertLogicEngine = CertLogicEngine(schema: SwiftDGC.euDgcSchemaV1, rules: [])
+  var certLogicEngine = CertLogicEngine(schema: SwiftDGC.euDgcSchemaV1, rules: [])
+
   func setRules(ruleList: [CertLogic.Rule]) {
     certLogicEngine.updateRules(rules: ruleList)
   }
+    
   func validate(filter: FilterParameter, external: ExternalParameter, payload: String) -> [ValidationResult] {
     return certLogicEngine.validate(filter: filter, external: external, payload: payload)
   }
+    
   func getRuleDetailsError(rule: Rule, filter: FilterParameter) -> Dictionary<String, String> {
     return certLogicEngine.getDetailsOfError(rule: rule, filter: filter)
   }

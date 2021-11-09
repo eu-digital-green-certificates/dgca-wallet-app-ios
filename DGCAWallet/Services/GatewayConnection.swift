@@ -326,21 +326,18 @@ extension GatewayConnection {
     request.httpBody = parametersData
     
     let session = URLSession.shared.dataTask(with: request, completionHandler: { data,response,error in
-      
       guard let responseData = data,
             let tokenJWT = String(data: responseData, encoding: .utf8)
       else {
         completion(nil)
         return
       }
-      
       guard let decodedToken = try? decode(jwt: tokenJWT),
             let jsonData = try? JSONSerialization.data(withJSONObject: decodedToken.body)
       else {
         completion(nil)
         return
       }
-      
       let decoder = JSONDecoder()
       do {
         accessTokenResponse = try decoder.decode(AccessTokenResponse.self, from: jsonData)

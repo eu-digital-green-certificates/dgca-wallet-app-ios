@@ -19,9 +19,6 @@ import AVFoundation
 }
 
 class ScanWalletController: UIViewController {
-  private enum Constants {
-    static let userDefaultsCountryKey = "UDCountryKey"
-  }
 
   private var captureSession: AVCaptureSession?
   weak var delegate: ScanWalletDelegate?
@@ -33,34 +30,9 @@ class ScanWalletController: UIViewController {
     }
     self.processClassification(request)
   }
-  private var selectedCountryCode: String? {
-    return self.selectedCounty?.code
-  }
 
   private var camView: UIView!
     
-  //Selected country code
-  private var selectedCounty: CountryModel? {
-    set {
-      let userDefaults = UserDefaults.standard
-      do {
-        try userDefaults.setObject(newValue, forKey: Constants.userDefaultsCountryKey)
-      } catch {
-        print(error.localizedDescription)
-      }
-    }
-    get {
-      let userDefaults = UserDefaults.standard
-      do {
-        let selected = try userDefaults.getObject(forKey: Constants.userDefaultsCountryKey, castTo: CountryModel.self)
-        return selected
-      } catch {
-        print(error.localizedDescription)
-        return nil
-      }
-    }
-  }
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     camView = UIView(frame: .zero)
@@ -178,7 +150,7 @@ extension ScanWalletController  {
       if captureSession?.isRunning == true {
         camView.layer.sublayers?.removeSubrange(1...)
         
-        for barcode in barcodes {
+        if let barcode = barcodes.first {
           var potentialQRCode: VNBarcodeObservation
           if #available(iOS 15, *) {
             guard let potentialCode = barcode as? VNBarcodeObservation,
@@ -203,7 +175,7 @@ extension ScanWalletController  {
   private func observationHandler(payloadString: String?) {
     guard let barcodeString = payloadString, !barcodeString.isEmpty else { return }
     do {
-      let countryCode = self.selectedCounty?.code
+      let countryCode = Wallet.shared.selectedCountryCode
       let hCert = try HCert(from: barcodeString, ruleCountryCode: countryCode)
       delegate?.walletController(self, didScanCertificate: hCert)
       

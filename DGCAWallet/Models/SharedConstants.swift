@@ -37,6 +37,8 @@ enum SharedConstants {
     static let imageStorageName = "images_secure"
     static let pdfStorageName = "pdfs_secure"
 
+    static let userDefaultsCountryKey = "UDCountryKey"
+    
     static let linkToOpenGitHubSource = "https://github.com/eu-digital-green-certificates"
     static let linkToOopenEuCertDoc = "https://ec.europa.eu/health/ehealth/covid-19_en"
 }

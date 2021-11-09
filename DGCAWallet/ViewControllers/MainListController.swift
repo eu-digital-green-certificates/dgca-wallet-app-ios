@@ -54,7 +54,6 @@ class MainListController: UIViewController {
   
   private var scannedToken: String = ""
   private var loading = false
-  weak var delegate: ScanWalletDelegate?
 
   override var preferredStatusBarStyle: UIStatusBarStyle {
     return .lightContent
@@ -163,24 +162,40 @@ class MainListController: UIViewController {
   }
 
   func onNFCResult(success: Bool, message: String) {
-    guard success else {
-      DGCLogger.logInfo("NFC: No success with message: \(message)")
-      return
-    }
-    DGCLogger.logInfo("NFC: \(message)")
-    do {
-      let countryCode = self.selectedCounty?.code
-      let hCert = try HCert(from: message, ruleCountryCode: countryCode)
-      delegate?.walletController(self, didScanCertificate: hCert)
+    let barcodeString = message
+    guard success, !barcodeString.isEmpty else { return }
 
-    } catch let error as CertificateParsingError {
-      //throw error
-      DGCLogger.logInfo("Error when validating the certificate from NFC? \(message)")
-      delegate?.walletController(self, didFailWithError: error)
-    } catch {
-      ()
+      DispatchQueue.main.async { [weak self] in
+        print("\(message)")
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        appDelegate?.isNFCFunctionality = false
+        if #available(iOS 13.0, *) {
+          let scene = self?.sceneDelegate
+          scene?.isNFCFunctionality = false
+        }
+        
+        do {
+          let countryCode = Wallet.shared.selectedCountryCode
+          let hCert = try HCert(from: barcodeString, ruleCountryCode: countryCode)
+          self?.saveQrCode(cert: hCert)
+          
+        } catch {
+          let alertController: UIAlertController = {
+              let controller = UIAlertController(title: l10n("error"), message: l10n("read.dcc.from.nfc"),
+                  preferredStyle: .alert)
+            let actionRetry = UIAlertAction(title: l10n("retry"), style: .default) { _ in
+              self?.scanNFC()
+            }
+              controller.addAction(actionRetry)
+            let actionOk = UIAlertAction(title: l10n("btn.ok"), style: .default)
+            controller.addAction(actionOk)
+              return controller
+          }()
+          self?.present(alertController, animated: true)
+
+        }
+      }
     }
-  }
 
   @IBAction func settingsTapped(_ sender: UIButton) {
     self.performSegue(withIdentifier: SegueIdentifiers.showSettingsController, sender: nil)
@@ -510,12 +525,17 @@ extension MainListController: UIImagePickerControllerDelegate, UINavigationContr
 
 extension MainListController {
   private func tryFoundQRCodeIn(image: UIImage) {
-    let hCert = HCert(from: qrString)
     if let qrString = image.qrCodeString() {
-        saveQrCode(cert: hCert)
-        return
+      do {
+        let countryCode = Wallet.shared.selectedCountryCode
+        let hCert = try HCert(from: qrString, ruleCountryCode: countryCode)
+        self.saveQrCode(cert: hCert)
+      } catch {
+      }
+      
+    } else {
+      self.saveImage(image: image)
     }
-    self.saveImage(image: image)
   }
   
   private func saveQrCode(cert: HCert) {
@@ -587,10 +607,14 @@ extension MainListController: UIDocumentPickerDelegate {
           return
       }
       for image in images {
-        let hCert = HCert(from: qrString)
         if let qrString = image.qrCodeString() {
-            saveQrCode(cert: hCert)
-            return
+          do {
+            let countryCode = Wallet.shared.selectedCountryCode
+            let hCert = try HCert(from: qrString, ruleCountryCode: countryCode)
+            self.saveQrCode(cert: hCert)
+          } catch {
+          }
+          return
         }
       }
       savePDFFile(url: url)

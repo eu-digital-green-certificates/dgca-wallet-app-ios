@@ -19,7 +19,7 @@
  * ---license-end
  */
 //  
-//  LicenseVC.swift
+//  LicenseController.swift
 //  DGCAWallet
 //  
 //  Created by Paul Ballmann on 19.05.21.
@@ -29,7 +29,7 @@ import UIKit
 import SwiftyJSON
 import WebKit
 
-class LicenseVC: UIViewController, WKNavigationDelegate {
+class LicenseController: UIViewController, WKNavigationDelegate {
   @IBOutlet fileprivate weak var packageNameLabel: UILabel!
   @IBOutlet fileprivate weak var licenseWebView: WKWebView!
   @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!

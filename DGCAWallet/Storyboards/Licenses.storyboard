@@ -12,7 +12,7 @@
         <!--Licenses-->
         <scene sceneID="cgR-sH-ApP">
             <objects>
-                <tableViewController id="2c9-yX-fqe" customClass="LicenseTableVC" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="2c9-yX-fqe" customClass="LicenseTableController" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="nJy-nY-9un">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -129,7 +129,7 @@
         <!--Licenses-->
         <scene sceneID="LAl-l2-xNj">
             <objects>
-                <navigationController storyboardIdentifier="Licenses" title="Licenses" id="CQO-5P-5xc" customClass="LicenseList" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Licenses" title="Licenses" id="CQO-5P-5xc" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="Oiv-ew-Bmn">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
