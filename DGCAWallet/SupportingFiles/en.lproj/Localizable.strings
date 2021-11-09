@@ -46,7 +46,7 @@
 "cert.delete.title" = "Delete Certificate";
 "cert.delete.body" = "Are you sure you want to delete this certificate? This action cannot be undone.";
 "tap-to-reveal" = "tap to reveal";
-"app-version" = "App Version %@";
+"app-version" = "App Version %@(%@)";
 "button_check_validity" = "Check Validity";
 "button_i_agree" = "I Agree, check validity";
 "failed_for_country" = "Failed for %@ (see settings)";

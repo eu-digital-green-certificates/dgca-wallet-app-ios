@@ -55,11 +55,6 @@ class HomeController: UIViewController {
 
   var loaded = false
     
-  func loadComplete() {
-    loaded = true
-    checkId()
-  }
-
   private func performServicesInitialization() {
     self.activityIndicator.startAnimating()
     RulesDataStorage.initialize {
@@ -78,7 +73,8 @@ class HomeController: UIViewController {
                         SecureBackground.image = renderer.image { rendererContext in
                           self.view.layer.render(in: rendererContext.cgContext)
                         }
-                        self.loadComplete()
+                        self.loaded = true
+                        self.checkId()
                       }
                     } // end localData init
                 }
