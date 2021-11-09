@@ -54,6 +54,7 @@ class MainListController: UIViewController {
   
   private var scannedToken: String = ""
   private var loading = false
+  weak var delegate: ScanWalletDelegate?
 
   override var preferredStatusBarStyle: UIStatusBarStyle {
     return .lightContent
@@ -78,9 +79,9 @@ class MainListController: UIViewController {
   }
 
   private func reloadAllComponents(completion: ((Bool) -> Void)? = nil) {
-    LocalData.initialize {
-      ImageDataStorage.initialize {
-        PdfDataStorage.initialize {
+    DataCenter.localDataManager.initialize {
+      DataCenter.imageDataManager.initialize {
+        DataCenter.pdfDataManager.initialize {
           completion?(true)
         }
       }
@@ -157,38 +158,30 @@ class MainListController: UIViewController {
       scene?.isNFCFunctionality = true
     }
     let helper = NFCHelper()
-    helper.onNFCResult = onNFCResult(success:msg:)
+    helper.onNFCResult = onNFCResult(success:message:)
     helper.restartSession()
   }
 
-  func onNFCResult(success: Bool, msg: String) {
-    DispatchQueue.main.async { [weak self] in
-      print("\(msg)")
-      let appDelegate = UIApplication.shared.delegate as? AppDelegate
-      appDelegate?.isNFCFunctionality = false
-      if #available(iOS 13.0, *) {
-        let scene = self?.sceneDelegate
-        scene?.isNFCFunctionality = false
-      }
-      if success, let hCert = HCert(from: msg, applicationType: .wallet) {
-        self?.saveQrCode(cert: hCert)
-      } else {
-        let alertController: UIAlertController = {
-            let controller = UIAlertController(title: l10n("error"), message: l10n("read.dcc.from.nfc"),
-                preferredStyle: .alert)
-          let actionRetry = UIAlertAction(title: l10n("retry"), style: .default) { _ in
-            self?.scanNFC()
-          }
-            controller.addAction(actionRetry)
-          let actionOk = UIAlertAction(title: l10n("btn.ok"), style: .default)
-          controller.addAction(actionOk)
-            return controller
-        }()
-        self?.present(alertController, animated: true)
-      }
+  func onNFCResult(success: Bool, message: String) {
+    guard success else {
+      DGCLogger.logInfo("NFC: No success with message: \(message)")
+      return
+    }
+    DGCLogger.logInfo("NFC: \(message)")
+    do {
+      let countryCode = self.selectedCounty?.code
+      let hCert = try HCert(from: message, ruleCountryCode: countryCode)
+      delegate?.walletController(self, didScanCertificate: hCert)
+
+    } catch let error as CertificateParsingError {
+      //throw error
+      DGCLogger.logInfo("Error when validating the certificate from NFC? \(message)")
+      delegate?.walletController(self, didFailWithError: error)
+    } catch {
+      ()
     }
   }
-  
+
   @IBAction func settingsTapped(_ sender: UIButton) {
     self.performSegue(withIdentifier: SegueIdentifiers.showSettingsController, sender: nil)
   }
@@ -242,6 +235,12 @@ class MainListController: UIViewController {
 }
 
 extension MainListController: ScanWalletDelegate {
+  func walletController(_ controller: ScanWalletController, didFailWithError error: CertificateParsingError) {
+    DispatchQueue.main.async {
+      self.showInfoAlert(withTitle: l10n("err.barcode"), message: l10n("err.misc"))
+    }
+  }
+  
   func disableBackgroundDetection() {
     SecureBackground.paused = true
   }
@@ -299,15 +298,15 @@ extension MainListController: CertificateManaging {
 
 extension MainListController: UITableViewDataSource {
   var listCertElements: [DatedCertString] {
-    return LocalData.sharedInstance.certStrings.reversed()
+    return DataCenter.certStrings.reversed()
   }
 
   var listImageElements: [SavedImage] {
-    return ImageDataStorage.sharedInstance.images
+    return DataCenter.images
   }
 
   var listPdfElements: [SavedPDF] {
-    return PdfDataStorage.sharedInstance.pdfs
+    return DataCenter.pdfs
   }
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -395,7 +394,7 @@ extension MainListController: UITableViewDelegate {
             actionTitle: l10n("btn.confirm"), cancelTitle: l10n("btn.cancel")) { [weak self] in
               if $0 {
                 self?.startActivity()
-                LocalData.sharedInstance.remove(withDate: savedCert.date) { _ in
+                DataCenter.localDataManager.remove(withDate: savedCert.date) { _ in
                   self?.reloadAllComponents(completion: { _ in
                     DispatchQueue.main.async {
                       self?.table.reloadData()
@@ -412,7 +411,7 @@ extension MainListController: UITableViewDelegate {
           actionTitle: l10n("btn.confirm"), cancelTitle: l10n("btn.cancel")) { [weak self] in
             if $0 {
               self?.startActivity()
-              ImageDataStorage.sharedInstance.deleteImage(with: savedImage.identifier) { _ in
+              DataCenter.imageDataManager.deleteImage(with: savedImage.identifier) { _ in
                 self?.reloadAllComponents(completion: { _ in
                   DispatchQueue.main.async {
                     self?.stopActivity()
@@ -428,7 +427,7 @@ extension MainListController: UITableViewDelegate {
           actionTitle: l10n("btn.confirm"), cancelTitle: l10n("btn.cancel")) { [weak self] in
             if $0 {
               self?.startActivity()
-              PdfDataStorage.sharedInstance.deletePDF(with: savedPDF.identifier) { _ in
+              DataCenter.pdfDataManager.deletePDF(with: savedPDF.identifier) { _ in
                 self?.reloadAllComponents(completion: { _ in
                   DispatchQueue.main.async {
                     self?.stopActivity()
@@ -511,7 +510,8 @@ extension MainListController: UIImagePickerControllerDelegate, UINavigationContr
 
 extension MainListController {
   private func tryFoundQRCodeIn(image: UIImage) {
-    if let qrString = image.qrCodeString(), let hCert = HCert(from: qrString, applicationType: .wallet) {
+    let hCert = HCert(from: qrString)
+    if let qrString = image.qrCodeString() {
         saveQrCode(cert: hCert)
         return
     }
@@ -528,11 +528,11 @@ extension MainListController {
       let savedImg = SavedImage(fileName: fileName ?? UUID().uuidString, image: image)
       
       self?.startActivity()
-      ImageDataStorage.sharedInstance.add(savedImage: savedImg) { _ in
+      DataCenter.imageDataManager.add(savedImage: savedImg) { _ in
         self?.reloadAllComponents { _ in
           DispatchQueue.main.async {
             self?.table.reloadData()
-            let rowCount = ImageDataStorage.sharedInstance.images.count
+            let rowCount = DataCenter.images.count
             let scrollToNum = rowCount > 0 ? rowCount - 1 : 0
             DispatchQueue.main.asyncAfter(deadline: .now()) {
               self?.stopActivity()
@@ -587,7 +587,8 @@ extension MainListController: UIDocumentPickerDelegate {
           return
       }
       for image in images {
-        if let qrString = image.qrCodeString(), let hCert = HCert(from: qrString, applicationType: .wallet) {
+        let hCert = HCert(from: qrString)
+        if let qrString = image.qrCodeString() {
             saveQrCode(cert: hCert)
             return
         }
@@ -600,11 +601,11 @@ extension MainListController: UIDocumentPickerDelegate {
       inputPlaceholder: l10n("pdf.confirm.placeholder")) { [weak self] fileName in
       let pdf = SavedPDF(fileName: fileName ?? UUID().uuidString, pdfUrl: url as URL)
       self?.startActivity()
-      PdfDataStorage.sharedInstance.add(savedPdf: pdf) { _ in
+      DataCenter.pdfDataManager.add(savedPdf: pdf) { _ in
         self?.reloadAllComponents(completion: { _ in
           DispatchQueue.main.async {
             self?.table.reloadData()
-            let rowsCount = ImageDataStorage.sharedInstance.images.count
+            let rowsCount = DataCenter.pdfs.count
             let scrollToNum = rowsCount > 0 ? rowsCount-1 : 0
             DispatchQueue.main.asyncAfter(deadline: .now()) {
               self?.stopActivity()

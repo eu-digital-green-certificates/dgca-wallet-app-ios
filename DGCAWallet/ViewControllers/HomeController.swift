@@ -30,64 +30,57 @@ import SwiftDGC
 
 class HomeController: UIViewController {
     
-    @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
+  @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
 
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-      return .lightContent
-    }
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
-
-    HCert.config.prefetchAllCodes = true
-    HCert.config.checkSignatures = false
-        
-    performServicesInitialization()
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
   }
 
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-
-    if loaded {
-      checkId()
-    }
+  var downloadedDataHasExpired: Bool {
+    return DataCenter.lastFetch.timeIntervalSinceNow < -SharedConstants.expiredDataInterval
+  }
+ 
+  var appWasRunWithOlderVersion: Bool {
+    return DataCenter.lastLaunchedAppVersion != DataCenter.appVersion
   }
 
-  var loaded = false
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
     
-  private func performServicesInitialization() {
-    self.activityIndicator.startAnimating()
-    RulesDataStorage.initialize {
-      GatewayConnection.rulesList { _ in
-        CertLogicEngineManager.sharedInstance.setRules(ruleList: RulesDataStorage.sharedInstance.rules)
-        GatewayConnection.loadRulesFromServer { _ in
-          CertLogicEngineManager.sharedInstance.setRules(ruleList: RulesDataStorage.sharedInstance.rules)
-          ValueSetsDataStorage.initialize {
-            GatewayConnection.valueSetsList { _ in
-              GatewayConnection.loadValueSetsFromServer { _ in
-                GatewayConnection.countryList { _ in
-                    LocalData.initialize {
-                      DispatchQueue.main.async { [unowned self] in
-                        self.activityIndicator.stopAnimating()
-                        let renderer = UIGraphicsImageRenderer(size: self.view.bounds.size)
-                        SecureBackground.image = renderer.image { rendererContext in
-                          self.view.layer.render(in: rendererContext.cgContext)
-                        }
-                        self.loaded = true
-                        self.checkId()
-                      }
-                    } // end localData init
-                }
-              }
-            }
-          }
-        }
+    DataCenter.initializeLocalData {[unowned self] in
+      DispatchQueue.main.async {
+        self.downloadedDataHasExpired || self.appWasRunWithOlderVersion ?  self.reloadStorageData() : self.initializeAllStorageData()
       }
-    } // End of Rules
+    }
   }
 
-  func checkId() {
-    if LocalData.sharedInstance.versionedConfig["outdated"].bool == true {
+  func initializeAllStorageData() {
+    self.activityIndicator.startAnimating()
+    DataCenter.initializeAllStorageData { [unowned self] in
+      DispatchQueue.main.async {
+        self.activityIndicator.stopAnimating()
+        self.loadComplete()
+      }
+    }
+  }
+  
+  func reloadStorageData() {
+    self.activityIndicator.startAnimating()
+    DataCenter.reloadStorageData { [unowned self] in
+      DispatchQueue.main.async {
+        self.activityIndicator.stopAnimating()
+        self.loadComplete()
+      }
+    }
+  }
+
+  private func loadComplete() {
+    let renderer = UIGraphicsImageRenderer(size: self.view.bounds.size)
+    SecureBackground.image = renderer.image { rendererContext in
+      self.view.layer.render(in: rendererContext.cgContext)
+    }
+    
+    if DataCenter.localDataManager.versionedConfig["outdated"].bool == true {
       showAlert(title: l10n("info.outdated"), subtitle: l10n("info.outdated.body"))
       return
     }
@@ -96,7 +89,7 @@ class HomeController: UIViewController {
         if success {
           self?.performSegue(withIdentifier: "list", sender: self)
         } else {
-          self?.checkId()
+          self?.loadComplete()
         }
       }
     }

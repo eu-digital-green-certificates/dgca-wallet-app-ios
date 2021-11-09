@@ -33,7 +33,7 @@ import CertLogic
 import JWTDecode
 
 struct GatewayConnection: ContextConnection {
-  public static func claim(cert: HCert, with tan: String?, completion: ((Bool, String?) -> Void)?) {
+  static func claim(cert: HCert, with tan: String?, completion: ((Bool, String?) -> Void)?) {
     guard var tan = tan, !tan.isEmpty else { return }
       
     // Replace dashes, spaces, etc. and turn into uppercase.
@@ -76,21 +76,22 @@ struct GatewayConnection: ContextConnection {
     }
   }
   
-  public static func fetchContext() {
+  static func fetchContext() {
     request( ["context"] ).response {
       guard let data = $0.data, let string = String(data: data, encoding: .utf8) else { return }
         
       let json = JSON(parseJSONC: string)
-      LocalData.sharedInstance.config.merge(other: json)
-      LocalData.sharedInstance.save()
-      if LocalData.sharedInstance.versionedConfig["outdated"].bool == true {
+      DataCenter.localDataManager.localData.config.merge(other: json)
+      DataCenter.saveLocalData()
+      if DataCenter.localDataManager.versionedConfig["outdated"].bool == true {
         let controller = UIApplication.shared.windows.first?.rootViewController as? UINavigationController
         controller?.popToRootViewController(animated: false)
       }
     }
   }
+  
   static var config: JSON {
-    LocalData.sharedInstance.versionedConfig
+    return DataCenter.localDataManager.versionedConfig
   }
 }
 
@@ -98,7 +99,7 @@ struct GatewayConnection: ContextConnection {
 
 extension GatewayConnection {
   // Country list
-  public static func getListOfCountry(completion: (([CountryModel]) -> Void)?) {
+  private static func getListOfCountry(completion: (([CountryModel]) -> Void)?) {
     request(["endpoints", "countryList"], method: .get).response {
       guard case let .success(result) = $0.result,
         let response = result,
@@ -115,25 +116,19 @@ extension GatewayConnection {
     }
   }
     
-  static func countryList(completion: (([CountryModel]) -> Void)? = nil) {
-    CountryDataStorage.initialize {
-      if CountryDataStorage.sharedInstance.countryCodes.count > 0 {
-        completion?(CountryDataStorage.sharedInstance.countryCodes.sorted(by: { $0.name < $1.name }))
+  static func loadCountryList(completion: (([CountryModel]) -> Void)? = nil) {
+    getListOfCountry { countryList in
+      DataCenter.countryCodes.removeAll()
+      countryList.forEach { country in
+        DataCenter.countryDataManager.add(country: country)
       }
-      getListOfCountry { countryList in
-        CountryDataStorage.sharedInstance.countryCodes.removeAll()
-        countryList.forEach { country in
-          CountryDataStorage.sharedInstance.add(country: country)
-        }
-        CountryDataStorage.sharedInstance.lastFetch = Date()
-        CountryDataStorage.sharedInstance.save()
-          completion?(CountryDataStorage.sharedInstance.countryCodes.sorted(by: { $0.name < $1.name }))
-      }
+      DataCenter.saveCountries()
+        completion?(DataCenter.countryCodes.sorted(by: { $0.name < $1.name }))
     }
   }
     
   // Rules
-  public static func getListOfRules(completion: (([CertLogic.Rule]) -> Void)?) {
+  static func getListOfRules(completion: (([CertLogic.Rule]) -> Void)?) {
     request(["endpoints", "rules"], method: .get).response {
       guard case let .success(result) = $0.result,
         let response = result,
@@ -142,7 +137,7 @@ extension GatewayConnection {
         
       let ruleHashes: [RuleHash] = CertLogicEngine.getItems(from: responseStr)
       // Remove old hashes
-      RulesDataStorage.sharedInstance.rules = RulesDataStorage.sharedInstance.rules.filter { rule in
+      DataCenter.rules = DataCenter.rules.filter { rule in
           return !ruleHashes.contains(where: { $0.hash == rule.hash})
       }
       // Downloading new hashes
@@ -150,7 +145,7 @@ extension GatewayConnection {
       let downloadingGroup = DispatchGroup()
       ruleHashes.forEach { ruleHash in
         downloadingGroup.enter()
-        if !RulesDataStorage.sharedInstance.isRuleExistWithHash(hash: ruleHash.hash) {
+        if !DataCenter.rulesDataManager.isRuleExistWithHash(hash: ruleHash.hash) {
           getRules(ruleHash: ruleHash) { rule in
             if let rule = rule {
               rulesItems.append(rule)
@@ -167,7 +162,8 @@ extension GatewayConnection {
       }
     }
   }
-  public static func getRules(ruleHash: CertLogic.RuleHash, completion: ((CertLogic.Rule?) -> Void)?) {
+  
+  static func getRules(ruleHash: CertLogic.RuleHash, completion: ((CertLogic.Rule?) -> Void)?) {
     request(["endpoints", "rules"], externalLink: "/\(ruleHash.country)/\(ruleHash.hash)", method: .get).response {
       guard case let .success(result) = $0.result,
         let response = result,
@@ -189,23 +185,17 @@ extension GatewayConnection {
       completion?(nil)
     }
   }
-  static func rulesList(completion: (([CertLogic.Rule]) -> Void)? = nil) {
-    RulesDataStorage.initialize {
-      completion?(RulesDataStorage.sharedInstance.rules)
-    }
-  }
   
   static func loadRulesFromServer(completion: (([CertLogic.Rule]) -> Void)? = nil) {
     getListOfRules { rulesList in
-      rulesList.forEach { RulesDataStorage.sharedInstance.add(rule: $0) }
-      RulesDataStorage.sharedInstance.lastFetch = Date()
-      RulesDataStorage.sharedInstance.save()
-      completion?(RulesDataStorage.sharedInstance.rules)
+      rulesList.forEach { DataCenter.rulesDataManager.add(rule: $0) }
+      DataCenter.saveRules()
+      completion?(DataCenter.rules)
     }
   }
   
   // ValueSets
-  public static func getListOfValueSets(completion: (([CertLogic.ValueSet]) -> Void)?) {
+  static func getListOfValueSets(completion: (([CertLogic.ValueSet]) -> Void)?) {
     request(["endpoints", "valuesets"], method: .get).response {
       guard case let .success(result) = $0.result, let response = result,
         let responseStr = String(data: response, encoding: .utf8)
@@ -213,7 +203,7 @@ extension GatewayConnection {
         
       let valueSetsHashes: [ValueSetHash] = CertLogicEngine.getItems(from: responseStr)
       // Remove old hashes
-      ValueSetsDataStorage.sharedInstance.valueSets = ValueSetsDataStorage.sharedInstance.valueSets.filter { valueSet in
+      DataCenter.valueSets = DataCenter.valueSets.filter { valueSet in
         return !valueSetsHashes.contains(where: { $0.hash == valueSet.hash})
       }
       // Downloading new hashes
@@ -221,7 +211,7 @@ extension GatewayConnection {
       let downloadingGroup = DispatchGroup()
       valueSetsHashes.forEach { valueSetHash in
         downloadingGroup.enter()
-        if !ValueSetsDataStorage.sharedInstance.isValueSetExistWithHash(hash: valueSetHash.hash) {
+        if !DataCenter.valueSetsDataManager.isValueSetExistWithHash(hash: valueSetHash.hash) {
           getValueSets(valueSetHash: valueSetHash) { valueSet in
             if let valueSet = valueSet {
               valueSetsItems.append(valueSet)
@@ -238,7 +228,8 @@ extension GatewayConnection {
       }
     }
   }
-  public static func getValueSets(valueSetHash: CertLogic.ValueSetHash, completion: ((CertLogic.ValueSet?) -> Void)?) {
+  
+  static func getValueSets(valueSetHash: CertLogic.ValueSetHash, completion: ((CertLogic.ValueSet?) -> Void)?) {
     request(["endpoints", "valuesets"], externalLink: "/\(valueSetHash.hash)", method: .get).response {
       guard case let .success(result) = $0.result,
         let response = result,
@@ -260,20 +251,14 @@ extension GatewayConnection {
       completion?(nil)
     }
   }
-  static func valueSetsList(completion: (([CertLogic.ValueSet]) -> Void)? = nil) {
-    ValueSetsDataStorage.initialize {
-      completion?(ValueSetsDataStorage.sharedInstance.valueSets)
-    }
-  }
   
   static func loadValueSetsFromServer(completion: (([CertLogic.ValueSet]) -> Void)? = nil){
     getListOfValueSets { valueSetsList in
       valueSetsList.forEach { valueSet in
-        ValueSetsDataStorage.sharedInstance.add(valueSet: valueSet)
+        DataCenter.valueSetsDataManager.add(valueSet: valueSet)
       }
-      ValueSetsDataStorage.sharedInstance.lastFetch = Date()
-      ValueSetsDataStorage.sharedInstance.save()
-      completion?(ValueSetsDataStorage.sharedInstance.valueSets)
+      DataCenter.saveSets()
+      completion?(DataCenter.valueSets)
     }
   }
   

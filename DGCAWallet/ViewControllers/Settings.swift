@@ -51,7 +51,7 @@ class SettingsTableVC: UITableViewController {
   }
 
   func openPrivacyDoc() {
-    let link = LocalData.sharedInstance.versionedConfig["privacyUrl"].string ?? ""
+    let link = DataCenter.localDataManager.versionedConfig["privacyUrl"].string ?? ""
     openUrl(link)
   }
 

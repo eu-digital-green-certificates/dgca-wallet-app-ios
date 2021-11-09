@@ -78,11 +78,7 @@ class CellWithDateAndCountryTVC: UITableViewCell {
       // Fallback on earlier versions
     }
     datePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
-    GatewayConnection.countryList { countryList in
-      DispatchQueue.main.async {
-        self.setListOfRuleCounties(list: countryList)
-      }
-    }
+    setListOfRuleCounties(list: DataCenter.countryCodes)
   }
 }
 

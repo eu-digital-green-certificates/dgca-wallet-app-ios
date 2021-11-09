@@ -19,26 +19,24 @@
  * ---license-end
  */
 //  
-//  CertLogicManager.swift
+//  SharedConstants.swift
 //  DGCAVerifier
 //  
-//  Created by Alexandr Chernyy on 23.06.2021.
+//  Created by Igor Khomiak on 05.11.2021.
 //  
+        
+
 import Foundation
-import CertLogic
-import SwiftDGC
 
-class CertLogicManager {
-  static var shared = CertLogicManager()
+enum SharedConstants {
+    static let expiredDataInterval: TimeInterval = 1 * 60 * 60 // 24 * 60 * 60
+    static let pubKeysStorageFilename = "secure"
+    static let countryStorageName = "country_secure"
+    static let rulesStorageName = "rules_secure"
+    static let valueSetsStorageName = "valueSets_secure"
+    static let imageStorageName = "images_secure"
+    static let pdfStorageName = "pdfs_secure"
 
-  var certLogicEngine: CertLogicEngine = CertLogicEngine(schema: SwiftDGC.euDgcSchemaV1, rules: [])
-  func setRules(ruleList: [CertLogic.Rule]) {
-    certLogicEngine.updateRules(rules: ruleList)
-  }
-  func validate(filter: FilterParameter, external: ExternalParameter, payload: String) -> [ValidationResult] {
-    return certLogicEngine.validate(filter: filter, external: external, payload: payload)
-  }
-  func getRuleDetailsError(rule: Rule, filter: FilterParameter) -> Dictionary<String, String> {
-    return certLogicEngine.getDetailsOfError(rule: rule, filter: filter)
-  }
+    static let linkToOpenGitHubSource = "https://github.com/eu-digital-green-certificates"
+    static let linkToOopenEuCertDoc = "https://ec.europa.eu/health/ehealth/covid-19_en"
 }
