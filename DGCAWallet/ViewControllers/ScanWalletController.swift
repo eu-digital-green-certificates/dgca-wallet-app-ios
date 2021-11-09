@@ -5,13 +5,10 @@
 //  Created by Igor Khomiak on 11.10.2021.
 //
 
-#if os(iOS)
 import UIKit
 import SwiftDGC
 import Vision
 import AVFoundation
-import SwiftCBOR
-import SwiftyJSON
 
  protocol ScanWalletDelegate: AnyObject {
   func walletController(_ controller: ScanWalletController, didScanCertificate certificate: HCert)
@@ -258,5 +255,3 @@ extension ScanWalletController {
     )
   }
 }
-
-#endif

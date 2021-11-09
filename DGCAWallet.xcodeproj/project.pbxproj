@@ -87,7 +87,6 @@
 		5CE07C842692E21E00A032F9 /* CertLogicEngineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE07C832692E21E00A032F9 /* CertLogicEngineManager.swift */; };
 		5CE07C852692E21E00A032F9 /* CertLogicEngineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE07C832692E21E00A032F9 /* CertLogicEngineManager.swift */; };
 		5CE07C862692E21E00A032F9 /* CertLogicEngineManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE07C832692E21E00A032F9 /* CertLogicEngineManager.swift */; };
-		CE13CF00262DCC180070C80E /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = CE13CEFF262DCC180070C80E /* FloatingPanel */; };
 		CE13CF0A262DCDDA0070C80E /* CertificateViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13CF09262DCDDA0070C80E /* CertificateViewer.swift */; };
 		CE13CF23262DDF810070C80E /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13CF22262DDF810070C80E /* RoundedButton.swift */; };
 		CE1D1EF6263597A2004C8919 /* LocalData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1D1EF5263597A2004C8919 /* LocalData.swift */; };
@@ -249,7 +248,6 @@
 				FE6E78882702033300C142A3 /* JWTDecode in Frameworks */,
 				CE6B330E2651A54800845B8E /* SwiftDGC in Frameworks */,
 				CE1F155C2639F9E700736D48 /* SwiftyJSON in Frameworks */,
-				CE13CF00262DCC180070C80E /* FloatingPanel in Frameworks */,
 				FE1D1A6B27148CBE00765A9A /* CryptoSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -543,7 +541,6 @@
 			);
 			name = DGCAWallet;
 			packageProductDependencies = (
-				CE13CEFF262DCC180070C80E /* FloatingPanel */,
 				CE8912FA2634C6B900CB92AF /* Alamofire */,
 				CE1F155B2639F9E700736D48 /* SwiftyJSON */,
 				CE6B330D2651A54800845B8E /* SwiftDGC */,
@@ -623,7 +620,6 @@
 			);
 			mainGroup = CEA6D6DF261F8D2700715333;
 			packageReferences = (
-				CE13CEFE262DCC180070C80E /* XCRemoteSwiftPackageReference "FloatingPanel" */,
 				CE8912F92634C6B900CB92AF /* XCRemoteSwiftPackageReference "Alamofire" */,
 				CE1F155A2639F9E700736D48 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				CE6B330C2651A54800845B8E /* XCRemoteSwiftPackageReference "dgca-app-core-ios" */,
@@ -1190,14 +1186,6 @@
 				kind = branch;
 			};
 		};
-		CE13CEFE262DCC180070C80E /* XCRemoteSwiftPackageReference "FloatingPanel" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SCENEE/FloatingPanel";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.3.0;
-			};
-		};
 		CE1F155A2639F9E700736D48 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
@@ -1245,11 +1233,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5CE07C742692E0D900A032F9 /* XCRemoteSwiftPackageReference "dgc-certlogic-ios" */;
 			productName = CertLogic;
-		};
-		CE13CEFF262DCC180070C80E /* FloatingPanel */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CE13CEFE262DCC180070C80E /* XCRemoteSwiftPackageReference "FloatingPanel" */;
-			productName = FloatingPanel;
 		};
 		CE1F155B2639F9E700736D48 /* SwiftyJSON */ = {
 			isa = XCSwiftPackageProductDependency;
