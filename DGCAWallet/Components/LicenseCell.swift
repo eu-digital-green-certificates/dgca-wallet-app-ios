@@ -26,7 +26,6 @@
 //
 
 import UIKit
-import SwiftDGC
 import SwiftyJSON
 
 class LicenseCell: UITableViewCell {

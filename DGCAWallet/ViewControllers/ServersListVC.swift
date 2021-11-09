@@ -27,7 +27,6 @@
 
 import UIKit
 import SwiftDGC
-import Security
 
 class ServersListVC: UIViewController {
     private enum Constants {

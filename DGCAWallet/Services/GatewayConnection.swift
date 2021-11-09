@@ -25,16 +25,12 @@
 //  Created by Yannick Spreen on 5/3/21.
 //  
 
-import Foundation
+import UIKit
 import Alamofire
 import SwiftDGC
 import SwiftyJSON
-import UIKit
 import CertLogic
-import CryptoKit
-import SwiftUI
 import JWTDecode
-import CryptoSwift
 
 struct GatewayConnection: ContextConnection {
   public static func claim(cert: HCert, with tan: String?, completion: ((Bool, String?) -> Void)?) {
@@ -88,7 +84,7 @@ struct GatewayConnection: ContextConnection {
       LocalData.sharedInstance.config.merge(other: json)
       LocalData.sharedInstance.save()
       if LocalData.sharedInstance.versionedConfig["outdated"].bool == true {
-        let controller = UIApplication.shared.windows[0].rootViewController as? UINavigationController
+        let controller = UIApplication.shared.windows.first?.rootViewController as? UINavigationController
         controller?.popToRootViewController(animated: false)
       }
     }

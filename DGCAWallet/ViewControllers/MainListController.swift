@@ -29,12 +29,8 @@
 
 import UIKit
 import SwiftDGC
-import SwiftCBOR
-import CoreImage
-import PDFKit
 import UniformTypeIdentifiers
 import MobileCoreServices
-import CoreServices
 
 class MainListController: UIViewController {
   

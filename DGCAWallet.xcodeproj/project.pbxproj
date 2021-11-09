@@ -432,13 +432,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		CEA15561262F6DA10024B7AC /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
 		CEA6D6DF261F8D2700715333 = {
 			isa = PBXGroup;
 			children = (
@@ -467,7 +460,6 @@
 				FEC54BDF271F24120048B6BC /* Ticketing */,
 				5C00072026D38D6D002E5013 /* DGCAWallet.entitlements */,
 				5C00071A26D38C5C002E5013 /* NFC */,
-				CEA15561262F6DA10024B7AC /* Protocols */,
 				CE157F8B262E24EC00FE4821 /* Models */,
 				CE13CF1E262DDE800070C80E /* SupportingFiles */,
 				CE13CF1D262DDE730070C80E /* Components */,

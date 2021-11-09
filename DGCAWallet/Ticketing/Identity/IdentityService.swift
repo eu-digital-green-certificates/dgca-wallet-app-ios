@@ -27,13 +27,6 @@
 import Foundation
 import Alamofire
 import SwiftDGC
-import SwiftyJSON
-import UIKit
-import CertLogic
-import CryptoKit
-import SwiftUI
-import JWTDecode
-import CryptoSwift
 
 import Foundation
 class IdentityService {
