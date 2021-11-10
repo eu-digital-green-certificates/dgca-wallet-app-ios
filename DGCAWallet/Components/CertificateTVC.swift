@@ -46,7 +46,7 @@ class CertificateCell: UITableViewCell {
     if let hCert = hCert {
       nameLabel.text = hCert.fullName
       descriptionLabel.text = hCert.exp.dateString
-      certTypeLabel.text = hCert.type.rawValue
+      certTypeLabel.text = hCert.certificateType.rawValue
     } else {
       nameLabel.text = ""
       descriptionLabel.text = ""

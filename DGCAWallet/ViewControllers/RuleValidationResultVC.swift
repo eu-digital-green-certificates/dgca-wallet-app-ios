@@ -125,7 +125,7 @@ extension RuleValidationResultVC {
     var validity: HCertValidity = .valid
     guard let hCert = hCert else { return validity }
       
-    let certType = getCertificationType(type: hCert.type)
+    let certType = getCertificationType(type: hCert.certificateType)
     if let countryCode = hCert.ruleCountryCode {
       let valueSets = DataCenter.valueSetsDataManager.getValueSetsForExternalParameters()
       let filterParameter = FilterParameter(validationClock: self.selectedDate,

@@ -136,6 +136,9 @@
 		D2E6CB0F273AA34200E9AF1F /* PdfDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E6CB0E273AA34200E9AF1F /* PdfDataManager.swift */; };
 		D2E6CB10273AA34200E9AF1F /* PdfDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E6CB0E273AA34200E9AF1F /* PdfDataManager.swift */; };
 		D2E6CB11273AA34200E9AF1F /* PdfDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E6CB0E273AA34200E9AF1F /* PdfDataManager.swift */; };
+		D2E6CB13273BE49300E9AF1F /* CertificateValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E6CB12273BE49300E9AF1F /* CertificateValidator.swift */; };
+		D2E6CB14273BE49300E9AF1F /* CertificateValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E6CB12273BE49300E9AF1F /* CertificateValidator.swift */; };
+		D2E6CB15273BE49300E9AF1F /* CertificateValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E6CB12273BE49300E9AF1F /* CertificateValidator.swift */; };
 		DA01661C265541C0005B73A1 /* LicenseTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01661B265541C0005B73A1 /* LicenseTableController.swift */; };
 		DA01661E26554992005B73A1 /* OpenSourceNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = DA01661D26554992005B73A1 /* OpenSourceNotices.json */; };
 		DA01662026554E02005B73A1 /* LicenseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01661F26554E02005B73A1 /* LicenseCell.swift */; };
@@ -223,7 +226,7 @@
 		CEA6D70F261F8D2900715333 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CED2725F26398683003D47A9 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		CED949C9263B50CE00883558 /* MainListController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = MainListController.swift; sourceTree = "<group>"; tabWidth = 2; };
-		CEDABD3F263C5FF4007A9B97 /* CertTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertTable.swift; sourceTree = "<group>"; };
+		CEDABD3F263C5FF4007A9B97 /* CertTable.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CertTable.swift; sourceTree = "<group>"; tabWidth = 2; };
 		CEDABD48263C70EF007A9B97 /* CertPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertPages.swift; sourceTree = "<group>"; };
 		CEDCA79B2639E77800FCB83E /* Package.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; name = Package.resolved; path = DGCAWallet.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved; sourceTree = SOURCE_ROOT; };
 		CEE9DA54263C7D4000A31532 /* CertCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertCode.swift; sourceTree = "<group>"; };
@@ -241,6 +244,7 @@
 		D2E6CB06273A94EA00E9AF1F /* LocalDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = LocalDataManager.swift; sourceTree = "<group>"; tabWidth = 2; };
 		D2E6CB0A273AA00200E9AF1F /* ImageDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ImageDataManager.swift; sourceTree = "<group>"; tabWidth = 2; };
 		D2E6CB0E273AA34200E9AF1F /* PdfDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = PdfDataManager.swift; sourceTree = "<group>"; tabWidth = 2; };
+		D2E6CB12273BE49300E9AF1F /* CertificateValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateValidator.swift; sourceTree = "<group>"; };
 		DA01661B265541C0005B73A1 /* LicenseTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseTableController.swift; sourceTree = "<group>"; };
 		DA01661D26554992005B73A1 /* OpenSourceNotices.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = OpenSourceNotices.json; sourceTree = "<group>"; };
 		DA01661F26554E02005B73A1 /* LicenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseCell.swift; sourceTree = "<group>"; };
@@ -428,6 +432,7 @@
 			isa = PBXGroup;
 			children = (
 				D2E6CB02273A948600E9AF1F /* SharedConstants.swift */,
+				D2E6CB12273BE49300E9AF1F /* CertificateValidator.swift */,
 				15F670A2273B0C8A00466C0F /* Wallet.swift */,
 				D2E6CAED273A93B400E9AF1F /* DataStorageManagement */,
 				5C50CF352697315B0015EE29 /* ValidityCellModel.swift */,
@@ -756,6 +761,7 @@
 				CEA15570262F79DE0024B7AC /* InfoCell.swift in Sources */,
 				FEC54BE4271F26990048B6BC /* IdentityService.swift in Sources */,
 				D24C8951272353610090398A /* ScanWalletController.swift in Sources */,
+				D2E6CB13273BE49300E9AF1F /* CertificateValidator.swift in Sources */,
 				D2E6CAFB273A943300E9AF1F /* DataStuctures.swift in Sources */,
 				CED949CA263B50CE00883558 /* MainListController.swift in Sources */,
 				5C50CF11269700710015EE29 /* RuleValidationResultVC.swift in Sources */,
@@ -808,6 +814,7 @@
 				D2E6CB10273AA34200E9AF1F /* PdfDataManager.swift in Sources */,
 				5C00073726D625D0002E5013 /* PDFTableViewCell.swift in Sources */,
 				5C50CF23269704240015EE29 /* UIViewController+.swift in Sources */,
+				D2E6CB14273BE49300E9AF1F /* CertificateValidator.swift in Sources */,
 				D2E6CAF0273A93F300E9AF1F /* DataCenter.swift in Sources */,
 				5CE07C852692E21E00A032F9 /* CertLogicManager.swift in Sources */,
 				5C50CF372697315B0015EE29 /* ValidityCellModel.swift in Sources */,
@@ -855,6 +862,7 @@
 				D2E6CB01273A944200E9AF1F /* CountryDataManager.swift in Sources */,
 				D2E6CAF5273A941200E9AF1F /* RulesDataManager.swift in Sources */,
 				D2E6CB11273AA34200E9AF1F /* PdfDataManager.swift in Sources */,
+				D2E6CB15273BE49300E9AF1F /* CertificateValidator.swift in Sources */,
 				5C50CF2926972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

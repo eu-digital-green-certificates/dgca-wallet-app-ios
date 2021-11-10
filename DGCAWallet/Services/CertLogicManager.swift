@@ -29,19 +29,30 @@ import CertLogic
 import SwiftDGC
 
 class CertLogicManager {
-  static var shared = CertLogicManager()
+    static let shared = CertLogicManager()
 
-  var certLogicEngine = CertLogicEngine(schema: SwiftDGC.euDgcSchemaV1, rules: [])
-
-  func setRules(ruleList: [CertLogic.Rule]) {
-    certLogicEngine.updateRules(rules: ruleList)
-  }
+    var certLogicEngine = CertLogicEngine(schema: SwiftDGC.euDgcSchemaV1, rules: [])
+    func setRules(ruleList: [CertLogic.Rule]) {
+      certLogicEngine.updateRules(rules: ruleList)
+    }
     
-  func validate(filter: FilterParameter, external: ExternalParameter, payload: String) -> [ValidationResult] {
-    return certLogicEngine.validate(filter: filter, external: external, payload: payload)
-  }
+    func validate(filter: FilterParameter, external: ExternalParameter, payload: String) -> [ValidationResult] {
+      return certLogicEngine.validate(filter: filter, external: external, payload: payload)
+    }
+      
+    func validateIssuer(filter: FilterParameter, external: ExternalParameter, payload: String) -> [ValidationResult] {
+      return certLogicEngine.validate(filter: filter, external: external, payload: payload, validationType: .issuer)
+    }
     
-  func getRuleDetailsError(rule: Rule, filter: FilterParameter) -> Dictionary<String, String> {
-    return certLogicEngine.getDetailsOfError(rule: rule, filter: filter)
-  }
+    func validateDestination(filter: FilterParameter, external: ExternalParameter, payload: String) -> [ValidationResult] {
+      return certLogicEngine.validate(filter: filter, external: external, payload: payload, validationType: .destination)
+    }
+    
+    func validateTraveller(filter: FilterParameter, external: ExternalParameter, payload: String) -> [ValidationResult] {
+      return certLogicEngine.validate(filter: filter, external: external, payload: payload, validationType: .traveller)
+    }
+    
+    func getRuleDetailsError(rule: Rule, filter: FilterParameter) -> Dictionary<String, String> {
+      return certLogicEngine.getDetailsOfError(rule: rule, filter: filter)
+    }
 }

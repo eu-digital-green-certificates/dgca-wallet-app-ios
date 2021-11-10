@@ -30,29 +30,58 @@ import UIKit
 
 class CertTableVC: UIViewController {
   @IBOutlet fileprivate weak var table: UITableView!
+  @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
 
   var hCert: HCert! {
     (parent as? CertPagesVC)?.embeddingVC.hCert
   }
+  private var validityState: ValidityState = .invalid
+  private var sectionBuilder: SectionBuilder?
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
+    validateAndSetupInterface()
     table.dataSource = self
     table.contentInset = .init(top: 0, left: 0, bottom: 32, right: 0)
     table.reloadData()
+  }
+  
+  private func validateAndSetupInterface() {
+    guard let hCert = hCert else { return }
+    
+    activityIndicator.startAnimating()
+    
+    let validator = CertificateValidator(with: hCert)
+    DispatchQueue.global(qos: .userInitiated).async {
+      validator.validate {[weak self] (validityState) in
+        self?.validityState = validityState
+        
+        let builder = SectionBuilder(with: hCert, validity: validityState)
+        builder.makeSections(for: .verifier)
+        if let section = validityState.infoRulesSection {
+          builder.makeSectionForRuleError(ruleSection: section, for: .verifier)
+        }
+        self?.sectionBuilder = builder
+        DispatchQueue.main.async {
+          self?.activityIndicator.stopAnimating()
+        }
+      }
+    }
   }
 }
 
 extension CertTableVC: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return hCert.info.count
+    return self.sectionBuilder?.infoSection.count ?? 0
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       guard let cell = tableView.dequeueReusableCell(withIdentifier: "infoCell",
         for: indexPath) as? InfoCell else {  return UITableViewCell() }
-    cell.setupCell(hCert.info[indexPath.row])
+    if let infoSection = self.sectionBuilder?.infoSection[indexPath.row] {
+      cell.setupCell(infoSection)
+    }
     return cell
   }
 }
