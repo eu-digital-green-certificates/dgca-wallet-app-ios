@@ -527,16 +527,8 @@
 			isa = PBXGroup;
 			children = (
 				FEC54BE2271F24F80048B6BC /* Identity */,
-				FEC54BE1271F24290048B6BC /* Validation */,
 			);
 			path = Ticketing;
-			sourceTree = "<group>";
-		};
-		FEC54BE1271F24290048B6BC /* Validation */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Validation;
 			sourceTree = "<group>";
 		};
 		FEC54BE2271F24F80048B6BC /* Identity */ = {
