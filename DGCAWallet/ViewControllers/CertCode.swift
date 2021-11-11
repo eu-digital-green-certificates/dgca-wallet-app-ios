@@ -33,10 +33,10 @@ class CertCodeVC: UIViewController {
   @IBOutlet fileprivate weak var tanLabel: UILabel!
 
   var hCert: HCert! {
-      (parent as? CertPagesVC)?.embeddingVC.hCert
+      (parent as? CertPagesController)?.embeddingVC.hCert
   }
   var tan: String? {
-      (parent as? CertPagesVC)?.embeddingVC.tan
+      (parent as? CertPagesController)?.embeddingVC.tan
   }
 
   override func viewDidLoad() {

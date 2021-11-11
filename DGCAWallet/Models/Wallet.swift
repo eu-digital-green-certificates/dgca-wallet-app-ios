@@ -30,8 +30,8 @@ import UIKit
 import SwiftDGC
 
 class Wallet {
-    static let shared = Wallet()
-    
+  static let shared = Wallet()
+  
   var selectedCountryCode: String? {
     return self.selectedCounty?.code
   }

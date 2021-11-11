@@ -178,7 +178,7 @@ class CertificateViewerVC: UIViewController {
       checkController.setupCheckValidity(with: hCert)
       
     case Constants.embedCertPagesController:
-      guard let childController = segue.destination as? CertPagesVC else { return }
+      guard let childController = segue.destination as? CertPagesController else { return }
       childController.embeddingVC = self
 
     default:

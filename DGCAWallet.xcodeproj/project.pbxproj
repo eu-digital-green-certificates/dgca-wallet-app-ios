@@ -98,7 +98,7 @@
 		CEA6D70E261F8D2900715333 /* DGCAWalletUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6D70D261F8D2900715333 /* DGCAWalletUITests.swift */; };
 		CED2726026398683003D47A9 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2725F26398683003D47A9 /* UIFont.swift */; };
 		CED949CA263B50CE00883558 /* MainListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED949C9263B50CE00883558 /* MainListController.swift */; };
-		CEDABD40263C5FF4007A9B97 /* CertTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDABD3F263C5FF4007A9B97 /* CertTable.swift */; };
+		CEDABD40263C5FF4007A9B97 /* CertificateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDABD3F263C5FF4007A9B97 /* CertificateController.swift */; };
 		CEDABD49263C70EF007A9B97 /* CertPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDABD48263C70EF007A9B97 /* CertPages.swift */; };
 		CEE9DA55263C7D4000A31532 /* CertCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9DA54263C7D4000A31532 /* CertCode.swift */; };
 		CEE9DA5D263C865200A31532 /* Brightness.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9DA5C263C865200A31532 /* Brightness.swift */; };
@@ -226,7 +226,7 @@
 		CEA6D70F261F8D2900715333 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CED2725F26398683003D47A9 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		CED949C9263B50CE00883558 /* MainListController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = MainListController.swift; sourceTree = "<group>"; tabWidth = 2; };
-		CEDABD3F263C5FF4007A9B97 /* CertTable.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CertTable.swift; sourceTree = "<group>"; tabWidth = 2; };
+		CEDABD3F263C5FF4007A9B97 /* CertificateController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CertificateController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		CEDABD48263C70EF007A9B97 /* CertPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertPages.swift; sourceTree = "<group>"; };
 		CEDCA79B2639E77800FCB83E /* Package.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; name = Package.resolved; path = DGCAWallet.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved; sourceTree = SOURCE_ROOT; };
 		CEE9DA54263C7D4000A31532 /* CertCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertCode.swift; sourceTree = "<group>"; };
@@ -378,7 +378,7 @@
 				CEE9DA54263C7D4000A31532 /* CertCode.swift */,
 				CE891304263581D900CB92AF /* HomeController.swift */,
 				CEDABD48263C70EF007A9B97 /* CertPages.swift */,
-				CEDABD3F263C5FF4007A9B97 /* CertTable.swift */,
+				CEDABD3F263C5FF4007A9B97 /* CertificateController.swift */,
 				CE4BD253264FF28900689FD6 /* SettingsTableController.swift */,
 				DA01661B265541C0005B73A1 /* LicenseTableController.swift */,
 				DA01662126558B2F005B73A1 /* LicenseController.swift */,
@@ -722,7 +722,7 @@
 				5C50CF362697315B0015EE29 /* ValidityCellModel.swift in Sources */,
 				5C50CF3A26973D9D0015EE29 /* UserDefaults+.swift in Sources */,
 				CE13CF0A262DCDDA0070C80E /* CertificateViewer.swift in Sources */,
-				CEDABD40263C5FF4007A9B97 /* CertTable.swift in Sources */,
+				CEDABD40263C5FF4007A9B97 /* CertificateController.swift in Sources */,
 				CE37B643263867D700DEE13D /* SecureBackground.swift in Sources */,
 				5C556D4926F9F8AC007E2C2E /* CertificatesListVC.swift in Sources */,
 				FEC54BE6271F27180048B6BC /* AccessTokenService.swift in Sources */,

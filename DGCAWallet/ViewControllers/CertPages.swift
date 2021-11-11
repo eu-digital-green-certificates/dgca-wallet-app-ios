@@ -19,7 +19,7 @@
  * ---license-end
  */
 //  
-//  CertPages.swift
+//  CertPagesController.swift
 //  DGCAWallet
 //  
 //  Created by Yannick Spreen on 4/30/21.
@@ -27,7 +27,7 @@
 
 import UIKit
 
-class CertPagesVC: UIPageViewController {
+class CertPagesController: UIPageViewController {
   weak var embeddingVC: CertificateViewerVC!
 
   var index = 0
@@ -60,7 +60,7 @@ class CertPagesVC: UIPageViewController {
   }
 }
 
-extension CertPagesVC: UIPageViewControllerDataSource {
+extension CertPagesController: UIPageViewControllerDataSource {
   func pageViewController(_ pageViewController: UIPageViewController,
     viewControllerBefore viewController: UIViewController) -> UIViewController? {
     let index = vcs.firstIndex(of: viewController) ?? 0
@@ -82,7 +82,7 @@ extension CertPagesVC: UIPageViewControllerDataSource {
   }
 }
 
-extension CertPagesVC: UIPageViewControllerDelegate {
+extension CertPagesController: UIPageViewControllerDelegate {
   func pageViewController( _ pageViewController: UIPageViewController,
     didFinishAnimating finished: Bool,
     previousViewControllers: [UIViewController],

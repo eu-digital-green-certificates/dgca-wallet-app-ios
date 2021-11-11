@@ -39,21 +39,26 @@ class HomeController: UIViewController {
   var downloadedDataHasExpired: Bool {
     return DataCenter.lastFetch.timeIntervalSinceNow < -SharedConstants.expiredDataInterval
   }
- 
+  
   var appWasRunWithOlderVersion: Bool {
     return DataCenter.lastLaunchedAppVersion != DataCenter.appVersion
   }
-
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    CoreManager.shared.config = HCertConfig(prefetchAllCodes: true, checkSignatures: false, debugPrintJsonErrors: true)
+  }
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
     DataCenter.initializeLocalData {[unowned self] in
       DispatchQueue.main.async {
-        self.downloadedDataHasExpired || self.appWasRunWithOlderVersion ?  self.reloadStorageData() : self.initializeAllStorageData()
+        self.downloadedDataHasExpired || self.appWasRunWithOlderVersion ? self.reloadStorageData() : self.initializeAllStorageData()
       }
     }
   }
-
+  
   func initializeAllStorageData() {
     self.activityIndicator.startAnimating()
     DataCenter.initializeAllStorageData { [unowned self] in
@@ -73,7 +78,7 @@ class HomeController: UIViewController {
       }
     }
   }
-
+  
   private func loadComplete() {
     let renderer = UIGraphicsImageRenderer(size: self.view.bounds.size)
     SecureBackground.image = renderer.image { rendererContext in
