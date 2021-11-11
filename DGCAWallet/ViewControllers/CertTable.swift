@@ -19,7 +19,7 @@
  * ---license-end
  */
 //  
-//  CertTable.swift
+//  CertificateController.swift
 //  DGCAWallet
 //  
 //  Created by Yannick Spreen on 4/30/21.
@@ -28,7 +28,7 @@
 import SwiftDGC
 import UIKit
 
-class CertTableVC: UIViewController {
+class CertificateController: UIViewController {
   @IBOutlet fileprivate weak var table: UITableView!
   @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
 
@@ -71,7 +71,7 @@ class CertTableVC: UIViewController {
   }
 }
 
-extension CertTableVC: UITableViewDataSource {
+extension CertificateController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return self.sectionBuilder?.infoSection.count ?? 0
   }
