@@ -590,8 +590,8 @@
                                     <constraint firstAttribute="bottom" secondItem="wUD-Wr-dv7" secondAttribute="bottom" constant="8" id="ofl-Zf-DSu"/>
                                 </constraints>
                             </view>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="2Bn-TZ-xdi">
-                                <rect key="frame" x="177.5" y="416" width="20" height="20"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="2Bn-TZ-xdi">
+                                <rect key="frame" x="169" y="416" width="37" height="37"/>
                                 <color key="color" systemColor="systemGrayColor"/>
                             </activityIndicatorView>
                         </subviews>
@@ -1030,8 +1030,8 @@
                                     <action selector="addNew" destination="BcE-gA-Tuj" eventType="touchUpInside" id="ox7-Wv-5g3"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Ixr-vD-aU3">
-                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Ixr-vD-aU3">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
                                 <color key="color" name="walletBlue"/>
                             </activityIndicatorView>
                         </subviews>
@@ -1122,8 +1122,8 @@
                                     <constraint firstAttribute="width" secondItem="Yx8-qg-PWV" secondAttribute="height" multiplier="7:2" id="vQY-Up-OpN"/>
                                 </constraints>
                             </imageView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="9nO-9e-hKR">
-                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="9nO-9e-hKR">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
                                 <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
                         </subviews>
@@ -1161,16 +1161,16 @@
     </scenes>
     <designables>
         <designable name="MID-ne-Jur">
-            <size key="intrinsicContentSize" width="101" height="47"/>
+            <size key="intrinsicContentSize" width="77" height="35"/>
         </designable>
         <designable name="Rcx-o5-KDY">
-            <size key="intrinsicContentSize" width="66" height="47"/>
+            <size key="intrinsicContentSize" width="42" height="35"/>
         </designable>
         <designable name="WbA-kC-hOb">
-            <size key="intrinsicContentSize" width="66" height="47"/>
+            <size key="intrinsicContentSize" width="42" height="35"/>
         </designable>
         <designable name="fol-rA-9gU">
-            <size key="intrinsicContentSize" width="56" height="51"/>
+            <size key="intrinsicContentSize" width="32" height="39"/>
         </designable>
     </designables>
     <resources>
