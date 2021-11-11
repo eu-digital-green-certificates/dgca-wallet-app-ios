@@ -32,14 +32,17 @@ import SwiftDGC
 
 class SettingsTableController: UITableViewController {
 
-  @IBAction func cancelButton() {
-    dismiss(animated: true, completion: nil)
-  }
-
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if indexPath.row == 0 {
       openPrivacyDoc()
+    } else if indexPath.row == 1 {
+      showLicenses()
     }
+    tableView.deselectRow(at: indexPath, animated: true)
+  }
+
+  @IBAction func doneAction(_ sender: Any) {
+    self.dismiss(animated: true)
   }
 
   func openPrivacyDoc() {
@@ -52,6 +55,10 @@ class SettingsTableController: UITableViewController {
     openUrl(link)
   }
 
+  func showLicenses() {
+    self.performSegue(withIdentifier: "showLicenses", sender: nil)
+  }
+  
   func openUrl(_ string: String) {
     if let url = URL(string: string) {
       UIApplication.shared.open(url)

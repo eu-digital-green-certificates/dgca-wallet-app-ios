@@ -52,6 +52,10 @@ class LicenseController: UIViewController, WKNavigationDelegate {
     }
   }
 
+  @IBAction func doneAction(_ sender: Any) {
+    self.dismiss(animated: true)
+  }
+
   func loadWebView(_ packageLink: String) {
     DispatchQueue.main.async { [weak self] in
       let request = URLRequest(url: URL(string: packageLink)!)

@@ -38,11 +38,11 @@
                                         </connections>
                                     </containerView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YeB-JS-Q1Q">
-                                        <rect key="frame" x="315" y="18.666666666666664" width="55" height="33"/>
+                                        <rect key="frame" x="310" y="17.666666666666664" width="60" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="vjf-Er-cpM"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" name="walletBlue"/>
                                         </state>
@@ -129,8 +129,8 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8fY-LF-Mko">
-                                        <rect key="frame" x="339" y="18.666666666666664" width="31" height="33"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                        <rect key="frame" x="336" y="17.666666666666664" width="34" height="35"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
                                         <state key="normal" title="Edit">
                                             <color key="titleColor" name="walletBlue"/>
                                         </state>
@@ -277,22 +277,22 @@
                                 <rect key="frame" x="0.0" y="57" width="390" height="597"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellWithTitleAndDescriptionTVC" rowHeight="55" id="d4x-Lr-vTo" customClass="CellWithTitleAndDescriptionTVC" customModule="DGCAWallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.666666030883789" width="390" height="55"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellWithTitleAndDescriptionTVC" rowHeight="60" id="d4x-Lr-vTo" customClass="CellWithTitleAndDescriptionTVC" customModule="DGCAWallet" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.666666030883789" width="390" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="d4x-Lr-vTo" id="VM9-6c-Az6">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="55"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Iq-oZ-9d6">
-                                                    <rect key="frame" x="20" y="8" width="350" height="17"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                    <rect key="frame" x="20" y="8" width="350" height="18"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Hv-8b-imR">
-                                                    <rect key="frame" x="20" y="33" width="350" height="15.666666666666664"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <rect key="frame" x="20" y="34" width="350" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -301,10 +301,10 @@
                                                 <constraint firstItem="8Iq-oZ-9d6" firstAttribute="leading" secondItem="VM9-6c-Az6" secondAttribute="leading" constant="20" symbolic="YES" id="GdD-Af-9KK"/>
                                                 <constraint firstItem="8Hv-8b-imR" firstAttribute="trailing" secondItem="VM9-6c-Az6" secondAttribute="trailingMargin" id="Mgd-eg-Lin"/>
                                                 <constraint firstItem="8Iq-oZ-9d6" firstAttribute="top" secondItem="VM9-6c-Az6" secondAttribute="top" constant="8" id="Ogr-CU-5Mq"/>
-                                                <constraint firstAttribute="bottom" secondItem="8Hv-8b-imR" secondAttribute="bottom" constant="6.3300000000000001" id="dIQ-PS-hsg"/>
                                                 <constraint firstItem="8Hv-8b-imR" firstAttribute="leading" secondItem="VM9-6c-Az6" secondAttribute="leadingMargin" id="klk-bZ-TkR"/>
                                                 <constraint firstItem="8Hv-8b-imR" firstAttribute="top" secondItem="8Iq-oZ-9d6" secondAttribute="bottom" constant="8" symbolic="YES" id="p1l-k5-A4N"/>
                                                 <constraint firstAttribute="trailing" secondItem="8Iq-oZ-9d6" secondAttribute="trailing" constant="20" symbolic="YES" id="uO5-E4-HHL"/>
+                                                <constraint firstAttribute="bottom" secondItem="8Hv-8b-imR" secondAttribute="bottom" constant="8" id="yfp-9r-E9X"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -313,7 +313,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellWithDateAndCountryTVC" rowHeight="230" id="7bQ-9H-JiP" customClass="CellWithDateAndCountryTVC" customModule="DGCAWallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="99.666666030883789" width="390" height="230"/>
+                                        <rect key="frame" x="0.0" y="104.66666603088379" width="390" height="230"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7bQ-9H-JiP" id="tcy-sh-6RW">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="230"/>
@@ -352,16 +352,16 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="1Sz-J6-1jI"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="hDf-On-xI3" firstAttribute="top" secondItem="9ru-fQ-9br" secondAttribute="bottom" constant="8" symbolic="YES" id="2vZ-Fe-rCh"/>
                                                 <constraint firstItem="hDf-On-xI3" firstAttribute="trailing" secondItem="tcy-sh-6RW" secondAttribute="trailingMargin" id="45Z-jg-RvT"/>
                                                 <constraint firstAttribute="trailing" secondItem="IGI-mV-anx" secondAttribute="trailing" constant="16" id="Daj-gi-g9v"/>
                                                 <constraint firstItem="Nb6-QA-iGb" firstAttribute="leading" secondItem="tcy-sh-6RW" secondAttribute="leading" constant="16" id="Hmp-3p-O1t"/>
-                                                <constraint firstItem="hDf-On-xI3" firstAttribute="top" secondItem="9ru-fQ-9br" secondAttribute="bottom" constant="8" id="MW3-dg-kGe"/>
                                                 <constraint firstItem="9ru-fQ-9br" firstAttribute="leading" secondItem="tcy-sh-6RW" secondAttribute="leading" constant="16" id="NkY-Ht-7Yl"/>
                                                 <constraint firstItem="9ru-fQ-9br" firstAttribute="top" secondItem="tcy-sh-6RW" secondAttribute="top" constant="8" id="RQC-fV-c2s"/>
                                                 <constraint firstAttribute="trailing" secondItem="9ru-fQ-9br" secondAttribute="trailing" constant="16" id="TzQ-su-OH8"/>
@@ -735,23 +735,23 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="infoCell" rowHeight="147" id="0du-5w-c9P" customClass="InfoCell" customModule="DGCAWallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.666666030883789" width="375" height="147"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="infoCell" rowHeight="96" id="0du-5w-c9P" customClass="InfoCell" customModule="DGCAWallet" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.666666030883789" width="375" height="96"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0du-5w-c9P" id="Hk9-2h-FIE">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="147"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="DE4382974329" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gn8-3g-ntq">
-                                                    <rect key="frame" x="16" y="108.66666666666667" width="343" height="38.333333333333329"/>
+                                                    <rect key="frame" x="16" y="57.666666666666657" width="343" height="38.333333333333343"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="32"/>
                                                     <color key="textColor" name="walletBlack"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Identification Number" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bxm-hI-f1t">
-                                                    <rect key="frame" x="16" y="16" width="343" height="88.666666666666671"/>
+                                                    <rect key="frame" x="16" y="15.999999999999996" width="343" height="37.666666666666657"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <color key="textColor" name="walletBlack"/>
+                                                    <color key="textColor" name="walletDarkGray"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -772,7 +772,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="9Xz-H7-a0H">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="9Xz-H7-a0H">
                                 <rect key="frame" x="169" y="181.66666666666666" width="37" height="37"/>
                                 <color key="color" systemColor="secondaryLabelColor"/>
                             </activityIndicatorView>
@@ -836,6 +836,9 @@
         </namedColor>
         <namedColor name="walletBlue">
             <color red="0.0" green="0.2669999897480011" blue="0.57999998331069946" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="walletDarkGray">
+            <color red="0.25099998712539673" green="0.25099998712539673" blue="0.25099998712539673" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="walletGray10">
             <color red="0.92199999094009399" green="0.92199999094009399" blue="0.92199999094009399" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

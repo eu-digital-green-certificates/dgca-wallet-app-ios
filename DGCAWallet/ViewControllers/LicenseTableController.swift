@@ -34,33 +34,38 @@ class LicenseTableController: UITableViewController {
   public var licenses: [JSON] = []
   private var selectedLicense: JSON = []
 
+  private let showLicenseDetails = "showLicenseDetails"
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     self.loadLicenses()
   }
 
+  @IBAction func doneAction(_ sender: Any) {
+    self.dismiss(animated: true)
+  }
+
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.destination is LicenseController {
-      if let destanationController = segue.destination as? LicenseController {
-          destanationController.licenseObject = self.selectedLicense
+      if let destanationController = segue.destination as? LicenseController, let json = sender as? JSON {
+          destanationController.licenseObject = json
       }
     }
   }
 
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: "LicenseCell", for: indexPath) as? LicenseCell
-    else { return UITableViewCell() }
-      
-    let index = indexPath.row
-    cell.drawLabel(self.licenses[index])
-    return cell
-  }
+//  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//    guard let cell = tableView.dequeueReusableCell(withIdentifier: "LicenseCell", for: indexPath) as? LicenseCell
+//      else { return UITableViewCell() }
+//      
+//    let index = indexPath.row
+//    cell.drawLabel(self.licenses[index])
+//    return cell
+//  }
 
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    if let cell = tableView.cellForRow(at: indexPath) as? LicenseCell {
-      self.selectedLicense = cell.licenseObject
-    }
-    performSegue(withIdentifier: "licenseSegue", sender: nil)
+    let licenseObject = self.licenses[indexPath.row]
+    performSegue(withIdentifier: showLicenseDetails, sender: licenseObject)
+    tableView.deselectRow(at: indexPath, animated: true)
   }
 
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
