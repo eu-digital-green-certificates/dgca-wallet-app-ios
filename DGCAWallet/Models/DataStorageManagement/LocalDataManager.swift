@@ -71,6 +71,7 @@ class LocalDataManager {
         result.config = self.localData.config
       }
       self.localData = result
+      self.save()
       completion()
     }
   }

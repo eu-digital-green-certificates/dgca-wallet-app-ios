@@ -108,3 +108,4 @@
 "certificates" = "Certificates";
 "please select one of service server" = "Please select one of the services";
 "close" = "Close";
+"settings.last-updated" = "Last Updated: %@";

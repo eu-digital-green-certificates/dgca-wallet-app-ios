@@ -32,17 +32,47 @@ import SwiftDGC
 
 class SettingsTableController: UITableViewController {
 
+  @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
+
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    if indexPath.row == 0 {
-      openPrivacyDoc()
-    } else if indexPath.row == 1 {
-      showLicenses()
+    switch indexPath.section {
+    case 0:
+        if indexPath.row == 0 {
+          openPrivacyDoc()
+        } else if indexPath.row == 1 {
+          showLicenses()
+        }
+    case 1:
+      reloadAllData()
+    default:
+        break
     }
+
     tableView.deselectRow(at: indexPath, animated: true)
+  }
+
+  override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    switch section {
+    case 1:
+      let format = l10n("settings.last-updated")
+      return String(format: format, DataCenter.lastFetch.dateTimeString)
+    default:
+      return nil
+    }
   }
 
   @IBAction func doneAction(_ sender: Any) {
     self.dismiss(animated: true)
+  }
+  
+  func reloadAllData() {
+    activityIndicator.startAnimating()
+    DataCenter.reloadStorageData { // + GatewayConnection.update {
+      DispatchQueue.main.async { [weak self] in
+        self?.activityIndicator.stopAnimating()
+        self?.tableView.reloadData()
+      }
+    }
   }
 
   func openPrivacyDoc() {
