@@ -72,10 +72,53 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Rules and countries data" footerTitle="Last updated: 2021-05-01 20:00:00" id="VRE-xN-la2">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="50" id="zv2-uX-LX9">
+                                        <rect key="frame" x="0.0" y="189.5" width="414" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zv2-uX-LX9" id="JlT-dr-MLg">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reload" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iiw-zv-F0r">
+                                                    <rect key="frame" x="20" y="11" width="336" height="28"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lQI-V6-x3N">
+                                                    <rect key="frame" x="356" y="0.0" width="50" height="50"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="lQI-V6-x3N" secondAttribute="height" multiplier="1:1" id="bjj-nr-fIz"/>
+                                                    </constraints>
+                                                    <color key="tintColor" name="congressBlue"/>
+                                                    <state key="normal" image="spinner"/>
+                                                </button>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ur5-by-26Y">
+                                                    <rect key="frame" x="197" y="15" width="20" height="20"/>
+                                                    <color key="color" systemColor="secondaryLabelColor"/>
+                                                </activityIndicatorView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="lQI-V6-x3N" firstAttribute="top" secondItem="JlT-dr-MLg" secondAttribute="top" id="0rW-8W-Sz6"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="iiw-zv-F0r" secondAttribute="bottom" id="1Vx-Ka-kR9"/>
+                                                <constraint firstItem="iiw-zv-F0r" firstAttribute="leading" secondItem="JlT-dr-MLg" secondAttribute="leadingMargin" id="7gb-Ju-Yno"/>
+                                                <constraint firstItem="iiw-zv-F0r" firstAttribute="top" secondItem="JlT-dr-MLg" secondAttribute="topMargin" id="Bvm-Kq-IUE"/>
+                                                <constraint firstItem="lQI-V6-x3N" firstAttribute="leading" secondItem="iiw-zv-F0r" secondAttribute="trailing" id="HXM-ql-6Gw"/>
+                                                <constraint firstItem="ur5-by-26Y" firstAttribute="centerY" secondItem="JlT-dr-MLg" secondAttribute="centerY" id="Q3D-ps-xxp"/>
+                                                <constraint firstAttribute="bottom" secondItem="lQI-V6-x3N" secondAttribute="bottom" id="Xc4-GS-VB5"/>
+                                                <constraint firstItem="ur5-by-26Y" firstAttribute="centerX" secondItem="JlT-dr-MLg" secondAttribute="centerX" id="dbK-RP-jQ4"/>
+                                                <constraint firstAttribute="trailing" secondItem="lQI-V6-x3N" secondAttribute="trailing" constant="8" id="lbo-ef-D2v"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection id="pbR-sX-7xs">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationLevel="1" indentationWidth="0.0" rowHeight="71" id="WeO-6m-Lot" customClass="AppVersionCell" customModule="SwiftDGC">
-                                        <rect key="frame" x="0.0" y="168" width="414" height="71"/>
+                                        <rect key="frame" x="0.0" y="284" width="414" height="71"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WeO-6m-Lot" id="bty-ns-uju">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="71"/>
@@ -117,6 +160,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="ur5-by-26Y" id="kIq-W7-QXc"/>
                         <segue destination="QCK-p6-e3A" kind="show" identifier="showLicenses" id="aCz-QD-l4J"/>
                     </connections>
                 </tableViewController>
@@ -324,6 +368,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="spinner" width="22" height="22"/>
+        <namedColor name="congressBlue">
+            <color red="0.32899999618530273" green="0.32400000095367432" blue="0.4779999852180481" alpha="0.33000001311302185" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="walletBlue">
             <color red="0.0" green="0.2669999897480011" blue="0.57999998331069946" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
