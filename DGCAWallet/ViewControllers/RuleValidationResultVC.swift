@@ -125,9 +125,9 @@ extension RuleValidationResultVC {
     var validity: HCertValidity = .valid
     guard let hCert = hCert else { return validity }
       
-    let certType = getCertificationType(type: hCert.type)
+    let certType = getCertificationType(type: hCert.certificateType)
     if let countryCode = hCert.ruleCountryCode {
-      let valueSets = ValueSetsDataStorage.sharedInstance.getValueSetsForExternalParameters()
+      let valueSets = DataCenter.valueSetsDataManager.getValueSetsForExternalParameters()
       let filterParameter = FilterParameter(validationClock: self.selectedDate,
         countryCode: countryCode,
         certificationType: certType)
@@ -137,7 +137,7 @@ extension RuleValidationResultVC {
          iat: hCert.iat,
          issuerCountryCode: hCert.issCode,
          kid: hCert.kidStr)
-      let result = CertLogicEngineManager.sharedInstance.validate(filter: filterParameter,
+      let result = CertLogicManager.shared.validate(filter: filterParameter,
         external: externalParameters, payload: hCert.body.description)
         
       let failsAndOpen = result.filter { $0.result != .passed }
@@ -172,7 +172,7 @@ extension RuleValidationResultVC {
             }
             var detailsError = ""
             if let rule = validationResult.rule {
-               let dict = CertLogicEngineManager.sharedInstance.getRuleDetailsError(rule: rule,
+               let dict = CertLogicManager.shared.getRuleDetailsError(rule: rule,
                 filter: filterParameter)
               dict.keys.forEach({ key in
                 detailsError += key + ": " + (dict[key] ?? "") + " "

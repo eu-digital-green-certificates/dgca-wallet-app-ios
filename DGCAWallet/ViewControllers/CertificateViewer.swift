@@ -135,7 +135,7 @@ class CertificateViewerVC: UIViewController {
     showAlert( title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"),
       actionTitle: l10n("btn.confirm"), cancelTitle: l10n("btn.cancel")) { [weak self] in
         if $0 {
-          LocalData.sharedInstance.remove(withDate: certDate) {[weak self] _ in
+          DataCenter.localDataManager.remove(withDate: certDate) {[weak self] _ in
             DispatchQueue.main.async {
               self?.delegate?.certificateViewer(self!, didDeleteCertificate: self!.hCert!)
               self?.dismiss(animated: true, completion: nil)
@@ -153,7 +153,7 @@ class CertificateViewerVC: UIViewController {
         if success {
           guard let cert = self?.hCert else { return }
             
-          LocalData.sharedInstance.add(cert, with: newTan) { _ in
+          DataCenter.localDataManager.add(cert, with: newTan) { _ in
             DispatchQueue.main.async {
               self?.showAlert(title: l10n("tan.confirm.success.title"), subtitle: l10n("tan.confirm.success.text")) { _ in
                 self?.dismiss(animated: true) {
@@ -210,6 +210,7 @@ extension CertificateViewerVC {
     activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
     self.present(activityViewController, animated: true, completion: nil)
   }
+  
   private func shareQrCodeLikePDF() {
     guard let hCert = hCert, let savedImage = hCert.qrCode else { return }
       

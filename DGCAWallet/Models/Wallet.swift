@@ -19,45 +19,43 @@
  * ---license-end
  */
 //  
-//  CertificateCell.swift
+//  Wallet.swift
 //  DGCAWallet
 //  
-//  Created by Alexandr Chernyy on 21.09.2021.
-//
-//  Updated by Igor Khomiak on 11.10.2021.
+//  Created by Igor Khomiak on 11/9/21.
+//  
         
 
 import UIKit
 import SwiftDGC
 
-class CertificateCell: UITableViewCell {
+class Wallet {
+    static let shared = Wallet()
+    
+  var selectedCountryCode: String? {
+    return self.selectedCounty?.code
+  }
 
-  @IBOutlet fileprivate weak var nameLabel: UILabel!
-  @IBOutlet fileprivate weak var certTypeLabel: UILabel!
-  @IBOutlet fileprivate weak var descriptionLabel: UILabel!
-  
-  private var hCert: HCert? {
-    didSet {
-      setupView()
+  //Selected country code
+  var selectedCounty: CountryModel? {
+    set {
+      let userDefaults = UserDefaults.standard
+      do {
+        try userDefaults.setObject(newValue, forKey: SharedConstants.userDefaultsCountryKey)
+      } catch {
+        print(error.localizedDescription)
+      }
+    }
+    get {
+      let userDefaults = UserDefaults.standard
+      do {
+        let selected = try userDefaults.getObject(forKey: SharedConstants.userDefaultsCountryKey, castTo: CountryModel.self)
+        return selected
+      } catch {
+        print(error.localizedDescription)
+        return nil
+      }
     }
   }
 
-  private func setupView() {
-    if let hCert = hCert {
-      nameLabel.text = hCert.fullName
-      descriptionLabel.text = hCert.exp.dateString
-      certTypeLabel.text = hCert.certificateType.rawValue
-    } else {
-      nameLabel.text = ""
-      descriptionLabel.text = ""
-    }
-  }
-
-  func setCertificate(cert: HCert) {
-    hCert = cert
-  }
-  
-  override func prepareForReuse() {
-    hCert = nil
-  }
 }

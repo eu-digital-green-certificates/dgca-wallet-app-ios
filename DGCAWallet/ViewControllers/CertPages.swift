@@ -55,27 +55,20 @@ class CertPagesVC: UIPageViewController {
   }
 
   func setBrightness() {
-    if index == 0 {
+     index == 0 ? Brightness.forceFull() : Brightness.reset()
       Brightness.forceFull()
-    } else {
-      Brightness.reset()
-    }
   }
 }
 
 extension CertPagesVC: UIPageViewControllerDataSource {
-  func pageViewController(
-    _ pageViewController: UIPageViewController,
-    viewControllerBefore viewController: UIViewController
-  ) -> UIViewController? {
+  func pageViewController(_ pageViewController: UIPageViewController,
+    viewControllerBefore viewController: UIViewController) -> UIViewController? {
     let index = vcs.firstIndex(of: viewController) ?? 0
     return index == 0 ? nil : vcs[index - 1]
   }
 
-  func pageViewController(
-    _ pageViewController: UIPageViewController,
-    viewControllerAfter viewController: UIViewController
-  ) -> UIViewController? {
+  func pageViewController( _ pageViewController: UIPageViewController,
+    viewControllerAfter viewController: UIViewController) -> UIViewController? {
     let index = vcs.firstIndex(of: viewController) ?? vcs.count - 1
     return index == vcs.count - 1 ? nil : vcs[index + 1]
   }
@@ -90,18 +83,13 @@ extension CertPagesVC: UIPageViewControllerDataSource {
 }
 
 extension CertPagesVC: UIPageViewControllerDelegate {
-  func pageViewController(
-    _ pageViewController: UIPageViewController,
+  func pageViewController( _ pageViewController: UIPageViewController,
     didFinishAnimating finished: Bool,
     previousViewControllers: [UIViewController],
-    transitionCompleted completed: Bool
-  ) {
+    transitionCompleted completed: Bool) {
     guard
-      completed,
-      let controller = pageViewController.viewControllers?.first
-    else {
-      return
-    }
+      completed, let controller = pageViewController.viewControllers?.first
+    else { return }
     index = vcs.firstIndex(of: controller) ?? 0
     setBrightness()
   }

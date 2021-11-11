@@ -19,7 +19,7 @@
  * ---license-end
  */
 //  
-//  Settings.swift
+//  SettingsTableController.swift
 //  DGCAWallet
 //  
 //  Created by Paul Ballmann on 14.05.21.
@@ -29,16 +29,8 @@
 import UIKit
 import SwiftDGC
 
-class SettingsVC: UINavigationController {
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-
-    additionalSafeAreaInsets.top = 16.0
-  }
-}
-
-class SettingsTableVC: UITableViewController {
+class SettingsTableController: UITableViewController {
 
   @IBAction func cancelButton() {
     dismiss(animated: true, completion: nil)
@@ -51,7 +43,7 @@ class SettingsTableVC: UITableViewController {
   }
 
   func openPrivacyDoc() {
-    let link = LocalData.sharedInstance.versionedConfig["privacyUrl"].string ?? ""
+    let link = DataCenter.localDataManager.versionedConfig["privacyUrl"].string ?? ""
     openUrl(link)
   }
 

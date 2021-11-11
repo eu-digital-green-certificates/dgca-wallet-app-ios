@@ -19,7 +19,7 @@
  * ---license-end
  */
 //  
-//  Licenses.swift
+//  LicenseTableController.swift
 //  DGCAWallet
 //  
 //  Created by Paul Ballmann on 19.05.21.
@@ -29,10 +29,8 @@ import UIKit
 import SwiftDGC
 import SwiftyJSON
 
-class LicenseList: UINavigationController {
-}
 
-class LicenseTableVC: UITableViewController {
+class LicenseTableController: UITableViewController {
   public var licenses: [JSON] = []
   private var selectedLicense: JSON = []
 
@@ -42,9 +40,9 @@ class LicenseTableVC: UITableViewController {
   }
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.destination is LicenseVC {
-      if let destVC = segue.destination as? LicenseVC {
-        destVC.licenseObject = self.selectedLicense
+    if segue.destination is LicenseController {
+      if let destanationController = segue.destination as? LicenseController {
+          destanationController.licenseObject = self.selectedLicense
       }
     }
   }

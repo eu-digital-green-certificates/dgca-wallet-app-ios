@@ -65,4 +65,3 @@ struct ValidationCertificate : Codable {
   var validFrom       : String?
   var validTo         : String?
 }
-

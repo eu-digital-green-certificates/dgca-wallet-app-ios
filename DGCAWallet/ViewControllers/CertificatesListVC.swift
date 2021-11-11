@@ -70,7 +70,7 @@ class CertificatesListVC: UIViewController {
     validationServiceInfo = validationInfo
     accessTokenInfo = accessTokenModel
     
-    listOfCert = LocalData.sharedInstance.certStrings.filter { ($0.cert!.fullName.lowercased() == "\(accessTokenModel.vc!.gnt!) \(accessTokenModel.vc!.fnt!)".lowercased()) && ($0.cert!.dateOfBirth == accessTokenModel.vc?.dob)}
+    listOfCert = DataCenter.certStrings.filter { ($0.cert!.fullName.lowercased() == "\(accessTokenModel.vc!.gnt!) \(accessTokenModel.vc!.fnt!)".lowercased()) && ($0.cert!.dateOfBirth == accessTokenModel.vc?.dob)}
     let validDateFrom = accessTokenModel.vc!.validFrom ?? ""
     if let dateValidFrom = Date(rfc3339DateTimeString: validDateFrom) {
       listOfCert = listOfCert.filter{ $0.cert!.iat < dateValidFrom }
@@ -85,7 +85,7 @@ class CertificatesListVC: UIViewController {
     guard let accessTokenModel = accessTokenInfo else { return }
           accessTokenInfo = accessTokenModel
 
-    listOfCert = LocalData.sharedInstance.certStrings.filter { ($0.cert!.fullName.lowercased() == "\(accessTokenModel.vc!.gnt!) \(accessTokenModel.vc!.fnt!)".lowercased()) && ($0.cert!.dateOfBirth == accessTokenModel.vc?.dob)}
+    listOfCert = DataCenter.certStrings.filter { ($0.cert!.fullName.lowercased() == "\(accessTokenModel.vc!.gnt!) \(accessTokenModel.vc!.fnt!)".lowercased()) && ($0.cert!.dateOfBirth == accessTokenModel.vc?.dob)}
     let validDateFrom = accessTokenModel.vc!.validFrom ?? ""
     if let dateValidFrom = Date(rfc3339DateTimeString: validDateFrom) {
       listOfCert = listOfCert.filter{ $0.cert!.iat < dateValidFrom }
@@ -135,7 +135,7 @@ extension CertificatesListVC: UITableViewDataSource, UITableViewDelegate {
       showAlert(title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"), actionTitle: l10n("btn.confirm"),
        cancelTitle: l10n("btn.cancel")) {
           if $0 {
-           LocalData.sharedInstance.remove(withDate: savedCert.date) { [weak self] _ in
+           DataCenter.localDataManager.remove(withDate: savedCert.date) { [weak self] _ in
              self?.reloadComponents()
              DispatchQueue.main.asyncAfter(deadline: .now()) {
                tableView.reloadData()

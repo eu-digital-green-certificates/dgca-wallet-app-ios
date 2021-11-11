@@ -19,7 +19,7 @@
  * ---license-end
  */
 //  
-//  File.swift
+//  RulesDataManager.swift
 //  DGCAVerifier
 //  
 //  Created by Alexandr Chernyy on 22.06.2021.
@@ -29,48 +29,39 @@ import SwiftDGC
 import SwiftyJSON
 import CertLogic
 
-class RulesDataStorage: Codable {
-  static var sharedInstance = RulesDataStorage()
-  static let storage = SecureStorage<RulesDataStorage>(fileName: "rules_secure")
-
-  var rules = [CertLogic.Rule]()
-  var lastFetchRaw: Date?
-  var lastFetch: Date {
-    get {
-      lastFetchRaw ?? .init(timeIntervalSince1970: 0)
-    }
-    set(value) {
-      lastFetchRaw = value
-    }
-  }
-
+class RulesDataManager {
+  lazy var storage = SecureStorage<RulesDataStorage>(fileName: SharedConstants.rulesStorageName)
+  lazy var rulesData: RulesDataStorage = RulesDataStorage()
+  
   func add(rule: CertLogic.Rule) {
-    let list = rules
-    if list.contains(where: { $0.identifier == rule.identifier && $0.version == rule.version }) {
-      return
+    if !rulesData.rules.contains(where: { $0.identifier == rule.identifier && $0.version == rule.version }) {
+      rulesData.rules.append(rule)
     }
-    rules.append(rule)
   }
 
   func save(completion: ((Bool) -> Void)? = nil) {
-    Self.storage.save(self, completion: completion)
+    storage.save(rulesData, completion: completion)
   }
-
+  
   func deleteRuleWithHash(hash: String) {
-    self.rules = self.rules.filter { $0.hash != hash }
+    rulesData.rules = rulesData.rules.filter { $0.hash != hash }
   }
     
   func isRuleExistWithHash(hash: String) -> Bool {
-    let list = rules
-    return list.contains(where: { $0.hash == hash })
+    return rulesData.rules.contains(where: { $0.hash == hash })
   }
-    
-  static func initialize(completion: @escaping () -> Void) {
-    storage.loadOverride(fallback: RulesDataStorage.sharedInstance) { success in
-      guard let result = success else { return }
+  
+  func initialize(completion: @escaping () -> Void) {
+    storage.loadOverride(fallback: rulesData) { [unowned self] value in
+      guard let result = value else {
+        completion()
+        return
+      }
+          
       let format = l10n("log.rules")
-      print(String.localizedStringWithFormat(format, result.rules.count))
-      RulesDataStorage.sharedInstance = result
+      DGCLogger.logInfo(String.localizedStringWithFormat(format, result.rules.count))
+      self.rulesData = result
+      self.save()
       completion()
     }
   }

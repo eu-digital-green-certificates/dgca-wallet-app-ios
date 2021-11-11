@@ -13,7 +13,7 @@
         <!--Settings-->
         <scene sceneID="Meu-Ub-Aqb">
             <objects>
-                <tableViewController id="Cs8-8v-zm5" customClass="SettingsTableVC" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Cs8-8v-zm5" customClass="SettingsTableController" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="1ci-L3-wGH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -127,7 +127,7 @@
         <!--Licenses-->
         <scene sceneID="IfG-Mv-iXh">
             <objects>
-                <tableViewController title="Licenses" id="geQ-ZR-Hrz" customClass="LicenseTableVC" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Licenses" id="geQ-ZR-Hrz" customClass="SettingsTableController" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="zXB-be-nBh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -174,10 +174,10 @@
             </objects>
             <point key="canvasLocation" x="1545" y="-38"/>
         </scene>
-        <!--LicenseVC-->
+        <!--Destanation Controller-->
         <scene sceneID="pb5-Tn-Rfx">
             <objects>
-                <viewController id="owi-dC-MFf" customClass="LicenseVC" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="owi-dC-MFf" customClass="destanationController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rnb-Bc-06L">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -225,10 +225,10 @@
             </objects>
             <point key="canvasLocation" x="2307.2463768115945" y="-38.169642857142854"/>
         </scene>
-        <!--SettingsVC-->
+        <!--Navigation Controller-->
         <scene sceneID="Vju-LG-t62">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wuJ-su-tYp" customClass="SettingsVC" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wuJ-su-tYp" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="oFp-Dw-tnq">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>

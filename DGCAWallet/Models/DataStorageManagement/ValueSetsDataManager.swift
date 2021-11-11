@@ -19,7 +19,7 @@
  * ---license-end
  */
 //  
-//  File.swift
+//  ValueSetsDataManager.swift
 //  DGCAVerifier
 //  
 //  Created by Alexandr Chernyy on 25.06.2021.
@@ -29,60 +29,54 @@ import SwiftDGC
 import SwiftyJSON
 import CertLogic
 
-class ValueSetsDataStorage: Codable {
-  static var sharedInstance = ValueSetsDataStorage()
-  static let storage = SecureStorage<ValueSetsDataStorage>(fileName: "valueSets_secure")
-
-  var valueSets = [CertLogic.ValueSet]()
-  var lastFetchRaw: Date?
-  var lastFetch: Date {
-    get {
-      lastFetchRaw ?? .init(timeIntervalSince1970: 0)
-    }
-    set(value) {
-      lastFetchRaw = value
-    }
-  }
-  var config = Config.load()
+class ValueSetsDataManager {
+  lazy var storage = SecureStorage<ValueSetsDataStorage>(fileName: SharedConstants.valueSetsStorageName)
+  lazy var valueSetsData: ValueSetsDataStorage = ValueSetsDataStorage()
 
   func add(valueSet: CertLogic.ValueSet) {
-    let list = valueSets
+    let list = valueSetsData.valueSets
     if list.contains(where: { $0.valueSetId == valueSet.valueSetId }) {
       return
+    } else {
+      valueSetsData.valueSets.append(valueSet)
     }
-    valueSets.append(valueSet)
   }
 
   func save(completion: ((Bool) -> Void)? = nil) {
-    Self.storage.save(self, completion: completion)
+    storage.save(valueSetsData, completion: completion)
   }
 
   func deleteValueSetWithHash(hash: String) {
-    self.valueSets = self.valueSets.filter { $0.hash != hash }
+    valueSetsData.valueSets = valueSetsData.valueSets.filter { $0.hash != hash }
   }
     
   func isValueSetExistWithHash(hash: String) -> Bool {
-    let list = valueSets
+    let list = valueSetsData.valueSets
     return list.contains(where: { $0.hash == hash })
   }
-
-  static func initialize(completion: @escaping () -> Void) {
-    storage.loadOverride(fallback: ValueSetsDataStorage.sharedInstance) { success in
-      guard let result = success else { return }
+    
+  func initialize(completion: @escaping () -> Void) {
+    storage.loadOverride(fallback: valueSetsData) { [unowned self]  success in
+      guard let result = success else {
+        completion()
+        return
+      }
+        
       let format = l10n("log.valueSets")
-      print(String.localizedStringWithFormat(format, result.valueSets.count))
-      ValueSetsDataStorage.sharedInstance = result
+      DGCLogger.logInfo(String.localizedStringWithFormat(format, result.valueSets.count))
+      self.valueSetsData = result
+      self.save()
       completion()
     }
   }
 }
 
 // MARK: ValueSets for External Parameters
-extension ValueSetsDataStorage {
+extension ValueSetsDataManager {
   public func getValueSetsForExternalParameters() -> Dictionary<String, [String]> {
     var returnValue = Dictionary<String, [String]>()
-    valueSets.forEach { valueSet in
-        let keys: [String] = Array(valueSet.valueSetValues.keys)
+    valueSetsData.valueSets.forEach { valueSet in
+        let keys = Array(valueSet.valueSetValues.keys)
         returnValue[valueSet.valueSetId] = keys
     }
     return returnValue

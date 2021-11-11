@@ -44,7 +44,6 @@ final class CheckValidityVC: UIViewController {
   private var items: [ValidityCellModel] = []
   private var hCert: HCert?
   private var selectedDate = Date()
-  private var selectedCountryCode: String?
     
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -87,11 +86,7 @@ extension CheckValidityVC: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return items.count
   }
-    
-  func numberOfSections(in tableView: UITableView) -> Int {
-    return 1
-  }
-
+  
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let item: ValidityCellModel = items[indexPath.row]
     if item.cellType == .titleAndDescription {
