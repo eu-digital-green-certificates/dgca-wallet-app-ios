@@ -61,7 +61,6 @@ class RulesDataManager {
       let format = l10n("log.rules")
       DGCLogger.logInfo(String.localizedStringWithFormat(format, result.rules.count))
       self.rulesData = result
-      self.save()
       completion()
     }
   }

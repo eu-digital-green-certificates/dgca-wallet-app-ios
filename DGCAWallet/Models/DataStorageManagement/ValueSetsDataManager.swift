@@ -65,7 +65,6 @@ class ValueSetsDataManager {
       let format = l10n("log.valueSets")
       DGCLogger.logInfo(String.localizedStringWithFormat(format, result.valueSets.count))
       self.valueSetsData = result
-      self.save()
       completion()
     }
   }

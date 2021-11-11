@@ -209,17 +209,20 @@ class DataCenter {
 
       group.enter()
       GatewayConnection.loadCountryList { _ in
+        saveCountries()
         group.leave()
       }
       
       group.enter()
       GatewayConnection.loadValueSetsFromServer { _ in
+        saveSets()
         group.leave()
       }
       
       group.enter()
       GatewayConnection.loadRulesFromServer { _ in
         CertLogicManager.shared.setRules(ruleList: rules)
+        saveRules()
         group.leave()
       }
 
@@ -227,6 +230,7 @@ class DataCenter {
     }
     group.notify(queue: .main) {
       lastFetch = Date()
+      saveLocalData()
       completion()
     }
   }

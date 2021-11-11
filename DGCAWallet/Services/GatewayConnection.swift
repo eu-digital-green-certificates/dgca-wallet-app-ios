@@ -122,8 +122,7 @@ extension GatewayConnection {
       countryList.forEach { country in
         DataCenter.countryDataManager.add(country: country)
       }
-      DataCenter.saveCountries()
-        completion?(DataCenter.countryCodes.sorted(by: { $0.name < $1.name }))
+      completion?(DataCenter.countryCodes.sorted(by: { $0.name < $1.name }))
     }
   }
     
@@ -138,7 +137,7 @@ extension GatewayConnection {
       let ruleHashes: [RuleHash] = CertLogicEngine.getItems(from: responseStr)
       // Remove old hashes
       DataCenter.rules = DataCenter.rules.filter { rule in
-          return !ruleHashes.contains(where: { $0.hash == rule.hash})
+        return !ruleHashes.contains(where: { $0.hash == rule.hash})
       }
       // Downloading new hashes
       var rulesItems = [CertLogic.Rule]()
@@ -189,7 +188,6 @@ extension GatewayConnection {
   static func loadRulesFromServer(completion: (([CertLogic.Rule]) -> Void)? = nil) {
     getListOfRules { rulesList in
       rulesList.forEach { DataCenter.rulesDataManager.add(rule: $0) }
-      DataCenter.saveRules()
       completion?(DataCenter.rules)
     }
   }
@@ -257,7 +255,6 @@ extension GatewayConnection {
       valueSetsList.forEach { valueSet in
         DataCenter.valueSetsDataManager.add(valueSet: valueSet)
       }
-      DataCenter.saveSets()
       completion?(DataCenter.valueSets)
     }
   }

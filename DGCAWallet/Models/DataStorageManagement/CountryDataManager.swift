@@ -58,7 +58,6 @@ class CountryDataManager {
       let format = l10n("log.country")
       DGCLogger.logInfo(String.localizedStringWithFormat(format, result.countryCodes.count))
       self.countryData = result
-      self.save()
       completion()
     }
   }
