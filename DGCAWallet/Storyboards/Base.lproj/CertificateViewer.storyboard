@@ -238,10 +238,10 @@
             </objects>
             <point key="canvasLocation" x="1103" y="117"/>
         </scene>
-        <!--Check ValidityVC-->
+        <!--Check Validity Controller-->
         <scene sceneID="7fp-eC-52X">
             <objects>
-                <viewController id="faH-nl-VQM" customClass="CheckValidityVC" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="faH-nl-VQM" customClass="CheckValidityController" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="w41-en-kdb">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

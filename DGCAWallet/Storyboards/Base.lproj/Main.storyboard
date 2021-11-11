@@ -25,10 +25,10 @@
             </objects>
             <point key="canvasLocation" x="-512" y="903"/>
         </scene>
-        <!--ViewerVC-->
+        <!--Viewer Controller-->
         <scene sceneID="Btg-Zb-uNg">
             <objects>
-                <viewController id="Zgy-od-xp6" customClass="PDFViewerVC" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Zgy-od-xp6" customClass="PDFViewerController" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="YHn-cK-H4X">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -101,10 +101,10 @@
             </objects>
             <point key="canvasLocation" x="215" y="966"/>
         </scene>
-        <!--Image ViewerVC-->
+        <!--Image Viewer Controller-->
         <scene sceneID="qFK-da-nKL">
             <objects>
-                <viewController id="x7R-KV-5e1" customClass="ImageViewerVC" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="x7R-KV-5e1" customClass="ImageViewerController" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="ad8-V9-BGY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -323,10 +323,10 @@
             </objects>
             <point key="canvasLocation" x="1212" y="119"/>
         </scene>
-        <!--Certificates ListVC-->
+        <!--Certificate List Controller-->
         <scene sceneID="Szj-sk-Pls">
             <objects>
-                <viewController id="Aqv-ZH-wCK" customClass="CertificatesListVC" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Aqv-ZH-wCK" customClass="CertificateListController" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5IK-QC-bwD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1151,7 +1151,7 @@
                     <navigationItem key="navigationItem" id="OA6-WB-Bsu"/>
                     <connections>
                         <outlet property="activityIndicator" destination="9nO-9e-hKR" id="cNx-Wq-0Wh"/>
-                        <segue destination="BcE-gA-Tuj" kind="show" identifier="list" id="GGI-dr-YbQ"/>
+                        <segue destination="BcE-gA-Tuj" kind="show" identifier="showMainList" id="GGI-dr-YbQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k79-Ja-kNa" userLabel="First Responder" sceneMemberID="firstResponder"/>

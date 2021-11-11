@@ -34,15 +34,11 @@ struct SecureBackground {
   public static var image: UIImage?
 
   public static func enable() {
-    guard !paused else {
-      return
-    }
+    guard !paused else { return }
     disable()
-    guard let image = image else {
-      return
-    }
+    guard let image = image else { return }
     let imageView = UIImageView(image: image)
-    UIApplication.shared.windows[0].addSubview(imageView)
+      UIApplication.shared.windows.first?.addSubview(imageView)
     Self.imageView = imageView
     Self.activation = Date()
   }
@@ -50,9 +46,7 @@ struct SecureBackground {
   public static func disable() {
     if imageView != nil {
       if activation.timeIntervalSinceNow < -1 {
-        (
-          UIApplication.shared.windows[0].rootViewController as? UINavigationController
-        )?.popToRootViewController(animated: false)
+          (UIApplication.shared.windows.first?.rootViewController as? UINavigationController)?.popToRootViewController(animated: false)
       }
       imageView?.removeFromSuperview()
       imageView = nil
@@ -62,9 +56,8 @@ struct SecureBackground {
   static var paused = false
   static var activation = Date()
   public static func checkId(from controller: UIViewController? = nil, completion: ((Bool) -> Void)?) {
-    guard !paused else {
-      return
-    }
+    guard !paused else { return }
+      
     paused = true
     let context = LAContext()
     context.localizedCancelTitle = l10n("auth.later")

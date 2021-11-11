@@ -32,10 +32,9 @@ extension UIImage {
   func qrCodeString() -> String? {
     var qrAsString = ""
     guard let detector = CIDetector(ofType: CIDetectorTypeQRCode,
-                                    context: nil,
-                                    options: [CIDetectorAccuracy: CIDetectorAccuracyHigh]),
-          let ciImage = CIImage(image: self),
-          let features = detector.features(in: ciImage) as? [CIQRCodeFeature] else {
+        context: nil, options: [CIDetectorAccuracy: CIDetectorAccuracyHigh]),
+        let ciImage = CIImage(image: self),
+        let features = detector.features(in: ciImage) as? [CIQRCodeFeature] else {
       return qrAsString
     }
     for feature in features {
@@ -49,5 +48,13 @@ extension UIImage {
   
   func convertImageToBase64String () -> String {
       return self.jpegData(compressionQuality: 1)?.base64EncodedString() ?? ""
+  }
+}
+
+extension String {
+  func convertBase64StringToImage () -> UIImage? {
+    guard let imageData = Data.init(base64Encoded: self, options: .init(rawValue: 0)) else { return nil }
+      let image = UIImage(data: imageData)
+      return image
   }
 }

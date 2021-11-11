@@ -19,7 +19,7 @@
  * ---license-end
  */
 //  
-//  CertificatesListVC.swift
+//  CertificateListController.swift
 //  DGCAWallet
 //  
 //  Created by Alexandr Chernyy on 21.09.2021.
@@ -28,7 +28,7 @@
 import UIKit
 import SwiftDGC
 
-class CertificatesListVC: UIViewController {
+class CertificateListController: UIViewController {
   private enum Constants {
     static let hcertCellIndentifier = "CertificateCell"
     static let showTicketAcceptController = "showTicketAcceptController"
@@ -107,7 +107,7 @@ class CertificatesListVC: UIViewController {
   }
 }
 
-extension CertificatesListVC: UITableViewDataSource, UITableViewDelegate {
+extension CertificateListController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return listOfCert.count
   }

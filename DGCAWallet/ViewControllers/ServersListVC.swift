@@ -101,7 +101,7 @@ class ServersListVC: UIViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     switch segue.identifier {
     case Constants.showCertificatesList:
-        guard let certController = segue.destination as? CertificatesListVC,
+        guard let certController = segue.destination as? CertificateListController,
             let (serviceInfo,tokenResponse) = sender as? (ServerListResponse, AccessTokenResponse) else { return }
         certController.setCertsWith(serviceInfo, tokenResponse)
     default:

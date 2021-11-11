@@ -19,7 +19,7 @@
  * ---license-end
  */
 //  
-//  CheckValidityVC.swift
+//  CheckValidityController.swift
 //  DGCAWallet
 //  
 //  Created by Alexandr Chernyy on 08.07.2021.
@@ -29,7 +29,7 @@
 import UIKit
 import SwiftDGC
 
-final class CheckValidityVC: UIViewController {
+final class CheckValidityController: UIViewController {
   private enum Constants {
     static let titleCellIndentifier = "CellWithTitleAndDescriptionTVC"
     static let countryCellIndentifier = "CellWithDateAndCountryTVC"
@@ -82,7 +82,7 @@ final class CheckValidityVC: UIViewController {
   }
 }
 
-extension CheckValidityVC: UITableViewDataSource {
+extension CheckValidityController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return items.count
   }

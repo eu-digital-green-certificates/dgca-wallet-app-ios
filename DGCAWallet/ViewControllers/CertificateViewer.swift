@@ -174,7 +174,7 @@ class CertificateViewerVC: UIViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     switch segue.identifier {
     case Constants.showValidityController:
-      guard let checkController = segue.destination as? CheckValidityVC else { return }
+      guard let checkController = segue.destination as? CheckValidityController else { return }
       checkController.setupCheckValidity(with: hCert)
       
     case Constants.embedCertPagesController:

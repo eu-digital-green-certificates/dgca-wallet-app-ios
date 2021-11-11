@@ -19,64 +19,64 @@
  * ---license-end
  */
 //  
-//  PDFViewerVC.swift
+//  ImageViewerController.swift
 //  DGCAWallet
 //  
 //  Created by Alexandr Chernyy on 25.08.2021.
 //  
-
+        
 
 import UIKit
-import PDFKit
 import SwiftDGC
 
-class PDFViewerVC: UIViewController {
+class ImageViewerController: UIViewController {
 
   @IBOutlet fileprivate weak var closeButton: UIButton!
   @IBOutlet fileprivate weak var shareButton: UIButton!
-  @IBOutlet fileprivate weak var pdfView: UIView!
-  
-  var pdfViewer: PDFView?
-  
-  var savedPDF: SavedPDF? {
-    didSet {
-      setupView()
-    }
-  }
+  @IBOutlet fileprivate weak var imageView: UIImageView!
+  @IBOutlet fileprivate weak var scrollView: UIScrollView!
+    
+  var savedImage: SavedImage?
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.closeButton.setTitle(l10n("close"), for: .normal)
     setupView()
   }
-  
+
+  func setImage(image: SavedImage? = nil) {
+    savedImage = image
+  }
+
   private func setupView() {
-    guard let savedPDF = savedPDF, let pdfView = pdfView else { return }
+    guard let savedImage = savedImage, let scrollView = scrollView, let imageView = imageView else { return }
       
-    if pdfViewer == nil {
-      pdfViewer = PDFView(frame: pdfView.bounds)
-    }
-    pdfViewer?.autoScales = true
-    pdfView.addSubview(pdfViewer!)
-    pdfViewer?.document = savedPDF.pdf
-    closeButton.setTitle(l10n("close"), for: .normal)
-    navigationItem.title = savedPDF.fileName
+    scrollView.backgroundColor = .lightGray
+    imageView.image = savedImage.image
+    scrollView.delegate = self
+    scrollView.minimumZoomScale = 1.0
+    scrollView.maximumZoomScale = 5.0
+    scrollView.zoomScale = 1.0
+    self.navigationItem.title = savedImage.fileName
   }
-  
-  func setPDF(pdf: SavedPDF) {
-    savedPDF = pdf
-  }
-  
+    
   @IBAction func shareAction(_ sender: Any) {
-    guard let savedPDF = savedPDF else { return }
+    guard let savedImage = savedImage else { return }
       
-    let pdfToShare = [ savedPDF.pdfData ]
-    let activityViewController = UIActivityViewController(activityItems: pdfToShare as [Any],
-        applicationActivities: nil)
+    let imageToShare = [ savedImage.image ]
+    let activityViewController = UIActivityViewController(activityItems: imageToShare as [Any],
+       applicationActivities: nil)
     activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
     self.present(activityViewController, animated: true, completion: nil)
   }
     
   @IBAction func closeAction(_ sender: Any) {
     self.dismiss(animated: true)
+  }
+}
+
+extension ImageViewerController: UIScrollViewDelegate {
+  func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+     return imageView
   }
 }

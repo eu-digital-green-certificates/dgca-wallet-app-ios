@@ -31,7 +31,6 @@ import SwiftyJSON
 import CertLogic
 
 class CertificateValidator {
-    
   private let certificate: HCert
 
   init(with cert: HCert) {

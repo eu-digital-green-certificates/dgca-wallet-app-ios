@@ -29,7 +29,8 @@ import UIKit
 import SwiftDGC
 
 class HomeController: UIViewController {
-    
+  let showMainList = "showMainList"
+  
   @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
 
   override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -92,7 +93,7 @@ class HomeController: UIViewController {
     SecureBackground.checkId(from: self) { success in
       DispatchQueue.main.async { [weak self] in
         if success {
-          self?.performSegue(withIdentifier: "list", sender: self)
+          self?.performSegue(withIdentifier: self!.showMainList, sender: nil)
         } else {
           self?.loadComplete()
         }

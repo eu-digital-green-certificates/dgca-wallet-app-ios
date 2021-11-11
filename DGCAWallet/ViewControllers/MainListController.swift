@@ -222,12 +222,12 @@ class MainListController: UIViewController {
         serviceController.setServices(info: listOfServices)
         
       case SegueIdentifiers.showPDFViewer:
-        guard let serviceController = segue.destination as? PDFViewerVC else { return }
+        guard let serviceController = segue.destination as? PDFViewerController else { return }
         guard let pdf = sender as? SavedPDF else { return }
         serviceController.setPDF(pdf: pdf)
 
       case SegueIdentifiers.showImageViewer:
-        guard let serviceController = segue.destination as? ImageViewerVC else { return }
+        guard let serviceController = segue.destination as? ImageViewerController else { return }
         guard let savedImage = sender as? SavedImage else { return }
         serviceController.setImage(image: savedImage)
       

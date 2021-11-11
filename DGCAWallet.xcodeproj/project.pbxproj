@@ -8,16 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		15F670A3273B0C8A00466C0F /* Wallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F670A2273B0C8A00466C0F /* Wallet.swift */; };
-		5C00071926CFAED2002E5013 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00071826CFAED2002E5013 /* UIImage+.swift */; };
+		5C00071926CFAED2002E5013 /* UIImage+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00071826CFAED2002E5013 /* UIImage+String.swift */; };
 		5C00071C26D38CC3002E5013 /* NFCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00071B26D38CC3002E5013 /* NFCHelper.swift */; };
 		5C00071D26D38CC3002E5013 /* NFCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00071B26D38CC3002E5013 /* NFCHelper.swift */; };
 		5C00071E26D38CC3002E5013 /* NFCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00071B26D38CC3002E5013 /* NFCHelper.swift */; };
 		5C00072226D3A40E002E5013 /* SavedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00072126D3A40E002E5013 /* SavedImage.swift */; };
 		5C00072326D3A40E002E5013 /* SavedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00072126D3A40E002E5013 /* SavedImage.swift */; };
 		5C00072426D3A40E002E5013 /* SavedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00072126D3A40E002E5013 /* SavedImage.swift */; };
-		5C00072626D3A6CD002E5013 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00072526D3A6CD002E5013 /* String+.swift */; };
-		5C00072726D3A6CD002E5013 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00072526D3A6CD002E5013 /* String+.swift */; };
-		5C00072826D3A6CD002E5013 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00072526D3A6CD002E5013 /* String+.swift */; };
 		5C00072E26D3AC11002E5013 /* SavedPDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00072D26D3AC11002E5013 /* SavedPDF.swift */; };
 		5C00072F26D3AC11002E5013 /* SavedPDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00072D26D3AC11002E5013 /* SavedPDF.swift */; };
 		5C00073026D3AC11002E5013 /* SavedPDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00072D26D3AC11002E5013 /* SavedPDF.swift */; };
@@ -27,15 +24,15 @@
 		5C00073A26D625DE002E5013 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00073926D625DE002E5013 /* ImageTableViewCell.swift */; };
 		5C00073B26D625DE002E5013 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00073926D625DE002E5013 /* ImageTableViewCell.swift */; };
 		5C00073C26D625DE002E5013 /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00073926D625DE002E5013 /* ImageTableViewCell.swift */; };
-		5C00073F26D641CC002E5013 /* ImageViewerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00073D26D641CC002E5013 /* ImageViewerVC.swift */; };
-		5C00074026D641CC002E5013 /* ImageViewerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00073D26D641CC002E5013 /* ImageViewerVC.swift */; };
-		5C00074126D641CC002E5013 /* ImageViewerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00073D26D641CC002E5013 /* ImageViewerVC.swift */; };
-		5C00074726D641E2002E5013 /* PDFViewerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00074526D641E2002E5013 /* PDFViewerVC.swift */; };
-		5C00074826D641E2002E5013 /* PDFViewerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00074526D641E2002E5013 /* PDFViewerVC.swift */; };
-		5C00074926D641E2002E5013 /* PDFViewerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00074526D641E2002E5013 /* PDFViewerVC.swift */; };
-		5C50CF09269700550015EE29 /* CheckValidityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF07269700540015EE29 /* CheckValidityVC.swift */; };
-		5C50CF0A269700550015EE29 /* CheckValidityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF07269700540015EE29 /* CheckValidityVC.swift */; };
-		5C50CF0B269700550015EE29 /* CheckValidityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF07269700540015EE29 /* CheckValidityVC.swift */; };
+		5C00073F26D641CC002E5013 /* ImageViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00073D26D641CC002E5013 /* ImageViewerController.swift */; };
+		5C00074026D641CC002E5013 /* ImageViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00073D26D641CC002E5013 /* ImageViewerController.swift */; };
+		5C00074126D641CC002E5013 /* ImageViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00073D26D641CC002E5013 /* ImageViewerController.swift */; };
+		5C00074726D641E2002E5013 /* PDFViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00074526D641E2002E5013 /* PDFViewerController.swift */; };
+		5C00074826D641E2002E5013 /* PDFViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00074526D641E2002E5013 /* PDFViewerController.swift */; };
+		5C00074926D641E2002E5013 /* PDFViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C00074526D641E2002E5013 /* PDFViewerController.swift */; };
+		5C50CF09269700550015EE29 /* CheckValidityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF07269700540015EE29 /* CheckValidityController.swift */; };
+		5C50CF0A269700550015EE29 /* CheckValidityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF07269700540015EE29 /* CheckValidityController.swift */; };
+		5C50CF0B269700550015EE29 /* CheckValidityController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF07269700540015EE29 /* CheckValidityController.swift */; };
 		5C50CF11269700710015EE29 /* RuleValidationResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF0F269700710015EE29 /* RuleValidationResultVC.swift */; };
 		5C50CF12269700710015EE29 /* RuleValidationResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF0F269700710015EE29 /* RuleValidationResultVC.swift */; };
 		5C50CF13269700710015EE29 /* RuleValidationResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF0F269700710015EE29 /* RuleValidationResultVC.swift */; };
@@ -63,9 +60,9 @@
 		5C556D4426F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4026F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift */; };
 		5C556D4526F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4026F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift */; };
 		5C556D4626F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4026F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift */; };
-		5C556D4926F9F8AC007E2C2E /* CertificatesListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4726F9F8AC007E2C2E /* CertificatesListVC.swift */; };
-		5C556D4A26F9F8AC007E2C2E /* CertificatesListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4726F9F8AC007E2C2E /* CertificatesListVC.swift */; };
-		5C556D4B26F9F8AC007E2C2E /* CertificatesListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4726F9F8AC007E2C2E /* CertificatesListVC.swift */; };
+		5C556D4926F9F8AC007E2C2E /* CertificateListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4726F9F8AC007E2C2E /* CertificateListController.swift */; };
+		5C556D4A26F9F8AC007E2C2E /* CertificateListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4726F9F8AC007E2C2E /* CertificateListController.swift */; };
+		5C556D4B26F9F8AC007E2C2E /* CertificateListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4726F9F8AC007E2C2E /* CertificateListController.swift */; };
 		5C556D5126F9F8C6007E2C2E /* ServersListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4F26F9F8C6007E2C2E /* ServersListVC.swift */; };
 		5C556D5226F9F8C6007E2C2E /* ServersListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4F26F9F8C6007E2C2E /* ServersListVC.swift */; };
 		5C556D5326F9F8C6007E2C2E /* ServersListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4F26F9F8C6007E2C2E /* ServersListVC.swift */; };
@@ -171,18 +168,17 @@
 
 /* Begin PBXFileReference section */
 		15F670A2273B0C8A00466C0F /* Wallet.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = Wallet.swift; sourceTree = "<group>"; tabWidth = 2; };
-		5C00071826CFAED2002E5013 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
+		5C00071826CFAED2002E5013 /* UIImage+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+String.swift"; sourceTree = "<group>"; };
 		5C00071B26D38CC3002E5013 /* NFCHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCHelper.swift; sourceTree = "<group>"; };
 		5C00071F26D38D58002E5013 /* DGCAWallet.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = DGCAWallet.entitlements; sourceTree = SOURCE_ROOT; };
 		5C00072026D38D6D002E5013 /* DGCAWallet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DGCAWallet.entitlements; sourceTree = "<group>"; };
 		5C00072126D3A40E002E5013 /* SavedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedImage.swift; sourceTree = "<group>"; };
-		5C00072526D3A6CD002E5013 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		5C00072D26D3AC11002E5013 /* SavedPDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPDF.swift; sourceTree = "<group>"; };
 		5C00073526D625D0002E5013 /* PDFTableViewCell.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = PDFTableViewCell.swift; sourceTree = "<group>"; tabWidth = 2; };
 		5C00073926D625DE002E5013 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; tabWidth = 2; };
-		5C00073D26D641CC002E5013 /* ImageViewerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewerVC.swift; sourceTree = "<group>"; };
-		5C00074526D641E2002E5013 /* PDFViewerVC.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = PDFViewerVC.swift; sourceTree = "<group>"; tabWidth = 2; };
-		5C50CF07269700540015EE29 /* CheckValidityVC.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CheckValidityVC.swift; sourceTree = "<group>"; tabWidth = 2; };
+		5C00073D26D641CC002E5013 /* ImageViewerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewerController.swift; sourceTree = "<group>"; };
+		5C00074526D641E2002E5013 /* PDFViewerController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = PDFViewerController.swift; sourceTree = "<group>"; tabWidth = 2; };
+		5C50CF07269700540015EE29 /* CheckValidityController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CheckValidityController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		5C50CF0F269700710015EE29 /* RuleValidationResultVC.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = RuleValidationResultVC.swift; sourceTree = "<group>"; tabWidth = 2; };
 		5C50CF192697023B0015EE29 /* RuleErrorTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleErrorTVC.swift; sourceTree = "<group>"; };
 		5C50CF21269704240015EE29 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
@@ -192,7 +188,7 @@
 		5C50CF3926973D9D0015EE29 /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
 		5C50CF3D26983E090015EE29 /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
 		5C556D4026F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = TicketCodeAcceptViewController.swift; sourceTree = "<group>"; tabWidth = 2; };
-		5C556D4726F9F8AC007E2C2E /* CertificatesListVC.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CertificatesListVC.swift; sourceTree = "<group>"; tabWidth = 2; };
+		5C556D4726F9F8AC007E2C2E /* CertificateListController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CertificateListController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		5C556D4F26F9F8C6007E2C2E /* ServersListVC.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ServersListVC.swift; sourceTree = "<group>"; tabWidth = 2; };
 		5CE07C832692E21E00A032F9 /* CertLogicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertLogicManager.swift; sourceTree = "<group>"; };
 		5CFEDB18269DBB4C00074F66 /* context.jsonc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = context.jsonc; sourceTree = "<group>"; };
@@ -360,8 +356,7 @@
 				5C50CF21269704240015EE29 /* UIViewController+.swift */,
 				5C50CF3926973D9D0015EE29 /* UserDefaults+.swift */,
 				5C50CF3D26983E090015EE29 /* UITableView+.swift */,
-				5C00071826CFAED2002E5013 /* UIImage+.swift */,
-				5C00072526D3A6CD002E5013 /* String+.swift */,
+				5C00071826CFAED2002E5013 /* UIImage+String.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -379,12 +374,12 @@
 				CE4BD253264FF28900689FD6 /* SettingsTableController.swift */,
 				DA01661B265541C0005B73A1 /* LicenseTableController.swift */,
 				DA01662126558B2F005B73A1 /* LicenseController.swift */,
-				5C50CF07269700540015EE29 /* CheckValidityVC.swift */,
+				5C50CF07269700540015EE29 /* CheckValidityController.swift */,
 				5C50CF0F269700710015EE29 /* RuleValidationResultVC.swift */,
-				5C00073D26D641CC002E5013 /* ImageViewerVC.swift */,
-				5C00074526D641E2002E5013 /* PDFViewerVC.swift */,
+				5C00073D26D641CC002E5013 /* ImageViewerController.swift */,
+				5C00074526D641E2002E5013 /* PDFViewerController.swift */,
 				5C556D4026F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift */,
-				5C556D4726F9F8AC007E2C2E /* CertificatesListVC.swift */,
+				5C556D4726F9F8AC007E2C2E /* CertificateListController.swift */,
 				5C556D4F26F9F8C6007E2C2E /* ServersListVC.swift */,
 				FEC54BE727201D660048B6BC /* ValidationResultViewController.swift */,
 			);
@@ -720,9 +715,9 @@
 				CE13CF0A262DCDDA0070C80E /* CertificateViewer.swift in Sources */,
 				CEDABD40263C5FF4007A9B97 /* CertificateController.swift in Sources */,
 				CE37B643263867D700DEE13D /* SecureBackground.swift in Sources */,
-				5C556D4926F9F8AC007E2C2E /* CertificatesListVC.swift in Sources */,
+				5C556D4926F9F8AC007E2C2E /* CertificateListController.swift in Sources */,
 				FEC54BE6271F27180048B6BC /* AccessTokenService.swift in Sources */,
-				5C00071926CFAED2002E5013 /* UIImage+.swift in Sources */,
+				5C00071926CFAED2002E5013 /* UIImage+String.swift in Sources */,
 				FEBE53B62721A3EA003B61FB /* LimitationCell.swift in Sources */,
 				CE8096D9263B07BB00A65AD6 /* UIColor.swift in Sources */,
 				CEDABD49263C70EF007A9B97 /* CertPages.swift in Sources */,
@@ -757,7 +752,7 @@
 				5C00072E26D3AC11002E5013 /* SavedPDF.swift in Sources */,
 				5C556D4426F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift in Sources */,
 				5C50CF1B2697023B0015EE29 /* RuleErrorTVC.swift in Sources */,
-				5C50CF09269700550015EE29 /* CheckValidityVC.swift in Sources */,
+				5C50CF09269700550015EE29 /* CheckValidityController.swift in Sources */,
 				D2E6CAFF273A944200E9AF1F /* CountryDataManager.swift in Sources */,
 				5C50CF3E26983E090015EE29 /* UITableView+.swift in Sources */,
 				CEA6D6EE261F8D2700715333 /* SceneDelegate.swift in Sources */,
@@ -765,12 +760,11 @@
 				5C50CF22269704240015EE29 /* UIViewController+.swift in Sources */,
 				D2E6CB0F273AA34200E9AF1F /* PdfDataManager.swift in Sources */,
 				D23EF7A6272057F40097D82B /* CertificateTVC.swift in Sources */,
-				5C00074726D641E2002E5013 /* PDFViewerVC.swift in Sources */,
-				5C00073F26D641CC002E5013 /* ImageViewerVC.swift in Sources */,
+				5C00074726D641E2002E5013 /* PDFViewerController.swift in Sources */,
+				5C00073F26D641CC002E5013 /* ImageViewerController.swift in Sources */,
 				5C00072226D3A40E002E5013 /* SavedImage.swift in Sources */,
 				D2E6CAEF273A93F300E9AF1F /* DataCenter.swift in Sources */,
 				D2E6CAF3273A941200E9AF1F /* RulesDataManager.swift in Sources */,
-				5C00072626D3A6CD002E5013 /* String+.swift in Sources */,
 				D2E6CB03273A948600E9AF1F /* SharedConstants.swift in Sources */,
 				5C50CF2F26972BFD0015EE29 /* CellWithDateAndCountryTVC.swift in Sources */,
 			);
@@ -780,11 +774,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C00074826D641E2002E5013 /* PDFViewerVC.swift in Sources */,
+				5C00074826D641E2002E5013 /* PDFViewerController.swift in Sources */,
 				5C50CF2826972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.swift in Sources */,
 				5C00071D26D38CC3002E5013 /* NFCHelper.swift in Sources */,
 				5C00072F26D3AC11002E5013 /* SavedPDF.swift in Sources */,
-				5C50CF0A269700550015EE29 /* CheckValidityVC.swift in Sources */,
+				5C50CF0A269700550015EE29 /* CheckValidityController.swift in Sources */,
 				5C556D4526F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift in Sources */,
 				5C50CF3B26973D9D0015EE29 /* UserDefaults+.swift in Sources */,
 				5C50CF3F26983E090015EE29 /* UITableView+.swift in Sources */,
@@ -798,7 +792,6 @@
 				D2E6CAF4273A941200E9AF1F /* RulesDataManager.swift in Sources */,
 				5C50CF12269700710015EE29 /* RuleValidationResultVC.swift in Sources */,
 				CEA6D703261F8D2900715333 /* DGCAWalletTests.swift in Sources */,
-				5C00072726D3A6CD002E5013 /* String+.swift in Sources */,
 				D2E6CB10273AA34200E9AF1F /* PdfDataManager.swift in Sources */,
 				5C00073726D625D0002E5013 /* PDFTableViewCell.swift in Sources */,
 				5C50CF23269704240015EE29 /* UIViewController+.swift in Sources */,
@@ -807,9 +800,9 @@
 				5CE07C852692E21E00A032F9 /* CertLogicManager.swift in Sources */,
 				5C50CF372697315B0015EE29 /* ValidityCellModel.swift in Sources */,
 				5C50CF3026972BFD0015EE29 /* CellWithDateAndCountryTVC.swift in Sources */,
-				5C00074026D641CC002E5013 /* ImageViewerVC.swift in Sources */,
+				5C00074026D641CC002E5013 /* ImageViewerController.swift in Sources */,
 				D2E6CAFC273A943300E9AF1F /* DataStuctures.swift in Sources */,
-				5C556D4A26F9F8AC007E2C2E /* CertificatesListVC.swift in Sources */,
+				5C556D4A26F9F8AC007E2C2E /* CertificateListController.swift in Sources */,
 				D2E6CB04273A948600E9AF1F /* SharedConstants.swift in Sources */,
 				D2E6CAF8273A942700E9AF1F /* ValueSetsDataManager.swift in Sources */,
 				CEFAD87F262714C4009AFEF9 /* EHNTests.swift in Sources */,
@@ -831,21 +824,20 @@
 				D2E6CB0D273AA00200E9AF1F /* ImageDataManager.swift in Sources */,
 				5C556D4626F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift in Sources */,
 				D2E6CAF1273A93F300E9AF1F /* DataCenter.swift in Sources */,
-				5C556D4B26F9F8AC007E2C2E /* CertificatesListVC.swift in Sources */,
+				5C556D4B26F9F8AC007E2C2E /* CertificateListController.swift in Sources */,
 				D2E6CB09273A94EA00E9AF1F /* LocalDataManager.swift in Sources */,
-				5C00074926D641E2002E5013 /* PDFViewerVC.swift in Sources */,
+				5C00074926D641E2002E5013 /* PDFViewerController.swift in Sources */,
 				CEA6D70E261F8D2900715333 /* DGCAWalletUITests.swift in Sources */,
 				5C50CF3126972BFD0015EE29 /* CellWithDateAndCountryTVC.swift in Sources */,
 				D2E6CAF9273A942700E9AF1F /* ValueSetsDataManager.swift in Sources */,
-				5C50CF0B269700550015EE29 /* CheckValidityVC.swift in Sources */,
+				5C50CF0B269700550015EE29 /* CheckValidityController.swift in Sources */,
 				5C556D5326F9F8C6007E2C2E /* ServersListVC.swift in Sources */,
 				5C50CF1D2697023B0015EE29 /* RuleErrorTVC.swift in Sources */,
 				5CE07C862692E21E00A032F9 /* CertLogicManager.swift in Sources */,
 				5C00071E26D38CC3002E5013 /* NFCHelper.swift in Sources */,
 				5C50CF13269700710015EE29 /* RuleValidationResultVC.swift in Sources */,
 				5C50CF24269704240015EE29 /* UIViewController+.swift in Sources */,
-				5C00072826D3A6CD002E5013 /* String+.swift in Sources */,
-				5C00074126D641CC002E5013 /* ImageViewerVC.swift in Sources */,
+				5C00074126D641CC002E5013 /* ImageViewerController.swift in Sources */,
 				D2E6CAFD273A943300E9AF1F /* DataStuctures.swift in Sources */,
 				D2E6CB01273A944200E9AF1F /* CountryDataManager.swift in Sources */,
 				D2E6CAF5273A941200E9AF1F /* RulesDataManager.swift in Sources */,
