@@ -84,9 +84,9 @@ class ScanWalletController: UIViewController {
   "protocolVersion": "1.0.0",
   "serviceIdentity": "https://dgca-booking-demo-eu-test.cfapps.eu10.hana.ondemand.com/api/identity",
   "privacyUrl": "https://validation-decorator.example",
-  "token": "eyJ0eXAiOiJKV1QiLCJraWQiOiJiUzhEMi9XejV0WT0iLCJhbGciOiJFUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RnY2EtYm9va2luZy1kZW1vLWV1LXRlc3QuY2ZhcHBzLmV1MTAuaGFuYS5vbmRlbWFuZC5jb20vYXBpL2lkZW50aXR5IiwiZXhwIjoxNjM1MDczMTg5LCJzdWIiOiI2YTJhYjU5MS1jMzgzLTRlOWEtYjMwOS0zNjBjNThkYWQ5M2YifQ.vo_YxeSM02knOLASRNs74qTErKWCNo9Zq8-7TVIc1HvaGkVf_r5USnUBcyDykSsmj8Ckle5lGnHAvU1krfpk3A",
+  "token": "eyJ0eXAiOiJKV1QiLCJraWQiOiJiUzhEMi9XejV0WT0iLCJhbGciOiJFUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RnY2EtYm9va2luZy1kZW1vLWV1LXRlc3QuY2ZhcHBzLmV1MTAuaGFuYS5vbmRlbWFuZC5jb20vYXBpL2lkZW50aXR5IiwiZXhwIjoxNjM2NjIzMTA0LCJzdWIiOiI0NmM3N2YwOS1kMGI1LTQ1NjUtYTY5NC01ZDkyMzk3NmI4M2YifQ.5EpHoZ-NBtsjI9h5encROPNGzU7MUcGFpJobffjrVsswFJTidKS2XT3PGFj3HUUvufZQRRurDbZKwOHBkzXyIA",
   "consent": "Please confirm to start the DCC Exchange flow. If you not confirm, the flow is aborted.",
-  "subject": "6a2ab591-c383-4e9a-b309-360c58dad93f",
+  "subject": "46c77f09-d0b5-4565-a694-5d923976b83f",
   "serviceProvider": "Booking Demo"
 }
 """)
