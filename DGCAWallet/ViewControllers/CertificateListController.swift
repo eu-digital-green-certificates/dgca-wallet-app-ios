@@ -32,6 +32,7 @@ class CertificateListController: UIViewController {
   private enum Constants {
     static let hcertCellIndentifier = "CertificateCell"
     static let showTicketAcceptController = "showTicketAcceptController"
+    static let accessTokenCellInfoIdentifier = "AccessTokenInfoCell"
   }
   
   @IBOutlet fileprivate weak var tableView: UITableView!
@@ -40,6 +41,8 @@ class CertificateListController: UIViewController {
   private var listOfCert = [DatedCertString]()
   private var validationServiceInfo : ServerListResponse?
   private var accessTokenInfo       : AccessTokenResponse?
+  private var accessTokenInfoKeys   : [String] = ["Name", "Date of birth", "Departure","Arrival","Accepted certificate type","Category","Validation Time","Valid from","Valid to"]
+  private var accessTokenInfoValues   : [String] = [String]()
   
   private var isNavigationEnabled: Bool {
     return accessTokenInfo != nil && validationServiceInfo != nil &&
@@ -48,6 +51,8 @@ class CertificateListController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    accessTokenInfoValues = ["\(accessTokenInfo!.vc!.gnt!) \(accessTokenInfo!.vc!.fnt!)",accessTokenInfo!.vc!.dob!,"\(accessTokenInfo!.vc!.cod!),\(accessTokenInfo!.vc!.rod!)","\(accessTokenInfo!.vc!.coa!),\(accessTokenInfo!.vc!.roa!)",accessTokenInfo!.vc!.type!.joined(separator: ","),accessTokenInfo!.vc!.category!.joined(separator: ","),accessTokenInfo!.vc!.validationClock!,accessTokenInfo!.vc!.validFrom!,accessTokenInfo!.vc!.validTo!]
+    
     tableView.tableFooterView = UIView()
     title = l10n("certificates")
     nextButton.isEnabled = false
@@ -65,7 +70,6 @@ class CertificateListController: UIViewController {
   }
   
   func setCertsWith(_ validationInfo: ServerListResponse,_ accessTokenModel : AccessTokenResponse) {
-    // TODO: Make filtering by all predicates (dob, validFrom/To, fullName)
         
     validationServiceInfo = validationInfo
     accessTokenInfo = accessTokenModel
@@ -109,10 +113,28 @@ class CertificateListController: UIViewController {
 
 extension CertificateListController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return listOfCert.count
+    if section == 0 {
+      if self.accessTokenInfo?.t == 0 {
+        return 0
+      } else if self.accessTokenInfo?.t == 1 {
+        return 2
+      } else if self.accessTokenInfo?.t == 2 {
+        return 9
+      }
+    }
+      return listOfCert.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    if indexPath.section == 0 {
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.accessTokenCellInfoIdentifier,
+          for: indexPath) as? TokenInfoCell else { return UITableViewCell() }
+      
+      cell.fieldName.text = accessTokenInfoKeys[indexPath.row]
+      cell.fieldValue.text = accessTokenInfoValues[indexPath.row]
+      
+      return cell
+    }
       guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.hcertCellIndentifier,
           for: indexPath) as? CertificateCell else { return UITableViewCell() }
       let savedCert = listOfCert[indexPath.row]
@@ -147,11 +169,13 @@ extension CertificateListController: UITableViewDataSource, UITableViewDelegate 
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    deselectAllCert()
-    nextButton.isEnabled = true
-    nextButton.backgroundColor = UIColor.walletYellow
-    listOfCert[indexPath.row].isSelected = true
-    tableView.reloadData()
+    if indexPath.section == 1 {
+      deselectAllCert()
+      nextButton.isEnabled = true
+      nextButton.backgroundColor = UIColor.walletYellow
+      listOfCert[indexPath.row].isSelected = true
+      tableView.reloadData()
+    }
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

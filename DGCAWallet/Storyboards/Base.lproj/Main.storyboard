@@ -390,6 +390,40 @@
                                             <outlet property="nameLabel" destination="EZx-rd-6zb" id="udM-ku-z70"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AccessTokenInfoCell" rowHeight="32" id="YgW-TE-KvK" customClass="TokenInfoCell" customModule="DGCAWallet" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="135.5" width="375" height="32"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YgW-TE-KvK" id="0U8-Cw-qC3">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="32"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d0e-Bt-rYr">
+                                                    <rect key="frame" x="272" y="8" width="87" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                                    <color key="textColor" name="disabledText"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eJY-DF-xWG">
+                                                    <rect key="frame" x="16" y="8" width="34.5" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                                    <color key="textColor" name="disabledText"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="d0e-Bt-rYr" secondAttribute="bottom" constant="8" id="O7o-RC-isb"/>
+                                                <constraint firstItem="eJY-DF-xWG" firstAttribute="top" secondItem="0U8-Cw-qC3" secondAttribute="top" constant="8" id="XuW-IL-8nO"/>
+                                                <constraint firstAttribute="trailing" secondItem="d0e-Bt-rYr" secondAttribute="trailing" constant="16" id="Z2e-Pj-kMd"/>
+                                                <constraint firstAttribute="bottom" secondItem="eJY-DF-xWG" secondAttribute="bottom" constant="8" id="eKU-97-XA0"/>
+                                                <constraint firstItem="eJY-DF-xWG" firstAttribute="leading" secondItem="0U8-Cw-qC3" secondAttribute="leading" constant="16" id="mVK-jC-qSR"/>
+                                                <constraint firstItem="d0e-Bt-rYr" firstAttribute="top" secondItem="0U8-Cw-qC3" secondAttribute="top" constant="8" id="osz-LA-l5I"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="fieldName" destination="eJY-DF-xWG" id="SE3-iQ-a1q"/>
+                                            <outlet property="fieldValue" destination="d0e-Bt-rYr" id="rxe-6r-dAd"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="Aqv-ZH-wCK" id="EYE-Vg-8uz"/>
@@ -444,7 +478,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BgU-EK-kpm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2128.985507246377" y="118.52678571428571"/>
+            <point key="canvasLocation" x="2128.8000000000002" y="118.29085457271366"/>
         </scene>
         <!--Ticket Code Accept View Controller-->
         <scene sceneID="Nns-P2-25y">

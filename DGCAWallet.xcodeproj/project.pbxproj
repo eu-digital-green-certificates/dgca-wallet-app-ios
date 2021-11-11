@@ -147,6 +147,7 @@
 		FEC54BE4271F26990048B6BC /* IdentityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC54BE3271F26990048B6BC /* IdentityService.swift */; };
 		FEC54BE6271F27180048B6BC /* AccessTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC54BE5271F27180048B6BC /* AccessTokenService.swift */; };
 		FEC54BE927201D660048B6BC /* ValidationResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC54BE727201D660048B6BC /* ValidationResultViewController.swift */; };
+		FEEAD6DB273BBE9600D883EB /* TokenInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEAD6DA273BBE9600D883EB /* TokenInfoCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -250,6 +251,7 @@
 		FEC54BE3271F26990048B6BC /* IdentityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityService.swift; sourceTree = "<group>"; };
 		FEC54BE5271F27180048B6BC /* AccessTokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenService.swift; sourceTree = "<group>"; };
 		FEC54BE727201D660048B6BC /* ValidationResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationResultViewController.swift; sourceTree = "<group>"; };
+		FEEAD6DA273BBE9600D883EB /* TokenInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenInfoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -400,6 +402,7 @@
 				5C00073526D625D0002E5013 /* PDFTableViewCell.swift */,
 				5C00073926D625DE002E5013 /* ImageTableViewCell.swift */,
 				FEBE53B42721A3EA003B61FB /* LimitationCell.swift */,
+				FEEAD6DA273BBE9600D883EB /* TokenInfoCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -738,6 +741,7 @@
 				DA01661C265541C0005B73A1 /* LicenseTableController.swift in Sources */,
 				5C00073626D625D0002E5013 /* PDFTableViewCell.swift in Sources */,
 				CE891305263581D900CB92AF /* HomeController.swift in Sources */,
+				FEEAD6DB273BBE9600D883EB /* TokenInfoCell.swift in Sources */,
 				5C00071C26D38CC3002E5013 /* NFCHelper.swift in Sources */,
 				CE260F56263DD1720083A200 /* WalletCell.swift in Sources */,
 				D23EF7A7272057F40097D82B /* ServerTVC.swift in Sources */,
