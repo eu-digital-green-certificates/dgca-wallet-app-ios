@@ -19,7 +19,7 @@
  * ---license-end
  */
 //  
-//  CertTable.swift
+//  CertCodeController.swift
 //  DGCAWallet
 //  
 //  Created by Yannick Spreen on 4/30/21.
@@ -28,11 +28,11 @@
 import SwiftDGC
 import UIKit
 
-class CertCodeVC: UIViewController {
+class CertCodeController: UIViewController {
   @IBOutlet fileprivate weak var imageView: UIImageView!
   @IBOutlet fileprivate weak var tanLabel: UILabel!
 
-  var hCert: HCert! {
+  var hCert: HCert? {
       (parent as? CertPagesController)?.embeddingVC.hCert
   }
   var tan: String? {
@@ -42,7 +42,7 @@ class CertCodeVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    imageView.image = hCert.qrCode
+    imageView.image = hCert?.qrCode
     tanLabel.text = ""
     if tan != nil {
       tanLabel.text = String(format: l10n("tan.label"), l10n("tap-to-reveal"))

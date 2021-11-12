@@ -31,18 +31,25 @@ import SwiftDGC
 import SwiftyJSON
 import CertLogic
 
-struct DatedCertString: Codable {
+class DatedCertString: Codable {
   var isSelected: Bool = false
-  var date: Date
-  var certString: String
-  var storedTAN: String?
+  let date: Date
+  let certString: String
+  let storedTAN: String?
   var cert: HCert? {
-    try? HCert(from: certString)
+    return try? HCert(from: certString)
+  }
+
+
+  init(date: Date, certString: String, storedTAN: String?) {
+    self.date = date
+    self.certString = certString
+    self.storedTAN = storedTAN
   }
 }
 
 class LocalData: Codable {
-var certStrings = [DatedCertString]()
+  var certStrings = [DatedCertString]()
   var lastFetchRaw: Date?
   var lastFetch: Date {
     get {

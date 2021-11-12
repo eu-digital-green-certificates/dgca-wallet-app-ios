@@ -45,13 +45,13 @@ class CertificateListController: UIViewController {
   private var accessTokenInfoValues   : [String] = [String]()
   
   private var isNavigationEnabled: Bool {
-    return accessTokenInfo != nil && validationServiceInfo != nil &&
-      getSelectedCert()?.cert != nil
+    return accessTokenInfo != nil && validationServiceInfo != nil && getSelectedCert()?.cert != nil
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    accessTokenInfoValues = ["\(accessTokenInfo!.vc!.gnt!) \(accessTokenInfo!.vc!.fnt!)",accessTokenInfo!.vc!.dob!,"\(accessTokenInfo!.vc!.cod!),\(accessTokenInfo!.vc!.rod!)","\(accessTokenInfo!.vc!.coa!),\(accessTokenInfo!.vc!.roa!)",accessTokenInfo!.vc!.type!.joined(separator: ","),accessTokenInfo!.vc!.category!.joined(separator: ","),accessTokenInfo!.vc!.validationClock!,accessTokenInfo!.vc!.validFrom!,accessTokenInfo!.vc!.validTo!]
+    guard let vcValue = accessTokenInfo?.vc else { return }
+    accessTokenInfoValues = ["\(vcValue.gnt!) \(vcValue.fnt!)", vcValue.dob!, "\(vcValue.cod!),\(vcValue.rod!)", "\(vcValue.coa!),\(vcValue.roa!)", vcValue.type!.joined(separator: ","), vcValue.category!.joined(separator: ","), vcValue.validationClock!, vcValue.validFrom!, vcValue.validTo!]
     
     tableView.tableFooterView = UIView()
     title = l10n("certificates")
@@ -69,17 +69,16 @@ class CertificateListController: UIViewController {
     self.performSegue(withIdentifier: Constants.showTicketAcceptController, sender: nil)
   }
   
-  func setCertsWith(_ validationInfo: ServerListResponse,_ accessTokenModel : AccessTokenResponse) {
-        
+  func setCertsWith(_ validationInfo: ServerListResponse, _ accessTokenModel : AccessTokenResponse) {
     validationServiceInfo = validationInfo
     accessTokenInfo = accessTokenModel
     
     listOfCert = DataCenter.certStrings.filter { ($0.cert!.fullName.lowercased() == "\(accessTokenModel.vc!.gnt!) \(accessTokenModel.vc!.fnt!)".lowercased()) && ($0.cert!.dateOfBirth == accessTokenModel.vc?.dob)}
-    let validDateFrom = accessTokenModel.vc!.validFrom ?? ""
+    let validDateFrom = accessTokenModel.vc?.validFrom ?? ""
     if let dateValidFrom = Date(rfc3339DateTimeString: validDateFrom) {
       listOfCert = listOfCert.filter{ $0.cert!.iat < dateValidFrom }
     }
-    let validDateTo = accessTokenModel.vc!.validTo ?? ""
+    let validDateTo = accessTokenModel.vc?.validTo ?? ""
     if let dateValidUntil = Date(rfc3339DateTimeString: validDateTo ) {
       listOfCert = listOfCert.filter {$0.cert!.exp > dateValidUntil }
     }

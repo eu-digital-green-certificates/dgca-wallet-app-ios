@@ -37,7 +37,9 @@ class SettingsTableController: UITableViewController {
 
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
-    dismissDelegate?.userDidDissmiss(self)
+    if (isBeingDismissed || isMovingFromParent) {
+      dismissDelegate?.userDidDissmiss(self)
+    }
   }
 
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

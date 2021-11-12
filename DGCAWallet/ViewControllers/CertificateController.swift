@@ -32,7 +32,7 @@ class CertificateController: UIViewController {
   @IBOutlet fileprivate weak var table: UITableView!
   @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
 
-  var hCert: HCert! {
+  var hCert: HCert? {
     (parent as? CertPagesController)?.embeddingVC.hCert
   }
   private var validityState: ValidityState = .invalid

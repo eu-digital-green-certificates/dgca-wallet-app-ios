@@ -397,8 +397,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="32"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d0e-Bt-rYr">
-                                                    <rect key="frame" x="272" y="8" width="87" height="16"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d0e-Bt-rYr">
+                                                    <rect key="frame" x="324.5" y="8" width="34.5" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
                                                     <color key="textColor" name="disabledText"/>
                                                     <nil key="highlightedColor"/>
@@ -415,6 +415,7 @@
                                                 <constraint firstItem="eJY-DF-xWG" firstAttribute="top" secondItem="0U8-Cw-qC3" secondAttribute="top" constant="8" id="XuW-IL-8nO"/>
                                                 <constraint firstAttribute="trailing" secondItem="d0e-Bt-rYr" secondAttribute="trailing" constant="16" id="Z2e-Pj-kMd"/>
                                                 <constraint firstAttribute="bottom" secondItem="eJY-DF-xWG" secondAttribute="bottom" constant="8" id="eKU-97-XA0"/>
+                                                <constraint firstItem="d0e-Bt-rYr" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="eJY-DF-xWG" secondAttribute="trailing" constant="20" id="ecA-hn-pP4"/>
                                                 <constraint firstItem="eJY-DF-xWG" firstAttribute="leading" secondItem="0U8-Cw-qC3" secondAttribute="leading" constant="16" id="mVK-jC-qSR"/>
                                                 <constraint firstItem="d0e-Bt-rYr" firstAttribute="top" secondItem="0U8-Cw-qC3" secondAttribute="top" constant="8" id="osz-LA-l5I"/>
                                             </constraints>

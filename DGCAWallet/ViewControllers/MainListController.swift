@@ -263,6 +263,7 @@ class MainListController: UIViewController, DismissControllerDelegate {
           serviceController.isSaved = false
         }
         serviceController.dismissDelegate = self
+        serviceController.delegate = self
         
       default:
         break
