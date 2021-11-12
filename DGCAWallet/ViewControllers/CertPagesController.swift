@@ -28,7 +28,7 @@
 import UIKit
 
 class CertPagesController: UIPageViewController {
-  weak var embeddingVC: CertificateViewerVC!
+  weak var embeddingVC: CertificateViewerVC?
 
   var index = 0
   let vcs: [UIViewController] = [
@@ -38,9 +38,11 @@ class CertPagesController: UIPageViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    guard let embeddingVC = embeddingVC else { return }
+      
     self.dataSource = self
     self.delegate = self
+      
     index = embeddingVC.isSaved ? 0 : 1
     setViewControllers([vcs[index]], direction: .forward, animated: false)
     let appearance = UIPageControl.appearance(whenContainedInInstancesOf: [UIPageViewController.self])
@@ -74,11 +76,11 @@ extension CertPagesController: UIPageViewControllerDataSource {
   }
 
   func presentationCount(for pageViewController: UIPageViewController) -> Int {
-    vcs.count
+    return vcs.count
   }
 
   func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-    index
+    return index
   }
 }
 
@@ -87,9 +89,7 @@ extension CertPagesController: UIPageViewControllerDelegate {
     didFinishAnimating finished: Bool,
     previousViewControllers: [UIViewController],
     transitionCompleted completed: Bool) {
-    guard
-      completed, let controller = pageViewController.viewControllers?.first
-    else { return }
+    guard completed, let controller = pageViewController.viewControllers?.first else { return }
     index = vcs.firstIndex(of: controller) ?? 0
     setBrightness()
   }

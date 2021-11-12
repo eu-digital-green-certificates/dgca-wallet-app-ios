@@ -721,7 +721,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fy6-pe-6cT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-839.20000000000005" y="116.74876847290641"/>
+            <point key="canvasLocation" x="2722" y="82"/>
         </scene>
         <!--Certificate Controller-->
         <scene sceneID="zRW-4o-eiU">
@@ -771,6 +771,10 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Rtb-d3-6Ll" id="ymJ-EN-8Lf"/>
+                                    <outlet property="delegate" destination="Rtb-d3-6Ll" id="6Sl-Au-TrT"/>
+                                </connections>
                             </tableView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="9Xz-H7-a0H">
                                 <rect key="frame" x="169" y="181.66666666666666" width="37" height="37"/>
@@ -807,7 +811,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RPx-uO-wbp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-839" y="-289"/>
+            <point key="canvasLocation" x="1958" y="82"/>
         </scene>
     </scenes>
     <designables>

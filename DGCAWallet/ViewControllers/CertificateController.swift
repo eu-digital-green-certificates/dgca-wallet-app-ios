@@ -33,7 +33,7 @@ class CertificateController: UIViewController {
   @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
 
   var hCert: HCert? {
-    (parent as? CertPagesController)?.embeddingVC.hCert
+    (parent as? CertPagesController)?.embeddingVC?.hCert
   }
   private var validityState: ValidityState = .invalid
   private var sectionBuilder: SectionBuilder?
@@ -42,29 +42,28 @@ class CertificateController: UIViewController {
     super.viewDidLoad()
 
     validateAndSetupInterface()
-    table.dataSource = self
     table.contentInset = .init(top: 0, left: 0, bottom: 32, right: 0)
-    table.reloadData()
   }
   
   private func validateAndSetupInterface() {
     guard let hCert = hCert else { return }
     
     activityIndicator.startAnimating()
-    
     let validator = CertificateValidator(with: hCert)
     DispatchQueue.global(qos: .userInitiated).async {
       validator.validate {[weak self] (validityState) in
         self?.validityState = validityState
         
         let builder = SectionBuilder(with: hCert, validity: validityState)
-        builder.makeSections(for: .verifier)
+        builder.makeSections(for: .wallet)
         if let section = validityState.infoRulesSection {
-          builder.makeSectionForRuleError(ruleSection: section, for: .verifier)
+          builder.makeSectionForRuleError(ruleSection: section, for: .wallet)
         }
         self?.sectionBuilder = builder
         DispatchQueue.main.async {
           self?.activityIndicator.stopAnimating()
+          self?.table.reloadData()
+
         }
       }
     }
