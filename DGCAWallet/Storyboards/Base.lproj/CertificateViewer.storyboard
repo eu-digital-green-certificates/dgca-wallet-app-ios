@@ -236,7 +236,7 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="PGK-qk-zXH" customClass="CertPagesController" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IUQ-f6-kbe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1120" y="40"/>
+            <point key="canvasLocation" x="1132" y="82"/>
         </scene>
         <!--Check Validity Controller-->
         <scene sceneID="7fp-eC-52X">
@@ -423,7 +423,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ets-pw-8xQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="869" y="660"/>
+            <point key="canvasLocation" x="991" y="601"/>
         </scene>
         <!--Rule Validation ResultVC-->
         <scene sceneID="5CU-uj-UDS">
@@ -680,7 +680,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R9z-LI-YCp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1871" y="835"/>
+            <point key="canvasLocation" x="1971" y="837"/>
         </scene>
         <!--Cert Code Controller-->
         <scene sceneID="ua8-UZ-7hv">

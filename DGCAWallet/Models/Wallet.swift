@@ -32,30 +32,4 @@ import SwiftDGC
 class Wallet {
   static let shared = Wallet()
   
-  var selectedCountryCode: String? {
-    return self.selectedCounty?.code
-  }
-
-  //Selected country code
-  var selectedCounty: CountryModel? {
-    set {
-      let userDefaults = UserDefaults.standard
-      do {
-        try userDefaults.setObject(newValue, forKey: SharedConstants.userDefaultsCountryKey)
-      } catch {
-        print(error.localizedDescription)
-      }
-    }
-    get {
-      let userDefaults = UserDefaults.standard
-      do {
-        let selected = try userDefaults.getObject(forKey: SharedConstants.userDefaultsCountryKey, castTo: CountryModel.self)
-        return selected
-      } catch {
-        print(error.localizedDescription)
-        return nil
-      }
-    }
-  }
-
 }

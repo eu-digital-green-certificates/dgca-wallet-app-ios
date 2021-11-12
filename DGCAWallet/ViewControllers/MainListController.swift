@@ -148,7 +148,7 @@ class MainListController: UIViewController, DismissControllerDelegate {
   }
   
   private func scanNewCertificate() {
-      performSegue(withIdentifier: SegueIdentifiers.showScannerSegue, sender: nil)
+    performSegue(withIdentifier: SegueIdentifiers.showScannerSegue, sender: nil)
   }
 
   private func addPdf() {
@@ -189,8 +189,7 @@ class MainListController: UIViewController, DismissControllerDelegate {
         }
         
         do {
-          let countryCode = Wallet.shared.selectedCountryCode
-          let hCert = try HCert(from: barcodeString, ruleCountryCode: countryCode)
+          let hCert = try HCert(from: barcodeString)
           self?.saveQrCode(cert: hCert)
           
         } catch {
@@ -549,8 +548,7 @@ extension MainListController {
   private func tryFoundQRCodeIn(image: UIImage) {
     if let qrString = image.qrCodeString() {
       do {
-        let countryCode = Wallet.shared.selectedCountryCode
-        let hCert = try HCert(from: qrString, ruleCountryCode: countryCode)
+        let hCert = try HCert(from: qrString)
         self.saveQrCode(cert: hCert)
       } catch {
       }
@@ -631,8 +629,7 @@ extension MainListController: UIDocumentPickerDelegate {
       for image in images {
         if let qrString = image.qrCodeString() {
           do {
-            let countryCode = Wallet.shared.selectedCountryCode
-            let hCert = try HCert(from: qrString, ruleCountryCode: countryCode)
+             let hCert = try HCert(from: qrString)
             self.saveQrCode(cert: hCert)
           } catch {
           }

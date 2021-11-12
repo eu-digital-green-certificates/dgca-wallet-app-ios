@@ -111,6 +111,7 @@ extension CellWithDateAndCountryTVC {
     self.countryItems = list
     self.countryPicker.reloadAllComponents()
     guard self.countryItems.count > 0 else { return }
+      
     if let selected = self.selectedCounty,
        let indexOfCountry = self.countryItems.firstIndex(where: {$0.code == selected.code}) {
       countryPicker.selectRow(indexOfCountry, inComponent: 0, animated: false)
@@ -120,9 +121,5 @@ extension CellWithDateAndCountryTVC {
       countryPicker.selectRow(0, inComponent: 0, animated: false)
       countryHandler?(self.selectedCounty?.code)
     }
-  }
-    
-  public func getSelectedCountryCode() -> String? {
-    return self.selectedCounty?.code
-  }
+  }    
 }
