@@ -33,6 +33,12 @@ import SwiftDGC
 class SettingsTableController: UITableViewController {
 
   @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
+  weak var dismissDelegate: DismissControllerDelegate?
+
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    dismissDelegate?.userDidDissmiss(self)
+  }
 
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     switch indexPath.section {

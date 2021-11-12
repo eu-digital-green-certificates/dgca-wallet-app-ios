@@ -32,7 +32,11 @@ import SwiftDGC
 import UniformTypeIdentifiers
 import MobileCoreServices
 
-class MainListController: UIViewController {
+protocol DismissControllerDelegate: AnyObject {
+  func userDidDissmiss(_ controller: UIViewController) //DismissControllerDelegate
+}
+
+class MainListController: UIViewController, DismissControllerDelegate {
   
   fileprivate enum SegueIdentifiers {
     static let showScannerSegue = "showScannerSegue"
@@ -52,6 +56,10 @@ class MainListController: UIViewController {
   @IBOutlet fileprivate weak var emptyView: UIView!
   @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
   
+  var downloadedDataHasExpired: Bool {
+    return DataCenter.lastFetch.timeIntervalSinceNow < -SharedConstants.expiredDataInterval
+  }
+
   private var scannedToken: String = ""
   private var loading = false
 
@@ -74,6 +82,12 @@ class MainListController: UIViewController {
     if #available(iOS 13.0, *) {
       let scene = self.sceneDelegate
       scene?.isNFCFunctionality = false
+    }
+  }
+
+  func userDidDissmiss(_ controller: UIViewController) {
+    if downloadedDataHasExpired {
+      self.navigationController?.popViewController(animated: false)
     }
   }
 
@@ -212,25 +226,31 @@ class MainListController: UIViewController {
         guard let scanController = segue.destination as? ScanWalletController else { return }
         scanController.modalPresentationStyle = .fullScreen
         scanController.delegate = self
+        scanController.dismissDelegate = self
         
       case SegueIdentifiers.showSettingsController:
-        break
+        guard let navController = segue.destination as? UINavigationController,
+          let serviceController = navController.viewControllers.first as? SettingsTableController else { return }
+          serviceController.dismissDelegate = self
 
       case SegueIdentifiers.showServicesList:
-        guard let serviceController = segue.destination as? ServersListVC else { return }
+        guard let serviceController = segue.destination as? ServerListController else { return }
         guard let listOfServices = sender as?  ServerListResponse else { return }
         serviceController.setServices(info: listOfServices)
+        serviceController.dismissDelegate = self
         
       case SegueIdentifiers.showPDFViewer:
         guard let serviceController = segue.destination as? PDFViewerController else { return }
         guard let pdf = sender as? SavedPDF else { return }
         serviceController.setPDF(pdf: pdf)
-
+        serviceController.dismissDelegate = self
+        
       case SegueIdentifiers.showImageViewer:
         guard let serviceController = segue.destination as? ImageViewerController else { return }
         guard let savedImage = sender as? SavedImage else { return }
         serviceController.setImage(image: savedImage)
-      
+        serviceController.dismissDelegate = self
+        
       case SegueIdentifiers.showCertificateViewer:
         guard let serviceController = segue.destination as? CertificateViewerVC else { return }
         if let savedCertificate = sender as? DatedCertString {
@@ -242,6 +262,7 @@ class MainListController: UIViewController {
           serviceController.hCert = certificate
           serviceController.isSaved = false
         }
+        serviceController.dismissDelegate = self
         
       default:
         break
@@ -302,12 +323,12 @@ extension MainListController: CertificateManaging {
   
   func certificateViewer(_ controller: CertificateViewerVC, didAddCeCertificate cert: HCert) {
     startActivity()
-    reloadAllComponents(completion: {[weak self] _ in
-      DispatchQueue.main.async {
+    DataCenter.initializeLocalData {[weak self] in
+      DispatchQueue.main.asyncAfter(deadline: .now()) {
         self?.stopActivity()
-        self?.reloadTable()
+        self?.table.reloadData()
       }
-    })
+    }
   }
 }
 

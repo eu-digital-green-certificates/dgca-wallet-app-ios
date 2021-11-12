@@ -22,7 +22,8 @@ class ScanWalletController: UIViewController {
 
   private var captureSession: AVCaptureSession?
   weak var delegate: ScanWalletDelegate?
-  
+  weak var dismissDelegate: DismissControllerDelegate?
+
   lazy var detectBarcodeRequest = VNDetectBarcodesRequest { request, error in
     guard error == nil else {
       self.showAlert(withTitle: l10n("err.barcode"), message: error?.localizedDescription ?? l10n("err.misc"))
@@ -74,6 +75,7 @@ class ScanWalletController: UIViewController {
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
+    dismissDelegate?.userDidDissmiss(self)
     captureSession?.stopRunning()
   }
   
@@ -174,16 +176,17 @@ extension ScanWalletController  {
   
   private func observationHandler(payloadString: String?) {
     guard let barcodeString = payloadString, !barcodeString.isEmpty else { return }
-    do {
-      let countryCode = Wallet.shared.selectedCountryCode
-      let hCert = try HCert(from: barcodeString, ruleCountryCode: countryCode)
+    let countryCode = Wallet.shared.selectedCountryCode
+
+    if let hCert = try? HCert(from: barcodeString, ruleCountryCode: countryCode) {
       delegate?.walletController(self, didScanCertificate: hCert)
       
-    } catch let error as CertificateParsingError {
+    } else if let payloadData = (payloadString ?? "").data(using: .utf8),
+        let ticketing = try? JSONDecoder().decode(CheckInQR.self, from: payloadData) {
+        delegate?.walletController(self, didScanInfo: ticketing)
+    } else {
       DGCLogger.logInfo("Error when validating the certificate? \(barcodeString)")
-      delegate?.walletController(self, didFailWithError: error)
-    } catch {
-      //delegate?.scanController(self, didFailWithError: error)
+      delegate?.walletController(self, didFailWithError: CertificateParsingError.unknown)
     }
   }
 }

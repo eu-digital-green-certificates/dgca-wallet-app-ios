@@ -213,10 +213,10 @@
             </objects>
             <point key="canvasLocation" x="1542" y="663"/>
         </scene>
-        <!--Servers ListVC-->
+        <!--Server List Controller-->
         <scene sceneID="302-Z6-2rd">
             <objects>
-                <viewController id="Cp6-NF-vHs" customClass="ServersListVC" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Cp6-NF-vHs" customClass="ServerListController" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="egm-5R-TZb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1195,16 +1195,16 @@
     </scenes>
     <designables>
         <designable name="MID-ne-Jur">
-            <size key="intrinsicContentSize" width="77" height="35"/>
+            <size key="intrinsicContentSize" width="101" height="47"/>
         </designable>
         <designable name="Rcx-o5-KDY">
-            <size key="intrinsicContentSize" width="42" height="35"/>
+            <size key="intrinsicContentSize" width="66" height="47"/>
         </designable>
         <designable name="WbA-kC-hOb">
-            <size key="intrinsicContentSize" width="42" height="35"/>
+            <size key="intrinsicContentSize" width="66" height="47"/>
         </designable>
         <designable name="fol-rA-9gU">
-            <size key="intrinsicContentSize" width="32" height="39"/>
+            <size key="intrinsicContentSize" width="56" height="51"/>
         </designable>
     </designables>
     <resources>

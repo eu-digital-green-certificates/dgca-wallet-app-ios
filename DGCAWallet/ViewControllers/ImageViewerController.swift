@@ -37,11 +37,17 @@ class ImageViewerController: UIViewController {
   @IBOutlet fileprivate weak var scrollView: UIScrollView!
     
   var savedImage: SavedImage?
-  
+  weak var dismissDelegate: DismissControllerDelegate?
+
   override func viewDidLoad() {
     super.viewDidLoad()
     self.closeButton.setTitle(l10n("close"), for: .normal)
     setupView()
+  }
+
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    dismissDelegate?.userDidDissmiss(self)
   }
 
   func setImage(image: SavedImage? = nil) {

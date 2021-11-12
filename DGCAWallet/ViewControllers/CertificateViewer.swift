@@ -33,6 +33,7 @@ protocol CertificateManaging: AnyObject {
   func certificateViewer(_ controller: CertificateViewerVC, didAddCeCertificate cert: HCert)
 }
 
+
 class CertificateViewerVC: UIViewController {
   private enum Constants {
     static let showValidityController = "showValidityController"
@@ -53,6 +54,7 @@ class CertificateViewerVC: UIViewController {
   var tan: String?
   
   weak var delegate: CertificateManaging?
+  weak var dismissDelegate: DismissControllerDelegate?
 
   public var isSaved = true
   private var isEditMode = false
@@ -64,7 +66,7 @@ class CertificateViewerVC: UIViewController {
 
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
-
+    dismissDelegate?.userDidDissmiss(self)
     Brightness.reset()
   }
 

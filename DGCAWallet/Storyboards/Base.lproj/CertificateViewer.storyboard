@@ -223,7 +223,7 @@
                         <outlet property="headerBackground" destination="fKu-7E-jAI" id="TKR-ve-HDL"/>
                         <outlet property="nameLabel" destination="DVW-2y-e4I" id="cyN-o4-vZQ"/>
                         <outlet property="shareButton" destination="WJ5-9S-W9j" id="tZZ-Is-DDy"/>
-                        <segue destination="faH-nl-VQM" kind="presentation" identifier="showValidityController" id="BRM-mY-bxt"/>
+                        <segue destination="faH-nl-VQM" kind="presentation" identifier="showValidityController" id="oB3-eG-qt5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9ZE-rf-pHy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -241,7 +241,7 @@
         <!--Check Validity Controller-->
         <scene sceneID="7fp-eC-52X">
             <objects>
-                <viewController id="faH-nl-VQM" customClass="CheckValidityController" sceneMemberID="viewController">
+                <viewController id="faH-nl-VQM" customClass="CheckValidityController" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="w41-en-kdb">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -423,7 +423,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ets-pw-8xQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="856.92307692307691" y="677.48815165876772"/>
+            <point key="canvasLocation" x="869" y="660"/>
         </scene>
         <!--Rule Validation ResultVC-->
         <scene sceneID="5CU-uj-UDS">
@@ -812,19 +812,19 @@
     </scenes>
     <designables>
         <designable name="9zn-iE-p4i">
-            <size key="intrinsicContentSize" width="171" height="51"/>
+            <size key="intrinsicContentSize" width="147" height="39"/>
         </designable>
         <designable name="KkS-4l-iTy">
-            <size key="intrinsicContentSize" width="205" height="51"/>
+            <size key="intrinsicContentSize" width="181" height="39"/>
         </designable>
         <designable name="WJ5-9S-W9j">
-            <size key="intrinsicContentSize" width="84" height="51"/>
+            <size key="intrinsicContentSize" width="60" height="39"/>
         </designable>
         <designable name="a9u-Ia-KEX">
-            <size key="intrinsicContentSize" width="78" height="51"/>
+            <size key="intrinsicContentSize" width="54" height="39"/>
         </designable>
         <designable name="eOj-kZ-7kv">
-            <size key="intrinsicContentSize" width="56" height="51"/>
+            <size key="intrinsicContentSize" width="32" height="39"/>
         </designable>
     </designables>
     <resources>

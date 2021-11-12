@@ -19,7 +19,7 @@
  * ---license-end
  */
 //  
-//  ServersListVC.swift
+//  ServerListController.swift
 //  DGCAWallet
 //  
 //  Created by Alexandr Chernyy on 21.09.2021.
@@ -28,18 +28,19 @@
 import UIKit
 import SwiftDGC
 
-class ServersListVC: UIViewController {
-    private enum Constants {
-      static let cellIndentifier = "ServerCell"
-      static let showCertificatesList = "showCertificatesList"
-    }
+class ServerListController: UIViewController {
+  private enum Constants {
+    static let cellIndentifier = "ServerCell"
+    static let showCertificatesList = "showCertificatesList"
+  }
 
   @IBOutlet fileprivate weak var tableView: UITableView!
   @IBOutlet fileprivate weak var nextButton: UIButton!
   
   private var serverListInfo: ServerListResponse?
   private var listOfServices = [ValidationService]()
-  
+  weak var dismissDelegate: DismissControllerDelegate?
+
   override func viewDidLoad() {
     super.viewDidLoad()
     title = l10n("services")
@@ -50,9 +51,14 @@ class ServersListVC: UIViewController {
     tableView.reloadData()
   }
     
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    dismissDelegate?.userDidDissmiss(self)
+  }
+
   override func willMove(toParent parent: UIViewController?) {
-        super.willMove(toParent: parent)
-        self.navigationController?.isNavigationBarHidden = (parent == nil)
+    super.willMove(toParent: parent)
+    self.navigationController?.isNavigationBarHidden = (parent == nil)
   }
 
   @IBAction func nextButtonAction(_ sender: Any) {
@@ -110,7 +116,7 @@ class ServersListVC: UIViewController {
   }
 }
 
-extension ServersListVC: UITableViewDataSource, UITableViewDelegate {
+extension ServerListController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       return listOfServices.count
   }
