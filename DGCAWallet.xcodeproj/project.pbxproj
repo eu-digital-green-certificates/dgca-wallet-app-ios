@@ -96,8 +96,8 @@
 		CED2726026398683003D47A9 /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED2725F26398683003D47A9 /* UIFont.swift */; };
 		CED949CA263B50CE00883558 /* MainListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED949C9263B50CE00883558 /* MainListController.swift */; };
 		CEDABD40263C5FF4007A9B97 /* CertificateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDABD3F263C5FF4007A9B97 /* CertificateController.swift */; };
-		CEDABD49263C70EF007A9B97 /* CertPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDABD48263C70EF007A9B97 /* CertPages.swift */; };
-		CEE9DA55263C7D4000A31532 /* CertCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9DA54263C7D4000A31532 /* CertCode.swift */; };
+		CEDABD49263C70EF007A9B97 /* CertPagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDABD48263C70EF007A9B97 /* CertPagesController.swift */; };
+		CEE9DA55263C7D4000A31532 /* CertCodeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9DA54263C7D4000A31532 /* CertCodeController.swift */; };
 		CEE9DA5D263C865200A31532 /* Brightness.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9DA5C263C865200A31532 /* Brightness.swift */; };
 		CEFAD87F262714C4009AFEF9 /* EHNTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFAD87E262714C4009AFEF9 /* EHNTests.swift */; };
 		D20F9D472727EBD70046E55E /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB1A269DBB4C00074F66 /* context.jsonc */; };
@@ -223,9 +223,9 @@
 		CED2725F26398683003D47A9 /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		CED949C9263B50CE00883558 /* MainListController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = MainListController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		CEDABD3F263C5FF4007A9B97 /* CertificateController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CertificateController.swift; sourceTree = "<group>"; tabWidth = 2; };
-		CEDABD48263C70EF007A9B97 /* CertPages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertPages.swift; sourceTree = "<group>"; };
+		CEDABD48263C70EF007A9B97 /* CertPagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertPagesController.swift; sourceTree = "<group>"; };
 		CEDCA79B2639E77800FCB83E /* Package.resolved */ = {isa = PBXFileReference; lastKnownFileType = text; name = Package.resolved; path = DGCAWallet.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved; sourceTree = SOURCE_ROOT; };
-		CEE9DA54263C7D4000A31532 /* CertCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertCode.swift; sourceTree = "<group>"; };
+		CEE9DA54263C7D4000A31532 /* CertCodeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertCodeController.swift; sourceTree = "<group>"; };
 		CEE9DA5C263C865200A31532 /* Brightness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brightness.swift; sourceTree = "<group>"; };
 		CEFAD87E262714C4009AFEF9 /* EHNTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EHNTests.swift; sourceTree = "<group>"; };
 		D23EF7A4272057F40097D82B /* CertificateTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateTVC.swift; sourceTree = "<group>"; };
@@ -369,9 +369,9 @@
 				D24C8950272353610090398A /* ScanWalletController.swift */,
 				CE13CF09262DCDDA0070C80E /* CertificateViewer.swift */,
 				CED949C9263B50CE00883558 /* MainListController.swift */,
-				CEE9DA54263C7D4000A31532 /* CertCode.swift */,
+				CEE9DA54263C7D4000A31532 /* CertCodeController.swift */,
 				CE891304263581D900CB92AF /* HomeController.swift */,
-				CEDABD48263C70EF007A9B97 /* CertPages.swift */,
+				CEDABD48263C70EF007A9B97 /* CertPagesController.swift */,
 				CEDABD3F263C5FF4007A9B97 /* CertificateController.swift */,
 				CE4BD253264FF28900689FD6 /* SettingsTableController.swift */,
 				DA01661B265541C0005B73A1 /* LicenseTableController.swift */,
@@ -723,12 +723,12 @@
 				5C00071926CFAED2002E5013 /* UIImage+String.swift in Sources */,
 				FEBE53B62721A3EA003B61FB /* LimitationCell.swift in Sources */,
 				CE8096D9263B07BB00A65AD6 /* UIColor.swift in Sources */,
-				CEDABD49263C70EF007A9B97 /* CertPages.swift in Sources */,
+				CEDABD49263C70EF007A9B97 /* CertPagesController.swift in Sources */,
 				CE4BD254264FF28900689FD6 /* SettingsTableController.swift in Sources */,
 				5CE07C842692E21E00A032F9 /* CertLogicManager.swift in Sources */,
 				CED2726026398683003D47A9 /* UIFont.swift in Sources */,
 				FEC54BE927201D660048B6BC /* ValidationResultViewController.swift in Sources */,
-				CEE9DA55263C7D4000A31532 /* CertCode.swift in Sources */,
+				CEE9DA55263C7D4000A31532 /* CertCodeController.swift in Sources */,
 				D2E6CAF7273A942700E9AF1F /* ValueSetsDataManager.swift in Sources */,
 				CE56BC07264068110044FD3F /* GatewayConnection.swift in Sources */,
 				FEAEA96526FBB13600B94FFF /* AccessTokenResponse.swift in Sources */,

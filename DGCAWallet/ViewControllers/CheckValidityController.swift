@@ -29,7 +29,7 @@
 import UIKit
 import SwiftDGC
 
-final class CheckValidityController: UIViewController {
+class CheckValidityController: UIViewController {
   private enum Constants {
     static let titleCellIndentifier = "CellWithTitleAndDescriptionTVC"
     static let countryCellIndentifier = "CellWithDateAndCountryTVC"

@@ -32,7 +32,7 @@ import CertLogic
 
 public typealias OnCloseHandler = () -> Void
 
-final class RuleValidationResultVC: UIViewController {
+class RuleValidationResultVC: UIViewController {
   private enum Constants {
     static let ruleCellId = "RuleErrorTVC"
   }

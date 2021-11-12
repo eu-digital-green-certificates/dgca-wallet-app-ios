@@ -28,7 +28,7 @@
 
 import UIKit
 
-final class ImageTableViewCell: UITableViewCell {
+class ImageTableViewCell: UITableViewCell {
   @IBOutlet fileprivate weak var imagePreviewView: UIImageView!
   @IBOutlet fileprivate weak var nameLabel: UILabel!
   @IBOutlet fileprivate weak var timeLabel: UILabel!
