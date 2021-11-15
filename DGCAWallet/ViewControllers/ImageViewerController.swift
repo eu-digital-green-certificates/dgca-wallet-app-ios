@@ -35,10 +35,10 @@ class ImageViewerController: UIViewController {
   @IBOutlet fileprivate weak var shareButton: UIButton!
   @IBOutlet fileprivate weak var imageView: UIImageView!
   @IBOutlet fileprivate weak var scrollView: UIScrollView!
-    
+  
   var savedImage: SavedImage?
   weak var dismissDelegate: DismissControllerDelegate?
-
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     self.closeButton.setTitle(l10n("close"), for: .normal)

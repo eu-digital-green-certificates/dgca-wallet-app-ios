@@ -89,38 +89,40 @@ class TicketCodeAcceptViewController: UIViewController {
   
   @IBAction func grandButtonAction(_ sender: Any) {
     guard loading == false else { return }
-    self.startActivity()
     guard let urlPath = accessTokenInfo?.aud!,
-          let url = URL(string: urlPath),
-          let iv = UserDefaults.standard.object(forKey: "xnonce"),
-          let verificationMethod = validationServiceInfo?.verificationMethod?.first(where: { $0.publicKeyJwk?.use == "enc" }),
-          let certificate = cert else { return }
-    
+      let url = URL(string: urlPath),
+      let iv = UserDefaults.standard.object(forKey: "xnonce"),
+      let verificationMethod = validationServiceInfo?.verificationMethod?.first(where: { $0.publicKeyJwk?.use == "enc" }),
+      let certificate = cert else { return }
     guard let dccData = encodeDCC(dgcString: certificate.fullPayloadString, iv: iv as! String),
-          let privateKey = Enclave.loadOrGenerateKey(with: "validationKey") else { return }
+      let privateKey = Enclave.loadOrGenerateKey(with: "validationKey") else { return }
     
     var sig = Data()
-
-    Enclave.sign(data: dccData.0, with: privateKey, using: SecKeyAlgorithm.ecdsaSignatureMessageX962SHA256, completion: { (signature,error) in
-      if let sign = signature {
-       sig = sign
-        let parameters = ["kid" : verificationMethod.publicKeyJwk!.kid, "dcc" : dccData.0.base64EncodedString(),
-            "sig": sig.base64EncodedString(),"encKey" : dccData.1.base64EncodedString(),
-            "sigAlg" : "SHA256withECDSA", "encScheme" : "RSAOAEPWithSHA256AESGCM"]
-        
-        GatewayConnection.validateTicketing(url: url, parameters: parameters) { [weak self] responseModel in
-          DispatchQueue.main.async {
-            self?.stopActivity()
-            self?.performSegue(withIdentifier: Constants.showValidationResult, sender: responseModel)
+    self.startActivity()
+    DispatchQueue.global(qos: .background).async {
+      Enclave.sign(data: dccData.0, with: privateKey, using: SecKeyAlgorithm.ecdsaSignatureMessageX962SHA256,
+          completion: { (signature,error) in
+        if let sign = signature {
+          sig = sign
+          let parameters = ["kid" : verificationMethod.publicKeyJwk!.kid, "dcc" : dccData.0.base64EncodedString(),
+              "sig": sig.base64EncodedString(),"encKey" : dccData.1.base64EncodedString(),
+              "sigAlg" : "SHA256withECDSA", "encScheme" : "RSAOAEPWithSHA256AESGCM"]
+          
+          GatewayConnection.validateTicketing(url: url, parameters: parameters) { [weak self] responseModel in
+            DispatchQueue.main.async {
+              self?.stopActivity()
+              self?.performSegue(withIdentifier: Constants.showValidationResult, sender: responseModel)
+            }
           }
         }
-      }
-    })
+      })
+    }
   }
   
   private func encodeDCC(dgcString : String, iv: String) -> (Data,Data)? {
     guard (iv.count > 16 || iv.count < 16 || iv.count % 8 > 0) else { return nil }
-    guard let verificationMethod = validationServiceInfo!.verificationMethod!.first(where: { $0.publicKeyJwk?.use == "enc" }) else { return nil }
+    guard let verificationMethod = validationServiceInfo!.verificationMethod!.first(where: { $0.publicKeyJwk?.use == "enc" })
+    else { return nil }
     
     let ivData : [UInt8] = Array(base64: iv)
     let dgcData : [UInt8] = Array(dgcString.utf8)
@@ -133,17 +135,13 @@ class TicketCodeAcceptViewController: UIViewController {
 
     /* Generate a key from a `password`. Optional if you already have a key */
     let key = try! PKCS5.PBKDF2(password: password, salt: salt, iterations: 4096, keyLength: 32, /* AES-256 */
-        variant: .sha2(.sha256)
-    ).calculate()
-
+        variant: .sha2(.sha256)).calculate()
     let publicSecKey = TicketCodeAcceptViewController.pubKey(from: verificationMethod.publicKeyJwk!.x5c)
     
     do {
-        let gcm = GCM(iv: ivData, mode: .combined)
-        let aes = try AES(key: key, blockMode: gcm, padding: .noPadding)
-        encryptedDgcData = try aes.encrypt(dgcData)
-//        let tag = gcm.authenticationTag
-      
+      let gcm = GCM(iv: ivData, mode: .combined)
+      let aes = try AES(key: key, blockMode: gcm, padding: .noPadding)
+      encryptedDgcData = try aes.encrypt(dgcData)
     } catch {
       print(error.localizedDescription)
     }
@@ -152,9 +150,7 @@ class TicketCodeAcceptViewController: UIViewController {
   }
   
   private static func encrypt(data: Data, with key: SecKey) -> (Data?, String?) {
-    guard let publicKey = SecKeyCopyPublicKey(key) else {
-      return (nil, l10n("err.pub-key-irretrievable"))
-    }
+    guard let publicKey = SecKeyCopyPublicKey(key) else { return (nil, l10n("err.pub-key-irretrievable")) }
     guard SecKeyIsAlgorithmSupported(publicKey, .encrypt, SecKeyAlgorithm.rsaEncryptionOAEPSHA256) else {
       return (nil, l10n("err.alg-not-supported"))
     }
@@ -171,19 +167,16 @@ class TicketCodeAcceptViewController: UIViewController {
       kSecAttrKeySizeInBits as String : 4096]
     
     var error: Unmanaged<CFError>?
-    guard let key = SecKeyCreateWithData(data as CFData,
-      options as CFDictionary, &error) else {
+    guard let key = SecKeyCreateWithData(data as CFData, options as CFDictionary, &error) else {
         throw error!.takeRetainedValue() as Error
     }
     return key
   }
   
   private static func pubKey(from b64EncodedCert: String) -> SecKey? {
-      guard
-        let encodedCertData = Data(base64Encoded: b64EncodedCert),
+      guard let encodedCertData = Data(base64Encoded: b64EncodedCert),
         let cert = SecCertificateCreateWithData(nil, encodedCertData as CFData),
-        let publicKey = SecCertificateCopyKey(cert)
-      else { return nil }
+        let publicKey = SecCertificateCopyKey(cert) else { return nil }
       return publicKey
   }
   
@@ -191,8 +184,7 @@ class TicketCodeAcceptViewController: UIViewController {
     switch segue.identifier {
     case Constants.showValidationResult:
       guard let validationController = segue.destination as? ValidationResultViewController,
-      let responseModel = sender as? AccessTokenResponse else { return }
-      
+          let responseModel = sender as? AccessTokenResponse else { return }
       validationController.validationResultModel = responseModel
 
     default:

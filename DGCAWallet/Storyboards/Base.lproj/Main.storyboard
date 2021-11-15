@@ -243,7 +243,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XYr-cx-IJW">
-                                                    <rect key="frame" x="20" y="39" width="335" height="20"/>
+                                                    <rect key="frame" x="16" y="39" width="339" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="pfk-Sj-wYb"/>
                                                     </constraints>
@@ -253,13 +253,13 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="XYr-cx-IJW" firstAttribute="leading" secondItem="lgi-kp-ZN2" secondAttribute="leadingMargin" id="0Nl-1H-LgU"/>
                                                 <constraint firstItem="OyH-pm-2lL" firstAttribute="trailing" secondItem="lgi-kp-ZN2" secondAttribute="trailingMargin" id="2vM-cS-2kU"/>
                                                 <constraint firstItem="OyH-pm-2lL" firstAttribute="top" secondItem="lgi-kp-ZN2" secondAttribute="topMargin" id="CZk-x7-MwO"/>
                                                 <constraint firstItem="XYr-cx-IJW" firstAttribute="top" secondItem="OyH-pm-2lL" secondAttribute="bottom" constant="8" symbolic="YES" id="Gdy-5K-YD9"/>
                                                 <constraint firstItem="OyH-pm-2lL" firstAttribute="leading" secondItem="lgi-kp-ZN2" secondAttribute="leadingMargin" id="O4W-iU-MEN"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="XYr-cx-IJW" secondAttribute="bottom" id="PWc-Ud-fkc"/>
                                                 <constraint firstAttribute="trailing" secondItem="XYr-cx-IJW" secondAttribute="trailing" constant="20" symbolic="YES" id="jYi-lj-dKE"/>
-                                                <constraint firstItem="XYr-cx-IJW" firstAttribute="leading" secondItem="lgi-kp-ZN2" secondAttribute="leading" constant="20" symbolic="YES" id="oB0-Lf-yIK"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -321,7 +321,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nH6-Y9-aF2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1212" y="119"/>
+            <point key="canvasLocation" x="1212" y="118.29085457271366"/>
         </scene>
         <!--Certificate List Controller-->
         <scene sceneID="Szj-sk-Pls">
@@ -619,7 +619,7 @@
                             </view>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="2Bn-TZ-xdi">
                                 <rect key="frame" x="169" y="392" width="37" height="37"/>
-                                <color key="color" systemColor="labelColor"/>
+                                <color key="color" name="walletBlue"/>
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8Qi-Oo-Y7o"/>
@@ -896,7 +896,7 @@
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d8h-xx-YMC">
                                                     <rect key="frame" x="132" y="66" width="169.5" height="39"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" name="walletBlue"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -943,7 +943,7 @@
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZEe-eT-8Ct">
                                                     <rect key="frame" x="132" y="52.5" width="193.5" height="52.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" name="walletBlue"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -983,14 +983,14 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Max Mustermann" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6NN-i3-YUv">
-                                                    <rect key="frame" x="16" y="39.5" width="309.5" height="26.5"/>
+                                                    <rect key="frame" x="16" y="39.5" width="309.5" height="25.5"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="scanned 2021-04-01" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="APa-yy-a1r">
-                                                    <rect key="frame" x="16" y="74" width="309.5" height="16"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="scanned 2021-04-01" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="APa-yy-a1r">
+                                                    <rect key="frame" x="16" y="73" width="309.5" height="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" name="walletBlue"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1032,10 +1032,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MID-ne-Jur" customClass="RoundedButton" customModule="DGCAWallet" customModuleProvider="target">
-                                <rect key="frame" x="115.5" y="605" width="144" height="46"/>
+                                <rect key="frame" x="107.5" y="605" width="160" height="46"/>
                                 <color key="backgroundColor" name="walletBlue"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="144" id="jzU-iO-50E"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="jzU-iO-50E"/>
                                     <constraint firstAttribute="height" constant="46" id="q7t-F1-nga"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
@@ -1133,7 +1133,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N7y-9d-COU">
-                                <rect key="frame" x="114" y="266" width="147" height="36"/>
+                                <rect key="frame" x="113.5" y="266" width="148" height="36"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>

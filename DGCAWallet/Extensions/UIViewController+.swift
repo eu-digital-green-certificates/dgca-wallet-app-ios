@@ -32,7 +32,7 @@ extension UIViewController {
   @available(iOS 13.0, *)
   var sceneDelegate: SceneDelegate? {
     guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-          let delegate = windowScene.delegate as? SceneDelegate else { return nil }
+        let delegate = windowScene.delegate as? SceneDelegate else { return nil }
     return delegate
   }
 }

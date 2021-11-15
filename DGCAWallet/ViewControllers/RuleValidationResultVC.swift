@@ -70,18 +70,17 @@ class RuleValidationResultVC: UIViewController {
     let validity: HCertValidity = self.validateCertLogicRules()
     switch validity {
       case .valid:
-          resultLabel.text = l10n("valid_certificate")
-          resultDescriptionLabel.text = l10n("your_certificate_allow")
-          resultIcon.image = UIImage(named: "icon_large_valid")
+        resultLabel.text = l10n("valid_certificate")
+        resultDescriptionLabel.text = l10n("your_certificate_allow")
+        resultIcon.image = UIImage(named: "icon_large_valid")
       case .invalid:
-          resultLabel.text = l10n("invalid_certificate")
-          resultDescriptionLabel.text = l10n("your_certificate_did_not_allow")
+        resultLabel.text = l10n("invalid_certificate")
+        resultDescriptionLabel.text = l10n("your_certificate_did_not_allow")
       case .ruleInvalid:
-          resultLabel.text = l10n("certificate_limitation")
-          resultDescriptionLabel.text = l10n("certification_has_limitation")
-          resultIcon.image = UIImage(named: "icon_large_warning")
+        resultLabel.text = l10n("certificate_limitation")
+        resultDescriptionLabel.text = l10n("certification_has_limitation")
+        resultIcon.image = UIImage(named: "icon_large_warning")
     }
-
     resultIcon.isHidden = false
     tableView.isHidden = false
     noWarrantyLabel.isHidden = false

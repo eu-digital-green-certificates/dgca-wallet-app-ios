@@ -73,7 +73,6 @@ class CertificateListController: UIViewController {
   func setCertsWith(_ validationInfo: ServerListResponse, _ accessTokenModel : AccessTokenResponse) {
     validationServiceInfo = validationInfo
     accessTokenInfo = accessTokenModel
-    
     reloadComponents()
   }
   
@@ -97,7 +96,7 @@ class CertificateListController: UIViewController {
   
   private func deselectAllCert() {
     for i in 0..<listOfCert.count {
-        listOfCert[i].isSelected = false
+      listOfCert[i].isSelected = false
     }
   }
   
@@ -133,7 +132,6 @@ extension CertificateListController: UITableViewDataSource, UITableViewDelegate 
     if indexPath.section == 0 {
       guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.accessTokenCellInfoIdentifier,
           for: indexPath) as? TokenInfoCell else { return UITableViewCell() }
-      
       cell.fieldName.text = accessTokenInfoKeys[indexPath.row]
       cell.fieldValue.text = accessTokenInfoValues[indexPath.row]
       return cell
@@ -142,7 +140,6 @@ extension CertificateListController: UITableViewDataSource, UITableViewDelegate 
       guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.hcertCellIndentifier,
         for: indexPath) as? CertificateCell else { return UITableViewCell() }
       let savedCert = listOfCert[indexPath.row]
-
       cell.accessoryType = savedCert.isSelected ? .checkmark : .none
       if let cert = savedCert.cert {
         cell.setCertificate(cert: cert)

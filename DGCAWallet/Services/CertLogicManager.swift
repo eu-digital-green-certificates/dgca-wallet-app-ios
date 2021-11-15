@@ -39,7 +39,7 @@ class CertLogicManager {
     func validate(filter: FilterParameter, external: ExternalParameter, payload: String) -> [ValidationResult] {
       return certLogicEngine.validate(filter: filter, external: external, payload: payload)
     }
-      
+    
     func validateIssuer(filter: FilterParameter, external: ExternalParameter, payload: String) -> [ValidationResult] {
       return certLogicEngine.validate(filter: filter, external: external, payload: payload, validationType: .issuer)
     }

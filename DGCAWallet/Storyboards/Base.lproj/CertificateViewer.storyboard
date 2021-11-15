@@ -236,7 +236,7 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="PGK-qk-zXH" customClass="CertPagesController" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IUQ-f6-kbe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1132" y="82"/>
+            <point key="canvasLocation" x="1106" y="7"/>
         </scene>
         <!--Check Validity Controller-->
         <scene sceneID="7fp-eC-52X">
@@ -464,7 +464,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="61" id="7eE-WY-tYj"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -721,7 +721,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fy6-pe-6cT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2722" y="82"/>
+            <point key="canvasLocation" x="2719" y="6"/>
         </scene>
         <!--Certificate Controller-->
         <scene sceneID="zRW-4o-eiU">
@@ -811,24 +811,24 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RPx-uO-wbp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1958" y="82"/>
+            <point key="canvasLocation" x="1904" y="6"/>
         </scene>
     </scenes>
     <designables>
         <designable name="9zn-iE-p4i">
-            <size key="intrinsicContentSize" width="147" height="39"/>
+            <size key="intrinsicContentSize" width="171" height="51"/>
         </designable>
         <designable name="KkS-4l-iTy">
-            <size key="intrinsicContentSize" width="181" height="39"/>
+            <size key="intrinsicContentSize" width="205" height="51"/>
         </designable>
         <designable name="WJ5-9S-W9j">
-            <size key="intrinsicContentSize" width="60" height="39"/>
+            <size key="intrinsicContentSize" width="84" height="51"/>
         </designable>
         <designable name="a9u-Ia-KEX">
-            <size key="intrinsicContentSize" width="54" height="39"/>
+            <size key="intrinsicContentSize" width="78" height="51"/>
         </designable>
         <designable name="eOj-kZ-7kv">
-            <size key="intrinsicContentSize" width="32" height="39"/>
+            <size key="intrinsicContentSize" width="56" height="51"/>
         </designable>
     </designables>
     <resources>
