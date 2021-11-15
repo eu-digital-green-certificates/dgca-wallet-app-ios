@@ -37,7 +37,6 @@ protocol DismissControllerDelegate: AnyObject {
 }
 
 class MainListController: UIViewController, DismissControllerDelegate {
-  
   fileprivate enum SegueIdentifiers {
     static let showScannerSegue = "showScannerSegue"
     static let showServicesList = "showServicesList"
@@ -59,16 +58,16 @@ class MainListController: UIViewController, DismissControllerDelegate {
   var downloadedDataHasExpired: Bool {
     return DataCenter.lastFetch.timeIntervalSinceNow < -SharedConstants.expiredDataInterval
   }
-
+  
   private var scannedToken: String = ""
   private var loading = false
-
+  
   override var preferredStatusBarStyle: UIStatusBarStyle {
     return .lightContent
   }
-
+  
   override func viewWillAppear(_ animated: Bool) {
-      super.viewWillAppear(animated)
+    super.viewWillAppear(animated)
     startActivity()
     self.reloadAllComponents { [weak self] _ in
       DispatchQueue.main.async {
@@ -76,7 +75,7 @@ class MainListController: UIViewController, DismissControllerDelegate {
         self?.reloadTable()
       }
     }
-      
+    
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
     appDelegate?.isNFCFunctionality = false
     if #available(iOS 13.0, *) {
@@ -84,13 +83,13 @@ class MainListController: UIViewController, DismissControllerDelegate {
       scene?.isNFCFunctionality = false
     }
   }
-
+  
   func userDidDissmiss(_ controller: UIViewController) {
     if downloadedDataHasExpired {
       self.navigationController?.popViewController(animated: false)
     }
   }
-
+  
   private func reloadAllComponents(completion: ((Bool) -> Void)? = nil) {
     DataCenter.localDataManager.initialize {
       DataCenter.imageDataManager.initialize {
@@ -121,14 +120,12 @@ class MainListController: UIViewController, DismissControllerDelegate {
     let menuActionSheet = UIAlertController(title: l10n("add.new"),
        message: l10n("want.add"),
        preferredStyle: UIAlertController.Style.actionSheet)
-       menuActionSheet.addAction(UIAlertAction(title: l10n("scan.certificate"),
-       style: UIAlertAction.Style.default,
-       handler: {[weak self] _ in
-           self?.scanNewCertificate()
-       }))
+    menuActionSheet.addAction(UIAlertAction(title: l10n("scan.certificate"),
+      style: UIAlertAction.Style.default, handler: {[weak self] _ in
+      self?.scanNewCertificate()
+    }))
     menuActionSheet.addAction(UIAlertAction(title: l10n("image.import"),
-        style: UIAlertAction.Style.default,
-        handler: { [weak self] _ in
+      style: UIAlertAction.Style.default, handler: { [weak self] _ in
       self?.addImageActivity()
     }))
     menuActionSheet.addAction(UIAlertAction(title: l10n("pdf.import"),
@@ -162,7 +159,7 @@ class MainListController: UIViewController, DismissControllerDelegate {
     pdfPicker.delegate = self
     present(pdfPicker, animated: true, completion: nil)
   }
-
+  
   private func scanNFC() {
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
     appDelegate?.isNFCFunctionality = true
@@ -174,41 +171,40 @@ class MainListController: UIViewController, DismissControllerDelegate {
     helper.onNFCResult = onNFCResult(success:message:)
     helper.restartSession()
   }
-
+  
   func onNFCResult(success: Bool, message: String) {
     let barcodeString = message
     guard success, !barcodeString.isEmpty else { return }
-
-      DispatchQueue.main.async { [weak self] in
-        print("\(message)")
-        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        appDelegate?.isNFCFunctionality = false
-        if #available(iOS 13.0, *) {
-          let scene = self?.sceneDelegate
-          scene?.isNFCFunctionality = false
-        }
+    
+    DispatchQueue.main.async { [weak self] in
+      print("\(message)")
+      let appDelegate = UIApplication.shared.delegate as? AppDelegate
+      appDelegate?.isNFCFunctionality = false
+      if #available(iOS 13.0, *) {
+        let scene = self?.sceneDelegate
+        scene?.isNFCFunctionality = false
+      }
+      
+      do {
+        let hCert = try HCert(from: barcodeString)
+        self?.saveQrCode(cert: hCert)
         
-        do {
-          let hCert = try HCert(from: barcodeString)
-          self?.saveQrCode(cert: hCert)
-          
-        } catch {
-          let alertController: UIAlertController = {
-              let controller = UIAlertController(title: l10n("error"), message: l10n("read.dcc.from.nfc"),
-                  preferredStyle: .alert)
-            let actionRetry = UIAlertAction(title: l10n("retry"), style: .default) { _ in
-              self?.scanNFC()
-            }
-              controller.addAction(actionRetry)
-            let actionOk = UIAlertAction(title: l10n("btn.ok"), style: .default)
-            controller.addAction(actionOk)
-              return controller
-          }()
-          self?.present(alertController, animated: true)
-
-        }
+      } catch {
+        let alertController: UIAlertController = {
+          let controller = UIAlertController(title: l10n("error"), message: l10n("read.dcc.from.nfc"),
+            preferredStyle: .alert)
+          let actionRetry = UIAlertAction(title: l10n("retry"), style: .default) { _ in
+            self?.scanNFC()
+          }
+          controller.addAction(actionRetry)
+          let actionOk = UIAlertAction(title: l10n("btn.ok"), style: .default)
+          controller.addAction(actionOk)
+            return controller
+        }()
+        self?.present(alertController, animated: true)
       }
     }
+  }
 
   @IBAction func settingsTapped(_ sender: UIButton) {
     self.performSegue(withIdentifier: SegueIdentifiers.showSettingsController, sender: nil)
@@ -220,53 +216,53 @@ class MainListController: UIViewController, DismissControllerDelegate {
   }
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-      switch segue.identifier {
-      case SegueIdentifiers.showScannerSegue:
-        guard let scanController = segue.destination as? ScanWalletController else { return }
-        scanController.modalPresentationStyle = .fullScreen
-        scanController.delegate = self
-        scanController.dismissDelegate = self
-        
-      case SegueIdentifiers.showSettingsController:
-        guard let navController = segue.destination as? UINavigationController,
-          let serviceController = navController.viewControllers.first as? SettingsTableController else { return }
-          serviceController.dismissDelegate = self
+    switch segue.identifier {
+    case SegueIdentifiers.showScannerSegue:
+      guard let scanController = segue.destination as? ScanWalletController else { return }
+      scanController.modalPresentationStyle = .fullScreen
+      scanController.delegate = self
+      scanController.dismissDelegate = self
+      
+    case SegueIdentifiers.showSettingsController:
+      guard let navController = segue.destination as? UINavigationController,
+        let serviceController = navController.viewControllers.first as? SettingsTableController else { return }
+      serviceController.dismissDelegate = self
 
-      case SegueIdentifiers.showServicesList:
-        guard let serviceController = segue.destination as? ServerListController else { return }
-        guard let listOfServices = sender as?  ServerListResponse else { return }
-        serviceController.setServices(info: listOfServices)
-        serviceController.dismissDelegate = self
-        
-      case SegueIdentifiers.showPDFViewer:
-        guard let serviceController = segue.destination as? PDFViewerController else { return }
-        guard let pdf = sender as? SavedPDF else { return }
-        serviceController.setPDF(pdf: pdf)
-        serviceController.dismissDelegate = self
-        
-      case SegueIdentifiers.showImageViewer:
-        guard let serviceController = segue.destination as? ImageViewerController else { return }
-        guard let savedImage = sender as? SavedImage else { return }
-        serviceController.setImage(image: savedImage)
-        serviceController.dismissDelegate = self
-        
-      case SegueIdentifiers.showCertificateViewer:
-        guard let serviceController = segue.destination as? CertificateViewerVC else { return }
-        if let savedCertificate = sender as? DatedCertString {
-          serviceController.hCert = savedCertificate.cert
-          serviceController.isSaved = true
-          serviceController.certDate = savedCertificate.date
-          serviceController.tan = savedCertificate.storedTAN
-        } else if let certificate = sender as? HCert {
-          serviceController.hCert = certificate
-          serviceController.isSaved = false
-        }
-        serviceController.dismissDelegate = self
-        serviceController.delegate = self
-        
-      default:
-        break
+    case SegueIdentifiers.showServicesList:
+      guard let serviceController = segue.destination as? ServerListController else { return }
+      guard let listOfServices = sender as?  ServerListResponse else { return }
+      serviceController.setServices(info: listOfServices)
+      serviceController.dismissDelegate = self
+      
+    case SegueIdentifiers.showPDFViewer:
+      guard let serviceController = segue.destination as? PDFViewerController else { return }
+      guard let pdf = sender as? SavedPDF else { return }
+      serviceController.setPDF(pdf: pdf)
+      serviceController.dismissDelegate = self
+      
+    case SegueIdentifiers.showImageViewer:
+      guard let serviceController = segue.destination as? ImageViewerController else { return }
+      guard let savedImage = sender as? SavedImage else { return }
+      serviceController.setImage(image: savedImage)
+      serviceController.dismissDelegate = self
+      
+    case SegueIdentifiers.showCertificateViewer:
+      guard let serviceController = segue.destination as? CertificateViewerVC else { return }
+      if let savedCertificate = sender as? DatedCertString {
+        serviceController.hCert = savedCertificate.cert
+        serviceController.isSaved = true
+        serviceController.certDate = savedCertificate.date
+        serviceController.tan = savedCertificate.storedTAN
+      } else if let certificate = sender as? HCert {
+        serviceController.hCert = certificate
+        serviceController.isSaved = false
       }
+      serviceController.dismissDelegate = self
+      serviceController.delegate = self
+      
+    default:
+      break
+    }
   }
 }
 
@@ -287,9 +283,9 @@ extension MainListController: ScanWalletDelegate {
 
   func walletController(_ controller: ScanWalletController, didScanCertificate certificate: HCert) {
     DispatchQueue.main.async { [weak self] in
-        self?.dismiss(animated: true, completion: {
-          self?.performSegue(withIdentifier: SegueIdentifiers.showCertificateViewer, sender: certificate)
-        })
+      self?.dismiss(animated: true, completion: {
+        self?.performSegue(withIdentifier: SegueIdentifiers.showCertificateViewer, sender: certificate)
+      })
     }
   }
   
@@ -298,13 +294,14 @@ extension MainListController: ScanWalletDelegate {
       return
     }
     scannedToken = ticketing.token
+    startActivity()
     IdentityService.requestListOfServices(ticketingInfo: ticketing) { [weak self] services in
-      self?.scannedToken = ""
-
       DispatchQueue.main.async {
-          self?.dismiss(animated: true, completion: {
-              self?.performSegue(withIdentifier: SegueIdentifiers.showServicesList, sender: services)
-          })
+        self?.dismiss(animated: true, completion: {
+          self?.scannedToken = ""
+          self?.stopActivity()
+          self?.performSegue(withIdentifier: SegueIdentifiers.showServicesList, sender: services)
+        })
       }
     }
   }

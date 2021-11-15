@@ -51,6 +51,7 @@ class CertificateListController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     guard let vcValue = accessTokenInfo?.vc else { return }
+    
     accessTokenInfoValues = ["\(vcValue.gnt!) \(vcValue.fnt!)", vcValue.dob!, "\(vcValue.cod!),\(vcValue.rod!)", "\(vcValue.coa!),\(vcValue.roa!)", vcValue.type!.joined(separator: ","), vcValue.category!.joined(separator: ","), vcValue.validationClock!, vcValue.validFrom!, vcValue.validTo!]
     
     tableView.tableFooterView = UIView()
@@ -73,28 +74,23 @@ class CertificateListController: UIViewController {
     validationServiceInfo = validationInfo
     accessTokenInfo = accessTokenModel
     
-    listOfCert = DataCenter.certStrings.filter { ($0.cert!.fullName.lowercased() == "\(accessTokenModel.vc!.gnt!) \(accessTokenModel.vc!.fnt!)".lowercased()) && ($0.cert!.dateOfBirth == accessTokenModel.vc?.dob)}
-    let validDateFrom = accessTokenModel.vc?.validFrom ?? ""
-    if let dateValidFrom = Date(rfc3339DateTimeString: validDateFrom) {
-      listOfCert = listOfCert.filter{ $0.cert!.iat < dateValidFrom }
-    }
-    let validDateTo = accessTokenModel.vc?.validTo ?? ""
-    if let dateValidUntil = Date(rfc3339DateTimeString: validDateTo ) {
-      listOfCert = listOfCert.filter {$0.cert!.exp > dateValidUntil }
-    }
+    reloadComponents()
   }
   
   func reloadComponents() {
-    guard let accessTokenModel = accessTokenInfo else { return }
-          accessTokenInfo = accessTokenModel
-
-    listOfCert = DataCenter.certStrings.filter { ($0.cert!.fullName.lowercased() == "\(accessTokenModel.vc!.gnt!) \(accessTokenModel.vc!.fnt!)".lowercased()) && ($0.cert!.dateOfBirth == accessTokenModel.vc?.dob)}
-    let validDateFrom = accessTokenModel.vc!.validFrom ?? ""
+    guard let validationCertificate = accessTokenInfo?.vc,
+      let givenName = validationCertificate.gnt, let familyName = validationCertificate.fnt else { return }
+    
+    listOfCert = DataCenter.certStrings.filter { ($0.cert!.fullName.lowercased() == "\(givenName) \(familyName)".lowercased()) &&
+      ($0.cert!.dateOfBirth == validationCertificate.dob) }
+    
+    let validDateFrom = validationCertificate.validFrom ?? ""
     if let dateValidFrom = Date(rfc3339DateTimeString: validDateFrom) {
       listOfCert = listOfCert.filter{ $0.cert!.iat < dateValidFrom }
     }
-    let validDateTo = accessTokenModel.vc!.validTo ?? ""
-    if let dateValidUntil = Date(rfc3339DateTimeString: validDateTo ) {
+    
+    let validDateTo = validationCertificate.validTo ?? ""
+    if let dateValidUntil = Date(rfc3339DateTimeString: validDateTo) {
       listOfCert = listOfCert.filter {$0.cert!.exp > dateValidUntil }
     }
   }
@@ -111,17 +107,26 @@ class CertificateListController: UIViewController {
 }
 
 extension CertificateListController: UITableViewDataSource, UITableViewDelegate {
+  func numberOfSections(in tableView: UITableView) -> Int {
+    return listOfCert.isEmpty ? 1 : 2
+  }
+  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     if section == 0 {
-      if self.accessTokenInfo?.t == 0 {
+      switch self.accessTokenInfo?.t {
+      case 0:
         return 0
-      } else if self.accessTokenInfo?.t == 1 {
+      case 1:
         return 2
-      } else if self.accessTokenInfo?.t == 2 {
+      case 2:
         return 9
+      default:
+        return 0
       }
-    }
+
+    } else {
       return listOfCert.count
+    }
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -131,18 +136,19 @@ extension CertificateListController: UITableViewDataSource, UITableViewDelegate 
       
       cell.fieldName.text = accessTokenInfoKeys[indexPath.row]
       cell.fieldValue.text = accessTokenInfoValues[indexPath.row]
-      
       return cell
-    }
+      
+    } else {
       guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.hcertCellIndentifier,
-          for: indexPath) as? CertificateCell else { return UITableViewCell() }
+        for: indexPath) as? CertificateCell else { return UITableViewCell() }
       let savedCert = listOfCert[indexPath.row]
 
       cell.accessoryType = savedCert.isSelected ? .checkmark : .none
       if let cert = savedCert.cert {
-          cell.setCertificate(cert: cert)
+        cell.setCertificate(cert: cert)
       }
       return cell
+    }
   }
 
   func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
