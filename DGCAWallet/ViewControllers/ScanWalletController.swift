@@ -32,6 +32,10 @@ class ScanWalletController: UIViewController {
     self.processClassification(request)
   }
 
+  override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+    return .portrait
+  }
+  
   private var camView: UIView!
     
   override func viewDidLoad() {

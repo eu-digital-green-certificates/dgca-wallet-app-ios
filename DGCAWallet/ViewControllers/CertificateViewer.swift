@@ -69,10 +69,10 @@ class CertificateViewerVC: UIViewController {
     dismissDelegate?.userDidDissmiss(self)
     Brightness.reset()
   }
-
+  
   func setupInterface() {
     guard let hCert = hCert else { return }
-      
+    
     nameLabel.text = hCert.fullName
     if !isSaved {
       dismissButton.setTitle(l10n("btn.save"), for: .normal)
