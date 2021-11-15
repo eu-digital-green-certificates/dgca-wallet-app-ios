@@ -472,7 +472,7 @@
                                 <rect key="frame" x="16" y="295" width="358" height="304"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RuleErrorTVC" rowHeight="131" id="mGD-c5-un9" customClass="RuleErrorTVC" customModule="DGCAWallet" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RuleErrorCell" rowHeight="131" id="mGD-c5-un9" customClass="RuleErrorCell" customModule="DGCAWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.666666030883789" width="358" height="131"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mGD-c5-un9" id="A1k-EG-APc">
@@ -816,19 +816,19 @@
     </scenes>
     <designables>
         <designable name="9zn-iE-p4i">
-            <size key="intrinsicContentSize" width="171" height="51"/>
+            <size key="intrinsicContentSize" width="147" height="39"/>
         </designable>
         <designable name="KkS-4l-iTy">
-            <size key="intrinsicContentSize" width="205" height="51"/>
+            <size key="intrinsicContentSize" width="181" height="39"/>
         </designable>
         <designable name="WJ5-9S-W9j">
-            <size key="intrinsicContentSize" width="84" height="51"/>
+            <size key="intrinsicContentSize" width="60" height="39"/>
         </designable>
         <designable name="a9u-Ia-KEX">
-            <size key="intrinsicContentSize" width="78" height="51"/>
+            <size key="intrinsicContentSize" width="54" height="39"/>
         </designable>
         <designable name="eOj-kZ-7kv">
-            <size key="intrinsicContentSize" width="56" height="51"/>
+            <size key="intrinsicContentSize" width="32" height="39"/>
         </designable>
     </designables>
     <resources>

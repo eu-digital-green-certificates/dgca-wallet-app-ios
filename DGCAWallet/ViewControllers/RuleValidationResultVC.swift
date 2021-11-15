@@ -34,7 +34,7 @@ public typealias OnCloseHandler = () -> Void
 
 class RuleValidationResultVC: UIViewController {
   private enum Constants {
-    static let ruleCellId = "RuleErrorTVC"
+    static let ruleCellId = "RuleErrorCell"
   }
   
   @IBOutlet fileprivate weak var closeButton: UIButton!
@@ -112,7 +112,7 @@ extension RuleValidationResultVC: UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.ruleCellId, for: indexPath) as? RuleErrorTVC else { return UITableViewCell() }
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.ruleCellId, for: indexPath) as? RuleErrorCell else { return UITableViewCell() }
     let item: InfoSection = items[indexPath.row]
     cell.setupCell(with: item)
     return cell

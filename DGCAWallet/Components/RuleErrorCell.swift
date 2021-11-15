@@ -19,7 +19,7 @@
  * ---license-end
  */
 //  
-//  RuleErrorTVC.swift
+//  RuleErrorCell.swift
 //  DGCAWallet
 //  
 //  Created by Alexandr Chernyy on 05.07.2021.
@@ -28,7 +28,7 @@
 import UIKit
 import SwiftDGC
 
-class RuleErrorTVC: UITableViewCell {
+class RuleErrorCell: UITableViewCell {
 
   @IBOutlet fileprivate weak var ruleLabel: UILabel!
   @IBOutlet fileprivate weak var ruleValueLabel: UILabel!

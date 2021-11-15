@@ -33,9 +33,7 @@ class WalletCell: UITableViewCell {
   @IBOutlet fileprivate weak var dateLabel: UILabel!
 
   func setupCell(_ dated: DatedCertString) {
-    guard let cert = dated.cert else {
-      return
-    }
+    guard let cert = dated.cert else { return }
 
     typeLabel.text = cert.certTypeString
     nameLabel.text = cert.fullName

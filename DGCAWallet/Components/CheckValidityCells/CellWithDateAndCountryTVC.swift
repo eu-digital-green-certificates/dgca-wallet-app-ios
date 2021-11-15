@@ -92,14 +92,17 @@ extension CellWithDateAndCountryTVC: UIPickerViewDataSource, UIPickerViewDelegat
   public func numberOfComponents(in pickerView: UIPickerView) -> Int {
     return 1
   }
+    
   public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
     if countryItems.count == 0 { return 1 }
     return countryItems.count
   }
+    
   public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
     if countryItems.count == 0 { return l10n("scaner.no.countrys") }
     return countryItems[row].name
   }
+    
   public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     self.selectedCounty = countryItems[row]
     countryHandler?(self.selectedCounty?.code)

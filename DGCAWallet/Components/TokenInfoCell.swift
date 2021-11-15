@@ -33,7 +33,4 @@ class TokenInfoCell: UITableViewCell {
   @IBOutlet weak var fieldName: UILabel!
   @IBOutlet weak var fieldValue: UILabel!
   
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
 }

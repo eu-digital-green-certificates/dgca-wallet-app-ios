@@ -36,9 +36,9 @@
 		5C50CF11269700710015EE29 /* RuleValidationResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF0F269700710015EE29 /* RuleValidationResultVC.swift */; };
 		5C50CF12269700710015EE29 /* RuleValidationResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF0F269700710015EE29 /* RuleValidationResultVC.swift */; };
 		5C50CF13269700710015EE29 /* RuleValidationResultVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF0F269700710015EE29 /* RuleValidationResultVC.swift */; };
-		5C50CF1B2697023B0015EE29 /* RuleErrorTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF192697023B0015EE29 /* RuleErrorTVC.swift */; };
-		5C50CF1C2697023B0015EE29 /* RuleErrorTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF192697023B0015EE29 /* RuleErrorTVC.swift */; };
-		5C50CF1D2697023B0015EE29 /* RuleErrorTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF192697023B0015EE29 /* RuleErrorTVC.swift */; };
+		5C50CF1B2697023B0015EE29 /* RuleErrorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF192697023B0015EE29 /* RuleErrorCell.swift */; };
+		5C50CF1C2697023B0015EE29 /* RuleErrorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF192697023B0015EE29 /* RuleErrorCell.swift */; };
+		5C50CF1D2697023B0015EE29 /* RuleErrorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF192697023B0015EE29 /* RuleErrorCell.swift */; };
 		5C50CF22269704240015EE29 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF21269704240015EE29 /* UIViewController+.swift */; };
 		5C50CF23269704240015EE29 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF21269704240015EE29 /* UIViewController+.swift */; };
 		5C50CF24269704240015EE29 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF21269704240015EE29 /* UIViewController+.swift */; };
@@ -103,8 +103,8 @@
 		D232F477273F18C800626BFC /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB18269DBB4C00074F66 /* context.jsonc */; };
 		D232F478273F18C800626BFC /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB18269DBB4C00074F66 /* context.jsonc */; };
 		D232F479273F18C900626BFC /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB18269DBB4C00074F66 /* context.jsonc */; };
-		D23EF7A6272057F40097D82B /* CertificateTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23EF7A4272057F40097D82B /* CertificateTVC.swift */; };
-		D23EF7A7272057F40097D82B /* ServerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23EF7A5272057F40097D82B /* ServerTVC.swift */; };
+		D23EF7A6272057F40097D82B /* CertificateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23EF7A4272057F40097D82B /* CertificateCell.swift */; };
+		D23EF7A7272057F40097D82B /* ServerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23EF7A5272057F40097D82B /* ServerCell.swift */; };
 		D24C8951272353610090398A /* ScanWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C8950272353610090398A /* ScanWalletController.swift */; };
 		D2E6CAEF273A93F300E9AF1F /* DataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E6CAEE273A93F300E9AF1F /* DataCenter.swift */; };
 		D2E6CAF0273A93F300E9AF1F /* DataCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E6CAEE273A93F300E9AF1F /* DataCenter.swift */; };
@@ -181,7 +181,7 @@
 		5C00074526D641E2002E5013 /* PDFViewerController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = PDFViewerController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		5C50CF07269700540015EE29 /* CheckValidityController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CheckValidityController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		5C50CF0F269700710015EE29 /* RuleValidationResultVC.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = RuleValidationResultVC.swift; sourceTree = "<group>"; tabWidth = 2; };
-		5C50CF192697023B0015EE29 /* RuleErrorTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleErrorTVC.swift; sourceTree = "<group>"; };
+		5C50CF192697023B0015EE29 /* RuleErrorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleErrorCell.swift; sourceTree = "<group>"; };
 		5C50CF21269704240015EE29 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		5C50CF2526972BCA0015EE29 /* CellWithTitleAndDescriptionTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellWithTitleAndDescriptionTVC.swift; sourceTree = "<group>"; };
 		5C50CF2D26972BFD0015EE29 /* CellWithDateAndCountryTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellWithDateAndCountryTVC.swift; sourceTree = "<group>"; };
@@ -228,8 +228,8 @@
 		CEE9DA54263C7D4000A31532 /* CertCodeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertCodeController.swift; sourceTree = "<group>"; };
 		CEE9DA5C263C865200A31532 /* Brightness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brightness.swift; sourceTree = "<group>"; };
 		CEFAD87E262714C4009AFEF9 /* EHNTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EHNTests.swift; sourceTree = "<group>"; };
-		D23EF7A4272057F40097D82B /* CertificateTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateTVC.swift; sourceTree = "<group>"; };
-		D23EF7A5272057F40097D82B /* ServerTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerTVC.swift; sourceTree = "<group>"; };
+		D23EF7A4272057F40097D82B /* CertificateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateCell.swift; sourceTree = "<group>"; };
+		D23EF7A5272057F40097D82B /* ServerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerCell.swift; sourceTree = "<group>"; };
 		D24C8950272353610090398A /* ScanWalletController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ScanWalletController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		D2E6CAEE273A93F300E9AF1F /* DataCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = DataCenter.swift; sourceTree = "<group>"; tabWidth = 2; };
 		D2E6CAF2273A941200E9AF1F /* RulesDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = RulesDataManager.swift; sourceTree = "<group>"; tabWidth = 2; };
@@ -391,9 +391,9 @@
 		CE13CF1D262DDE730070C80E /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				D23EF7A4272057F40097D82B /* CertificateTVC.swift */,
-				D23EF7A5272057F40097D82B /* ServerTVC.swift */,
-				5C50CF192697023B0015EE29 /* RuleErrorTVC.swift */,
+				D23EF7A4272057F40097D82B /* CertificateCell.swift */,
+				D23EF7A5272057F40097D82B /* ServerCell.swift */,
+				5C50CF192697023B0015EE29 /* RuleErrorCell.swift */,
 				5C50CF172697009E0015EE29 /* CheckValidityCells */,
 				CE13CF22262DDF810070C80E /* RoundedButton.swift */,
 				CE260F55263DD1720083A200 /* WalletCell.swift */,
@@ -744,7 +744,7 @@
 				FEEAD6DB273BBE9600D883EB /* TokenInfoCell.swift in Sources */,
 				5C00071C26D38CC3002E5013 /* NFCHelper.swift in Sources */,
 				CE260F56263DD1720083A200 /* WalletCell.swift in Sources */,
-				D23EF7A7272057F40097D82B /* ServerTVC.swift in Sources */,
+				D23EF7A7272057F40097D82B /* ServerCell.swift in Sources */,
 				CEA15570262F79DE0024B7AC /* InfoCell.swift in Sources */,
 				FEC54BE4271F26990048B6BC /* IdentityService.swift in Sources */,
 				D24C8951272353610090398A /* ScanWalletController.swift in Sources */,
@@ -755,7 +755,7 @@
 				DA01662226558B2F005B73A1 /* LicenseController.swift in Sources */,
 				5C00072E26D3AC11002E5013 /* SavedPDF.swift in Sources */,
 				5C556D4426F9DAF7007E2C2E /* TicketCodeAcceptViewController.swift in Sources */,
-				5C50CF1B2697023B0015EE29 /* RuleErrorTVC.swift in Sources */,
+				5C50CF1B2697023B0015EE29 /* RuleErrorCell.swift in Sources */,
 				5C50CF09269700550015EE29 /* CheckValidityController.swift in Sources */,
 				D2E6CAFF273A944200E9AF1F /* CountryDataManager.swift in Sources */,
 				5C50CF3E26983E090015EE29 /* UITableView+.swift in Sources */,
@@ -763,7 +763,7 @@
 				5C00073A26D625DE002E5013 /* ImageTableViewCell.swift in Sources */,
 				5C50CF22269704240015EE29 /* UIViewController+.swift in Sources */,
 				D2E6CB0F273AA34200E9AF1F /* PdfDataManager.swift in Sources */,
-				D23EF7A6272057F40097D82B /* CertificateTVC.swift in Sources */,
+				D23EF7A6272057F40097D82B /* CertificateCell.swift in Sources */,
 				5C00074726D641E2002E5013 /* PDFViewerController.swift in Sources */,
 				5C00073F26D641CC002E5013 /* ImageViewerController.swift in Sources */,
 				5C00072226D3A40E002E5013 /* SavedImage.swift in Sources */,
@@ -788,7 +788,7 @@
 				5C50CF3F26983E090015EE29 /* UITableView+.swift in Sources */,
 				D2E6CB08273A94EA00E9AF1F /* LocalDataManager.swift in Sources */,
 				5C00073B26D625DE002E5013 /* ImageTableViewCell.swift in Sources */,
-				5C50CF1C2697023B0015EE29 /* RuleErrorTVC.swift in Sources */,
+				5C50CF1C2697023B0015EE29 /* RuleErrorCell.swift in Sources */,
 				D2E6CB0C273AA00200E9AF1F /* ImageDataManager.swift in Sources */,
 				5C556D5226F9F8C6007E2C2E /* ServerListController.swift in Sources */,
 				D2E6CB00273A944200E9AF1F /* CountryDataManager.swift in Sources */,
@@ -836,7 +836,7 @@
 				D2E6CAF9273A942700E9AF1F /* ValueSetsDataManager.swift in Sources */,
 				5C50CF0B269700550015EE29 /* CheckValidityController.swift in Sources */,
 				5C556D5326F9F8C6007E2C2E /* ServerListController.swift in Sources */,
-				5C50CF1D2697023B0015EE29 /* RuleErrorTVC.swift in Sources */,
+				5C50CF1D2697023B0015EE29 /* RuleErrorCell.swift in Sources */,
 				5CE07C862692E21E00A032F9 /* CertLogicManager.swift in Sources */,
 				5C00071E26D38CC3002E5013 /* NFCHelper.swift in Sources */,
 				5C50CF13269700710015EE29 /* RuleValidationResultVC.swift in Sources */,

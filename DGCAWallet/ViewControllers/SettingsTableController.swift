@@ -33,8 +33,15 @@ import SwiftDGC
 class SettingsTableController: UITableViewController {
 
   @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
+  @IBOutlet fileprivate weak var versionLabel: UILabel!
+
   weak var dismissDelegate: DismissControllerDelegate?
 
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    self.versionLabel.text = DataCenter.appVersion
+  }
+  
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
     if (isBeingDismissed || isMovingFromParent) {
