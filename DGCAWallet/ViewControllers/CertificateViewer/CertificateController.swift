@@ -40,7 +40,6 @@ class CertificateController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
     validateAndSetupInterface()
     table.contentInset = .init(top: 0, left: 0, bottom: 32, right: 0)
   }
@@ -63,7 +62,6 @@ class CertificateController: UIViewController {
         DispatchQueue.main.async {
           self?.activityIndicator.stopAnimating()
           self?.table.reloadData()
-
         }
       }
     }

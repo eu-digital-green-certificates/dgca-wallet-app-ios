@@ -28,8 +28,8 @@ import Foundation
 import SwiftDGC
 
 class PdfDataManager {
-  lazy var storage = SecureStorage<PdfDataStorage>(fileName: SharedConstants.pdfStorageName)
   lazy var pdfData = PdfDataStorage()
+  lazy var storage = SecureStorage<PdfDataStorage>(fileName: SharedConstants.pdfStorageName)
   
   func add(savedPdf: SavedPDF, completion: ((Bool) -> Void)? = nil) {
     if !pdfData.pdfs.contains(where: { $0.identifier == savedPdf.identifier }) {
@@ -37,8 +37,7 @@ class PdfDataManager {
       storage.save(pdfData, completion: completion)
     }
   }
-    
-
+  
   func deletePDF(with identifier: String, completion: ((Bool) -> Void)? = nil) {
     let pdfs = pdfData.pdfs.filter { $0.identifier != identifier }
     pdfData.pdfs = pdfs

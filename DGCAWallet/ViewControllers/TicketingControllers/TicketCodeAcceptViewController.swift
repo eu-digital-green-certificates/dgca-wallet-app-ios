@@ -183,7 +183,7 @@ class TicketCodeAcceptViewController: UIViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     switch segue.identifier {
     case Constants.showValidationResult:
-      guard let validationController = segue.destination as? ValidationResultViewController,
+      guard let validationController = segue.destination as? ValidationResultController,
           let responseModel = sender as? AccessTokenResponse else { return }
       validationController.validationResultModel = responseModel
 

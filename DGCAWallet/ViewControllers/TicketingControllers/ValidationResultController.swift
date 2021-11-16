@@ -19,7 +19,7 @@
  * ---license-end
  */
 //  
-//  ValidationResultViewController.swift
+//  ValidationResultController.swift
 //  DGCAWallet
 //  
 //  Created by Illia Vlasov on 20.10.2021.
@@ -34,7 +34,7 @@ enum ValidationResultType {
   case open
 }
 
-class ValidationResultViewController: UIViewController {
+class ValidationResultController: UIViewController {
   
   @IBOutlet fileprivate weak var titleLabel: UILabel!
   @IBOutlet fileprivate weak var iconImage: UIImageView!
@@ -90,7 +90,7 @@ class ValidationResultViewController: UIViewController {
   }
 }
 
-extension ValidationResultViewController : UITableViewDataSource {
+extension ValidationResultController : UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     guard let issuesCount = validationResultModel?.results?.count else { return 0 }
     return issuesCount
@@ -105,7 +105,7 @@ extension ValidationResultViewController : UITableViewDataSource {
   }
 }
 
-extension ValidationResultViewController : UITableViewDelegate {
+extension ValidationResultController : UITableViewDelegate {
   func numberOfSections(in tableView: UITableView) -> Int {
     return 1
   }

@@ -663,10 +663,10 @@
             </objects>
             <point key="canvasLocation" x="3040.579710144928" y="135.9375"/>
         </scene>
-        <!--Validation Result View Controller-->
+        <!--Validation Result Controller-->
         <scene sceneID="Aas-kA-zJv">
             <objects>
-                <viewController id="bpJ-se-zNP" customClass="ValidationResultViewController" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="bpJ-se-zNP" customClass="ValidationResultController" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="sEP-mn-kG0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

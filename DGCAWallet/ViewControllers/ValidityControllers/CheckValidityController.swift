@@ -31,8 +31,8 @@ import SwiftDGC
 
 class CheckValidityController: UIViewController {
   private enum Constants {
-    static let titleCellIndentifier = "CellWithTitleAndDescriptionTVC"
-    static let countryCellIndentifier = "CellWithDateAndCountryTVC"
+    static let titleCellIndentifier = "SimpleValidityCell"
+    static let countryCellIndentifier = "ExtendedValidityCell"
     static let showRuleValidationResult = "showRuleValidationResult"
     static let bottomOffset: CGFloat = 32.0
   }
@@ -91,13 +91,13 @@ extension CheckValidityController: UITableViewDataSource {
     let item: ValidityCellModel = items[indexPath.row]
     if item.cellType == .titleAndDescription {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.titleCellIndentifier,
-          for: indexPath) as? CellWithTitleAndDescriptionTVC else { return UITableViewCell() }
+          for: indexPath) as? SimpleValidityCell else { return UITableViewCell() }
 
       cell.setupCell(with: item)
       return cell
         
     } else {
-      guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.countryCellIndentifier, for: indexPath) as? CellWithDateAndCountryTVC else { return UITableViewCell() }
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.countryCellIndentifier, for: indexPath) as? ExtendedValidityCell else { return UITableViewCell() }
 
       cell.countryHandler = { [weak self] countryCode in
         self?.hCert?.ruleCountryCode = countryCode

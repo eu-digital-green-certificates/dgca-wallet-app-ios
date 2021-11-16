@@ -18,7 +18,7 @@
  * ---license-end
  */
 //
-//  CertificateViewer.swift
+//  CertificateViewerController.swift
 //  DGCAWallet
 //
 //  Created by Yannick Spreen on 4/19/21.
@@ -29,12 +29,12 @@ import SwiftDGC
 import PDFKit
 
 protocol CertificateManaging: AnyObject {
-  func certificateViewer(_ controller: CertificateViewerVC, didDeleteCertificate cert: HCert)
-  func certificateViewer(_ controller: CertificateViewerVC, didAddCeCertificate cert: HCert)
+  func certificateViewer(_ controller: CertificateViewerController, didDeleteCertificate cert: HCert)
+  func certificateViewer(_ controller: CertificateViewerController, didAddCeCertificate cert: HCert)
 }
 
 
-class CertificateViewerVC: UIViewController {
+class CertificateViewerController: UIViewController {
   private enum Constants {
     static let showValidityController = "showValidityController"
     static let embedCertPagesController = "embedCertPagesController"
@@ -202,7 +202,7 @@ class CertificateViewerVC: UIViewController {
   }
 }
 
-extension CertificateViewerVC {
+extension CertificateViewerController {
   private func shareQRCodeLikeImage() {
     guard let hCert = hCert, let savedImage = hCert.qrCode else { return }
       

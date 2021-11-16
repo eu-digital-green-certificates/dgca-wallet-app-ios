@@ -28,7 +28,7 @@
 import UIKit
 
 class CertPagesController: UIPageViewController {
-  weak var embeddingVC: CertificateViewerVC?
+  weak var embeddingVC: CertificateViewerController?
 
   var index = 0
   let vcs: [UIViewController] = [

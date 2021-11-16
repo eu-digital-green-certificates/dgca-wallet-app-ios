@@ -30,28 +30,20 @@ import SwiftDGC
 import SwiftyJSON
 
 class LocalDataManager {
-    private enum Constants {
-      static let pubKeysStorageFilename = "secure"
-      static let bundleVersion = "CFBundleShortVersionString"
-      static let unknown = "?.?.?"
-      static let versions = "versions"
-      static let defaultVer = "default"
-    }
-
-  lazy var storage = SecureStorage<LocalData>(fileName: Constants.pubKeysStorageFilename)
   lazy var localData: LocalData = LocalData()
+  lazy var storage = SecureStorage<LocalData>(fileName: SharedConstants.pubKeysStorageFilename)
 
-    func add(_ cert: HCert, with tan: String?, completion: ((Bool) -> Void)? = nil) {
-      localData.certStrings.append(DatedCertString(date: Date(), certString: cert.fullPayloadString, storedTAN: tan))
+  func add(_ cert: HCert, with tan: String?, completion: ((Bool) -> Void)? = nil) {
+    localData.certStrings.append(DatedCertString(date: Date(), certString: cert.fullPayloadString, storedTAN: tan))
+    storage.save(localData, completion: completion)
+  }
+
+  func remove(withDate date: Date, completion: ((Bool) -> Void)? = nil) {
+    if let ind = localData.certStrings.firstIndex(where: { $0.date == date }) {
+      localData.certStrings.remove(at: ind)
       storage.save(localData, completion: completion)
     }
-
-    func remove(withDate date: Date, completion: ((Bool) -> Void)? = nil) {
-      if let ind = localData.certStrings.firstIndex(where: { $0.date == date }) {
-        localData.certStrings.remove(at: ind)
-        storage.save(localData, completion: completion)
-      }
-    }
+  }
 
   func merge(other: JSON) {
     localData.config.merge(other: other)

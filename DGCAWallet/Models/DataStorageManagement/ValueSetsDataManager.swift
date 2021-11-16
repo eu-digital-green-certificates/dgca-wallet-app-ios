@@ -30,8 +30,8 @@ import SwiftyJSON
 import CertLogic
 
 class ValueSetsDataManager {
-  lazy var storage = SecureStorage<ValueSetsDataStorage>(fileName: SharedConstants.valueSetsStorageName)
   lazy var valueSetsData: ValueSetsDataStorage = ValueSetsDataStorage()
+  lazy var storage = SecureStorage<ValueSetsDataStorage>(fileName: SharedConstants.valueSetsStorageName)
 
   func add(valueSet: CertLogic.ValueSet) {
     let list = valueSetsData.valueSets

@@ -247,7 +247,7 @@ class MainListController: UIViewController, DismissControllerDelegate {
       serviceController.dismissDelegate = self
       
     case SegueIdentifiers.showCertificateViewer:
-      guard let serviceController = segue.destination as? CertificateViewerVC else { return }
+      guard let serviceController = segue.destination as? CertificateViewerController else { return }
       if let savedCertificate = sender as? DatedCertString {
         serviceController.hCert = savedCertificate.cert
         serviceController.isSaved = true
@@ -308,7 +308,7 @@ extension MainListController: ScanWalletDelegate {
 }
 
 extension MainListController: CertificateManaging {
-  func certificateViewer(_ controller: CertificateViewerVC, didDeleteCertificate cert: HCert) {
+  func certificateViewer(_ controller: CertificateViewerController, didDeleteCertificate cert: HCert) {
     startActivity()
     reloadAllComponents(completion: {[weak self] _ in
       DispatchQueue.main.async {
@@ -318,7 +318,7 @@ extension MainListController: CertificateManaging {
     })
   }
   
-  func certificateViewer(_ controller: CertificateViewerVC, didAddCeCertificate cert: HCert) {
+  func certificateViewer(_ controller: CertificateViewerController, didAddCeCertificate cert: HCert) {
     startActivity()
     DataCenter.initializeLocalData {[weak self] in
       DispatchQueue.main.asyncAfter(deadline: .now()) {

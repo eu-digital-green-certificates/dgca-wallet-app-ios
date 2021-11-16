@@ -29,8 +29,8 @@ import SwiftDGC
 import SwiftyJSON
 
 class ImageDataManager {
-  lazy var storage = SecureStorage<ImageDataStorage>(fileName: SharedConstants.imageStorageName)
   lazy var imageData: ImageDataStorage = ImageDataStorage()
+  lazy var storage = SecureStorage<ImageDataStorage>(fileName: SharedConstants.imageStorageName)
   
   func add(savedImage: SavedImage, completion: ((Bool) -> Void)? = nil) {
     if !imageData.images.contains(where: { $0.identifier == savedImage.identifier }) {
@@ -38,8 +38,7 @@ class ImageDataManager {
       storage.save(imageData, completion: completion)
     }
   }
-    
-
+  
   func deleteImage(with identifier: String, completion: ((Bool) -> Void)? = nil) {
     let images = imageData.images.filter { $0.identifier != identifier }
     imageData.images = images

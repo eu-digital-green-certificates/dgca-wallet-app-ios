@@ -19,7 +19,7 @@
  * ---license-end
  */
 //  
-//  CellWithDateAndCountryTVC.swift
+//  ExtendedValidityCell.swift
 //  DGCAWallet
 //  
 //  Created by Alexandr Chernyy on 08.07.2021.
@@ -32,7 +32,7 @@ import SwiftDGC
 public typealias OnDateChangedHandler = (Date) -> Void
 public typealias OnCountryChangedHandler = (String?) -> Void
 
-class CellWithDateAndCountryTVC: UITableViewCell {
+class ExtendedValidityCell: UITableViewCell {
     private enum Constants {
       static let userDefaultsCountryKey = "UDWalletCountryKey"
     }
@@ -82,13 +82,13 @@ class CellWithDateAndCountryTVC: UITableViewCell {
   }
 }
 
-extension CellWithDateAndCountryTVC {
+extension ExtendedValidityCell {
   @objc func dateChanged(_ sender: UIDatePicker) {
     dataHandler?(sender.date)
   }
 }
 
-extension CellWithDateAndCountryTVC: UIPickerViewDataSource, UIPickerViewDelegate {
+extension ExtendedValidityCell: UIPickerViewDataSource, UIPickerViewDelegate {
   public func numberOfComponents(in pickerView: UIPickerView) -> Int {
     return 1
   }
@@ -109,7 +109,7 @@ extension CellWithDateAndCountryTVC: UIPickerViewDataSource, UIPickerViewDelegat
   }
 }
 
-extension CellWithDateAndCountryTVC {
+extension ExtendedValidityCell {
   public func setListOfRuleCounties(list: [CountryModel]) {
     self.countryItems = list
     self.countryPicker.reloadAllComponents()

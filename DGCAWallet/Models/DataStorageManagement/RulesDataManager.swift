@@ -30,8 +30,8 @@ import SwiftyJSON
 import CertLogic
 
 class RulesDataManager {
-  lazy var storage = SecureStorage<RulesDataStorage>(fileName: SharedConstants.rulesStorageName)
   lazy var rulesData: RulesDataStorage = RulesDataStorage()
+  lazy var storage = SecureStorage<RulesDataStorage>(fileName: SharedConstants.rulesStorageName)
   
   func add(rule: CertLogic.Rule) {
     if !rulesData.rules.contains(where: { $0.identifier == rule.identifier && $0.version == rule.version }) {

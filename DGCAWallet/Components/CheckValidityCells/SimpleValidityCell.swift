@@ -19,7 +19,7 @@
  * ---license-end
  */
 //  
-//  CellWithTitleAndDescriptionTVC.swift
+//  SimpleValidityCell.swift
 //  DGCAWallet
 //  
 //  Created by Alexandr Chernyy on 08.07.2021.
@@ -28,7 +28,7 @@
 
 import UIKit
 
-class CellWithTitleAndDescriptionTVC: UITableViewCell {
+class SimpleValidityCell: UITableViewCell {
   @IBOutlet fileprivate weak var titleLabel: UILabel!
   @IBOutlet fileprivate weak var descriptionLabel: UILabel!
   
