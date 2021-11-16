@@ -124,7 +124,7 @@ class TicketCodeAcceptViewController: UIViewController {
     
     let ivData : [UInt8] = Array(base64: iv)
     let dgcData : [UInt8] = Array(dgcString.utf8)
-    let _ : [UInt8] = Array(base64: verificationMethod.publicKeyJwk!.x5c)
+    let _ : [UInt8] = Array(base64: verificationMethod.publicKeyJwk!.x5c.first!)
     var encryptedDgcData : [UInt8] = Array()
     
     // AES GCM
@@ -136,7 +136,7 @@ class TicketCodeAcceptViewController: UIViewController {
         variant: .sha2(.sha256)
     ).calculate()
 
-    let publicSecKey = TicketCodeAcceptViewController.pubKey(from: verificationMethod.publicKeyJwk!.x5c)
+    let publicSecKey = TicketCodeAcceptViewController.pubKey(from: verificationMethod.publicKeyJwk!.x5c.first!)
     
     do {
         let gcm = GCM(iv: ivData, mode: .combined)
