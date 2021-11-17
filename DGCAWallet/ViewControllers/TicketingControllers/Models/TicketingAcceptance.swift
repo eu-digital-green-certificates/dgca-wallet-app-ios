@@ -56,22 +56,20 @@ class TicketingAcceptance {
       return
     }
       
-    DispatchQueue.global(qos: .background).async {
-      Enclave.sign(data: dccData.0, with: privateKey, using: SecKeyAlgorithm.ecdsaSignatureMessageX962SHA256, completion: { (signature, error) in
-        guard error == nil else {
-          completion(nil, WalletEntryError.local(description: error!))
-          return
-        }
-        guard let sign = signature else {
-          completion(nil, WalletEntryError.signingError)
-          return
-        }
-        let parameters = ["kid" : verificationMethod.publicKeyJwk!.kid, "dcc" : dccData.0.base64EncodedString(),
-            "sig": sign.base64EncodedString(),"encKey" : dccData.1.base64EncodedString(),
-            "sigAlg" : "SHA256withECDSA", "encScheme" : "RSAOAEPWithSHA256AESGCM"]
-        GatewayConnection.validateTicketing(url: url, parameters: parameters, completion: completion)
-      })
-    }
+    Enclave.sign(data: dccData.0, with: privateKey, using: SecKeyAlgorithm.ecdsaSignatureMessageX962SHA256, completion: { (signature, error) in
+      guard error == nil else {
+        completion(nil, WalletEntryError.local(description: error!))
+        return
+      }
+      guard let sign = signature else {
+        completion(nil, WalletEntryError.signingError)
+        return
+      }
+      let parameters = ["kid" : verificationMethod.publicKeyJwk!.kid, "dcc" : dccData.0.base64EncodedString(),
+          "sig": sign.base64EncodedString(),"encKey" : dccData.1.base64EncodedString(),
+          "sigAlg" : "SHA256withECDSA", "encScheme" : "RSAOAEPWithSHA256AESGCM"]
+      GatewayConnection.validateTicketing(url: url, parameters: parameters, completion: completion)
+    })
   }
 
   private func encodeDCC(dgcString : String, iv: String) -> (Data,Data)? {
