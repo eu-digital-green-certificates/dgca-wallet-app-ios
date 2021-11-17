@@ -151,6 +151,7 @@ extension ScanWalletController  {
   }
   
   private func processClassification(_ request: VNRequest) {
+    
     guard let barcodes = request.results else { return }
     DispatchQueue.main.async { [self] in
       if captureSession?.isRunning == true {

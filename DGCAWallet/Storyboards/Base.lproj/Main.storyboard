@@ -45,7 +45,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="YRf-la-YuK"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                                 <state key="normal" title="Share">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -131,7 +131,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="J0F-IF-AsM"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                                 <state key="normal" title="Share">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -280,7 +280,7 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="144" id="GLJ-JX-LXm"/>
                                     <constraint firstAttribute="height" constant="40" id="hVJ-cs-YhR"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                                 <state key="normal" title="Next">
                                     <color key="titleColor" name="walletBlack"/>
                                 </state>
@@ -366,12 +366,12 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="YKe-rH-l3u" firstAttribute="leading" secondItem="XiI-QU-nZU" secondAttribute="trailing" constant="20" id="2Av-cT-mEz"/>
                                                 <constraint firstItem="EZx-rd-6zb" firstAttribute="trailing" secondItem="bd7-IO-9sW" secondAttribute="trailingMargin" id="3nu-dP-Clp"/>
                                                 <constraint firstItem="XiI-QU-nZU" firstAttribute="leading" secondItem="bd7-IO-9sW" secondAttribute="leadingMargin" id="JaM-jp-N2E"/>
                                                 <constraint firstItem="EZx-rd-6zb" firstAttribute="leading" secondItem="bd7-IO-9sW" secondAttribute="leadingMargin" id="MMc-Sy-hdy"/>
                                                 <constraint firstItem="EZx-rd-6zb" firstAttribute="top" secondItem="bd7-IO-9sW" secondAttribute="topMargin" id="Nrb-bP-MqV"/>
-                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="YKe-rH-l3u" secondAttribute="trailing" constant="20" id="RcJ-OE-UQY"/>
-                                                <constraint firstItem="YKe-rH-l3u" firstAttribute="leading" secondItem="XiI-QU-nZU" secondAttribute="trailing" constant="20" id="XIs-nv-lEU"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="YKe-rH-l3u" secondAttribute="trailing" constant="20" id="Z7c-t6-vgc"/>
                                                 <constraint firstItem="XiI-QU-nZU" firstAttribute="top" secondItem="EZx-rd-6zb" secondAttribute="bottom" constant="16" id="dod-5Y-9SY"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="XiI-QU-nZU" secondAttribute="bottom" constant="0.5" id="sdQ-oR-jaf"/>
                                                 <constraint firstItem="YKe-rH-l3u" firstAttribute="centerY" secondItem="XiI-QU-nZU" secondAttribute="centerY" id="vBB-hH-Kya"/>
@@ -430,7 +430,7 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="144" id="XFO-FO-gF6"/>
                                     <constraint firstAttribute="height" constant="40" id="l4t-WQ-1z3"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                                 <state key="normal" title="Next">
                                     <color key="titleColor" name="walletBlack"/>
                                 </state>
@@ -580,7 +580,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dV4-Pl-DfX">
                                                 <rect key="frame" x="183.5" y="80" width="159.5" height="40"/>
-                                                <color key="backgroundColor" name="yellow"/>
+                                                <color key="backgroundColor" name="walletYellow"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="HGS-rw-BmN"/>
                                                 </constraints>
@@ -1038,7 +1038,7 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="jzU-iO-50E"/>
                                     <constraint firstAttribute="height" constant="46" id="q7t-F1-nga"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                                 <state key="normal" title="Add new">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -1188,16 +1188,16 @@
     </scenes>
     <designables>
         <designable name="MID-ne-Jur">
-            <size key="intrinsicContentSize" width="101" height="47"/>
+            <size key="intrinsicContentSize" width="88" height="39"/>
         </designable>
         <designable name="Rcx-o5-KDY">
-            <size key="intrinsicContentSize" width="66" height="47"/>
+            <size key="intrinsicContentSize" width="47" height="39"/>
         </designable>
         <designable name="WbA-kC-hOb">
-            <size key="intrinsicContentSize" width="66" height="47"/>
+            <size key="intrinsicContentSize" width="47" height="39"/>
         </designable>
         <designable name="fol-rA-9gU">
-            <size key="intrinsicContentSize" width="56" height="51"/>
+            <size key="intrinsicContentSize" width="32" height="39"/>
         </designable>
     </designables>
     <resources>
@@ -1218,9 +1218,6 @@
             <color red="0.27500000596046448" green="0.4779999852180481" blue="0.22400000691413879" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="walletYellow">
-            <color red="1" green="0.83899998664855957" blue="0.090000003576278687" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="yellow">
             <color red="1" green="0.83899998664855957" blue="0.090000003576278687" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
