@@ -30,27 +30,34 @@ import SwiftDGC
 
 class CertificateListController: UIViewController {
   private enum Constants {
-    static let hcertCellIndentifier = "CertificateCell"
     static let showTicketAcceptController = "showTicketAcceptController"
-    static let accessTokenCellInfoIdentifier = "AccessTokenInfoCell"
-  }
+   }
   
   @IBOutlet fileprivate weak var tableView: UITableView!
   @IBOutlet fileprivate weak var nextButton: UIButton!
   
-  private var listOfCert = [DatedCertString]()
-  private var validationServiceInfo : ServerListResponse?
-  private var accessTokenInfo       : AccessTokenResponse?
+  var ticketingAcceptance: TicketingAcceptance? {
+    didSet {
+      self.reloadComponents()
+    }
+  }
+  
+  private var stringCertificates = [DatedCertString]()
+  
+  private var selectedStringCertificate: DatedCertString? {
+    return stringCertificates.filter({ $0.isSelected }).first
+ }
+
   private var accessTokenInfoKeys   : [String] = ["Name", "Date of birth", "Departure","Arrival","Accepted certificate type","Category","Validation Time","Valid from","Valid to"]
-  private var accessTokenInfoValues   : [String] = [String]()
+  private var accessTokenInfoValues: [String] = [String]()
   
   private var isNavigationEnabled: Bool {
-    return accessTokenInfo != nil && validationServiceInfo != nil && getSelectedCert()?.cert != nil
+    return ticketingAcceptance != nil && selectedStringCertificate?.cert != nil
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    guard let vcValue = accessTokenInfo?.vc else { return }
+    guard let vcValue = ticketingAcceptance?.accessInfo.vc else { return }
     
     accessTokenInfoValues = ["\(vcValue.gnt!) \(vcValue.fnt!)", vcValue.dob!, "\(vcValue.cod!),\(vcValue.rod!)", "\(vcValue.coa!),\(vcValue.roa!)", vcValue.type!.joined(separator: ","), vcValue.category!.joined(separator: ","), vcValue.validationClock!, vcValue.validFrom!, vcValue.validTo!]
     
@@ -70,49 +77,41 @@ class CertificateListController: UIViewController {
     self.performSegue(withIdentifier: Constants.showTicketAcceptController, sender: nil)
   }
   
-  func setCertsWith(_ validationInfo: ServerListResponse, _ accessTokenModel : AccessTokenResponse) {
-    validationServiceInfo = validationInfo
-    accessTokenInfo = accessTokenModel
-    reloadComponents()
-  }
-  
   func reloadComponents() {
-    guard let validationCertificate = accessTokenInfo?.vc,
+    guard let validationCertificate = ticketingAcceptance?.accessInfo.vc,
       let givenName = validationCertificate.gnt, let familyName = validationCertificate.fnt else { return }
     
-    listOfCert = DataCenter.certStrings.filter { ($0.cert!.fullName.lowercased() == "\(givenName) \(familyName)".lowercased()) &&
-      ($0.cert!.dateOfBirth == validationCertificate.dob) }
+    let array = DataCenter.certStrings.filter { ($0.cert!.fullName.lowercased() == "\(givenName) \(familyName)".lowercased()) && ($0.cert!.dateOfBirth == validationCertificate.dob) }
+    stringCertificates = array
     
     let validDateFrom = validationCertificate.validFrom ?? ""
     if let dateValidFrom = Date(rfc3339DateTimeString: validDateFrom) {
-      listOfCert = listOfCert.filter{ $0.cert!.iat < dateValidFrom }
+      let array = stringCertificates.filter{ $0.cert!.iat < dateValidFrom }
+      stringCertificates = array
     }
     
     let validDateTo = validationCertificate.validTo ?? ""
     if let dateValidUntil = Date(rfc3339DateTimeString: validDateTo) {
-      listOfCert = listOfCert.filter {$0.cert!.exp > dateValidUntil }
+      let array = stringCertificates.filter {$0.cert!.exp > dateValidUntil }
+      stringCertificates = array
     }
   }
   
-  private func deselectAllCert() {
-    for i in 0..<listOfCert.count {
-      listOfCert[i].isSelected = false
+  private func deselectAllCertificates() {
+    for i in 0..<stringCertificates.count {
+      stringCertificates[i].isSelected = false
     }
-  }
-  
-  private func getSelectedCert() -> DatedCertString? {
-     return listOfCert.filter({ $0.isSelected }).first
   }
 }
 
 extension CertificateListController: UITableViewDataSource, UITableViewDelegate {
   func numberOfSections(in tableView: UITableView) -> Int {
-    return listOfCert.isEmpty ? 1 : 2
+    return stringCertificates.isEmpty ? 1 : 2
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     if section == 0 {
-      switch self.accessTokenInfo?.t {
+      switch ticketingAcceptance?.accessInfo.t {
       case 0:
         return 0
       case 1:
@@ -124,22 +123,26 @@ extension CertificateListController: UITableViewDataSource, UITableViewDelegate 
       }
 
     } else {
-      return listOfCert.count
+      return stringCertificates.count
     }
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if indexPath.section == 0 {
-      guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.accessTokenCellInfoIdentifier,
-          for: indexPath) as? TokenInfoCell else { return UITableViewCell() }
+      let cellID = String(describing: TokenInfoCell.self)
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as? TokenInfoCell
+      else { return UITableViewCell() }
+      
       cell.fieldName.text = accessTokenInfoKeys[indexPath.row]
       cell.fieldValue.text = accessTokenInfoValues[indexPath.row]
       return cell
       
     } else {
-      guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.hcertCellIndentifier,
-        for: indexPath) as? CertificateCell else { return UITableViewCell() }
-      let savedCert = listOfCert[indexPath.row]
+      let cellID = String(describing: CertificateCell.self)
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as? CertificateCell
+      else { return UITableViewCell() }
+      
+      let savedCert = stringCertificates[indexPath.row]
       cell.accessoryType = savedCert.isSelected ? .checkmark : .none
       if let cert = savedCert.cert {
         cell.setCertificate(cert: cert)
@@ -155,7 +158,7 @@ extension CertificateListController: UITableViewDataSource, UITableViewDelegate 
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle,
         forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
-      let savedCert = listOfCert[indexPath.row]
+      let savedCert = stringCertificates[indexPath.row]
       showAlert(title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"), actionTitle: l10n("btn.confirm"),
        cancelTitle: l10n("btn.cancel")) {
           if $0 {
@@ -172,10 +175,10 @@ extension CertificateListController: UITableViewDataSource, UITableViewDelegate 
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if indexPath.section == 1 {
-      deselectAllCert()
+      deselectAllCertificates()
       nextButton.isEnabled = true
       nextButton.backgroundColor = UIColor.walletYellow
-      listOfCert[indexPath.row].isSelected = true
+      stringCertificates[indexPath.row].isSelected = true
       tableView.reloadData()
     }
   }
@@ -183,12 +186,11 @@ extension CertificateListController: UITableViewDataSource, UITableViewDelegate 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     switch segue.identifier {
     case Constants.showTicketAcceptController:
-      guard let ticketController = segue.destination as? TicketCodeAcceptViewController,
-          let tokenInfo = accessTokenInfo,
-          let serviceInfo = validationServiceInfo,
-          let selectedCert = getSelectedCert()?.cert else { return }
+      guard let ticketingController = segue.destination as? TicketingAcceptanceController,
+          let acceptance = ticketingAcceptance,
+          let selectedCertificate = selectedStringCertificate?.cert else { return }
       
-      ticketController.setCertsWith(serviceInfo, tokenInfo, selectedCert)
+      ticketingController.prepareTicketing(with: acceptance, certificate: selectedCertificate)
 
     default:
         break

@@ -32,6 +32,17 @@ import SwiftyJSON
 import CertLogic
 import JWTDecode
 
+enum WalletEntryError: Error {
+  case encodingError
+  case signingError
+  case incorrectDataResponse
+  case connection(error: Error)
+  case local(description: String)
+  case parsingError
+}
+
+typealias TicketingCompletion = (AccessTokenResponse?, Error?) -> Void
+
 struct GatewayConnection: ContextConnection {
   static func claim(cert: HCert, with tan: String?, completion: ((Bool, String?) -> Void)?) {
     guard var tan = tan, !tan.isEmpty else { return }
@@ -272,7 +283,6 @@ extension GatewayConnection {
     request.headers  = [HTTPHeader(name: "Authorization", value: "Bearer " + token),HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")]
     
     let session = URLSession.shared.dataTask(with: request, completionHandler: { data,response,error in
-      var accessTokenResponse : AccessTokenResponse?
       
       guard let responseData = data,
             let tokenJWT = String(data: responseData, encoding: .utf8),
@@ -290,30 +300,28 @@ extension GatewayConnection {
       
       let decoder = JSONDecoder()
       do {
-        accessTokenResponse = try decoder.decode(AccessTokenResponse.self, from: jsonData)
+        let accessTokenResponse = try decoder.decode(AccessTokenResponse.self, from: jsonData)
+        UserDefaults.standard.set(tokenJWT, forKey: "AccessToken")
+
+        completion(accessTokenResponse)
+        if let httpResponse = response as? HTTPURLResponse {
+          UserDefaults.standard.set(httpResponse.allHeaderFields["x-nonce"], forKey: "xnonce")
+        }
+
       } catch let parseError {
         print(parseError)
+        completion(nil)
       }
-      
-      if let httpResponse = response as? HTTPURLResponse {
-        UserDefaults.standard.set(httpResponse.allHeaderFields["x-nonce"], forKey: "xnonce")
-      }
-      
-      UserDefaults.standard.set(tokenJWT, forKey: "AccessToken")
-      completion(accessTokenResponse)
-      
     })
     session.resume()
   }
   
-  static func validateTicketing(url : URL, parameters : [String: String]?, completion : @escaping (AccessTokenResponse?) -> Void ) {
-    var accessTokenResponse : AccessTokenResponse?
-    
+  static func validateTicketing(url : URL, parameters : [String: String]?, completion : @escaping TicketingCompletion) {
     let headers = HTTPHeaders([HTTPHeader(name: "Authorization", value: "Bearer " + (UserDefaults.standard.object(forKey: "AccessToken") as! String)),HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")])
     
     let encoder = JSONEncoder()
     guard let parametersData = try? encoder.encode(parameters) else {
-      completion(nil)
+      completion(nil, WalletEntryError.encodingError)
       return
     }
     
@@ -322,27 +330,23 @@ extension GatewayConnection {
     request.method = .post
     request.httpBody = parametersData
     
-    let session = URLSession.shared.dataTask(with: request, completionHandler: { data,response,error in
-      guard let responseData = data,
-            let tokenJWT = String(data: responseData, encoding: .utf8)
+    let session = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
+      guard error == nil else { completion(nil,WalletEntryError.connection(error: error!)); return }
+      guard let responseData = data, let tokenJWT = String(data: responseData, encoding: .utf8)
       else {
-        completion(nil)
+        completion(nil, WalletEntryError.incorrectDataResponse)
         return
       }
-      guard let decodedToken = try? decode(jwt: tokenJWT),
-            let jsonData = try? JSONSerialization.data(withJSONObject: decodedToken.body)
-      else {
-        completion(nil)
-        return
-      }
-      let decoder = JSONDecoder()
       do {
-        accessTokenResponse = try decoder.decode(AccessTokenResponse.self, from: jsonData)
-      } catch let parseError {
-        print(parseError)
+        let decodedToken = try decode(jwt: tokenJWT)
+        let jsonData = try JSONSerialization.data(withJSONObject: decodedToken.body)
+        let decoder = JSONDecoder()
+        let accessTokenResponse = try decoder.decode(AccessTokenResponse.self, from: jsonData)
+        completion(accessTokenResponse, nil)
+      } catch {
+        completion(nil, WalletEntryError.parsingError)
+        print(error.localizedDescription)
       }
-      
-      completion(accessTokenResponse)
     })
     session.resume()
   }

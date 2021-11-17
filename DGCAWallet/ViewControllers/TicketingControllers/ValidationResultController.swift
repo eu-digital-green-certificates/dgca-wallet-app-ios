@@ -27,15 +27,9 @@
 
 
 import UIKit
-
-enum ValidationResultType {
-  case valid
-  case invalid
-  case open
-}
+import SwiftDGC
 
 class ValidationResultController: UIViewController {
-  
   @IBOutlet fileprivate weak var titleLabel: UILabel!
   @IBOutlet fileprivate weak var iconImage: UIImageView!
   @IBOutlet fileprivate weak var detailLabel: UILabel!
@@ -53,33 +47,33 @@ class ValidationResultController: UIViewController {
     limitationsTableView.tableFooterView = UIView()
     iconImage.image = iconImage.image?.withRenderingMode(.alwaysTemplate)
     
-    switch validationResultModel?.result {
+    guard let result = validationResultModel?.result else {
+      //TODO alert
+        return
+    }
+    
+    switch result {
     case "OK":
-      titleLabel.text = "Valid certificate"
-      detailLabel.text = "Your certificate is valid and confirms to the provided country rules. Additional entry requirements might apply, please refer to the Re-open EU website:"
+      titleLabel.text = l10n("Valid certificate")
+      detailLabel.text = l10n("Your certificate is valid and confirms to the provided country rules. Additional entry requirements might apply, please refer to the Re-open EU website:")
       iconImage.image = UIImage(named: "icon_large_valid")
-      
       iconImage.tintColor = .walletGreen
+        
     case "NOK":
-      titleLabel.text = "Invalid certificate"
-      detailLabel.text = "Your certificate is not valid. Please refer to the Re-open EU website:"
+      titleLabel.text = l10n("Invalid certificate")
+      detailLabel.text = l10n("Your certificate is not valid. Please refer to the Re-open EU website:")
       iconImage.image = UIImage(named: "icon_large_invalid")
-      
       iconImage.tintColor = .walletRed
+        
     case "CHK":
-      titleLabel.text = "Certificate has limitation"
-      detailLabel.text = "Your certificate is valid but has the following restrictions:"
+      titleLabel.text = l10n("Certificate has limitation")
+      detailLabel.text = l10n("Your certificate is valid but has the following restrictions:")
       iconImage.image = UIImage(named: "icon_large_warning")
-      
-      iconImage.tintColor = .yellow
-    case .none:
-      titleLabel.text = "Invalid certificate"
-      detailLabel.text = "Your certificate is not valid. Please refer to the Re-open EU website:"
-      iconImage.image = UIImage(named: "icon_large_invalid")
-      iconImage.tintColor = .walletRed
-    case .some(_):
-      titleLabel.text = "Invalid certificate"
-      detailLabel.text = "Your certificate is not valid. Please refer to the Re-open EU website:"
+      iconImage.tintColor = .walletYellow
+        
+    default:
+      titleLabel.text = l10n("Invalid certificate")
+      detailLabel.text = l10n("Your certificate is not valid. Please refer to the Re-open EU website:")
       iconImage.image = UIImage(named: "icon_large_invalid")
       iconImage.tintColor = .walletRed
     }
@@ -90,7 +84,11 @@ class ValidationResultController: UIViewController {
   }
 }
 
-extension ValidationResultController : UITableViewDataSource {
+extension ValidationResultController : UITableViewDelegate, UITableViewDataSource {
+  func numberOfSections(in tableView: UITableView) -> Int {
+    return 1
+  }
+
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     guard let issuesCount = validationResultModel?.results?.count else { return 0 }
     return issuesCount
@@ -102,11 +100,5 @@ extension ValidationResultController : UITableViewDataSource {
       cell.issueTextView.text = issueText
     }
     return cell
-  }
-}
-
-extension ValidationResultController : UITableViewDelegate {
-  func numberOfSections(in tableView: UITableView) -> Int {
-    return 1
   }
 }

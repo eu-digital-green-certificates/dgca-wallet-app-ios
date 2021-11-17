@@ -109,3 +109,14 @@
 "please select one of service server" = "Please select one of the services";
 "close" = "Close";
 "settings.last-updated" = "Last Updated: %@";
+"Consent" = "Consent";
+"Do you agree to share the %@ certificate with %@?" = "Do you agree to share the %@ certificate with %@?";
+
+"Valid certificate" = "Valid certificate";
+"Your certificate is valid and confirms to the provided country rules. Additional entry requirements might apply, please refer to the Re-open EU website:" = "Your certificate is valid and confirms to the provided country rules. Additional entry requirements might apply, please refer to the Re-open EU website:";
+
+"Invalid certificate" = "Invalid certificate";
+"Your certificate is not valid. Please refer to the Re-open EU website:" = "Your certificate is not valid. Please refer to the Re-open EU website:";
+
+"Certificate has limitation" = "Certificate has limitation";
+"Your certificate is valid but has the following restrictions:" = "Your certificate is valid but has the following restrictions:";

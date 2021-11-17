@@ -383,7 +383,7 @@
                                             <outlet property="nameLabel" destination="EZx-rd-6zb" id="udM-ku-z70"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AccessTokenInfoCell" rowHeight="32" id="YgW-TE-KvK" customClass="TokenInfoCell" customModule="DGCAWallet" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TokenInfoCell" rowHeight="32" id="YgW-TE-KvK" customClass="TokenInfoCell" customModule="DGCAWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="121.5" width="375" height="32"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YgW-TE-KvK" id="0U8-Cw-qC3">
@@ -473,10 +473,10 @@
             </objects>
             <point key="canvasLocation" x="2128.8000000000002" y="118.29085457271366"/>
         </scene>
-        <!--Ticket Code Accept View Controller-->
+        <!--Ticketing Acceptance Controller-->
         <scene sceneID="Nns-P2-25y">
             <objects>
-                <viewController id="GVQ-Q1-tWE" customClass="TicketCodeAcceptViewController" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="GVQ-Q1-tWE" customClass="TicketingAcceptanceController" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3gU-YO-tVd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

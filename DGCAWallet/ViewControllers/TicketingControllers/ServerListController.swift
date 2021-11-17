@@ -89,7 +89,12 @@ class ServerListController: UIViewController {
       
       GatewayConnection.getAccessTokenFor(url: url,servicePath: service.id, publicKey: pubKey) { response in
         DispatchQueue.main.async { [weak self] in
-          self?.performSegue(withIdentifier: Constants.showCertificatesList, sender: (serviceInfo, response))
+          guard let response = response else {
+            //TODO: Show Alert
+            return
+          }
+          let ticketingAcceptance = TicketingAcceptance(validationInfo: serviceInfo, accessInfo: response)
+          self?.performSegue(withIdentifier: Constants.showCertificatesList, sender: ticketingAcceptance)
         }
       }
     }
@@ -99,17 +104,18 @@ class ServerListController: UIViewController {
     serverListInfo = info
       listOfServices = serverListInfo?.service?.filter{ $0.type == "ValidationService" } ?? []
   }
-    
+  
   private func getSelectedServer() -> ValidationService? {
       listOfServices.filter({ $0.isSelected ?? false }).first
   }
-    
+  
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     switch segue.identifier {
     case Constants.showCertificatesList:
-        guard let certController = segue.destination as? CertificateListController,
-            let (serviceInfo,tokenResponse) = sender as? (ServerListResponse, AccessTokenResponse) else { return }
-        certController.setCertsWith(serviceInfo, tokenResponse)
+        guard let certificateListController = segue.destination as? CertificateListController,
+          let acceptance = sender as? TicketingAcceptance else { return }
+        certificateListController.ticketingAcceptance = acceptance
+    
     default:
         break
     }
@@ -118,7 +124,7 @@ class ServerListController: UIViewController {
 
 extension ServerListController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      return listOfServices.count
+    return listOfServices.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
