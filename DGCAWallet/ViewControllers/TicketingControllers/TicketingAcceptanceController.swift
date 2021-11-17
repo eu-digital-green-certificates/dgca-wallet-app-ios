@@ -69,8 +69,10 @@ class TicketingAcceptanceController: UIViewController {
 
   private func setupView(isValidation: Bool) {
     if isValidation {
-      certificateTitle.text = certificate?.certTypeString
-      validToLabel.text = certificate?.exp.localDateString
+      title = l10n("Consent")
+      self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+      certificateTitle.text = String(format: "Certificate type: %@", certificate?.certTypeString ?? "")
+      validToLabel.text = String(format: "Expired date: %@", certificate?.exp.localDateString ?? "")
       consetsLabel.text = l10n("Consent")
       infoLabel.text = String(format: l10n("Do you agree to share the %@ certificate with %@?"),
           certificate?.certTypeString ?? "", "airline.com")
@@ -91,7 +93,7 @@ class TicketingAcceptanceController: UIViewController {
     guard loading == false, let certificate = certificate else { return }
     self.startActivity()
     ticketingAcceptance?.requestGrandPermissions(for: certificate, completion: { response, error in
-      guard error == nil else {
+      guard error == nil, let response = response else {
         DispatchQueue.main.async {
           self.stopActivity()
           // TODO show alert here
@@ -103,7 +105,7 @@ class TicketingAcceptanceController: UIViewController {
         self.performSegue(withIdentifier: Constants.showValidationResult, sender: response)
       }
     })
-   }
+  }
     
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     switch segue.identifier {

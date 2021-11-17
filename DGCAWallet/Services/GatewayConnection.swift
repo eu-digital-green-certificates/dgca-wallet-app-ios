@@ -331,7 +331,11 @@ extension GatewayConnection {
     request.httpBody = parametersData
     
     let session = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
-      guard error == nil else { completion(nil,WalletEntryError.connection(error: error!)); return }
+      guard error == nil
+      else {
+        completion(nil,WalletEntryError.connection(error: error!))
+        return
+      }
       guard let responseData = data, let tokenJWT = String(data: responseData, encoding: .utf8)
       else {
         completion(nil, WalletEntryError.incorrectDataResponse)

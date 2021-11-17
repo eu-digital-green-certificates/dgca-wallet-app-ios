@@ -44,6 +44,7 @@ class ServerListController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     title = l10n("services")
+    self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -128,13 +129,14 @@ extension ServerListController: UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellIndentifier,
-        for: indexPath) as? ServerCell else { return UITableViewCell() }
-      
+    let cellID = String(describing: ServerCell.self)
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as? ServerCell
+    else { return UITableViewCell() }
+    
     let service = listOfServices[indexPath.row]
     cell.accessoryType = (service.isSelected ?? false) ? .checkmark : .none
     cell.setService(serv: service)
-      
+    
     return cell
   }
   
