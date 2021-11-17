@@ -44,7 +44,7 @@ class IdentityService {
     let session = URLSession.shared.dataTask(with: request, completionHandler: { data,response,error in
       if let responseData = data {
         
-        let responseModel = try! decoder.decode(ServerListResponse.self, from: responseData)
+        let responseModel = try? decoder.decode(ServerListResponse.self, from: responseData)
         
         completion(responseModel)
       } else {
@@ -67,7 +67,7 @@ class IdentityService {
         completion(nil)
         return
       }
-      let responseModel = try! decoder.decode(ServerListResponse.self, from: data)
+      let responseModel = try? decoder.decode(ServerListResponse.self, from: data)
       completion(responseModel)
     })
     session.resume()
