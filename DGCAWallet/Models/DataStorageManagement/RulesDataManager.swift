@@ -38,7 +38,7 @@ class RulesDataManager {
       rulesData.rules.append(rule)
     }
   }
-
+  
   func save(completion: ((Bool) -> Void)? = nil) {
     storage.save(rulesData, completion: completion)
   }
@@ -46,7 +46,7 @@ class RulesDataManager {
   func deleteRuleWithHash(hash: String) {
     rulesData.rules = rulesData.rules.filter { $0.hash != hash }
   }
-    
+  
   func isRuleExistWithHash(hash: String) -> Bool {
     return rulesData.rules.contains(where: { $0.hash == hash })
   }
@@ -57,9 +57,7 @@ class RulesDataManager {
         completion()
         return
       }
-          
-      let format = l10n("log.rules")
-      DGCLogger.logInfo(String.localizedStringWithFormat(format, result.rules.count))
+      DGCLogger.logInfo(String(format: "Downloaded %@ rules", result.rules.count))
       self.rulesData = result
       completion()
     }

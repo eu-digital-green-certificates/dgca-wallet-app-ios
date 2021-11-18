@@ -59,9 +59,7 @@ class ImageDataManager {
         completion()
         return
       }
-        
-      let format = l10n("log.images")
-      DGCLogger.logInfo(String.localizedStringWithFormat(format, result.images.count))
+      DGCLogger.logInfo(String(format: "Loaded %@ images", result.images.count))
       self.imageData = result
       self.save()
       completion()

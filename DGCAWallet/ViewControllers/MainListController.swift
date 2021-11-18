@@ -177,7 +177,7 @@ class MainListController: UIViewController, DismissControllerDelegate {
     guard success, !barcodeString.isEmpty else { return }
     
     DispatchQueue.main.async { [weak self] in
-      print("\(message)")
+      DGCLogger.logInfo("\(message)")
       let appDelegate = UIApplication.shared.delegate as? AppDelegate
       appDelegate?.isNFCFunctionality = false
       if #available(iOS 13.0, *) {
@@ -193,11 +193,11 @@ class MainListController: UIViewController, DismissControllerDelegate {
         let alertController: UIAlertController = {
           let controller = UIAlertController(title: l10n("Cannot read NFC"), message: l10n("read.dcc.from.nfc"),
             preferredStyle: .alert)
-          let actionRetry = UIAlertAction(title: l10n("retry"), style: .default) { _ in
+          let actionRetry = UIAlertAction(title: l10n("Retry"), style: .default) { _ in
             self?.scanNFC()
           }
           controller.addAction(actionRetry)
-          let actionOk = UIAlertAction(title: l10n("btn.ok"), style: .default)
+          let actionOk = UIAlertAction(title: l10n("OK"), style: .default)
           controller.addAction(actionOk)
             return controller
         }()
@@ -427,8 +427,8 @@ extension MainListController: UITableViewDelegate {
       switch indexPath.section {
       case TableSection.certificates.rawValue:
           let savedCert = listCertElements[indexPath.row]
-          showAlert( title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"),
-            actionTitle: l10n("btn.confirm"), cancelTitle: l10n("btn.cancel")) { [weak self] in
+          showAlert( title: l10n("Delete Certificate"), subtitle: l10n("cert.delete.body"),
+            actionTitle: l10n("Confirm"), cancelTitle: l10n("Cancel")) { [weak self] in
               if $0 {
                 self?.startActivity()
                 DataCenter.localDataManager.remove(withDate: savedCert.date) { _ in
@@ -444,8 +444,8 @@ extension MainListController: UITableViewDelegate {
             }
       case TableSection.images.rawValue:
         let savedImage = listImageElements[indexPath.row]
-        showAlert( title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"),
-          actionTitle: l10n("btn.confirm"), cancelTitle: l10n("btn.cancel")) { [weak self] in
+        showAlert( title: l10n("Delete Certificate"), subtitle: l10n("cert.delete.body"),
+          actionTitle: l10n("Confirm"), cancelTitle: l10n("Cancel")) { [weak self] in
             if $0 {
               self?.startActivity()
               DataCenter.imageDataManager.deleteImage(with: savedImage.identifier) { _ in
@@ -460,8 +460,8 @@ extension MainListController: UITableViewDelegate {
           }
       case TableSection.pdfs.rawValue:
         let savedPDF = listPdfElements[indexPath.row]
-        showAlert( title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"),
-          actionTitle: l10n("btn.confirm"), cancelTitle: l10n("btn.cancel")) { [weak self] in
+        showAlert( title: l10n("Delete Certificate"), subtitle: l10n("cert.delete.body"),
+          actionTitle: l10n("Confirm"), cancelTitle: l10n("Cancel")) { [weak self] in
             if $0 {
               self?.startActivity()
               DataCenter.pdfDataManager.deletePDF(with: savedPDF.identifier) { _ in
@@ -482,7 +482,7 @@ extension MainListController: UITableViewDelegate {
                           
 extension MainListController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   private func addImageActivity() {
-    let alert = UIAlertController(title: l10n("get.image.from"), message: nil, preferredStyle: .actionSheet)
+    let alert = UIAlertController(title: l10n("Get Image from"), message: nil, preferredStyle: .actionSheet)
     let cameraAction = UIAlertAction(title: l10n("Camera"), style: .default) {[weak self] _ in
       alert.dismiss(animated: true, completion: nil)
       self?.openCamera()
@@ -491,7 +491,7 @@ extension MainListController: UIImagePickerControllerDelegate, UINavigationContr
       alert.dismiss(animated: true, completion: nil)
       self?.openGallery()
     }
-    let cancelAction = UIAlertAction(title: l10n("cancel"), style: .cancel)
+    let cancelAction = UIAlertAction(title: l10n("Cancel"), style: .cancel)
     
     // Add the actions
     alert.addAction(cameraAction)
@@ -508,9 +508,9 @@ extension MainListController: UIImagePickerControllerDelegate, UINavigationContr
           present(picker, animated: true, completion: nil)
       } else {
           let alertController: UIAlertController = {
-              let controller = UIAlertController(title: l10n("Cannot scan"), message: l10n("dont.have.camera"),
+              let controller = UIAlertController(title: l10n("Cannot scan"), message: l10n("You don't have a camera."),
                  preferredStyle: .alert)
-              let action = UIAlertAction(title: l10n("btn.ok"), style: .default)
+              let action = UIAlertAction(title: l10n("OK"), style: .default)
               controller.addAction(action)
               return controller
           }()
@@ -563,8 +563,8 @@ extension MainListController {
   }
   
   private func saveImage(image: UIImage) {
-    showInputDialog(title: l10n("image.confirm.title"), subtitle: l10n("image.confirm.text"),
-      inputPlaceholder: l10n("image.confirm.placeholder")) { [weak self] fileName in
+    showInputDialog(title: l10n("Save image"), subtitle: l10n("Please enter the image name"),
+      inputPlaceholder: l10n("filename")) { [weak self] fileName in
       let savedImg = SavedImage(fileName: fileName ?? UUID().uuidString, image: image)
       
       self?.startActivity()
@@ -640,8 +640,8 @@ extension MainListController: UIDocumentPickerDelegate {
   }
   
   private func savePDFFile(url: NSURL) {
-    showInputDialog(title: l10n("pdf.confirm.title"), subtitle: l10n("pdf.confirm.text"),
-      inputPlaceholder: l10n("pdf.confirm.placeholder")) { [weak self] fileName in
+    showInputDialog(title: l10n("Save PDF file"), subtitle: l10n("Please enter the pdf file name"),
+      inputPlaceholder: l10n("filename")) { [weak self] fileName in
       let pdf = SavedPDF(fileName: fileName ?? UUID().uuidString, pdfUrl: url as URL)
       self?.startActivity()
       DataCenter.pdfDataManager.add(savedPdf: pdf) { _ in

@@ -67,10 +67,10 @@ class CheckValidityController: UIViewController {
   }
     
   private func setupInitialDate() {
-    items.append(ValidityCellModel(title: l10n("country_certificate_text"), description: "",
+    items.append(ValidityCellModel(title: l10n("Check country rules conformance of your certificate"), description: "",
         needChangeTitleFont: true))
     items.append(ValidityCellModel(cellType: .countryAndTimeSelection))
-    items.append(ValidityCellModel(title: l10n("disclaimer"), description: l10n("disclaimer_text")))
+    items.append(ValidityCellModel(title: l10n("Disclaimer"), description: l10n("disclaimer_text")))
   }
     
   func setupCheckValidity(with cert: HCert?) {
@@ -97,7 +97,8 @@ extension CheckValidityController: UITableViewDataSource {
       return cell
         
     } else {
-      guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.countryCellIndentifier, for: indexPath) as? ExtendedValidityCell else { return UITableViewCell() }
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.countryCellIndentifier, for: indexPath) as? ExtendedValidityCell
+      else { return UITableViewCell() }
 
       cell.countryHandler = { [weak self] countryCode in
         self?.hCert?.ruleCountryCode = countryCode

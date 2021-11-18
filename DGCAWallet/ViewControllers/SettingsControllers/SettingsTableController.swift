@@ -25,7 +25,6 @@
 //  Created by Paul Ballmann on 14.05.21.
 //  
 
-
 import UIKit
 import SwiftDGC
 
@@ -69,7 +68,7 @@ class SettingsTableController: UITableViewController {
   override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
     switch section {
     case 1:
-      let format = l10n("settings.last-updated")
+      let format = l10n("Last Updated: %@")
       return String(format: format, DataCenter.lastFetch.dateTimeString)
     default:
       return nil

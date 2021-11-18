@@ -93,7 +93,7 @@ class ScanWalletController: UIViewController {
        button.translatesAutoresizingMaskIntoConstraints = false
        button.backgroundColor = .clear
        button.setAttributedTitle(
-         NSAttributedString(string: l10n("btn.cancel"), attributes: [.font: UIFont.systemFont(ofSize: 22,
+         NSAttributedString(string: l10n("Cancel"), attributes: [.font: UIFont.systemFont(ofSize: 22,
             weight: .semibold), .foregroundColor: UIColor.white]), for: .normal)
        button.addTarget(self, action: #selector(dismissScaner), for: .touchUpInside)
        view.addSubview(button)
@@ -172,7 +172,7 @@ extension ScanWalletController  {
             else { return }
             potentialQRCode = potentialCode
           }
-          print(potentialQRCode.symbology)
+          DGCLogger.logInfo(potentialQRCode.symbology.rawValue.description)
           observationHandler(payloadString: potentialQRCode.payloadStringValue)
         }
       }
@@ -204,7 +204,7 @@ extension ScanWalletController: AVCaptureVideoDataOutputSampleBufferDelegate {
     do {
       try imageRequestHandler.perform([detectBarcodeRequest])
     } catch {
-      print(error.localizedDescription)
+      DGCLogger.logError(error)
     }
   }
 }
@@ -223,15 +223,14 @@ extension ScanWalletController {
   private func showAlert(withTitle title: String, message: String) {
     DispatchQueue.main.async {
       let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-      alertController.addAction(UIAlertAction(title: l10n("btn.ok"), style: .default))
+      alertController.addAction(UIAlertAction(title: l10n("OK"), style: .default))
       self.present(alertController, animated: true)
     }
   }
   
   private func showPermissionsAlert() {
-    showAlert(
-      withTitle: l10n("err.cam.perm"),
-      message: l10n("err.cam.perm.desc")
+    showAlert( withTitle: l10n("Camera Permissions"),
+      message: l10n("Please open Settings and grant permission for this app to use your camera.")
     )
   }
 }

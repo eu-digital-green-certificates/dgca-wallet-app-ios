@@ -61,7 +61,7 @@ class RuleValidationResultVC: UIViewController {
   }
     
   private func setupInterface() {
-    resultLabel.text = l10n("validate_certificate_with_rules")
+    resultLabel.text = l10n("Validating certificate with country rules")
     resultDescriptionLabel.text = ""
     noWarrantyLabel.text = l10n("info_without_waranty")
     closeButton.setTitle(l10n("Close"), for: .normal)
@@ -70,15 +70,15 @@ class RuleValidationResultVC: UIViewController {
     let validity: HCertValidity = self.validateCertLogicRules()
     switch validity {
       case .valid:
-        resultLabel.text = l10n("valid_certificate")
+        resultLabel.text = l10n("Valid certificate")
         resultDescriptionLabel.text = l10n("your_certificate_allow")
         resultIcon.image = UIImage(named: "icon_large_valid")
       case .invalid:
-        resultLabel.text = l10n("invalid_certificate")
-        resultDescriptionLabel.text = l10n("your_certificate_did_not_allow")
+        resultLabel.text = l10n("Invalid certificate")
+        resultDescriptionLabel.text = l10n("Your certificate did not allows you to enter the chosen country")
       case .ruleInvalid:
-        resultLabel.text = l10n("certificate_limitation")
-        resultDescriptionLabel.text = l10n("certification_has_limitation")
+        resultLabel.text = l10n("Certificate has limitation")
+        resultDescriptionLabel.text = l10n("Your certificate is valid but has the following restrictions:")
         resultIcon.image = UIImage(named: "icon_large_warning")
     }
     resultIcon.isHidden = false

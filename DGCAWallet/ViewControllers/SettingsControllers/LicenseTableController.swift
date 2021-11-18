@@ -53,15 +53,6 @@ class LicenseTableController: UITableViewController {
     }
   }
 
-//  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//    guard let cell = tableView.dequeueReusableCell(withIdentifier: "LicenseCell", for: indexPath) as? LicenseCell
-//      else { return UITableViewCell() }
-//      
-//    let index = indexPath.row
-//    cell.drawLabel(self.licenses[index])
-//    return cell
-//  }
-
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let licenseObject = self.licenses[indexPath.row]
     performSegue(withIdentifier: showLicenseDetails, sender: licenseObject)

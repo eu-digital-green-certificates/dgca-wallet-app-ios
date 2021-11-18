@@ -52,7 +52,7 @@ class ExtendedValidityCell: UITableViewCell {
       do {
         try UserDefaults.standard.setObject(newValue, forKey: Constants.userDefaultsCountryKey)
       } catch {
-        print(error.localizedDescription)
+          DGCLogger.logError(error)
       }
     }
     get {
@@ -60,15 +60,15 @@ class ExtendedValidityCell: UITableViewCell {
         let selected = try UserDefaults.standard.getObject(forKey: Constants.userDefaultsCountryKey, castTo: CountryModel.self)
         return selected
       } catch {
-        print(error.localizedDescription)
+        DGCLogger.logError(error)
         return nil
       }
     }
   }
     
   func setupView() {
-    destinationLabel.text = l10n("destination_country")
-    dateLabel.text = l10n("destination_date")
+    destinationLabel.text = l10n("Your destination country")
+    dateLabel.text = l10n("Check the date")
     datePicker.minimumDate = Date()
     if #available(iOS 13.4, *) {
       datePicker.preferredDatePickerStyle = .wheels
@@ -97,7 +97,7 @@ extension ExtendedValidityCell: UIPickerViewDataSource, UIPickerViewDelegate {
   }
     
   public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    if countryItems.count == 0 { return l10n("scaner.no.countrys") }
+    if countryItems.count == 0 { return l10n("Country codes list empty") }
     return countryItems[row].name
   }
     

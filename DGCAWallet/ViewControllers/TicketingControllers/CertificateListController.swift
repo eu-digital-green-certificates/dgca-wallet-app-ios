@@ -169,8 +169,8 @@ extension CertificateListController: UITableViewDataSource, UITableViewDelegate 
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
       let savedCert = stringCertificates[indexPath.row]
-      showAlert(title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"), actionTitle: l10n("btn.confirm"),
-       cancelTitle: l10n("btn.cancel")) {
+      showAlert(title: l10n("Delete Certificate"), subtitle: l10n("cert.delete.body"), actionTitle: l10n("Confirm"),
+       cancelTitle: l10n("Cancel")) {
           if $0 {
            DataCenter.localDataManager.remove(withDate: savedCert.date) { [weak self] _ in
              self?.reloadComponents()

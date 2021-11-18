@@ -57,8 +57,7 @@ class LocalDataManager {
     storage.loadOverride(fallback: localData) { [unowned self] success in
       guard let result = success else {  return }
       
-      let format = l10n("log.certs-loaded")
-      print(String.localizedStringWithFormat(format, result.certStrings.count))
+      DGCLogger.logInfo(String(format: "%d certs loaded.", result.certStrings.count))
       if result.lastLaunchedAppVersion != DataCenter.appVersion {
         result.config = self.localData.config
       }

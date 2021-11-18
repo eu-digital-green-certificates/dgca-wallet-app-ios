@@ -58,9 +58,7 @@ class PdfDataManager {
         completion()
         return
       }
-        
-      let format = l10n("log.pdfs")
-      DGCLogger.logInfo(String.localizedStringWithFormat(format, result.pdfs.count))
+      DGCLogger.logInfo(String(format: "Loaded %@ pdf files", result.pdfs.count))
       self.pdfData = result
       self.save()
       completion()

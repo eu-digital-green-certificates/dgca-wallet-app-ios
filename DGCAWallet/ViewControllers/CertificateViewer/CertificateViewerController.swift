@@ -134,8 +134,8 @@ class CertificateViewerController: UIViewController {
   @IBAction func deleteCertificateAction() {
     guard let certDate = certDate else { return }
     
-    showAlert( title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"),
-      actionTitle: l10n("btn.confirm"), cancelTitle: l10n("btn.cancel")) { [weak self] in
+    showAlert( title: l10n("Delete Certificate"), subtitle: l10n("cert.delete.body"),
+      actionTitle: l10n("Confirm"), cancelTitle: l10n("Cancel")) { [weak self] in
         if $0 {
           DataCenter.localDataManager.remove(withDate: certDate) {[weak self] _ in
             DispatchQueue.main.async {
@@ -148,7 +148,7 @@ class CertificateViewerController: UIViewController {
   }
   
   func saveCert() {
-    showInputDialog(title: l10n("tan.confirm.title"), subtitle: l10n("tan.confirm.text"), actionTitle: l10n("btn.confirm"), inputPlaceholder: l10n("tan.confirm.placeholder") ) { [weak self] in
+    showInputDialog(title: l10n("tan.confirm.title"), subtitle: l10n("tan.confirm.text"), actionTitle: l10n("Confirm"), inputPlaceholder: l10n("tan.confirm.placeholder") ) { [weak self] in
       guard let cert = self?.hCert else { return }
         
       GatewayConnection.claim(cert: cert, with: $0) { success, newTan in
@@ -197,7 +197,7 @@ class CertificateViewerController: UIViewController {
     menuActionSheet.addAction(UIAlertAction(title: l10n("pdf.export"), style: .default, handler: { [weak self] _ in
           self?.shareQrCodeLikePDF()
         }))
-    menuActionSheet.addAction(UIAlertAction(title: l10n("cancel"), style: .cancel, handler: nil))
+    menuActionSheet.addAction(UIAlertAction(title: l10n("Cancel"), style: .cancel, handler: nil))
     present(menuActionSheet, animated: true, completion: nil)
   }
 }

@@ -54,9 +54,7 @@ class CountryDataManager {
         completion()
         return
       }
-        
-      let format = l10n("log.country")
-      DGCLogger.logInfo(String.localizedStringWithFormat(format, result.countryCodes.count))
+      DGCLogger.logInfo(String(format: "Loaded %@ counries", result.countryCodes.count))
       self.countryData = result
       completion()
     }

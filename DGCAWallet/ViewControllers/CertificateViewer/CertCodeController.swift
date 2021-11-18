@@ -45,7 +45,7 @@ class CertCodeController: UIViewController {
     imageView.image = hCert?.qrCode
     tanLabel.text = ""
     if tan != nil {
-      tanLabel.text = String(format: l10n("tan.label"), l10n("tap-to-reveal"))
+      tanLabel.text = String(format: l10n("TAN: %@"), l10n("tap to reveal"))
       tanLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapToReveal)))
       tanLabel.isUserInteractionEnabled = true
     }
@@ -53,7 +53,7 @@ class CertCodeController: UIViewController {
 
   @IBAction func tapToReveal() {
     if let tan = tan {
-      tanLabel.text = String(format: l10n("tan.label"), tan)
+      tanLabel.text = String(format: l10n("TAN: %@"), tan)
     }
   }
 }

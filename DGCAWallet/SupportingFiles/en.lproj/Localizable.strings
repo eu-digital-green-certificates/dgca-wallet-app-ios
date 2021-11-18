@@ -25,13 +25,10 @@
   
 */
 
-"log.certs-loaded" = "%d certs loaded.";
-"list.cell.scanned-at" = "Scanned %@";
+"Scanned %@" = "Scanned %@";
 "btn.okay" = "Okay";
-"btn.ok" = "OK";
-"btn.cancel" = "Cancel";
 "btn.save" = "Save";
-"btn.confirm" = "Confirm";
+"Confirm" = "Confirm";
 "tan.confirm.title" = "Confirm TAN";
 "tan.confirm.text" = "Please enter the TAN that was provided together with your certificate:";
 "tan.confirm.placeholder" = "XYZ12345";
@@ -39,47 +36,52 @@
 "tan.confirm.success.text" = "Certificate was saved to wallet!";
 "tan.confirm.fail.title" = "Cannot save";
 "tan.confirm.fail.text" = "Check the TAN and try again.";
-"tan.label" = "TAN: %@";
+"TAN: %@" = "TAN: %@";
 "auth.confirm" = "Confirm Identity";
 "auth.later" = "Try Later";
 "auth.error" = "Could not verify device ownership. Please try setting a passcode for this device before opening the app.";
-"cert.delete.title" = "Delete Certificate";
+"Delete Certificate" = "Delete Certificate";
 "cert.delete.body" = "Are you sure you want to delete this certificate? This action cannot be undone.";
-"tap-to-reveal" = "tap to reveal";
+"tap to reveal" = "tap to reveal";
 "app-version" = "App Version %@(%@)";
 "button_check_validity" = "Check Validity";
 "button_i_agree" = "I Agree, check validity";
-"failed_for_country" = "Failed for %@ (see settings)";
-"passed_for_country" = "Passed for %@ (see settings)";
-"open_for_country" = "Open for %@ (see settings)";
-"failed" = "Failed";
-"passed" = "Passed";
-"open" = "Open";
+"Failed for %@ (see settings)" = "Failed for %@ (see settings)";
+"Passed for %@ (see settings)" = "Passed for %@ (see settings)";
+"Open for %@ (see settings)" = "Open for %@ (see settings)";
+
+"Failed" = "Failed";
+"Passed" = "Passed";
+"Open" = "Open";
+"Rule" = "Rule";
+"Current" = "Current";
+"Result" = "Result";
+
 "country_certificate_text" = "Check country rules conformance of your certificate";
 "disclaimer_text" = "This check gives an indication on eligibility to travel based on your certificate. Restriction of free movement in response to the coronavirus pandemic are subject to change and might be based on additional information not available to and within this application. Please refer to authoritative national sources for more information and the Re-open EU website: https://reopen.europa.eu/. Your data is being processed locally on this device.";
 "validity_of_certificate" = "Validity of your certificate";
-"disclaimer" = "Disclaimer";
-"destination_country" = "Your destination country";
-"destination_date" = "Check the date";
-"valid_certificate" = "Valid certificate";
+"Disclaimer" = "Disclaimer";
+"Your destination country" = "Your destination country";
+"Check the date" = "Check the date";
+"Valid certificate" = "Valid certificate";
 "your_certificate_allow" = "Your certificate is valid and confirms to the provided country rules. Additional entry requirements might apply, please refer to the Re-open EU website: https://reopen.europa.eu/";
-"invalid_certificate" = "Invalid certificate";
-"your_certificate_did_not_allow" = "Your certificate did not allows you to enter the chosen country";
-"certificate_limitation" = "Certificate has limitation";
-"certification_has_limitation" = "Your certificate is valid but has the following restrictions:";
-"validate_certificate_with_rules" = "Validating certificate with country rules";
-"please_wait" = "Please wait we are validating your certificate";
-"info_without_waranty" = "This check gives an indication on eligibility to travel based on your certificate. Restriction of free movement in response to the coronavirus pandemic are subject to change and might be based on additional information not available to and within this application.";
-"issuer.country" = "Issuer Country";
-"test.type" = "Type of Test";
-"section.name" = "Name";
-"image.confirm.title" = "Save image";
-"image.confirm.text" = "Please enter the image name";
-"image.confirm.placeholder" = "filename";
 
-"pdf.confirm.title" = "Save pdf";
-"pdf.confirm.text" = "Please enter the pdf file name";
-"pdf.confirm.placeholder" = "filename";
+"Invalid certificate" = "Invalid certificate";
+"Your certificate did not allows you to enter the chosen country" = "Your certificate did not allows you to enter the chosen country";
+"Certificate has limitation" = "Certificate has limitation";
+"Your certificate is valid but has the following restrictions:" = "Your certificate is valid but has the following restrictions:";
+"Validating certificate with country rules" = "Validating certificate with country rules";
+
+"info_without_waranty" = "This check gives an indication on eligibility to travel based on your certificate. Restriction of free movement in response to the coronavirus pandemic are subject to change and might be based on additional information not available to and within this application.";
+"Issuer Country" = "Issuer Country";
+"Type of Test" = "Type of Test";
+"section.name" = "Name";
+"Save image" = "Save image";
+"Please enter the image name" = "Please enter the image name";
+"filename" = "filename";
+
+"Save PDF file" = "Save PDF file";
+"Please enter the pdf file name" = "Please enter the pdf file name";
 "log.images" = "%d images loaded.";
 "log.pdfs" = "%d pdf files loaded.";
 "share.qr.code" = "Share QR Code?";
@@ -95,16 +97,16 @@
 "nfc.import" = "NFC Import";
 "Cannot read NFC" = "Cannot read NFC";
 "read.dcc.from.nfc" = "An error occurred while reading NFC";
-"retry" = "Retry";
-"ok" = "OK";
+"Retry" = "Retry";
+"OK" = "OK";
 "Images" = "Images";
 "PDF files" = "PDF files";
-"get.image.from" = "Get Image from";
+"Get Image from" = "Get Image from";
 
 "Camera" = "Camera";
 "Gallery" = "Gallery";
 "Cannot scan" = "Cannot scan";
-"dont.have.camera" = "You don't have a camera.";
+"You don't have a camera." = "You don't have a camera.";
 "Services" = "Services";
 "Certificates" = "Certificates";
 "Please select the required service" = "Please select the required service";
@@ -114,7 +116,7 @@
 "Here are all the appropriate certificates." = "Here are all the appropriate certificates.";
 
 "Close" = "Close";
-"settings.last-updated" = "Last Updated: %@";
+"Last Updated: %@" = "Last Updated: %@";
 "Consent" = "Consent";
 "Do you agree to share the %@ certificate with %@?" = "Do you agree to share the %@ certificate with %@?";
 

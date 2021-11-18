@@ -29,7 +29,6 @@ import UIKit
 import SwiftDGC
 
 class RuleErrorCell: UITableViewCell {
-
   @IBOutlet fileprivate weak var ruleLabel: UILabel!
   @IBOutlet fileprivate weak var ruleValueLabel: UILabel!
   @IBOutlet fileprivate weak var currentLabel: UILabel!
@@ -49,11 +48,11 @@ class RuleErrorCell: UITableViewCell {
   }
     
   private func setLabels() {
-    ruleLabel.text = l10n("rule")
+    ruleLabel.text = l10n("Rule")
     ruleValueLabel.text = ""
-    currentLabel.text = l10n("current")
+    currentLabel.text = l10n("Current")
     currentValueLabel.text = ""
-    resultLabel.text = l10n("result")
+    resultLabel.text = l10n("Result")
     resultValueLabel.text = ""
   }
     
@@ -64,32 +63,32 @@ class RuleErrorCell: UITableViewCell {
     switch infoItem.ruleValidationResult {
     case .error:
       failedLabel.textColor = .walletRed
-      failedLabel.text = l10n("failed")
+      failedLabel.text = l10n("Failed")
     case .passed:
       failedLabel.textColor = .walletGreen
-      failedLabel.text = l10n("passed")
+      failedLabel.text = l10n("Passed")
     case .open:
       failedLabel.textColor = .walletGreen
-      failedLabel.text = l10n("open")
+      failedLabel.text = l10n("Open")
     }
 
     if let countryName = infoItem.countryName {
       switch infoItem.ruleValidationResult {
       case .error:
-        resultValueLabel.text = String(format: l10n("failed_for_country"), countryName)
+        resultValueLabel.text = String(format: l10n("Failed for %@ (see settings)"), countryName)
       case .passed:
-        resultValueLabel.text = String(format: l10n("passed_for_country"), countryName)
+        resultValueLabel.text = String(format: l10n("Passed for %@ (see settings)"), countryName)
       case .open:
-        resultValueLabel.text = String(format: l10n("open_for_country"), countryName)
+        resultValueLabel.text = String(format: l10n("Open for %@ (see settings)"), countryName)
       }
     } else {
       switch infoItem.ruleValidationResult {
       case .error:
-        resultValueLabel.text = l10n("failed")
+        resultValueLabel.text = l10n("Failed")
       case .passed:
-        resultValueLabel.text = l10n("passed")
+        resultValueLabel.text = l10n("Passed")
       case .open:
-        resultValueLabel.text = l10n("open")
+        resultValueLabel.text = l10n("Open")
       }
     }
   }

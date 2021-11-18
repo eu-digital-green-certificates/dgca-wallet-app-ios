@@ -41,7 +41,6 @@ class PDFTableViewCell: UITableViewCell {
   }
   
   private var pdfViewer: PDFView?
-  
   func setPDF(pdf: SavedPDF) {
     savedPDF = pdf
   }
@@ -68,6 +67,6 @@ class PDFTableViewCell: UITableViewCell {
   }
     
   override func prepareForReuse() {
-      savedPDF = nil
+    savedPDF = nil
   }
 }

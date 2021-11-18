@@ -37,6 +37,6 @@ class WalletCell: UITableViewCell {
 
     typeLabel.text = cert.certTypeString
     nameLabel.text = cert.fullName
-    dateLabel.text = String(format: l10n("list.cell.scanned-at"), dated.date.localDateString)
+    dateLabel.text = String(format: l10n("Scanned %@"), dated.date.localDateString)
   }
 }
