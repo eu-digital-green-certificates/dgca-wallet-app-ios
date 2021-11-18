@@ -37,8 +37,9 @@ typealias IdentityCompletion = (ServerListResponse?, Error?) -> Void
 
 class IdentityService {
   static func requestListOfServices(ticketingInfo : CheckInQR, completion : @escaping IdentityCompletion) {
-    UserDefaults.standard.set(ticketingInfo.token, forKey: "TicketingToken")
-    
+    if let tokenData = ticketingInfo.token.data(using: .utf8) {
+      KeyChain.save(key: SharedConstants.keyTicketingToken, data: tokenData)
+    }
     let url = URL(string: ticketingInfo.serviceIdentity)!
     var request = URLRequest(url: url)
     request.addValue( "1.0.0", forHTTPHeaderField: "X-Version")

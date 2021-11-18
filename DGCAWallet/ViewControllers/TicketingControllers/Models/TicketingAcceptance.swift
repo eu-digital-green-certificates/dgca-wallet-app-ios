@@ -42,14 +42,19 @@ class TicketingAcceptance {
   func requestGrandPermissions(for certificate: HCert, completion: @escaping TicketingCompletion) {
     guard let urlPath = self.accessInfo.aud,
       let url = URL(string: urlPath),
-      let iv = UserDefaults.standard.object(forKey: "xnonce") as? String,
       let verificationMethod = validationInfo.verificationMethod?.first(where: { $0.publicKeyJwk?.use == "enc" })
     else {
       completion(nil, GatewayError.local(description: "Bad input data"))
       return
     }
     
-    guard let dccData = encodeDCC(dgcString: certificate.fullPayloadString, iv: iv),
+    guard let tokenData = KeyChain.load(key: SharedConstants.keyXnonce) else {
+      completion(nil, GatewayError.tokenError)
+      return
+    }
+    let ivToken = String(decoding: tokenData, as: UTF8.self)
+
+    guard let dccData = encodeDCC(dgcString: certificate.fullPayloadString, iv: ivToken),
       let privateKey = Enclave.loadOrGenerateKey(with: "validationKey")
     else {
       completion(nil, GatewayError.local(description: "EncodeDCC Error"))

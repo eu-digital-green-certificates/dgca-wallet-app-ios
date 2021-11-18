@@ -102,6 +102,7 @@
 		D2387C5E2745492600C55DF7 /* TicketingAcceptance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2387C5D2745492600C55DF7 /* TicketingAcceptance.swift */; };
 		D2387C5F274558C200C55DF7 /* TicketingAcceptance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2387C5D2745492600C55DF7 /* TicketingAcceptance.swift */; };
 		D2387C60274558C300C55DF7 /* TicketingAcceptance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2387C5D2745492600C55DF7 /* TicketingAcceptance.swift */; };
+		D2387C622746A7FB00C55DF7 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2387C612746A7FB00C55DF7 /* KeyChain.swift */; };
 		D23EF7A6272057F40097D82B /* CertificateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23EF7A4272057F40097D82B /* CertificateCell.swift */; };
 		D23EF7A7272057F40097D82B /* ServerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23EF7A5272057F40097D82B /* ServerCell.swift */; };
 		D24C8951272353610090398A /* ScanWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C8950272353610090398A /* ScanWalletController.swift */; };
@@ -230,6 +231,7 @@
 		CEE9DA5C263C865200A31532 /* Brightness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brightness.swift; sourceTree = "<group>"; };
 		CEFAD87E262714C4009AFEF9 /* EHNTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EHNTests.swift; sourceTree = "<group>"; };
 		D2387C5D2745492600C55DF7 /* TicketingAcceptance.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = TicketingAcceptance.swift; sourceTree = "<group>"; tabWidth = 2; };
+		D2387C612746A7FB00C55DF7 /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		D23EF7A4272057F40097D82B /* CertificateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateCell.swift; sourceTree = "<group>"; };
 		D23EF7A5272057F40097D82B /* ServerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerCell.swift; sourceTree = "<group>"; };
 		D24C8950272353610090398A /* ScanWalletController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ScanWalletController.swift; sourceTree = "<group>"; tabWidth = 2; };
@@ -345,6 +347,7 @@
 			isa = PBXGroup;
 			children = (
 				CE37B642263867D700DEE13D /* SecureBackground.swift */,
+				D2387C612746A7FB00C55DF7 /* KeyChain.swift */,
 				CEE9DA5C263C865200A31532 /* Brightness.swift */,
 				CE56BC06264068110044FD3F /* GatewayConnection.swift */,
 				5CE07C832692E21E00A032F9 /* CertLogicManager.swift */,
@@ -462,8 +465,8 @@
 			isa = PBXGroup;
 			children = (
 				5C00072026D38D6D002E5013 /* DGCAWallet.entitlements */,
-				FEC54BDF271F24120048B6BC /* Ticketing */,
 				CE13CF1E262DDE800070C80E /* SupportingFiles */,
+				FEC54BDF271F24120048B6BC /* Ticketing */,
 				5C00071A26D38C5C002E5013 /* NFC */,
 				CE157F8B262E24EC00FE4821 /* Models */,
 				CE13CF1D262DDE730070C80E /* Components */,
@@ -785,6 +788,7 @@
 				5C00073626D625D0002E5013 /* PDFTableViewCell.swift in Sources */,
 				CE891305263581D900CB92AF /* HomeController.swift in Sources */,
 				FEEAD6DB273BBE9600D883EB /* TokenInfoCell.swift in Sources */,
+				D2387C622746A7FB00C55DF7 /* KeyChain.swift in Sources */,
 				5C00071C26D38CC3002E5013 /* NFCHelper.swift in Sources */,
 				CE260F56263DD1720083A200 /* WalletCell.swift in Sources */,
 				D23EF7A7272057F40097D82B /* ServerCell.swift in Sources */,

@@ -39,6 +39,7 @@ enum GatewayError: Error {
   case connection(error: Error)
   case local(description: String)
   case parsingError
+  case tokenError
 }
 
 typealias TicketingCompletion = (AccessTokenResponse?, Error?) -> Void
@@ -273,13 +274,16 @@ extension GatewayConnection {
   static func getAccessTokenFor(url : URL,servicePath : String, publicKey : String, completion : @escaping TicketingCompletion) {
     let json: [String: Any] = ["service": servicePath, "pubKey": publicKey]
     
-    let jsonData = try? JSONSerialization.data(withJSONObject: json,options: .prettyPrinted)
-    
+    guard let jsonData = try? JSONSerialization.data(withJSONObject: json,options: .prettyPrinted),
+      let tokenData = KeyChain.load(key: SharedConstants.keyTicketingToken)  else {
+      completion(nil, GatewayError.tokenError)
+      return
+    }
+    let token = String(decoding: tokenData, as: UTF8.self)
+
     var request = URLRequest(url: url)
     request.httpMethod = "POST"
     request.httpBody = jsonData
-    let token = UserDefaults.standard.object(forKey: "TicketingToken") as! String
-    
     request.addValue( "1.0.0", forHTTPHeaderField: "X-Version")
     request.addValue( "application/json", forHTTPHeaderField: "content-type")
     request.addValue( "Bearer " + token, forHTTPHeaderField: "Authorization")
@@ -297,10 +301,13 @@ extension GatewayConnection {
         let decodedToken = try decode(jwt: tokenJWT)
         let jsonData = try JSONSerialization.data(withJSONObject: decodedToken.body)
         let accessTokenResponse = try JSONDecoder().decode(AccessTokenResponse.self, from: jsonData)
-        UserDefaults.standard.set(tokenJWT, forKey: "AccessToken")
-
-        if let httpResponse = response as? HTTPURLResponse {
-          UserDefaults.standard.set(httpResponse.allHeaderFields["x-nonce"], forKey: "xnonce")
+        
+        if let tokenData = tokenJWT.data(using: .utf8) {
+          KeyChain.save(key: SharedConstants.keyAccessToken, data: tokenData)
+        }
+        if let httpResponse = response as? HTTPURLResponse,
+           let xnonceData = (httpResponse.allHeaderFields["x-nonce"] as? String)?.data(using: .utf8) {
+          KeyChain.save(key: SharedConstants.keyXnonce, data: xnonceData)
         }
         completion(accessTokenResponse, nil)
 
@@ -317,12 +324,16 @@ extension GatewayConnection {
       completion(nil, GatewayError.encodingError)
       return
     }
+    guard let tokenData = KeyChain.load(key: SharedConstants.keyAccessToken) else {
+      completion(nil, GatewayError.tokenError)
+      return
+    }
+    let token = String(decoding: tokenData, as: UTF8.self)
     
     var request = URLRequest(url: url)
     request.method = .post
     request.httpBody = parametersData
     
-    let token = UserDefaults.standard.object(forKey: "AccessToken") as! String
     request.addValue( "1.0.0", forHTTPHeaderField: "X-Version")
     request.addValue( "application/json", forHTTPHeaderField: "content-type")
     request.addValue( "Bearer " + token, forHTTPHeaderField: "Authorization")

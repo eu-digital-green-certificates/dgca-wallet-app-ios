@@ -49,17 +49,15 @@ class ExtendedValidityCell: UITableViewCell {
   // Selected country code
   private var selectedCounty: CountryModel? {
     set {
-      let userDefaults = UserDefaults.standard
       do {
-        try userDefaults.setObject(newValue, forKey: Constants.userDefaultsCountryKey)
+        try UserDefaults.standard.setObject(newValue, forKey: Constants.userDefaultsCountryKey)
       } catch {
         print(error.localizedDescription)
       }
     }
     get {
-      let userDefaults = UserDefaults.standard
       do {
-        let selected = try userDefaults.getObject(forKey: Constants.userDefaultsCountryKey, castTo: CountryModel.self)
+        let selected = try UserDefaults.standard.getObject(forKey: Constants.userDefaultsCountryKey, castTo: CountryModel.self)
         return selected
       } catch {
         print(error.localizedDescription)

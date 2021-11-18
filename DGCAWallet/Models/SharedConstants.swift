@@ -29,6 +29,10 @@
 import Foundation
 
 enum SharedConstants {
+    static let keyTicketingToken = "DGCAWallet.TicketingToken"
+    static let keyAccessToken = "DGCAWallet.AccessToken"
+    static let keyXnonce = "DGCAWallet.xnonce"
+    
     static let expiredDataInterval: TimeInterval = 1 * 60 * 60 // 24 * 60 * 60
     static let pubKeysStorageFilename = "secure"
     static let countryStorageName = "country_secure"
