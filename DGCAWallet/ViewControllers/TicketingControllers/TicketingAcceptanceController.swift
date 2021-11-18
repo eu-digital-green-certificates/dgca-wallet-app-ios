@@ -91,22 +91,20 @@ class TicketingAcceptanceController: UIViewController {
   @IBAction func grandButtonAction(_ sender: Any) {
     guard loading == false, let certificate = certificate else { return }
     self.startActivity()
-    DispatchQueue.global(qos: .background).async { [weak self] in
-      self?.ticketingAcceptance?.requestGrandPermissions(for: certificate, completion: { response, error in
-        guard error == nil, let response = response else {
-          DispatchQueue.main.async {
-            self?.stopActivity()
-            self?.showInfoAlert(withTitle: l10n("Cannot validate the certificate"),
-                message: l10n("Make sure you select the desired service and try again. If it happens again, please refer to the Re-open EU website."))
-          }
-          return
-        }
+    ticketingAcceptance?.requestGrandPermissions(for: certificate, completion: { [weak self] response, error in
+      guard error == nil, let response = response else {
         DispatchQueue.main.async {
           self?.stopActivity()
-          self?.performSegue(withIdentifier: Segues.showValidationResult, sender: response)
+          self?.showInfoAlert(withTitle: l10n("Cannot validate the certificate"),
+              message: l10n("Make sure you select the desired service and try again. If it happens again, please refer to the Re-open EU website."))
         }
-      })
-    }
+        return
+      }
+      DispatchQueue.main.async {
+        self?.stopActivity()
+        self?.performSegue(withIdentifier: Segues.showValidationResult, sender: response)
+      }
+    })
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
