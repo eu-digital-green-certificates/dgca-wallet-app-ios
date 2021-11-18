@@ -31,7 +31,7 @@ import SwiftDGC
 import CryptoSwift
 
 class TicketingAcceptanceController: UIViewController {
-  private enum Constants {
+  private enum Segues {
     static let showValidationResult = "showValidationResult"
   }
 
@@ -45,7 +45,6 @@ class TicketingAcceptanceController: UIViewController {
  
   private var ticketingAcceptance: TicketingAcceptance?
   private var certificate: HCert?
-  
   private var loading = false
 
   override func viewDidLoad() {
@@ -75,7 +74,7 @@ class TicketingAcceptanceController: UIViewController {
       validToLabel.text = String(format: "Expired date: %@", certificate?.exp.localDateString ?? "")
       consetsLabel.text = l10n("Consent")
       infoLabel.text = String(format: l10n("Do you agree to share the %@ certificate with %@?"),
-          certificate?.certTypeString ?? "", "airline.com")
+        certificate?.certTypeString ?? "", "airline.com")
     }
   }
   
@@ -92,27 +91,29 @@ class TicketingAcceptanceController: UIViewController {
   @IBAction func grandButtonAction(_ sender: Any) {
     guard loading == false, let certificate = certificate else { return }
     self.startActivity()
-    ticketingAcceptance?.requestGrandPermissions(for: certificate, completion: { response, error in
-      guard error == nil, let response = response else {
-        DispatchQueue.main.async {
-          self.stopActivity()
-          // TODO show alert here
+    DispatchQueue.global(qos: .background).async { [weak self] in
+      self?.ticketingAcceptance?.requestGrandPermissions(for: certificate, completion: { response, error in
+        guard error == nil, let response = response else {
+          DispatchQueue.main.async {
+            self?.stopActivity()
+            self?.showInfoAlert(withTitle: l10n("Cannot validate the certificate"),
+                message: l10n("Make sure you select the desired service and try again. If it happens again, please refer to the Re-open EU website."))
+          }
+          return
         }
-        return
-      }
-      DispatchQueue.main.async {
-        self.stopActivity()
-        self.performSegue(withIdentifier: Constants.showValidationResult, sender: response)
-      }
-    })
+        DispatchQueue.main.async {
+          self?.stopActivity()
+          self?.performSegue(withIdentifier: Segues.showValidationResult, sender: response)
+        }
+      })
+    }
   }
-    
+  
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     switch segue.identifier {
-    case Constants.showValidationResult:
+    case Segues.showValidationResult:
       guard let validationController = segue.destination as? ValidationResultController,
       let responseModel = sender as? AccessTokenResponse else { return }
-      
       validationController.validationResultModel = responseModel
 
     default:

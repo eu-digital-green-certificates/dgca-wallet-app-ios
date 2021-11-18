@@ -49,7 +49,7 @@ class CheckValidityController: UIViewController {
     super.viewDidLoad()
     setupView()
     checkValidityButton.setTitle(l10n("button_i_agree"), for: .normal)
-    closeButton.setTitle(l10n("close"), for: .normal)
+    closeButton.setTitle(l10n("Close"), for: .normal)
   }
     
   @IBAction func closeButtonAction(_ sender: Any) {

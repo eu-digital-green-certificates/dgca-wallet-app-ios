@@ -64,7 +64,7 @@ class PDFViewerController: UIViewController {
     pdfViewer?.autoScales = true
     pdfView.addSubview(pdfViewer!)
     pdfViewer?.document = savedPDF.pdf
-    closeButton.setTitle(l10n("close"), for: .normal)
+    closeButton.setTitle(l10n("Close"), for: .normal)
     navigationItem.title = savedPDF.fileName
   }
   
@@ -81,7 +81,7 @@ class PDFViewerController: UIViewController {
     activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
     self.present(activityViewController, animated: true, completion: nil)
   }
-    
+  
   @IBAction func closeAction(_ sender: Any) {
     self.dismiss(animated: true)
   }

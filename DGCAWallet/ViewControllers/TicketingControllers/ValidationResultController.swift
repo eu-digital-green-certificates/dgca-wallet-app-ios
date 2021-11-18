@@ -48,8 +48,13 @@ class ValidationResultController: UIViewController {
     iconImage.image = iconImage.image?.withRenderingMode(.alwaysTemplate)
     
     guard let result = validationResultModel?.result else {
-      //TODO alert
-        return
+      showInfoAlert(withTitle: l10n("Cannot validate the certificate"),
+          message: l10n("Make sure you select the desired service and try again. If it happens again, please refer to the Re-open EU website."))
+      titleLabel.text = l10n("Validation error")
+      detailLabel.text = l10n("Please refer to the Re-open EU website.")
+      iconImage.image = UIImage(named: "icon_large_invalid")
+      iconImage.tintColor = .walletRed
+      return
     }
     
     switch result {

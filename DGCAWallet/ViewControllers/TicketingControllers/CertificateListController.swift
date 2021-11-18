@@ -43,7 +43,6 @@ class CertificateListController: UIViewController {
   }
   
   private var stringCertificates = [DatedCertString]()
-  
   private var selectedStringCertificate: DatedCertString? {
     return stringCertificates.filter({ $0.isSelected }).first
   }
@@ -63,9 +62,7 @@ class CertificateListController: UIViewController {
     accessTokenInfoValues = ["\(vcValue.gnt!) \(vcValue.fnt!)", vcValue.dob!, "\(vcValue.cod!),\(vcValue.rod!)", "\(vcValue.coa!),\(vcValue.roa!)", vcValue.type!.joined(separator: ","), vcValue.category!.joined(separator: ","), vcValue.validationClock!, vcValue.validFrom!, vcValue.validTo!]
     
     tableView.tableFooterView = UIView()
-    title = l10n("certificates")
-    nextButton.isEnabled = false
-    nextButton.backgroundColor = UIColor.walletLightYellow
+    title = l10n("Certificates")
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -74,7 +71,11 @@ class CertificateListController: UIViewController {
   }
   
   @IBAction func nextButtonAction(_ sender: Any) {
-    guard isNavigationEnabled else { return }
+    guard let _ = selectedStringCertificate?.cert else {
+      self.showInfoAlert(withTitle: l10n("Please select a certificate"), message: l10n("Here are all the appropriate certificates."))
+        return
+    }
+    
     self.performSegue(withIdentifier: Constants.showTicketAcceptController, sender: nil)
   }
   
@@ -82,7 +83,8 @@ class CertificateListController: UIViewController {
     guard let validationCertificate = ticketingAcceptance?.accessInfo.vc,
       let givenName = validationCertificate.gnt, let familyName = validationCertificate.fnt else { return }
     
-    let array = DataCenter.certStrings.filter { ($0.cert!.fullName.lowercased() == "\(givenName) \(familyName)".lowercased()) && ($0.cert!.dateOfBirth == validationCertificate.dob) }
+    let array = DataCenter.certStrings.filter { ($0.cert!.fullName.lowercased() == "\(givenName) \(familyName)".lowercased()) &&
+      ($0.cert!.dateOfBirth == validationCertificate.dob) }
     stringCertificates = array
     
     let validDateFrom = validationCertificate.validFrom ?? ""
@@ -132,7 +134,7 @@ extension CertificateListController: UITableViewDataSource, UITableViewDelegate 
     if section == 0 {
       return nil
     } else {
-      return l10n("certificates")
+      return l10n("Certificates")
     }
   }
   
@@ -164,8 +166,7 @@ extension CertificateListController: UITableViewDataSource, UITableViewDelegate 
     return true
   }
   
-  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle,
-        forRowAt indexPath: IndexPath) {
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
       let savedCert = stringCertificates[indexPath.row]
       showAlert(title: l10n("cert.delete.title"), subtitle: l10n("cert.delete.body"), actionTitle: l10n("btn.confirm"),
@@ -174,7 +175,7 @@ extension CertificateListController: UITableViewDataSource, UITableViewDelegate 
            DataCenter.localDataManager.remove(withDate: savedCert.date) { [weak self] _ in
              self?.reloadComponents()
              DispatchQueue.main.asyncAfter(deadline: .now()) {
-               tableView.reloadData()
+               self?.tableView.reloadData()
              }
            }
          }
@@ -185,8 +186,6 @@ extension CertificateListController: UITableViewDataSource, UITableViewDelegate 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if indexPath.section == 1 {
       deselectAllCertificates()
-      nextButton.isEnabled = true
-      nextButton.backgroundColor = UIColor.walletYellow
       stringCertificates[indexPath.row].isSelected = true
       tableView.reloadData()
     }

@@ -122,30 +122,25 @@ class MainListController: UIViewController, DismissControllerDelegate {
   @IBAction func addNew() {
     guard loading == false else { return }
     
-    let menuActionSheet = UIAlertController(title: l10n("add.new"),
-       message: l10n("want.add"),
-       preferredStyle: UIAlertController.Style.actionSheet)
-    menuActionSheet.addAction(UIAlertAction(title: l10n("scan.certificate"),
-      style: UIAlertAction.Style.default, handler: {[weak self] _ in
-      self?.scanNewCertificate()
-    }))
-    menuActionSheet.addAction(UIAlertAction(title: l10n("image.import"),
-      style: UIAlertAction.Style.default, handler: { [weak self] _ in
-      self?.addImageActivity()
-    }))
-    menuActionSheet.addAction(UIAlertAction(title: l10n("pdf.import"),
-        style: UIAlertAction.Style.default,
-        handler: { [weak self] _ in
-      self?.addPdf()
-    }))
-    menuActionSheet.addAction(UIAlertAction(title: l10n("nfc.import"),
-        style: UIAlertAction.Style.default,
-        handler: { [weak self] _ in
-      self?.scanNFC()
-    }))
-    menuActionSheet.addAction(UIAlertAction(title: l10n("cancel"),
-        style: UIAlertAction.Style.cancel,
-        handler: nil))
+    let menuActionSheet = UIAlertController(title: l10n("add.new"), message: l10n("want.add"), preferredStyle: UIAlertController.Style.actionSheet)
+    
+    menuActionSheet.addAction(UIAlertAction(title: l10n("scan.certificate"), style: UIAlertAction.Style.default, handler: {[weak self] _ in
+        self?.scanNewCertificate()
+      })
+    )
+    menuActionSheet.addAction(UIAlertAction(title: l10n("image.import"), style: UIAlertAction.Style.default, handler: { [weak self] _ in
+        self?.addImageActivity()
+      })
+    )
+    menuActionSheet.addAction(UIAlertAction(title: l10n("pdf.import"), style: UIAlertAction.Style.default, handler: { [weak self] _ in
+        self?.addPdf()
+      })
+    )
+    menuActionSheet.addAction(UIAlertAction(title: l10n("nfc.import"), style: UIAlertAction.Style.default, handler: { [weak self] _ in
+        self?.scanNFC()
+      })
+    )
+    menuActionSheet.addAction(UIAlertAction(title: l10n("Cancel"), style: UIAlertAction.Style.cancel, handler: nil))
     present(menuActionSheet, animated: true, completion: nil)
   }
   
@@ -196,7 +191,7 @@ class MainListController: UIViewController, DismissControllerDelegate {
         
       } catch {
         let alertController: UIAlertController = {
-          let controller = UIAlertController(title: l10n("error"), message: l10n("read.dcc.from.nfc"),
+          let controller = UIAlertController(title: l10n("Cannot read NFC"), message: l10n("read.dcc.from.nfc"),
             preferredStyle: .alert)
           let actionRetry = UIAlertAction(title: l10n("retry"), style: .default) { _ in
             self?.scanNFC()
@@ -235,8 +230,8 @@ class MainListController: UIViewController, DismissControllerDelegate {
 
     case SegueIdentifiers.showServicesList:
       guard let serviceController = segue.destination as? ServerListController else { return }
-      guard let listOfServices = sender as?  ServerListResponse else { return }
-      serviceController.setServices(info: listOfServices)
+      guard let listOfServices = sender as? ServerListResponse else { return }
+      serviceController.serverListInfo = listOfServices
       serviceController.dismissDelegate = self
       
     case SegueIdentifiers.showPDFViewer:
@@ -300,11 +295,15 @@ extension MainListController: ScanWalletDelegate {
     }
     scannedToken = ticketing.token
     startActivity()
-    IdentityService.requestListOfServices(ticketingInfo: ticketing) { [weak self] services in
+    IdentityService.requestListOfServices(ticketingInfo: ticketing) { [weak self] services, error in
+      guard error == nil else {
+        self?.showInfoAlert(withTitle: l10n("This certificate is not supported"), message: "")
+        return
+      }
       DispatchQueue.main.async {
+        self?.stopActivity()
         self?.dismiss(animated: true, completion: {
           self?.scannedToken = ""
-          self?.stopActivity()
           self?.performSegue(withIdentifier: SegueIdentifiers.showServicesList, sender: services)
         })
       }
@@ -367,11 +366,11 @@ extension MainListController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
       switch section {
       case TableSection.certificates.rawValue:
-          return l10n("section.certificates")
+          return l10n("Certificates")
       case TableSection.images.rawValue:
-          return l10n("section.images")
+          return l10n("Images")
       case  TableSection.pdfs.rawValue:
-          return l10n("section.pdf")
+          return l10n("PDF files")
       default:
           return ":"
       }
@@ -484,11 +483,11 @@ extension MainListController: UITableViewDelegate {
 extension MainListController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   private func addImageActivity() {
     let alert = UIAlertController(title: l10n("get.image.from"), message: nil, preferredStyle: .actionSheet)
-    let cameraAction = UIAlertAction(title: l10n("camera"), style: .default) {[weak self] _ in
+    let cameraAction = UIAlertAction(title: l10n("Camera"), style: .default) {[weak self] _ in
       alert.dismiss(animated: true, completion: nil)
       self?.openCamera()
     }
-    let galleryAction = UIAlertAction(title: l10n("galery"), style: .default) {[weak self] _ in
+    let galleryAction = UIAlertAction(title: l10n("Gallery"), style: .default) {[weak self] _ in
       alert.dismiss(animated: true, completion: nil)
       self?.openGallery()
     }
@@ -509,8 +508,7 @@ extension MainListController: UIImagePickerControllerDelegate, UINavigationContr
           present(picker, animated: true, completion: nil)
       } else {
           let alertController: UIAlertController = {
-              let controller = UIAlertController(title: l10n("error"),
-                 message: l10n("dont.have.camera"),
+              let controller = UIAlertController(title: l10n("Cannot scan"), message: l10n("dont.have.camera"),
                  preferredStyle: .alert)
               let action = UIAlertAction(title: l10n("btn.ok"), style: .default)
               controller.addAction(action)

@@ -86,28 +86,34 @@
 "want.share" = "Do you want to share DCC certificate via image or PDF file?";
 "image.export" = "Export as Image";
 "pdf.export" = "Export as PDF";
-"cancel" = "Cancel";
+"Cancel" = "Cancel";
 "add.new" = "Add new?";
 "want.add" = "Do you want to add new certificate, image or PDF file?";
 "scan.certificate" = "Scan certificate";
 "image.import" = "Image import";
 "pdf.import" = "PDF Import";
 "nfc.import" = "NFC Import";
-"error" = "Error";
-"read.dcc.from.nfc" = "Reading DCC from NFC";
+"Cannot read NFC" = "Cannot read NFC";
+"read.dcc.from.nfc" = "An error occurred while reading NFC";
 "retry" = "Retry";
 "ok" = "OK";
-"section.certificates" = "Certificates";
-"section.images" = "Images";
-"section.pdf" = "PDF's files";
-"get.image.from" = "Get Image From";
-"camera" = "Camera";
-"galery" = "Gallery";
-"dont.have.camera" = "You don't have a camera";
-"services" = "Services";
-"certificates" = "Certificates";
-"please select one of service server" = "Please select one of the services";
-"close" = "Close";
+"Images" = "Images";
+"PDF files" = "PDF files";
+"get.image.from" = "Get Image from";
+
+"Camera" = "Camera";
+"Gallery" = "Gallery";
+"Cannot scan" = "Cannot scan";
+"dont.have.camera" = "You don't have a camera.";
+"Services" = "Services";
+"Certificates" = "Certificates";
+"Please select the required service" = "Please select the required service";
+"Each service is located on a separate server and is designed for specific activities." = "Each service is located on a separate server and is designed for specific activities";
+
+"Please select a certificate" = "Please select a certificate";
+"Here are all the appropriate certificates." = "Here are all the appropriate certificates.";
+
+"Close" = "Close";
 "settings.last-updated" = "Last Updated: %@";
 "Consent" = "Consent";
 "Do you agree to share the %@ certificate with %@?" = "Do you agree to share the %@ certificate with %@?";
@@ -120,3 +126,20 @@
 
 "Certificate has limitation" = "Certificate has limitation";
 "Your certificate is valid but has the following restrictions:" = "Your certificate is valid but has the following restrictions:";
+
+"Cannot validate the certificate" = "Cannot validate the certificate";
+"Make sure you select the desired service and try again. If it happens again, please refer to the Re-open EU website." = "Make sure you select the desired service and try again. If it happens again, please refer to the Re-open EU website.";
+
+"Validation error" = "Validation error";
+"Please refer to the Re-open EU website." = "Please refer to the Re-open EU website.";
+
+"An internal error has occurred" = "An internal error has occurred";
+"Please quit the application and restart again." = "Please quit the application and restart again.";
+
+"The specified service cannot be used" = "The specified service cannot be used";
+"Make sure you select the desired service and try again. If it happens again, please refer to application support." = "Make sure you select the desired service and try again. If it happens again, please refer to application support.";
+
+"This certificate is not supported" = "This certificate is not supported";
+
+"An internet connection error has occurred" = "An internet connection error has occurred";
+"Make sure your device is connected to the internet and try again. If it happens again, please refer to application support." = "Make sure your device is connected to the internet and try again. If it happens again, please refer to application support.";

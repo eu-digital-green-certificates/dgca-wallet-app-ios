@@ -29,21 +29,30 @@ import UIKit
 import SwiftDGC
 
 class ServerListController: UIViewController {
-  private enum Constants {
-    static let cellIndentifier = "ServerCell"
+  private enum Segues {
     static let showCertificatesList = "showCertificatesList"
   }
 
   @IBOutlet fileprivate weak var tableView: UITableView!
   @IBOutlet fileprivate weak var nextButton: UIButton!
   
-  private var serverListInfo: ServerListResponse?
-  private var listOfServices = [ValidationService]()
   weak var dismissDelegate: DismissControllerDelegate?
+  
+  var serverListInfo: ServerListResponse? {
+    didSet {
+      listOfServices = serverListInfo?.service?.filter{ $0.type == "ValidationService" } ?? []
+    }
+  }
+  
+  private var listOfServices = [ValidationService]()
+
+  private var selectedServer: ValidationService? {
+    return listOfServices.filter({ $0.isSelected ?? false }).first
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    title = l10n("services")
+    title = l10n("Services")
     self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
   }
   
@@ -63,60 +72,46 @@ class ServerListController: UIViewController {
   }
 
   @IBAction func nextButtonAction(_ sender: Any) {
-    guard let service = getSelectedServer() else {
-      let alertController: UIAlertController = {
-          let controller = UIAlertController(title: l10n("please select one of service server"), message: "",
-             preferredStyle: .alert)
-        let actionOk = UIAlertAction(title: l10n("btn.ok"), style: .default)
-        controller.addAction(actionOk)
-        return controller
-      }()
-      self.present(alertController, animated: true)
+    guard let service = selectedServer else {
+      showNotSelectedServise()
       return
     }
-    guard let privateKey = Enclave.loadOrGenerateKey(with: "validationKey") else { return }
-    
+    guard let privateKey = Enclave.loadOrGenerateKey(with: "validationKey") else {
+      showAlertInternalError()
+      return
+    }
     guard let accessTokenService = serverListInfo?.service?.first(where: { $0.type == "AccessTokenService" }),
-      let url = URL(string: accessTokenService.serviceEndpoint),
-      let serviceURL = URL(string: service.serviceEndpoint) else { return }
-    
-    IdentityService.getServiceInfo(url: serviceURL) { [weak self] validationServiceInfo in
-      
-//  TODO: Show UI message with error if fail to fetch serviceInfo
-      
-      guard let serviceInfo = validationServiceInfo else { return }
+      let url = URL(string: accessTokenService.serviceEndpoint), let serviceURL = URL(string: service.serviceEndpoint) else {
+        showAlertInternalError()
+        return
+    }
+    IdentityService.getServiceInfo(url: serviceURL) { [weak self] info, error in
+      guard error == nil, let serviceInfo = info else {
+        self?.showAlertServiceCannotUse()
+        return
+      }
       
       let pubKey = (X509.derPubKey(for: privateKey) ?? Data()).base64EncodedString()
       
-      GatewayConnection.getAccessTokenFor(url: url,servicePath: service.id, publicKey: pubKey) { response in
+      GatewayConnection.getAccessTokenFor(url: url,servicePath: service.id, publicKey: pubKey) { response, error in
         DispatchQueue.main.async { [weak self] in
           guard let response = response else {
-            //TODO: Show Alert
+            self?.showNetworkingError()
             return
           }
           let ticketingAcceptance = TicketingAcceptance(validationInfo: serviceInfo, accessInfo: response)
-          self?.performSegue(withIdentifier: Constants.showCertificatesList, sender: ticketingAcceptance)
+          self?.performSegue(withIdentifier: Segues.showCertificatesList, sender: ticketingAcceptance)
         }
       }
     }
   }
   
-  func setServices(info: ServerListResponse) {
-    serverListInfo = info
-      listOfServices = serverListInfo?.service?.filter{ $0.type == "ValidationService" } ?? []
-  }
-  
-  private func getSelectedServer() -> ValidationService? {
-      listOfServices.filter({ $0.isSelected ?? false }).first
-  }
-  
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     switch segue.identifier {
-    case Constants.showCertificatesList:
+    case Segues.showCertificatesList:
         guard let certificateListController = segue.destination as? CertificateListController,
           let acceptance = sender as? TicketingAcceptance else { return }
         certificateListController.ticketingAcceptance = acceptance
-    
     default:
         break
     }
@@ -146,5 +141,36 @@ extension ServerListController: UITableViewDataSource, UITableViewDelegate {
     }
     listOfServices[indexPath.row].isSelected = true
     tableView.reloadData()
+  }
+}
+
+//Alerts
+extension ServerListController {
+  func showNotSelectedServise() {
+    DispatchQueue.main.async {
+      self.showInfoAlert(withTitle: l10n("Please select the required service"),
+          message: l10n("Each service is located on a separate server and is designed for specific activities."))
+    }
+  }
+
+  func showAlertServiceCannotUse() {
+    DispatchQueue.main.async {
+      self.showInfoAlert(withTitle: l10n("The specified service cannot be used"),
+          message: l10n("Make sure you select the desired service and try again. If it happens again, please refer to application support."))
+    }
+  }
+  
+  func showAlertInternalError() {
+    DispatchQueue.main.async {
+      self.showInfoAlert(withTitle: l10n("An internal error has occurred"),
+          message: l10n("Please quit the application and restart again."))
+    }
+  }
+  
+  func showNetworkingError() {
+    DispatchQueue.main.async {
+      self.showInfoAlert(withTitle: l10n("An internet connection error has occurred"),
+          message: l10n("Make sure your device is connected to the internet and try again. If it happens again, please refer to application support."))
+    }
   }
 }

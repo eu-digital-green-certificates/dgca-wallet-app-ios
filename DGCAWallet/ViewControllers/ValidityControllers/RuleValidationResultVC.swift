@@ -64,7 +64,7 @@ class RuleValidationResultVC: UIViewController {
     resultLabel.text = l10n("validate_certificate_with_rules")
     resultDescriptionLabel.text = ""
     noWarrantyLabel.text = l10n("info_without_waranty")
-    closeButton.setTitle(l10n("close"), for: .normal)
+    closeButton.setTitle(l10n("Close"), for: .normal)
     tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 32, right: 0)
 
     let validity: HCertValidity = self.validateCertLogicRules()

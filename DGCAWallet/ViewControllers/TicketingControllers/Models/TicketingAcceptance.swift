@@ -45,24 +45,24 @@ class TicketingAcceptance {
       let iv = UserDefaults.standard.object(forKey: "xnonce") as? String,
       let verificationMethod = validationInfo.verificationMethod?.first(where: { $0.publicKeyJwk?.use == "enc" })
     else {
-      completion(nil, WalletEntryError.local(description: "Bad input data"))
+      completion(nil, GatewayError.local(description: "Bad input data"))
       return
     }
     
     guard let dccData = encodeDCC(dgcString: certificate.fullPayloadString, iv: iv),
       let privateKey = Enclave.loadOrGenerateKey(with: "validationKey")
     else {
-      completion(nil, WalletEntryError.local(description: "EncodeDCC Error"))
+      completion(nil, GatewayError.local(description: "EncodeDCC Error"))
       return
     }
       
     Enclave.sign(data: dccData.0, with: privateKey, using: SecKeyAlgorithm.ecdsaSignatureMessageX962SHA256, completion: { (signature, error) in
       guard error == nil else {
-        completion(nil, WalletEntryError.local(description: error!))
+        completion(nil, GatewayError.local(description: error!))
         return
       }
       guard let sign = signature else {
-        completion(nil, WalletEntryError.signingError)
+        completion(nil, GatewayError.signingError)
         return
       }
       let parameters = ["kid" : verificationMethod.publicKeyJwk!.kid, "dcc" : dccData.0.base64EncodedString(),

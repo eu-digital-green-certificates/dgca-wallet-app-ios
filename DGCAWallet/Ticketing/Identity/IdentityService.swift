@@ -25,50 +25,67 @@
 //  Created by Illia Vlasov on 19.10.2021.
 //  
 import Foundation
-import Alamofire
 import SwiftDGC
 
-import Foundation
+enum IdentityError: Error {
+  case wrongData
+  case connection(error: Error)
+  case parsingError
+}
+
+typealias IdentityCompletion = (ServerListResponse?, Error?) -> Void
+
 class IdentityService {
-  static func requestListOfServices(ticketingInfo : CheckInQR, completion : @escaping ((ServerListResponse?) -> Void)) {
-    let decoder = JSONDecoder()
-    
+  static func requestListOfServices(ticketingInfo : CheckInQR, completion : @escaping IdentityCompletion) {
     UserDefaults.standard.set(ticketingInfo.token, forKey: "TicketingToken")
-    
-    let headers = HTTPHeaders([HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")])
     
     let url = URL(string: ticketingInfo.serviceIdentity)!
     var request = URLRequest(url: url)
-    request.headers = headers
+    request.addValue( "1.0.0", forHTTPHeaderField: "X-Version")
+    request.addValue( "application/json", forHTTPHeaderField: "content-type")
     
-    let session = URLSession.shared.dataTask(with: request, completionHandler: { data,response,error in
-      if let responseData = data {
-        
-        let responseModel = try? decoder.decode(ServerListResponse.self, from: responseData)
-        
-        completion(responseModel)
-      } else {
-        completion(nil)
+    let session = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
+      guard error == nil else {
+        completion(nil, IdentityError.connection(error: error!))
+        return
       }
       
+      guard let responseData = data else {
+          completion(nil, IdentityError.wrongData)
+          return
+      }
+      
+      do {
+        let responseModel = try JSONDecoder().decode(ServerListResponse.self, from: responseData)
+        completion(responseModel, nil)
+      } catch {
+        completion(nil, IdentityError.parsingError)
+      }
     })
     session.resume()
   }
   
-  static func getServiceInfo(url : URL, completion: @escaping (ServerListResponse?) -> Void) {
-    let decoder = JSONDecoder()
-    let headers = HTTPHeaders([HTTPHeader(name: "X-Version", value: "1.0.0"),HTTPHeader(name: "content-type", value: "application/json")])
-    
+  static func getServiceInfo(url : URL, completion: @escaping IdentityCompletion) {
     var request = URLRequest(url: url)
-    request.headers = headers
-    
-    let session = URLSession.shared.dataTask(with: request, completionHandler: { data,response,error in
-      guard let data = data else {
-        completion(nil)
+    request.addValue( "1.0.0", forHTTPHeaderField: "X-Version")
+    request.addValue( "application/json", forHTTPHeaderField: "content-type")
+
+    let session = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
+      guard error == nil else {
+        completion(nil, IdentityError.connection(error: error!))
         return
       }
-      let responseModel = try? decoder.decode(ServerListResponse.self, from: data)
-      completion(responseModel)
+
+      guard let data = data else {
+        completion(nil, IdentityError.wrongData)
+        return
+      }
+      do {
+        let responseModel = try JSONDecoder().decode(ServerListResponse.self, from: data)
+        completion(responseModel, nil)
+      } catch {
+        completion(nil, IdentityError.parsingError)
+      }
     })
     session.resume()
   }
