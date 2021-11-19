@@ -49,7 +49,7 @@ class ValidationResultController: UIViewController {
     
     guard let result = validationResultModel?.result else {
       showInfoAlert(withTitle: l10n("Cannot validate the certificate"),
-          message: l10n("Make sure you select the desired service and try again. If it happens again, please refer to the Re-open EU website."))
+          message: l10n("Make sure you select the desired service..."))
       titleLabel.text = l10n("Validation error")
       detailLabel.text = l10n("Please refer to the Re-open EU website.")
       iconImage.image = UIImage(named: "icon_large_invalid")
@@ -60,7 +60,7 @@ class ValidationResultController: UIViewController {
     switch result {
     case "OK":
       titleLabel.text = l10n("Valid certificate")
-      detailLabel.text = l10n("Your certificate is valid and confirms to the provided country rules. Additional entry requirements might apply, please refer to the Re-open EU website:")
+      detailLabel.text = l10n("Your certificate is valid and confirms...")
       iconImage.image = UIImage(named: "icon_large_valid")
       iconImage.tintColor = .walletGreen
         

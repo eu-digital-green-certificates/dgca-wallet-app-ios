@@ -156,7 +156,7 @@ extension ServerListController {
   func showAlertServiceCannotUse() {
     DispatchQueue.main.async {
       self.showInfoAlert(withTitle: l10n("The specified service cannot be used"),
-          message: l10n("Make sure you select the desired service and try again. If it happens again, please refer to application support."))
+          message: l10n("Make sure you select the desired service..."))
     }
   }
   
@@ -170,7 +170,7 @@ extension ServerListController {
   func showNetworkingError() {
     DispatchQueue.main.async {
       self.showInfoAlert(withTitle: l10n("An internet connection error has occurred"),
-          message: l10n("Make sure your device is connected to the internet and try again. If it happens again, please refer to application support."))
+          message: l10n("Make sure your device is connected to the internet and try again..."))
     }
   }
 }

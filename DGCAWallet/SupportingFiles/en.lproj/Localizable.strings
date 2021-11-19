@@ -26,7 +26,6 @@
 */
 
 "Scanned %@" = "Scanned %@";
-"btn.okay" = "Okay";
 "Save" = "Save";
 "Done" = "Done";
 "Edit" = "Edit";
@@ -37,7 +36,6 @@
 "Certificate saved successfully" = "Certificate saved successfully";
 "Now it is available in the wallet" = "Now it is available in the wallet";
 "Cannot save the Certificate" = "Cannot save the Certificate";
-"tan.confirm.fail.text" = "Check the TAN and try again.";
 "TAN: %@" = "TAN: %@";
 "Could not verify device ownership" = "Could not verify device ownership";
 "Try Later" = "Try Later";
@@ -59,14 +57,13 @@
 "Current" = "Current";
 "Result" = "Result";
 
-"country_certificate_text" = "Check country rules conformance of your certificate";
 "disclaimer_text" = "This check gives an indication on eligibility to travel based on your certificate. Restriction of free movement in response to the coronavirus pandemic are subject to change and might be based on additional information not available to and within this application. Please refer to authoritative national sources for more information and the Re-open EU website: https://reopen.europa.eu/. Your data is being processed locally on this device.";
 
 "Disclaimer" = "Disclaimer";
 "Your destination country" = "Your destination country";
 "Check the date" = "Check the date";
 "Valid certificate" = "Valid certificate";
-"your_certificate_allow" = "Your certificate is valid and confirms to the provided country rules. Additional entry requirements might apply, please refer to the Re-open EU website: https://reopen.europa.eu/";
+"Your certificate is valid and confirms..." = "Your certificate is valid and confirms to the provided country rules. Additional entry requirements might apply, please refer to the Re-open EU website: https://reopen.europa.eu/";
 
 "Invalid certificate" = "Invalid certificate";
 "Your certificate did not allows you to enter the chosen country" = "Your certificate did not allows you to enter the chosen country";
@@ -74,7 +71,7 @@
 "Your certificate is valid but has the following restrictions:" = "Your certificate is valid but has the following restrictions:";
 "Validating certificate with country rules" = "Validating certificate with country rules";
 
-"info_without_waranty" = "This check gives an indication on eligibility to travel based on your certificate. Restriction of free movement in response to the coronavirus pandemic are subject to change and might be based on additional information not available to and within this application.";
+"This check gives an indication on eligibility..." = "This check gives an indication on eligibility to travel based on your certificate. Restriction of free movement in response to the coronavirus pandemic are subject to change and might be based on additional information not available to and within this application.";
 "Issuer Country" = "Issuer Country";
 "Type of Test" = "Type of Test";
 "Name" = "Name";
@@ -90,13 +87,12 @@
 "Export as PDF" = "Export as PDF";
 "Cancel" = "Cancel";
 "Add new?" = "Add new?";
-"want.add" = "Do you want to add new certificate, image or PDF file?";
 "Scan certificate" = "Scan certificate";
 "Image import" = "Image import";
 "PDF Import" = "PDF Import";
 "NFC Import" = "NFC Import";
 "Cannot read NFC" = "Cannot read NFC";
-"read.dcc.from.nfc" = "An error occurred while reading NFC";
+"An error occurred while reading NFC" = "An error occurred while reading NFC";
 "Retry" = "Retry";
 "OK" = "OK";
 "Images" = "Images";
@@ -121,8 +117,6 @@
 "Do you agree to share the %@ certificate with %@?" = "Do you agree to share the %@ certificate with %@?";
 
 "Valid certificate" = "Valid certificate";
-"Your certificate is valid and confirms to the provided country rules. Additional entry requirements might apply, please refer to the Re-open EU website:" = "Your certificate is valid and confirms to the provided country rules. Additional entry requirements might apply, please refer to the Re-open EU website:";
-
 "Invalid certificate" = "Invalid certificate";
 "Your certificate is not valid. Please refer to the Re-open EU website:" = "Your certificate is not valid. Please refer to the Re-open EU website:";
 
@@ -130,7 +124,7 @@
 "Your certificate is valid but has the following restrictions:" = "Your certificate is valid but has the following restrictions:";
 
 "Cannot validate the certificate" = "Cannot validate the certificate";
-"Make sure you select the desired service and try again. If it happens again, please refer to the Re-open EU website." = "Make sure you select the desired service and try again. If it happens again, please refer to the Re-open EU website.";
+"Make sure you select the desired service..." = "Make sure you select the desired service and try again. If it happens again, please refer to the Re-open EU website.";
 
 "Validation error" = "Validation error";
 "Please refer to the Re-open EU website." = "Please refer to the Re-open EU website.";
@@ -139,9 +133,7 @@
 "Please quit the application and restart again." = "Please quit the application and restart again.";
 
 "The specified service cannot be used" = "The specified service cannot be used";
-"Make sure you select the desired service and try again. If it happens again, please refer to application support." = "Make sure you select the desired service and try again. If it happens again, please refer to application support.";
-
 "This certificate is not supported" = "This certificate is not supported";
 
 "An internet connection error has occurred" = "An internet connection error has occurred";
-"Make sure your device is connected to the internet and try again. If it happens again, please refer to application support." = "Make sure your device is connected to the internet and try again. If it happens again, please refer to application support.";
+"Make sure your device is connected to the internet and try again..." = "Make sure your device is connected to the internet and try again. If it happens again, please refer to application support.";

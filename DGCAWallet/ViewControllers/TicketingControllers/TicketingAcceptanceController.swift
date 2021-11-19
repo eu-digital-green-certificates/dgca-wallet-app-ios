@@ -96,7 +96,7 @@ class TicketingAcceptanceController: UIViewController {
         DispatchQueue.main.async {
           self?.stopActivity()
           self?.showInfoAlert(withTitle: l10n("Cannot validate the certificate"),
-              message: l10n("Make sure you select the desired service and try again. If it happens again, please refer to the Re-open EU website."))
+              message: l10n("Make sure you select the desired service..."))
         }
         return
       }

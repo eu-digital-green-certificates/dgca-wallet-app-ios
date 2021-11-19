@@ -192,7 +192,8 @@ class MainListController: UIViewController, DismissControllerDelegate {
         
       } catch {
         let alertController: UIAlertController = {
-          let controller = UIAlertController(title: l10n("Cannot read NFC"), message: l10n("read.dcc.from.nfc"),
+          let controller = UIAlertController(title: l10n("Cannot read NFC"),
+              message: l10n("An error occurred while reading NFC"),
             preferredStyle: .alert)
           let actionRetry = UIAlertAction(title: l10n("Retry"), style: .default) { _ in
             self?.scanNFC()

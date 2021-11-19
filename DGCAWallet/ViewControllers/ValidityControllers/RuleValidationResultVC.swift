@@ -63,7 +63,7 @@ class RuleValidationResultVC: UIViewController {
   private func setupInterface() {
     resultLabel.text = l10n("Validating certificate with country rules")
     resultDescriptionLabel.text = ""
-    noWarrantyLabel.text = l10n("info_without_waranty")
+    noWarrantyLabel.text = l10n("This check gives an indication on eligibility...")
     closeButton.setTitle(l10n("Close"), for: .normal)
     tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 32, right: 0)
 
@@ -71,7 +71,7 @@ class RuleValidationResultVC: UIViewController {
     switch validity {
       case .valid:
         resultLabel.text = l10n("Valid certificate")
-        resultDescriptionLabel.text = l10n("your_certificate_allow")
+        resultDescriptionLabel.text = l10n("Your certificate is valid and confirms...")
         resultIcon.image = UIImage(named: "icon_large_valid")
       case .invalid:
         resultLabel.text = l10n("Invalid certificate")
