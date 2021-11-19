@@ -1,0 +1,139 @@
+/*-
+ * ---license-start
+ * eu-digital-green-certificates / dgca-wallet-app-ios
+ * ---
+ * Copyright (C) 2021 T-Systems International GmbH and all other contributors
+ * ---
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ---license-end
+ */
+/*
+  Localizable.strings
+  DGCAWallet
+
+  Created by Yannick Spreen on 5/6/21.
+  
+*/
+
+"Scanned %@" = "Scanned %@";
+"Save" = "Save";
+"Done" = "Done";
+"Edit" = "Edit";
+"Confirm" = "Confirm";
+"Confirm TAN" = "Confirm TAN";
+"Please enter the TAN that was provided together with your certificate:" = "Please enter the TAN that was provided together with your certificate:";
+
+"Certificate saved successfully" = "Certificate saved successfully";
+"Now it is available in the wallet" = "Now it is available in the wallet";
+"Cannot save the Certificate" = "Cannot save the Certificate";
+"TAN: %@" = "TAN: %@";
+"Could not verify device ownership" = "Could not verify device ownership";
+"Try Later" = "Try Later";
+"Please try setting a passcode for this device before opening the app." = "Please try setting a passcode for this device before opening the app.";
+"Delete Certificate" = "Delete Certificate";
+"cert.delete.body" = "Are you sure you want to delete this certificate? This action cannot be undone.";
+"tap to reveal" = "tap to reveal";
+
+"Check Validity" = "Check Validity";
+"I Agree, check validity" = "I Agree, check validity";
+"Failed for %@ (see settings)" = "Failed for %@ (see settings)";
+"Passed for %@ (see settings)" = "Passed for %@ (see settings)";
+"Open for %@ (see settings)" = "Open for %@ (see settings)";
+
+"Failed" = "Failed";
+"Passed" = "Passed";
+"Open" = "Open";
+"Rule" = "Rule";
+"Current" = "Current";
+"Result" = "Result";
+
+"disclaimer_text" = "This check gives an indication on eligibility to travel based on your certificate. Restriction of free movement in response to the coronavirus pandemic are subject to change and might be based on additional information not available to and within this application. Please refer to authoritative national sources for more information and the Re-open EU website: https://reopen.europa.eu/. Your data is being processed locally on this device.";
+
+"Disclaimer" = "Disclaimer";
+"Your destination country" = "Your destination country";
+"Check the date" = "Check the date";
+"Valid certificate" = "Valid certificate";
+"Your certificate is valid and confirms..." = "Your certificate is valid and confirms to the provided country rules. Additional entry requirements might apply, please refer to the Re-open EU website: https://reopen.europa.eu/";
+
+"Invalid certificate" = "Invalid certificate";
+"Your certificate did not allows you to enter the chosen country" = "Your certificate did not allows you to enter the chosen country";
+"Certificate has limitation" = "Certificate has limitation";
+"Your certificate is valid but has the following restrictions:" = "Your certificate is valid but has the following restrictions:";
+"Validating certificate with country rules" = "Validating certificate with country rules";
+
+"This check gives an indication on eligibility..." = "This check gives an indication on eligibility to travel based on your certificate. Restriction of free movement in response to the coronavirus pandemic are subject to change and might be based on additional information not available to and within this application.";
+"Issuer Country" = "Issuer Country";
+"Type of Test" = "Type of Test";
+"Name" = "Name";
+"Save image" = "Save image";
+"Please enter the image name" = "Please enter the image name";
+"filename" = "filename";
+
+"Save PDF file" = "Save PDF file";
+"Please enter the pdf file name" = "Please enter the pdf file name";
+"Share QR Code?" = "Share QR Code?";
+"Do you want to share DCC certificate via image or PDF file?" = "Do you want to share DCC certificate via image or PDF file?";
+"Export as Image" = "Export as Image";
+"Export as PDF" = "Export as PDF";
+"Cancel" = "Cancel";
+"Add new?" = "Add new?";
+"Scan certificate" = "Scan certificate";
+"Image import" = "Image import";
+"PDF Import" = "PDF Import";
+"NFC Import" = "NFC Import";
+"Cannot read NFC" = "Cannot read NFC";
+"An error occurred while reading NFC" = "An error occurred while reading NFC";
+"Retry" = "Retry";
+"OK" = "OK";
+"Images" = "Images";
+"PDF files" = "PDF files";
+"Get Image from" = "Get Image from";
+
+"Camera" = "Camera";
+"Gallery" = "Gallery";
+"Cannot scan" = "Cannot scan";
+"You don't have a camera." = "You don't have a camera.";
+"Services" = "Services";
+"Certificates" = "Certificates";
+"Please select the required service" = "Please select the required service";
+"Each service is located on a separate server and is designed for specific activities." = "Each service is located on a separate server and is designed for specific activities";
+
+"Please select a certificate" = "Please select a certificate";
+"Here are all the appropriate certificates." = "Here are all the appropriate certificates.";
+
+"Close" = "Close";
+"Last Updated: %@" = "Last Updated: %@";
+"Consent" = "Consent";
+"Do you agree to share the %@ certificate with %@?" = "Do you agree to share the %@ certificate with %@?";
+
+"Valid certificate" = "Valid certificate";
+"Invalid certificate" = "Invalid certificate";
+"Your certificate is not valid. Please refer to the Re-open EU website:" = "Your certificate is not valid. Please refer to the Re-open EU website:";
+
+"Certificate has limitation" = "Certificate has limitation";
+"Your certificate is valid but has the following restrictions:" = "Your certificate is valid but has the following restrictions:";
+
+"Cannot validate the certificate" = "Cannot validate the certificate";
+"Make sure you select the desired service..." = "Make sure you select the desired service and try again. If it happens again, please refer to the Re-open EU website.";
+
+"Validation error" = "Validation error";
+"Please refer to the Re-open EU website." = "Please refer to the Re-open EU website.";
+
+"An internal error has occurred" = "An internal error has occurred";
+"Please quit the application and restart again." = "Please quit the application and restart again.";
+
+"The specified service cannot be used" = "The specified service cannot be used";
+"This certificate is not supported" = "This certificate is not supported";
+
+"An internet connection error has occurred" = "An internet connection error has occurred";
+"Make sure your device is connected to the internet and try again..." = "Make sure your device is connected to the internet and try again. If it happens again, please refer to application support.";
