@@ -59,7 +59,7 @@ class ImageDataManager {
         completion()
         return
       }
-      DGCLogger.logInfo(String(format: "Loaded %@ images", result.images.count))
+      DGCLogger.logInfo(String(format: "Loaded %d images", result.images.count))
       self.imageData = result
       self.save()
       completion()

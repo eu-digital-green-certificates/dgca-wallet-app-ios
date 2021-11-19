@@ -61,7 +61,7 @@ class ValueSetsDataManager {
         completion()
         return
       }
-      DGCLogger.logInfo(String(format: "Loaded %@ value sets", result.valueSets.count))
+      DGCLogger.logInfo(String(format: "Loaded %d value sets", result.valueSets.count))
       self.valueSetsData = result
       completion()
     }

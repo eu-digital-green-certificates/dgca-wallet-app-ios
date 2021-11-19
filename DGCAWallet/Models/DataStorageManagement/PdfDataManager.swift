@@ -58,7 +58,7 @@ class PdfDataManager {
         completion()
         return
       }
-      DGCLogger.logInfo(String(format: "Loaded %@ pdf files", result.pdfs.count))
+      DGCLogger.logInfo(String(format: "Loaded %d pdf files", result.pdfs.count))
       self.pdfData = result
       self.save()
       completion()

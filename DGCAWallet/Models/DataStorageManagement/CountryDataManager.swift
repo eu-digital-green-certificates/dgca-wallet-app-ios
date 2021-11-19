@@ -54,7 +54,7 @@ class CountryDataManager {
         completion()
         return
       }
-      DGCLogger.logInfo(String(format: "Loaded %@ counries", result.countryCodes.count))
+      DGCLogger.logInfo(String(format: "Loaded %d counries", result.countryCodes.count))
       self.countryData = result
       completion()
     }

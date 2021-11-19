@@ -57,7 +57,7 @@ class RulesDataManager {
         completion()
         return
       }
-      DGCLogger.logInfo(String(format: "Downloaded %@ rules", result.rules.count))
+      DGCLogger.logInfo(String(format: "Downloaded %d rules", result.rules.count))
       self.rulesData = result
       completion()
     }
