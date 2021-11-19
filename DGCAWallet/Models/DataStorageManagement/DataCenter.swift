@@ -29,6 +29,8 @@ import UIKit
 import SwiftDGC
 import CertLogic
 
+typealias CompletionHandler = () -> Void
+
 class DataCenter {
   static let shared = DataCenter()
   static var appVersion: String {
@@ -44,6 +46,7 @@ class DataCenter {
   static let imageDataManager: ImageDataManager = ImageDataManager()
   static let pdfDataManager: PdfDataManager = PdfDataManager()
   
+  // MARK: - public variables
   static var lastFetch: Date {
     get {
       let fetchDate = localDataManager.localData.lastFetch
@@ -116,36 +119,32 @@ class DataCenter {
       valueSetsDataManager.valueSetsData.valueSets = newValue
     }
   }
-
-  static func saveLocalData() {
-    localDataManager.save()
-  }
   
-  static func saveCountries() {
+  // MARK: - Data Add methods
+  static func addCountries(_ list: [CountryModel]) {
+    countryCodes.removeAll()
+    list.forEach { country in
+      countryDataManager.add(country: country)
+    }
     countryDataManager.save()
   }
   
-  static func saveSets() {
-    valueSetsDataManager.save()
-  }
-
-  static func saveRules() {
+  static func addRules(_ list: [CertLogic.Rule]) {
+    rules.forEach { rulesDataManager.add(rule: $0) }
     rulesDataManager.save()
   }
   
-  static func saveImages() {
-    imageDataManager.save()
+  static func addValueSets(_ list: [CertLogic.ValueSet]) {
+    list.forEach { valueSetsDataManager.add(valueSet: $0) }
+    valueSetsDataManager.save()
   }
   
-  static func savePDFs() {
-    pdfDataManager.save()
-  }
-
-  static func initializeLocalData(completion: @escaping () -> Void) {
+  // MARK: - Data initialize methods
+  static func initializeLocalData(completion: @escaping CompletionHandler) {
     localDataManager.initialize(completion: completion)
   }
   
-  static func initializeAllStorageData(completion: @escaping () -> Void) {
+  static func initializeAllStorageData(completion: @escaping CompletionHandler) {
     let group = DispatchGroup()
     
     group.enter()
@@ -179,12 +178,13 @@ class DataCenter {
 
       group.leave()
     }
+    
     group.notify(queue: .main) {
       completion()
     }
   }
 
-  static func reloadStorageData(completion: @escaping () -> Void) {
+  static func reloadStorageData(completion: @escaping CompletionHandler) {
     let group = DispatchGroup()
     
     group.enter()
@@ -212,30 +212,28 @@ class DataCenter {
 //      }
 
       group.enter()
-      GatewayConnection.loadCountryList { _ in
-        saveCountries()
+      GatewayConnection.loadCountryList { list, error in
         group.leave()
       }
       
       group.enter()
-      GatewayConnection.loadValueSetsFromServer { _ in
-        saveSets()
+      GatewayConnection.loadValueSetsFromServer { list, error in
         group.leave()
       }
       
       group.enter()
-      GatewayConnection.loadRulesFromServer { _ in
-        CertLogicManager.shared.setRules(ruleList: rules)
-        saveRules()
+      GatewayConnection.loadRulesFromServer { listRules, error in
+        CertLogicManager.shared.setRules(ruleList: listRules ?? [])
         group.leave()
       }
 
       group.leave()
     }
+    
     group.notify(queue: .main) {
       lastFetch = Date()
       lastLaunchedAppVersion = Self.appVersion
-      saveLocalData()
+      localDataManager.save()
       completion()
     }
   }

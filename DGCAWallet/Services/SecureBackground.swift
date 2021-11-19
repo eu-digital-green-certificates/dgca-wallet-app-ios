@@ -35,6 +35,7 @@ struct SecureBackground {
 
   public static func enable() {
     guard !paused else { return }
+      
     disable()
     guard let image = image else { return }
     let imageView = UIImageView(image: image)
@@ -55,6 +56,7 @@ struct SecureBackground {
 
   static var paused = false
   static var activation = Date()
+    
   public static func checkId(from controller: UIViewController? = nil, completion: ((Bool) -> Void)?) {
     guard !paused else { return }
       
@@ -72,6 +74,7 @@ struct SecureBackground {
           completion?(false)
           return
         }
+          
         DispatchQueue.main.async {
           controller?.showAlert(title: l10n("Could not verify device ownership"),
             subtitle: l10n("Please try setting a passcode for this device before opening the app.")) { _ in

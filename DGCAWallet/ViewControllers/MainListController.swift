@@ -95,6 +95,7 @@ class MainListController: UIViewController, DismissControllerDelegate {
     }
   }
   
+  // MARK: - Private UI methods
   private func reloadAllComponents(completion: ((Bool) -> Void)? = nil) {
     DataCenter.localDataManager.initialize {
       DataCenter.imageDataManager.initialize {
@@ -118,7 +119,13 @@ class MainListController: UIViewController, DismissControllerDelegate {
     addButton.isEnabled = true
     addButton.backgroundColor = UIColor.walletBlue
   }
+  
+  private func reloadTable() {
+    emptyView.alpha = listCertElements.isEmpty && listImageElements.isEmpty && listPdfElements.isEmpty ? 1 : 0
+    table.reloadData()
+  }
 
+  // MARK: Actions
   @IBAction func addNew() {
     guard loading == false else { return }
     
@@ -143,34 +150,6 @@ class MainListController: UIViewController, DismissControllerDelegate {
     )
     menuActionSheet.addAction(UIAlertAction(title: l10n("Cancel"), style: UIAlertAction.Style.cancel, handler: nil))
     present(menuActionSheet, animated: true, completion: nil)
-  }
-  
-  private func scanNewCertificate() {
-    performSegue(withIdentifier: SegueIdentifiers.showScannerSegue, sender: nil)
-  }
-
-  private func addPdf() {
-    let pdfPicker: UIDocumentPickerViewController
-    if #available(iOS 14.0, *) {
-      let supportedTypes: [UTType] = [UTType.pdf]
-      pdfPicker = UIDocumentPickerViewController(forOpeningContentTypes: supportedTypes, asCopy: true)
-    } else {
-      pdfPicker = UIDocumentPickerViewController(documentTypes: [kUTTypePDF as String], in: .open)
-    }
-    pdfPicker.delegate = self
-    present(pdfPicker, animated: true, completion: nil)
-  }
-  
-  private func scanNFC() {
-    let appDelegate = UIApplication.shared.delegate as? AppDelegate
-    appDelegate?.isNFCFunctionality = true
-    if #available(iOS 13.0, *) {
-      let scene = self.sceneDelegate
-      scene?.isNFCFunctionality = true
-    }
-    let helper = NFCHelper()
-    helper.onNFCResult = onNFCResult(success:message:)
-    helper.restartSession()
   }
   
   func onNFCResult(success: Bool, message: String) {
@@ -212,11 +191,36 @@ class MainListController: UIViewController, DismissControllerDelegate {
     self.performSegue(withIdentifier: SegueIdentifiers.showSettingsController, sender: nil)
   }
 
-  func reloadTable() {
-    emptyView.alpha = listCertElements.isEmpty && listImageElements.isEmpty && listPdfElements.isEmpty ? 1 : 0
-    table.reloadData()
+  // MARK: Tasks
+  private func scanNewCertificate() {
+    performSegue(withIdentifier: SegueIdentifiers.showScannerSegue, sender: nil)
   }
 
+  private func addPdf() {
+    let pdfPicker: UIDocumentPickerViewController
+    if #available(iOS 14.0, *) {
+      let supportedTypes: [UTType] = [UTType.pdf]
+      pdfPicker = UIDocumentPickerViewController(forOpeningContentTypes: supportedTypes, asCopy: true)
+    } else {
+      pdfPicker = UIDocumentPickerViewController(documentTypes: [kUTTypePDF as String], in: .open)
+    }
+    pdfPicker.delegate = self
+    present(pdfPicker, animated: true, completion: nil)
+  }
+  
+  private func scanNFC() {
+    let appDelegate = UIApplication.shared.delegate as? AppDelegate
+    appDelegate?.isNFCFunctionality = true
+    if #available(iOS 13.0, *) {
+      let scene = self.sceneDelegate
+      scene?.isNFCFunctionality = true
+    }
+    let helper = NFCHelper()
+    helper.onNFCResult = onNFCResult(success:message:)
+    helper.restartSession()
+  }
+    
+  // MARK: Navifation
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     switch segue.identifier {
     case SegueIdentifiers.showScannerSegue:
@@ -268,6 +272,7 @@ class MainListController: UIViewController, DismissControllerDelegate {
   }
 }
 
+// MARK: - ScanWalletDelegate
 extension MainListController: ScanWalletDelegate {
   func walletController(_ controller: ScanWalletController, didFailWithError error: CertificateParsingError) {
     DispatchQueue.main.async {
@@ -313,6 +318,7 @@ extension MainListController: ScanWalletDelegate {
   }
 }
 
+// MARK: CertificateManaging
 extension MainListController: CertificateManaging {
   func certificateViewer(_ controller: CertificateViewerController, didDeleteCertificate cert: HCert) {
     startActivity()
@@ -335,7 +341,8 @@ extension MainListController: CertificateManaging {
   }
 }
 
-extension MainListController: UITableViewDataSource {
+// MARK: UITable delegate
+extension MainListController: UITableViewDelegate, UITableViewDataSource {
   var listCertElements: [DatedCertString] {
     return DataCenter.certStrings.reversed()
   }
@@ -401,9 +408,7 @@ extension MainListController: UITableViewDataSource {
           return UITableViewCell()
       }
   }
-}
 
-extension MainListController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard loading == false else { return }
     
@@ -423,65 +428,65 @@ extension MainListController: UITableViewDelegate {
     }
   }
 
-  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle,
-    forRowAt indexPath: IndexPath
-  ) {
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
       switch indexPath.section {
       case TableSection.certificates.rawValue:
-          let savedCert = listCertElements[indexPath.row]
-          showAlert( title: l10n("Delete Certificate"), subtitle: l10n("cert.delete.body"),
-            actionTitle: l10n("Confirm"), cancelTitle: l10n("Cancel")) { [weak self] in
-              if $0 {
-                self?.startActivity()
-                DataCenter.localDataManager.remove(withDate: savedCert.date) { _ in
-                  self?.reloadAllComponents(completion: { _ in
-                    DispatchQueue.main.async {
-                      self?.table.reloadData()
-                      self?.stopActivity()
-                      self?.reloadTable()
-                    }
-                  })
-                } // LocalData
+        let savedCert = listCertElements[indexPath.row]
+        showAlert( title: l10n("Delete Certificate"), subtitle: l10n("cert.delete.body"),
+                   actionTitle: l10n("Confirm"), cancelTitle: l10n("Cancel")) { [weak self] in
+        if $0 {
+          self?.startActivity()
+          DataCenter.localDataManager.remove(withDate: savedCert.date) { _ in
+            self?.reloadAllComponents(completion: { _ in
+              DispatchQueue.main.async {
+                self?.table.reloadData()
+                self?.stopActivity()
+                self?.reloadTable()
               }
-            }
+            })
+          } // LocalData
+        }
+      }
+      
       case TableSection.images.rawValue:
         let savedImage = listImageElements[indexPath.row]
         showAlert( title: l10n("Delete Certificate"), subtitle: l10n("cert.delete.body"),
-          actionTitle: l10n("Confirm"), cancelTitle: l10n("Cancel")) { [weak self] in
-            if $0 {
-              self?.startActivity()
-              DataCenter.imageDataManager.deleteImage(with: savedImage.identifier) { _ in
-                self?.reloadAllComponents(completion: { _ in
-                  DispatchQueue.main.async {
-                    self?.stopActivity()
-                    self?.reloadTable()
-                  }
-                })
-              }
+                   actionTitle: l10n("Confirm"), cancelTitle: l10n("Cancel")) { [weak self] in
+          if $0 {
+            self?.startActivity()
+            DataCenter.imageDataManager.deleteImage(with: savedImage.identifier) { _ in
+              self?.reloadAllComponents(completion: { _ in
+                DispatchQueue.main.async {
+                  self?.stopActivity()
+                  self?.reloadTable()
+                }
+              })
             }
           }
+        }
       case TableSection.pdfs.rawValue:
         let savedPDF = listPdfElements[indexPath.row]
         showAlert( title: l10n("Delete Certificate"), subtitle: l10n("cert.delete.body"),
-          actionTitle: l10n("Confirm"), cancelTitle: l10n("Cancel")) { [weak self] in
-            if $0 {
-              self?.startActivity()
-              DataCenter.pdfDataManager.deletePDF(with: savedPDF.identifier) { _ in
-                self?.reloadAllComponents(completion: { _ in
-                  DispatchQueue.main.async {
-                    self?.stopActivity()
-                    self?.reloadTable()
-                  }
-                })
-              }
+                   actionTitle: l10n("Confirm"), cancelTitle: l10n("Cancel")) { [weak self] in
+          if $0 {
+            self?.startActivity()
+            DataCenter.pdfDataManager.deletePDF(with: savedPDF.identifier) { _ in
+              self?.reloadAllComponents(completion: { _ in
+                DispatchQueue.main.async {
+                  self?.stopActivity()
+                  self?.reloadTable()
+                }
+              })
             }
           }
+        }
       default:
           break
       }
   }
 }
-                          
+
+// MARK: UIImagePicker delegate
 extension MainListController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   private func addImageActivity() {
     let alert = UIAlertController(title: l10n("Get Image from"), message: nil, preferredStyle: .actionSheet)
@@ -546,6 +551,7 @@ extension MainListController: UIImagePickerControllerDelegate, UINavigationContr
   }
 }
 
+// MARK: QR Code, PDF. Image sources
 extension MainListController {
   private func tryFoundQRCodeIn(image: UIImage) {
     if let qrString = image.qrCodeString() {
@@ -592,6 +598,7 @@ extension MainListController {
   }
 }
 
+// MARK: PDF Document Delegate
 extension MainListController: UIDocumentPickerDelegate {
   private func convertPDF(at sourceURL: URL, dpi: CGFloat = 200) throws -> [UIImage] {
     let pdfDocument = CGPDFDocument(sourceURL as CFURL)!

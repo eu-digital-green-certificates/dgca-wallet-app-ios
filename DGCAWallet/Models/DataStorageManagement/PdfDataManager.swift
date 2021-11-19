@@ -52,7 +52,7 @@ class PdfDataManager {
     storage.save(pdfData, completion: completion)
   }
 
-  func initialize(completion: @escaping () -> Void) {
+  func initialize(completion: @escaping CompletionHandler) {
     storage.loadOverride(fallback: pdfData) { [unowned self] value in
       guard let result = value else {
         completion()

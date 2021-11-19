@@ -1188,16 +1188,16 @@
     </scenes>
     <designables>
         <designable name="MID-ne-Jur">
-            <size key="intrinsicContentSize" width="112" height="51"/>
+            <size key="intrinsicContentSize" width="88" height="39"/>
         </designable>
         <designable name="Rcx-o5-KDY">
-            <size key="intrinsicContentSize" width="71" height="51"/>
+            <size key="intrinsicContentSize" width="47" height="39"/>
         </designable>
         <designable name="WbA-kC-hOb">
-            <size key="intrinsicContentSize" width="71" height="51"/>
+            <size key="intrinsicContentSize" width="47" height="39"/>
         </designable>
         <designable name="fol-rA-9gU">
-            <size key="intrinsicContentSize" width="56" height="51"/>
+            <size key="intrinsicContentSize" width="32" height="39"/>
         </designable>
     </designables>
     <resources>

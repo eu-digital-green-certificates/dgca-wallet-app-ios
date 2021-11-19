@@ -48,7 +48,7 @@ class CountryDataManager {
     storage.save(countryData, completion: completion)
   }
 
-  func initialize(completion: @escaping () -> Void) {
+  func initialize(completion: @escaping CompletionHandler) {
     storage.loadOverride(fallback: countryData) { [unowned self] value in
       guard let result = value else {
         completion()

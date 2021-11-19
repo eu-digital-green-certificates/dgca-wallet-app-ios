@@ -48,7 +48,8 @@ class CertificateViewerController: UIViewController {
   @IBOutlet fileprivate weak var editButton: UIButton!
   @IBOutlet fileprivate weak var deleteButton: UIButton!
   @IBOutlet fileprivate weak var checkValidityButton: UIButton!
-  
+  @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
+
   var hCert: HCert?
   var certDate: Date?
   var tan: String?
@@ -114,7 +115,10 @@ class CertificateViewerController: UIViewController {
     if isSaved {
        dismiss(animated: true, completion: nil)
     } else {
-      saveCert()
+      activityIndicator.startAnimating()
+      saveCert {[weak self] in
+        self?.activityIndicator.stopAnimating()
+      }
     }
   }
 
@@ -147,27 +151,37 @@ class CertificateViewerController: UIViewController {
       }
   }
   
-  func saveCert() {
+  private func saveCert(completion: @escaping CompletionHandler) {
     showInputDialog(title: l10n("Confirm TAN"),
           subtitle: l10n("Please enter the TAN that was provided together with your certificate:"),
           actionTitle: l10n("Confirm"), inputPlaceholder: "XYZ12345" ) { [weak self] in
-      guard let cert = self?.hCert else { return }
+      guard let certificate = self?.hCert else {
+        DGCLogger.logInfo("Certificate error")
+        completion()
+        return
+      }
         
-      GatewayConnection.claim(cert: cert, with: $0) { success, newTan in
+      GatewayConnection.claim(cert: certificate, with: $0) { success, newTan, error in
+        guard error == nil else {
+          completion()
+          DGCLogger.logError(error!)
+          return
+        }
+        
         if success {
-          guard let cert = self?.hCert else { return }
-            
-          DataCenter.localDataManager.add(cert, with: newTan) { _ in
+          DataCenter.localDataManager.add(certificate, with: newTan) { _ in
             DispatchQueue.main.async {
+              completion()
               self?.showAlert(title: l10n("Certificate saved successfully"), subtitle: l10n("Now it is available in the wallet")) { _ in
                 self?.dismiss(animated: true) {
-                  self?.delegate?.certificateViewer(self!, didAddCeCertificate: cert)
+                  self?.delegate?.certificateViewer(self!, didAddCeCertificate: certificate)
                 }
               }
             }
           }
         } else {
           DispatchQueue.main.async {
+            completion()
             self?.showAlert(title: l10n("Cannot save the Certificate"), subtitle: l10n("Check the TAN and try again."))
           }
         }

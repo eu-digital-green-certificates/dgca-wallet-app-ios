@@ -55,7 +55,7 @@ class ValueSetsDataManager {
     return list.contains(where: { $0.hash == hash })
   }
     
-  func initialize(completion: @escaping () -> Void) {
+  func initialize(completion: @escaping CompletionHandler) {
     storage.loadOverride(fallback: valueSetsData) { [unowned self]  success in
       guard let result = success else {
         completion()

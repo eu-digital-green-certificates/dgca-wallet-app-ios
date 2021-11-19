@@ -53,7 +53,7 @@ class ImageDataManager {
     storage.save(imageData, completion: completion)
   }
 
-  func initialize(completion: @escaping () -> Void) {
+  func initialize(completion: @escaping CompletionHandler) {
     storage.loadOverride(fallback: imageData) { [unowned self] value in
       guard let result = value else {
         completion()

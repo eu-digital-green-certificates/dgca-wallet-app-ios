@@ -33,6 +33,7 @@ import CertLogic
 import JWTDecode
 
 enum GatewayError: Error {
+  case insufficientData
   case encodingError
   case signingError
   case incorrectDataResponse
@@ -42,11 +43,20 @@ enum GatewayError: Error {
   case tokenError
 }
 
+typealias ValueSetsCompletion = ([CertLogic.ValueSet]?, Error?) -> Void
+typealias ValueSetCompletionHandler = (CertLogic.ValueSet?, Error?) -> Void
+typealias RulesCompletion = ([CertLogic.Rule]?, Error?) -> Void
+typealias RuleCompletionHandler = (CertLogic.Rule?, Error?) -> Void
+typealias CountriesCompletion = ([CountryModel]?, Error?) -> Void
 typealias TicketingCompletion = (AccessTokenResponse?, Error?) -> Void
+typealias ContextCompletion = (Bool, String?, Error?) -> Void
 
-struct GatewayConnection: ContextConnection {
-  static func claim(cert: HCert, with tan: String?, completion: ((Bool, String?) -> Void)?) {
-    guard var tan = tan, !tan.isEmpty else { return }
+class GatewayConnection: ContextConnection {
+  static func claim(cert: HCert, with tan: String?, completion: @escaping ContextCompletion) {
+    guard var tan = tan, !tan.isEmpty else {
+      completion(false, nil, GatewayError.insufficientData)
+      return
+    }
       
     // Replace dashes, spaces, etc. and turn into uppercase.
     let set = CharacterSet(charactersIn: "0123456789").union(.uppercaseLetters)
@@ -58,9 +68,16 @@ struct GatewayConnection: ContextConnection {
     
     let toBeSigned = tanHash + certHash + pubKey
     let toBeSignedData = Data(toBeSigned.data(using: .utf8) ?? .init())
+    
     Enclave.sign(data: toBeSignedData, with: cert.keyPair, using: .ecdsaSignatureMessageX962SHA256) { sign, err in
-      guard let sign = sign, err == nil else { return }
-      
+      guard err == nil else {
+        completion(false, nil, GatewayError.local(description: err!))
+        return
+      }
+      guard let sign = sign else {
+        completion(false, nil, GatewayError.local(description: "No sign"))
+        return
+      }
       let keyParam: [String: Any] = [ "type": "EC", "value": pubKey ]
       let param: [String: Any] = [
         "DGCI": cert.uvci,
@@ -70,20 +87,17 @@ struct GatewayConnection: ContextConnection {
         "signature": sign.base64EncodedString(),
         "sigAlg": "SHA256withECDSA"
       ]
-        
+      
       request( ["endpoints", "claim"], method: .post, parameters: param, encoding: JSONEncoding.default,
           headers: HTTPHeaders([HTTPHeader(name: "content-type", value: "application/json")])).response {
-        guard case .success(_) = $0.result,
-          let status = $0.response?.statusCode,
-          status / 100 == 2
-        else {
-          completion?(false, nil)
+        guard case .success(_) = $0.result, let status = $0.response?.statusCode, status / 100 == 2 else {
+          completion(false, nil, GatewayError.local(description: "Cannot claim certificate"))
           return
         }
         let response = String(data: $0.data ?? .init(), encoding: .utf8)
         let json = JSON(parseJSON: response ?? "")
         let newTAN = json["tan"].string
-        completion?(true, newTAN)
+        completion(true, newTAN, nil)
       }
     }
   }
@@ -94,7 +108,7 @@ struct GatewayConnection: ContextConnection {
         
       let json = JSON(parseJSONC: string)
       DataCenter.localDataManager.localData.config.merge(other: json)
-      DataCenter.saveLocalData()
+      DataCenter.localDataManager.save()
       if DataCenter.localDataManager.versionedConfig["outdated"].bool == true {
         let controller = UIApplication.shared.windows.first?.rootViewController as? UINavigationController
         controller?.popToRootViewController(animated: false)
@@ -108,166 +122,205 @@ struct GatewayConnection: ContextConnection {
 }
 
 // MARK: Country, Rules, Valuesets extension
-
 extension GatewayConnection {
   // Country list
-  private static func getListOfCountry(completion: (([CountryModel]) -> Void)?) {
+  private static func getListOfCountry(completion: @escaping CountriesCompletion) {
     request(["endpoints", "countryList"], method: .get).response {
       guard case let .success(result) = $0.result,
         let response = result,
         let responseStr = String(data: response, encoding: .utf8),
         let json = JSON(parseJSON: responseStr).array
-      else { return }
-        
+      else {
+        completion(nil, GatewayError.parsingError)
+        return
+      }
       let codes = json.compactMap { $0.string }
       var countryList: [CountryModel] = []
       codes.forEach { code in
         countryList.append(CountryModel(code: code))
       }
-      completion?(countryList)
+      completion(countryList, nil)
     }
   }
     
-  static func loadCountryList(completion: (([CountryModel]) -> Void)? = nil) {
-    getListOfCountry { countryList in
-      DataCenter.countryCodes.removeAll()
-      countryList.forEach { country in
-        DataCenter.countryDataManager.add(country: country)
+  static func loadCountryList(completion: @escaping CountriesCompletion) {
+    getListOfCountry { list, error in
+      guard error == nil else {
+        completion(nil, GatewayError.connection(error: error!))
+        return
       }
-      completion?(DataCenter.countryCodes.sorted(by: { $0.name < $1.name }))
+      guard let countryList = list else {
+        completion(nil, GatewayError.local(description: "No sign"))
+        return
+      }
+      DataCenter.addCountries(countryList)
+      let countryCodes = DataCenter.countryCodes.sorted(by: { $0.name < $1.name })
+      completion(countryCodes, nil)
     }
   }
     
   // Rules
-  static func getListOfRules(completion: (([CertLogic.Rule]) -> Void)?) {
+  static func getListOfRules(completion: @escaping RulesCompletion) {
     request(["endpoints", "rules"], method: .get).response {
       guard case let .success(result) = $0.result,
         let response = result,
         let responseStr = String(data: response, encoding: .utf8)
-      else { return }
-        
+      else {
+        completion(nil, GatewayError.parsingError)
+        return
+      }
+      
       let ruleHashes: [RuleHash] = CertLogicEngine.getItems(from: responseStr)
       // Remove old hashes
       DataCenter.rules = DataCenter.rules.filter { rule in
         return !ruleHashes.contains(where: { $0.hash == rule.hash})
       }
+      
       // Downloading new hashes
-      var rulesItems = [CertLogic.Rule]()
-      let downloadingGroup = DispatchGroup()
+      let rulesItems = SyncArray<CertLogic.Rule>()
+      let group = DispatchGroup()
       ruleHashes.forEach { ruleHash in
-        downloadingGroup.enter()
+        group.enter()
         if !DataCenter.rulesDataManager.isRuleExistWithHash(hash: ruleHash.hash) {
-          getRules(ruleHash: ruleHash) { rule in
-            if let rule = rule {
-              rulesItems.append(rule)
+          getRules(ruleHash: ruleHash) { rule, error in
+            guard error == nil else {
+              completion(nil, GatewayError.connection(error: error!))
+              return
             }
-            downloadingGroup.leave()
+            guard let rule = rule else {
+              completion(nil, GatewayError.parsingError)
+              return
+            }
+            rulesItems.append(rule)
+            group.leave()
           }
         } else {
-          downloadingGroup.leave()
+          group.leave()
         }
       }
-      downloadingGroup.notify(queue: .main) {
-        completion?(rulesItems)
-        print("Finished all requests.")
+      group.notify(queue: .main) {
+        completion(rulesItems.resultArray, nil)
+        DGCLogger.logInfo("Finished all Rules requests.")
       }
     }
   }
   
-  static func getRules(ruleHash: CertLogic.RuleHash, completion: ((CertLogic.Rule?) -> Void)?) {
+  static func getRules(ruleHash: CertLogic.RuleHash, completion: @escaping RuleCompletionHandler) {
     request(["endpoints", "rules"], externalLink: "/\(ruleHash.country)/\(ruleHash.hash)", method: .get).response {
       guard case let .success(result) = $0.result,
         let response = result,
         let responseStr = String(data: response, encoding: .utf8)
       else {
-        completion?(nil)
+        completion(nil, GatewayError.parsingError)
         return
       }
       if let rule: Rule = CertLogicEngine.getItem(from: responseStr) {
         let downloadedRuleHash = SHA256.digest(input: response as NSData)
         if downloadedRuleHash.hexString == ruleHash.hash {
           rule.setHash(hash: ruleHash.hash)
-          completion?(rule)
+          completion(rule, nil)
         } else {
-          completion?(nil)
+          completion(nil, GatewayError.signingError)
         }
         return
+      } else {
+        completion(nil, GatewayError.signingError)
       }
-      completion?(nil)
     }
   }
   
-  static func loadRulesFromServer(completion: (([CertLogic.Rule]) -> Void)? = nil) {
-    getListOfRules { rulesList in
-      rulesList.forEach { DataCenter.rulesDataManager.add(rule: $0) }
-      completion?(DataCenter.rules)
+  static func loadRulesFromServer(completion: @escaping RulesCompletion) {
+    getListOfRules { rulesList, error in
+      guard error == nil else {
+        completion(nil, GatewayError.connection(error: error!))
+        return
+      }
+      guard let rules = rulesList else {
+        completion(nil, GatewayError.parsingError)
+        return
+      }
+      DataCenter.addRules(rules)
+      completion(DataCenter.rules, nil)
     }
   }
   
   // ValueSets
-  static func getListOfValueSets(completion: (([CertLogic.ValueSet]) -> Void)?) {
+  static func getListOfValueSets(completion: @escaping ValueSetsCompletion) {
     request(["endpoints", "valuesets"], method: .get).response {
       guard case let .success(result) = $0.result, let response = result,
         let responseStr = String(data: response, encoding: .utf8)
-      else { return }
-        
+      else {
+        completion(nil, GatewayError.parsingError)
+        return
+      }
       let valueSetsHashes: [ValueSetHash] = CertLogicEngine.getItems(from: responseStr)
       // Remove old hashes
       DataCenter.valueSets = DataCenter.valueSets.filter { valueSet in
         return !valueSetsHashes.contains(where: { $0.hash == valueSet.hash})
       }
       // Downloading new hashes
-      var valueSetsItems = [CertLogic.ValueSet]()
-      let downloadingGroup = DispatchGroup()
+      let valueSetsItems = SyncArray<CertLogic.ValueSet>()
+      let group = DispatchGroup()
       valueSetsHashes.forEach { valueSetHash in
-        downloadingGroup.enter()
+        group.enter()
         if !DataCenter.valueSetsDataManager.isValueSetExistWithHash(hash: valueSetHash.hash) {
-          getValueSets(valueSetHash: valueSetHash) { valueSet in
+          loadValueSet(valueSetHash: valueSetHash) { valueSet, error in
+            guard error == nil else {
+              completion(nil, GatewayError.connection(error: error!))
+              return
+            }
             if let valueSet = valueSet {
               valueSetsItems.append(valueSet)
             }
-            downloadingGroup.leave()
+            group.leave()
           }
         } else {
-          downloadingGroup.leave()
+          group.leave()
         }
       }
-      downloadingGroup.notify(queue: .main) {
-        completion?(valueSetsItems)
-        print("Finished all requests.")
+      group.notify(queue: .main) {
+        completion(valueSetsItems.resultArray, nil)
+        DGCLogger.logInfo("Finished all ValueSets requests.")
       }
     }
   }
   
-  static func getValueSets(valueSetHash: CertLogic.ValueSetHash, completion: ((CertLogic.ValueSet?) -> Void)?) {
+  static private func loadValueSet(valueSetHash: CertLogic.ValueSetHash, completion: @escaping ValueSetCompletionHandler) {
     request(["endpoints", "valuesets"], externalLink: "/\(valueSetHash.hash)", method: .get).response {
       guard case let .success(result) = $0.result,
         let response = result,
         let responseStr = String(data: response, encoding: .utf8)
       else {
-        completion?(nil)
+        completion(nil, GatewayError.parsingError)
         return
       }
-      if let valueSet: ValueSet = CertLogicEngine.getItem(from: responseStr) {
-        let downloadedValueSetHash = SHA256.digest(input: response as NSData)
-        if downloadedValueSetHash.hexString == valueSetHash.hash {
-          valueSet.setHash(hash: valueSetHash.hash)
-          completion?(valueSet)
-        } else {
-          completion?(nil)
-        }
+      guard let valueSet: ValueSet = CertLogicEngine.getItem(from: responseStr) else {
+        completion(nil, GatewayError.encodingError)
         return
       }
-      completion?(nil)
+      let downloadedValueSetHash = SHA256.digest(input: response as NSData)
+      if downloadedValueSetHash.hexString == valueSetHash.hash {
+        valueSet.setHash(hash: valueSetHash.hash)
+        completion(valueSet, nil)
+      } else {
+        completion(nil, GatewayError.signingError)
+      }
     }
   }
   
-  static func loadValueSetsFromServer(completion: (([CertLogic.ValueSet]) -> Void)? = nil){
-    getListOfValueSets { valueSetsList in
-      valueSetsList.forEach { valueSet in
-        DataCenter.valueSetsDataManager.add(valueSet: valueSet)
+  static func loadValueSetsFromServer(completion: @escaping ValueSetsCompletion) {
+    getListOfValueSets { list, error in
+      guard error == nil else {
+        completion(nil, GatewayError.connection(error: error!))
+        return
       }
-      completion?(DataCenter.valueSets)
+      guard let valueSetsList = list else {
+        completion(nil, GatewayError.connection(error: error!))
+        return
+      }
+
+      DataCenter.addValueSets(valueSetsList)
+      completion(DataCenter.valueSets, nil)
     }
   }
   
@@ -313,7 +366,7 @@ extension GatewayConnection {
 
       } catch {
         completion(nil, GatewayError.encodingError)
-        return
+        DGCLogger.logError(error)
       }
     })
     session.resume()
@@ -356,7 +409,7 @@ extension GatewayConnection {
         
       } catch {
         completion(nil, GatewayError.parsingError)
-        print(error.localizedDescription)
+        DGCLogger.logError(error)
       }
     })
     session.resume()

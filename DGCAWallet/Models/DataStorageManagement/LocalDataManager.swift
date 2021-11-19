@@ -53,7 +53,7 @@ class LocalDataManager {
     storage.save(localData, completion: completion)
   }
 
-  func initialize(completion: @escaping () -> Void) {
+  func initialize(completion: @escaping CompletionHandler) {
     storage.loadOverride(fallback: localData) { [unowned self] success in
       guard let result = success else {  return }
       

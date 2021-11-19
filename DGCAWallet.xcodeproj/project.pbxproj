@@ -103,6 +103,7 @@
 		D2387C60274558C300C55DF7 /* TicketingAcceptance.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2387C5D2745492600C55DF7 /* TicketingAcceptance.swift */; };
 		D2387C622746A7FB00C55DF7 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2387C612746A7FB00C55DF7 /* KeyChain.swift */; };
 		D2387C642746EE5500C55DF7 /* DGCLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2387C632746EE5500C55DF7 /* DGCLogger.swift */; };
+		D2387C66274813A000C55DF7 /* SyncArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2387C65274813A000C55DF7 /* SyncArray.swift */; };
 		D23EF7A6272057F40097D82B /* CertificateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23EF7A4272057F40097D82B /* CertificateCell.swift */; };
 		D23EF7A7272057F40097D82B /* ServerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23EF7A5272057F40097D82B /* ServerCell.swift */; };
 		D24C8951272353610090398A /* ScanWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C8950272353610090398A /* ScanWalletController.swift */; };
@@ -232,6 +233,7 @@
 		D2387C5D2745492600C55DF7 /* TicketingAcceptance.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = TicketingAcceptance.swift; sourceTree = "<group>"; tabWidth = 2; };
 		D2387C612746A7FB00C55DF7 /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		D2387C632746EE5500C55DF7 /* DGCLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DGCLogger.swift; sourceTree = "<group>"; };
+		D2387C65274813A000C55DF7 /* SyncArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncArray.swift; sourceTree = "<group>"; };
 		D23EF7A4272057F40097D82B /* CertificateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateCell.swift; sourceTree = "<group>"; };
 		D23EF7A5272057F40097D82B /* ServerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerCell.swift; sourceTree = "<group>"; };
 		D24C8950272353610090398A /* ScanWalletController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ScanWalletController.swift; sourceTree = "<group>"; tabWidth = 2; };
@@ -428,6 +430,7 @@
 				5C00072126D3A40E002E5013 /* SavedImage.swift */,
 				5C00072D26D3AC11002E5013 /* SavedPDF.swift */,
 				FEAEA96426FBB13600B94FFF /* AccessTokenResponse.swift */,
+				D2387C65274813A000C55DF7 /* SyncArray.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -762,6 +765,7 @@
 				5C50CF3A26973D9D0015EE29 /* UserDefaults+.swift in Sources */,
 				CE13CF0A262DCDDA0070C80E /* CertificateViewerController.swift in Sources */,
 				CEDABD40263C5FF4007A9B97 /* CertificateController.swift in Sources */,
+				D2387C66274813A000C55DF7 /* SyncArray.swift in Sources */,
 				CE37B643263867D700DEE13D /* SecureBackground.swift in Sources */,
 				5C556D4926F9F8AC007E2C2E /* CertificateListController.swift in Sources */,
 				FEC54BE6271F27180048B6BC /* AccessTokenService.swift in Sources */,

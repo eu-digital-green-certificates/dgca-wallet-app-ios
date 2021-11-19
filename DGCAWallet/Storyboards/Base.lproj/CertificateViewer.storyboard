@@ -167,6 +167,10 @@
                                             <constraint firstAttribute="width" secondItem="zGf-U8-pn3" secondAttribute="height" multiplier="14:9" id="nDE-5U-ZWG"/>
                                         </constraints>
                                     </imageView>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="r19-3o-Fqx">
+                                        <rect key="frame" x="176.66666666666666" y="364.66666666666669" width="37" height="37"/>
+                                        <color key="color" name="walletBlue"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="WJ5-9S-W9j" firstAttribute="leading" secondItem="a9u-Ia-KEX" secondAttribute="trailing" constant="16" id="2W9-Hf-mpU"/>
@@ -187,6 +191,7 @@
                                     <constraint firstAttribute="trailing" secondItem="YeB-JS-Q1Q" secondAttribute="trailing" constant="20" symbolic="YES" id="WpQ-ME-KBq"/>
                                     <constraint firstAttribute="bottom" secondItem="a9u-Ia-KEX" secondAttribute="bottom" constant="52" id="Ylj-6k-vl1"/>
                                     <constraint firstItem="9zn-iE-p4i" firstAttribute="top" secondItem="dsC-7e-Skh" secondAttribute="bottom" constant="16" id="YyA-kR-Pm1"/>
+                                    <constraint firstItem="r19-3o-Fqx" firstAttribute="centerY" secondItem="yEe-AH-rsr" secondAttribute="centerY" id="ani-2b-r8H"/>
                                     <constraint firstAttribute="trailing" secondItem="dsC-7e-Skh" secondAttribute="trailing" id="csD-4w-284"/>
                                     <constraint firstItem="dsC-7e-Skh" firstAttribute="leading" secondItem="yEe-AH-rsr" secondAttribute="leading" id="fGR-NQ-ao6"/>
                                     <constraint firstAttribute="trailing" secondItem="9zn-iE-p4i" secondAttribute="trailing" constant="20" symbolic="YES" id="hyX-KZ-rvc"/>
@@ -195,6 +200,7 @@
                                     <constraint firstItem="DVW-2y-e4I" firstAttribute="top" secondItem="yEe-AH-rsr" secondAttribute="top" constant="16" id="mLW-Ml-UXk"/>
                                     <constraint firstItem="YeB-JS-Q1Q" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DVW-2y-e4I" secondAttribute="trailing" constant="20" id="oV5-YM-uS3"/>
                                     <constraint firstItem="YeB-JS-Q1Q" firstAttribute="centerY" secondItem="DVW-2y-e4I" secondAttribute="centerY" id="quR-pQ-2ki"/>
+                                    <constraint firstItem="r19-3o-Fqx" firstAttribute="centerX" secondItem="yEe-AH-rsr" secondAttribute="centerX" id="rhl-4M-fSc"/>
                                     <constraint firstAttribute="bottom" secondItem="zGf-U8-pn3" secondAttribute="bottom" constant="8" id="utt-Vx-cic"/>
                                     <constraint firstItem="8fY-LF-Mko" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DVW-2y-e4I" secondAttribute="trailing" constant="20" id="vHo-YF-S8L"/>
                                     <constraint firstItem="WJ5-9S-W9j" firstAttribute="width" secondItem="a9u-Ia-KEX" secondAttribute="width" id="yAl-fm-WBD"/>
@@ -215,6 +221,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="r19-3o-Fqx" id="OJH-oV-stS"/>
                         <outlet property="cancelButton" destination="YeB-JS-Q1Q" id="xQU-gp-tsD"/>
                         <outlet property="checkValidityButton" destination="9zn-iE-p4i" id="mbe-qx-Vcb"/>
                         <outlet property="deleteButton" destination="KkS-4l-iTy" id="6wM-f0-XY6"/>
@@ -816,19 +823,19 @@
     </scenes>
     <designables>
         <designable name="9zn-iE-p4i">
-            <size key="intrinsicContentSize" width="171" height="51"/>
+            <size key="intrinsicContentSize" width="147" height="39"/>
         </designable>
         <designable name="KkS-4l-iTy">
-            <size key="intrinsicContentSize" width="205" height="51"/>
+            <size key="intrinsicContentSize" width="181" height="39"/>
         </designable>
         <designable name="WJ5-9S-W9j">
-            <size key="intrinsicContentSize" width="84" height="51"/>
+            <size key="intrinsicContentSize" width="60" height="39"/>
         </designable>
         <designable name="a9u-Ia-KEX">
-            <size key="intrinsicContentSize" width="78" height="51"/>
+            <size key="intrinsicContentSize" width="54" height="39"/>
         </designable>
         <designable name="eOj-kZ-7kv">
-            <size key="intrinsicContentSize" width="56" height="51"/>
+            <size key="intrinsicContentSize" width="32" height="39"/>
         </designable>
     </designables>
     <resources>

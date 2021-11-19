@@ -51,7 +51,7 @@ class RulesDataManager {
     return rulesData.rules.contains(where: { $0.hash == hash })
   }
   
-  func initialize(completion: @escaping () -> Void) {
+  func initialize(completion: @escaping CompletionHandler) {
     storage.loadOverride(fallback: rulesData) { [unowned self] value in
       guard let result = value else {
         completion()
