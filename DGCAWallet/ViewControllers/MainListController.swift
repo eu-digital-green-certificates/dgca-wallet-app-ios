@@ -122,21 +122,22 @@ class MainListController: UIViewController, DismissControllerDelegate {
   @IBAction func addNew() {
     guard loading == false else { return }
     
-    let menuActionSheet = UIAlertController(title: l10n("add.new"), message: l10n("want.add"), preferredStyle: UIAlertController.Style.actionSheet)
+    let menuActionSheet = UIAlertController(title: l10n("Add new?"), message: l10n("Do you want to add new certificate, image or PDF file?"),
+      preferredStyle: UIAlertController.Style.actionSheet)
     
-    menuActionSheet.addAction(UIAlertAction(title: l10n("scan.certificate"), style: UIAlertAction.Style.default, handler: {[weak self] _ in
+    menuActionSheet.addAction(UIAlertAction(title: l10n("Scan certificate"), style: UIAlertAction.Style.default, handler: {[weak self] _ in
         self?.scanNewCertificate()
       })
     )
-    menuActionSheet.addAction(UIAlertAction(title: l10n("image.import"), style: UIAlertAction.Style.default, handler: { [weak self] _ in
+    menuActionSheet.addAction(UIAlertAction(title: l10n("Image import"), style: UIAlertAction.Style.default, handler: { [weak self] _ in
         self?.addImageActivity()
       })
     )
-    menuActionSheet.addAction(UIAlertAction(title: l10n("pdf.import"), style: UIAlertAction.Style.default, handler: { [weak self] _ in
+    menuActionSheet.addAction(UIAlertAction(title: l10n("PDF Import"), style: UIAlertAction.Style.default, handler: { [weak self] _ in
         self?.addPdf()
       })
     )
-    menuActionSheet.addAction(UIAlertAction(title: l10n("nfc.import"), style: UIAlertAction.Style.default, handler: { [weak self] _ in
+    menuActionSheet.addAction(UIAlertAction(title: l10n("NFC Import"), style: UIAlertAction.Style.default, handler: { [weak self] _ in
         self?.scanNFC()
       })
     )
@@ -269,7 +270,7 @@ class MainListController: UIViewController, DismissControllerDelegate {
 extension MainListController: ScanWalletDelegate {
   func walletController(_ controller: ScanWalletController, didFailWithError error: CertificateParsingError) {
     DispatchQueue.main.async {
-      self.showInfoAlert(withTitle: l10n("err.barcode"), message: l10n("err.misc"))
+      self.showInfoAlert(withTitle: l10n("Barcode reading Error"), message: l10n("Something went wrong."))
     }
   }
   

@@ -66,16 +66,16 @@ class CertificateValidator {
   private func findValidityFailures() -> [String] {
     var failures = [String]()
     if !certificate.cryptographicallyValid {
-      failures.append(l10n("hcert.err.crypto"))
+      failures.append(l10n("Cryptographic signature not valid."))
     }
     if certificate.exp < HCert.clock {
-      failures.append(l10n("hcert.err.exp"))
+      failures.append(l10n("Certificate past expiration date."))
     }
     if certificate.iat > HCert.clock {
-      failures.append(l10n("hcert.err.iat"))
+      failures.append(l10n("Certificate issuance date is in the future."))
     }
     if certificate.statement == nil {
-      failures.append(l10n("hcert.err.empty"))
+      failures.append(l10n("No entries in the certificate."))
       return failures
     }
     failures.append(contentsOf: certificate.statement.validityFailures)

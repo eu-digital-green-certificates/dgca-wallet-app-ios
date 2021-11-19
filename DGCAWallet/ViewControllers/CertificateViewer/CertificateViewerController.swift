@@ -75,7 +75,7 @@ class CertificateViewerController: UIViewController {
     
     nameLabel.text = hCert.fullName
     if !isSaved {
-      dismissButton.setTitle(l10n("btn.save"), for: .normal)
+      dismissButton.setTitle(l10n("Save"), for: .normal)
       editButton.isHidden = true
       cancelButton.isHidden = false
       
@@ -90,13 +90,13 @@ class CertificateViewerController: UIViewController {
       cancelButton.isHidden = true
       
       if isEditMode {
-        editButton.setTitle("Done", for: .normal)
+        editButton.setTitle(l10n("Done"), for: .normal)
         deleteButton.isHidden = false
         checkValidityButton.isHidden = true
         dismissButton.isHidden = true
         shareButton.isHidden = true
       } else {
-        editButton.setTitle("Edit", for: .normal)
+        editButton.setTitle(l10n("Edit"), for: .normal)
         deleteButton.isHidden = true
         checkValidityButton.isHidden = false
         dismissButton.isHidden = false
@@ -106,7 +106,7 @@ class CertificateViewerController: UIViewController {
       headerBackground.backgroundColor = .walletBlue
     }
     
-    checkValidityButton.setTitle(l10n("button_check_validity"), for: .normal)
+    checkValidityButton.setTitle(l10n("Check Validity"), for: .normal)
     view.layoutIfNeeded()
   }
 
@@ -148,7 +148,9 @@ class CertificateViewerController: UIViewController {
   }
   
   func saveCert() {
-    showInputDialog(title: l10n("tan.confirm.title"), subtitle: l10n("tan.confirm.text"), actionTitle: l10n("Confirm"), inputPlaceholder: l10n("tan.confirm.placeholder") ) { [weak self] in
+    showInputDialog(title: l10n("Confirm TAN"),
+          subtitle: l10n("Please enter the TAN that was provided together with your certificate:"),
+          actionTitle: l10n("Confirm"), inputPlaceholder: "XYZ12345" ) { [weak self] in
       guard let cert = self?.hCert else { return }
         
       GatewayConnection.claim(cert: cert, with: $0) { success, newTan in
@@ -157,7 +159,7 @@ class CertificateViewerController: UIViewController {
             
           DataCenter.localDataManager.add(cert, with: newTan) { _ in
             DispatchQueue.main.async {
-              self?.showAlert(title: l10n("tan.confirm.success.title"), subtitle: l10n("tan.confirm.success.text")) { _ in
+              self?.showAlert(title: l10n("Certificate saved successfully"), subtitle: l10n("Now it is available in the wallet")) { _ in
                 self?.dismiss(animated: true) {
                   self?.delegate?.certificateViewer(self!, didAddCeCertificate: cert)
                 }
@@ -166,7 +168,7 @@ class CertificateViewerController: UIViewController {
           }
         } else {
           DispatchQueue.main.async {
-            self?.showAlert(title: l10n("tan.confirm.fail.title"), subtitle: l10n("tan.confirm.fail.text"))
+            self?.showAlert(title: l10n("Cannot save the Certificate"), subtitle: l10n("Check the TAN and try again."))
           }
         }
       }
@@ -189,12 +191,12 @@ class CertificateViewerController: UIViewController {
   }
   
   @IBAction func shareAction(_ sender: Any) {
-    let menuActionSheet =  UIAlertController(title: l10n("share.qr.code"), message: l10n("want.share"),
-        preferredStyle: .actionSheet)
-    menuActionSheet.addAction(UIAlertAction(title: l10n("image.export"), style: .default, handler: { [weak self] _ in
+    let menuActionSheet =  UIAlertController(title: l10n("Share QR Code?"),
+          message: l10n("Do you want to share DCC certificate via image or PDF file?"), preferredStyle: .actionSheet)
+    menuActionSheet.addAction(UIAlertAction(title: l10n("Export as Image"), style: .default, handler: { [weak self] _ in
           self?.shareQRCodeLikeImage()
         }))
-    menuActionSheet.addAction(UIAlertAction(title: l10n("pdf.export"), style: .default, handler: { [weak self] _ in
+    menuActionSheet.addAction(UIAlertAction(title: l10n("Export as PDF"), style: .default, handler: { [weak self] _ in
           self?.shareQrCodeLikePDF()
         }))
     menuActionSheet.addAction(UIAlertAction(title: l10n("Cancel"), style: .cancel, handler: nil))

@@ -60,8 +60,8 @@ struct SecureBackground {
       
     paused = true
     let context = LAContext()
-    context.localizedCancelTitle = l10n("auth.later")
-    let reason = l10n("auth.confirm")
+    context.localizedCancelTitle = l10n("Try Later")
+    let reason = l10n("Could not verify device ownership")
     context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason ) { success, err in
       if success {
         paused = false
@@ -73,8 +73,9 @@ struct SecureBackground {
           return
         }
         DispatchQueue.main.async {
-          controller?.showAlert(title: l10n("auth.confirm"), subtitle: l10n("auth.error")) { _ in
-            completion?(false)
+          controller?.showAlert(title: l10n("Could not verify device ownership"),
+            subtitle: l10n("Please try setting a passcode for this device before opening the app.")) { _ in
+              completion?(false)
           }
         }
       }

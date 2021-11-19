@@ -48,7 +48,7 @@ class CheckValidityController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupView()
-    checkValidityButton.setTitle(l10n("button_i_agree"), for: .normal)
+    checkValidityButton.setTitle(l10n("I Agree, check validity"), for: .normal)
     closeButton.setTitle(l10n("Close"), for: .normal)
   }
     
@@ -92,7 +92,6 @@ extension CheckValidityController: UITableViewDataSource {
     if item.cellType == .titleAndDescription {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.titleCellIndentifier,
           for: indexPath) as? SimpleValidityCell else { return UITableViewCell() }
-
       cell.setupCell(with: item)
       return cell
         

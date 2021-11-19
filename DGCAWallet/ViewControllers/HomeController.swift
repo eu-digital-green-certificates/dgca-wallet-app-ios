@@ -87,7 +87,7 @@ class HomeController: UIViewController {
     }
     
     if DataCenter.localDataManager.versionedConfig["outdated"].bool == true {
-      showAlert(title: l10n("info.outdated"), subtitle: l10n("info.outdated.body"))
+      showAlert(title: l10n("Update available"), subtitle: l10n("This version of the app is out of date."))
       return
     }
     SecureBackground.checkId(from: self) { success in

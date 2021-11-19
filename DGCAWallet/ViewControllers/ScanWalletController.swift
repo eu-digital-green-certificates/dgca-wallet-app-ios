@@ -26,7 +26,7 @@ class ScanWalletController: UIViewController {
 
   lazy var detectBarcodeRequest = VNDetectBarcodesRequest { request, error in
     guard error == nil else {
-      self.showAlert(withTitle: l10n("err.barcode"), message: error?.localizedDescription ?? l10n("err.misc"))
+      self.showAlert(withTitle: l10n("Barcode reading Error"), message: error?.localizedDescription ?? l10n("Something went wrong."))
       return
     }
     self.processClassification(request)
@@ -136,7 +136,7 @@ extension ScanWalletController  {
       let videoDeviceInput = try? AVCaptureDeviceInput(device: device),
       captureSession?.canAddInput(videoDeviceInput) == true
     else {
-      showAlert( withTitle: l10n("err.cam"), message: l10n("err.cam.desc"))
+      showAlert( withTitle: l10n("No camera available"), message: l10n("The app cannot access the camera"))
       return
     }
     
