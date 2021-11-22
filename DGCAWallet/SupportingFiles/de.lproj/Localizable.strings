@@ -155,4 +155,6 @@
 "Reload" = "Neu laden";
 "Privacy Information" = "Datenschutzinformationen:";
 "Settings" = "Einstellungen";
+"Expired date: %@" = "Abgelaufenes Datum: %@";
+"Certificate type: %@" = "Art des Zertifikats: %@";
 

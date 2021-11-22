@@ -26,7 +26,8 @@ class ScanWalletController: UIViewController {
 
   lazy var detectBarcodeRequest = VNDetectBarcodesRequest { request, error in
     guard error == nil else {
-      self.showAlert(withTitle: l10n("Barcode reading Error"), message: error?.localizedDescription ?? l10n("Something went wrong."))
+      self.showAlert(withTitle: "Barcode reading Error".localized,
+          message: error?.localizedDescription ?? "Something went wrong.".localized)
       return
     }
     self.processClassification(request)
@@ -93,7 +94,7 @@ class ScanWalletController: UIViewController {
        button.translatesAutoresizingMaskIntoConstraints = false
        button.backgroundColor = .clear
        button.setAttributedTitle(
-         NSAttributedString(string: l10n("Cancel"), attributes: [.font: UIFont.systemFont(ofSize: 22,
+        NSAttributedString(string: "Cancel".localized, attributes: [.font: UIFont.systemFont(ofSize: 22,
             weight: .semibold), .foregroundColor: UIColor.white]), for: .normal)
        button.addTarget(self, action: #selector(dismissScaner), for: .touchUpInside)
        view.addSubview(button)
@@ -136,7 +137,7 @@ extension ScanWalletController  {
       let videoDeviceInput = try? AVCaptureDeviceInput(device: device),
       captureSession?.canAddInput(videoDeviceInput) == true
     else {
-      showAlert( withTitle: l10n("No camera available"), message: l10n("The app cannot access the camera"))
+      showAlert( withTitle: "No camera available".localized, message: "The app cannot access the camera".localized)
       return
     }
     
@@ -223,14 +224,14 @@ extension ScanWalletController {
   private func showAlert(withTitle title: String, message: String) {
     DispatchQueue.main.async {
       let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-      alertController.addAction(UIAlertAction(title: l10n("OK"), style: .default))
+      alertController.addAction(UIAlertAction(title: "OK".localized, style: .default))
       self.present(alertController, animated: true)
     }
   }
   
   private func showPermissionsAlert() {
-    showAlert( withTitle: l10n("Camera Permissions"),
-      message: l10n("Please open Settings and grant permission for this app to use your camera.")
+    showAlert( withTitle: "Camera Permissions".localized,
+               message: "Please open Settings and grant permission for this app to use your camera.".localized
     )
   }
 }

@@ -157,3 +157,5 @@
 "Reload" = "Reload";
 "Privacy Information" = "Privacy Information:";
 "Settings" = "Settings";
+"Expired date: %@" = "Expired date: %@";
+"Certificate type: %@" = "Certificate type: %@";

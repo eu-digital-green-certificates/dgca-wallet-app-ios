@@ -70,8 +70,8 @@ class MainListController: UIViewController, DismissControllerDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-    self.titleLabel.text = l10n("Certificate Wallet")
-    self.addButton.setTitle(l10n("Add New"), for: .normal)
+    self.titleLabel.text = "Certificate Wallet".localized
+    self.addButton.setTitle("Add New".localized, for: .normal)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -132,26 +132,26 @@ class MainListController: UIViewController, DismissControllerDelegate {
   @IBAction func addNew() {
     guard loading == false else { return }
     
-    let menuActionSheet = UIAlertController(title: l10n("Add new?"), message: l10n("Do you want to add new certificate, image or PDF file?"),
+    let menuActionSheet = UIAlertController(title: "Add new?".localized, message: "Do you want to add new certificate, image or PDF file?".localized,
       preferredStyle: UIAlertController.Style.actionSheet)
     
-    menuActionSheet.addAction(UIAlertAction(title: l10n("Scan certificate"), style: UIAlertAction.Style.default, handler: {[weak self] _ in
+    menuActionSheet.addAction(UIAlertAction(title: "Scan certificate".localized, style: UIAlertAction.Style.default, handler: {[weak self] _ in
         self?.scanNewCertificate()
       })
     )
-    menuActionSheet.addAction(UIAlertAction(title: l10n("Image import"), style: UIAlertAction.Style.default, handler: { [weak self] _ in
+    menuActionSheet.addAction(UIAlertAction(title: "Image import".localized, style: UIAlertAction.Style.default, handler: { [weak self] _ in
         self?.addImageActivity()
       })
     )
-    menuActionSheet.addAction(UIAlertAction(title: l10n("PDF Import"), style: UIAlertAction.Style.default, handler: { [weak self] _ in
+    menuActionSheet.addAction(UIAlertAction(title: "PDF Import".localized, style: UIAlertAction.Style.default, handler: { [weak self] _ in
         self?.addPdf()
       })
     )
-    menuActionSheet.addAction(UIAlertAction(title: l10n("NFC Import"), style: UIAlertAction.Style.default, handler: { [weak self] _ in
+    menuActionSheet.addAction(UIAlertAction(title: "NFC Import".localized, style: UIAlertAction.Style.default, handler: { [weak self] _ in
         self?.scanNFC()
       })
     )
-    menuActionSheet.addAction(UIAlertAction(title: l10n("Cancel"), style: UIAlertAction.Style.cancel, handler: nil))
+    menuActionSheet.addAction(UIAlertAction(title: "Cancel".localized, style: UIAlertAction.Style.cancel, handler: nil))
     present(menuActionSheet, animated: true, completion: nil)
   }
   
@@ -174,14 +174,14 @@ class MainListController: UIViewController, DismissControllerDelegate {
         
       } catch {
         let alertController: UIAlertController = {
-          let controller = UIAlertController(title: l10n("Cannot read NFC"),
-              message: l10n("An error occurred while reading NFC"),
+          let controller = UIAlertController(title: "Cannot read NFC".localized,
+                                             message: "An error occurred while reading NFC".localized,
             preferredStyle: .alert)
-          let actionRetry = UIAlertAction(title: l10n("Retry"), style: .default) { _ in
+          let actionRetry = UIAlertAction(title: "Retry".localized, style: .default) { _ in
             self?.scanNFC()
           }
           controller.addAction(actionRetry)
-          let actionOk = UIAlertAction(title: l10n("OK"), style: .default)
+          let actionOk = UIAlertAction(title: "OK".localized, style: .default)
           controller.addAction(actionOk)
             return controller
         }()
@@ -279,7 +279,7 @@ class MainListController: UIViewController, DismissControllerDelegate {
 extension MainListController: ScanWalletDelegate {
   func walletController(_ controller: ScanWalletController, didFailWithError error: CertificateParsingError) {
     DispatchQueue.main.async {
-      self.showInfoAlert(withTitle: l10n("Barcode reading Error"), message: l10n("Something went wrong."))
+      self.showInfoAlert(withTitle: "Barcode reading Error".localized, message: "Something went wrong.".localized)
     }
   }
   
@@ -307,7 +307,7 @@ extension MainListController: ScanWalletDelegate {
     startActivity()
     IdentityService.requestListOfServices(ticketingInfo: ticketing) { [weak self] services, error in
       guard error == nil else {
-        self?.showInfoAlert(withTitle: l10n("This certificate is not supported"), message: "")
+        self?.showInfoAlert(withTitle: "This certificate is not supported".localized, message: "")
         return
       }
       DispatchQueue.main.async {
@@ -378,11 +378,11 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
       switch section {
       case TableSection.certificates.rawValue:
-          return l10n("Certificates")
+        return "Certificates".localized
       case TableSection.images.rawValue:
-          return l10n("Images")
+        return "Images".localized
       case  TableSection.pdfs.rawValue:
-          return l10n("PDF files")
+        return "PDF files".localized
       default:
           return ":"
       }
@@ -391,18 +391,22 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       switch indexPath.section {
       case TableSection.certificates.rawValue:
-        guard let walletCell = table.dequeueReusableCell(withIdentifier: "walletCell", for: indexPath) as? WalletCell else { return UITableViewCell() }
+        guard let walletCell = table.dequeueReusableCell(withIdentifier: "walletCell", for: indexPath) as? WalletCell
+        else { return UITableViewCell() }
         
         walletCell.setupCell(listCertElements[indexPath.row])
         return walletCell
           
       case TableSection.images.rawValue:
-          guard let imageCell = table.dequeueReusableCell(withIdentifier: "ImageTableViewCell", for: indexPath) as? ImageTableViewCell else { return UITableViewCell() }
+        guard let imageCell = table.dequeueReusableCell(withIdentifier: "ImageTableViewCell", for: indexPath) as? ImageTableViewCell
+        else { return UITableViewCell() }
+        
         imageCell.setImage(image: listImageElements[indexPath.row])
         return imageCell
           
       case TableSection.pdfs.rawValue:
-          guard let imageCell = table.dequeueReusableCell(withIdentifier: "PDFTableViewCell", for: indexPath) as? PDFTableViewCell else { return UITableViewCell() }
+        guard let imageCell = table.dequeueReusableCell(withIdentifier: "PDFTableViewCell", for: indexPath) as? PDFTableViewCell
+        else { return UITableViewCell() }
            
         imageCell.setPDF(pdf: listPdfElements[indexPath.row])
         return imageCell
@@ -435,8 +439,8 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
       switch indexPath.section {
       case TableSection.certificates.rawValue:
         let savedCert = listCertElements[indexPath.row]
-        showAlert( title: l10n("Delete Certificate"), subtitle: l10n("cert.delete.body"),
-                   actionTitle: l10n("Confirm"), cancelTitle: l10n("Cancel")) { [weak self] in
+        showAlert( title: "Delete Certificate".localized, subtitle: "cert.delete.body".localized,
+                   actionTitle: "Confirm".localized, cancelTitle: "Cancel".localized) { [weak self] in
         if $0 {
           self?.startActivity()
           DataCenter.localDataManager.remove(withDate: savedCert.date) { _ in
@@ -453,8 +457,8 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
       
       case TableSection.images.rawValue:
         let savedImage = listImageElements[indexPath.row]
-        showAlert( title: l10n("Delete Certificate"), subtitle: l10n("cert.delete.body"),
-                   actionTitle: l10n("Confirm"), cancelTitle: l10n("Cancel")) { [weak self] in
+        showAlert( title: "Delete Certificate".localized, subtitle: "cert.delete.body".localized,
+      actionTitle: "Confirm".localized, cancelTitle:"Cancel".localized) { [weak self] in
           if $0 {
             self?.startActivity()
             DataCenter.imageDataManager.deleteImage(with: savedImage.identifier) { _ in
@@ -469,8 +473,8 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
         }
       case TableSection.pdfs.rawValue:
         let savedPDF = listPdfElements[indexPath.row]
-        showAlert( title: l10n("Delete Certificate"), subtitle: l10n("cert.delete.body"),
-                   actionTitle: l10n("Confirm"), cancelTitle: l10n("Cancel")) { [weak self] in
+        showAlert( title: "Delete Certificate".localized, subtitle: "cert.delete.body".localized,
+                   actionTitle: "Confirm".localized, cancelTitle: "Cancel".localized) { [weak self] in
           if $0 {
             self?.startActivity()
             DataCenter.pdfDataManager.deletePDF(with: savedPDF.identifier) { _ in
@@ -492,16 +496,16 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
 // MARK: UIImagePicker delegate
 extension MainListController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   private func addImageActivity() {
-    let alert = UIAlertController(title: l10n("Get Image from"), message: nil, preferredStyle: .actionSheet)
-    let cameraAction = UIAlertAction(title: l10n("Camera"), style: .default) {[weak self] _ in
+    let alert = UIAlertController(title: "Get Image from".localized, message: nil, preferredStyle: .actionSheet)
+    let cameraAction = UIAlertAction(title: "Camera".localized, style: .default) {[weak self] _ in
       alert.dismiss(animated: true, completion: nil)
       self?.openCamera()
     }
-    let galleryAction = UIAlertAction(title: l10n("Gallery"), style: .default) {[weak self] _ in
+    let galleryAction = UIAlertAction(title: "Gallery".localized, style: .default) {[weak self] _ in
       alert.dismiss(animated: true, completion: nil)
       self?.openGallery()
     }
-    let cancelAction = UIAlertAction(title: l10n("Cancel"), style: .cancel)
+    let cancelAction = UIAlertAction(title: "Cancel".localized, style: .cancel)
     
     // Add the actions
     alert.addAction(cameraAction)
@@ -518,9 +522,9 @@ extension MainListController: UIImagePickerControllerDelegate, UINavigationContr
           present(picker, animated: true, completion: nil)
       } else {
           let alertController: UIAlertController = {
-              let controller = UIAlertController(title: l10n("Cannot scan"), message: l10n("You don't have a camera."),
+            let controller = UIAlertController(title:"Cannot scan".localized, message: "You don't have a camera.".localized,
                  preferredStyle: .alert)
-              let action = UIAlertAction(title: l10n("OK"), style: .default)
+            let action = UIAlertAction(title: "OK".localized, style: .default)
               controller.addAction(action)
               return controller
           }()
@@ -574,8 +578,8 @@ extension MainListController {
   }
   
   private func saveImage(image: UIImage) {
-    showInputDialog(title: l10n("Save image"), subtitle: l10n("Please enter the image name"),
-      inputPlaceholder: l10n("filename")) { [weak self] fileName in
+    showInputDialog(title: "Save image".localized, subtitle: "Please enter the image name".localized,
+                    inputPlaceholder: "filename".localized) { [weak self] fileName in
       let savedImg = SavedImage(fileName: fileName ?? UUID().uuidString, image: image)
       
       self?.startActivity()
@@ -652,8 +656,8 @@ extension MainListController: UIDocumentPickerDelegate {
   }
   
   private func savePDFFile(url: NSURL) {
-    showInputDialog(title: l10n("Save PDF file"), subtitle: l10n("Please enter the pdf file name"),
-      inputPlaceholder: l10n("filename")) { [weak self] fileName in
+    showInputDialog(title: "Save PDF file".localized, subtitle: "Please enter the pdf file name".localized,
+                    inputPlaceholder: "filename".localized) { [weak self] fileName in
       let pdf = SavedPDF(fileName: fileName ?? UUID().uuidString, pdfUrl: url as URL)
       self?.startActivity()
       DataCenter.pdfDataManager.add(savedPdf: pdf) { _ in

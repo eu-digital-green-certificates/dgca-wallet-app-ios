@@ -64,8 +64,8 @@ class PDFViewerController: UIViewController {
     pdfViewer?.autoScales = true
     pdfView.addSubview(pdfViewer!)
     pdfViewer?.document = savedPDF.pdf
-    closeButton.setTitle(l10n("Close"), for: .normal)
-    shareButton.setTitle(l10n("Share"), for: .normal)
+    closeButton.setTitle("Close".localized, for: .normal)
+    shareButton.setTitle("Share".localized, for: .normal)
     navigationItem.title = savedPDF.fileName
   }
   

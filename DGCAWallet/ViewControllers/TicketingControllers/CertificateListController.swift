@@ -48,15 +48,16 @@ class CertificateListController: UIViewController {
   }
 
   private var accessTokenInfoKeys = [
-      l10n("Name"),
-      l10n("Date of birth"),
-      l10n("Departure"),
-      l10n("Arrival"),
-      l10n("Accepted certificate type"),
-      l10n("Category"),
-      l10n("Validation Time"),
-      l10n("Valid from"),
-      l10n("Valid to")]
+    "Name".localized,
+    "Date of birth".localized,
+    "Departure".localized,
+    "Arrival".localized,
+    "Accepted certificate type".localized,
+    "Category".localized,
+    "Validation Time".localized,
+    "Valid from".localized,
+    "Valid to".localized
+  ]
   
   private var accessTokenInfoValues = [String]()
   
@@ -72,8 +73,8 @@ class CertificateListController: UIViewController {
     accessTokenInfoValues = ["\(vcValue.gnt!) \(vcValue.fnt!)", vcValue.dob!, "\(vcValue.cod!),\(vcValue.rod!)", "\(vcValue.coa!),\(vcValue.roa!)", vcValue.type!.joined(separator: ","), vcValue.category!.joined(separator: ","), vcValue.validationClock!, vcValue.validFrom!, vcValue.validTo!]
     
     tableView.tableFooterView = UIView()
-    title = l10n("Certificates")
-    nextButton.setTitle(l10n("Next"), for: .normal)
+    title = "Certificates".localized
+    nextButton.setTitle("Next".localized, for: .normal)
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -83,7 +84,7 @@ class CertificateListController: UIViewController {
   
   @IBAction func nextButtonAction(_ sender: Any) {
     guard let _ = selectedStringCertificate?.cert else {
-      self.showInfoAlert(withTitle: l10n("Please select a certificate"), message: l10n("Here are all the appropriate certificates."))
+      self.showInfoAlert(withTitle: "Please select a certificate".localized, message: "Here are all the appropriate certificates.".localized)
         return
     }
     
@@ -145,7 +146,7 @@ extension CertificateListController: UITableViewDataSource, UITableViewDelegate 
     if section == 0 {
       return nil
     } else {
-      return l10n("Certificates")
+      return "Certificates".localized
     }
   }
   
@@ -180,8 +181,8 @@ extension CertificateListController: UITableViewDataSource, UITableViewDelegate 
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
       let savedCert = stringCertificates[indexPath.row]
-      showAlert(title: l10n("Delete Certificate"), subtitle: l10n("cert.delete.body"), actionTitle: l10n("Confirm"),
-       cancelTitle: l10n("Cancel")) {
+      showAlert(title: "Delete Certificate".localized, subtitle: "cert.delete.body".localized, actionTitle: "Confirm".localized,
+                cancelTitle: "Cancel".localized) {
           if $0 {
            DataCenter.localDataManager.remove(withDate: savedCert.date) { [weak self] _ in
              self?.reloadComponents()

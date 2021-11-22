@@ -67,8 +67,8 @@ class ExtendedValidityCell: UITableViewCell {
   }
     
   func setupView() {
-    destinationLabel.text = l10n("Your destination country")
-    dateLabel.text = l10n("Check the date")
+      destinationLabel.text = "Your destination country".localized
+      dateLabel.text = "Check the date".localized
     datePicker.minimumDate = Date()
     if #available(iOS 13.4, *) {
       datePicker.preferredDatePickerStyle = .wheels
@@ -97,7 +97,7 @@ extension ExtendedValidityCell: UIPickerViewDataSource, UIPickerViewDelegate {
   }
     
   public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-    if countryItems.count == 0 { return l10n("Country codes list empty") }
+      if countryItems.count == 0 { return "Country codes list empty".localized }
     return countryItems[row].name
   }
     

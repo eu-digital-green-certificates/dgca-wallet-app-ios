@@ -52,8 +52,8 @@ class ServerListController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    title = l10n("Services")
-    nextButton.setTitle(l10n("Next"), for: .normal)
+    title = "Services".localized
+    nextButton.setTitle("Next".localized, for: .normal)
     self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
   }
   
@@ -149,29 +149,29 @@ extension ServerListController: UITableViewDataSource, UITableViewDelegate {
 extension ServerListController {
   func showNotSelectedServise() {
     DispatchQueue.main.async {
-      self.showInfoAlert(withTitle: l10n("Please select the required service"),
-          message: l10n("Each service is located on a separate server and is designed for specific activities."))
+      self.showInfoAlert(withTitle: "Please select the required service".localized,
+          message: "Each service is located on a separate server and is designed for specific activities.".localized)
     }
   }
 
   func showAlertServiceCannotUse() {
     DispatchQueue.main.async {
-      self.showInfoAlert(withTitle: l10n("The specified service cannot be used"),
-          message: l10n("Make sure you select the desired service..."))
+      self.showInfoAlert(withTitle: "The specified service cannot be used".localized,
+          message: "Make sure you select the desired service...".localized)
     }
   }
   
   func showAlertInternalError() {
     DispatchQueue.main.async {
-      self.showInfoAlert(withTitle: l10n("An internal error has occurred"),
-          message: l10n("Please quit the application and restart again."))
+      self.showInfoAlert(withTitle: "An internal error has occurred".localized,
+          message: "Please quit the application and restart again.".localized)
     }
   }
   
   func showNetworkingError() {
     DispatchQueue.main.async {
-      self.showInfoAlert(withTitle: l10n("An internet connection error has occurred"),
-          message: l10n("Make sure your device is connected to the internet and try again..."))
+      self.showInfoAlert(withTitle: "An internet connection error has occurred".localized,
+          message: "Make sure your device is connected to the internet and try again...".localized)
     }
   }
 }

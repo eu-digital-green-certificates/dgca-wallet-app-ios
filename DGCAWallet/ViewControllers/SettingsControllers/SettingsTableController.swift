@@ -42,10 +42,10 @@ class SettingsTableController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     versionLabel.text = DataCenter.appVersion
-    reloadLabel.text = l10n("Reload")
-    licensesLabel.text = l10n("Licenses")
-    privacyInfoLabel.text = l10n("Privacy Information")
-    self.title = l10n("Settings")
+    reloadLabel.text = "Reload".localized
+    licensesLabel.text = "Licenses".localized
+    privacyInfoLabel.text = "Privacy Information".localized
+    self.title = "Settings".localized
   }
   
   override func viewDidDisappear(_ animated: Bool) {
@@ -75,7 +75,7 @@ class SettingsTableController: UITableViewController {
   override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
     switch section {
     case 1:
-      let format = l10n("Last Updated: %@")
+      let format = "Last Updated: %@".localized
       return String(format: format, DataCenter.lastFetch.dateTimeString)
     default:
       return nil

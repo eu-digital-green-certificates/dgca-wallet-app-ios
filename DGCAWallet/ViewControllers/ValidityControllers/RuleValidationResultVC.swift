@@ -62,25 +62,25 @@ class RuleValidationResultVC: UIViewController {
   }
     
   private func setupInterface() {
-    resultLabel.text = l10n("Validating certificate with country rules")
+    resultLabel.text = "Validating certificate with country rules".localized
     resultDescriptionLabel.text = ""
-    noWarrantyLabel.text = l10n("This check gives an indication on eligibility...")
-    closeButton.setTitle(l10n("Close"), for: .normal)
-    okButton.setTitle(l10n("OK"), for: .normal)
+    noWarrantyLabel.text = "This check gives an indication on eligibility...".localized
+    closeButton.setTitle("Close".localized, for: .normal)
+    okButton.setTitle("OK".localized, for: .normal)
     tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 32, right: 0)
 
     let validity: HCertValidity = self.validateCertLogicRules()
     switch validity {
       case .valid:
-        resultLabel.text = l10n("Valid certificate")
-        resultDescriptionLabel.text = l10n("Your certificate is valid and confirms...")
+      resultLabel.text = "Valid certificate".localized
+      resultDescriptionLabel.text = "Your certificate is valid and confirms...".localized
         resultIcon.image = UIImage(named: "icon_large_valid")
       case .invalid:
-        resultLabel.text = l10n("Invalid certificate")
-        resultDescriptionLabel.text = l10n("Your certificate did not allows you to enter the chosen country")
+      resultLabel.text = "Invalid certificate".localized
+      resultDescriptionLabel.text = "Your certificate did not allows you to enter the chosen country".localized
       case .ruleInvalid:
-        resultLabel.text = l10n("Certificate has limitation")
-        resultDescriptionLabel.text = l10n("Your certificate is valid but has the following restrictions:")
+      resultLabel.text = "Certificate has limitation".localized
+      resultDescriptionLabel.text = "Your certificate is valid but has the following restrictions:".localized
         resultIcon.image = UIImage(named: "icon_large_warning")
     }
     resultIcon.isHidden = false
@@ -147,15 +147,15 @@ extension RuleValidationResultVC {
           if let error = validationResult.validationErrors?.first {
             switch validationResult.result {
             case .fail:
-              items.append(InfoSection(header: l10n("Certificate logic engine error"), content: error.localizedDescription,
+              items.append(InfoSection(header: "Certificate logic engine error".localized, content: error.localizedDescription,
                 countryName: hCert.ruleCountryCode,
                 ruleValidationResult: SwiftDGC.RuleValidationResult.error))
             case .open:
-              items.append(InfoSection(header: l10n("Certificate logic engine error"), content: error.localizedDescription,
+              items.append(InfoSection(header: "Certificate logic engine error".localized, content: error.localizedDescription,
                 countryName: hCert.ruleCountryCode,
                 ruleValidationResult: SwiftDGC.RuleValidationResult.open))
             case .passed:
-              items.append(InfoSection(header: l10n("Certificate logic engine error"), content: error.localizedDescription,
+              items.append(InfoSection(header: "Certificate logic engine error".localized, content: error.localizedDescription,
                 countryName: hCert.ruleCountryCode,
                 ruleValidationResult: SwiftDGC.RuleValidationResult.passed))
             }

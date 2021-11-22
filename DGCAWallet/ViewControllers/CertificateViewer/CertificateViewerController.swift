@@ -75,12 +75,12 @@ class CertificateViewerController: UIViewController {
     guard let hCert = hCert else { return }
     
     nameLabel.text = hCert.fullName
-    shareButton.setTitle(l10n("Save"), for: .normal)
-    deleteButton.setTitle(l10n("Delete Certificate"), for: .normal)
-    checkValidityButton.setTitle(l10n("Check Validity"), for: .normal)
+    shareButton.setTitle("Share".localized, for: .normal)
+    deleteButton.setTitle("Delete Certificate".localized, for: .normal)
+    checkValidityButton.setTitle("Check Validity".localized, for: .normal)
 
     if !isSaved {
-      dismissButton.setTitle(l10n("Save"), for: .normal)
+      dismissButton.setTitle("Save".localized, for: .normal)
       editButton.isHidden = true
       cancelButton.isHidden = false
       
@@ -95,13 +95,13 @@ class CertificateViewerController: UIViewController {
       cancelButton.isHidden = true
       
       if isEditMode {
-        editButton.setTitle(l10n("Done"), for: .normal)
+        editButton.setTitle("Done".localized, for: .normal)
         deleteButton.isHidden = false
         checkValidityButton.isHidden = true
         dismissButton.isHidden = true
         shareButton.isHidden = true
       } else {
-        editButton.setTitle(l10n("Edit"), for: .normal)
+        editButton.setTitle("Edit".localized, for: .normal)
         deleteButton.isHidden = true
         checkValidityButton.isHidden = false
         dismissButton.isHidden = false
@@ -141,8 +141,8 @@ class CertificateViewerController: UIViewController {
   @IBAction func deleteCertificateAction() {
     guard let certDate = certDate else { return }
     
-    showAlert( title: l10n("Delete Certificate"), subtitle: l10n("cert.delete.body"),
-      actionTitle: l10n("Confirm"), cancelTitle: l10n("Cancel")) { [weak self] in
+    showAlert( title: "Delete Certificate".localized, subtitle: "cert.delete.body".localized,
+          actionTitle: "Confirm".localized, cancelTitle: "Cancel".localized) { [weak self] in
         if $0 {
           DataCenter.localDataManager.remove(withDate: certDate) {[weak self] _ in
             DispatchQueue.main.async {
@@ -155,9 +155,9 @@ class CertificateViewerController: UIViewController {
   }
   
   private func saveCert(completion: @escaping CompletionHandler) {
-    showInputDialog(title: l10n("Confirm TAN"),
-          subtitle: l10n("Please enter the TAN that was provided together with your certificate:"),
-          actionTitle: l10n("Confirm"), inputPlaceholder: "XYZ12345" ) { [weak self] in
+    showInputDialog(title: "Confirm TAN".localized,
+        subtitle: "Please enter the TAN that was provided together with your certificate:".localized,
+        actionTitle: "Confirm".localized, inputPlaceholder: "XYZ12345" ) { [weak self] in
       guard let certificate = self?.hCert else {
         DGCLogger.logInfo("Certificate error")
         completion()
@@ -167,6 +167,11 @@ class CertificateViewerController: UIViewController {
       GatewayConnection.claim(cert: certificate, with: $0) { success, newTan, error in
         guard error == nil else {
           completion()
+          DispatchQueue.main.async {
+            completion()
+            self?.showAlert(title:"Cannot save the Certificate".localized, subtitle: "Check the TAN and try again.".localized)
+          }
+
           DGCLogger.logError(error!)
           return
         }
@@ -175,7 +180,7 @@ class CertificateViewerController: UIViewController {
           DataCenter.localDataManager.add(certificate, with: newTan) { _ in
             DispatchQueue.main.async {
               completion()
-              self?.showAlert(title: l10n("Certificate saved successfully"), subtitle: l10n("Now it is available in the wallet")) { _ in
+              self?.showAlert(title: "Certificate saved successfully".localized, subtitle: "Now it is available in the wallet".localized) { _ in
                 self?.dismiss(animated: true) {
                   self?.delegate?.certificateViewer(self!, didAddCeCertificate: certificate)
                 }
@@ -185,7 +190,7 @@ class CertificateViewerController: UIViewController {
         } else {
           DispatchQueue.main.async {
             completion()
-            self?.showAlert(title: l10n("Cannot save the Certificate"), subtitle: l10n("Check the TAN and try again."))
+            self?.showAlert(title:"Cannot save the Certificate".localized, subtitle: "Check the TAN and try again.".localized)
           }
         }
       }
@@ -208,15 +213,15 @@ class CertificateViewerController: UIViewController {
   }
   
   @IBAction func shareAction(_ sender: Any) {
-    let menuActionSheet =  UIAlertController(title: l10n("Share QR Code?"),
-          message: l10n("Do you want to share DCC certificate via image or PDF file?"), preferredStyle: .actionSheet)
-    menuActionSheet.addAction(UIAlertAction(title: l10n("Export as Image"), style: .default, handler: { [weak self] _ in
+    let menuActionSheet =  UIAlertController(title: "Share QR Code?".localized,
+          message: "Do you want to share DCC certificate via image or PDF file?".localized, preferredStyle: .actionSheet)
+    menuActionSheet.addAction(UIAlertAction(title: "Export as Image".localized, style: .default, handler: { [weak self] _ in
           self?.shareQRCodeLikeImage()
         }))
-    menuActionSheet.addAction(UIAlertAction(title: l10n("Export as PDF"), style: .default, handler: { [weak self] _ in
+    menuActionSheet.addAction(UIAlertAction(title: "Export as PDF".localized, style: .default, handler: { [weak self] _ in
           self?.shareQrCodeLikePDF()
         }))
-    menuActionSheet.addAction(UIAlertAction(title: l10n("Cancel"), style: .cancel, handler: nil))
+    menuActionSheet.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil))
     present(menuActionSheet, animated: true, completion: nil)
   }
 }

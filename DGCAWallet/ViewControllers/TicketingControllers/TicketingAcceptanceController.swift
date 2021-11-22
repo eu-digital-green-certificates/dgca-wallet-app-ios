@@ -68,12 +68,12 @@ class TicketingAcceptanceController: UIViewController {
 
   private func setupView(isValidation: Bool) {
     if isValidation {
-      title = l10n("Consent")
+      title = "Consent".localized
       self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-      certificateTitle.text = String(format: "Certificate type: %@", certificate?.certTypeString ?? "")
-      validToLabel.text = String(format: "Expired date: %@", certificate?.exp.localDateString ?? "")
-      consetsLabel.text = l10n("Consent")
-      infoLabel.text = String(format: l10n("Do you agree to share the %@ certificate with %@?"),
+      certificateTitle.text = String(format: "Certificate type: %@".localized, certificate?.certTypeString ?? "")
+      validToLabel.text = String(format: "Expired date: %@".localized, certificate?.exp.localDateString ?? "")
+      consetsLabel.text = "Consent".localized
+      infoLabel.text = String(format: "Do you agree to share the %@ certificate with %@?".localized,
         certificate?.certTypeString ?? "", "airline.com")
     }
   }
@@ -95,8 +95,8 @@ class TicketingAcceptanceController: UIViewController {
       guard error == nil, let response = response else {
         DispatchQueue.main.async {
           self?.stopActivity()
-          self?.showInfoAlert(withTitle: l10n("Cannot validate the certificate"),
-              message: l10n("Make sure you select the desired service..."))
+          self?.showInfoAlert(withTitle: "Cannot validate the certificate".localized,
+            message: "Make sure you select the desired service...".localized)
         }
         return
       }

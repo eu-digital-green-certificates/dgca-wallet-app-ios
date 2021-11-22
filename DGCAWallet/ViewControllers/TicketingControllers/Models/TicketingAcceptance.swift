@@ -114,9 +114,9 @@ class TicketingAcceptance {
   }
     
   private  func encrypt(data: Data, with key: SecKey) -> (Data?, String?) {
-    guard let publicKey = SecKeyCopyPublicKey(key) else { return (nil, l10n("Cannot retrieve public key.")) }
+    guard let publicKey = SecKeyCopyPublicKey(key) else { return (nil, "Cannot retrieve public key.".localized) }
     guard SecKeyIsAlgorithmSupported(publicKey, .encrypt, SecKeyAlgorithm.rsaEncryptionOAEPSHA256) else {
-      return (nil, l10n("Algorithm not supported."))
+      return (nil, "Algorithm not supported.".localized)
     }
     var error: Unmanaged<CFError>?
     let cipherData = SecKeyCreateEncryptedData(publicKey,

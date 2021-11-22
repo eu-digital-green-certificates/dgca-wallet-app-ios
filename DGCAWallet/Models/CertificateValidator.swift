@@ -66,16 +66,16 @@ class CertificateValidator {
   private func findValidityFailures() -> [String] {
     var failures = [String]()
     if !certificate.cryptographicallyValid {
-      failures.append(l10n("Cryptographic signature not valid."))
+        failures.append("Cryptographic signature not valid.".localized)
     }
     if certificate.exp < HCert.clock {
-      failures.append(l10n("Certificate past expiration date."))
+        failures.append("Certificate past expiration date.".localized)
     }
     if certificate.iat > HCert.clock {
-      failures.append(l10n("Certificate issuance date is in the future."))
+        failures.append("Certificate issuance date is in the future.".localized)
     }
     if certificate.statement == nil {
-      failures.append(l10n("No entries in the certificate."))
+        failures.append("No entries in the certificate.".localized)
       return failures
     }
     failures.append(contentsOf: certificate.statement.validityFailures)
@@ -105,23 +105,23 @@ class CertificateValidator {
         
         if failsAndOpen.count > 0 {
           validity = .ruleInvalid
-          infoSection = InfoSection(header: l10n("Possible limitation"), content: l10n("Country rules validation failed"))
+            infoSection = InfoSection(header: "Possible limitation".localized, content: "Country rules validation failed".localized)
           var listOfRulesSection: [InfoSection] = []
           result.sorted(by: { $0.result.rawValue < $1.result.rawValue }).forEach { validationResult in
             if let error = validationResult.validationErrors?.first {
               switch validationResult.result {
               case .fail:
-                listOfRulesSection.append(InfoSection(header: l10n("Certificate logic engine error"),
+                  listOfRulesSection.append(InfoSection(header: "Certificate logic engine error".localized,
                     content: error.localizedDescription,
                     countryName: certificate.ruleCountryCode,
                     ruleValidationResult: SwiftDGC.RuleValidationResult.error))
               case .open:
-                listOfRulesSection.append(InfoSection(header: l10n("Certificate logic engine error"),
-                    content: l10n(error.localizedDescription),
+                  listOfRulesSection.append(InfoSection(header: "Certificate logic engine error".localized,
+                    content: error.localizedDescription,
                     countryName: certificate.ruleCountryCode,
                     ruleValidationResult: SwiftDGC.RuleValidationResult.open))
               case .passed:
-                listOfRulesSection.append(InfoSection(header: l10n("Certificate logic engine error"),
+                  listOfRulesSection.append(InfoSection(header: "Certificate logic engine error".localized,
                     content: error.localizedDescription,
                     countryName: certificate.ruleCountryCode,
                     ruleValidationResult: SwiftDGC.RuleValidationResult.passed))

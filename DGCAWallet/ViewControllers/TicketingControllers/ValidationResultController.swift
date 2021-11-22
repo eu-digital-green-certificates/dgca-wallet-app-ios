@@ -47,13 +47,13 @@ class ValidationResultController: UIViewController {
     limitationsTableView.reloadData()
     limitationsTableView.tableFooterView = UIView()
     iconImage.image = iconImage.image?.withRenderingMode(.alwaysTemplate)
-    okButton.setTitle(l10n("OK"), for: .normal)
+    okButton.setTitle("OK".localized, for: .normal)
 
     guard let result = validationResultModel?.result else {
-      showInfoAlert(withTitle: l10n("Cannot validate the certificate"),
-          message: l10n("Make sure you select the desired service..."))
-      titleLabel.text = l10n("Validation error")
-      detailLabel.text = l10n("Please refer to the Re-open EU website.")
+      showInfoAlert(withTitle: "Cannot validate the certificate".localized,
+          message: "Make sure you select the desired service...".localized)
+      titleLabel.text = "Validation error".localized
+      detailLabel.text = "Please refer to the Re-open EU website.".localized
       iconImage.image = UIImage(named: "icon_large_invalid")
       iconImage.tintColor = .walletRed
       return
@@ -61,26 +61,26 @@ class ValidationResultController: UIViewController {
     
     switch result {
     case "OK":
-      titleLabel.text = l10n("Valid certificate")
-      detailLabel.text = l10n("Your certificate is valid and confirms...")
+      titleLabel.text = "Valid certificate".localized
+      detailLabel.text = "Your certificate is valid and confirms...".localized
       iconImage.image = UIImage(named: "icon_large_valid")
       iconImage.tintColor = .walletGreen
         
     case "NOK":
-      titleLabel.text = l10n("Invalid certificate")
-      detailLabel.text = l10n("Your certificate is not valid. Please refer to the Re-open EU website:")
+      titleLabel.text = "Invalid certificate".localized
+      detailLabel.text = "Your certificate is not valid. Please refer to the Re-open EU website:".localized
       iconImage.image = UIImage(named: "icon_large_invalid")
       iconImage.tintColor = .walletRed
         
     case "CHK":
-      titleLabel.text = l10n("Certificate has limitation")
-      detailLabel.text = l10n("Your certificate is valid but has the following restrictions:")
+      titleLabel.text = "Certificate has limitation".localized
+      detailLabel.text = "Your certificate is valid but has the following restrictions:".localized
       iconImage.image = UIImage(named: "icon_large_warning")
       iconImage.tintColor = .walletYellow
         
     default:
-      titleLabel.text = l10n("Invalid certificate")
-      detailLabel.text = l10n("Your certificate is not valid. Please refer to the Re-open EU website:")
+      titleLabel.text = "Invalid certificate".localized
+      detailLabel.text = "Your certificate is not valid. Please refer to the Re-open EU website:".localized
       iconImage.image = UIImage(named: "icon_large_invalid")
       iconImage.tintColor = .walletRed
     }

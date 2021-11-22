@@ -48,8 +48,8 @@ class CheckValidityController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupView()
-    checkValidityButton.setTitle(l10n("I Agree, check validity"), for: .normal)
-    closeButton.setTitle(l10n("Close"), for: .normal)
+    checkValidityButton.setTitle("I Agree, check validity".localized, for: .normal)
+    closeButton.setTitle("Close".localized, for: .normal)
   }
     
   @IBAction func closeButtonAction(_ sender: Any) {
@@ -67,10 +67,10 @@ class CheckValidityController: UIViewController {
   }
     
   private func setupInitialDate() {
-    items.append(ValidityCellModel(title: l10n("Check country rules conformance of your certificate"), description: "",
+    items.append(ValidityCellModel(title: "Check country rules conformance of your certificate".localized, description: "",
         needChangeTitleFont: true))
     items.append(ValidityCellModel(cellType: .countryAndTimeSelection))
-    items.append(ValidityCellModel(title: l10n("Disclaimer"), description: l10n("disclaimer_text")))
+    items.append(ValidityCellModel(title: "Disclaimer".localized, description: "disclaimer_text".localized))
   }
     
   func setupCheckValidity(with cert: HCert?) {

@@ -49,7 +49,7 @@ class HomeController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     CoreManager.shared.config = HCertConfig(prefetchAllCodes: true, checkSignatures: false, debugPrintJsonErrors: true)
-    appNameLabel.text = l10n("Wallet App")
+    appNameLabel.text = "Wallet App".localized
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -64,6 +64,7 @@ class HomeController: UIViewController {
   
   func initializeAllStorageData() {
     self.activityIndicator.startAnimating()
+    
     DataCenter.initializeAllStorageData { [unowned self] in
       DispatchQueue.main.async {
         self.activityIndicator.stopAnimating()
@@ -84,14 +85,16 @@ class HomeController: UIViewController {
   
   private func loadComplete() {
     let renderer = UIGraphicsImageRenderer(size: self.view.bounds.size)
+    
     SecureBackground.image = renderer.image { rendererContext in
       self.view.layer.render(in: rendererContext.cgContext)
     }
     
     if DataCenter.localDataManager.versionedConfig["outdated"].bool == true {
-      showAlert(title: l10n("Update available"), subtitle: l10n("This version of the app is out of date."))
+      showAlert(title: "Update available".localized, subtitle: "This version of the app is out of date.".localized)
       return
     }
+    
     SecureBackground.checkId(from: self) { success in
       DispatchQueue.main.async { [weak self] in
         if success {
