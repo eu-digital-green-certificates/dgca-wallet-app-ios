@@ -324,22 +324,14 @@ extension MainListController: ScanWalletDelegate {
 // MARK: CertificateManaging
 extension MainListController: CertificateManaging {
   func certificateViewer(_ controller: CertificateViewerController, didDeleteCertificate cert: HCert) {
-    startActivity()
-    reloadAllComponents(completion: {[weak self] _ in
-      DispatchQueue.main.async {
-        self?.stopActivity()
+      DispatchQueue.main.async { [weak self] in
         self?.reloadTable()
       }
-    })
   }
   
   func certificateViewer(_ controller: CertificateViewerController, didAddCeCertificate cert: HCert) {
-    startActivity()
-    DataCenter.initializeLocalData {[weak self] in
-      DispatchQueue.main.asyncAfter(deadline: .now()) {
-        self?.stopActivity()
-        self?.table.reloadData()
-      }
+    DispatchQueue.main.async { [weak self] in
+      self?.reloadTable()
     }
   }
 }
@@ -444,13 +436,11 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
         if $0 {
           self?.startActivity()
           DataCenter.localDataManager.remove(withDate: savedCert.date) { _ in
-            self?.reloadAllComponents(completion: { _ in
-              DispatchQueue.main.async {
-                self?.table.reloadData()
-                self?.stopActivity()
-                self?.reloadTable()
-              }
-            })
+            DispatchQueue.main.async {
+              self?.table.reloadData()
+              self?.stopActivity()
+              self?.reloadTable()
+            }
           } // LocalData
         }
       }
@@ -462,12 +452,10 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
           if $0 {
             self?.startActivity()
             DataCenter.imageDataManager.deleteImage(with: savedImage.identifier) { _ in
-              self?.reloadAllComponents(completion: { _ in
-                DispatchQueue.main.async {
-                  self?.stopActivity()
-                  self?.reloadTable()
-                }
-              })
+              DispatchQueue.main.async {
+                self?.stopActivity()
+                self?.reloadTable()
+              }
             }
           }
         }
@@ -478,12 +466,10 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
           if $0 {
             self?.startActivity()
             DataCenter.pdfDataManager.deletePDF(with: savedPDF.identifier) { _ in
-              self?.reloadAllComponents(completion: { _ in
-                DispatchQueue.main.async {
-                  self?.stopActivity()
-                  self?.reloadTable()
-                }
-              })
+              DispatchQueue.main.async {
+                self?.stopActivity()
+                self?.reloadTable()
+              }
             }
           }
         }
@@ -579,26 +565,24 @@ extension MainListController {
   
   private func saveImage(image: UIImage) {
     showInputDialog(title: "Save image".localized, subtitle: "Please enter the image name".localized,
-                    inputPlaceholder: "filename".localized) { [weak self] fileName in
+          inputPlaceholder: "filename".localized) { [weak self] fileName in
       let savedImg = SavedImage(fileName: fileName ?? UUID().uuidString, image: image)
       
       self?.startActivity()
       DataCenter.imageDataManager.add(savedImage: savedImg) { _ in
-        self?.reloadAllComponents { _ in
-          DispatchQueue.main.async {
-            self?.table.reloadData()
-            let rowCount = DataCenter.images.count
-            let scrollToNum = rowCount > 0 ? rowCount - 1 : 0
-            DispatchQueue.main.asyncAfter(deadline: .now()) {
-              self?.stopActivity()
-              let path = IndexPath(row: scrollToNum, section: TableSection.images.rawValue)
-              self?.table.scrollToRow(at: path, at: .bottom, animated: true)
-              self?.table.selectRow(at: path, animated: true, scrollPosition: .bottom)
-              DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(350)) {
-                self?.table.deselectRow(at: path, animated: true)
-              }
-            } // asynk after
-          }
+        DispatchQueue.main.async {
+          self?.table.reloadData()
+          let rowCount = DataCenter.images.count
+          let scrollToNum = rowCount > 0 ? rowCount - 1 : 0
+          DispatchQueue.main.asyncAfter(deadline: .now()) {
+            self?.stopActivity()
+            let path = IndexPath(row: scrollToNum, section: TableSection.images.rawValue)
+            self?.table.scrollToRow(at: path, at: .bottom, animated: true)
+            self?.table.selectRow(at: path, animated: true, scrollPosition: .bottom)
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(350)) {
+              self?.table.deselectRow(at: path, animated: true)
+            }
+          } // asynk after
         }
       } // end add
     }
@@ -657,26 +641,26 @@ extension MainListController: UIDocumentPickerDelegate {
   
   private func savePDFFile(url: NSURL) {
     showInputDialog(title: "Save PDF file".localized, subtitle: "Please enter the pdf file name".localized,
-                    inputPlaceholder: "filename".localized) { [weak self] fileName in
+          inputPlaceholder: "filename".localized) { [weak self] fileName in
       let pdf = SavedPDF(fileName: fileName ?? UUID().uuidString, pdfUrl: url as URL)
+      
       self?.startActivity()
       DataCenter.pdfDataManager.add(savedPdf: pdf) { _ in
-        self?.reloadAllComponents(completion: { _ in
-          DispatchQueue.main.async {
-            self?.table.reloadData()
-            let rowsCount = DataCenter.pdfs.count
-            let scrollToNum = rowsCount > 0 ? rowsCount-1 : 0
-            DispatchQueue.main.asyncAfter(deadline: .now()) {
-              self?.stopActivity()
-              let path = IndexPath(row: scrollToNum, section: TableSection.pdfs.rawValue)
-              self?.table.scrollToRow(at: path, at: .bottom, animated: true)
-              self?.table.selectRow(at: path, animated: true, scrollPosition: .bottom)
-              DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(350)) {
-                self?.table.deselectRow(at: path, animated: true)
-              }
-            } // end asynk after
-          }
-        }) //end reload components
+        DispatchQueue.main.async {
+          self?.table.reloadData()
+          let rowsCount = DataCenter.pdfs.count
+          let scrollToNum = rowsCount > 0 ? rowsCount-1 : 0
+          DispatchQueue.main.asyncAfter(deadline: .now()) {
+            self?.stopActivity()
+            let path = IndexPath(row: scrollToNum, section: TableSection.pdfs.rawValue)
+            self?.table.scrollToRow(at: path, at: .bottom, animated: true)
+            self?.table.selectRow(at: path, animated: true, scrollPosition: .bottom)
+            // let's add time for app to scroll down (0.35 sec)
+            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(350)) {
+              self?.table.deselectRow(at: path, animated: true)
+            }
+          } // end asynk after
+        }
       } // end add
     } // end alert action
   }

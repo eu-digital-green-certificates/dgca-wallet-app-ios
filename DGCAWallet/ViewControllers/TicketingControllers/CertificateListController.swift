@@ -182,16 +182,16 @@ extension CertificateListController: UITableViewDataSource, UITableViewDelegate 
     if editingStyle == .delete {
       let savedCert = stringCertificates[indexPath.row]
       showAlert(title: "Delete Certificate".localized, subtitle: "cert.delete.body".localized, actionTitle: "Confirm".localized,
-                cancelTitle: "Cancel".localized) {
-          if $0 {
-           DataCenter.localDataManager.remove(withDate: savedCert.date) { [weak self] _ in
-             self?.reloadComponents()
-             DispatchQueue.main.asyncAfter(deadline: .now()) {
-               self?.tableView.reloadData()
-             }
+          cancelTitle: "Cancel".localized) {
+        if $0 {
+         DataCenter.localDataManager.remove(withDate: savedCert.date) { [weak self] _ in
+           self?.reloadComponents()
+           DispatchQueue.main.asyncAfter(deadline: .now()) {
+             self?.tableView.reloadData()
            }
          }
        }
+      }
     }
   }
   

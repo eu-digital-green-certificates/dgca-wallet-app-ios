@@ -142,16 +142,18 @@ class CertificateViewerController: UIViewController {
     guard let certDate = certDate else { return }
     
     showAlert( title: "Delete Certificate".localized, subtitle: "cert.delete.body".localized,
-          actionTitle: "Confirm".localized, cancelTitle: "Cancel".localized) { [weak self] in
-        if $0 {
-          DataCenter.localDataManager.remove(withDate: certDate) {[weak self] _ in
-            DispatchQueue.main.async {
-              self?.delegate?.certificateViewer(self!, didDeleteCertificate: self!.hCert!)
-              self?.dismiss(animated: true, completion: nil)
+        actionTitle: "Confirm".localized, cancelTitle: "Cancel".localized) { [weak self] in
+      if $0 {
+        DataCenter.localDataManager.remove(withDate: certDate) {[weak self] _ in
+          DispatchQueue.main.async {
+            if let cert = self?.hCert {
+              self?.delegate?.certificateViewer(self!, didDeleteCertificate: cert)
             }
-          } // LocalData
-        }
+            self?.dismiss(animated: true, completion: nil)
+          }
+        } // LocalData
       }
+    }
   }
   
   private func saveCert(completion: @escaping CompletionHandler) {
