@@ -58,5 +58,4 @@ class ServerCell: UITableViewCell {
   override func prepareForReuse() {
     service = nil
   }
-
 }

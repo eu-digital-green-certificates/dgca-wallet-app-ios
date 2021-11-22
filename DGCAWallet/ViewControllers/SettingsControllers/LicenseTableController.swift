@@ -38,6 +38,7 @@ class LicenseTableController: UITableViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.title = l10n("Licenses")
     self.loadLicenses()
   }
 

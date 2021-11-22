@@ -47,7 +47,17 @@ class CertificateListController: UIViewController {
     return stringCertificates.filter({ $0.isSelected }).first
   }
 
-  private var accessTokenInfoKeys = ["Name", "Date of birth", "Departure", "Arrival", "Accepted certificate type", "Category", "Validation Time", "Valid from","Valid to"]
+  private var accessTokenInfoKeys = [
+      l10n("Name"),
+      l10n("Date of birth"),
+      l10n("Departure"),
+      l10n("Arrival"),
+      l10n("Accepted certificate type"),
+      l10n("Category"),
+      l10n("Validation Time"),
+      l10n("Valid from"),
+      l10n("Valid to")]
+  
   private var accessTokenInfoValues = [String]()
   
   private var isNavigationEnabled: Bool {
@@ -63,6 +73,7 @@ class CertificateListController: UIViewController {
     
     tableView.tableFooterView = UIView()
     title = l10n("Certificates")
+    nextButton.setTitle(l10n("Next"), for: .normal)
   }
   
   override func viewWillAppear(_ animated: Bool) {

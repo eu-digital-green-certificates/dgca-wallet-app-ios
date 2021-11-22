@@ -105,23 +105,23 @@ class CertificateValidator {
         
         if failsAndOpen.count > 0 {
           validity = .ruleInvalid
-          infoSection = InfoSection(header: "Possible limitation", content: "Country rules validation failed")
+          infoSection = InfoSection(header: l10n("Possible limitation"), content: l10n("Country rules validation failed"))
           var listOfRulesSection: [InfoSection] = []
           result.sorted(by: { $0.result.rawValue < $1.result.rawValue }).forEach { validationResult in
             if let error = validationResult.validationErrors?.first {
               switch validationResult.result {
               case .fail:
-                listOfRulesSection.append(InfoSection(header: "CirtLogic Engine error",
+                listOfRulesSection.append(InfoSection(header: l10n("Certificate logic engine error"),
                     content: error.localizedDescription,
                     countryName: certificate.ruleCountryCode,
                     ruleValidationResult: SwiftDGC.RuleValidationResult.error))
               case .open:
-                listOfRulesSection.append(InfoSection(header: "CirtLogic Engine error",
+                listOfRulesSection.append(InfoSection(header: l10n("Certificate logic engine error"),
                     content: l10n(error.localizedDescription),
                     countryName: certificate.ruleCountryCode,
                     ruleValidationResult: SwiftDGC.RuleValidationResult.open))
               case .passed:
-                listOfRulesSection.append(InfoSection(header: "CirtLogic Engine error",
+                listOfRulesSection.append(InfoSection(header: l10n("Certificate logic engine error"),
                     content: error.localizedDescription,
                     countryName: certificate.ruleCountryCode,
                     ruleValidationResult: SwiftDGC.RuleValidationResult.passed))

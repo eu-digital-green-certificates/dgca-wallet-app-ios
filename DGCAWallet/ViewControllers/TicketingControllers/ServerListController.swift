@@ -53,6 +53,7 @@ class ServerListController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     title = l10n("Services")
+    nextButton.setTitle(l10n("Next"), for: .normal)
     self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
   }
   

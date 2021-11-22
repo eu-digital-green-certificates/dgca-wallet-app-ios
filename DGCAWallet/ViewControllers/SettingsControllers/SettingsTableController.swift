@@ -33,12 +33,19 @@ class SettingsTableController: UITableViewController {
 
   @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
   @IBOutlet fileprivate weak var versionLabel: UILabel!
+  @IBOutlet fileprivate weak var reloadLabel: UILabel!
+  @IBOutlet fileprivate weak var privacyInfoLabel: UILabel!
+  @IBOutlet fileprivate weak var licensesLabel: UILabel!
 
   weak var dismissDelegate: DismissControllerDelegate?
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.versionLabel.text = DataCenter.appVersion
+    versionLabel.text = DataCenter.appVersion
+    reloadLabel.text = l10n("Reload")
+    licensesLabel.text = l10n("Licenses")
+    privacyInfoLabel.text = l10n("Privacy Information")
+    self.title = l10n("Settings")
   }
   
   override func viewDidDisappear(_ animated: Bool) {

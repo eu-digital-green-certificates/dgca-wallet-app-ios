@@ -38,6 +38,7 @@ class RuleValidationResultVC: UIViewController {
   }
   
   @IBOutlet fileprivate weak var closeButton: UIButton!
+  @IBOutlet fileprivate weak var okButton: UIButton!
   @IBOutlet fileprivate weak var resultLabel: UILabel!
   @IBOutlet fileprivate weak var resultIcon: UIImageView!
   @IBOutlet fileprivate weak var resultDescriptionLabel: UILabel!
@@ -65,6 +66,7 @@ class RuleValidationResultVC: UIViewController {
     resultDescriptionLabel.text = ""
     noWarrantyLabel.text = l10n("This check gives an indication on eligibility...")
     closeButton.setTitle(l10n("Close"), for: .normal)
+    okButton.setTitle(l10n("OK"), for: .normal)
     tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 32, right: 0)
 
     let validity: HCertValidity = self.validateCertLogicRules()
@@ -145,18 +147,15 @@ extension RuleValidationResultVC {
           if let error = validationResult.validationErrors?.first {
             switch validationResult.result {
             case .fail:
-              items.append(InfoSection(header: "CirtLogic Engine error",
-                content: error.localizedDescription,
+              items.append(InfoSection(header: l10n("Certificate logic engine error"), content: error.localizedDescription,
                 countryName: hCert.ruleCountryCode,
                 ruleValidationResult: SwiftDGC.RuleValidationResult.error))
             case .open:
-              items.append(InfoSection(header: "CirtLogic Engine error",
-                content: error.localizedDescription,
+              items.append(InfoSection(header: l10n("Certificate logic engine error"), content: error.localizedDescription,
                 countryName: hCert.ruleCountryCode,
                 ruleValidationResult: SwiftDGC.RuleValidationResult.open))
             case .passed:
-              items.append(InfoSection(header: "CirtLogic Engine error",
-                content: error.localizedDescription,
+              items.append(InfoSection(header: l10n("Certificate logic engine error"), content: error.localizedDescription,
                 countryName: hCert.ruleCountryCode,
                 ruleValidationResult: SwiftDGC.RuleValidationResult.passed))
             }

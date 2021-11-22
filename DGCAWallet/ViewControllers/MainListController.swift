@@ -54,7 +54,8 @@ class MainListController: UIViewController, DismissControllerDelegate {
   @IBOutlet fileprivate weak var table: UITableView!
   @IBOutlet fileprivate weak var emptyView: UIView!
   @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
-  
+  @IBOutlet fileprivate weak var titleLabel: UILabel!
+
   var downloadedDataHasExpired: Bool {
     return DataCenter.lastFetch.timeIntervalSinceNow < -SharedConstants.expiredDataInterval
   }
@@ -69,6 +70,8 @@ class MainListController: UIViewController, DismissControllerDelegate {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+    self.titleLabel.text = l10n("Certificate Wallet")
+    self.addButton.setTitle(l10n("Add New"), for: .normal)
   }
   
   override func viewWillAppear(_ animated: Bool) {

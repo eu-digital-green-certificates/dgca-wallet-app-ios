@@ -805,6 +805,7 @@
                         <outlet property="detailLabel" destination="bjA-7o-KTc" id="FYc-J6-fSc"/>
                         <outlet property="iconImage" destination="Ik5-iB-ezB" id="n7f-na-FH7"/>
                         <outlet property="limitationsTableView" destination="7xK-Rp-7FD" id="9P5-vd-JAX"/>
+                        <outlet property="okButton" destination="fol-rA-9gU" id="D5k-4k-ZGf"/>
                         <outlet property="titleLabel" destination="VcR-QW-aFJ" id="F5U-xQ-eTO"/>
                     </connections>
                 </viewController>
@@ -1095,6 +1096,7 @@
                         <outlet property="addButton" destination="MID-ne-Jur" id="bDo-SW-HNv"/>
                         <outlet property="emptyView" destination="W03-Gm-CHU" id="cC1-aC-UeX"/>
                         <outlet property="table" destination="emV-oh-VSt" id="afK-OZ-s2d"/>
+                        <outlet property="titleLabel" destination="Q38-2s-CMN" id="AtG-j3-Swn"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="showScannerSegue" id="4aa-0o-E6T"/>
                         <segue destination="Cp6-NF-vHs" kind="show" identifier="showServicesList" id="Tn6-HN-bIx"/>
                         <segue destination="Zgy-od-xp6" kind="presentation" identifier="showPDFViewer" id="Dow-6R-6Bm"/>

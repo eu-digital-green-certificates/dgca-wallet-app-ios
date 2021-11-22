@@ -158,6 +158,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="ur5-by-26Y" id="kIq-W7-QXc"/>
+                        <outlet property="licensesLabel" destination="5Lw-xZ-YJu" id="jg9-Ds-lrc"/>
+                        <outlet property="privacyInfoLabel" destination="hky-ZS-URO" id="reA-yd-Vyq"/>
+                        <outlet property="reloadLabel" destination="iiw-zv-F0r" id="nOY-H0-5XH"/>
                         <outlet property="versionLabel" destination="Rdn-TW-8aO" id="C4Q-qW-QkG"/>
                         <segue destination="QCK-p6-e3A" kind="show" identifier="showLicenses" id="aCz-QD-l4J"/>
                     </connections>
@@ -208,6 +211,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="BDZ-mX-IuU">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="Aa6-t2-zk9">
+                            <color key="tintColor" name="walletBlue"/>
                             <connections>
                                 <action selector="doneAction:" destination="owi-dC-MFf" id="fkr-me-ftX"/>
                             </connections>

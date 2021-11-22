@@ -39,7 +39,8 @@ final class ValidityCellModel {
   var description: String?
   var needChangeTitleFont: Bool = false
   
-  init(cellType: ValidityCellModelType = .titleAndDescription, title: String? = nil, description: String? = nil, needChangeTitleFont: Bool = false) {
+  init(cellType: ValidityCellModelType = .titleAndDescription, title: String? = nil, description: String? = nil,
+       needChangeTitleFont: Bool = false) {
     self.needChangeTitleFont = needChangeTitleFont
     self.cellType = cellType
     self.title = title

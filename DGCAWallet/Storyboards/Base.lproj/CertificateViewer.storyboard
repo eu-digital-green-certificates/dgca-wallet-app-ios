@@ -679,6 +679,7 @@
                     <connections>
                         <outlet property="closeButton" destination="h4c-Yf-R4i" id="FOp-Lk-Hwm"/>
                         <outlet property="noWarrantyLabel" destination="wTp-cM-ruV" id="gBh-Qf-hC7"/>
+                        <outlet property="okButton" destination="eOj-kZ-7kv" id="mSX-lL-Ibq"/>
                         <outlet property="resultDescriptionLabel" destination="dBu-JJ-ecS" id="86A-PZ-7d2"/>
                         <outlet property="resultIcon" destination="z1T-hw-p7A" id="SBs-l3-qCG"/>
                         <outlet property="resultLabel" destination="qfD-px-d4M" id="joh-A1-NQ6"/>

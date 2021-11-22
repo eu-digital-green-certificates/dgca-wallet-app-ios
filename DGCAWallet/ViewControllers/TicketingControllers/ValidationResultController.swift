@@ -34,7 +34,8 @@ class ValidationResultController: UIViewController {
   @IBOutlet fileprivate weak var iconImage: UIImageView!
   @IBOutlet fileprivate weak var detailLabel: UILabel!
   @IBOutlet fileprivate weak var limitationsTableView: UITableView!
-  
+  @IBOutlet fileprivate weak var okButton: UIButton!
+
   public var validationResultModel : AccessTokenResponse?
   
   override func viewDidLoad() {
@@ -46,7 +47,8 @@ class ValidationResultController: UIViewController {
     limitationsTableView.reloadData()
     limitationsTableView.tableFooterView = UIView()
     iconImage.image = iconImage.image?.withRenderingMode(.alwaysTemplate)
-    
+    okButton.setTitle(l10n("OK"), for: .normal)
+
     guard let result = validationResultModel?.result else {
       showInfoAlert(withTitle: l10n("Cannot validate the certificate"),
           message: l10n("Make sure you select the desired service..."))

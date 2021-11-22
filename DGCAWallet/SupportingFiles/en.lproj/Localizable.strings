@@ -98,6 +98,7 @@
 "Images" = "Images";
 "PDF files" = "PDF files";
 "Get Image from" = "Get Image from";
+"Next" = "Next";
 
 "Camera" = "Camera";
 "Gallery" = "Gallery";
@@ -116,11 +117,8 @@
 "Consent" = "Consent";
 "Do you agree to share the %@ certificate with %@?" = "Do you agree to share the %@ certificate with %@?";
 
-"Valid certificate" = "Valid certificate";
-"Invalid certificate" = "Invalid certificate";
 "Your certificate is not valid. Please refer to the Re-open EU website:" = "Your certificate is not valid. Please refer to the Re-open EU website:";
 
-"Certificate has limitation" = "Certificate has limitation";
 "Your certificate is valid but has the following restrictions:" = "Your certificate is valid but has the following restrictions:";
 
 "Cannot validate the certificate" = "Cannot validate the certificate";
@@ -137,3 +135,25 @@
 
 "An internet connection error has occurred" = "An internet connection error has occurred";
 "Make sure your device is connected to the internet and try again..." = "Make sure your device is connected to the internet and try again. If it happens again, please refer to application support.";
+
+"Possible limitation" = "Possible limitation";
+"Country rules validation failed" = "Country rules validation failed";
+
+"Certificate logic engine error" = "Certificate logic engine error";
+
+"Departure" = "Departure";
+"Arrival" = "Arrival"
+"Accepted certificate type" = "Accepted certificate type";
+"Category" = "Category";
+"Validation Time" = "Validation Time";
+"Valid from" = "Valid from";
+"Valid to" = "Valid to"
+
+"Sorry! \n no rules for this country" = "Sorry! \n no rules for this country";
+"Certificate Wallet" = "Certificate Wallet";
+"Add New" = "Add New";
+"Share" = "Share";
+"Licenses" = "Licenses";
+"Reload" = "Reload";
+"Privacy Information" = "Privacy Information:";
+"Settings" = "Settings";

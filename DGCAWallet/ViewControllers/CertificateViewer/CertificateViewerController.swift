@@ -75,6 +75,10 @@ class CertificateViewerController: UIViewController {
     guard let hCert = hCert else { return }
     
     nameLabel.text = hCert.fullName
+    shareButton.setTitle(l10n("Save"), for: .normal)
+    deleteButton.setTitle(l10n("Delete Certificate"), for: .normal)
+    checkValidityButton.setTitle(l10n("Check Validity"), for: .normal)
+
     if !isSaved {
       dismissButton.setTitle(l10n("Save"), for: .normal)
       editButton.isHidden = true
@@ -107,7 +111,6 @@ class CertificateViewerController: UIViewController {
       headerBackground.backgroundColor = .walletBlue
     }
     
-    checkValidityButton.setTitle(l10n("Check Validity"), for: .normal)
     view.layoutIfNeeded()
   }
 
