@@ -32,6 +32,7 @@ class HomeController: UIViewController {
   let showMainList = "showMainList"
   
   @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
+  @IBOutlet fileprivate weak var appNameLabel: UILabel!
 
   override var preferredStatusBarStyle: UIStatusBarStyle {
     return .lightContent
@@ -48,6 +49,7 @@ class HomeController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     CoreManager.shared.config = HCertConfig(prefetchAllCodes: true, checkSignatures: false, debugPrintJsonErrors: true)
+    appNameLabel.text = l10n("Wallet App")
   }
   
   override func viewWillAppear(_ animated: Bool) {

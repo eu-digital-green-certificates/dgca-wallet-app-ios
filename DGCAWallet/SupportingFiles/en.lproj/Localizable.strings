@@ -16,8 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * ---license-end
- */
-/*
+
   Localizable.strings
   DGCAWallet
 
@@ -25,6 +24,7 @@
   
 */
 
+"Wallet App" = "Wallet App";
 "Scanned %@" = "Scanned %@";
 "Save" = "Save";
 "Done" = "Done";

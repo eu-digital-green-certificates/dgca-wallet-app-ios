@@ -883,7 +883,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LGe-mF-UuS">
-                                                    <rect key="frame" x="132" y="11" width="169.5" height="39"/>
+                                                    <rect key="frame" x="132" y="11" width="169.5" height="47"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -896,7 +896,7 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d8h-xx-YMC">
-                                                    <rect key="frame" x="132" y="66" width="169.5" height="39"/>
+                                                    <rect key="frame" x="132" y="58" width="169.5" height="47"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" name="walletBlue"/>
                                                     <nil key="highlightedColor"/>
@@ -912,7 +912,7 @@
                                                 <constraint firstItem="d8h-xx-YMC" firstAttribute="leading" secondItem="ubT-xb-IOZ" secondAttribute="trailing" constant="16" id="gnD-yc-qoG"/>
                                                 <constraint firstAttribute="bottom" secondItem="ubT-xb-IOZ" secondAttribute="bottom" constant="8" id="j0m-dq-Lss"/>
                                                 <constraint firstItem="LGe-mF-UuS" firstAttribute="top" secondItem="7Af-wY-7DO" secondAttribute="topMargin" id="w32-ac-ac4"/>
-                                                <constraint firstItem="d8h-xx-YMC" firstAttribute="top" secondItem="LGe-mF-UuS" secondAttribute="bottom" constant="16" id="wL3-DX-jTE"/>
+                                                <constraint firstItem="d8h-xx-YMC" firstAttribute="top" secondItem="LGe-mF-UuS" secondAttribute="bottom" id="wL3-DX-jTE"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="d8h-xx-YMC" secondAttribute="trailing" constant="40" id="znt-5Y-Qmy"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -959,8 +959,8 @@
                                                 <constraint firstItem="10t-CQ-U1T" firstAttribute="top" secondItem="SrR-sb-tdt" secondAttribute="top" id="gxf-k4-MEY"/>
                                                 <constraint firstItem="ZEe-eT-8Ct" firstAttribute="top" secondItem="10t-CQ-U1T" secondAttribute="bottom" id="iCk-UF-xTp"/>
                                                 <constraint firstItem="ZEe-eT-8Ct" firstAttribute="bottom" secondItem="SrR-sb-tdt" secondAttribute="bottomMargin" id="rSg-9t-eyK"/>
+                                                <constraint firstAttribute="bottom" secondItem="Z4G-Ba-tHv" secondAttribute="bottom" constant="8" id="tES-Eu-jvU"/>
                                                 <constraint firstItem="Z4G-Ba-tHv" firstAttribute="top" secondItem="SrR-sb-tdt" secondAttribute="top" constant="8" id="urh-zV-rMo"/>
-                                                <constraint firstAttribute="bottom" secondItem="Z4G-Ba-tHv" secondAttribute="bottom" constant="8" id="y02-nM-8Nr"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -1180,6 +1180,7 @@
                     <navigationItem key="navigationItem" id="OA6-WB-Bsu"/>
                     <connections>
                         <outlet property="activityIndicator" destination="9nO-9e-hKR" id="cNx-Wq-0Wh"/>
+                        <outlet property="appNameLabel" destination="N7y-9d-COU" id="FkU-Jh-zxP"/>
                         <segue destination="BcE-gA-Tuj" kind="show" identifier="showMainList" id="GGI-dr-YbQ"/>
                     </connections>
                 </viewController>

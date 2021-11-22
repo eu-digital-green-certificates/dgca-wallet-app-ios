@@ -104,6 +104,7 @@
 		D2387C622746A7FB00C55DF7 /* KeyChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2387C612746A7FB00C55DF7 /* KeyChain.swift */; };
 		D2387C642746EE5500C55DF7 /* DGCLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2387C632746EE5500C55DF7 /* DGCLogger.swift */; };
 		D2387C66274813A000C55DF7 /* SyncArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2387C65274813A000C55DF7 /* SyncArray.swift */; };
+		D2387C6B274BD5EA00C55DF7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D2387C6D274BD5EA00C55DF7 /* InfoPlist.strings */; };
 		D23EF7A6272057F40097D82B /* CertificateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23EF7A4272057F40097D82B /* CertificateCell.swift */; };
 		D23EF7A7272057F40097D82B /* ServerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23EF7A5272057F40097D82B /* ServerCell.swift */; };
 		D24C8951272353610090398A /* ScanWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C8950272353610090398A /* ScanWalletController.swift */; };
@@ -235,6 +236,10 @@
 		D2387C632746EE5500C55DF7 /* DGCLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DGCLogger.swift; sourceTree = "<group>"; };
 		D2387C65274813A000C55DF7 /* SyncArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncArray.swift; sourceTree = "<group>"; };
 		D2387C67274853BC00C55DF7 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D2387C6C274BD5EA00C55DF7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D2387C6E274BD5EE00C55DF7 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D2387C70274BD84E00C55DF7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		D2387C72274BD85200C55DF7 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		D23EF7A4272057F40097D82B /* CertificateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateCell.swift; sourceTree = "<group>"; };
 		D23EF7A5272057F40097D82B /* ServerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerCell.swift; sourceTree = "<group>"; };
 		D24C8950272353610090398A /* ScanWalletController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ScanWalletController.swift; sourceTree = "<group>"; tabWidth = 2; };
@@ -414,6 +419,7 @@
 				CEA6D6ED261F8D2700715333 /* SceneDelegate.swift */,
 				CEA6D6F4261F8D2900715333 /* Assets.xcassets */,
 				CEA6D6F9261F8D2900715333 /* Info.plist */,
+				D2387C6D274BD5EA00C55DF7 /* InfoPlist.strings */,
 				CE6D4A46264835F100A5D33D /* Localizable.strings */,
 				DA01661D26554992005B73A1 /* OpenSourceNotices.json */,
 			);
@@ -715,6 +721,7 @@
 				DA01661E26554992005B73A1 /* OpenSourceNotices.json in Resources */,
 				CEA6D6F5261F8D2900715333 /* Assets.xcassets in Resources */,
 				CEA6D6F3261F8D2700715333 /* Main.storyboard in Resources */,
+				D2387C6B274BD5EA00C55DF7 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -958,8 +965,19 @@
 			isa = PBXVariantGroup;
 			children = (
 				CEA6D6F7261F8D2900715333 /* Base */,
+				D2387C70274BD84E00C55DF7 /* en */,
+				D2387C72274BD85200C55DF7 /* de */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		D2387C6D274BD5EA00C55DF7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D2387C6C274BD5EA00C55DF7 /* en */,
+				D2387C6E274BD5EE00C55DF7 /* de */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
