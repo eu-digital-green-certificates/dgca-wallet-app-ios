@@ -140,12 +140,12 @@
 "Certificate logic engine error" = "Fehler in der Zertifikatlogik-Engine";
 
 "Departure" = "Abfahrt";
-"Arrival" = "Ankunft"
+"Arrival" = "Ankunft";
 "Accepted certificate type" = "Akzeptierter Zertifikatstyp";
 "Category" = "Kategorie";
 "Validation Time" = "Validierungszeit";
 "Valid from" = "Gültig ab";
-"Valid to" = "Gültig bis"
+"Valid to" = "Gültig bis";
 
 "Sorry! \n no rules for this country" = "Entschuldigung! \n keine Regeln für dieses Land";
 "Certificate Wallet" = "Zertifikat-Wallet";

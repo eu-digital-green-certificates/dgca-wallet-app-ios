@@ -142,12 +142,12 @@
 "Certificate logic engine error" = "Certificate logic engine error";
 
 "Departure" = "Departure";
-"Arrival" = "Arrival"
+"Arrival" = "Arrival";
 "Accepted certificate type" = "Accepted certificate type";
 "Category" = "Category";
 "Validation Time" = "Validation Time";
 "Valid from" = "Valid from";
-"Valid to" = "Valid to"
+"Valid to" = "Valid to";
 
 "Sorry! \n no rules for this country" = "Sorry! \n no rules for this country";
 "Certificate Wallet" = "Certificate Wallet";
