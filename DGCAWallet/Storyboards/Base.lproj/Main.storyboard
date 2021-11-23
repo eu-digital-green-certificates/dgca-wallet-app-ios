@@ -875,45 +875,43 @@
                                 <rect key="frame" x="0.0" y="86.5" width="375" height="502.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PDFTableViewCell" rowHeight="116" id="gBl-AR-089" customClass="PDFTableViewCell" customModule="DGCAWallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="375" height="116"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PDFTableViewCell" rowHeight="117" id="gBl-AR-089" customClass="PDFTableViewCell" customModule="DGCAWallet" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.5" width="375" height="117"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gBl-AR-089" id="7Af-wY-7DO">
-                                            <rect key="frame" x="0.0" y="0.0" width="349.5" height="116"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="349.5" height="117"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LGe-mF-UuS">
-                                                    <rect key="frame" x="132" y="11" width="169.5" height="47"/>
+                                                    <rect key="frame" x="124" y="8" width="209.5" height="24"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ubT-xb-IOZ">
                                                     <rect key="frame" x="16" y="8" width="100" height="100"/>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="CvU-pY-MMn"/>
                                                         <constraint firstAttribute="height" constant="100" id="rj6-mO-UKo"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d8h-xx-YMC">
-                                                    <rect key="frame" x="132" y="58" width="169.5" height="47"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d8h-xx-YMC">
+                                                    <rect key="frame" x="124" y="40" width="209.5" height="69"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" name="walletBlue"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="d8h-xx-YMC" firstAttribute="height" secondItem="LGe-mF-UuS" secondAttribute="height" id="1i1-kv-XVu"/>
                                                 <constraint firstItem="ubT-xb-IOZ" firstAttribute="top" secondItem="7Af-wY-7DO" secondAttribute="top" constant="8" id="2dl-Ng-ERD"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="LGe-mF-UuS" secondAttribute="trailing" constant="40" id="Cf2-OI-g5w"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="d8h-xx-YMC" secondAttribute="bottom" id="MhN-QG-QW0"/>
                                                 <constraint firstItem="ubT-xb-IOZ" firstAttribute="leading" secondItem="7Af-wY-7DO" secondAttribute="leading" constant="16" id="ReO-pt-1wT"/>
-                                                <constraint firstItem="LGe-mF-UuS" firstAttribute="leading" secondItem="ubT-xb-IOZ" secondAttribute="trailing" constant="16" id="b6L-gu-888"/>
-                                                <constraint firstItem="d8h-xx-YMC" firstAttribute="leading" secondItem="ubT-xb-IOZ" secondAttribute="trailing" constant="16" id="gnD-yc-qoG"/>
-                                                <constraint firstAttribute="bottom" secondItem="ubT-xb-IOZ" secondAttribute="bottom" constant="8" id="j0m-dq-Lss"/>
-                                                <constraint firstItem="LGe-mF-UuS" firstAttribute="top" secondItem="7Af-wY-7DO" secondAttribute="topMargin" id="w32-ac-ac4"/>
-                                                <constraint firstItem="d8h-xx-YMC" firstAttribute="top" secondItem="LGe-mF-UuS" secondAttribute="bottom" id="wL3-DX-jTE"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="d8h-xx-YMC" secondAttribute="trailing" constant="40" id="znt-5Y-Qmy"/>
+                                                <constraint firstItem="d8h-xx-YMC" firstAttribute="top" secondItem="LGe-mF-UuS" secondAttribute="bottom" constant="8" id="Ufr-Kb-dEm"/>
+                                                <constraint firstItem="LGe-mF-UuS" firstAttribute="leading" secondItem="ubT-xb-IOZ" secondAttribute="trailing" constant="8" symbolic="YES" id="b8q-iv-DUf"/>
+                                                <constraint firstItem="LGe-mF-UuS" firstAttribute="top" secondItem="7Af-wY-7DO" secondAttribute="top" constant="8" id="hjj-2E-Gou"/>
+                                                <constraint firstAttribute="bottom" secondItem="d8h-xx-YMC" secondAttribute="bottom" constant="8" id="hjj-N6-lZY"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ubT-xb-IOZ" secondAttribute="bottom" constant="8" id="j0m-dq-Lss"/>
+                                                <constraint firstAttribute="trailing" secondItem="d8h-xx-YMC" secondAttribute="trailing" constant="16" id="jAX-jg-aRF"/>
+                                                <constraint firstAttribute="trailing" secondItem="LGe-mF-UuS" secondAttribute="trailing" constant="16" id="k5D-LS-bp5"/>
+                                                <constraint firstItem="d8h-xx-YMC" firstAttribute="leading" secondItem="ubT-xb-IOZ" secondAttribute="trailing" constant="8" symbolic="YES" id="yYk-IY-Jbc"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -923,18 +921,13 @@
                                             <outlet property="timeLabel" destination="d8h-xx-YMC" id="RoG-35-chv"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ImageTableViewCell" rowHeight="116" id="bM6-7H-Ybo" customClass="ImageTableViewCell" customModule="DGCAWallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="160.5" width="375" height="116"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="ImageTableViewCell" rowHeight="117" id="bM6-7H-Ybo" customClass="ImageTableViewCell" customModule="DGCAWallet" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="161.5" width="375" height="117"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bM6-7H-Ybo" id="SrR-sb-tdt">
-                                            <rect key="frame" x="0.0" y="0.0" width="349.5" height="116"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="349.5" height="117"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10t-CQ-U1T">
-                                                    <rect key="frame" x="132" y="0.0" width="193.5" height="52.5"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Z4G-Ba-tHv">
                                                     <rect key="frame" x="16" y="8" width="100" height="100"/>
                                                     <constraints>
@@ -942,24 +935,28 @@
                                                         <constraint firstAttribute="width" constant="100" id="n7b-d2-o8b"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZEe-eT-8Ct">
-                                                    <rect key="frame" x="132" y="52.5" width="193.5" height="52.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10t-CQ-U1T">
+                                                    <rect key="frame" x="124" y="8" width="209.5" height="24"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZEe-eT-8Ct">
+                                                    <rect key="frame" x="124" y="40" width="218" height="69"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" name="walletBlue"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="10t-CQ-U1T" firstAttribute="leading" secondItem="Z4G-Ba-tHv" secondAttribute="trailing" constant="16" id="8D2-Xb-0Vh"/>
+                                                <constraint firstAttribute="bottom" secondItem="ZEe-eT-8Ct" secondAttribute="bottom" constant="8" id="D9W-Jo-3ek"/>
+                                                <constraint firstItem="ZEe-eT-8Ct" firstAttribute="top" secondItem="10t-CQ-U1T" secondAttribute="bottom" constant="8" id="EqL-Xn-xOp"/>
                                                 <constraint firstItem="Z4G-Ba-tHv" firstAttribute="leading" secondItem="SrR-sb-tdt" secondAttribute="leading" constant="16" id="KAq-vc-hcp"/>
-                                                <constraint firstItem="ZEe-eT-8Ct" firstAttribute="leading" secondItem="Z4G-Ba-tHv" secondAttribute="trailing" constant="16" id="MZh-5K-YOX"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="ZEe-eT-8Ct" secondAttribute="trailing" constant="16" id="UAX-F3-vUA"/>
-                                                <constraint firstItem="ZEe-eT-8Ct" firstAttribute="height" secondItem="10t-CQ-U1T" secondAttribute="height" id="e5z-6s-kmL"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="10t-CQ-U1T" secondAttribute="trailing" constant="16" id="fOx-M1-8y4"/>
-                                                <constraint firstItem="10t-CQ-U1T" firstAttribute="top" secondItem="SrR-sb-tdt" secondAttribute="top" id="gxf-k4-MEY"/>
-                                                <constraint firstItem="ZEe-eT-8Ct" firstAttribute="top" secondItem="10t-CQ-U1T" secondAttribute="bottom" id="iCk-UF-xTp"/>
-                                                <constraint firstItem="ZEe-eT-8Ct" firstAttribute="bottom" secondItem="SrR-sb-tdt" secondAttribute="bottomMargin" id="rSg-9t-eyK"/>
-                                                <constraint firstAttribute="bottom" secondItem="Z4G-Ba-tHv" secondAttribute="bottom" constant="8" id="tES-Eu-jvU"/>
+                                                <constraint firstItem="10t-CQ-U1T" firstAttribute="leading" secondItem="Z4G-Ba-tHv" secondAttribute="trailing" constant="8" symbolic="YES" id="LYV-0k-cpG"/>
+                                                <constraint firstItem="ZEe-eT-8Ct" firstAttribute="leading" secondItem="Z4G-Ba-tHv" secondAttribute="trailing" constant="8" symbolic="YES" id="MLf-GT-Eua"/>
+                                                <constraint firstAttribute="trailing" secondItem="10t-CQ-U1T" secondAttribute="trailing" constant="16" id="Ngd-6Z-K7O"/>
+                                                <constraint firstAttribute="trailing" secondItem="ZEe-eT-8Ct" secondAttribute="trailing" constant="7.5" id="WV0-cS-7Vd"/>
+                                                <constraint firstItem="10t-CQ-U1T" firstAttribute="top" secondItem="SrR-sb-tdt" secondAttribute="top" constant="8" id="rCT-dd-6dw"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Z4G-Ba-tHv" secondAttribute="bottom" constant="8" id="tES-Eu-jvU"/>
                                                 <constraint firstItem="Z4G-Ba-tHv" firstAttribute="top" secondItem="SrR-sb-tdt" secondAttribute="top" constant="8" id="urh-zV-rMo"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -971,7 +968,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="walletCell" rowHeight="101" id="JcT-Kw-bMh" customClass="WalletCell" customModule="DGCAWallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="276.5" width="375" height="101"/>
+                                        <rect key="frame" x="0.0" y="278.5" width="375" height="101"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JcT-Kw-bMh" id="m3f-OR-BSb">
                                             <rect key="frame" x="0.0" y="0.0" width="349.5" height="101"/>
@@ -1113,7 +1110,7 @@
                     <color key="backgroundColor" red="0.69351077028937902" green="0.75351419445125889" blue="0.90099731978681896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="215.94202898550725" y="118.52678571428571"/>
+            <point key="canvasLocation" x="215.19999999999999" y="118.29085457271366"/>
         </scene>
         <!--Home Controller-->
         <scene sceneID="6EO-ab-Dh1">
@@ -1191,16 +1188,16 @@
     </scenes>
     <designables>
         <designable name="MID-ne-Jur">
-            <size key="intrinsicContentSize" width="88" height="39"/>
+            <size key="intrinsicContentSize" width="112" height="51"/>
         </designable>
         <designable name="Rcx-o5-KDY">
-            <size key="intrinsicContentSize" width="47" height="39"/>
+            <size key="intrinsicContentSize" width="71" height="51"/>
         </designable>
         <designable name="WbA-kC-hOb">
-            <size key="intrinsicContentSize" width="47" height="39"/>
+            <size key="intrinsicContentSize" width="71" height="51"/>
         </designable>
         <designable name="fol-rA-9gU">
-            <size key="intrinsicContentSize" width="32" height="39"/>
+            <size key="intrinsicContentSize" width="56" height="51"/>
         </designable>
     </designables>
     <resources>

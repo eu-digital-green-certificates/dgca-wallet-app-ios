@@ -355,13 +355,13 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
       switch section {
       case TableSection.certificates.rawValue:
-        return "Certificates".localized
+        return !listCertElements.isEmpty ? "Certificates".localized : nil
       case TableSection.images.rawValue:
-        return "Images".localized
-      case  TableSection.pdfs.rawValue:
-        return "PDF files".localized
+        return !listImageElements.isEmpty ? "Images".localized : nil
+      case TableSection.pdfs.rawValue:
+        return !listPdfElements.isEmpty ? "PDF files".localized : nil
       default:
-          return ":"
+          return nil
       }
   }
   
