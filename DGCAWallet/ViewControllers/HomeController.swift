@@ -55,7 +55,7 @@ class HomeController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-    DataCenter.initializeLocalData {[unowned self] in
+    DataCenter.initializeLocalData {[unowned self] result in
       DispatchQueue.main.async {
         self.downloadedDataHasExpired || self.appWasRunWithOlderVersion ? self.reloadStorageData() : self.initializeAllStorageData()
       }
@@ -65,7 +65,7 @@ class HomeController: UIViewController {
   func initializeAllStorageData() {
     self.activityIndicator.startAnimating()
     
-    DataCenter.initializeAllStorageData { [unowned self] in
+    DataCenter.initializeAllStorageData { [unowned self] rezult in
       DispatchQueue.main.async {
         self.activityIndicator.stopAnimating()
         self.loadComplete()
@@ -75,7 +75,7 @@ class HomeController: UIViewController {
   
   func reloadStorageData() {
     self.activityIndicator.startAnimating()
-    DataCenter.reloadStorageData { [unowned self] in
+    DataCenter.reloadStorageData { [unowned self] rezult in
       DispatchQueue.main.async {
         self.activityIndicator.stopAnimating()
         self.loadComplete()

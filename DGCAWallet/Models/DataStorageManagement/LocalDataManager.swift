@@ -30,15 +30,15 @@ import SwiftDGC
 import SwiftyJSON
 
 class LocalDataManager {
-  lazy var localData: LocalData = LocalData()
+  var localData: LocalData = LocalData()
   lazy var storage = SecureStorage<LocalData>(fileName: SharedConstants.pubKeysStorageFilename)
 
-  func add(_ cert: HCert, with tan: String?, completion: ((Bool) -> Void)? = nil) {
+  func add(_ cert: HCert, with tan: String?, completion: @escaping DataCompletionHandler) {
     localData.certStrings.append(DatedCertString(date: Date(), certString: cert.fullPayloadString, storedTAN: tan))
     storage.save(localData, completion: completion)
   }
 
-  func remove(withDate date: Date, completion: ((Bool) -> Void)? = nil) {
+  func remove(withDate date: Date, completion: @escaping DataCompletionHandler) {
     if let ind = localData.certStrings.firstIndex(where: { $0.date == date }) {
       localData.certStrings.remove(at: ind)
       storage.save(localData, completion: completion)
@@ -49,24 +49,27 @@ class LocalDataManager {
     localData.config.merge(other: other)
   }
   
-  func save(completion: ((Bool) -> Void)? = nil) {
+  func save(completion: @escaping DataCompletionHandler) {
     storage.save(localData, completion: completion)
   }
 
-  func initialize(completion: @escaping CompletionHandler) {
-    storage.loadOverride(fallback: localData) { [unowned self] success in
-      guard let result = success else {  return }
-      
-      DGCLogger.logInfo(String(format: "%d certs loaded.", result.certStrings.count))
-      if result.lastLaunchedAppVersion != DataCenter.appVersion {
-        result.config = self.localData.config
+  func loadLocallyStoredData(completion: @escaping DataCompletionHandler) {
+    storage.loadStoredData(fallback: localData) { [unowned self] data in
+      guard let loadedData = data else {
+        completion(.failure(DataOperationError.noInputData))
+        return
       }
-      self.localData = result
-      self.save()
-      completion()
+      
+      DGCLogger.logInfo(String(format: "%d certs loaded.", loadedData.certStrings.count))
+      if loadedData.lastLaunchedAppVersion != DataCenter.appVersion {
+        loadedData.config = self.localData.config
+        loadedData.lastLaunchedAppVersion = self.localData.lastLaunchedAppVersion
+      }
+      self.localData = loadedData
+      self.save(completion: completion)
     }
   }
-  
+    
   var versionedConfig: JSON {
     if localData.config["versions"][DataCenter.appVersion].exists() {
       return localData.config["versions"][DataCenter.appVersion]

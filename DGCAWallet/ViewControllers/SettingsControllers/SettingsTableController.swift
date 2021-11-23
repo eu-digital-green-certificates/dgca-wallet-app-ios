@@ -88,11 +88,13 @@ class SettingsTableController: UITableViewController {
   
   func reloadAllData() {
     activityIndicator.startAnimating()
-    DataCenter.reloadStorageData { // + GatewayConnection.update {
+    DataCenter.reloadStorageData { result in
+//      guard case let .success(value) = result, value == true else {  return  }
       DispatchQueue.main.async { [weak self] in
         self?.activityIndicator.stopAnimating()
         self?.tableView.reloadData()
       }
+
     }
   }
 

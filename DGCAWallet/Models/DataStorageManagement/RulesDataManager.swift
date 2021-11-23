@@ -30,36 +30,36 @@ import SwiftyJSON
 import CertLogic
 
 class RulesDataManager {
-  lazy var rulesData: RulesDataStorage = RulesDataStorage()
+  var localData: RulesDataStorage = RulesDataStorage()
   lazy var storage = SecureStorage<RulesDataStorage>(fileName: SharedConstants.rulesStorageName)
   
   func add(rule: CertLogic.Rule) {
-    if !rulesData.rules.contains(where: { $0.identifier == rule.identifier && $0.version == rule.version }) {
-      rulesData.rules.append(rule)
+    if !localData.rules.contains(where: { $0.identifier == rule.identifier && $0.version == rule.version }) {
+      localData.rules.append(rule)
     }
   }
   
-  func save(completion: ((Bool) -> Void)? = nil) {
-    storage.save(rulesData, completion: completion)
+  func save(completion: @escaping DataCompletionHandler) {
+    storage.save(localData, completion: completion)
   }
-  
+
   func deleteRuleWithHash(hash: String) {
-    rulesData.rules = rulesData.rules.filter { $0.hash != hash }
+    localData.rules = localData.rules.filter { $0.hash != hash }
   }
   
   func isRuleExistWithHash(hash: String) -> Bool {
-    return rulesData.rules.contains(where: { $0.hash == hash })
+    return localData.rules.contains(where: { $0.hash == hash })
   }
   
-  func initialize(completion: @escaping CompletionHandler) {
-    storage.loadOverride(fallback: rulesData) { [unowned self] value in
-      guard let result = value else {
-        completion()
+  func loadLocallyStoredData(completion: @escaping DataCompletionHandler) {
+    storage.loadStoredData(fallback: localData) { [unowned self] data in
+      guard let result = data else {
+        completion(.failure(DataOperationError.noInputData))
         return
       }
       DGCLogger.logInfo(String(format: "Downloaded %d rules", result.rules.count))
-      self.rulesData = result
-      completion()
+      self.localData = result
+      completion(.success(true))
     }
   }
 }

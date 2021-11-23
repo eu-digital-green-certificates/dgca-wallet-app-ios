@@ -29,34 +29,33 @@ import SwiftDGC
 import SwiftyJSON
 
 class CountryDataManager {
+  var localData: CountryDataStorage = CountryDataStorage()
   lazy var storage = SecureStorage<CountryDataStorage>(fileName: SharedConstants.countryStorageName)
-  lazy var countryData: CountryDataStorage = CountryDataStorage()
   
   func add(country: CountryModel) {
-    if !countryData.countryCodes.contains(where: { $0.code == country.code }) {
-      countryData.countryCodes.append(country)
+    if !localData.countryCodes.contains(where: { $0.code == country.code }) {
+      localData.countryCodes.append(country)
     }
   }
   
   func update(country: CountryModel) {
-    guard let countryFromDB = countryData.countryCodes.filter({ $0.code == country.code }).first else { return }
+    guard let countryFromDB = localData.countryCodes.filter({ $0.code == country.code }).first else { return }
     countryFromDB.debugModeEnabled = country.debugModeEnabled
-    save()
   }
 
-  func save(completion: ((Bool) -> Void)? = nil) {
-    storage.save(countryData, completion: completion)
+  func save(completion: @escaping DataCompletionHandler) {
+    storage.save(localData, completion: completion)
   }
 
-  func initialize(completion: @escaping CompletionHandler) {
-    storage.loadOverride(fallback: countryData) { [unowned self] value in
-      guard let result = value else {
-        completion()
+  func loadLocallyStoredData(completion: @escaping DataCompletionHandler) {
+    storage.loadStoredData(fallback: localData) { [unowned self] data in
+      guard let result = data else {
+        completion(.failure(DataOperationError.noInputData))
         return
       }
       DGCLogger.logInfo(String(format: "Loaded %d counries", result.countryCodes.count))
-      self.countryData = result
-      completion()
+      self.localData = result
+      completion(.success(true))
     }
   }
 }

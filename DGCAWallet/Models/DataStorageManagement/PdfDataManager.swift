@@ -28,40 +28,41 @@ import Foundation
 import SwiftDGC
 
 class PdfDataManager {
-  lazy var pdfData = PdfDataStorage()
+  var localData: PdfDataStorage = PdfDataStorage()
   lazy var storage = SecureStorage<PdfDataStorage>(fileName: SharedConstants.pdfStorageName)
   
-  func add(savedPdf: SavedPDF, completion: ((Bool) -> Void)? = nil) {
-    if !pdfData.pdfs.contains(where: { $0.identifier == savedPdf.identifier }) {
-      pdfData.pdfs.append(savedPdf)
-      storage.save(pdfData, completion: completion)
+  func add(savedPdf: SavedPDF, completion: @escaping DataCompletionHandler) {
+    if !localData.pdfs.contains(where: { $0.identifier == savedPdf.identifier }) {
+      localData.pdfs.append(savedPdf)
+      storage.save(localData, completion: completion)
+    } else {
+      completion(.success(true))
     }
   }
   
-  func deletePDF(with identifier: String, completion: ((Bool) -> Void)? = nil) {
-    let pdfs = pdfData.pdfs.filter { $0.identifier != identifier }
-    pdfData.pdfs = pdfs
-    storage.save(pdfData, completion: completion)
+  func deletePDF(with identifier: String, completion: @escaping DataCompletionHandler) {
+    let pdfs = localData.pdfs.filter { $0.identifier != identifier }
+    localData.pdfs = pdfs
+    storage.save(localData, completion: completion)
   }
 
   func isPdfExistWith(identifier: String) -> Bool {
-    return pdfData.pdfs.contains(where: { $0.identifier == identifier })
+    return localData.pdfs.contains(where: { $0.identifier == identifier })
   }
   
-  func save(completion: ((Bool) -> Void)? = nil) {
-    storage.save(pdfData, completion: completion)
+  func save(completion: @escaping DataCompletionHandler) {
+    storage.save(localData, completion: completion)
   }
 
-  func initialize(completion: @escaping CompletionHandler) {
-    storage.loadOverride(fallback: pdfData) { [unowned self] value in
-      guard let result = value else {
-        completion()
+  func loadLocallyStoredData(completion: @escaping DataCompletionHandler) {
+    storage.loadStoredData(fallback: localData) { [unowned self] data in
+      guard let result = data else {
+        completion(.failure(DataOperationError.noInputData))
         return
       }
       DGCLogger.logInfo(String(format: "Loaded %d pdf files", result.pdfs.count))
-      self.pdfData = result
-      self.save()
-      completion()
+      self.localData = result
+      completion(.success(true))
     }
   }
 }

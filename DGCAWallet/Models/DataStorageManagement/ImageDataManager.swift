@@ -29,40 +29,41 @@ import SwiftDGC
 import SwiftyJSON
 
 class ImageDataManager {
-  lazy var imageData: ImageDataStorage = ImageDataStorage()
+  var localData: ImageDataStorage = ImageDataStorage()
   lazy var storage = SecureStorage<ImageDataStorage>(fileName: SharedConstants.imageStorageName)
   
-  func add(savedImage: SavedImage, completion: ((Bool) -> Void)? = nil) {
-    if !imageData.images.contains(where: { $0.identifier == savedImage.identifier }) {
-      imageData.images.append(savedImage)
-      storage.save(imageData, completion: completion)
+  func add(savedImage: SavedImage, completion: @escaping DataCompletionHandler) {
+    if !localData.images.contains(where: { $0.identifier == savedImage.identifier }) {
+      localData.images.append(savedImage)
+      storage.save(localData, completion: completion)
+    } else {
+      completion(.success(true))
     }
   }
   
-  func deleteImage(with identifier: String, completion: ((Bool) -> Void)? = nil) {
-    let images = imageData.images.filter { $0.identifier != identifier }
-    imageData.images = images
-    storage.save(imageData, completion: completion)
+  func deleteImage(with identifier: String, completion: @escaping DataCompletionHandler) {
+    let images = localData.images.filter { $0.identifier != identifier }
+    localData.images = images
+    storage.save(localData, completion: completion)
   }
 
   func isImageExistWith(identifier: String) -> Bool {
-    return imageData.images.contains(where: { $0.identifier == identifier })
+    return localData.images.contains(where: { $0.identifier == identifier })
   }
   
-  func save(completion: ((Bool) -> Void)? = nil) {
-    storage.save(imageData, completion: completion)
+  func save(completion: @escaping DataCompletionHandler) {
+    storage.save(localData, completion: completion)
   }
 
-  func initialize(completion: @escaping CompletionHandler) {
-    storage.loadOverride(fallback: imageData) { [unowned self] value in
-      guard let result = value else {
-        completion()
+  func loadLocallyStoredData(completion: @escaping DataCompletionHandler) {
+    storage.loadStoredData(fallback: localData) { [unowned self] data in
+      guard let result = data else {
+        completion(.failure(DataOperationError.noInputData))
         return
       }
       DGCLogger.logInfo(String(format: "Loaded %d images", result.images.count))
-      self.imageData = result
-      self.save()
-      completion()
+      self.localData = result
+      completion(.success(true))
     }
   }
 }

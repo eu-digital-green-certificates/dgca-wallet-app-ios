@@ -33,10 +33,10 @@ import UniformTypeIdentifiers
 import MobileCoreServices
 
 protocol DismissControllerDelegate: AnyObject {
-  func userDidDissmiss(_ controller: UIViewController) //DismissControllerDelegate
+  func userDidDissmiss(_ controller: UIViewController)
 }
 
-class MainListController: UIViewController, DismissControllerDelegate {
+class MainListController: UIViewController {
   fileprivate enum SegueIdentifiers {
     static let showScannerSegue = "showScannerSegue"
     static let showServicesList = "showServicesList"
@@ -76,13 +76,6 @@ class MainListController: UIViewController, DismissControllerDelegate {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    startActivity()
-    self.reloadAllComponents { [weak self] _ in
-      DispatchQueue.main.async {
-        self?.stopActivity()
-        self?.reloadTable()
-      }
-    }
     
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
     appDelegate?.isNFCFunctionality = false
@@ -90,22 +83,13 @@ class MainListController: UIViewController, DismissControllerDelegate {
       let scene = self.sceneDelegate
       scene?.isNFCFunctionality = false
     }
+    self.reloadTable()
   }
-  
-  func userDidDissmiss(_ controller: UIViewController) {
-    if downloadedDataHasExpired {
-      self.navigationController?.popViewController(animated: false)
-    }
-  }
-  
+    
   // MARK: - Private UI methods
-  private func reloadAllComponents(completion: ((Bool) -> Void)? = nil) {
-    DataCenter.localDataManager.initialize {
-      DataCenter.imageDataManager.initialize {
-        DataCenter.pdfDataManager.initialize {
-          completion?(true)
-        }
-      }
+  private func reloadAllComponents(completion: @escaping DataCompletionHandler) {
+    DataCenter.initializeAllStorageData { result in
+      completion(.success(true))
     }
   }
   
@@ -175,15 +159,16 @@ class MainListController: UIViewController, DismissControllerDelegate {
       } catch {
         let alertController: UIAlertController = {
           let controller = UIAlertController(title: "Cannot read NFC".localized,
-                                             message: "An error occurred while reading NFC".localized,
-            preferredStyle: .alert)
+            message: "An error occurred while reading NFC".localized, preferredStyle: .alert)
+          
           let actionRetry = UIAlertAction(title: "Retry".localized, style: .default) { _ in
             self?.scanNFC()
           }
           controller.addAction(actionRetry)
+          
           let actionOk = UIAlertAction(title: "OK".localized, style: .default)
           controller.addAction(actionOk)
-            return controller
+          return controller
         }()
         self?.present(alertController, animated: true)
       }
@@ -571,19 +556,19 @@ extension MainListController {
       self?.startActivity()
       DataCenter.imageDataManager.add(savedImage: savedImg) { _ in
         DispatchQueue.main.async {
+          self?.stopActivity()
           self?.table.reloadData()
           let rowCount = DataCenter.images.count
-          let scrollToNum = rowCount > 0 ? rowCount - 1 : 0
-          DispatchQueue.main.asyncAfter(deadline: .now()) {
-            self?.stopActivity()
-            let path = IndexPath(row: scrollToNum, section: TableSection.images.rawValue)
-            self?.table.scrollToRow(at: path, at: .bottom, animated: true)
-            self?.table.selectRow(at: path, animated: true, scrollPosition: .bottom)
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(350)) {
-              self?.table.deselectRow(at: path, animated: true)
+            if rowCount > 0 {
+              let scrollToNum = rowCount - 1
+              let path = IndexPath(row: scrollToNum, section: TableSection.images.rawValue)
+              self?.table.scrollToRow(at: path, at: .bottom, animated: true)
+              self?.table.selectRow(at: path, animated: true, scrollPosition: .bottom)
+              DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(350)) {
+                self?.table.deselectRow(at: path, animated: true)
+              }
             }
-          } // asynk after
-        }
+          }
       } // end add
     }
   }
@@ -647,11 +632,11 @@ extension MainListController: UIDocumentPickerDelegate {
       self?.startActivity()
       DataCenter.pdfDataManager.add(savedPdf: pdf) { _ in
         DispatchQueue.main.async {
+          self?.stopActivity()
           self?.table.reloadData()
           let rowsCount = DataCenter.pdfs.count
-          let scrollToNum = rowsCount > 0 ? rowsCount-1 : 0
-          DispatchQueue.main.asyncAfter(deadline: .now()) {
-            self?.stopActivity()
+           if rowsCount > 0 {
+            let scrollToNum = rowsCount-1
             let path = IndexPath(row: scrollToNum, section: TableSection.pdfs.rawValue)
             self?.table.scrollToRow(at: path, at: .bottom, animated: true)
             self?.table.selectRow(at: path, animated: true, scrollPosition: .bottom)
@@ -659,7 +644,7 @@ extension MainListController: UIDocumentPickerDelegate {
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(350)) {
               self?.table.deselectRow(at: path, animated: true)
             }
-          } // end asynk after
+          }
         }
       } // end add
     } // end alert action
@@ -676,6 +661,16 @@ extension MainListController: UIDocumentPickerDelegate {
   private func documentPicker(controller: UIDocumentPickerViewController, didPickDocumentAtURL url: NSURL) {
     if controller.documentPickerMode == .import {
       checkQRCodesInPDFFile(url: url)
+    }
+  }
+}
+
+
+// MARK: DismissController Delegate
+extension MainListController: DismissControllerDelegate {
+  func userDidDissmiss(_ controller: UIViewController) {
+    if downloadedDataHasExpired {
+      self.navigationController?.popViewController(animated: false)
     }
   }
 }

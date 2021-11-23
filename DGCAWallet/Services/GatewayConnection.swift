@@ -36,6 +36,7 @@ enum GatewayError: Error {
   case insufficientData
   case encodingError
   case signingError
+  case updatingError
   case incorrectDataResponse
   case connection(error: Error)
   case local(description: String)
@@ -102,16 +103,18 @@ class GatewayConnection: ContextConnection {
     }
   }
   
-  static func fetchContext() {
+  static func fetchContext(completion: @escaping CompletionHandler) {
     request( ["context"] ).response {
       guard let data = $0.data, let string = String(data: data, encoding: .utf8) else { return }
         
       let json = JSON(parseJSONC: string)
       DataCenter.localDataManager.localData.config.merge(other: json)
-      DataCenter.localDataManager.save()
-      if DataCenter.localDataManager.versionedConfig["outdated"].bool == true {
-        let controller = UIApplication.shared.windows.first?.rootViewController as? UINavigationController
-        controller?.popToRootViewController(animated: false)
+      DataCenter.localDataManager.save { result in
+        if DataCenter.localDataManager.versionedConfig["outdated"].bool == true {
+          let controller = UIApplication.shared.windows.first?.rootViewController as? UINavigationController
+          controller?.popToRootViewController(animated: false)
+        }
+        completion()
       }
     }
   }
@@ -153,9 +156,10 @@ extension GatewayConnection {
         completion(nil, GatewayError.local(description: "No sign"))
         return
       }
-      DataCenter.addCountries(countryList)
-      let countryCodes = DataCenter.countryCodes.sorted(by: { $0.name < $1.name })
-      completion(countryCodes, nil)
+      DataCenter.addCountries(countryList) { result in
+        let countryCodes = DataCenter.countryCodes.sorted(by: { $0.name < $1.name })
+        completion(countryCodes, nil)
+      }
     }
   }
     
@@ -239,8 +243,13 @@ extension GatewayConnection {
         completion(nil, GatewayError.parsingError)
         return
       }
-      DataCenter.addRules(rules)
-      completion(DataCenter.rules, nil)
+      DataCenter.addRules(rules, completion: { result in
+//        guard case let .success(value) = result, value == true else {
+//          completion(nil, GatewayError.updatingError)
+//          return
+//        }
+        completion(DataCenter.rules, nil)
+      })
     }
   }
   
@@ -319,8 +328,13 @@ extension GatewayConnection {
         return
       }
 
-      DataCenter.addValueSets(valueSetsList)
-      completion(DataCenter.valueSets, nil)
+      DataCenter.addValueSets(valueSetsList, completion: { result in
+//        guard case let .success(value) = result, value == true else {
+//          completion(nil, GatewayError.encodingError)
+//          return
+//        }
+        completion(DataCenter.valueSets, nil)
+      })
     }
   }
   
