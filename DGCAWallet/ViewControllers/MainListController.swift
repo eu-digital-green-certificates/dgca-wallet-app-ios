@@ -18,12 +18,12 @@
  * limitations under the License.
  * ---license-end
  */
-//  
+//
 //  MainListController.swift
 //  DGCAWallet
-//  
+//
 //  Created by Yannick Spreen on 4/25/21.
-//  
+//
 
 // swiftlint:disable file_length
 
@@ -309,14 +309,14 @@ extension MainListController: ScanWalletDelegate {
 // MARK: CertificateManaging
 extension MainListController: CertificateManaging {
   func certificateViewer(_ controller: CertificateViewerController, didDeleteCertificate cert: HCert) {
-      DispatchQueue.main.async { [weak self] in
-        self?.reloadTable()
+    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(150)) {
+        self.reloadTable()
       }
   }
   
   func certificateViewer(_ controller: CertificateViewerController, didAddCeCertificate cert: HCert) {
-    DispatchQueue.main.async { [weak self] in
-      self?.reloadTable()
+    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(150)) {
+      self.reloadTable()
     }
   }
 }
@@ -373,21 +373,21 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
         
         walletCell.setupCell(listCertElements[indexPath.row])
         return walletCell
-          
+        
       case TableSection.images.rawValue:
         guard let imageCell = table.dequeueReusableCell(withIdentifier: "ImageTableViewCell", for: indexPath) as? ImageTableViewCell
         else { return UITableViewCell() }
         
         imageCell.setImage(image: listImageElements[indexPath.row])
         return imageCell
-          
+        
       case TableSection.pdfs.rawValue:
         guard let imageCell = table.dequeueReusableCell(withIdentifier: "PDFTableViewCell", for: indexPath) as? PDFTableViewCell
         else { return UITableViewCell() }
-           
+        
         imageCell.setPDF(pdf: listPdfElements[indexPath.row])
         return imageCell
-          
+        
       default:
           return UITableViewCell()
       }
@@ -400,7 +400,7 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
     switch indexPath.section {
       case TableSection.certificates.rawValue:
         self.performSegue(withIdentifier: SegueIdentifiers.showCertificateViewer, sender: listCertElements[indexPath.row])
-          
+      
       case TableSection.images.rawValue:
         self.performSegue(withIdentifier: SegueIdentifiers.showImageViewer, sender: listImageElements[indexPath.row])
 
@@ -417,23 +417,22 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
       case TableSection.certificates.rawValue:
         let savedCert = listCertElements[indexPath.row]
         showAlert( title: "Delete Certificate".localized, subtitle: "cert.delete.body".localized,
-                   actionTitle: "Confirm".localized, cancelTitle: "Cancel".localized) { [weak self] in
-        if $0 {
-          self?.startActivity()
-          DataCenter.localDataManager.remove(withDate: savedCert.date) { _ in
-            DispatchQueue.main.async {
-              self?.table.reloadData()
-              self?.stopActivity()
-              self?.reloadTable()
-            }
-          } // LocalData
+            actionTitle: "Confirm".localized, cancelTitle: "Cancel".localized) { [weak self] in
+          if $0 {
+            self?.startActivity()
+            DataCenter.localDataManager.remove(withDate: savedCert.date) { _ in
+              DispatchQueue.main.async {
+                self?.stopActivity()
+                self?.reloadTable()
+              }
+            } // LocalData
+          }
         }
-      }
       
       case TableSection.images.rawValue:
         let savedImage = listImageElements[indexPath.row]
         showAlert( title: "Delete Certificate".localized, subtitle: "cert.delete.body".localized,
-      actionTitle: "Confirm".localized, cancelTitle:"Cancel".localized) { [weak self] in
+            actionTitle: "Confirm".localized, cancelTitle:"Cancel".localized) { [weak self] in
           if $0 {
             self?.startActivity()
             DataCenter.imageDataManager.deleteImage(with: savedImage.identifier) { _ in
@@ -447,7 +446,7 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
       case TableSection.pdfs.rawValue:
         let savedPDF = listPdfElements[indexPath.row]
         showAlert( title: "Delete Certificate".localized, subtitle: "cert.delete.body".localized,
-                   actionTitle: "Confirm".localized, cancelTitle: "Cancel".localized) { [weak self] in
+            actionTitle: "Confirm".localized, cancelTitle: "Cancel".localized) { [weak self] in
           if $0 {
             self?.startActivity()
             DataCenter.pdfDataManager.deletePDF(with: savedPDF.identifier) { _ in
@@ -562,10 +561,12 @@ extension MainListController {
             if rowCount > 0 {
               let scrollToNum = rowCount - 1
               let path = IndexPath(row: scrollToNum, section: TableSection.images.rawValue)
-              self?.table.scrollToRow(at: path, at: .bottom, animated: true)
-              self?.table.selectRow(at: path, animated: true, scrollPosition: .bottom)
-              DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(350)) {
-                self?.table.deselectRow(at: path, animated: true)
+              DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(150)) {
+                self?.table.scrollToRow(at: path, at: .bottom, animated: true)
+                self?.table.selectRow(at: path, animated: true, scrollPosition: .bottom)
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(350)) {
+                  self?.table.deselectRow(at: path, animated: true)
+                }
               }
             }
           }
@@ -617,6 +618,7 @@ extension MainListController: UIDocumentPickerDelegate {
              let hCert = try HCert(from: qrString)
             self.saveQrCode(cert: hCert)
           } catch {
+            savePDFFile(url: url)
           }
           return
         }
@@ -638,12 +640,14 @@ extension MainListController: UIDocumentPickerDelegate {
            if rowsCount > 0 {
             let scrollToNum = rowsCount-1
             let path = IndexPath(row: scrollToNum, section: TableSection.pdfs.rawValue)
-            self?.table.scrollToRow(at: path, at: .bottom, animated: true)
-            self?.table.selectRow(at: path, animated: true, scrollPosition: .bottom)
-            // let's add time for app to scroll down (0.35 sec)
-            DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(350)) {
-              self?.table.deselectRow(at: path, animated: true)
-            }
+             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(150)) {
+               self?.table.scrollToRow(at: path, at: .bottom, animated: true)
+               self?.table.selectRow(at: path, animated: true, scrollPosition: .bottom)
+               // let's add time for app to scroll down (0.35 sec)
+               DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(350)) {
+                 self?.table.deselectRow(at: path, animated: true)
+               }
+             }
           }
         }
       } // end add
