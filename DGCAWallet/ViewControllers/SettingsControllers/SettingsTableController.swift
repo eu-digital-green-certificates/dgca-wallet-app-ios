@@ -75,7 +75,7 @@ class SettingsTableController: UITableViewController {
   override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     switch section {
     case 1:
-      return "COVID-19 vaccination verification".localized
+      return "COVID-19 vaccination verification data".localized
     default:
       return nil
     }
