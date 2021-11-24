@@ -50,6 +50,8 @@ class TicketingAcceptanceController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupView(isValidation: true)
+    cancelButton.setTitle("Cancel".localized, for: .normal)
+    grandButton.setTitle("Grant Permission".localized, for: .normal)
   }
   
   private func startActivity() {

@@ -41,7 +41,7 @@ class ImageViewerController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.closeButton.setTitle("Close".localized, for: .normal)
+    self.closeButton.setTitle("Done".localized, for: .normal)
     shareButton.setTitle("Share".localized, for: .normal)
     self.title = "PDF files".localized
     setupView()

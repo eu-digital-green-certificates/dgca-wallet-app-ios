@@ -72,6 +72,15 @@ class SettingsTableController: UITableViewController {
     tableView.deselectRow(at: indexPath, animated: true)
   }
 
+  override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    switch section {
+    case 1:
+      return "COVID-19 vaccination verification".localized
+    default:
+      return nil
+    }
+
+  }
   override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
     switch section {
     case 1:

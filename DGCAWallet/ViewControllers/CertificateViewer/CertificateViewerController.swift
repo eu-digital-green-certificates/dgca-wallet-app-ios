@@ -93,7 +93,7 @@ class CertificateViewerController: UIViewController {
     } else {
       editButton.isHidden = false
       cancelButton.isHidden = true
-      
+      dismissButton.setTitle("Done".localized, for: .normal)
       if isEditMode {
         editButton.setTitle("Done".localized, for: .normal)
         deleteButton.isHidden = false
