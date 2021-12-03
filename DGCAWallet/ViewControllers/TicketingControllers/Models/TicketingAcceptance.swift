@@ -34,11 +34,49 @@ class TicketingAcceptance {
   let validationInfo: ServerListResponse
   let accessInfo : AccessTokenResponse
 
+  let accessTokenInfoKeys = [
+    "Name".localized,
+    "Date of birth".localized,
+    "Departure".localized,
+    "Arrival".localized,
+    "Accepted certificate type".localized,
+    "Category".localized,
+    "Validation Time".localized,
+    "Valid from".localized,
+    "Valid to".localized
+  ]
+
+  var accessTokenInfoValues: [String] {
+    guard let vcValue = accessInfo.vc else { return [] }
+    let infoValueArray = ["\(vcValue.gnt) \(vcValue.fnt)", vcValue.dob, "\(vcValue.cod),\(vcValue.rod)", "\(vcValue.coa),\(vcValue.roa)", vcValue.type.joined(separator: ","), vcValue.category.joined(separator: ","), vcValue.validationClock, vcValue.validFrom, vcValue.validTo]
+    return infoValueArray
+  }
+  
   init(validationInfo: ServerListResponse, accessInfo: AccessTokenResponse) {
       self.validationInfo = validationInfo
       self.accessInfo = accessInfo
   }
+  
+  var ticketingCertificates: [DatedCertString] {
+    guard let validationCertificate = self.accessInfo.vc else { return [] }
+      let givenName = validationCertificate.gnt
+      let familyName = validationCertificate.fnt
     
+    var collectArray = DataCenter.certStrings.filter { ($0.cert!.fullName.lowercased() == "\(givenName) \(familyName)".lowercased()) &&
+      ($0.cert!.dateOfBirth == validationCertificate.dob) }
+    
+    let validDateFrom = validationCertificate.validFrom
+    if let dateValidFrom = Date(rfc3339DateTimeString: validDateFrom) {
+      collectArray = collectArray.filter{ $0.cert!.iat < dateValidFrom }
+    }
+    
+    let validDateTo = validationCertificate.validTo
+    if let dateValidUntil = Date(rfc3339DateTimeString: validDateTo) {
+      collectArray = collectArray.filter {$0.cert!.exp > dateValidUntil }
+    }
+    return collectArray
+  }
+  
   func requestGrandPermissions(for certificate: HCert, completion: @escaping TicketingCompletion) {
     guard let urlPath = self.accessInfo.aud,
       let url = URL(string: urlPath),
@@ -53,7 +91,7 @@ class TicketingAcceptance {
       return
     }
     let ivToken = String(decoding: tokenData, as: UTF8.self)
-
+    
     guard let dccData = encodeDCC(dgcString: certificate.fullPayloadString, iv: ivToken),
       let privateKey = Enclave.loadOrGenerateKey(with: "validationKey")
     else {
@@ -61,7 +99,8 @@ class TicketingAcceptance {
       return
     }
       
-    Enclave.sign(data: dccData.0, with: privateKey, using: SecKeyAlgorithm.ecdsaSignatureMessageX962SHA256, completion: { (signature, error) in
+    Enclave.sign(data: dccData.0, with: privateKey, using: SecKeyAlgorithm.ecdsaSignatureMessageX962SHA256,
+          completion: { (signature, error) in
       guard error == nil else {
         completion(nil, GatewayError.local(description: error!))
         return
@@ -70,9 +109,13 @@ class TicketingAcceptance {
         completion(nil, GatewayError.signingError)
         return
       }
-      let parameters = ["kid" : verificationMethod.publicKeyJwk!.kid, "dcc" : dccData.0.base64EncodedString(),
-          "sig": sign.base64EncodedString(),"encKey" : dccData.1.base64EncodedString(),
-          "sigAlg" : "SHA256withECDSA", "encScheme" : "RSAOAEPWithSHA256AESGCM"]
+      let parameters = ["kid" : verificationMethod.publicKeyJwk!.kid,
+          "dcc" : dccData.0.base64EncodedString(),
+          "sig": sign.base64EncodedString(),
+          "encKey" : dccData.1.base64EncodedString(),
+          "sigAlg" : "SHA256withECDSA",
+          "encScheme" : "RSAOAEPWithSHA256AESGCM"]
+      
       GatewayConnection.validateTicketing(url: url, parameters: parameters, completion: completion)
     })
   }
@@ -116,7 +159,7 @@ class TicketingAcceptance {
   private  func encrypt(data: Data, with key: SecKey) -> (Data?, String?) {
     guard let publicKey = SecKeyCopyPublicKey(key) else { return (nil, "Cannot retrieve public key.".localized) }
     guard SecKeyIsAlgorithmSupported(publicKey, .encrypt, SecKeyAlgorithm.rsaEncryptionOAEPSHA256) else {
-      return (nil, "Algorithm not supported.".localized)
+      return (nil, "Algorithm is not supported.".localized)
     }
     var error: Unmanaged<CFError>?
     let cipherData = SecKeyCreateEncryptedData(publicKey,

@@ -26,41 +26,20 @@
 //  
 
 import UIKit
-import SwiftDGC
 
 class CertificateListController: UIViewController {
-  private enum Constants {
-    static let showTicketAcceptController = "showTicketAcceptController"
-  }
+  let showTicketAcceptController = "showTicketAcceptController"
   
   @IBOutlet fileprivate weak var tableView: UITableView!
   @IBOutlet fileprivate weak var nextButton: UIButton!
   
-  var ticketingAcceptance: TicketingAcceptance? {
-    didSet {
-      self.reloadComponents()
-    }
-  }
+  var ticketingAcceptance: TicketingAcceptance?
   
   private var stringCertificates = [DatedCertString]()
   private var selectedStringCertificate: DatedCertString? {
     return stringCertificates.filter({ $0.isSelected }).first
   }
-
-  private var accessTokenInfoKeys = [
-    "Name".localized,
-    "Date of birth".localized,
-    "Departure".localized,
-    "Arrival".localized,
-    "Accepted certificate type".localized,
-    "Category".localized,
-    "Validation Time".localized,
-    "Valid from".localized,
-    "Valid to".localized
-  ]
-  
-  private var accessTokenInfoValues = [String]()
-  
+    
   private var isNavigationEnabled: Bool {
     return ticketingAcceptance != nil && selectedStringCertificate?.cert != nil
   }
@@ -68,10 +47,6 @@ class CertificateListController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-    guard let vcValue = ticketingAcceptance?.accessInfo.vc else { return }
-    
-    accessTokenInfoValues = ["\(vcValue.gnt!) \(vcValue.fnt!)", vcValue.dob!, "\(vcValue.cod!),\(vcValue.rod!)", "\(vcValue.coa!),\(vcValue.roa!)", vcValue.type!.joined(separator: ","), vcValue.category!.joined(separator: ","), vcValue.validationClock!, vcValue.validFrom!, vcValue.validTo!]
-    
     tableView.tableFooterView = UIView()
     title = "Certificates".localized
     nextButton.setTitle("Next".localized, for: .normal)
@@ -79,39 +54,19 @@ class CertificateListController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    self.stringCertificates = ticketingAcceptance?.ticketingCertificates ?? []
     tableView.reloadData()
   }
   
   @IBAction func nextButtonAction(_ sender: Any) {
     guard let _ = selectedStringCertificate?.cert else {
-      self.showInfoAlert(withTitle: "Please select a certificate".localized, message: "Here are all the appropriate certificates.".localized)
+      self.showInfoAlert(withTitle: "Please select a certificate".localized,
+          message: "Here are all the appropriate certificates.".localized)
         return
     }
-    
-    self.performSegue(withIdentifier: Constants.showTicketAcceptController, sender: nil)
+    self.performSegue(withIdentifier: showTicketAcceptController, sender: nil)
   }
-  
-  func reloadComponents() {
-    guard let validationCertificate = ticketingAcceptance?.accessInfo.vc,
-      let givenName = validationCertificate.gnt, let familyName = validationCertificate.fnt else { return }
     
-    let array = DataCenter.certStrings.filter { ($0.cert!.fullName.lowercased() == "\(givenName) \(familyName)".lowercased()) &&
-      ($0.cert!.dateOfBirth == validationCertificate.dob) }
-    stringCertificates = array
-    
-    let validDateFrom = validationCertificate.validFrom ?? ""
-    if let dateValidFrom = Date(rfc3339DateTimeString: validDateFrom) {
-      let array = stringCertificates.filter{ $0.cert!.iat < dateValidFrom }
-      stringCertificates = array
-    }
-    
-    let validDateTo = validationCertificate.validTo ?? ""
-    if let dateValidUntil = Date(rfc3339DateTimeString: validDateTo) {
-      let array = stringCertificates.filter {$0.cert!.exp > dateValidUntil }
-      stringCertificates = array
-    }
-  }
-  
   private func deselectAllCertificates() {
     for i in 0..<stringCertificates.count {
       stringCertificates[i].isSelected = false
@@ -126,7 +81,9 @@ extension CertificateListController: UITableViewDataSource, UITableViewDelegate 
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     if section == 0 {
-      switch ticketingAcceptance?.accessInfo.t {
+      guard let infoTableValue = ticketingAcceptance?.accessInfo.t else { return 0 }
+
+      switch infoTableValue {
       case 0:
         return 0
       case 1:
@@ -136,7 +93,7 @@ extension CertificateListController: UITableViewDataSource, UITableViewDelegate 
       default:
         return 0
       }
-
+      
     } else {
       return stringCertificates.count
     }
@@ -144,9 +101,9 @@ extension CertificateListController: UITableViewDataSource, UITableViewDelegate 
   
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     if section == 0 {
-      return nil
+      return "Ticketing information".localized
     } else {
-      return "Certificates".localized
+      return "Available Certificates".localized
     }
   }
   
@@ -156,8 +113,8 @@ extension CertificateListController: UITableViewDataSource, UITableViewDelegate 
       guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as? TokenInfoCell
       else { return UITableViewCell() }
       
-      cell.fieldName.text = accessTokenInfoKeys[indexPath.row]
-      cell.fieldValue.text = accessTokenInfoValues[indexPath.row]
+      cell.fieldName.text = ticketingAcceptance?.accessTokenInfoKeys[indexPath.row] ?? ""
+      cell.fieldValue.text = ticketingAcceptance?.accessTokenInfoValues[indexPath.row] ?? ""
       return cell
       
     } else {
@@ -174,27 +131,6 @@ extension CertificateListController: UITableViewDataSource, UITableViewDelegate 
     }
   }
   
-  func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-    return true
-  }
-  
-  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-    if editingStyle == .delete {
-      let savedCert = stringCertificates[indexPath.row]
-      showAlert(title: "Delete Certificate".localized, subtitle: "cert.delete.body".localized, actionTitle: "Confirm".localized,
-          cancelTitle: "Cancel".localized) {
-        if $0 {
-         DataCenter.localDataManager.remove(withDate: savedCert.date) { [weak self] _ in
-           self?.reloadComponents()
-           DispatchQueue.main.asyncAfter(deadline: .now()) {
-             self?.tableView.reloadData()
-           }
-         }
-       }
-      }
-    }
-  }
-  
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if indexPath.section == 1 {
       deselectAllCertificates()
@@ -205,11 +141,9 @@ extension CertificateListController: UITableViewDataSource, UITableViewDelegate 
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     switch segue.identifier {
-    case Constants.showTicketAcceptController:
+    case showTicketAcceptController:
       guard let ticketingController = segue.destination as? TicketingAcceptanceController,
-          let acceptance = ticketingAcceptance,
-          let selectedCertificate = selectedStringCertificate?.cert else { return }
-      
+        let acceptance = ticketingAcceptance, let selectedCertificate = selectedStringCertificate?.cert else { return }
       ticketingController.prepareTicketing(with: acceptance, certificate: selectedCertificate)
 
     default:

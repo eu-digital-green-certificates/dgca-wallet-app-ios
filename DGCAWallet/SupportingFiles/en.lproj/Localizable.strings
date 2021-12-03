@@ -159,4 +159,7 @@
 "Settings" = "Settings";
 "Expired date: %@" = "Expired date: %@";
 "Certificate type: %@" = "Certificate type: %@";
+
 "COVID-19 vaccination verification data" = "COVID-19 vaccination verification data";
+"Ticketing information" = "Ticketing information";
+"Available Certificates" = "Available Certificates";

@@ -36,7 +36,7 @@ class ValidationResultController: UIViewController {
   @IBOutlet fileprivate weak var limitationsTableView: UITableView!
   @IBOutlet fileprivate weak var okButton: UIButton!
 
-  public var validationResultModel : AccessTokenResponse?
+  public var accessTokenResponse : AccessTokenResponse?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -49,9 +49,10 @@ class ValidationResultController: UIViewController {
     iconImage.image = iconImage.image?.withRenderingMode(.alwaysTemplate)
     okButton.setTitle("OK".localized, for: .normal)
 
-    guard let result = validationResultModel?.result else {
+    guard let result = accessTokenResponse?.result else {
       showInfoAlert(withTitle: "Cannot validate the certificate".localized,
-          message: "Make sure you select the desired service...".localized)
+        message: "Make sure you select the desired service...".localized)
+      
       titleLabel.text = "Validation error".localized
       detailLabel.text = "Please refer to the Re-open EU website.".localized
       iconImage.image = UIImage(named: "icon_large_invalid")
@@ -97,15 +98,13 @@ extension ValidationResultController : UITableViewDelegate, UITableViewDataSourc
   }
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    guard let issuesCount = validationResultModel?.results?.count else { return 0 }
+    guard let issuesCount = accessTokenResponse?.results?.count else { return 0 }
     return issuesCount
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "LimitationCell", for: indexPath) as! LimitationCell
-    if let issueText = validationResultModel?.results?[indexPath.row].details {
-      cell.issueTextView.text = issueText
-    }
+    cell.issueTextView.text = accessTokenResponse?.results?[indexPath.row].details ?? ""
     return cell
   }
 }

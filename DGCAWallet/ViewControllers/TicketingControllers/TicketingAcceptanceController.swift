@@ -113,9 +113,9 @@ class TicketingAcceptanceController: UIViewController {
     switch segue.identifier {
     case Segues.showValidationResult:
       guard let validationController = segue.destination as? ValidationResultController,
-      let responseModel = sender as? AccessTokenResponse else { return }
-      validationController.validationResultModel = responseModel
-
+          let responseModel = sender as? AccessTokenResponse else { return }
+      validationController.accessTokenResponse = responseModel
+      
     default:
         break
     }

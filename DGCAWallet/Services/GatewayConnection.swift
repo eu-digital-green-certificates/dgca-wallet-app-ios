@@ -338,7 +338,7 @@ extension GatewayConnection {
     }
   }
   
-  static func getAccessTokenFor(url : URL,servicePath : String, publicKey : String, completion : @escaping TicketingCompletion) {
+  static func loadAccessToken(_ url : URL, servicePath : String, publicKey: String, completion: @escaping TicketingCompletion) {
     let json: [String: Any] = ["service": servicePath, "pubKey": publicKey]
     
     guard let jsonData = try? JSONSerialization.data(withJSONObject: json,options: .prettyPrinted),

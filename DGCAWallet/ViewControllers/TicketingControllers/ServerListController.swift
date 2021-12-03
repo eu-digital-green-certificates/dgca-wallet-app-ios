@@ -94,7 +94,7 @@ class ServerListController: UIViewController {
       
       let pubKey = (X509.derPubKey(for: privateKey) ?? Data()).base64EncodedString()
       
-      GatewayConnection.getAccessTokenFor(url: url,servicePath: service.id, publicKey: pubKey) { response, error in
+      GatewayConnection.loadAccessToken(url, servicePath: service.id, publicKey: pubKey) { response, error in
         DispatchQueue.main.async { [weak self] in
           guard let response = response else {
             self?.showNetworkingError()
