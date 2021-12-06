@@ -121,13 +121,13 @@
 
 "Your certificate is valid but has the following restrictions:" = "Your certificate is valid but has the following restrictions:";
 
-"Cannot validate the certificate" = "Cannot validate the certificate";
+"Unable to verify certificate" = "Unable to verify certificate";
 "Make sure you select the desired service..." = "Make sure you select the desired service and try again. If it happens again, please refer to the Re-open EU website.";
 
 "Validation error" = "Validation error";
 "Please refer to the Re-open EU website." = "Please refer to the Re-open EU website.";
 
-"An internal error has occurred" = "An internal error has occurred";
+"Failed to process ticketing request" = "Failed to process ticketing request";
 "Please quit the application and restart again." = "Please quit the application and restart again.";
 
 "The specified service cannot be used" = "The specified service cannot be used";
@@ -163,3 +163,6 @@
 "COVID-19 vaccination verification data" = "COVID-19 vaccination verification data";
 "Ticketing information" = "Ticketing information";
 "Available Certificates" = "Available Certificates";
+
+"Failed to confirm ticketing request" = "Failed to confirm ticketing request";
+"Please create new ticketing request and try again..." = "Please create new ticketing request and try again. If it happens again, please refer to the Re-open EU website.";

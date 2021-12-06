@@ -50,7 +50,7 @@ class ValidationResultController: UIViewController {
     okButton.setTitle("OK".localized, for: .normal)
 
     guard let result = accessTokenResponse?.result else {
-      showInfoAlert(withTitle: "Cannot validate the certificate".localized,
+      showInfoAlert(withTitle: "Unable to verify certificate".localized,
         message: "Make sure you select the desired service...".localized)
       
       titleLabel.text = "Validation error".localized

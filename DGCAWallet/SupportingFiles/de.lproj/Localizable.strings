@@ -119,13 +119,13 @@
 
 "Your certificate is not valid. Please refer to the Re-open EU website:" = "Ihre Bescheinigung ist nicht gültig. Bitte besuchen Sie die Website Re-open EU:";
 
-"Cannot validate the certificate" = "Das Zertifikat kann nicht validiert werden";
+"Unable to verify certificate" = "Das Zertifikat kann nicht validiert werden";
 "Make sure you select the desired service..." = "Vergewissern Sie sich, dass Sie den gewünschten Dienst ausgewählt haben und versuchen Sie es erneut. Wenn das Problem erneut auftritt, besuchen Sie bitte die Website EU wieder öffnen";
 
 "Validation error" = "Validierungsfehler";
 "Please refer to the Re-open EU website." = "Bitte besuchen Sie die Website von Re-open EU.";
 
-"An internal error has occurred" = "Ein interner Fehler ist aufgetreten";
+"Failed to process ticketing request" = "Ein interner Fehler ist aufgetreten";
 "Please quit the application and restart again." = "Bitte beenden Sie die Anwendung und starten Sie sie erneut.";
 
 "The specified service cannot be used" = "Der angegebene Dienst kann nicht verwendet werden";
@@ -161,3 +161,6 @@
 "COVID-19 vaccination verification data" = "Daten zur Verifizierung der COVID-19-Impfung";
 "Ticketing information" = "Ticketing-Informationen";
 "Available Certificates" = "Verfügbare Zertifikate";
+
+"Failed to confirm ticketing request" = "Ticketanfrage konnte nicht bestätigt werden";
+"Please create new ticketing request and try again..." = "Bitte erstellen Sie eine neue Ticketanfrage und versuchen Sie es erneut. Sollte dies erneut passieren, besuchen Sie bitte die EU Website.";

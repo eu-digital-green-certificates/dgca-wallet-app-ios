@@ -332,19 +332,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="sKg-PA-Rtf">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="595"/>
+                                <rect key="frame" x="8" y="0.0" width="359" height="595"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CertificateCell" rowHeight="77" id="jYu-JM-UXs" customClass="CertificateCell" customModule="DGCAWallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="375" height="77"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="359" height="77"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jYu-JM-UXs" id="bd7-IO-9sW">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="77"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="359" height="77"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EZx-rd-6zb">
-                                                    <rect key="frame" x="16" y="11" width="343" height="20.5"/>
+                                                    <rect key="frame" x="16" y="11" width="327" height="20.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="19" id="nLq-MM-L2m"/>
                                                     </constraints>
@@ -384,14 +384,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TokenInfoCell" rowHeight="32" id="YgW-TE-KvK" customClass="TokenInfoCell" customModule="DGCAWallet" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="121.5" width="375" height="32"/>
+                                        <rect key="frame" x="0.0" y="121.5" width="359" height="32"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YgW-TE-KvK" id="0U8-Cw-qC3">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="32"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="359" height="32"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d0e-Bt-rYr">
-                                                    <rect key="frame" x="320" y="8" width="39" height="16"/>
+                                                    <rect key="frame" x="304" y="8" width="39" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -453,13 +453,13 @@
                         <viewLayoutGuide key="safeArea" id="YzT-Kx-FjW"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="YzT-Kx-FjW" firstAttribute="trailing" secondItem="sKg-PA-Rtf" secondAttribute="trailing" constant="8" id="ChB-xf-rOK"/>
                             <constraint firstItem="WbA-kC-hOb" firstAttribute="top" secondItem="sKg-PA-Rtf" secondAttribute="bottom" constant="16" id="Chk-Qx-cG3"/>
-                            <constraint firstItem="sKg-PA-Rtf" firstAttribute="leading" secondItem="YzT-Kx-FjW" secondAttribute="leading" id="MX4-Qg-nrG"/>
+                            <constraint firstItem="sKg-PA-Rtf" firstAttribute="leading" secondItem="YzT-Kx-FjW" secondAttribute="leading" constant="8" id="MX4-Qg-nrG"/>
                             <constraint firstItem="YzT-Kx-FjW" firstAttribute="trailing" secondItem="WbA-kC-hOb" secondAttribute="trailing" constant="20" id="TWV-Ut-VaR"/>
                             <constraint firstItem="sKg-PA-Rtf" firstAttribute="top" secondItem="YzT-Kx-FjW" secondAttribute="top" id="fF9-BR-rLn"/>
                             <constraint firstItem="WbA-kC-hOb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YzT-Kx-FjW" secondAttribute="leading" constant="20" id="gBJ-nr-ilN"/>
                             <constraint firstItem="YzT-Kx-FjW" firstAttribute="bottom" secondItem="WbA-kC-hOb" secondAttribute="bottom" constant="16" id="wUb-Sj-F2p"/>
-                            <constraint firstItem="sKg-PA-Rtf" firstAttribute="trailing" secondItem="YzT-Kx-FjW" secondAttribute="trailing" id="yc8-tR-6ed"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="3t6-5U-vk5"/>

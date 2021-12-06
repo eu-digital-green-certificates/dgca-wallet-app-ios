@@ -97,7 +97,7 @@ class TicketingAcceptanceController: UIViewController {
       guard error == nil, let response = response else {
         DispatchQueue.main.async {
           self?.stopActivity()
-          self?.showInfoAlert(withTitle: "Cannot validate the certificate".localized,
+          self?.showInfoAlert(withTitle: "Unable to verify certificate".localized,
             message: "Make sure you select the desired service...".localized)
         }
         return

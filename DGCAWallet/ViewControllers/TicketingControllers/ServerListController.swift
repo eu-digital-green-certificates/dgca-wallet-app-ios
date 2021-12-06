@@ -97,7 +97,7 @@ class ServerListController: UIViewController {
       GatewayConnection.loadAccessToken(url, servicePath: service.id, publicKey: pubKey) { response, error in
         DispatchQueue.main.async { [weak self] in
           guard let response = response else {
-            self?.showNetworkingError()
+            self?.showTicketingError()
             return
           }
           let ticketingAcceptance = TicketingAcceptance(validationInfo: serviceInfo, accessInfo: response)
@@ -163,15 +163,15 @@ extension ServerListController {
   
   func showAlertInternalError() {
     DispatchQueue.main.async {
-      self.showInfoAlert(withTitle: "An internal error has occurred".localized,
-          message: "Please quit the application and restart again.".localized)
+      self.showInfoAlert(withTitle: "Failed to process ticketing request".localized,
+          message: "Please create new ticketing request and try again...".localized)
     }
   }
   
-  func showNetworkingError() {
+  func showTicketingError() {
     DispatchQueue.main.async {
-      self.showInfoAlert(withTitle: "An internet connection error has occurred".localized,
-          message: "Make sure your device is connected to the internet and try again...".localized)
+      self.showInfoAlert(withTitle: "Failed to confirm ticketing request".localized,
+          message: "Please create new ticketing request and try again...".localized)
     }
   }
 }
