@@ -120,7 +120,9 @@ class CertificateViewerController: UIViewController {
     } else {
       activityIndicator.startAnimating()
       saveCert {[weak self] in
-        self?.activityIndicator.stopAnimating()
+        DispatchQueue.main.async {
+          self?.activityIndicator.stopAnimating()
+        }
       }
     }
   }
@@ -140,16 +142,15 @@ class CertificateViewerController: UIViewController {
 
   @IBAction func deleteCertificateAction() {
     guard let certDate = certDate else { return }
-    
+    guard let cert = self.hCert else { return }
+
     showAlert( title: "Delete Certificate".localized, subtitle: "cert.delete.body".localized,
-        actionTitle: "Confirm".localized, cancelTitle: "Cancel".localized) { [weak self] in
+        actionTitle: "Confirm".localized, cancelTitle: "Cancel".localized) { [unowned self] in
       if $0 {
-        DataCenter.localDataManager.remove(withDate: certDate) {[weak self] _ in
+        DataCenter.localDataManager.remove(withDate: certDate) { _ in
+          self.delegate?.certificateViewer(self, didDeleteCertificate: cert)
           DispatchQueue.main.async {
-            if let cert = self?.hCert {
-              self?.delegate?.certificateViewer(self!, didDeleteCertificate: cert)
-            }
-            self?.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
           }
         } // LocalData
       }
@@ -159,8 +160,8 @@ class CertificateViewerController: UIViewController {
   private func saveCert(completion: @escaping CompletionHandler) {
     showInputDialog(title: "Confirm TAN".localized,
         subtitle: "Please enter the TAN that was provided together with your certificate:".localized,
-        actionTitle: "Confirm".localized, inputPlaceholder: "XYZ12345" ) { [weak self] in
-      guard let certificate = self?.hCert else {
+        actionTitle: "Confirm".localized, inputPlaceholder: "XYZ12345" ) { [unowned self] in
+      guard let certificate = self.hCert else {
         DGCLogger.logInfo("Certificate error")
         completion()
         return
@@ -170,8 +171,7 @@ class CertificateViewerController: UIViewController {
         guard error == nil else {
           completion()
           DispatchQueue.main.async {
-            completion()
-            self?.showAlert(title:"Cannot save the Certificate".localized, subtitle: "Check the TAN and try again.".localized)
+            self.showAlert(title:"Cannot save the Certificate".localized, subtitle: "Check the TAN and try again.".localized)
           }
 
           DGCLogger.logError(error!)
@@ -180,19 +180,19 @@ class CertificateViewerController: UIViewController {
         
         if success {
           DataCenter.localDataManager.add(certificate, with: newTan) { _ in
+            completion()
             DispatchQueue.main.async {
-              completion()
-              self?.showAlert(title: "Certificate saved successfully".localized, subtitle: "Now it is available in the wallet".localized) { _ in
-                self?.dismiss(animated: true) {
-                  self?.delegate?.certificateViewer(self!, didAddCeCertificate: certificate)
+              self.showAlert(title: "Certificate saved successfully".localized, subtitle: "Now it is available in the wallet".localized) { _ in
+                self.dismiss(animated: true) {
+                  self.delegate?.certificateViewer(self, didAddCeCertificate: certificate)
                 }
               }
             }
           }
         } else {
+          completion()
           DispatchQueue.main.async {
-            completion()
-            self?.showAlert(title:"Cannot save the Certificate".localized, subtitle: "Check the TAN and try again.".localized)
+            self.showAlert(title:"Cannot save the Certificate".localized, subtitle: "Check the TAN and try again.".localized)
           }
         }
       }
