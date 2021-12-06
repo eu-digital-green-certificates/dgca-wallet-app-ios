@@ -81,16 +81,14 @@ struct TicketingAcceptance {
     guard let tokenData = KeyChain.load(key: SharedConstants.keyXnonce) else { completion(nil, GatewayError.tokenError); return }
     guard let privateKey = Enclave.loadOrGenerateKey(with: "validationKey") else { completion(nil, GatewayError.privateKeyError); return }
 
-    guard let filteredMethod = (validationInfo.verificationMethod?.filter {
-        $0.publicKeyJwk?.use == "enc" &&
+    guard let filteredMethod = validationInfo.verificationMethod?.first(where: {
         $0.type == ValidationConstants.dccEncryptionScheme2021 &&
         $0.id.hasSuffix(ValidationConstants.rsaOAEPWithSHA256AESGCM)
-    })?.last
+    }) else { completion(nil, GatewayError.insufficientData); return }
+    
+    guard let verificationId = filteredMethod.verificationMethods?.last,
+          let verificationMethod = validationInfo.verificationMethod?.first(where: { $0.id == verificationId })
     else { completion(nil, GatewayError.insufficientData); return }
-
-    guard let verificationMethod = validationInfo.verificationMethod?.first(where: { $0.id == filteredMethod.id })
-    else { completion(nil, GatewayError.insufficientData); return }
-
 
     let ivToken = String(decoding: tokenData, as: UTF8.self)
 
