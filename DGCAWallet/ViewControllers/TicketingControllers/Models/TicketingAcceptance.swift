@@ -77,11 +77,20 @@ struct TicketingAcceptance {
   }
   
   func requestGrandPermissions(for certificate: HCert, completion: @escaping TicketingCompletion) {
-    guard let urlPath = self.accessInfo.aud, let url = URL(string: urlPath),
-      let verificationMethod = validationInfo.verificationMethod?.first(where: { $0.publicKeyJwk?.use == "enc" })
-    else { completion(nil, GatewayError.insufficientData); return }
+    guard let urlPath = self.accessInfo.aud, let url = URL(string: urlPath) else { completion(nil, GatewayError.insufficientData); return }
     guard let tokenData = KeyChain.load(key: SharedConstants.keyXnonce) else { completion(nil, GatewayError.tokenError); return }
     guard let privateKey = Enclave.loadOrGenerateKey(with: "validationKey") else { completion(nil, GatewayError.privateKeyError); return }
+
+    guard let filteredMethod = (validationInfo.verificationMethod?.filter {
+        $0.publicKeyJwk?.use == "enc" &&
+        $0.type == ValidationConstants.dccEncryptionScheme2021 &&
+        $0.id.hasSuffix(ValidationConstants.rsaOAEPWithSHA256AESGCM)
+    })?.last
+    else { completion(nil, GatewayError.insufficientData); return }
+
+    guard let verificationMethod = validationInfo.verificationMethod?.first(where: { $0.id == filteredMethod.id })
+    else { completion(nil, GatewayError.insufficientData); return }
+
 
     let ivToken = String(decoding: tokenData, as: UTF8.self)
 
@@ -97,8 +106,8 @@ struct TicketingAcceptance {
             "dcc" : dccData.0.base64EncodedString(),
             "sig": sign.base64EncodedString(),
             "encKey" : dccData.1.base64EncodedString(),
-            "sigAlg" : "SHA256withECDSA",
-            "encScheme" : "RSAOAEPWithSHA256AESGCM"]
+            "sigAlg" : ValidationConstants.sha256withECDSA,
+            "encScheme" : ValidationConstants.rsaOAEPWithSHA256AESGCM]
         
         GatewayConnection.validateTicketing(url: url, parameters: parameters, completion: completion)
       })

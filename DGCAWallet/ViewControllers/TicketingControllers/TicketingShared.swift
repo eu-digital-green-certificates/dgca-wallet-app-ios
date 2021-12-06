@@ -34,3 +34,9 @@ enum EncodeError: Error {
     case incorrectPayload
     case encryptionData
 }
+
+enum ValidationConstants  {
+    static let dccEncryptionScheme2021 = "DccEncryptionScheme2021"
+    static let rsaOAEPWithSHA256AESGCM = "RSAOAEPWithSHA256AESGCM"
+    static let sha256withECDSA = "SHA256withECDSA"
+}
