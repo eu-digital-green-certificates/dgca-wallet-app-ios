@@ -95,6 +95,8 @@
 		CEE9DA55263C7D4000A31532 /* CertCodeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9DA54263C7D4000A31532 /* CertCodeController.swift */; };
 		CEE9DA5D263C865200A31532 /* Brightness.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEE9DA5C263C865200A31532 /* Brightness.swift */; };
 		CEFAD87F262714C4009AFEF9 /* EHNTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFAD87E262714C4009AFEF9 /* EHNTests.swift */; };
+		D221E48B275E201D00D17049 /* CertificateRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = D221E48A275E201D00D17049 /* CertificateRecord.swift */; };
+		D221E48D275E207000D17049 /* TicketingShared.swift in Sources */ = {isa = PBXBuildFile; fileRef = D221E48C275E207000D17049 /* TicketingShared.swift */; };
 		D232F477273F18C800626BFC /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB18269DBB4C00074F66 /* context.jsonc */; };
 		D232F478273F18C800626BFC /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB18269DBB4C00074F66 /* context.jsonc */; };
 		D232F479273F18C900626BFC /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB18269DBB4C00074F66 /* context.jsonc */; };
@@ -231,6 +233,8 @@
 		CEE9DA54263C7D4000A31532 /* CertCodeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertCodeController.swift; sourceTree = "<group>"; };
 		CEE9DA5C263C865200A31532 /* Brightness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brightness.swift; sourceTree = "<group>"; };
 		CEFAD87E262714C4009AFEF9 /* EHNTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EHNTests.swift; sourceTree = "<group>"; };
+		D221E48A275E201D00D17049 /* CertificateRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateRecord.swift; sourceTree = "<group>"; };
+		D221E48C275E207000D17049 /* TicketingShared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketingShared.swift; sourceTree = "<group>"; };
 		D2387C5D2745492600C55DF7 /* TicketingAcceptance.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = TicketingAcceptance.swift; sourceTree = "<group>"; tabWidth = 2; };
 		D2387C612746A7FB00C55DF7 /* KeyChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChain.swift; sourceTree = "<group>"; };
 		D2387C632746EE5500C55DF7 /* DGCLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DGCLogger.swift; sourceTree = "<group>"; };
@@ -510,6 +514,7 @@
 		D2387C5C274548EC00C55DF7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D221E48A275E201D00D17049 /* CertificateRecord.swift */,
 				D2387C5D2745492600C55DF7 /* TicketingAcceptance.swift */,
 			);
 			path = Models;
@@ -541,6 +546,7 @@
 		D2B605BC2743CA18000D914A /* TicketingControllers */ = {
 			isa = PBXGroup;
 			children = (
+				D221E48C275E207000D17049 /* TicketingShared.swift */,
 				D2387C5C274548EC00C55DF7 /* Models */,
 				5C556D4726F9F8AC007E2C2E /* CertificateListController.swift */,
 				5C556D4F26F9F8C6007E2C2E /* ServerListController.swift */,
@@ -799,6 +805,7 @@
 				DA01661C265541C0005B73A1 /* LicenseTableController.swift in Sources */,
 				5C00073626D625D0002E5013 /* PDFTableViewCell.swift in Sources */,
 				CE891305263581D900CB92AF /* HomeController.swift in Sources */,
+				D221E48B275E201D00D17049 /* CertificateRecord.swift in Sources */,
 				FEEAD6DB273BBE9600D883EB /* TokenInfoCell.swift in Sources */,
 				D2387C622746A7FB00C55DF7 /* KeyChain.swift in Sources */,
 				5C00071C26D38CC3002E5013 /* NFCHelper.swift in Sources */,
@@ -812,6 +819,7 @@
 				CED949CA263B50CE00883558 /* MainListController.swift in Sources */,
 				5C50CF11269700710015EE29 /* RuleValidationResultVC.swift in Sources */,
 				DA01662226558B2F005B73A1 /* LicenseController.swift in Sources */,
+				D221E48D275E207000D17049 /* TicketingShared.swift in Sources */,
 				5C00072E26D3AC11002E5013 /* SavedPDF.swift in Sources */,
 				5C556D4426F9DAF7007E2C2E /* TicketingAcceptanceController.swift in Sources */,
 				5C50CF1B2697023B0015EE29 /* RuleErrorCell.swift in Sources */,

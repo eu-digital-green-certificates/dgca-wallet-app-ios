@@ -113,8 +113,7 @@ extension CertificateListController: UITableViewDataSource, UITableViewDelegate 
       guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as? TokenInfoCell
       else { return UITableViewCell() }
       
-      cell.fieldName.text = ticketingAcceptance?.accessTokenInfoKeys[indexPath.row] ?? ""
-      cell.fieldValue.text = ticketingAcceptance?.accessTokenInfoValues[indexPath.row] ?? ""
+      cell.certificateRecord = ticketingAcceptance?.certificateRecords[indexPath.row]
       return cell
       
     } else {

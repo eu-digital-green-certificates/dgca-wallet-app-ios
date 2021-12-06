@@ -41,6 +41,7 @@ enum GatewayError: Error {
   case connection(error: Error)
   case local(description: String)
   case parsingError
+  case privateKeyError
   case tokenError
 }
 

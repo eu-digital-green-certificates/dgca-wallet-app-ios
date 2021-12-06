@@ -19,24 +19,16 @@
  * ---license-end
  */
 //  
-//  TokenInfoCell.swift
+//  CertificateRecord.swift
 //  DGCAWallet
 //  
-//  Created by Illia Vlasov on 10.11.2021.
+//  Created by Igor Khomiak on 06.12.2021.
 //  
         
 
-import UIKit
+import Foundation
 
-class TokenInfoCell: UITableViewCell {
-  
-  @IBOutlet weak var fieldName: UILabel!
-  @IBOutlet weak var fieldValue: UILabel!
-  
-    var certificateRecord: CertificateRecord? {
-        didSet {
-            fieldName.text = certificateRecord?.keyName
-            fieldValue.text = certificateRecord?.value
-        }
-    }
+struct CertificateRecord {
+  let keyName: String
+  let value: String
 }

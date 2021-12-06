@@ -30,28 +30,27 @@ import UIKit
 import SwiftDGC
 import CryptoSwift
 
-class TicketingAcceptance {
+
+struct TicketingAcceptance {
   let validationInfo: ServerListResponse
   let accessInfo : AccessTokenResponse
 
-  let accessTokenInfoKeys = [
-    "Name".localized,
-    "Date of birth".localized,
-    "Departure".localized,
-    "Arrival".localized,
-    "Accepted certificate type".localized,
-    "Category".localized,
-    "Validation Time".localized,
-    "Valid from".localized,
-    "Valid to".localized
-  ]
-
-  var accessTokenInfoValues: [String] {
+  var certificateRecords: [CertificateRecord] {
     guard let vcValue = accessInfo.vc else { return [] }
-    let infoValueArray = ["\(vcValue.gnt) \(vcValue.fnt)", vcValue.dob, "\(vcValue.cod),\(vcValue.rod)", "\(vcValue.coa),\(vcValue.roa)", vcValue.type.joined(separator: ","), vcValue.category.joined(separator: ","), vcValue.validationClock, vcValue.validFrom, vcValue.validTo]
-    return infoValueArray
+    var records = [CertificateRecord]()
+    records.append(CertificateRecord(keyName: "Name".localized, value: "\(vcValue.gnt) \(vcValue.fnt)"))
+    records.append(CertificateRecord(keyName: "Date of birth".localized, value: vcValue.dob))
+    records.append(CertificateRecord(keyName: "Departure".localized, value: "\(vcValue.cod),\(vcValue.rod)"))
+    records.append(CertificateRecord(keyName: "Arrival".localized, value:  "\(vcValue.coa),\(vcValue.roa)"))
+    records.append(CertificateRecord(keyName: "Accepted certificate type".localized, value: vcValue.type.joined(separator: ",")))
+    records.append(CertificateRecord(keyName: "Category".localized, value: vcValue.category.joined(separator: ",")))
+    records.append(CertificateRecord(keyName: "Validation Time".localized, value: vcValue.validationClock))
+    records.append(CertificateRecord(keyName: "Valid from".localized, value: vcValue.validFrom))
+    records.append(CertificateRecord(keyName: "Valid to".localized, value: vcValue.validTo))
+
+    return records
   }
-  
+    
   init(validationInfo: ServerListResponse, accessInfo: AccessTokenResponse) {
       self.validationInfo = validationInfo
       self.accessInfo = accessInfo
@@ -78,85 +77,71 @@ class TicketingAcceptance {
   }
   
   func requestGrandPermissions(for certificate: HCert, completion: @escaping TicketingCompletion) {
-    guard let urlPath = self.accessInfo.aud,
-      let url = URL(string: urlPath),
+    guard let urlPath = self.accessInfo.aud, let url = URL(string: urlPath),
       let verificationMethod = validationInfo.verificationMethod?.first(where: { $0.publicKeyJwk?.use == "enc" })
-    else {
-      completion(nil, GatewayError.local(description: "Bad input data"))
-      return
-    }
-    
-    guard let tokenData = KeyChain.load(key: SharedConstants.keyXnonce) else {
-      completion(nil, GatewayError.tokenError)
-      return
-    }
+    else { completion(nil, GatewayError.insufficientData); return }
+    guard let tokenData = KeyChain.load(key: SharedConstants.keyXnonce) else { completion(nil, GatewayError.tokenError); return }
+    guard let privateKey = Enclave.loadOrGenerateKey(with: "validationKey") else { completion(nil, GatewayError.privateKeyError); return }
+
     let ivToken = String(decoding: tokenData, as: UTF8.self)
-    
-    guard let dccData = encodeDCC(dgcString: certificate.fullPayloadString, iv: ivToken),
-      let privateKey = Enclave.loadOrGenerateKey(with: "validationKey")
-    else {
-      completion(nil, GatewayError.local(description: "EncodeDCC Error"))
-      return
+
+    encodeDCC(dgcString: certificate.fullPayloadString, token: ivToken, method: verificationMethod) { data, error in
+      guard error == nil else { completion(nil, GatewayError.local(description: error!.localizedDescription)); return }
+      guard let dccData = data else { completion(nil, GatewayError.local(description: "EncodeDCC Error")); return }
+
+      Enclave.sign(data: dccData.0, with: privateKey, using: SecKeyAlgorithm.ecdsaSignatureMessageX962SHA256, completion: { (signature, error) in
+        guard error == nil else { completion(nil, GatewayError.local(description: error!)); return }
+        guard let sign = signature else { completion(nil, GatewayError.signingError); return }
+        
+        let parameters = ["kid" : verificationMethod.publicKeyJwk!.kid,
+            "dcc" : dccData.0.base64EncodedString(),
+            "sig": sign.base64EncodedString(),
+            "encKey" : dccData.1.base64EncodedString(),
+            "sigAlg" : "SHA256withECDSA",
+            "encScheme" : "RSAOAEPWithSHA256AESGCM"]
+        
+        GatewayConnection.validateTicketing(url: url, parameters: parameters, completion: completion)
+      })
     }
-      
-    Enclave.sign(data: dccData.0, with: privateKey, using: SecKeyAlgorithm.ecdsaSignatureMessageX962SHA256,
-          completion: { (signature, error) in
-      guard error == nil else {
-        completion(nil, GatewayError.local(description: error!))
-        return
-      }
-      guard let sign = signature else {
-        completion(nil, GatewayError.signingError)
-        return
-      }
-      let parameters = ["kid" : verificationMethod.publicKeyJwk!.kid,
-          "dcc" : dccData.0.base64EncodedString(),
-          "sig": sign.base64EncodedString(),
-          "encKey" : dccData.1.base64EncodedString(),
-          "sigAlg" : "SHA256withECDSA",
-          "encScheme" : "RSAOAEPWithSHA256AESGCM"]
-      
-      GatewayConnection.validateTicketing(url: url, parameters: parameters, completion: completion)
-    })
   }
 
-  private func encodeDCC(dgcString : String, iv: String) -> (Data,Data)? {
-    guard (iv.count > 16 || iv.count < 16 || iv.count % 8 > 0) else { return nil }
-    guard let verificationMethod = validationInfo.verificationMethod?.first(where: { $0.publicKeyJwk?.use == "enc" })
-    else { return nil }
-    
-    let ivData : [UInt8] = Array(base64: iv)
+  private func encodeDCC(dgcString : String, token: String, method: VerificationMethod, completion: @escaping EncodingCompletion) {
+    guard (token.count > 16 || token.count < 16 || token.count % 8 > 0),
+        let b64EncodedCert = method.publicKeyJwk?.x5c.first,
+        let publicSecKey = pubKey(from: b64EncodedCert)
+    else { completion(nil, EncodeError.incorrectPayload); return }
+
+    let tokenData : [UInt8] = Array(base64: token)
     let dgcData : [UInt8] = Array(dgcString.utf8)
-    let _ : [UInt8] = Array(base64: verificationMethod.publicKeyJwk!.x5c.first!)
     var encryptedDgcData : [UInt8] = Array()
     
     // AES GCM
     let password: [UInt8] = Array("s33krit".utf8)
     let salt: [UInt8] = Array("nacllcan".utf8)
 
-    /* Generate a key from a `password`. Optional if you already have a key */
-    let key = try! PKCS5.PBKDF2(password: password, salt: salt, iterations: 4096, keyLength: 32, /* AES-256 */
-        variant: .sha2(.sha256)).calculate()
-
-    guard let b64EncodedCert = verificationMethod.publicKeyJwk?.x5c.first else {
-      // TODO: complete error
-      return nil
-    }
-    let publicSecKey = pubKey(from: b64EncodedCert)
     do {
-      let gcm = GCM(iv: ivData, mode: .combined)
+      /* Generate a key from a `password`. Optional if you already have a key */
+      let key = try PKCS5.PBKDF2(password: password, salt: salt, iterations: 4096, keyLength: 32, /* AES-256 */
+          variant: .sha2(.sha256)).calculate()
+
+      let gcm = GCM(iv: tokenData, mode: .combined)
       let aes = try AES(key: key, blockMode: gcm, padding: .noPadding)
       encryptedDgcData = try aes.encrypt(dgcData)
-      let encryptedKeyData = encrypt(data: Data(key), with: publicSecKey!)
-      return (Data(encryptedDgcData), encryptedKeyData.0!)
-
+      if let encryptedData = encrypt(data: Data(key), with: publicSecKey).0 {
+        let comletionData = (Data(encryptedDgcData), encryptedData)
+        completion(comletionData, nil)
+      } else {
+        DGCLogger.logError(EncodeError.encryptionData)
+        completion(nil, EncodeError.encryptionData)
+      }
+      
     } catch {
-      print(error.localizedDescription)
-      return nil
+      DGCLogger.logError(error)
+      completion(nil, EncodeError.encryptionData)
     }
   }
-    
-  private  func encrypt(data: Data, with key: SecKey) -> (Data?, String?) {
+  
+  private func encrypt(data: Data, with key: SecKey) -> (Data?, String?) {
     guard let publicKey = SecKeyCopyPublicKey(key) else { return (nil, "Cannot retrieve public key.".localized) }
     guard SecKeyIsAlgorithmSupported(publicKey, .encrypt, SecKeyAlgorithm.rsaEncryptionOAEPSHA256) else {
       return (nil, "Algorithm is not supported.".localized)
@@ -167,7 +152,7 @@ class TicketingAcceptance {
     let err = error?.takeRetainedValue().localizedDescription
     return (cipherData, err)
   }
-      
+  
   private func keyFromData(_ data: Data) throws -> SecKey {
     let options: [String: Any] = [kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
       kSecAttrKeyClass as String: kSecAttrKeyClassPublic, kSecAttrKeySizeInBits as String : 4096]
