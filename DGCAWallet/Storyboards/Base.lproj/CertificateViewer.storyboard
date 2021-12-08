@@ -132,7 +132,7 @@
                                         <rect key="frame" x="336" y="17.666666666666664" width="34" height="35"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
                                         <state key="normal" title="Edit">
-                                            <color key="titleColor" name="walletBlue"/>
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
                                             <action selector="editAction" destination="WCj-Xf-fml" eventType="touchUpInside" id="kpl-WI-I6Y"/>
@@ -751,14 +751,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="DE4382974329" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gn8-3g-ntq">
-                                                    <rect key="frame" x="16" y="57.666666666666657" width="343" height="38.333333333333343"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="32"/>
+                                                    <rect key="frame" x="16" y="67.333333333333329" width="343" height="28.666666666666671"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
                                                     <color key="textColor" name="walletBlack"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Identification Number" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bxm-hI-f1t">
-                                                    <rect key="frame" x="16" y="15.999999999999996" width="343" height="37.666666666666657"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <rect key="frame" x="16" y="16.000000000000004" width="343" height="47.333333333333343"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" name="walletDarkGray"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>

@@ -166,6 +166,9 @@ class CertificateViewerController: UIViewController {
     DataCenter.localDataManager.add(certificate, with: nil) { _ in
       completion()
       self.delegate?.certificateViewer(self, didAddCeCertificate: certificate)
+      DispatchQueue.main.async {
+        self.dismiss(animated: true, completion: nil)
+      }
     }
   }
   
@@ -185,16 +188,15 @@ class CertificateViewerController: UIViewController {
           DispatchQueue.main.async {
             self.showAlert(title:"Cannot save the Certificate".localized, subtitle: "Check the TAN and try again.".localized)
           }
-
           DGCLogger.logError(error!)
           return
         }
         
         if success {
           DataCenter.localDataManager.add(certificate, with: newTan) { _ in
-            completion()
             DispatchQueue.main.async {
               self.showAlert(title: "Certificate saved successfully".localized, subtitle: "Now it is available in the wallet".localized) { _ in
+                completion()
                 self.dismiss(animated: true) {
                   self.delegate?.certificateViewer(self, didAddCeCertificate: certificate)
                 }

@@ -215,7 +215,7 @@ class MainListController: UIViewController {
       guard let scanController = segue.destination as? ScanWalletController else { return }
       scanController.modalPresentationStyle = .fullScreen
       scanController.delegate = self
-      scanController.dismissDelegate = self
+      scanController.dismissDelegate = nil
       
     case SegueIdentifiers.showSettingsController:
       guard let navController = segue.destination as? UINavigationController,
