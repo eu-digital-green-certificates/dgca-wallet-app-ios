@@ -119,7 +119,7 @@ class CertificateViewerController: UIViewController {
        dismiss(animated: true, completion: nil)
     } else {
       activityIndicator.startAnimating()
-      saveCert {[weak self] in
+      saveCertWithoutClaming {[weak self] in
         DispatchQueue.main.async {
           self?.activityIndicator.stopAnimating()
         }
@@ -154,6 +154,18 @@ class CertificateViewerController: UIViewController {
           }
         } // LocalData
       }
+    }
+  }
+  
+  private func saveCertWithoutClaming(completion: @escaping CompletionHandler) {
+    guard let certificate = self.hCert else {
+      DGCLogger.logInfo("Certificate error")
+      completion()
+      return
+    }
+    DataCenter.localDataManager.add(certificate, with: nil) { _ in
+      completion()
+      self.delegate?.certificateViewer(self, didAddCeCertificate: certificate)
     }
   }
   
