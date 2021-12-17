@@ -24,4 +24,13 @@
   
 */
 
+//Bundle name
 "CFBundleDisplayName" = "Wallet-App";
+//Privacy - NFC Scan Usage Description
+"NFCReaderUsageDescription" = "Sie können Zertifikate per NFC importieren.";
+//Privacy - Camera Usage Description
+"NSCameraUsageDescription" = "Sie können Barcodes und Bilder mit Ihrer Kamera scannen.";
+//Privacy - Face ID Usage Description
+"NSFaceIDUsageDescription" = "Sie verwenden FaceID, um sensible Daten zu entsperren.";
+//Privacy - Photo Library Usage Description
+"NSPhotoLibraryUsageDescription" = "Sie können Fotos aus der Fotobibliothek importieren.";
