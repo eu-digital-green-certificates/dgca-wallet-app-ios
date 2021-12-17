@@ -25,4 +25,13 @@
   
 */
 
+//Bundle name
 "CFBundleDisplayName" = "Wallet App";
+//Privacy - NFC Scan Usage Description
+"NFCReaderUsageDescription" = "Import certificate by NFC";
+//Privacy - Camera Usage Description
+"NSCameraUsageDescription" = "Scan barcodes and images with your camera.";
+//Privacy - Face ID Usage Description
+"NSFaceIDUsageDescription" = "Unlock sensitive data.";
+//Privacy - Photo Library Usage Description
+"NSPhotoLibraryUsageDescription" = "This app requires access to the photo library.";

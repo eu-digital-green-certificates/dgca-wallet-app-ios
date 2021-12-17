@@ -284,7 +284,7 @@ extension MainListController: ScanWalletDelegate {
     }
   }
   
-  func walletController(_ controller: ScanWalletController, didScanInfo ticketing: SwiftDGC.CheckInQR) {
+  func walletController(_ controller: ScanWalletController, didScanInfo ticketing: CheckInQR) {
     if scannedToken == ticketing.token {
       return
     }
