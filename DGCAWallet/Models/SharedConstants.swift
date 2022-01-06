@@ -28,13 +28,8 @@
 
 import Foundation
 
-enum SharedConstants {
-    static let keyTicketingToken = "DGCAWallet.TicketingToken"
-    static let keyAccessToken = "DGCAWallet.AccessToken"
-    static let keyXnonce = "DGCAWallet.xnonce"
-    
+enum SharedConstants {    
     static let expiredDataInterval: TimeInterval = 1 * 60 * 60 // 24 * 60 * 60
-    static let pubKeysStorageFilename = "secure"
     static let countryStorageName = "country_secure"
     static let rulesStorageName = "rules_secure"
     static let valueSetsStorageName = "valueSets_secure"

@@ -31,15 +31,8 @@ import CertLogic
 
 typealias CompletionHandler = () -> Void
 
-class DataCenter {
-  static let shared = DataCenter()
-  static var appVersion: String {
-    let versionValue = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "?.?.?"
-    let buildNumValue = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "?.?.?"
-    return "\(versionValue)(\(buildNumValue))"
-  }
+extension DataCenter {
 
-  static let localDataManager: LocalDataManager = LocalDataManager()
   static let countryDataManager: CountryDataManager = CountryDataManager()
   static let rulesDataManager: RulesDataManager = RulesDataManager()
   static let valueSetsDataManager: ValueSetsDataManager = ValueSetsDataManager()
@@ -47,17 +40,6 @@ class DataCenter {
   static let pdfDataManager: PdfDataManager = PdfDataManager()
   
   // MARK: - public variables
-  static var lastFetch: Date {
-    return localDataManager.localData.lastFetch
-  }
-  
-  static var lastLaunchedAppVersion: String {
-    return DataCenter.localDataManager.localData.lastLaunchedAppVersion
-  }
-  
-  static var certStrings: [DatedCertString] {
-    return localDataManager.localData.certStrings
-  }
   
   static var images: [SavedImage] {
     return imageDataManager.localData.images

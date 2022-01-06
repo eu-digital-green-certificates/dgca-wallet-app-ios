@@ -31,38 +31,6 @@ import SwiftDGC
 import SwiftyJSON
 import CertLogic
 
-class DatedCertString: Codable {
-  var isSelected: Bool = false
-  let date: Date
-  let certString: String
-  let storedTAN: String?
-  var cert: HCert? {
-    return try? HCert(from: certString)
-  }
-
-
-  init(date: Date, certString: String, storedTAN: String?) {
-    self.date = date
-    self.certString = certString
-    self.storedTAN = storedTAN
-  }
-}
-
-class LocalData: Codable {
-  var certStrings = [DatedCertString]()
-  var lastFetchRaw: Date?
-  var lastFetch: Date {
-    get {
-      lastFetchRaw ?? Date.distantPast
-    }
-    set {
-      lastFetchRaw = newValue
-    }
-  }
-  var config = Config.load()
-  var lastLaunchedAppVersion = "0.0"
-}
-
 class CountryDataStorage: Codable {
   var countryCodes = [CountryModel]()
 }
