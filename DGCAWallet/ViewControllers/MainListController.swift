@@ -31,12 +31,9 @@ import UIKit
 import SwiftDGC
 import UniformTypeIdentifiers
 import MobileCoreServices
+import TicketingLibrary
 
-protocol DismissControllerDelegate: AnyObject {
-  func userDidDissmiss(_ controller: UIViewController)
-}
-
-class MainListController: UIViewController {
+class MainListController: UIViewController, DismissControllerDelegate {
   fileprivate enum SegueIdentifiers {
     static let showScannerSegue = "showScannerSegue"
     static let showServicesList = "showServicesList"
@@ -671,7 +668,7 @@ extension MainListController: UIDocumentPickerDelegate {
 
 
 // MARK: DismissController Delegate
-extension MainListController: DismissControllerDelegate {
+extension MainListController {
   func userDidDissmiss(_ controller: UIViewController) {
     if downloadedDataHasExpired {
       self.navigationController?.popViewController(animated: false)

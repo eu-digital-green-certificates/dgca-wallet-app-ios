@@ -32,25 +32,11 @@ import SwiftyJSON
 import CertLogic
 import JWTDecode
 
-enum GatewayError: Error {
-  case insufficientData
-  case encodingError
-  case signingError
-  case updatingError
-  case incorrectDataResponse
-  case connection(error: Error)
-  case local(description: String)
-  case parsingError
-  case privateKeyError
-  case tokenError
-}
-
 typealias ValueSetsCompletion = ([CertLogic.ValueSet]?, Error?) -> Void
 typealias ValueSetCompletionHandler = (CertLogic.ValueSet?, Error?) -> Void
 typealias RulesCompletion = ([CertLogic.Rule]?, Error?) -> Void
 typealias RuleCompletionHandler = (CertLogic.Rule?, Error?) -> Void
 typealias CountriesCompletion = ([CountryModel]?, Error?) -> Void
-typealias TicketingCompletion = (AccessTokenResponse?, Error?) -> Void
 typealias ContextCompletion = (Bool, String?, Error?) -> Void
 
 class GatewayConnection: ContextConnection {
@@ -339,94 +325,4 @@ extension GatewayConnection {
     }
   }
   
-  static func loadAccessToken(_ url : URL, servicePath : String, publicKey: String, completion: @escaping TicketingCompletion) {
-    let json: [String: Any] = ["service": servicePath, "pubKey": publicKey]
-    
-    guard let jsonData = try? JSONSerialization.data(withJSONObject: json,options: .prettyPrinted),
-      let tokenData = KeyChain.load(key: SharedConstants.keyTicketingToken)  else {
-      completion(nil, GatewayError.tokenError)
-      return
-    }
-    let token = String(decoding: tokenData, as: UTF8.self)
-
-    var request = URLRequest(url: url)
-    request.httpMethod = "POST"
-    request.httpBody = jsonData
-    request.addValue( "1.0.0", forHTTPHeaderField: "X-Version")
-    request.addValue( "application/json", forHTTPHeaderField: "content-type")
-    request.addValue( "Bearer " + token, forHTTPHeaderField: "Authorization")
-
-    let session = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
-      guard error == nil else {
-        completion(nil, GatewayError.connection(error: error!))
-        return
-      }
-      guard let responseData = data, let tokenJWT = String(data: responseData, encoding: .utf8), responseData.count > 0 else {
-        completion(nil, GatewayError.incorrectDataResponse)
-        return
-      }
-      do {
-        let decodedToken = try decode(jwt: tokenJWT)
-        let jsonData = try JSONSerialization.data(withJSONObject: decodedToken.body)
-        let accessTokenResponse = try JSONDecoder().decode(AccessTokenResponse.self, from: jsonData)
-        
-        if let tokenData = tokenJWT.data(using: .utf8) {
-          KeyChain.save(key: SharedConstants.keyAccessToken, data: tokenData)
-        }
-        if let httpResponse = response as? HTTPURLResponse,
-           let xnonceData = (httpResponse.allHeaderFields["x-nonce"] as? String)?.data(using: .utf8) {
-          KeyChain.save(key: SharedConstants.keyXnonce, data: xnonceData)
-        }
-        completion(accessTokenResponse, nil)
-
-      } catch {
-        completion(nil, GatewayError.encodingError)
-        DGCLogger.logError(error)
-      }
-    })
-    session.resume()
-  }
-  
-  static func validateTicketing(url : URL, parameters : [String: String]?, completion : @escaping TicketingCompletion) {
-    guard let parametersData = try? JSONEncoder().encode(parameters) else {
-      completion(nil, GatewayError.encodingError)
-      return
-    }
-    guard let tokenData = KeyChain.load(key: SharedConstants.keyAccessToken) else {
-      completion(nil, GatewayError.tokenError)
-      return
-    }
-    let token = String(decoding: tokenData, as: UTF8.self)
-    
-    var request = URLRequest(url: url)
-    request.method = .post
-    request.httpBody = parametersData
-    
-    request.addValue( "1.0.0", forHTTPHeaderField: "X-Version")
-    request.addValue( "application/json", forHTTPHeaderField: "content-type")
-    request.addValue( "Bearer " + token, forHTTPHeaderField: "Authorization")
-
-    let session = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
-      guard error == nil else {
-        completion(nil,GatewayError.connection(error: error!))
-        return
-      }
-      guard let responseData = data, let tokenJWT = String(data: responseData, encoding: .utf8) else {
-        completion(nil, GatewayError.incorrectDataResponse)
-        return
-      }
-      do {
-        let decodedToken = try decode(jwt: tokenJWT)
-        let jsonData = try JSONSerialization.data(withJSONObject: decodedToken.body)
-        let decoder = JSONDecoder()
-        let accessTokenResponse = try decoder.decode(AccessTokenResponse.self, from: jsonData)
-        completion(accessTokenResponse, nil)
-        
-      } catch {
-        completion(nil, GatewayError.parsingError)
-        DGCLogger.logError(error)
-      }
-    })
-    session.resume()
-  }
 }
