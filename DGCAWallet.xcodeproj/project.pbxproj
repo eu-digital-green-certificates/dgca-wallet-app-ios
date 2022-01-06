@@ -122,7 +122,7 @@
 		D2E6CB13273BE49300E9AF1F /* CertificateValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E6CB12273BE49300E9AF1F /* CertificateValidator.swift */; };
 		D2E6CB14273BE49300E9AF1F /* CertificateValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E6CB12273BE49300E9AF1F /* CertificateValidator.swift */; };
 		D2E6CB15273BE49300E9AF1F /* CertificateValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E6CB12273BE49300E9AF1F /* CertificateValidator.swift */; };
-		D3A72E512774D1B1005F8FB8 /* TicketingLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = D3A72E502774D1B1005F8FB8 /* TicketingLibrary */; };
+		D383D2472787029C00CC9C01 /* TicketingLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = D383D2462787029C00CC9C01 /* TicketingLibrary */; };
 		DA01661C265541C0005B73A1 /* LicenseTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01661B265541C0005B73A1 /* LicenseTableController.swift */; };
 		DA01661E26554992005B73A1 /* OpenSourceNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = DA01661D26554992005B73A1 /* OpenSourceNotices.json */; };
 		DA01662026554E02005B73A1 /* LicenseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01661F26554E02005B73A1 /* LicenseCell.swift */; };
@@ -225,7 +225,6 @@
 		D2E6CB0A273AA00200E9AF1F /* ImageDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ImageDataManager.swift; sourceTree = "<group>"; tabWidth = 2; };
 		D2E6CB0E273AA34200E9AF1F /* PdfDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = PdfDataManager.swift; sourceTree = "<group>"; tabWidth = 2; };
 		D2E6CB12273BE49300E9AF1F /* CertificateValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateValidator.swift; sourceTree = "<group>"; };
-		D3A72E4F2774D1A4005F8FB8 /* TicketingLibrary */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TicketingLibrary; path = ../TicketingLibrary; sourceTree = "<group>"; };
 		DA01661B265541C0005B73A1 /* LicenseTableController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = LicenseTableController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		DA01661D26554992005B73A1 /* OpenSourceNotices.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = OpenSourceNotices.json; sourceTree = "<group>"; };
 		DA01661F26554E02005B73A1 /* LicenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseCell.swift; sourceTree = "<group>"; };
@@ -240,7 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE8912FB2634C6B900CB92AF /* Alamofire in Frameworks */,
-				D3A72E512774D1B1005F8FB8 /* TicketingLibrary in Frameworks */,
+				D383D2472787029C00CC9C01 /* TicketingLibrary in Frameworks */,
 				5CE07C762692E0D900A032F9 /* CertLogic in Frameworks */,
 				FE6E78882702033300C142A3 /* JWTDecode in Frameworks */,
 				CE6B330E2651A54800845B8E /* SwiftDGC in Frameworks */,
@@ -417,7 +416,6 @@
 		CEA6D6DF261F8D2700715333 = {
 			isa = PBXGroup;
 			children = (
-				D3A72E4E2774D1A4005F8FB8 /* Packages */,
 				FE6F225327142AB1003AE754 /* dgca-app-core-ios */,
 				CEA6D6EA261F8D2700715333 /* DGCAWallet */,
 				CEA6D701261F8D2900715333 /* DGCAWalletTests */,
@@ -518,14 +516,6 @@
 			path = DataStorageManagement;
 			sourceTree = "<group>";
 		};
-		D3A72E4E2774D1A4005F8FB8 /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				D3A72E4F2774D1A4005F8FB8 /* TicketingLibrary */,
-			);
-			name = Packages;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -550,7 +540,7 @@
 				5CE07C752692E0D900A032F9 /* CertLogic */,
 				FE6E78872702033300C142A3 /* JWTDecode */,
 				FE1D1A6A27148CBE00765A9A /* CryptoSwift */,
-				D3A72E502774D1B1005F8FB8 /* TicketingLibrary */,
+				D383D2462787029C00CC9C01 /* TicketingLibrary */,
 			);
 			productName = DGCAWallet;
 			productReference = CEA6D6E8261F8D2700715333 /* DGCAWallet.app */;
@@ -631,6 +621,7 @@
 				5CE07C742692E0D900A032F9 /* XCRemoteSwiftPackageReference "dgc-certlogic-ios" */,
 				FE6E78862702033200C142A3 /* XCRemoteSwiftPackageReference "JWTDecode.swift" */,
 				FE1D1A6927148CBE00765A9A /* XCRemoteSwiftPackageReference "CryptoSwift" */,
+				D383D2432786F8E600CC9C01 /* XCRemoteSwiftPackageReference "dgca-wallet-app-ios" */,
 			);
 			productRefGroup = CEA6D6E9261F8D2700715333 /* Products */;
 			projectDirPath = "";
@@ -1210,7 +1201,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/eu-digital-green-certificates/dgca-app-core-ios";
 			requirement = {
-				branch = feature/ticketing;
+				branch = feature/ticketing_module;
 				kind = branch;
 			};
 		};
@@ -1220,6 +1211,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.4.3;
+			};
+		};
+		D383D2432786F8E600CC9C01 /* XCRemoteSwiftPackageReference "dgca-wallet-app-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/eu-digital-green-certificates/dgca-wallet-app-ios";
+			requirement = {
+				branch = module/ticketing;
+				kind = branch;
 			};
 		};
 		FE1D1A6927148CBE00765A9A /* XCRemoteSwiftPackageReference "CryptoSwift" */ = {
@@ -1261,8 +1260,9 @@
 			package = CE8912F92634C6B900CB92AF /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
-		D3A72E502774D1B1005F8FB8 /* TicketingLibrary */ = {
+		D383D2462787029C00CC9C01 /* TicketingLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = D383D2432786F8E600CC9C01 /* XCRemoteSwiftPackageReference "dgca-wallet-app-ios" */;
 			productName = TicketingLibrary;
 		};
 		FE1D1A6A27148CBE00765A9A /* CryptoSwift */ = {
