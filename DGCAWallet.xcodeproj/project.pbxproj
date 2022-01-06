@@ -58,7 +58,6 @@
 		5CE07C862692E21E00A032F9 /* CertLogicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE07C832692E21E00A032F9 /* CertLogicManager.swift */; };
 		CE13CF0A262DCDDA0070C80E /* CertificateViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13CF09262DCDDA0070C80E /* CertificateViewerController.swift */; };
 		CE13CF23262DDF810070C80E /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13CF22262DDF810070C80E /* RoundedButton.swift */; };
-		CE1F155C2639F9E700736D48 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = CE1F155B2639F9E700736D48 /* SwiftyJSON */; };
 		CE260F56263DD1720083A200 /* WalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE260F55263DD1720083A200 /* WalletCell.swift */; };
 		CE37B643263867D700DEE13D /* SecureBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37B642263867D700DEE13D /* SecureBackground.swift */; };
 		CE4BD254264FF28900689FD6 /* SettingsTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4BD253264FF28900689FD6 /* SettingsTableController.swift */; };
@@ -122,7 +121,7 @@
 		D2E6CB13273BE49300E9AF1F /* CertificateValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E6CB12273BE49300E9AF1F /* CertificateValidator.swift */; };
 		D2E6CB14273BE49300E9AF1F /* CertificateValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E6CB12273BE49300E9AF1F /* CertificateValidator.swift */; };
 		D2E6CB15273BE49300E9AF1F /* CertificateValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E6CB12273BE49300E9AF1F /* CertificateValidator.swift */; };
-		D383D2472787029C00CC9C01 /* TicketingLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = D383D2462787029C00CC9C01 /* TicketingLibrary */; };
+		D308129727870A1900CC70B8 /* TicketingLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = D308129627870A1900CC70B8 /* TicketingLibrary */; };
 		DA01661C265541C0005B73A1 /* LicenseTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01661B265541C0005B73A1 /* LicenseTableController.swift */; };
 		DA01661E26554992005B73A1 /* OpenSourceNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = DA01661D26554992005B73A1 /* OpenSourceNotices.json */; };
 		DA01662026554E02005B73A1 /* LicenseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01661F26554E02005B73A1 /* LicenseCell.swift */; };
@@ -239,11 +238,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE8912FB2634C6B900CB92AF /* Alamofire in Frameworks */,
-				D383D2472787029C00CC9C01 /* TicketingLibrary in Frameworks */,
+				D308129727870A1900CC70B8 /* TicketingLibrary in Frameworks */,
 				5CE07C762692E0D900A032F9 /* CertLogic in Frameworks */,
 				FE6E78882702033300C142A3 /* JWTDecode in Frameworks */,
 				CE6B330E2651A54800845B8E /* SwiftDGC in Frameworks */,
-				CE1F155C2639F9E700736D48 /* SwiftyJSON in Frameworks */,
 				FE1D1A6B27148CBE00765A9A /* CryptoSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -535,12 +533,11 @@
 			name = DGCAWallet;
 			packageProductDependencies = (
 				CE8912FA2634C6B900CB92AF /* Alamofire */,
-				CE1F155B2639F9E700736D48 /* SwiftyJSON */,
 				CE6B330D2651A54800845B8E /* SwiftDGC */,
 				5CE07C752692E0D900A032F9 /* CertLogic */,
 				FE6E78872702033300C142A3 /* JWTDecode */,
 				FE1D1A6A27148CBE00765A9A /* CryptoSwift */,
-				D383D2462787029C00CC9C01 /* TicketingLibrary */,
+				D308129627870A1900CC70B8 /* TicketingLibrary */,
 			);
 			productName = DGCAWallet;
 			productReference = CEA6D6E8261F8D2700715333 /* DGCAWallet.app */;
@@ -621,7 +618,7 @@
 				5CE07C742692E0D900A032F9 /* XCRemoteSwiftPackageReference "dgc-certlogic-ios" */,
 				FE6E78862702033200C142A3 /* XCRemoteSwiftPackageReference "JWTDecode.swift" */,
 				FE1D1A6927148CBE00765A9A /* XCRemoteSwiftPackageReference "CryptoSwift" */,
-				D383D2432786F8E600CC9C01 /* XCRemoteSwiftPackageReference "dgca-wallet-app-ios" */,
+				D3081295278709FA00CC70B8 /* XCRemoteSwiftPackageReference "dgca-app-ticketing-ios" */,
 			);
 			productRefGroup = CEA6D6E9261F8D2700715333 /* Products */;
 			projectDirPath = "";
@@ -1213,11 +1210,11 @@
 				minimumVersion = 5.4.3;
 			};
 		};
-		D383D2432786F8E600CC9C01 /* XCRemoteSwiftPackageReference "dgca-wallet-app-ios" */ = {
+		D3081295278709FA00CC70B8 /* XCRemoteSwiftPackageReference "dgca-app-ticketing-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/eu-digital-green-certificates/dgca-wallet-app-ios";
+			repositoryURL = "https://github.com/eu-digital-green-certificates/dgca-app-ticketing-ios";
 			requirement = {
-				branch = module/ticketing;
+				branch = feature/ticketing;
 				kind = branch;
 			};
 		};
@@ -1245,11 +1242,6 @@
 			package = 5CE07C742692E0D900A032F9 /* XCRemoteSwiftPackageReference "dgc-certlogic-ios" */;
 			productName = CertLogic;
 		};
-		CE1F155B2639F9E700736D48 /* SwiftyJSON */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CE1F155A2639F9E700736D48 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
-			productName = SwiftyJSON;
-		};
 		CE6B330D2651A54800845B8E /* SwiftDGC */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CE6B330C2651A54800845B8E /* XCRemoteSwiftPackageReference "dgca-app-core-ios" */;
@@ -1260,9 +1252,9 @@
 			package = CE8912F92634C6B900CB92AF /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
-		D383D2462787029C00CC9C01 /* TicketingLibrary */ = {
+		D308129627870A1900CC70B8 /* TicketingLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D383D2432786F8E600CC9C01 /* XCRemoteSwiftPackageReference "dgca-wallet-app-ios" */;
+			package = D3081295278709FA00CC70B8 /* XCRemoteSwiftPackageReference "dgca-app-ticketing-ios" */;
 			productName = TicketingLibrary;
 		};
 		FE1D1A6A27148CBE00765A9A /* CryptoSwift */ = {
