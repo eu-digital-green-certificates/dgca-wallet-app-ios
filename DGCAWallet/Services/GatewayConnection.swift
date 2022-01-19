@@ -45,10 +45,10 @@ enum GatewayError: Error {
   case tokenError
 }
 
-typealias ValueSetsCompletion = ([CertLogic.ValueSet]?, Error?) -> Void
-typealias ValueSetCompletionHandler = (CertLogic.ValueSet?, Error?) -> Void
-typealias RulesCompletion = ([CertLogic.Rule]?, Error?) -> Void
-typealias RuleCompletionHandler = (CertLogic.Rule?, Error?) -> Void
+typealias ValueSetsCompletion = ([ValueSet]?, Error?) -> Void
+typealias ValueSetCompletionHandler = (ValueSet?, Error?) -> Void
+typealias RulesCompletion = ([Rule]?, Error?) -> Void
+typealias RuleCompletionHandler = (Rule?, Error?) -> Void
 typealias CountriesCompletion = ([CountryModel]?, Error?) -> Void
 typealias TicketingCompletion = (AccessTokenResponse?, Error?) -> Void
 typealias ContextCompletion = (Bool, String?, Error?) -> Void
@@ -59,7 +59,7 @@ class GatewayConnection: ContextConnection {
       completion(false, nil, GatewayError.insufficientData)
       return
     }
-      
+    
     // Replace dashes, spaces, etc. and turn into uppercase.
     let set = CharacterSet(charactersIn: "0123456789").union(.uppercaseLetters)
     tan = tan.uppercased().components(separatedBy: set.inverted).joined()
@@ -89,7 +89,6 @@ class GatewayConnection: ContextConnection {
         "signature": sign.base64EncodedString(),
         "sigAlg": "SHA256withECDSA"
       ]
-      
       request( ["endpoints", "claim"], method: .post, parameters: param, encoding: JSONEncoding.default,
           headers: HTTPHeaders([HTTPHeader(name: "content-type", value: "application/json")])).response {
         guard case .success(_) = $0.result, let status = $0.response?.statusCode, status / 100 == 2 else {
@@ -130,11 +129,9 @@ extension GatewayConnection {
   // Country list
   private static func getListOfCountry(completion: @escaping CountriesCompletion) {
     request(["endpoints", "countryList"], method: .get).response {
-      guard case let .success(result) = $0.result,
-        let response = result,
+      guard case let .success(result) = $0.result, let response = result,
         let responseStr = String(data: response, encoding: .utf8),
-        let json = JSON(parseJSON: responseStr).array
-      else {
+        let json = JSON(parseJSON: responseStr).array else {
         completion(nil, GatewayError.parsingError)
         return
       }
@@ -167,14 +164,12 @@ extension GatewayConnection {
   // Rules
   static func getListOfRules(completion: @escaping RulesCompletion) {
     request(["endpoints", "rules"], method: .get).response {
-      guard case let .success(result) = $0.result,
-        let response = result,
+      guard case let .success(result) = $0.result, let response = result,
         let responseStr = String(data: response, encoding: .utf8)
       else {
         completion(nil, GatewayError.parsingError)
         return
       }
-      
       let ruleHashes: [RuleHash] = CertLogicEngine.getItems(from: responseStr)
       // Remove old hashes
       DataCenter.rules = DataCenter.rules.filter { rule in
@@ -182,7 +177,7 @@ extension GatewayConnection {
       }
       
       // Downloading new hashes
-      let rulesItems = SyncArray<CertLogic.Rule>()
+      let rulesItems = SyncArray<Rule>()
       let group = DispatchGroup()
       ruleHashes.forEach { ruleHash in
         group.enter()
@@ -210,7 +205,7 @@ extension GatewayConnection {
     }
   }
   
-  static func getRules(ruleHash: CertLogic.RuleHash, completion: @escaping RuleCompletionHandler) {
+  static func getRules(ruleHash: RuleHash, completion: @escaping RuleCompletionHandler) {
     request(["endpoints", "rules"], externalLink: "/\(ruleHash.country)/\(ruleHash.hash)", method: .get).response {
       guard case let .success(result) = $0.result,
         let response = result,
@@ -219,7 +214,7 @@ extension GatewayConnection {
         completion(nil, GatewayError.parsingError)
         return
       }
-      if let rule: Rule = CertLogicEngine.getItem(from: responseStr) {
+      if var rule: Rule = CertLogicEngine.getItem(from: responseStr) {
         let downloadedRuleHash = SHA256.digest(input: response as NSData)
         if downloadedRuleHash.hexString == ruleHash.hash {
           rule.setHash(hash: ruleHash.hash)
@@ -269,7 +264,7 @@ extension GatewayConnection {
         return !valueSetsHashes.contains(where: { $0.hash == valueSet.hash})
       }
       // Downloading new hashes
-      let valueSetsItems = SyncArray<CertLogic.ValueSet>()
+      let valueSetsItems = SyncArray<ValueSet>()
       let group = DispatchGroup()
       valueSetsHashes.forEach { valueSetHash in
         group.enter()
@@ -295,16 +290,15 @@ extension GatewayConnection {
     }
   }
   
-  static private func loadValueSet(valueSetHash: CertLogic.ValueSetHash, completion: @escaping ValueSetCompletionHandler) {
+  static private func loadValueSet(valueSetHash: ValueSetHash, completion: @escaping ValueSetCompletionHandler) {
     request(["endpoints", "valuesets"], externalLink: "/\(valueSetHash.hash)", method: .get).response {
-      guard case let .success(result) = $0.result,
-        let response = result,
+      guard case let .success(result) = $0.result, let response = result,
         let responseStr = String(data: response, encoding: .utf8)
       else {
         completion(nil, GatewayError.parsingError)
         return
       }
-      guard let valueSet: ValueSet = CertLogicEngine.getItem(from: responseStr) else {
+      guard var valueSet: ValueSet = CertLogicEngine.getItem(from: responseStr) else {
         completion(nil, GatewayError.encodingError)
         return
       }
@@ -330,10 +324,6 @@ extension GatewayConnection {
       }
 
       DataCenter.addValueSets(valueSetsList, completion: { result in
-//        guard case let .success(value) = result, value == true else {
-//          completion(nil, GatewayError.encodingError)
-//          return
-//        }
         completion(DataCenter.valueSets, nil)
       })
     }
@@ -348,14 +338,14 @@ extension GatewayConnection {
       return
     }
     let token = String(decoding: tokenData, as: UTF8.self)
-
+    
     var request = URLRequest(url: url)
     request.httpMethod = "POST"
     request.httpBody = jsonData
     request.addValue( "1.0.0", forHTTPHeaderField: "X-Version")
     request.addValue( "application/json", forHTTPHeaderField: "content-type")
     request.addValue( "Bearer " + token, forHTTPHeaderField: "Authorization")
-
+    
     let session = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
       guard error == nil else {
         completion(nil, GatewayError.connection(error: error!))
@@ -378,7 +368,7 @@ extension GatewayConnection {
           KeyChain.save(key: SharedConstants.keyXnonce, data: xnonceData)
         }
         completion(accessTokenResponse, nil)
-
+        
       } catch {
         completion(nil, GatewayError.encodingError)
         DGCLogger.logError(error)
@@ -397,7 +387,6 @@ extension GatewayConnection {
       return
     }
     let token = String(decoding: tokenData, as: UTF8.self)
-    
     var request = URLRequest(url: url)
     request.method = .post
     request.httpBody = parametersData
@@ -405,7 +394,7 @@ extension GatewayConnection {
     request.addValue( "1.0.0", forHTTPHeaderField: "X-Version")
     request.addValue( "application/json", forHTTPHeaderField: "content-type")
     request.addValue( "Bearer " + token, forHTTPHeaderField: "Authorization")
-
+    
     let session = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
       guard error == nil else {
         completion(nil,GatewayError.connection(error: error!))
