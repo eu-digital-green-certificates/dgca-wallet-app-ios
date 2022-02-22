@@ -33,11 +33,8 @@ enum SharedConstants {
     static let keyAccessToken = "DGCAWallet.AccessToken"
     static let keyXnonce = "DGCAWallet.xnonce"
     
-    static let expiredDataInterval: TimeInterval = 1 * 60 * 60 // 24 * 60 * 60
-    static let pubKeysStorageFilename = "secure"
-    static let countryStorageName = "country_secure"
-    static let rulesStorageName = "rules_secure"
-    static let valueSetsStorageName = "valueSets_secure"
+    static let expiredDataInterval: TimeInterval = 12.0 * 60 * 60
+    static let dataStorageName = "secure_storage"
     static let imageStorageName = "images_secure"
     static let pdfStorageName = "pdfs_secure"
 
@@ -45,4 +42,7 @@ enum SharedConstants {
     
     static let linkToOpenGitHubSource = "https://github.com/eu-digital-green-certificates"
     static let linkToOopenEuCertDoc = "https://ec.europa.eu/health/ehealth/covid-19_en"
+    
+    static let revocationServiceBase = "https://dgca-revocation-service-eu-test.cfapps.eu10.hana.ondemand.com"
+
 }

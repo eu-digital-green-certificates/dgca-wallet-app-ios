@@ -60,6 +60,11 @@ class CertificateViewerController: UIViewController {
   public var isSaved = true
   private var isEditMode = false
   
+  deinit {
+      let center = NotificationCenter.default
+      center.removeObserver(self)
+  }
+
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     setupInterface()

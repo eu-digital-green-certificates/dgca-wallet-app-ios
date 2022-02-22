@@ -32,200 +32,219 @@ import CertLogic
 typealias CompletionHandler = () -> Void
 
 class DataCenter {
-  static let shared = DataCenter()
-  static var appVersion: String {
-    let versionValue = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "?.?.?"
-    let buildNumValue = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "?.?.?"
-    return "\(versionValue)(\(buildNumValue))"
-  }
+    static let shared = DataCenter()
+    static var appVersion: String {
+      let versionValue = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "?.?.?"
+      let buildNumValue = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "?.?.?"
+      return "\(versionValue)(\(buildNumValue))"
+    }
 
-  static let localDataManager: LocalDataManager = LocalDataManager()
-  static let countryDataManager: CountryDataManager = CountryDataManager()
-  static let rulesDataManager: RulesDataManager = RulesDataManager()
-  static let valueSetsDataManager: ValueSetsDataManager = ValueSetsDataManager()
-  static let imageDataManager: ImageDataManager = ImageDataManager()
-  static let pdfDataManager: PdfDataManager = PdfDataManager()
-  
-  // MARK: - public variables
-  static var lastFetch: Date {
-    return localDataManager.localData.lastFetch
-  }
-  
-  static var lastLaunchedAppVersion: String {
-    return DataCenter.localDataManager.localData.lastLaunchedAppVersion
-  }
-  
-  static var certStrings: [DatedCertString] {
-    return localDataManager.localData.certStrings
-  }
-  
-  static var images: [SavedImage] {
-    return imageDataManager.localData.images
-  }
-  
-  static var pdfs: [SavedPDF] {
-    return pdfDataManager.localData.pdfs
-  }
-  
-  static var countryCodes: [CountryModel] {
-    return countryDataManager.localData.countryCodes
-  }
-  
-  static var rules: [CertLogic.Rule] {
-    get {
-      return rulesDataManager.localData.rules
-    }
-    set {
-      rulesDataManager.localData.rules = newValue
-    }
-  }
-  
-  static var valueSets: [CertLogic.ValueSet] {
-    get {
-      return valueSetsDataManager.localData.valueSets
-    }
-    set {
-      valueSetsDataManager.localData.valueSets = newValue
-    }
-  }
-  
-  // MARK: - Data Add methods
-  static func addCountries(_ list: [CountryModel], completion: @escaping DataCompletionHandler) {
-    countryDataManager.localData.countryCodes.removeAll()
-    list.forEach { country in
-      countryDataManager.add(country: country)
-    }
-    countryDataManager.save(completion: completion)
-  }
-  
-  static func addRules(_ list: [CertLogic.Rule], completion: @escaping DataCompletionHandler) {
-    rules.forEach { rulesDataManager.add(rule: $0) }
-    rulesDataManager.save(completion: completion)
-  }
-  
-  static func addValueSets(_ list: [CertLogic.ValueSet], completion: @escaping DataCompletionHandler) {
-    list.forEach { valueSetsDataManager.add(valueSet: $0) }
-    valueSetsDataManager.save(completion: completion)
-  }
-  
-  // MARK: - Data initialize methods
-  static func initializeLocalData(completion: @escaping DataCompletionHandler) {
-    localDataManager.loadLocallyStoredData(completion: completion)
-  }
-  
-  static func initializeAllStorageData(completion: @escaping DataCompletionHandler) {
-    let group = DispatchGroup()
-    
-    group.enter()
-    localDataManager.loadLocallyStoredData { result in
-     // guard case let .success(value) = result, value == true else { completion(result); return }
+    static let localDataManager: LocalDataManager = LocalDataManager()
+    static let imageDataManager: ImageDataManager = ImageDataManager()
+    static let pdfDataManager: PdfDataManager = PdfDataManager()
+    static let revocationWorker: RevocationWorker = RevocationWorker()
 
-      group.enter()
-      rulesDataManager.loadLocallyStoredData { result in
-        //guard case let .success(value) = result, value == true else { completion(result); return }
+    static var downloadedDataHasExpired: Bool {
+        return lastFetch.timeIntervalSinceNow < -SharedConstants.expiredDataInterval
+    }
+   
+    static var appWasRunWithOlderVersion: Bool {
+        return localDataManager.localData.lastLaunchedAppVersion != appVersion
+    }
 
-        CertLogicManager.shared.setRules(ruleList: rules)
-        group.leave()
-      }
-      
-      group.enter()
-      valueSetsDataManager.loadLocallyStoredData { result in
-        //guard case let .success(value) = result, value == true else { completion(result); return }
-        group.leave()
-      }
-      
-      group.enter()
-      countryDataManager.loadLocallyStoredData { result in
-        //guard case let .success(value) = result, value == true else { completion(result); return }
-        group.leave()
-      }
-      
-      group.enter()
-      imageDataManager.loadLocallyStoredData { result in
-        //guard case let .success(value) = result, value == true else { completion(result); return }
-        group.leave()
-      }
-      
-      group.enter()
-      pdfDataManager.loadLocallyStoredData { result in
-        //guard case let .success(value) = result, value == true else { completion(result); return }
-        group.leave()
-      }
-      group.leave()
+    // MARK: - public variables
+  
+    static var lastFetch: Date {
+        get {
+            return localDataManager.localData.lastFetch
+        }
+        set {
+            localDataManager.localData.lastFetch = newValue
+        }
+    }
+
+    static var lastLaunchedAppVersion: String {
+      return DataCenter.localDataManager.localData.lastLaunchedAppVersion
+    }
+
+    static var certStrings: [DatedCertString] {
+        get {
+          return localDataManager.localData.certStrings
+        }
+        set {
+          localDataManager.localData.certStrings = newValue
+        }
+    }
+  
+    static var resumeToken: String? {
+        get {
+            return localDataManager.localData.resumeToken
+        }
+        set {
+            localDataManager.localData.resumeToken = newValue
+        }
+    }
+
+    static var images: [SavedImage] {
+        get {
+            return imageDataManager.localData.images
+        }
+        set {
+            imageDataManager.localData.images = newValue
+        }
     }
     
-    group.notify(queue: .main) {
-      completion(.success(true))
+    static var pdfs: [SavedPDF] {
+        get {
+            return pdfDataManager.localData.pdfs
+        }
+        set {
+            pdfDataManager.localData.pdfs = newValue
+        }
     }
-  }
 
-  static func reloadStorageData(completion: @escaping DataCompletionHandler) {
-    let group = DispatchGroup()
+    static var countryCodes: [CountryModel] {
+        get {
+            return localDataManager.localData.countryCodes
+        }
+        set {
+            localDataManager.localData.countryCodes = newValue
+        }
+    }
+
+    static var rules: [Rule] {
+        get {
+          return localDataManager.localData.rules
+        }
+        set {
+            localDataManager.localData.rules = newValue
+        }
+    }
     
-    group.enter()
-    localDataManager.loadLocallyStoredData { result in
-      //guard case let .success(value) = result, value == true else { completion(result); return }
-
-      group.enter()
-      rulesDataManager.loadLocallyStoredData { result in
-        //guard case let .success(value) = result, value == true else { completion(result); return }
-        CertLogicManager.shared.setRules(ruleList: rules)
-        group.leave()
-      }
-      
-      group.enter()
-      valueSetsDataManager.loadLocallyStoredData { result in
-        //guard case let .success(value) = result, value == true else { completion(result); return }
-        group.leave()
-      }
-      
-      group.enter()
-      countryDataManager.loadLocallyStoredData { result in
-        //guard case let .success(value) = result, value == true else { completion(result); return }
-        group.leave()
-      }
-      
-      group.enter()
-      GatewayConnection.loadCountryList { list, error in
-        guard error == nil else { completion(.failure(error!)); return }
-
-        group.leave()
-      }
-      
-      group.enter()
-      imageDataManager.loadLocallyStoredData { result in
-        //guard case let .success(value) = result, value == true else { completion(result); return }
-        group.leave()
-      }
-      
-      group.enter()
-      pdfDataManager.loadLocallyStoredData { result in
-        //guard case let .success(value) = result, value == true else { completion(result); return }
-        group.leave()
-      }
-
-      group.enter()
-      GatewayConnection.loadValueSetsFromServer { list, error in
-        guard error == nil else { completion(.failure(error!)); return }
-
-        group.leave()
-      }
-      
-      group.enter()
-      GatewayConnection.loadRulesFromServer { listRules, error in
-        guard error == nil else { completion(.failure(error!)); return }
-
-        CertLogicManager.shared.setRules(ruleList: listRules ?? [])
-        group.leave()
-      }
-
-      group.leave()
+    static var valueSets: [ValueSet] {
+        get {
+          return localDataManager.localData.valueSets
+        }
+        set {
+            localDataManager.localData.valueSets = newValue
+        }
     }
+    
+    static func saveLocalData() {
+        localDataManager.save { rez in }
+    }
+    
+    static func addValueSets(_ list: [ValueSet]) {
+        list.forEach { localDataManager.add(valueSet: $0) }
+    }
+
+    static func addRules(_ list: [Rule]) {
+        list.forEach { localDataManager.add(rule: $0) }
+    }
+
+    static func addCountries(_ list: [CountryModel]) {
+        localDataManager.localData.countryCodes.removeAll()
+        list.forEach { localDataManager.add(country: $0) }
+    }
+
+    // MARK: - Data initialize methods
+    class func prepareLocalData(completion: @escaping DataCompletionHandler) {
+        initializeAllStorageData { result in
+            let shouldDownload = self.downloadedDataHasExpired || self.appWasRunWithOlderVersion
+            if !shouldDownload {
+                completion(result)
+            } else {
+                reloadStorageData { result in
+                    initializeAllStorageData { result in
+                        completion(result)
+                    }
+                }
+            }
+        }
+    }
+
+    static func initializeAllStorageData(completion: @escaping DataCompletionHandler) {
+        let group = DispatchGroup()
         
-    group.notify(queue: .main) {
-      localDataManager.localData.lastFetch = Date()
-      localDataManager.localData.lastLaunchedAppVersion = Self.appVersion
-      localDataManager.save(completion: completion)
+        group.enter()
+        localDataManager.loadLocallyStoredData { result in
+            CertLogicManager.shared.setRules(ruleList: rules)
+                
+            group.enter()
+            imageDataManager.loadLocallyStoredData { result in
+              group.leave()
+            }
+            
+            group.enter()
+            pdfDataManager.loadLocallyStoredData { result in
+               group.leave()
+            }
+            group.leave()
+        }
+        
+        group.notify(queue: .main) {
+            completion(.success(true))
+        }
     }
-  }
+    
+    static func reloadStorageData(completion: @escaping DataCompletionHandler) {
+        let group = DispatchGroup()
+        
+        let center = NotificationCenter.default
+        center.post(name: Notification.Name("StartLoadingNotificationName"), object: nil, userInfo: nil )
+        
+        group.enter()
+        localDataManager.loadLocallyStoredData { result in
+            CertLogicManager.shared.setRules(ruleList: rules)
+            
+            group.enter()
+            imageDataManager.loadLocallyStoredData { result in
+              group.leave()
+            }
+            
+            group.enter()
+            pdfDataManager.loadLocallyStoredData { result in
+              group.leave()
+            }
+            
+            group.enter()
+            GatewayConnection.loadCountryList { list, error in
+                group.leave()
+            }
+
+            group.enter()
+            GatewayConnection.loadValueSetsFromServer { list, error in
+              group.leave()
+            }
+            
+            group.enter()
+            GatewayConnection.loadRulesFromServer { listRules, error in
+              guard error == nil else { completion(.failure(error!)); return }
+              CertLogicManager.shared.setRules(ruleList: listRules ?? [])
+              group.leave()
+            }
+
+            group.leave()
+        }
+        
+        group.enter()
+        revocationWorker.processReloadRevocations { error in
+            if let err = error {
+                if case let .failedValidation(status: status) = err, status == 404 {
+                    revocationWorker.processReloadRevocations { err in
+                        print("Backend error!!")
+                    }
+                }
+            }
+            
+            group.leave()
+        }
+        
+        group.notify(queue: .main) {
+            localDataManager.localData.lastFetch = Date()
+            center.post(name: Notification.Name("StopLoadingNotificationName"), object: nil, userInfo: nil )
+            localDataManager.localData.lastLaunchedAppVersion = Self.appVersion
+            localDataManager.save(completion: completion)
+        }
+    }
 }

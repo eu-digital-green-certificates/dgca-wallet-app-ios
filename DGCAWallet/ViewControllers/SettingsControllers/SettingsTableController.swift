@@ -37,7 +37,23 @@ class SettingsTableController: UITableViewController {
   @IBOutlet fileprivate weak var privacyInfoLabel: UILabel!
   @IBOutlet fileprivate weak var licensesLabel: UILabel!
 
+  lazy var progressView: UIProgressView = UIProgressView(progressViewStyle: .`default`)
+  lazy var indicator: UIActivityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
+
+  lazy var activityAlert: UIAlertController = {
+      let controller = UIAlertController(title: "Loading data", message: "\n\n\n", preferredStyle: .alert)
+      controller.view.addSubview(progressView)
+      controller.view.addSubview(indicator)
+      progressView.setProgress(0.0, animated: false)
+      return controller
+  }()
+
   weak var dismissDelegate: DismissControllerDelegate?
+
+  deinit {
+      let center = NotificationCenter.default
+      center.removeObserver(self)
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -46,6 +62,29 @@ class SettingsTableController: UITableViewController {
     licensesLabel.text = "Licenses".localized
     privacyInfoLabel.text = "Privacy Information".localized
     self.title = "Settings".localized
+    
+    let center = NotificationCenter.default
+    center.addObserver(forName: Notification.Name("StartLoadingNotificationName"), object: nil, queue: .main) { notification in
+        self.activityAlert.dismiss(animated: true, completion: nil)
+        self.present(self.activityAlert, animated: true) {
+            self.indicator.center = CGPoint(x: self.activityAlert.view.frame.size.width/2, y: 100)
+            self.indicator.startAnimating()
+            self.progressView.center = CGPoint(x: self.activityAlert.view.frame.size.width/2, y: 120)
+        }
+    }
+    
+    center.addObserver(forName: Notification.Name("StopLoadingNotificationName"), object: nil, queue: .main) { notification in
+        self.activityAlert.dismiss(animated: true, completion: nil)
+        self.progressView.setProgress(0.0, animated: false)
+        self.indicator.stopAnimating()
+    }
+    
+    center.addObserver(forName: Notification.Name("LoadingRevocationsNotificationName"), object: nil, queue: .main) { notification in
+        let strMessage = notification.userInfo?["name"] as? String ?? "Loading Database"
+        self.activityAlert.title = strMessage
+        let percentage = notification.userInfo?["progress" ] as? Float ?? 0.0
+        self.progressView.setProgress(percentage, animated: true)
+    }
   }
   
   override func viewDidDisappear(_ animated: Bool) {

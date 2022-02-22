@@ -55,11 +55,24 @@ class MainListController: UIViewController {
   @IBOutlet fileprivate weak var emptyView: UIView!
   @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
   @IBOutlet fileprivate weak var titleLabel: UILabel!
-
-  var downloadedDataHasExpired: Bool {
-    return DataCenter.lastFetch.timeIntervalSinceNow < -SharedConstants.expiredDataInterval
-  }
   
+  lazy var progressView: UIProgressView = UIProgressView(progressViewStyle: .`default`)
+  lazy var indicator: UIActivityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
+
+  lazy var activityAlert: UIAlertController = {
+      let controller = UIAlertController(title: "Loading data", message: "\n\n\n", preferredStyle: .alert)
+      controller.view.addSubview(progressView)
+      controller.view.addSubview(indicator)
+      progressView.setProgress(0.0, animated: false)
+      return controller
+  }()
+
+    var downloadedDataHasExpired: Bool {
+        return DataCenter.lastFetch.timeIntervalSinceNow < -SharedConstants.expiredDataInterval
+    }
+
+  private var expireDataTimer: Timer?
+
   private var scannedToken: String = ""
   private var loading = false
   
@@ -67,6 +80,11 @@ class MainListController: UIViewController {
     return .lightContent
   }
   
+  deinit {
+      let center = NotificationCenter.default
+      center.removeObserver(self)
+  }
+
   override func viewDidLoad() {
     super.viewDidLoad()
     self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -83,9 +101,52 @@ class MainListController: UIViewController {
       let scene = self.sceneDelegate
       scene?.isNFCFunctionality = false
     }
+    let center = NotificationCenter.default
+    center.addObserver(forName: Notification.Name("StartLoadingNotificationName"), object: nil, queue: .main) { notification in
+        self.activityAlert.dismiss(animated: true, completion: nil)
+        self.present(self.activityAlert, animated: true) {
+            self.indicator.center = CGPoint(x: self.activityAlert.view.frame.size.width/2, y: 100)
+            self.indicator.startAnimating()
+            self.progressView.center = CGPoint(x: self.activityAlert.view.frame.size.width/2, y: 120)
+        }
+    }
+    
+    center.addObserver(forName: Notification.Name("StopLoadingNotificationName"), object: nil, queue: .main) { notification in
+        self.activityAlert.dismiss(animated: true, completion: nil)
+        self.progressView.setProgress(0.0, animated: false)
+        self.indicator.stopAnimating()
+    }
+
+    center.addObserver(forName: Notification.Name("LoadingRevocationsNotificationName"), object: nil, queue: .main) { notification in
+        let strMessage = notification.userInfo?["name"] as? String ?? "Loading Database"
+        self.activityAlert.title = strMessage
+        let percentage = notification.userInfo?["progress" ] as? Float ?? 0.0
+        self.progressView.setProgress(percentage, animated: true)
+    }
+    expireDataTimer = Timer.scheduledTimer(timeInterval: 1800, target: self, selector: #selector(reloadExpiredData),
+        userInfo: nil, repeats: true)
+
     self.reloadTable()
   }
-    
+  
+    // MARK: - Actions
+    @objc func reloadExpiredData() {
+       if downloadedDataHasExpired {
+            showAlertReloadDatabase()
+       }
+    }
+
+    func showAlertReloadDatabase() {
+        let alert = UIAlertController(title: "Reload databases?".localized, message: "The update may take some time.".localized, preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Later".localized, style: .default, handler: { _ in }))
+        
+        alert.addAction(UIAlertAction(title: "Reload".localized, style: .default, handler: { (_: UIAlertAction!) in
+            DataCenter.reloadStorageData(completion: { _ in })
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+
   // MARK: - Private UI methods
   private func reloadAllComponents(completion: @escaping DataCompletionHandler) {
     DataCenter.initializeAllStorageData { result in
@@ -673,8 +734,6 @@ extension MainListController: UIDocumentPickerDelegate {
 // MARK: DismissController Delegate
 extension MainListController: DismissControllerDelegate {
   func userDidDissmiss(_ controller: UIViewController) {
-    if downloadedDataHasExpired {
-      self.navigationController?.popViewController(animated: false)
-    }
+    ()
   }
 }

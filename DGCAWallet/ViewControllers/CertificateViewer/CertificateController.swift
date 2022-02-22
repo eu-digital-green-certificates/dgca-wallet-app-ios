@@ -35,7 +35,7 @@ class CertificateController: UIViewController {
   var hCert: HCert? {
     (parent as? CertPagesController)?.embeddingVC?.hCert
   }
-  private var validityState: ValidityState = .invalid
+  private var validityState: ValidityState = .invalidState
   private var sectionBuilder: SectionBuilder?
 
   override func viewDidLoad() {

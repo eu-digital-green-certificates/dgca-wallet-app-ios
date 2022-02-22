@@ -20,76 +20,79 @@
  */
 //
 //  CertificateValidator..swift
-//  
+//
 //
 //  Created by Igor Khomiak on 15.10.2021.
 //
 
 import Foundation
 import SwiftDGC
-import SwiftyJSON
 import CertLogic
 
-class CertificateValidator {
-  private let certificate: HCert
+public typealias ValidityCompletion = (ValidityState) -> Void
 
-  init(with cert: HCert) {
-    self.certificate = cert
-  }
-
-  func validate(completion: ((ValidityState) -> Void)? = nil) {
-    let failures = findValidityFailures()
+public class CertificateValidator {
     
-    let technicalValidity: HCertValidity = failures.isEmpty ? .valid : .invalid
-    let issuerValidity = validateCertLogicForIssuer()
-    let destinationValidity = validateCertLogicForDestination()
-    let travalerValidity = validateCertLogicForTraveller()
-    let (infoRulesSection, allRulesValidity): (InfoSection?, HCertValidity)
-    if technicalValidity == .valid {
-      (infoRulesSection, allRulesValidity) = validateCertLogicForAllRules()
-    } else {
-      (infoRulesSection, allRulesValidity) = (nil, .invalid)
+    public let certificate: HCert
+
+    init(with cert: HCert) {
+      self.certificate = cert
     }
-    
-    let validity = ValidityState(
-      technicalValidity: technicalValidity,
-      issuerValidity: issuerValidity,
-      destinationValidity: destinationValidity,
-      travalerValidity: travalerValidity,
-      allRulesValidity: allRulesValidity,
-      validityFailures: failures,
-      infoRulesSection: infoRulesSection)
-    
-    completion?(validity)
+
+  func validate(completion: ValidityCompletion) {
+      let failures = findValidityFailures()
+      
+      let technicalValidity: HCertValidity = failures.isEmpty ? .valid : .invalid
+      let issuerValidity = validateCertLogicForIssuer()
+      let destinationValidity = validateCertLogicForDestination()
+      let travalerValidity = validateCertLogicForTraveller()
+      let (infoRulesSection, allRulesValidity): (InfoSection?, HCertValidity)
+      if technicalValidity == .valid {
+          (infoRulesSection, allRulesValidity) = validateCertLogicForAllRules()
+      } else {
+          (infoRulesSection, allRulesValidity) = (nil, .invalid)
+      }
+
+      let validityState = ValidityState(
+        technicalValidity: technicalValidity,
+        issuerValidity: issuerValidity,
+        destinationValidity: destinationValidity,
+        travalerValidity: travalerValidity,
+        allRulesValidity: allRulesValidity,
+        revocationValidity: .valid,
+        validityFailures: failures,
+        infoRulesSection: infoRulesSection)
+
+    completion(validityState)
   }
   
   private func findValidityFailures() -> [String] {
     var failures = [String]()
     if !certificate.cryptographicallyValid {
-        failures.append("Cryptographic signature not valid.".localized)
+      failures.append("No entries in the certificate.".localized)
     }
     if certificate.exp < HCert.clock {
-        failures.append("Certificate past expiration date.".localized)
+      failures.append("Certificate past expiration date.".localized)
     }
     if certificate.iat > HCert.clock {
-        failures.append("Certificate issuance date is in the future.".localized)
+      failures.append("Certificate issuance date is in the future.".localized)
     }
     if certificate.statement == nil {
-        failures.append("No entries in the certificate.".localized)
+      failures.append("No entries in the certificate.".localized)
       return failures
     }
     failures.append(contentsOf: certificate.statement.validityFailures)
     return failures
   }
 
-  // MARK: validation
+  // MARK: - private validation methods
   private func validateCertLogicForAllRules() -> (InfoSection?, HCertValidity) {
       var validity: HCertValidity = .valid
       let certType = certificationType(for: certificate.certificateType)
       var infoSection: InfoSection?
     
       if let countryCode = certificate.ruleCountryCode {
-        let valueSets = DataCenter.valueSetsDataManager.getValueSetsForExternalParameters()
+        let valueSets = DataCenter.localDataManager.getValueSetsForExternalParameters()
         let filterParameter = FilterParameter(validationClock: Date(),
             countryCode: countryCode,
             certificationType: certType)
@@ -105,26 +108,26 @@ class CertificateValidator {
         
         if failsAndOpen.count > 0 {
           validity = .ruleInvalid
-            infoSection = InfoSection(header: "Possible limitation".localized, content: "Country rules validation failed".localized)
+          infoSection = InfoSection(header: "Possible limitation", content: "Country rules validation failed")
           var listOfRulesSection: [InfoSection] = []
           result.sorted(by: { $0.result.rawValue < $1.result.rawValue }).forEach { validationResult in
             if let error = validationResult.validationErrors?.first {
               switch validationResult.result {
               case .fail:
-                  listOfRulesSection.append(InfoSection(header: "Certificate logic engine error".localized,
+                listOfRulesSection.append(InfoSection(header: "CirtLogic Engine error",
                     content: error.localizedDescription,
                     countryName: certificate.ruleCountryCode,
-                    ruleValidationResult: SwiftDGC.RuleValidationResult.error))
+                    ruleValidationResult: .failed))
               case .open:
-                  listOfRulesSection.append(InfoSection(header: "Certificate logic engine error".localized,
+                listOfRulesSection.append(InfoSection(header: "CirtLogic Engine error",
                     content: error.localizedDescription,
                     countryName: certificate.ruleCountryCode,
-                    ruleValidationResult: SwiftDGC.RuleValidationResult.open))
+                    ruleValidationResult: .open))
               case .passed:
-                  listOfRulesSection.append(InfoSection(header: "Certificate logic engine error".localized,
+                listOfRulesSection.append(InfoSection(header: "CirtLogic Engine error",
                     content: error.localizedDescription,
                     countryName: certificate.ruleCountryCode,
-                    ruleValidationResult: SwiftDGC.RuleValidationResult.passed))
+                    ruleValidationResult: .passed))
               }
               
             } else {
@@ -145,17 +148,17 @@ class CertificateValidator {
                 listOfRulesSection.append(InfoSection(header: errorString,
                     content: detailsError,
                     countryName: certificate.ruleCountryCode,
-                    ruleValidationResult: SwiftDGC.RuleValidationResult.error))
+                    ruleValidationResult: .failed))
               case .open:
                 listOfRulesSection.append(InfoSection(header: errorString,
                     content: detailsError,
                     countryName: certificate.ruleCountryCode,
-                    ruleValidationResult: SwiftDGC.RuleValidationResult.open))
+                    ruleValidationResult: .open))
               case .passed:
                 listOfRulesSection.append(InfoSection(header: errorString,
                     content: detailsError,
                     countryName: certificate.ruleCountryCode,
-                    ruleValidationResult: SwiftDGC.RuleValidationResult.passed))
+                    ruleValidationResult: .passed))
               }
             }
           }
@@ -164,13 +167,11 @@ class CertificateValidator {
       }
       return (infoSection, validity)
     }
-    
+        
     private func validateCertLogicForIssuer() -> HCertValidity {
-      let validity: HCertValidity = .valid
-      
       let certType = certificationType(for: certificate.certificateType)
       if let countryCode = certificate.ruleCountryCode {
-        let valueSets = DataCenter.valueSetsDataManager.getValueSetsForExternalParameters()
+        let valueSets = DataCenter.localDataManager.getValueSetsForExternalParameters()
         let filterParameter = FilterParameter(validationClock: Date(),
             countryCode: countryCode,
             certificationType: certType)
@@ -191,15 +192,13 @@ class CertificateValidator {
           return .ruleInvalid
         }
       }
-      return validity
+      return .valid
     }
 
     private func validateCertLogicForDestination() -> HCertValidity {
-      let validity: HCertValidity = .valid
-      
       let certType = certificationType(for: certificate.certificateType)
       if let countryCode = certificate.ruleCountryCode {
-        let valueSets = DataCenter.valueSetsDataManager.getValueSetsForExternalParameters()
+        let valueSets = DataCenter.localDataManager.getValueSetsForExternalParameters()
         let filterParameter = FilterParameter(validationClock: Date(),
           countryCode: countryCode,
           certificationType: certType)
@@ -220,15 +219,13 @@ class CertificateValidator {
           return .ruleInvalid
         }
       }
-      return validity
+      return .valid
     }
     
     private func validateCertLogicForTraveller() -> HCertValidity {
-      let validity: HCertValidity = .valid
-      
       let certType = certificationType(for: certificate.certificateType)
       if let countryCode = certificate.ruleCountryCode {
-        let valueSets = DataCenter.valueSetsDataManager.getValueSetsForExternalParameters()
+        let valueSets = DataCenter.localDataManager.getValueSetsForExternalParameters()
         let filterParameter = FilterParameter(validationClock: Date(),
             countryCode: countryCode,
             certificationType: certType)
@@ -250,7 +247,7 @@ class CertificateValidator {
           return .ruleInvalid
         }
       }
-      return validity
+      return .valid
     }
     
     private func certificationType(for type: SwiftDGC.HCertType) -> CertificateType {
