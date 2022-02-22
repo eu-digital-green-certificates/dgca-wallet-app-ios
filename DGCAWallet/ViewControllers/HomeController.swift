@@ -36,29 +36,17 @@ class HomeController: UIViewController {
   @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
   @IBOutlet fileprivate weak var appNameLabel: UILabel!
   @IBOutlet fileprivate weak var messageLabel: UILabel!
-  @IBOutlet fileprivate weak var progresBar: UIProgressView!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
       return .lightContent
-    }
-
-    deinit {
-        let center = NotificationCenter.default
-        center.removeObserver(self)
     }
 
     override func viewDidLoad() {
       super.viewDidLoad()
       CoreManager.shared.config = HCertConfig(prefetchAllCodes: true, checkSignatures: false, debugPrintJsonErrors: true)
       appNameLabel.text = "Wallet App".localized
-      let center = NotificationCenter.default
-      center.addObserver(forName: Notification.Name("LoadingRevocationsNotificationName"), object: nil, queue: .main) { notification in
-        let strMessage = notification.userInfo?["name"] as? String ?? "Loading Database"
-          self.messageLabel?.text = strMessage
-          let percentage = notification.userInfo?["progress" ] as? Float ?? 0.0
-          self.progresBar?.setProgress(percentage, animated: true)
-      }
         self.activityIndicator.startAnimating()
+        messageLabel.text = "Loading data".localized
         DataCenter.initializeAllStorageData {[unowned self] result in
             DispatchQueue.main.async {
               self.activityIndicator.stopAnimating()

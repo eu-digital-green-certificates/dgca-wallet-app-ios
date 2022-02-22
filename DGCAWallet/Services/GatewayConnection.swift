@@ -154,7 +154,7 @@ extension GatewayConnection {
             completion(nil, GatewayError.local(description: "No sign"))
             return
           }
-          DataCenter.localDataManager.addCountries(countryCodeList)
+          DataCenter.addCountries(countryCodeList)
           let countryCodes = DataCenter.countryCodes.sorted(by: { $0.name < $1.name })
           completion(countryCodes, nil)
       }

@@ -38,16 +38,16 @@ protocol DismissControllerDelegate: AnyObject {
 
 class MainListController: UIViewController {
   fileprivate enum SegueIdentifiers {
-    static let showScannerSegue = "showScannerSegue"
-    static let showServicesList = "showServicesList"
-    static let showSettingsController = "showSettingsController"
-    static let showCertificateViewer = "showCertificateViewer"
-    static let showPDFViewer = "showPDFViewer"
-    static let showImageViewer = "showImageViewer"
+      static let showScannerSegue = "showScannerSegue"
+      static let showServicesList = "showServicesList"
+      static let showSettingsController = "showSettingsController"
+      static let showCertificateViewer = "showCertificateViewer"
+      static let showPDFViewer = "showPDFViewer"
+      static let showImageViewer = "showImageViewer"
   }
 
   private enum TableSection: Int, CaseIterable {
-    case certificates, images, pdfs
+      case certificates, images, pdfs
   }
   
   @IBOutlet fileprivate weak var addButton: RoundedButton!
@@ -56,79 +56,49 @@ class MainListController: UIViewController {
   @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
   @IBOutlet fileprivate weak var titleLabel: UILabel!
   
-  lazy var progressView: UIProgressView = UIProgressView(progressViewStyle: .`default`)
-  lazy var indicator: UIActivityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
+    lazy var indicator: UIActivityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
 
-  lazy var activityAlert: UIAlertController = {
-      let controller = UIAlertController(title: "Loading data", message: "\n\n\n", preferredStyle: .alert)
-      controller.view.addSubview(progressView)
-      controller.view.addSubview(indicator)
-      progressView.setProgress(0.0, animated: false)
-      return controller
-  }()
+    lazy var activityAlert: UIAlertController = {
+        let controller = UIAlertController(title: "Loading data", message: "\n\n\n", preferredStyle: .alert)
+
+        controller.view.addSubview(indicator)
+        return controller
+    }()
 
     var downloadedDataHasExpired: Bool {
         return DataCenter.lastFetch.timeIntervalSinceNow < -SharedConstants.expiredDataInterval
     }
 
-  private var expireDataTimer: Timer?
-
-  private var scannedToken: String = ""
-  private var loading = false
-  
-  override var preferredStatusBarStyle: UIStatusBarStyle {
-    return .lightContent
-  }
-  
-  deinit {
-      let center = NotificationCenter.default
-      center.removeObserver(self)
-  }
-
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-    self.titleLabel.text = "Certificate Wallet".localized
-    self.addButton.setTitle("Add New".localized, for: .normal)
-  }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
+    private var expireDataTimer: Timer?
+    private var scannedToken: String = ""
+    private var loading = false
     
-    let appDelegate = UIApplication.shared.delegate as? AppDelegate
-    appDelegate?.isNFCFunctionality = false
-    if #available(iOS 13.0, *) {
-      let scene = self.sceneDelegate
-      scene?.isNFCFunctionality = false
-    }
-    let center = NotificationCenter.default
-    center.addObserver(forName: Notification.Name("StartLoadingNotificationName"), object: nil, queue: .main) { notification in
-        self.activityAlert.dismiss(animated: true, completion: nil)
-        self.present(self.activityAlert, animated: true) {
-            self.indicator.center = CGPoint(x: self.activityAlert.view.frame.size.width/2, y: 100)
-            self.indicator.startAnimating()
-            self.progressView.center = CGPoint(x: self.activityAlert.view.frame.size.width/2, y: 120)
-        }
-    }
-    
-    center.addObserver(forName: Notification.Name("StopLoadingNotificationName"), object: nil, queue: .main) { notification in
-        self.activityAlert.dismiss(animated: true, completion: nil)
-        self.progressView.setProgress(0.0, animated: false)
-        self.indicator.stopAnimating()
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+      return .lightContent
     }
 
-    center.addObserver(forName: Notification.Name("LoadingRevocationsNotificationName"), object: nil, queue: .main) { notification in
-        let strMessage = notification.userInfo?["name"] as? String ?? "Loading Database"
-        self.activityAlert.title = strMessage
-        let percentage = notification.userInfo?["progress" ] as? Float ?? 0.0
-        self.progressView.setProgress(percentage, animated: true)
+    override func viewDidLoad() {
+      super.viewDidLoad()
+      self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+      self.titleLabel.text = "Certificate Wallet".localized
+      self.addButton.setTitle("Add New".localized, for: .normal)
     }
-    expireDataTimer = Timer.scheduledTimer(timeInterval: 1800, target: self, selector: #selector(reloadExpiredData),
-        userInfo: nil, repeats: true)
 
-    self.reloadTable()
-  }
-  
+    override func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(animated)
+      
+      let appDelegate = UIApplication.shared.delegate as? AppDelegate
+      appDelegate?.isNFCFunctionality = false
+      if #available(iOS 13.0, *) {
+        let scene = self.sceneDelegate
+        scene?.isNFCFunctionality = false
+      }
+      expireDataTimer = Timer.scheduledTimer(timeInterval: 1800, target: self, selector: #selector(reloadExpiredData),
+          userInfo: nil, repeats: true)
+
+      self.reloadTable()
+    }
+
     // MARK: - Actions
     @objc func reloadExpiredData() {
        if downloadedDataHasExpired {
@@ -137,7 +107,7 @@ class MainListController: UIViewController {
     }
 
     func showAlertReloadDatabase() {
-        let alert = UIAlertController(title: "Reload databases?".localized, message: "The update may take some time.".localized, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Reload data?".localized, message: "The update may take some time.".localized, preferredStyle: .alert)
 
         alert.addAction(UIAlertAction(title: "Later".localized, style: .default, handler: { _ in }))
         
@@ -147,13 +117,13 @@ class MainListController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
 
-  // MARK: - Private UI methods
-  private func reloadAllComponents(completion: @escaping DataCompletionHandler) {
-    DataCenter.initializeAllStorageData { result in
-      completion(.success(true))
+    // MARK: - Private UI methods
+    private func reloadAllComponents(completion: @escaping DataCompletionHandler) {
+      DataCenter.initializeAllStorageData { result in
+        completion(.success(true))
+      }
     }
-  }
-  
+
   private func startActivity() {
     loading = true
     activityIndicator.startAnimating()
@@ -180,19 +150,23 @@ class MainListController: UIViewController {
     let menuActionSheet = UIAlertController(title: "Add new?".localized, message: "Do you want to add new certificate, image or PDF file?".localized,
       preferredStyle: UIAlertController.Style.actionSheet)
     
-    menuActionSheet.addAction(UIAlertAction(title: "Scan certificate".localized, style: UIAlertAction.Style.default, handler: {[weak self] _ in
-        self?.scanNewCertificate()
-      })
+    menuActionSheet.addAction(UIAlertAction(title: "Scan certificate".localized, style: UIAlertAction.Style.default,
+        handler: {[weak self] _ in
+            self?.scanNewCertificate()
+        })
     )
-    menuActionSheet.addAction(UIAlertAction(title: "Image import".localized, style: UIAlertAction.Style.default, handler: { [weak self] _ in
-        self?.addImageActivity()
-      })
+    menuActionSheet.addAction(UIAlertAction(title: "Image import".localized, style: UIAlertAction.Style.default,
+        handler: { [weak self] _ in
+            self?.addImageActivity()
+        })
     )
-    menuActionSheet.addAction(UIAlertAction(title: "PDF Import".localized, style: UIAlertAction.Style.default, handler: { [weak self] _ in
+    menuActionSheet.addAction(UIAlertAction(title: "PDF Import".localized, style: UIAlertAction.Style.default,
+        handler: { [weak self] _ in
         self?.addPdf()
       })
     )
-    menuActionSheet.addAction(UIAlertAction(title: "NFC Import".localized, style: UIAlertAction.Style.default, handler: { [weak self] _ in
+    menuActionSheet.addAction(UIAlertAction(title: "NFC Import".localized, style: UIAlertAction.Style.default,
+        handler: { [weak self] _ in
         self?.scanNFC()
       })
     )

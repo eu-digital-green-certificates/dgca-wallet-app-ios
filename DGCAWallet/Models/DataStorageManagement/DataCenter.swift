@@ -42,7 +42,6 @@ class DataCenter {
     static let localDataManager: LocalDataManager = LocalDataManager()
     static let imageDataManager: ImageDataManager = ImageDataManager()
     static let pdfDataManager: PdfDataManager = PdfDataManager()
-    static let revocationWorker: RevocationWorker = RevocationWorker()
 
     static var downloadedDataHasExpired: Bool {
         return lastFetch.timeIntervalSinceNow < -SharedConstants.expiredDataInterval
@@ -189,10 +188,7 @@ class DataCenter {
     
     static func reloadStorageData(completion: @escaping DataCompletionHandler) {
         let group = DispatchGroup()
-        
-        let center = NotificationCenter.default
-        center.post(name: Notification.Name("StartLoadingNotificationName"), object: nil, userInfo: nil )
-        
+                
         group.enter()
         localDataManager.loadLocallyStoredData { result in
             CertLogicManager.shared.setRules(ruleList: rules)
@@ -227,22 +223,8 @@ class DataCenter {
             group.leave()
         }
         
-        group.enter()
-        revocationWorker.processReloadRevocations { error in
-            if let err = error {
-                if case let .failedValidation(status: status) = err, status == 404 {
-                    revocationWorker.processReloadRevocations { err in
-                        print("Backend error!!")
-                    }
-                }
-            }
-            
-            group.leave()
-        }
-        
         group.notify(queue: .main) {
             localDataManager.localData.lastFetch = Date()
-            center.post(name: Notification.Name("StopLoadingNotificationName"), object: nil, userInfo: nil )
             localDataManager.localData.lastLaunchedAppVersion = Self.appVersion
             localDataManager.save(completion: completion)
         }

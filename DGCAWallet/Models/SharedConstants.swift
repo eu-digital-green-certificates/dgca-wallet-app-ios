@@ -42,7 +42,4 @@ enum SharedConstants {
     
     static let linkToOpenGitHubSource = "https://github.com/eu-digital-green-certificates"
     static let linkToOopenEuCertDoc = "https://ec.europa.eu/health/ehealth/covid-19_en"
-    
-    static let revocationServiceBase = "https://dgca-revocation-service-eu-test.cfapps.eu10.hana.ondemand.com"
-
 }
