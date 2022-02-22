@@ -32,22 +32,19 @@ import SwiftDGC
 import UniformTypeIdentifiers
 import MobileCoreServices
 
-protocol DismissControllerDelegate: AnyObject {
-  func userDidDissmiss(_ controller: UIViewController)
-}
 
 class MainListController: UIViewController {
   fileprivate enum SegueIdentifiers {
-    static let showScannerSegue = "showScannerSegue"
-    static let showServicesList = "showServicesList"
-    static let showSettingsController = "showSettingsController"
-    static let showCertificateViewer = "showCertificateViewer"
-    static let showPDFViewer = "showPDFViewer"
-    static let showImageViewer = "showImageViewer"
+      static let showScannerSegue = "showScannerSegue"
+      static let showServicesList = "showServicesList"
+      static let showSettingsController = "showSettingsController"
+      static let showCertificateViewer = "showCertificateViewer"
+      static let showPDFViewer = "showPDFViewer"
+      static let showImageViewer = "showImageViewer"
   }
 
   private enum TableSection: Int, CaseIterable {
-    case certificates, images, pdfs
+      case certificates, images, pdfs
   }
   
   @IBOutlet fileprivate weak var addButton: RoundedButton!
@@ -55,44 +52,75 @@ class MainListController: UIViewController {
   @IBOutlet fileprivate weak var emptyView: UIView!
   @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
   @IBOutlet fileprivate weak var titleLabel: UILabel!
+  
+    lazy var indicator: UIActivityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
 
-  var downloadedDataHasExpired: Bool {
-    return DataCenter.lastFetch.timeIntervalSinceNow < -SharedConstants.expiredDataInterval
-  }
-  
-  private var scannedToken: String = ""
-  private var loading = false
-  
-  override var preferredStatusBarStyle: UIStatusBarStyle {
-    return .lightContent
-  }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-    self.titleLabel.text = "Certificate Wallet".localized
-    self.addButton.setTitle("Add New".localized, for: .normal)
-  }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    
-    let appDelegate = UIApplication.shared.delegate as? AppDelegate
-    appDelegate?.isNFCFunctionality = false
-    if #available(iOS 13.0, *) {
-      let scene = self.sceneDelegate
-      scene?.isNFCFunctionality = false
+    lazy var activityAlert: UIAlertController = {
+        let controller = UIAlertController(title: "Loading data", message: "\n\n\n", preferredStyle: .alert)
+
+        controller.view.addSubview(indicator)
+        return controller
+    }()
+
+    var downloadedDataHasExpired: Bool {
+        return DataCenter.lastFetch.timeIntervalSinceNow < -SharedConstants.expiredDataInterval
     }
-    self.reloadTable()
-  }
+
+    private var expireDataTimer: Timer?
+    private var scannedToken: String = ""
+    private var loading = false
     
-  // MARK: - Private UI methods
-  private func reloadAllComponents(completion: @escaping DataCompletionHandler) {
-    DataCenter.initializeAllStorageData { result in
-      completion(.success(true))
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+      return .lightContent
     }
-  }
-  
+
+    override func viewDidLoad() {
+      super.viewDidLoad()
+      self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+      self.titleLabel.text = "Certificate Wallet".localized
+      self.addButton.setTitle("Add New".localized, for: .normal)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(animated)
+      
+      let appDelegate = UIApplication.shared.delegate as? AppDelegate
+      appDelegate?.isNFCFunctionality = false
+      if #available(iOS 13.0, *) {
+        let scene = self.sceneDelegate
+        scene?.isNFCFunctionality = false
+      }
+      expireDataTimer = Timer.scheduledTimer(timeInterval: 1800, target: self, selector: #selector(reloadExpiredData),
+          userInfo: nil, repeats: true)
+
+      self.reloadTable()
+    }
+
+    // MARK: - Actions
+    @objc func reloadExpiredData() {
+       if downloadedDataHasExpired {
+            showAlertReloadDatabase()
+       }
+    }
+
+    func showAlertReloadDatabase() {
+        let alert = UIAlertController(title: "Reload data?".localized, message: "The update may take some time.".localized, preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Later".localized, style: .default, handler: { _ in }))
+        
+        alert.addAction(UIAlertAction(title: "Reload".localized, style: .default, handler: { (_: UIAlertAction!) in
+            DataCenter.reloadStorageData(completion: { _ in })
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    // MARK: - Private UI methods
+    private func reloadAllComponents(completion: @escaping DataCompletionHandler) {
+      DataCenter.initializeAllStorageData { result in
+        completion(.success(true))
+      }
+    }
+
   private func startActivity() {
     loading = true
     activityIndicator.startAnimating()
@@ -119,19 +147,23 @@ class MainListController: UIViewController {
     let menuActionSheet = UIAlertController(title: "Add new?".localized, message: "Do you want to add new certificate, image or PDF file?".localized,
       preferredStyle: UIAlertController.Style.actionSheet)
     
-    menuActionSheet.addAction(UIAlertAction(title: "Scan certificate".localized, style: UIAlertAction.Style.default, handler: {[weak self] _ in
-        self?.scanNewCertificate()
-      })
+    menuActionSheet.addAction(UIAlertAction(title: "Scan certificate".localized, style: UIAlertAction.Style.default,
+        handler: {[weak self] _ in
+            self?.scanNewCertificate()
+        })
     )
-    menuActionSheet.addAction(UIAlertAction(title: "Image import".localized, style: UIAlertAction.Style.default, handler: { [weak self] _ in
-        self?.addImageActivity()
-      })
+    menuActionSheet.addAction(UIAlertAction(title: "Image import".localized, style: UIAlertAction.Style.default,
+        handler: { [weak self] _ in
+            self?.addImageActivity()
+        })
     )
-    menuActionSheet.addAction(UIAlertAction(title: "PDF Import".localized, style: UIAlertAction.Style.default, handler: { [weak self] _ in
+    menuActionSheet.addAction(UIAlertAction(title: "PDF Import".localized, style: UIAlertAction.Style.default,
+        handler: { [weak self] _ in
         self?.addPdf()
       })
     )
-    menuActionSheet.addAction(UIAlertAction(title: "NFC Import".localized, style: UIAlertAction.Style.default, handler: { [weak self] _ in
+    menuActionSheet.addAction(UIAlertAction(title: "NFC Import".localized, style: UIAlertAction.Style.default,
+        handler: { [weak self] _ in
         self?.scanNFC()
       })
     )
@@ -215,30 +247,27 @@ class MainListController: UIViewController {
       guard let scanController = segue.destination as? ScanWalletController else { return }
       scanController.modalPresentationStyle = .fullScreen
       scanController.delegate = self
-      scanController.dismissDelegate = self
       
     case SegueIdentifiers.showSettingsController:
       guard let navController = segue.destination as? UINavigationController,
-        let serviceController = navController.viewControllers.first as? SettingsTableController else { return }
-      serviceController.dismissDelegate = self
+            let _ = navController.viewControllers.first as? SettingsTableController else { return }
 
     case SegueIdentifiers.showServicesList:
       guard let serviceController = segue.destination as? ServerListController else { return }
       guard let listOfServices = sender as? ServerListResponse else { return }
       serviceController.serverListInfo = listOfServices
-      serviceController.dismissDelegate = self
+
       
     case SegueIdentifiers.showPDFViewer:
       guard let serviceController = segue.destination as? PDFViewerController else { return }
       guard let pdf = sender as? SavedPDF else { return }
       serviceController.setPDF(pdf: pdf)
-      serviceController.dismissDelegate = self
       
     case SegueIdentifiers.showImageViewer:
       guard let serviceController = segue.destination as? ImageViewerController else { return }
       guard let savedImage = sender as? SavedImage else { return }
       serviceController.setImage(image: savedImage)
-      serviceController.dismissDelegate = self
+
       
     case SegueIdentifiers.showCertificateViewer:
       guard let serviceController = segue.destination as? CertificateViewerController else { return }
@@ -251,7 +280,7 @@ class MainListController: UIViewController {
         serviceController.hCert = certificate
         serviceController.isSaved = false
       }
-      serviceController.dismissDelegate = self
+
       serviceController.delegate = self
       
     default:
@@ -640,10 +669,12 @@ extension MainListController: UIDocumentPickerDelegate {
            if rowsCount > 0 {
             let scrollToNum = rowsCount-1
             let path = IndexPath(row: scrollToNum, section: TableSection.pdfs.rawValue)
+               
              DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(150)) {
                self?.table.scrollToRow(at: path, at: .bottom, animated: true)
                self?.table.selectRow(at: path, animated: true, scrollPosition: .bottom)
                // let's add time for app to scroll down (0.35 sec)
+                 
                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(350)) {
                  self?.table.deselectRow(at: path, animated: true)
                }
@@ -665,16 +696,6 @@ extension MainListController: UIDocumentPickerDelegate {
   private func documentPicker(controller: UIDocumentPickerViewController, didPickDocumentAtURL url: NSURL) {
     if controller.documentPickerMode == .import {
       checkQRCodesInPDFFile(url: url)
-    }
-  }
-}
-
-
-// MARK: DismissController Delegate
-extension MainListController: DismissControllerDelegate {
-  func userDidDissmiss(_ controller: UIViewController) {
-    if downloadedDataHasExpired {
-      self.navigationController?.popViewController(animated: false)
     }
   }
 }

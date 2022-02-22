@@ -28,51 +28,45 @@
 
 import Foundation
 import SwiftDGC
-import SwiftyJSON
 import CertLogic
 
 class DatedCertString: Codable {
-  var isSelected: Bool = false
-  let date: Date
-  let certString: String
-  let storedTAN: String?
-  var cert: HCert? {
-    return try? HCert(from: certString)
-  }
+    var isSelected: Bool = false
+    let date: Date
+    let certString: String
+    let storedTAN: String?
+    var cert: HCert? {
+      return try? HCert(from: certString)
+    }
 
 
-  init(date: Date, certString: String, storedTAN: String?) {
-    self.date = date
-    self.certString = certString
-    self.storedTAN = storedTAN
-  }
+    init(date: Date, certString: String, storedTAN: String?) {
+      self.date = date
+      self.certString = certString
+      self.storedTAN = storedTAN
+    }
 }
 
 class LocalData: Codable {
-  var certStrings = [DatedCertString]()
-  var lastFetchRaw: Date?
-  var lastFetch: Date {
-    get {
-      lastFetchRaw ?? Date.distantPast
+    var encodedPublicKeys = [String: [String]]()
+    var certStrings = [DatedCertString]()
+
+    var countryCodes = [CountryModel]()
+    var valueSets = [ValueSet]()
+    var rules = [Rule]()
+    
+    var resumeToken: String?
+    var lastFetchRaw: Date?
+    var lastFetch: Date {
+      get {
+        lastFetchRaw ?? Date.distantPast
+      }
+      set {
+        lastFetchRaw = newValue
+      }
     }
-    set {
-      lastFetchRaw = newValue
-    }
-  }
-  var config = Config.load()
-  var lastLaunchedAppVersion = "0.0"
-}
-
-class CountryDataStorage: Codable {
-  var countryCodes = [CountryModel]()
-}
-
-class RulesDataStorage: Codable {
-  var rules = [CertLogic.Rule]()
-}
-
-class ValueSetsDataStorage: Codable {
-  var valueSets = [CertLogic.ValueSet]()
+    var config = Config.load()
+    var lastLaunchedAppVersion = "0.0"
 }
 
 class ImageDataStorage: Codable {

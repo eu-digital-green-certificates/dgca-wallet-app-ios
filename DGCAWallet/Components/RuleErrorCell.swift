@@ -61,7 +61,7 @@ class RuleErrorCell: UITableViewCell {
     ruleValueLabel.text = infoItem.header
     currentValueLabel.text = infoItem.content
     switch infoItem.ruleValidationResult {
-    case .error:
+    case .failed:
       failedLabel.textColor = .walletRed
         failedLabel.text = "Failed".localized
     case .passed:
@@ -74,7 +74,7 @@ class RuleErrorCell: UITableViewCell {
 
     if let countryName = infoItem.countryName {
       switch infoItem.ruleValidationResult {
-      case .error:
+      case .failed:
           resultValueLabel.text = String(format: "Failed for %@ (see settings)".localized, countryName)
       case .passed:
           resultValueLabel.text = String(format: "Passed for %@ (see settings)".localized, countryName)
@@ -83,7 +83,7 @@ class RuleErrorCell: UITableViewCell {
       }
     } else {
       switch infoItem.ruleValidationResult {
-      case .error:
+      case .failed:
           resultValueLabel.text = "Failed".localized
       case .passed:
           resultValueLabel.text = "Passed".localized

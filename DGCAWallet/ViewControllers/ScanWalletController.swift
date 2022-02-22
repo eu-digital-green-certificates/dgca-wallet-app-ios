@@ -22,7 +22,6 @@ class ScanWalletController: UIViewController {
 
   private var captureSession: AVCaptureSession?
   weak var delegate: ScanWalletDelegate?
-  weak var dismissDelegate: DismissControllerDelegate?
 
   lazy var detectBarcodeRequest = VNDetectBarcodesRequest { request, error in
     guard error == nil else {
@@ -80,7 +79,6 @@ class ScanWalletController: UIViewController {
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
-    dismissDelegate?.userDidDissmiss(self)
     captureSession?.stopRunning()
   }
   

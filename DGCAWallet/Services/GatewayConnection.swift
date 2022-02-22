@@ -145,20 +145,19 @@ extension GatewayConnection {
   }
     
   static func loadCountryList(completion: @escaping CountriesCompletion) {
-    getListOfCountry { list, error in
-      guard error == nil else {
-        completion(nil, GatewayError.connection(error: error!))
-        return
+      getListOfCountry { list, error in
+          guard error == nil else {
+            completion(nil, GatewayError.connection(error: error!))
+            return
+          }
+          guard let countryCodeList = list else {
+            completion(nil, GatewayError.local(description: "No sign"))
+            return
+          }
+          DataCenter.addCountries(countryCodeList)
+          let countryCodes = DataCenter.countryCodes.sorted(by: { $0.name < $1.name })
+          completion(countryCodes, nil)
       }
-      guard let countryList = list else {
-        completion(nil, GatewayError.local(description: "No sign"))
-        return
-      }
-      DataCenter.addCountries(countryList) { result in
-        let countryCodes = DataCenter.countryCodes.sorted(by: { $0.name < $1.name })
-        completion(countryCodes, nil)
-      }
-    }
   }
     
   // Rules
@@ -181,7 +180,7 @@ extension GatewayConnection {
       let group = DispatchGroup()
       ruleHashes.forEach { ruleHash in
         group.enter()
-        if !DataCenter.rulesDataManager.isRuleExistWithHash(hash: ruleHash.hash) {
+        if !DataCenter.localDataManager.isRuleExistWithHash(hash: ruleHash.hash) {
           getRules(ruleHash: ruleHash) { rule, error in
             guard error == nil else {
               completion(nil, GatewayError.connection(error: error!))
@@ -239,13 +238,8 @@ extension GatewayConnection {
         completion(nil, GatewayError.parsingError)
         return
       }
-      DataCenter.addRules(rules, completion: { result in
-//        guard case let .success(value) = result, value == true else {
-//          completion(nil, GatewayError.updatingError)
-//          return
-//        }
+        DataCenter.addRules(rules)
         completion(DataCenter.rules, nil)
-      })
     }
   }
   
@@ -268,7 +262,7 @@ extension GatewayConnection {
       let group = DispatchGroup()
       valueSetsHashes.forEach { valueSetHash in
         group.enter()
-        if !DataCenter.valueSetsDataManager.isValueSetExistWithHash(hash: valueSetHash.hash) {
+        if !DataCenter.localDataManager.isValueSetExistWithHash(hash: valueSetHash.hash) {
           loadValueSet(valueSetHash: valueSetHash) { valueSet, error in
             guard error == nil else {
               completion(nil, GatewayError.connection(error: error!))
@@ -313,20 +307,19 @@ extension GatewayConnection {
   }
   
   static func loadValueSetsFromServer(completion: @escaping ValueSetsCompletion) {
-    getListOfValueSets { list, error in
-      guard error == nil else {
-        completion(nil, GatewayError.connection(error: error!))
-        return
-      }
-      guard let valueSetsList = list else {
-        completion(nil, GatewayError.connection(error: error!))
-        return
-      }
+      getListOfValueSets { list, error in
+          guard error == nil else {
+            completion(nil, GatewayError.connection(error: error!))
+            return
+          }
+          guard let valueSetsList = list else {
+            completion(nil, GatewayError.connection(error: error!))
+            return
+          }
 
-      DataCenter.addValueSets(valueSetsList, completion: { result in
-        completion(DataCenter.valueSets, nil)
-      })
-    }
+          DataCenter.addValueSets(valueSetsList)
+          completion(DataCenter.valueSets, nil)
+      }
   }
   
   static func loadAccessToken(_ url : URL, servicePath : String, publicKey: String, completion: @escaping TicketingCompletion) {

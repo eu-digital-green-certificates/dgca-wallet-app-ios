@@ -55,11 +55,15 @@ class CertificateViewerController: UIViewController {
   var tan: String?
   
   weak var delegate: CertificateManaging?
-  weak var dismissDelegate: DismissControllerDelegate?
 
   public var isSaved = true
   private var isEditMode = false
   
+  deinit {
+      let center = NotificationCenter.default
+      center.removeObserver(self)
+  }
+
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     setupInterface()
@@ -67,7 +71,6 @@ class CertificateViewerController: UIViewController {
 
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
-    dismissDelegate?.userDidDissmiss(self)
     Brightness.reset()
   }
   

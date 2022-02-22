@@ -82,6 +82,11 @@ class RuleValidationResultVC: UIViewController {
       resultLabel.text = "Certificate has limitation".localized
       resultDescriptionLabel.text = "Your certificate is valid but has the following restrictions:".localized
         resultIcon.image = UIImage(named: "icon_large_warning")
+    case .revocated:
+      resultLabel.text = "Certificate was revoked".localized
+      resultDescriptionLabel.text = "Your certificate did not allows you to enter the chosen country".localized
+        resultIcon.image = UIImage(named: "icon_large_warning")
+
     }
     resultIcon.isHidden = false
     tableView.isHidden = false
@@ -127,7 +132,7 @@ extension RuleValidationResultVC {
       
     let certType = getCertificationType(type: hCert.certificateType)
     if let countryCode = hCert.ruleCountryCode {
-      let valueSets = DataCenter.valueSetsDataManager.getValueSetsForExternalParameters()
+      let valueSets = DataCenter.localDataManager.getValueSetsForExternalParameters()
       let filterParameter = FilterParameter(validationClock: self.selectedDate,
         countryCode: countryCode,
         certificationType: certType)
@@ -149,7 +154,7 @@ extension RuleValidationResultVC {
             case .fail:
               items.append(InfoSection(header: "Certificate logic engine error".localized, content: error.localizedDescription,
                 countryName: hCert.ruleCountryCode,
-                ruleValidationResult: SwiftDGC.RuleValidationResult.error))
+                ruleValidationResult: SwiftDGC.RuleValidationResult.failed))
             case .open:
               items.append(InfoSection(header: "Certificate logic engine error".localized, content: error.localizedDescription,
                 countryName: hCert.ruleCountryCode,
@@ -180,17 +185,17 @@ extension RuleValidationResultVC {
               items.append(InfoSection(header: errorString,
                 content: detailsError,
                 countryName: hCert.ruleCountryCode,
-                ruleValidationResult: SwiftDGC.RuleValidationResult.error))
+                ruleValidationResult: RuleValidationResult.failed))
             case .open:
               items.append(InfoSection(header: errorString,
                 content: detailsError,
                 countryName: hCert.ruleCountryCode,
-                ruleValidationResult: SwiftDGC.RuleValidationResult.open))
+                ruleValidationResult: RuleValidationResult.open))
             case .passed:
               items.append(InfoSection(header: errorString,
                 content: detailsError,
                 countryName: hCert.ruleCountryCode,
-                ruleValidationResult: SwiftDGC.RuleValidationResult.passed))
+                ruleValidationResult: RuleValidationResult.passed))
             }
           }
         }

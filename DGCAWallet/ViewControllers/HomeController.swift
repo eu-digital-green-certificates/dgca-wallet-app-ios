@@ -29,80 +29,41 @@ import UIKit
 import SwiftDGC
 
 class HomeController: UIViewController {
-  let showMainList = "showMainList"
-  
+  private enum Constants {
+    static let scannerSegueID = "showMainList"
+  }
+
   @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
   @IBOutlet fileprivate weak var appNameLabel: UILabel!
+  @IBOutlet fileprivate weak var messageLabel: UILabel!
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+      return .lightContent
+    }
 
-  override var preferredStatusBarStyle: UIStatusBarStyle {
-    return .lightContent
-  }
-
-  var downloadedDataHasExpired: Bool {
-    return DataCenter.lastFetch.timeIntervalSinceNow < -SharedConstants.expiredDataInterval
-  }
-  
-  var appWasRunWithOlderVersion: Bool {
-    return DataCenter.lastLaunchedAppVersion != DataCenter.appVersion
-  }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    CoreManager.shared.config = HCertConfig(prefetchAllCodes: true, checkSignatures: false, debugPrintJsonErrors: true)
-    appNameLabel.text = "Wallet App".localized
-  }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    
-    DataCenter.initializeLocalData {[unowned self] result in
-      DispatchQueue.main.async {
-        self.downloadedDataHasExpired || self.appWasRunWithOlderVersion ? self.reloadStorageData() : self.initializeAllStorageData()
-      }
-    }
-  }
-  
-  func initializeAllStorageData() {
-    self.activityIndicator.startAnimating()
-    
-    DataCenter.initializeAllStorageData { [unowned self] rezult in
-      DispatchQueue.main.async {
-        self.activityIndicator.stopAnimating()
-        self.loadComplete()
-      }
-    }
-  }
-  
-  func reloadStorageData() {
-    self.activityIndicator.startAnimating()
-    DataCenter.reloadStorageData { [unowned self] rezult in
-      DispatchQueue.main.async {
-        self.activityIndicator.stopAnimating()
-        self.loadComplete()
-      }
-    }
-  }
-  
-  private func loadComplete() {
-    let renderer = UIGraphicsImageRenderer(size: self.view.bounds.size)
-    
-    SecureBackground.image = renderer.image { rendererContext in
-      self.view.layer.render(in: rendererContext.cgContext)
-    }
-    
-    if DataCenter.localDataManager.versionedConfig["outdated"].bool == true {
-      showAlert(title: "Update available".localized, subtitle: "This version of the app is out of date.".localized)
-      return
-    }
-    
-    SecureBackground.checkId(from: self) { success in
-      DispatchQueue.main.async { [weak self] in
-        if success {
-          self?.performSegue(withIdentifier: self!.showMainList, sender: nil)
-        } else {
-          self?.loadComplete()
+    override func viewDidLoad() {
+      super.viewDidLoad()
+      CoreManager.shared.config = HCertConfig(prefetchAllCodes: true, checkSignatures: false, debugPrintJsonErrors: true)
+      appNameLabel.text = "Wallet App".localized
+        self.activityIndicator.startAnimating()
+        messageLabel.text = "Loading data".localized
+        DataCenter.initializeAllStorageData {[unowned self] result in
+            DispatchQueue.main.async {
+              self.activityIndicator.stopAnimating()
+              self.loadComplete()
+            }
         }
-      }
     }
-  }
+
+    private func loadComplete() {
+        let renderer = UIGraphicsImageRenderer(size: self.view.bounds.size)
+        SecureBackground.image = renderer.image { rendererContext in
+          self.view.layer.render(in: rendererContext.cgContext)
+        }
+        if DataCenter.localDataManager.versionedConfig["outdated"].bool == true {
+          showAlert(title: "Update Available".localized, subtitle: "This version of the app is out of date.".localized)
+        } else {
+          performSegue(withIdentifier: Constants.scannerSegueID, sender: nil)
+        }
+    }
 }

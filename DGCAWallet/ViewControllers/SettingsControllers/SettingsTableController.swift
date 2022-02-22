@@ -37,7 +37,11 @@ class SettingsTableController: UITableViewController {
   @IBOutlet fileprivate weak var privacyInfoLabel: UILabel!
   @IBOutlet fileprivate weak var licensesLabel: UILabel!
 
-  weak var dismissDelegate: DismissControllerDelegate?
+
+  deinit {
+      let center = NotificationCenter.default
+      center.removeObserver(self)
+  }
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -48,13 +52,6 @@ class SettingsTableController: UITableViewController {
     self.title = "Settings".localized
   }
   
-  override func viewDidDisappear(_ animated: Bool) {
-    super.viewDidDisappear(animated)
-    if (isBeingDismissed || isMovingFromParent) {
-      dismissDelegate?.userDidDissmiss(self)
-    }
-  }
-
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     switch indexPath.section {
     case 0:
@@ -98,12 +95,10 @@ class SettingsTableController: UITableViewController {
   func reloadAllData() {
     activityIndicator.startAnimating()
     DataCenter.reloadStorageData { result in
-//      guard case let .success(value) = result, value == true else {  return  }
       DispatchQueue.main.async { [weak self] in
         self?.activityIndicator.stopAnimating()
         self?.tableView.reloadData()
       }
-
     }
   }
 

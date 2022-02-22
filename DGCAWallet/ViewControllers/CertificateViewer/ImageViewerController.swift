@@ -37,7 +37,6 @@ class ImageViewerController: UIViewController {
   @IBOutlet fileprivate weak var scrollView: UIScrollView!
   
   var savedImage: SavedImage?
-  weak var dismissDelegate: DismissControllerDelegate?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -45,11 +44,6 @@ class ImageViewerController: UIViewController {
     shareButton.setTitle("Share".localized, for: .normal)
     self.title = "PDF files".localized
     setupView()
-  }
-
-  override func viewDidDisappear(_ animated: Bool) {
-    super.viewDidDisappear(animated)
-    dismissDelegate?.userDidDissmiss(self)
   }
 
   func setImage(image: SavedImage? = nil) {
