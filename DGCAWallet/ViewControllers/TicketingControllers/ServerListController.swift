@@ -35,9 +35,7 @@ class ServerListController: UIViewController {
 
   @IBOutlet fileprivate weak var tableView: UITableView!
   @IBOutlet fileprivate weak var nextButton: UIButton!
-  
-  weak var dismissDelegate: DismissControllerDelegate?
-  
+    
   var serverListInfo: ServerListResponse? {
     didSet {
       listOfServices = serverListInfo?.service?.filter{ $0.type == "ValidationService" } ?? []
@@ -61,12 +59,7 @@ class ServerListController: UIViewController {
     super.viewWillAppear(animated)
     tableView.reloadData()
   }
-    
-  override func viewDidDisappear(_ animated: Bool) {
-    super.viewDidDisappear(animated)
-    dismissDelegate?.userDidDissmiss(self)
-  }
-
+  
   override func willMove(toParent parent: UIViewController?) {
     super.willMove(toParent: parent)
     self.navigationController?.isNavigationBarHidden = (parent == nil)

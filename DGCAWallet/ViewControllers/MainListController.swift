@@ -32,9 +32,6 @@ import SwiftDGC
 import UniformTypeIdentifiers
 import MobileCoreServices
 
-protocol DismissControllerDelegate: AnyObject {
-  func userDidDissmiss(_ controller: UIViewController)
-}
 
 class MainListController: UIViewController {
   fileprivate enum SegueIdentifiers {
@@ -250,30 +247,27 @@ class MainListController: UIViewController {
       guard let scanController = segue.destination as? ScanWalletController else { return }
       scanController.modalPresentationStyle = .fullScreen
       scanController.delegate = self
-      scanController.dismissDelegate = self
       
     case SegueIdentifiers.showSettingsController:
       guard let navController = segue.destination as? UINavigationController,
-        let serviceController = navController.viewControllers.first as? SettingsTableController else { return }
-      serviceController.dismissDelegate = self
+            let _ = navController.viewControllers.first as? SettingsTableController else { return }
 
     case SegueIdentifiers.showServicesList:
       guard let serviceController = segue.destination as? ServerListController else { return }
       guard let listOfServices = sender as? ServerListResponse else { return }
       serviceController.serverListInfo = listOfServices
-      serviceController.dismissDelegate = self
+
       
     case SegueIdentifiers.showPDFViewer:
       guard let serviceController = segue.destination as? PDFViewerController else { return }
       guard let pdf = sender as? SavedPDF else { return }
       serviceController.setPDF(pdf: pdf)
-      serviceController.dismissDelegate = self
       
     case SegueIdentifiers.showImageViewer:
       guard let serviceController = segue.destination as? ImageViewerController else { return }
       guard let savedImage = sender as? SavedImage else { return }
       serviceController.setImage(image: savedImage)
-      serviceController.dismissDelegate = self
+
       
     case SegueIdentifiers.showCertificateViewer:
       guard let serviceController = segue.destination as? CertificateViewerController else { return }
@@ -286,7 +280,7 @@ class MainListController: UIViewController {
         serviceController.hCert = certificate
         serviceController.isSaved = false
       }
-      serviceController.dismissDelegate = self
+
       serviceController.delegate = self
       
     default:
@@ -675,10 +669,12 @@ extension MainListController: UIDocumentPickerDelegate {
            if rowsCount > 0 {
             let scrollToNum = rowsCount-1
             let path = IndexPath(row: scrollToNum, section: TableSection.pdfs.rawValue)
+               
              DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(150)) {
                self?.table.scrollToRow(at: path, at: .bottom, animated: true)
                self?.table.selectRow(at: path, animated: true, scrollPosition: .bottom)
                // let's add time for app to scroll down (0.35 sec)
+                 
                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(350)) {
                  self?.table.deselectRow(at: path, animated: true)
                }
@@ -701,13 +697,5 @@ extension MainListController: UIDocumentPickerDelegate {
     if controller.documentPickerMode == .import {
       checkQRCodesInPDFFile(url: url)
     }
-  }
-}
-
-
-// MARK: DismissController Delegate
-extension MainListController: DismissControllerDelegate {
-  func userDidDissmiss(_ controller: UIViewController) {
-    ()
   }
 }

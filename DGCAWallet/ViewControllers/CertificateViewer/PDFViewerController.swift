@@ -37,7 +37,6 @@ class PDFViewerController: UIViewController {
   @IBOutlet fileprivate weak var pdfView: UIView!
   
   var pdfViewer: PDFView?
-  weak var dismissDelegate: DismissControllerDelegate?
 
   var savedPDF: SavedPDF? {
     didSet {
@@ -45,11 +44,6 @@ class PDFViewerController: UIViewController {
     }
   }
   
-  override func viewDidDisappear(_ animated: Bool) {
-    super.viewDidDisappear(animated)
-    dismissDelegate?.userDidDissmiss(self)
-  }
-
   override func viewDidLoad() {
     super.viewDidLoad()
     setupView()

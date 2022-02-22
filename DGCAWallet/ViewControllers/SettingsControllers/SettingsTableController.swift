@@ -37,7 +37,6 @@ class SettingsTableController: UITableViewController {
   @IBOutlet fileprivate weak var privacyInfoLabel: UILabel!
   @IBOutlet fileprivate weak var licensesLabel: UILabel!
 
-  weak var dismissDelegate: DismissControllerDelegate?
 
   deinit {
       let center = NotificationCenter.default
@@ -53,13 +52,6 @@ class SettingsTableController: UITableViewController {
     self.title = "Settings".localized
   }
   
-  override func viewDidDisappear(_ animated: Bool) {
-    super.viewDidDisappear(animated)
-    if (isBeingDismissed || isMovingFromParent) {
-      dismissDelegate?.userDidDissmiss(self)
-    }
-  }
-
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     switch indexPath.section {
     case 0:

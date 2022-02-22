@@ -55,7 +55,6 @@ class CertificateViewerController: UIViewController {
   var tan: String?
   
   weak var delegate: CertificateManaging?
-  weak var dismissDelegate: DismissControllerDelegate?
 
   public var isSaved = true
   private var isEditMode = false
@@ -72,7 +71,6 @@ class CertificateViewerController: UIViewController {
 
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)
-    dismissDelegate?.userDidDissmiss(self)
     Brightness.reset()
   }
   
