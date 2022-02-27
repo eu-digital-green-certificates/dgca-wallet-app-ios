@@ -28,15 +28,19 @@ import UIKit
 import SwiftDGC
 
 class WalletCell: UITableViewCell {
-  @IBOutlet fileprivate weak var typeLabel: UILabel!
-  @IBOutlet fileprivate weak var nameLabel: UILabel!
-  @IBOutlet fileprivate weak var dateLabel: UILabel!
-
-  func setupCell(_ dated: DatedCertString) {
-    guard let cert = dated.cert else { return }
-
-    typeLabel.text = cert.certTypeString
-    nameLabel.text = cert.fullName
-      dateLabel.text = String(format: "Scanned %@".localized, dated.date.localDateString)
-  }
+	@IBOutlet fileprivate weak var typeLabel: UILabel!
+	@IBOutlet fileprivate weak var nameLabel: UILabel!
+	@IBOutlet fileprivate weak var dateLabel: UILabel!
+	@IBOutlet fileprivate weak var revocationLabel: UILabel!
+	
+	func setupCell(_ dated: DatedCertString) {
+		guard let cert = dated.cert else { return }
+		
+		typeLabel.text = cert.certTypeString
+		nameLabel.text = cert.fullName
+		dateLabel.text = String(format: "Scanned %@".localized, dated.date.localDateString)
+		guard let cert = dated.cert else { return }
+		revocationLabel.isHidden = cert.isRevoked ?? true
+		revocationLabel.text = cert.isRevoked == true ? "Certificate revoked" : ""
+	}
 }
