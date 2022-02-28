@@ -25,7 +25,6 @@
 //  Created by Yannick Spreen on 4/27/21.
 //  
 
-import Foundation
 import UIKit
 import LocalAuthentication
 import SwiftDGC
@@ -35,15 +34,12 @@ struct SecureBackground {
   public static var image: UIImage?
 
   public static func enable() {
-    guard !paused else {
-      return
-    }
+    guard !paused else { return }
+      
     disable()
-    guard let image = image else {
-      return
-    }
+    guard let image = image else { return }
     let imageView = UIImageView(image: image)
-    UIApplication.shared.windows[0].addSubview(imageView)
+      UIApplication.shared.windows.first?.addSubview(imageView)
     Self.imageView = imageView
     Self.activation = Date()
   }
@@ -51,9 +47,7 @@ struct SecureBackground {
   public static func disable() {
     if imageView != nil {
       if activation.timeIntervalSinceNow < -1 {
-        (
-          UIApplication.shared.windows[0].rootViewController as? UINavigationController
-        )?.popToRootViewController(animated: false)
+          (UIApplication.shared.windows.first?.rootViewController as? UINavigationController)?.popToRootViewController(animated: false)
       }
       imageView?.removeFromSuperview()
       imageView = nil
@@ -62,14 +56,14 @@ struct SecureBackground {
 
   static var paused = false
   static var activation = Date()
+    
   public static func checkId(from controller: UIViewController? = nil, completion: ((Bool) -> Void)?) {
-    guard !paused else {
-      return
-    }
+    guard !paused else { return }
+      
     paused = true
     let context = LAContext()
-    context.localizedCancelTitle = l10n("auth.later")
-    let reason = l10n("auth.confirm")
+      context.localizedCancelTitle = "Try Later".localized
+      let reason = "Could not verify device ownership".localized
     context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason ) { success, err in
       if success {
         paused = false
@@ -80,9 +74,11 @@ struct SecureBackground {
           completion?(false)
           return
         }
+          
         DispatchQueue.main.async {
-          controller?.showAlert(title: l10n("auth.confirm"), subtitle: l10n("auth.error")) { _ in
-            completion?(false)
+            controller?.showAlert(title: "Could not verify device ownership".localized,
+                subtitle: "Please try setting a passcode for this device before opening the app.".localized) { _ in
+              completion?(false)
           }
         }
       }

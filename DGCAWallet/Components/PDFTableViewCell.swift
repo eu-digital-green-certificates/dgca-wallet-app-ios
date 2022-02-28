@@ -30,25 +30,18 @@ import UIKit
 import PDFKit
 
 class PDFTableViewCell: UITableViewCell {
-
-  @IBOutlet weak var pdfView: UIView!
-  @IBOutlet weak var nameLabel: UILabel!
-  @IBOutlet weak var timeLabel: UILabel!
+  @IBOutlet fileprivate weak var pdfView: UIView!
+  @IBOutlet fileprivate weak var nameLabel: UILabel!
+  @IBOutlet fileprivate weak var timeLabel: UILabel!
   
   private var savedPDF: SavedPDF? {
     didSet {
       setupView()
     }
   }
+  
   private var pdfViewer: PDFView?
-  
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    // Initialization code
-    setupView()
-  }
-  
-  public func setPDF(pdf: SavedPDF) {
+  func setPDF(pdf: SavedPDF) {
     savedPDF = pdf
   }
   
@@ -71,5 +64,9 @@ class PDFTableViewCell: UITableViewCell {
     }
     nameLabel.text = savedPDF.fileName
     timeLabel.text = savedPDF.dateString
+  }
+    
+  override func prepareForReuse() {
+    savedPDF = nil
   }
 }
