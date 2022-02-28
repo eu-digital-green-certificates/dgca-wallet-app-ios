@@ -992,12 +992,23 @@
                                                     <color key="textColor" name="walletBlue"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iTJ-x3-Wam">
+                                                    <rect key="frame" x="309.33333333333331" y="16" width="42" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="iTJ-x3-Wam" secondAttribute="height" multiplier="2:1" id="Qdm-BC-429"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.85490196080000003" green="0.12941176469999999" blue="0.19215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="6NN-i3-YUv" firstAttribute="top" secondItem="Md0-O5-XZH" secondAttribute="bottom" constant="8" id="G7X-Kg-G9n"/>
+                                                <constraint firstAttribute="trailing" secondItem="iTJ-x3-Wam" secondAttribute="trailing" constant="10" id="KC0-RF-Wi9"/>
                                                 <constraint firstItem="Md0-O5-XZH" firstAttribute="leading" secondItem="m3f-OR-BSb" secondAttribute="leadingMargin" id="RIv-q4-GJN"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Md0-O5-XZH" secondAttribute="trailing" id="UC5-Se-Y5x"/>
                                                 <constraint firstItem="Md0-O5-XZH" firstAttribute="top" secondItem="m3f-OR-BSb" secondAttribute="topMargin" id="c5q-qS-b9t"/>
+                                                <constraint firstItem="iTJ-x3-Wam" firstAttribute="top" secondItem="m3f-OR-BSb" secondAttribute="top" constant="16" id="fW7-VG-vCl"/>
                                                 <constraint firstItem="APa-yy-a1r" firstAttribute="leading" secondItem="m3f-OR-BSb" secondAttribute="leadingMargin" id="g7l-40-0Jk"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="APa-yy-a1r" secondAttribute="trailing" constant="16" id="gtM-xa-4f4"/>
                                                 <constraint firstItem="6NN-i3-YUv" firstAttribute="leading" secondItem="m3f-OR-BSb" secondAttribute="leadingMargin" id="sBt-6B-WYJ"/>
@@ -1009,6 +1020,7 @@
                                         <connections>
                                             <outlet property="dateLabel" destination="APa-yy-a1r" id="hq8-y8-eho"/>
                                             <outlet property="nameLabel" destination="6NN-i3-YUv" id="IDI-aQ-bij"/>
+                                            <outlet property="revocationLabel" destination="iTJ-x3-Wam" id="0mp-O1-5MK"/>
                                             <outlet property="selectedBackgroundView" destination="kLh-5C-6Nc" id="F77-C5-E5N"/>
                                             <outlet property="typeLabel" destination="Md0-O5-XZH" id="qRx-qH-fi6"/>
                                         </connections>
@@ -1201,13 +1213,13 @@
             <size key="intrinsicContentSize" width="88" height="39"/>
         </designable>
         <designable name="Rcx-o5-KDY">
-            <size key="intrinsicContentSize" width="47" height="39"/>
+            <size key="intrinsicContentSize" width="71" height="51"/>
         </designable>
         <designable name="WbA-kC-hOb">
-            <size key="intrinsicContentSize" width="47" height="39"/>
+            <size key="intrinsicContentSize" width="71" height="51"/>
         </designable>
         <designable name="fol-rA-9gU">
-            <size key="intrinsicContentSize" width="32" height="39"/>
+            <size key="intrinsicContentSize" width="56" height="51"/>
         </designable>
     </designables>
     <resources>
