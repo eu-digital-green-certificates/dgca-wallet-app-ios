@@ -1,0 +1,166 @@
+/*-
+ * ---license-start
+ * eu-digital-green-certificates / dgca-wallet-app-ios
+ * ---
+ * Copyright (C) 2021 T-Systems International GmbH and all other contributors
+ * ---
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * ---license-end
+
+  Localizable.strings
+  DGCAWallet
+
+  Created by Yannick Spreen on 5/6/21.
+  
+*/
+
+"Wallet App" = "Wallet-App";
+"Scanned %@" = "Gescannt %@";
+"Save" = "Speichern";
+"Done" = "Fertig";
+"Edit" = "Bearbeiten";
+"Confirm" = "Bestätigen";
+"Confirm TAN" = "TAN bestätigen";
+"Please enter the TAN that was provided together with your certificate:" = "Bitte geben Sie die TAN ein, die Sie zusammen mit Ihrem Zertifikat erhalten haben:";
+
+"Certificate saved successfully" = "Zertifikat erfolgreich gespeichert";
+"Now it is available in the wallet" = "Jetzt in der App verfügbar";
+"Cannot save the Certificate" = "Zertifikat konnte nicht gespeichert werden";
+"TAN: %@" = "TAN: %@";
+"Could not verify device ownership" = "Eigentümerschaft des Geräts konnte nicht verifiziert werden.";
+"Try Later" = "Versuchen Sie es später.";
+"Please try setting a passcode for this device before opening the app." = "Bitte versuchen Sie, einen Passcode für dieses Gerät festzulegen, bevor Sie die App öffnen.";
+"Delete Certificate" = "Zertifikat löschen";
+"cert.delete.body" = "Sind Sie sicher, dass Sie dieses Zertifikat löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.";
+"tap to reveal" = "Zum Anzeigen tippen";
+
+"Check Validity" = "Gültigkeit prüfen";
+"I Agree, check validity" = "Ich stimme zu, Gültigkeit prüfen";
+"Failed for %@ (see settings)" = "Fehler bei %@ (siehe Einstellungen)";
+"Passed for %@ (see settings)" = "Genehmigt für %@ (siehe Einstellungen)";
+"Open for %@ (see settings)" = "Offen für %@ (siehe Einstellungen)";
+
+"Failed" = "Fehlgeschlagen";
+"Passed" = "Genehmigt";
+"Open" = "Offen";
+"Rule" = "Regel";
+"Current" = "Aktuell";
+"Result" = "Ergebnis";
+
+"disclaimer_text" = "Diese Prüfung gibt Aufschluss über die Reiseberechtigung auf der Grundlage Ihrer Bescheinigung. Einschränkungen der Freizügigkeit als Reaktion auf die Coronavirus-Pandemie können sich ändern und basieren möglicherweise auf zusätzlichen Informationen, die in diesem Antrag nicht verfügbar sind. Weitere Informationen finden Sie in den betreffenden nationalen Quellen und auf der Website von Re-open EU: https://reopen.europa.eu/. Ihre Daten werden lokal auf diesem Gerät verarbeitet.";
+
+"Disclaimer" = "Haftungsausschluss";
+"Your destination country" = "Ihr Zielland";
+"Check the date" = "Überprüfen Sie das Datum";
+"Valid certificate" = "Gültiges Zertifikat";
+"Your certificate is valid and confirms..." = "Ihr Zertifikat ist gültig und entspricht den bereitgestellten Länderregeln. Möglicherweise gelten zusätzliche Zulassungsbedingungen, die Sie auf der Website von Re-open EU nachlesen können: https://reopen.europa.eu/";
+
+"Invalid certificate" = "Ungültiges Zertifikat";
+"Your certificate did not allows you to enter the chosen country" = "Ihr Zertifikat erlaubt Ihnen nicht die Einreise in das gewählte Land.";
+"Certificate has limitation" = "Das Zertifikat hat Einschränkungen.";
+"Your certificate is valid but has the following restrictions:" = "Ihr Zertifikat ist gültig, unterliegt jedoch den folgenden Einschränkungen:";
+"Validating certificate with country rules" = "Zertifikat mit Länderregeln validieren";
+
+"This check gives an indication on eligibility..." = "Diese Prüfung gibt einen Hinweis auf die Reiseberechtigung anhand Ihres Zertifikates. Einschränkungen der Reisefreiheit in Bezug auf die Coronavirus-Pandemie können sich ändern und basieren möglicherweise auf zusätzlichen Informationen, die in dieser Prüfung nicht verfügbar sind.";
+"Issuer Country" = "Ausstellerland";
+"Type of Test" = "Art des Tests";
+"Name" = "Name";
+"Save image" = "Bild speichern";
+"Please enter the image name" = "Bitte geben Sie den Namen ein";
+"filename" = "Dateiname";
+
+"Save PDF file" = "PDF-Datei speichern";
+"Please enter the pdf file name" = "Bitte geben Sie den Namen der pdf-Datei ein";
+"Share QR Code?" = "QR-Code teilen?";
+"Do you want to share DCC certificate via image or PDF file?" = "Möchten Sie das DCC-Zertifikat als Bild- oder PDF-Datei teilen?";
+"Export as Image" = "Als Bild exportieren";
+"Export as PDF" = "PDF Export";
+"Cancel" = "Abbrechen";
+"Add new?" = "Neu hinzufügen?";
+"Scan certificate" = "Zertifikat scannen";
+"Image import" = "Bildimport";
+"PDF Import" = "PDF-Import";
+"NFC Import" = "NFC-Import";
+"Cannot read NFC" = "NFC nicht kann nicht gelesen werden";
+"An error occurred while reading NFC" = "Beim Lesen von NFC ist ein Fehler aufgetreten";
+"Retry" = "Wiederholen";
+"OK" = "OK";
+"Images" = "Bilder";
+"PDF files" = "PDF-Dateien";
+"Get Image from" = "Bild laden von";
+"Next" = "Weiter";
+
+"Camera" = "Kamera";
+"Gallery" = "Galerie";
+"Cannot scan" = "Scannen nicht möglich.";
+"You don't have a camera." = "Sie haben keine Kamera.";
+"Services" = "Dienstleistungen";
+"Certificates" = "Zertifikate";
+"Please select the required service" = "Bitte wählen Sie den gewünschten Service aus";
+"Each service is located on a separate server and is designed for specific activities." = "Jeder Dienst befindet sich auf einem separaten Server und ist für bestimmte Aktivitäten konzipiert.";
+
+"Please select a certificate" = "Bitte wählen Sie ein Zertifikat aus";
+"Here are all the appropriate certificates." = "Hier sind alle passenden Zertifikate.";
+
+"Close" = "Schließen";
+"Last Updated: %@" = "Letzte Aktualisierung: %@";
+"Consent" = "Zustimmen";
+"Do you agree to share the %@ certificate with %@?" = "Sind Sie damit einverstanden, das %@-Zertifikat mit %@ zu teilen?";
+
+"Your certificate is not valid. Please refer to the Re-open EU website:" = "Ihre Bescheinigung ist nicht gültig. Bitte besuchen Sie die Re-open EU Website: https://reopen.europa.eu/";
+
+"Unable to verify certificate" = "Das Zertifikat kann nicht validiert werden.";
+"Make sure you select the desired service..." = "Vergewissern Sie sich, dass Sie den gewünschten Dienst ausgewählt haben und versuchen Sie es erneut. Wenn das Problem erneut auftritt, besuchen Sie bitte die Re-open EU Website.";
+
+"Validation error" = "Validierungsfehler";
+"Please refer to the Re-open EU website." = "Bitte besuchen Sie die Re-open EU Website.";
+
+"Failed to process ticketing request" = "Ein interner Fehler ist aufgetreten";
+"Please quit the application and restart again." = "Bitte beenden Sie die Anwendung und starten Sie sie erneut.";
+
+"The specified service cannot be used" = "Der angegebene Dienst kann nicht verwendet werden";
+"This certificate is not supported" = "Dieses Zertifikat wird nicht unterstützt";
+
+"An internet connection error has occurred" = "Ein Internetverbindungsfehler ist aufgetreten";
+"Make sure your device is connected to the internet and try again..." = "Stellen Sie sicher, dass Ihr Gerät mit dem Internet verbunden ist, und versuchen Sie es erneut. Wenn das Problem erneut auftritt, wenden Sie sich bitte an den Support.";
+
+"Possible limitation" = "Mögliche Einschränkung";
+"Country rules validation failed" = "Validierung der Länderregeln fehlgeschlagen.";
+
+"Certificate logic engine error" = "Fehler in der Zertifikatlogik-Engine";
+
+"Departure" = "Abreise";
+"Arrival" = "Ankunft";
+"Accepted certificate type" = "Akzeptierter Zertifikatstyp";
+"Category" = "Kategorie";
+"Validation Time" = "Validierungszeit";
+"Valid from" = "Gültig ab";
+"Valid to" = "Gültig bis";
+
+"Sorry! \n no rules for this country" = "Entschuldigung! \n Keine Regeln für dieses Land vorhanden.";
+"Certificate Wallet" = "Zertifikat Wallet";
+"Add New" = "Hinzufügen";
+"Share" = "Teilen";
+"Licenses" = "Lizenzen";
+"Reload" = "Neu laden";
+"Privacy Information" = "Datenschutzinformationen:";
+"Settings" = "Einstellungen";
+"Expired date: %@" = "Abgelaufenes Datum: %@";
+"Certificate type: %@" = "Art des Zertifikats: %@";
+
+"COVID-19 vaccination verification data" = "Daten zur Verifizierung der COVID-19-Impfung";
+"Ticketing information" = "Ticketing-Informationen";
+"Available Certificates" = "Verfügbare Zertifikate";
+
+"Failed to confirm ticketing request" = "Ticketanfrage konnte nicht bestätigt werden";
+"Please create new ticketing request and try again..." = "Bitte erstellen Sie eine neue Ticketanfrage und versuchen Sie es erneut. Sollte dies erneut passieren, besuchen Sie bitte die EU Website.";

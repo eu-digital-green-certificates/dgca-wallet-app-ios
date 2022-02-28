@@ -28,17 +28,15 @@ import UIKit
 import SwiftDGC
 
 class WalletCell: UITableViewCell {
-  @IBOutlet weak var typeLabel: UILabel!
-  @IBOutlet weak var nameLabel: UILabel!
-  @IBOutlet weak var dateLabel: UILabel!
+  @IBOutlet fileprivate weak var typeLabel: UILabel!
+  @IBOutlet fileprivate weak var nameLabel: UILabel!
+  @IBOutlet fileprivate weak var dateLabel: UILabel!
 
-  func draw(_ dated: DatedCertString) {
-    guard let cert = dated.cert else {
-      return
-    }
+  func setupCell(_ dated: DatedCertString) {
+    guard let cert = dated.cert else { return }
 
     typeLabel.text = cert.certTypeString
     nameLabel.text = cert.fullName
-    dateLabel.text = String(format: l10n("list.cell.scanned-at"), dated.date.localDateString)
+      dateLabel.text = String(format: "Scanned %@".localized, dated.date.localDateString)
   }
 }

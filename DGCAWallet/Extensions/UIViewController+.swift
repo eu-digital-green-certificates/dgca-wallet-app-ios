@@ -29,17 +29,10 @@
 import UIKit
 
 extension UIViewController {
-  static func loadFromNib() -> Self {
-    func instantiateFromNib<T: UIViewController>() -> T {
-      return T.init(nibName: String(describing: T.self), bundle: Bundle.init(for: Self.self))
-    }
-    return instantiateFromNib()
-  }
-
   @available(iOS 13.0, *)
   var sceneDelegate: SceneDelegate? {
     guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-          let delegate = windowScene.delegate as? SceneDelegate else { return nil }
+        let delegate = windowScene.delegate as? SceneDelegate else { return nil }
     return delegate
   }
 }
