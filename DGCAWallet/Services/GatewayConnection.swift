@@ -33,16 +33,16 @@ import CertLogic
 import JWTDecode
 
 enum GatewayError: Error {
-    case insufficientData
-    case encodingError
-    case signingError
-    case updatingError
-    case incorrectDataResponse
-    case connection(error: Error)
-    case local(description: String)
-    case parsingError
-    case privateKeyError
-    case tokenError
+  case insufficientData
+  case encodingError
+  case signingError
+  case updatingError
+  case incorrectDataResponse
+  case connection(error: Error)
+  case local(description: String)
+  case parsingError
+  case privateKeyError
+  case tokenError
 }
 
 typealias ValueSetsCompletion = ([ValueSet]?, Error?) -> Void

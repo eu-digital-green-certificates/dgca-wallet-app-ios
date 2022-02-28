@@ -1009,6 +1009,7 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="Md0-O5-XZH" secondAttribute="trailing" id="UC5-Se-Y5x"/>
                                                 <constraint firstItem="Md0-O5-XZH" firstAttribute="top" secondItem="m3f-OR-BSb" secondAttribute="topMargin" id="c5q-qS-b9t"/>
                                                 <constraint firstItem="iTJ-x3-Wam" firstAttribute="top" secondItem="m3f-OR-BSb" secondAttribute="top" constant="16" id="fW7-VG-vCl"/>
+
                                                 <constraint firstItem="APa-yy-a1r" firstAttribute="leading" secondItem="m3f-OR-BSb" secondAttribute="leadingMargin" id="g7l-40-0Jk"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="APa-yy-a1r" secondAttribute="trailing" constant="16" id="gtM-xa-4f4"/>
                                                 <constraint firstItem="6NN-i3-YUv" firstAttribute="leading" secondItem="m3f-OR-BSb" secondAttribute="leadingMargin" id="sBt-6B-WYJ"/>
@@ -1020,7 +1021,9 @@
                                         <connections>
                                             <outlet property="dateLabel" destination="APa-yy-a1r" id="hq8-y8-eho"/>
                                             <outlet property="nameLabel" destination="6NN-i3-YUv" id="IDI-aQ-bij"/>
+
                                             <outlet property="revocationLabel" destination="iTJ-x3-Wam" id="0mp-O1-5MK"/>
+
                                             <outlet property="selectedBackgroundView" destination="kLh-5C-6Nc" id="F77-C5-E5N"/>
                                             <outlet property="typeLabel" destination="Md0-O5-XZH" id="qRx-qH-fi6"/>
                                         </connections>
@@ -1213,6 +1216,7 @@
             <size key="intrinsicContentSize" width="88" height="39"/>
         </designable>
         <designable name="Rcx-o5-KDY">
+
             <size key="intrinsicContentSize" width="71" height="51"/>
         </designable>
         <designable name="WbA-kC-hOb">
@@ -1220,6 +1224,7 @@
         </designable>
         <designable name="fol-rA-9gU">
             <size key="intrinsicContentSize" width="56" height="51"/>
+
         </designable>
     </designables>
     <resources>
