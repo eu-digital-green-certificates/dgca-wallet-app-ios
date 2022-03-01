@@ -38,15 +38,15 @@ struct Header: Encodable {
 struct Payload: Encodable {
 	let sub: String
 	let payload: [String]
-	let exp: Date
+	let exp: Double
 }
 
 class DGCAJwt {
 	private static func makeJwtPayload(cert: HCert) -> Payload {
-		let payload = [cert.uvciHash![0..<(cert.uvciHash!.count/2)].toHexString(),
-					   cert.signatureHash![0..<(cert.signatureHash!.count/2)].toHexString(),
-					   cert.countryCodeUvciHash![0..<(cert.countryCodeUvciHash!.count/2)].toHexString()]
-		return Payload(sub: cert.uvciHash!.toHexString(), payload: payload, exp: cert.exp)
+		let payload: [String] = [cert.uvciHash![0..<(cert.uvciHash!.count/2)].toHexString(),
+								 cert.signatureHash![0..<(cert.signatureHash!.count/2)].toHexString(),
+								 cert.countryCodeUvciHash![0..<(cert.countryCodeUvciHash!.count/2)].toHexString()]
+		return Payload(sub: cert.uvciHash!.toHexString(), payload: payload, exp: cert.exp.timeIntervalSince1970)
 	}
 	// payload: Payload, with keyPair: SecKey
 	public static func makeJwtAndSign(fromCerts certs: [HCert], completion: @escaping (Bool, [String]?, Error?) -> Void) {
