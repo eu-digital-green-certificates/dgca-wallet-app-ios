@@ -178,6 +178,11 @@ class DataCenter {
             pdfDataManager.loadLocallyStoredData { result in
                group.leave()
             }
+			
+			group.enter()
+			GatewayConnection.lookup(certStrings: certStrings) { success, _, _ in
+				group.leave()
+			}
             group.leave()
         }
         

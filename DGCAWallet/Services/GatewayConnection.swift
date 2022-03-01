@@ -33,16 +33,16 @@ import CertLogic
 import JWTDecode
 
 enum GatewayError: Error {
-  case insufficientData
-  case encodingError
-  case signingError
-  case updatingError
-  case incorrectDataResponse
-  case connection(error: Error)
-  case local(description: String)
-  case parsingError
-  case privateKeyError
-  case tokenError
+    case insufficientData
+    case encodingError
+    case signingError
+    case updatingError
+    case incorrectDataResponse
+    case connection(error: Error)
+    case local(description: String)
+    case parsingError
+    case privateKeyError
+    case tokenError
 }
 
 typealias ValueSetsCompletion = ([ValueSet]?, Error?) -> Void
@@ -104,60 +104,78 @@ class GatewayConnection: ContextConnection {
     }
     
     static func lookup(certStrings: [DatedCertString], completion: @escaping ContextCompletion) {
+        guard certStrings.count != 0 else { completion(true, nil, nil); return; }
         // construct certs from strings
-        var certs: [Date:HCert] = [:]
+        var certs: [Date: HCert] = [:]
         for string in certStrings {
             guard let c = string.cert else { completion(false, nil, nil); return; }
+            // certs.append(c)
             certs[string.date] = c
         }
-        var certHashes: [String] = []
-        certs.forEach { _, cert in
-            certHashes.append(cert.certHash)
-        }
-        let param: [String: Any] = ["value": certHashes]
-        request(
-            [""],
-            externalLink: "https://dgca-revocation-service-eu-test.cfapps.eu10.hana.ondemand.com/revocation/lookup",
-            method: .post,
-            parameters: param,
-            encoding: JSONEncoding.default
-        ).response {
-            guard
-                case .success(_) = $0.result,
-                let status = $0.response?.statusCode,
-                let response = String(data: $0.data ?? .init(), encoding: .utf8),
-                status / 100 == 2
-            else {
-                completion(false, nil, nil)
-                return
-            }
-            if response.count == 0 { completion(true, nil, nil); return }
-            // response is list of hashes that have been revoked
-            let revokedHashes = certHashes.filter { element in
-                return !response.contains(element)
-            }
-            for revokedHash in revokedHashes {
-                certs.forEach { date, cert in
-                    if cert.certHash.elementsEqual(revokedHash) {
-                        cert.isRevoked = true
-                        // remove old certificate and add new
-                        DataCenter.localDataManager.remove(withDate: date) { status in
-                            guard case .success(_) = status else { completion(false, nil, nil); return }
-                            var storedTan: String?
-                            certStrings.forEach { certString in
-                                if certString.cert!.certHash.elementsEqual(cert.certHash) {
-                                    storedTan = certString.storedTAN ?? nil
-                                }
-                            }
-                            DataCenter.localDataManager.add(cert, with: storedTan) { status in
+        
+        DGCAJwt.makeJwtAndSign(fromCerts: Array(certs.values)) { success, jwts, error in
+            guard let jwts = jwts,
+                  success == true,
+                  error == nil else {
+                      completion(false, nil, GatewayError.local(description: "JWT creation failed!"))
+                      return
+                  }
+            // let param = ["value": jwts]
+            
+            var request = URLRequest(url: URL(string: "https://dgca-revocation-service-eu-test.cfapps.eu10.hana.ondemand.com/revocation/lookup")!)
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.httpBody = try! JSONSerialization.data(withJSONObject: jwts)
+            AF.request(request).response {
+                guard
+                    case .success(_) = $0.result,
+                    let status = $0.response?.statusCode,
+                    let response = try? JSONSerialization.jsonObject(with: $0.data ?? .init(), options: []) as? [String],
+                    status / 100 == 2
+                else {
+                    completion(false, nil, nil)
+                    return
+                }
+                if response.count == 0 { completion(true, nil, nil); return }
+                // response is list of hashes that have been revoked
+                let revokedHashes = response as [String]
+                for revokedHash in revokedHashes {
+                    certs.forEach { date, cert in
+                        if revokedHash.elementsEqual(cert.uvciHash!.toHexString()) ||
+                            revokedHash.elementsEqual(cert.signatureHash!.toHexString()) ||
+                            revokedHash.elementsEqual(cert.countryCodeUvciHash!.toHexString()) {
+                            cert.isRevoked = true
+                            // remove old certificate and add new
+                            DataCenter.localDataManager.remove(withDate: date) { status in
                                 guard case .success(_) = status else { completion(false, nil, nil); return }
+                                var storedTan: String?
+                                certStrings.forEach { certString in
+                                    if certString.cert!.certHash.elementsEqual(cert.certHash) {
+                                        storedTan = certString.storedTAN ?? nil
+                                    }
+                                }
+                                DataCenter.localDataManager.add(cert, with: storedTan) { status in
+                                    guard case .success(_) = status else { completion(false, nil, nil); return }
+                                }
                             }
                         }
                     }
                 }
+                completion(true, nil, nil)
             }
-            completion(true, nil, nil)
+            /*
+            request(
+                [""],
+                externalLink: "https://dgca-revocation-service-eu-test.cfapps.eu10.hana.ondemand.com/revocation/lookup",
+                method: .post,
+                parameters: param,
+                encoding: JSONEncoding.default
+            ).response {
+
+            } */
+            
         }
+        
     }
     
     static func fetchContext(completion: @escaping CompletionHandler) {
