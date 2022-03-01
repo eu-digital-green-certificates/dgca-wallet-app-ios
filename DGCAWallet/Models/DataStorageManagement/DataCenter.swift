@@ -213,10 +213,10 @@ class DataCenter {
               group.leave()
             }
 			
-			group.enter()
-			GatewayConnection.lookup(certStrings: certStrings) { success, _, _ in
-				group.leave()
-			}
+            group.enter()
+            GatewayConnection.lookup(certStrings: certStrings) { success, _, _ in
+              group.leave()
+            }
             
             group.enter()
             GatewayConnection.loadRulesFromServer { listRules, error in
