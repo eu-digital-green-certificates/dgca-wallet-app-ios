@@ -46,7 +46,7 @@ class LocalDataManager {
     }
 
     func add(_ cert: HCert, with tan: String?, completion: @escaping DataCompletionHandler) {
-        localData.certStrings.append(DatedCertString(date: Date(), certString: cert.fullPayloadString, storedTAN: tan))
+		localData.certStrings.append(DatedCertString(date: Date(), certString: cert.fullPayloadString, storedTAN: tan, isRevoked: cert.isRevoked))
         storage.save(localData, completion: completion)
     }
     

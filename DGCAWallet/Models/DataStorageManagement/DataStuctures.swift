@@ -24,55 +24,58 @@
 //  
 //  Created by Igor Khomiak on 11/3/21.
 //  
-        
+
 
 import Foundation
 import SwiftDGC
 import CertLogic
 
 class DatedCertString: Codable {
-    var isSelected: Bool = false
-    let date: Date
-    let certString: String
-    let storedTAN: String?
-    var cert: HCert? {
-      return try? HCert(from: certString)
-    }
-
-
-    init(date: Date, certString: String, storedTAN: String?) {
-      self.date = date
-      self.certString = certString
-      self.storedTAN = storedTAN
-    }
+	var isSelected: Bool = false
+	let date: Date
+	let certString: String
+	let storedTAN: String?
+	var cert: HCert? {
+		return try? HCert(from: certString)
+	}
+	
+	init(date: Date, certString: String, storedTAN: String?, isRevoked: Bool?) {
+		self.date = date
+		if isRevoked != nil && isRevoked == true {
+			self.certString = "x" + certString
+		} else {
+			self.certString = certString
+		}
+		self.storedTAN = storedTAN
+	}
 }
 
 class LocalData: Codable {
-    var encodedPublicKeys = [String: [String]]()
-    var certStrings = [DatedCertString]()
-
-    var countryCodes = [CountryModel]()
-    var valueSets = [ValueSet]()
-    var rules = [Rule]()
-    
-    var resumeToken: String?
-    var lastFetchRaw: Date?
-    var lastFetch: Date {
-      get {
-        lastFetchRaw ?? Date.distantPast
-      }
-      set {
-        lastFetchRaw = newValue
-      }
-    }
-    var config = Config.load()
-    var lastLaunchedAppVersion = "0.0"
+	var encodedPublicKeys = [String: [String]]()
+	var certStrings = [DatedCertString]()
+	
+	var countryCodes = [CountryModel]()
+	var valueSets = [ValueSet]()
+	var rules = [Rule]()
+	
+	var resumeToken: String?
+	var lastFetchRaw: Date?
+	var lastFetch: Date {
+		get {
+			lastFetchRaw ?? Date.distantPast
+		}
+		set {
+			lastFetchRaw = newValue
+		}
+	}
+	var config = Config.load()
+	var lastLaunchedAppVersion = "0.0"
 }
 
 class ImageDataStorage: Codable {
-  var images = [SavedImage]()
+	var images = [SavedImage]()
 }
 
 class PdfDataStorage: Codable {
-  var pdfs = [SavedPDF]()
+	var pdfs = [SavedPDF]()
 }
