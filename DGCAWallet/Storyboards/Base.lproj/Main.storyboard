@@ -1210,7 +1210,7 @@
     </scenes>
     <designables>
         <designable name="MID-ne-Jur">
-            <size key="intrinsicContentSize" width="88" height="39"/>
+            <size key="intrinsicContentSize" width="112" height="51"/>
         </designable>
         <designable name="Rcx-o5-KDY">
             <size key="intrinsicContentSize" width="71" height="51"/>

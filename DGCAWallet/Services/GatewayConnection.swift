@@ -141,9 +141,9 @@ class GatewayConnection: ContextConnection {
                 let revokedHashes = response as [String]
                 for revokedHash in revokedHashes {
                     certs.forEach { date, cert in
-                        if revokedHash.elementsEqual(cert.uvciHash!.toHexString()) ||
-                            revokedHash.elementsEqual(cert.signatureHash!.toHexString()) ||
-                            revokedHash.elementsEqual(cert.countryCodeUvciHash!.toHexString()) {
+                        if revokedHash.elementsEqual(cert.uvciHash![0..<cert.uvciHash!.count/2].toHexString()) ||
+                            revokedHash.elementsEqual(cert.signatureHash![0..<cert.signatureHash!.count/2].toHexString()) ||
+                            revokedHash.elementsEqual(cert.countryCodeUvciHash![0..<cert.countryCodeUvciHash!.count/2].toHexString()) {
                             cert.isRevoked = true
                             // remove old certificate and add new
                             DataCenter.localDataManager.remove(withDate: date) { status in
@@ -177,7 +177,7 @@ class GatewayConnection: ContextConnection {
         }
         
     }
-    
+    /*
     static func fetchContext(completion: @escaping CompletionHandler) {
         request( ["context"] ).response {
             guard let data = $0.data, let string = String(data: data, encoding: .utf8) else { return }
@@ -192,7 +192,7 @@ class GatewayConnection: ContextConnection {
                 completion()
             }
         }
-    }
+    }*/
     
     static var config: JSON {
         return DataCenter.localDataManager.versionedConfig
