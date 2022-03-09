@@ -992,7 +992,7 @@
                                                     <color key="textColor" name="walletBlue"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iTJ-x3-Wam">
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iTJ-x3-Wam">
                                                     <rect key="frame" x="309.33333333333331" y="16" width="42" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="iTJ-x3-Wam" secondAttribute="height" multiplier="2:1" id="Qdm-BC-429"/>
@@ -1122,7 +1122,7 @@
                     <color key="backgroundColor" red="0.69351077028937902" green="0.75351419445125889" blue="0.90099731978681896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="215.19999999999999" y="118.29085457271366"/>
+            <point key="canvasLocation" x="213.84615384615384" y="118.00947867298578"/>
         </scene>
         <!--Home Controller-->
         <scene sceneID="6EO-ab-Dh1">
