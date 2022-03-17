@@ -121,7 +121,6 @@ class GatewayConnection: ContextConnection {
                       return
                   }
             // let param = ["value": jwts]
-            
             var request = URLRequest(url: URL(string: "https://dgca-revocation-service-eu-test.cfapps.eu10.hana.ondemand.com/revocation/lookup")!)
             request.httpMethod = "POST"
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")

@@ -35,9 +35,10 @@ struct SecureBackground {
 
   public static func enable() {
     guard !paused else { return }
-      
+	
     disable()
-    guard let image = image else { return }
+	// return
+	guard let image = image else { return }
     let imageView = UIImageView(image: image)
       UIApplication.shared.windows.first?.addSubview(imageView)
     Self.imageView = imageView
@@ -47,7 +48,7 @@ struct SecureBackground {
   public static func disable() {
     if imageView != nil {
       if activation.timeIntervalSinceNow < -1 {
-          (UIApplication.shared.windows.first?.rootViewController as? UINavigationController)?.popToRootViewController(animated: false)
+          // (UIApplication.shared.windows.first?.rootViewController as? UINavigationController)?.popToRootViewController(animated: false)
       }
       imageView?.removeFromSuperview()
       imageView = nil

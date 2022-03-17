@@ -36,8 +36,8 @@ class SettingsTableController: UITableViewController {
   @IBOutlet fileprivate weak var reloadLabel: UILabel!
   @IBOutlet fileprivate weak var privacyInfoLabel: UILabel!
   @IBOutlet fileprivate weak var licensesLabel: UILabel!
-
-
+	let nc = NotificationCenter.default
+	
   deinit {
       let center = NotificationCenter.default
       center.removeObserver(self)
@@ -98,6 +98,7 @@ class SettingsTableController: UITableViewController {
       DispatchQueue.main.async { [weak self] in
         self?.activityIndicator.stopAnimating()
         self?.tableView.reloadData()
+				self?.nc.post(name: Notification.Name("DataReloaded"), object: nil)
       }
     }
   }

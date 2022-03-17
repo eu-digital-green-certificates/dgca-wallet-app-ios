@@ -182,16 +182,16 @@ class CertificateViewerController: UIViewController {
         }
         
         if success {
-          DataCenter.localDataManager.add(certificate, with: newTan) { _ in
-            completion()
-            DispatchQueue.main.async {
-              self.showAlert(title: "Certificate saved successfully".localized, subtitle: "Now it is available in the wallet".localized) { _ in
-                self.dismiss(animated: true) {
-                  self.delegate?.certificateViewer(self, didAddCeCertificate: certificate)
-                }
-              }
-            }
-          }
+					DataCenter.localDataManager.add(certificate, with: newTan) { _ in
+						completion()
+						DispatchQueue.main.async {
+							self.showAlert(title: "Certificate saved successfully".localized, subtitle: "Now it is available in the wallet".localized) { _ in
+								self.dismiss(animated: true) {
+									self.delegate?.certificateViewer(self, didAddCeCertificate: certificate)
+								}
+							}
+						}
+					}
         } else {
           completion()
           DispatchQueue.main.async {

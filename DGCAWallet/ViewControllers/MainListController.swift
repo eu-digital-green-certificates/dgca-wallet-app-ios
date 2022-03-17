@@ -35,6 +35,7 @@ import MobileCoreServices
 
 class MainListController: UIViewController {
 	let refreshControl = UIRefreshControl()
+	let center = NotificationCenter.default
 	fileprivate enum SegueIdentifiers {
 		static let showScannerSegue = "showScannerSegue"
 		static let showServicesList = "showServicesList"
@@ -75,8 +76,13 @@ class MainListController: UIViewController {
 		return .lightContent
 	}
 	
+	deinit {
+		center.removeObserver(self)
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+		center.addObserver(self, selector: #selector(refresh), name: Notification.Name("DataReloaded"), object: nil)
 		self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 		self.titleLabel.text = "Certificate Wallet".localized
 		self.addButton.setTitle("Add New".localized, for: .normal)
@@ -87,7 +93,6 @@ class MainListController: UIViewController {
 	
 	@objc func refresh() {
 		self.reloadTable()
-		
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -324,6 +329,7 @@ extension MainListController: ScanWalletDelegate {
 		DispatchQueue.main.async { [weak self] in
 			self?.dismiss(animated: true, completion: {
 				self?.performSegue(withIdentifier: SegueIdentifiers.showCertificateViewer, sender: certificate)
+				self?.reloadTable()
 			})
 		}
 	}
@@ -360,7 +366,9 @@ extension MainListController: CertificateManaging {
 	
 	func certificateViewer(_ controller: CertificateViewerController, didAddCeCertificate cert: HCert) {
 		DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(150)) {
-			self.reloadTable()
+			GatewayConnection.lookup(certStrings: [DataCenter.certStrings.last!]) { _, _, _ in
+				self.reloadTable()
+			}
 		}
 	}
 }
