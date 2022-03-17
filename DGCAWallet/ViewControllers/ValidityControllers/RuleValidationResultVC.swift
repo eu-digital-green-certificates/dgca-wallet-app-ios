@@ -82,7 +82,7 @@ class RuleValidationResultVC: UIViewController {
       resultLabel.text = "Certificate has limitation".localized
       resultDescriptionLabel.text = "Your certificate is valid but has the following restrictions:".localized
         resultIcon.image = UIImage(named: "icon_large_warning")
-    case .revocated:
+    case .revoked:
       resultLabel.text = "Certificate was revoked".localized
       resultDescriptionLabel.text = "Your certificate did not allows you to enter the chosen country".localized
         resultIcon.image = UIImage(named: "icon_large_warning")
@@ -154,15 +154,15 @@ extension RuleValidationResultVC {
             case .fail:
               items.append(InfoSection(header: "Certificate logic engine error".localized, content: error.localizedDescription,
                 countryName: hCert.ruleCountryCode,
-                ruleValidationResult: SwiftDGC.RuleValidationResult.failed))
+                ruleValidationResult: .invalid))
             case .open:
               items.append(InfoSection(header: "Certificate logic engine error".localized, content: error.localizedDescription,
                 countryName: hCert.ruleCountryCode,
-                ruleValidationResult: SwiftDGC.RuleValidationResult.open))
+                ruleValidationResult: .ruleInvalid))
             case .passed:
               items.append(InfoSection(header: "Certificate logic engine error".localized, content: error.localizedDescription,
                 countryName: hCert.ruleCountryCode,
-                ruleValidationResult: SwiftDGC.RuleValidationResult.passed))
+                ruleValidationResult: .valid))
             }
           } else {
             let preferredLanguage = Locale.preferredLanguages[0] as String
@@ -185,17 +185,17 @@ extension RuleValidationResultVC {
               items.append(InfoSection(header: errorString,
                 content: detailsError,
                 countryName: hCert.ruleCountryCode,
-                ruleValidationResult: RuleValidationResult.failed))
+                ruleValidationResult: .invalid))
             case .open:
               items.append(InfoSection(header: errorString,
                 content: detailsError,
                 countryName: hCert.ruleCountryCode,
-                ruleValidationResult: RuleValidationResult.open))
+                ruleValidationResult: .ruleInvalid))
             case .passed:
               items.append(InfoSection(header: errorString,
                 content: detailsError,
                 countryName: hCert.ruleCountryCode,
-                ruleValidationResult: RuleValidationResult.passed))
+                ruleValidationResult: .valid))
             }
           }
         }
