@@ -35,7 +35,7 @@ class CertificateController: UIViewController {
   var hCert: HCert? {
     (parent as? CertPagesController)?.embeddingVC?.hCert
   }
-  private var validityState: ValidityState = .invalidState
+  private var validityState: ValidityState = .init(isValid: false)
   private var sectionBuilder: SectionBuilder?
 
   override func viewDidLoad() {
@@ -53,8 +53,7 @@ class CertificateController: UIViewController {
       validator.validate {[weak self] (validityState) in
         self?.validityState = validityState
         
-        let builder = SectionBuilder(with: hCert, validity: validityState)
-        builder.makeSections(for: .wallet)
+        let builder = SectionBuilder(with: hCert, validity: validityState, for: .wallet)
         if let section = validityState.infoRulesSection {
           builder.makeSectionForRuleError(ruleSection: section, for: .wallet)
         }

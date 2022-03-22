@@ -89,6 +89,7 @@ class MainListController: UIViewController {
 		refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
 		refreshControl.addTarget(self, action: #selector(self.refresh), for: .valueChanged)
 		table.refreshControl = refreshControl
+        self.reloadTable()
 	}
 	
 	@objc func refresh() {
@@ -364,13 +365,15 @@ extension MainListController: CertificateManaging {
 		}
 	}
 	
-	func certificateViewer(_ controller: CertificateViewerController, didAddCeCertificate cert: HCert) {
-		DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(150)) {
-			GatewayConnection.lookup(certStrings: [DataCenter.certStrings.last!]) { _, _, _ in
-				self.reloadTable()
-			}
-		}
-	}
+    func certificateViewer(_ controller: CertificateViewerController, didAddCeCertificate cert: HCert) {
+        GatewayConnection.lookup(certStrings: [DataCenter.certStrings.last!]) { success, _, _ in
+            if success {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(150)) {
+                    self.reloadTable()
+                }
+            }
+        }
+    }
 }
 
 // MARK: UITable delegate

@@ -104,7 +104,7 @@ class GatewayConnection: ContextConnection {
     }
     
     static func lookup(certStrings: [DatedCertString], completion: @escaping ContextCompletion) {
-        guard certStrings.count != 0 else { completion(true, nil, nil); return; }
+         guard certStrings.count != 0 else { completion(true, nil, nil); return; }
         // construct certs from strings
         var certs: [Date: HCert] = [:]
         for string in certStrings {
@@ -137,6 +137,7 @@ class GatewayConnection: ContextConnection {
                 }
                 if response.count == 0 { completion(true, nil, nil); return }
                 // response is list of hashes that have been revoked
+                var count = certs.count
                 let revokedHashes = response as [String]
                 for revokedHash in revokedHashes {
                     certs.forEach { date, cert in
@@ -144,6 +145,7 @@ class GatewayConnection: ContextConnection {
                             revokedHash.elementsEqual(cert.signatureHash![0..<cert.signatureHash!.count/2].toHexString()) ||
                             revokedHash.elementsEqual(cert.countryCodeUvciHash![0..<cert.countryCodeUvciHash!.count/2].toHexString()) {
                             cert.isRevoked = true
+                            count -= 1;
                             // remove old certificate and add new
                             DataCenter.localDataManager.remove(withDate: date) { status in
                                 guard case .success(_) = status else { completion(false, nil, nil); return }
@@ -155,9 +157,13 @@ class GatewayConnection: ContextConnection {
                                 }
                                 DataCenter.localDataManager.add(cert, with: storedTan) { status in
                                     guard case .success(_) = status else { completion(false, nil, nil); return }
+                                    if count == 0 {
+                                        completion(true, nil, nil)
+                                        return
+                                    }
                                 }
                             }
-                        }
+                        } else { count -= 1; if count == 0 { completion(true, nil, nil); } }
                     }
                 }
                 completion(true, nil, nil)

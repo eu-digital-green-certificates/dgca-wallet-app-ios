@@ -82,7 +82,7 @@ class RuleValidationResultVC: UIViewController {
       resultLabel.text = "Certificate has limitation".localized
       resultDescriptionLabel.text = "Your certificate is valid but has the following restrictions:".localized
         resultIcon.image = UIImage(named: "icon_large_warning")
-    case .revocated:
+    case .revoked:
       resultLabel.text = "Certificate was revoked".localized
       resultDescriptionLabel.text = "Your certificate did not allows you to enter the chosen country".localized
         resultIcon.image = UIImage(named: "icon_large_warning")
