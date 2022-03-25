@@ -166,7 +166,6 @@ class GatewayConnection: ContextConnection {
                         } else { count -= 1; if count == 0 { completion(true, nil, nil); } }
                     }
                 }
-                completion(true, nil, nil)
             }
             /*
             request(
