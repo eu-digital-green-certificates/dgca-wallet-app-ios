@@ -57,7 +57,7 @@ extension UIViewController {
       }
       
       alert.addAction(UIAlertAction(title: actionTitle, style: .default) { _ in
-        guard let textField = alert.textFields?.first else {
+          guard let textField = alert.textFields?.first else {
               handler?(nil)
               return
           }
