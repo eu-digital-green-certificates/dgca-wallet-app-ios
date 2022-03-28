@@ -43,7 +43,7 @@ class HomeController: UIViewController {
 
     override func viewDidLoad() {
       super.viewDidLoad()
-        CoreManager.config = HCertConfig(prefetchAllCodes: true, checkSignatures: false, debugPrintJsonErrors: true)
+      CoreManager.config = HCertConfig(prefetchAllCodes: true, checkSignatures: false, debugPrintJsonErrors: true)
       appNameLabel.text = "Wallet App".localized
         self.activityIndicator.startAnimating()
         messageLabel.text = "Loading data".localized

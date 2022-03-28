@@ -154,15 +154,15 @@ extension RuleValidationResultVC {
             case .fail:
               items.append(InfoSection(header: "Certificate logic engine error".localized, content: error.localizedDescription,
                 countryName: hCert.ruleCountryCode,
-                ruleValidationResult: SwiftDGC.RuleValidationResult.failed))
+                ruleValidationResult: .invalid))
             case .open:
               items.append(InfoSection(header: "Certificate logic engine error".localized, content: error.localizedDescription,
                 countryName: hCert.ruleCountryCode,
-                ruleValidationResult: SwiftDGC.RuleValidationResult.open))
+                ruleValidationResult: .ruleInvalid))
             case .passed:
               items.append(InfoSection(header: "Certificate logic engine error".localized, content: error.localizedDescription,
                 countryName: hCert.ruleCountryCode,
-                ruleValidationResult: SwiftDGC.RuleValidationResult.passed))
+                ruleValidationResult: .valid))
             }
           } else {
             let preferredLanguage = Locale.preferredLanguages[0] as String
@@ -185,17 +185,17 @@ extension RuleValidationResultVC {
               items.append(InfoSection(header: errorString,
                 content: detailsError,
                 countryName: hCert.ruleCountryCode,
-                ruleValidationResult: RuleValidationResult.failed))
+                ruleValidationResult: .invalid))
             case .open:
               items.append(InfoSection(header: errorString,
                 content: detailsError,
                 countryName: hCert.ruleCountryCode,
-                ruleValidationResult: RuleValidationResult.open))
+                ruleValidationResult: .ruleInvalid))
             case .passed:
               items.append(InfoSection(header: errorString,
                 content: detailsError,
                 countryName: hCert.ruleCountryCode,
-                ruleValidationResult: RuleValidationResult.passed))
+                ruleValidationResult: .valid))
             }
           }
         }

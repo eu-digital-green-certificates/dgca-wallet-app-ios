@@ -117,17 +117,17 @@ public class CertificateValidator {
                 listOfRulesSection.append(InfoSection(header: "CirtLogic Engine error",
                     content: error.localizedDescription,
                     countryName: certificate.ruleCountryCode,
-                    ruleValidationResult: .failed))
+                    ruleValidationResult: .invalid))
               case .open:
                 listOfRulesSection.append(InfoSection(header: "CirtLogic Engine error",
                     content: error.localizedDescription,
                     countryName: certificate.ruleCountryCode,
-                    ruleValidationResult: .open))
+                    ruleValidationResult: .ruleInvalid))
               case .passed:
                 listOfRulesSection.append(InfoSection(header: "CirtLogic Engine error",
                     content: error.localizedDescription,
                     countryName: certificate.ruleCountryCode,
-                    ruleValidationResult: .passed))
+                    ruleValidationResult: .valid))
               }
               
             } else {
@@ -148,17 +148,17 @@ public class CertificateValidator {
                 listOfRulesSection.append(InfoSection(header: errorString,
                     content: detailsError,
                     countryName: certificate.ruleCountryCode,
-                    ruleValidationResult: .failed))
+                    ruleValidationResult: .invalid))
               case .open:
                 listOfRulesSection.append(InfoSection(header: errorString,
                     content: detailsError,
                     countryName: certificate.ruleCountryCode,
-                    ruleValidationResult: .open))
+                    ruleValidationResult: .ruleInvalid))
               case .passed:
                 listOfRulesSection.append(InfoSection(header: errorString,
                     content: detailsError,
                     countryName: certificate.ruleCountryCode,
-                    ruleValidationResult: .passed))
+                    ruleValidationResult: .valid))
               }
             }
           }
