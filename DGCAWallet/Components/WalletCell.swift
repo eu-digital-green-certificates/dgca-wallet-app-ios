@@ -39,9 +39,8 @@ class WalletCell: UITableViewCell {
 		nameLabel.text = cert.fullName
 		dateLabel.text = String(format: "Scanned %@".localized, dated.date.localDateString)
 		guard let cert = dated.cert else { return }
-		if let isRevoked = cert.isRevoked {
-			revocationLabel.isHidden = !isRevoked
-		}
+		let isRevoked = cert.isRevoked
+        revocationLabel.isHidden = !isRevoked
 		revocationLabel.text = "Certificate revoked"
 	}
 }

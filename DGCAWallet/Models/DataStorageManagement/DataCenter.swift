@@ -187,7 +187,7 @@ class DataCenter {
         }
         
         group.notify(queue: .main) {
-            completion(.success(true))
+            completion(.success)
         }
     }
     
@@ -225,11 +225,11 @@ class DataCenter {
             
             group.enter()
             GatewayConnection.loadRulesFromServer { listRules, error in
-              guard error == nil else { completion(.failure(error!)); return }
+                guard error == nil else { completion(.failure(.dataError(description: error?.localizedDescription ?? "error"))); return }
               CertLogicManager.shared.setRules(ruleList: listRules ?? [])
               group.leave()
             }
-
+            
             group.leave()
         }
         

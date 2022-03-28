@@ -147,7 +147,7 @@ class GatewayConnection: ContextConnection {
                             cert.isRevoked = true
                             // remove old certificate and add new
                             DataCenter.localDataManager.remove(withDate: date) { status in
-                                guard case .success(_) = status else { completion(false, nil, nil); return }
+                                guard case .success = status else { completion(false, nil, nil); return }
                                 var storedTan: String?
                                 certStrings.forEach { certString in
                                     if certString.cert!.certHash.elementsEqual(cert.certHash) {
@@ -155,7 +155,7 @@ class GatewayConnection: ContextConnection {
                                     }
                                 }
                                 DataCenter.localDataManager.add(cert, with: storedTan) { status in
-                                    guard case .success(_) = status else { completion(false, nil, nil); return }
+                                    guard case .success = status else { completion(false, nil, nil); return }
                                 }
                             }
                         }

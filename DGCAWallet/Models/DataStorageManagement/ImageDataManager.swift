@@ -37,7 +37,7 @@ class ImageDataManager {
       localData.images.append(savedImage)
       storage.save(localData, completion: completion)
     } else {
-      completion(.success(true))
+      completion(.success)
     }
   }
   
@@ -63,7 +63,7 @@ class ImageDataManager {
       }
       DGCLogger.logInfo(String(format: "Loaded %d images", result.images.count))
       self.localData = result
-      completion(.success(true))
+      completion(.success)
     }
   }
 }
