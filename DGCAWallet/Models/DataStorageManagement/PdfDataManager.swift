@@ -36,7 +36,7 @@ class PdfDataManager {
       localData.pdfs.append(savedPdf)
       storage.save(localData, completion: completion)
     } else {
-      completion(.success(true))
+      completion(.success)
     }
   }
   
@@ -62,7 +62,7 @@ class PdfDataManager {
       }
       DGCLogger.logInfo(String(format: "Loaded %d pdf files", result.pdfs.count))
       self.localData = result
-      completion(.success(true))
+      completion(.success)
     }
   }
 }

@@ -146,8 +146,8 @@ class CertificateViewerController: UIViewController {
   @IBAction func deleteCertificateAction() {
     guard let certDate = certDate else { return }
     guard let cert = self.hCert else { return }
-
-    showAlert( title: "Delete Certificate".localized, subtitle: "cert.delete.body".localized,
+		
+		showAlert( title: "Delete Certificate".localized, subtitle: "cert.delete.body".localized,
         actionTitle: "Confirm".localized, cancelTitle: "Cancel".localized) { [unowned self] in
       if $0 {
         DataCenter.localDataManager.remove(withDate: certDate) { _ in

@@ -143,6 +143,7 @@
 		DA01662226558B2F005B73A1 /* LicenseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01662126558B2F005B73A1 /* LicenseController.swift */; };
 		DA5A441627CE301100E64183 /* DGCAJwt.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5A441527CE301100E64183 /* DGCAJwt.swift */; };
 		DA5A441827CE303600E64183 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA5A441727CE303600E64183 /* Data.swift */; };
+		DAE70C0827F1DF2D00DB2B6A /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAE70C0727F1DF2D00DB2B6A /* UIViewController.swift */; };
 		FE1D1A6B27148CBE00765A9A /* CryptoSwift in Frameworks */ = {isa = PBXBuildFile; productRef = FE1D1A6A27148CBE00765A9A /* CryptoSwift */; };
 		FE6E78882702033300C142A3 /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = FE6E78872702033300C142A3 /* JWTDecode */; };
 		FEAEA96526FBB13600B94FFF /* AccessTokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEAEA96426FBB13600B94FFF /* AccessTokenResponse.swift */; };
@@ -257,6 +258,7 @@
 		DA01662126558B2F005B73A1 /* LicenseController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = LicenseController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		DA5A441527CE301100E64183 /* DGCAJwt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DGCAJwt.swift; sourceTree = "<group>"; };
 		DA5A441727CE303600E64183 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
+		DAE70C0727F1DF2D00DB2B6A /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		FE6F225327142AB1003AE754 /* dgca-app-core-ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "dgca-app-core-ios"; path = "../dgca-app-core-ios"; sourceTree = "<group>"; };
 		FEAEA96426FBB13600B94FFF /* AccessTokenResponse.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = AccessTokenResponse.swift; sourceTree = "<group>"; tabWidth = 2; };
 		FEBE53B42721A3EA003B61FB /* LimitationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitationCell.swift; sourceTree = "<group>"; };
@@ -389,6 +391,7 @@
 				D2B605BB2743C9BB000D914A /* SettingsControllers */,
 				D2B605BF2743CC25000D914A /* ValidityControllers */,
 				D2B605BC2743CA18000D914A /* TicketingControllers */,
+				DAE70C0727F1DF2D00DB2B6A /* UIViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -797,6 +800,7 @@
 				CE8096D9263B07BB00A65AD6 /* UIColor.swift in Sources */,
 				CEDABD49263C70EF007A9B97 /* CertPagesController.swift in Sources */,
 				CE4BD254264FF28900689FD6 /* SettingsTableController.swift in Sources */,
+				DAE70C0827F1DF2D00DB2B6A /* UIViewController.swift in Sources */,
 				5CE07C842692E21E00A032F9 /* CertLogicManager.swift in Sources */,
 				CED2726026398683003D47A9 /* UIFont.swift in Sources */,
 				FEC54BE927201D660048B6BC /* ValidationResultController.swift in Sources */,

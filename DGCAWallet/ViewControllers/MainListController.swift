@@ -132,7 +132,7 @@ class MainListController: UIViewController {
 	// MARK: - Private UI methods
 	private func reloadAllComponents(completion: @escaping DataCompletionHandler) {
 		DataCenter.initializeAllStorageData { result in
-			completion(.success(true))
+			completion(.success)
 		}
 	}
 	

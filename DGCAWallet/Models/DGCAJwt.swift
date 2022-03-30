@@ -43,9 +43,14 @@ struct Payload: Encodable {
 
 class DGCAJwt {
 	private static func makeJwtPayload(cert: HCert) -> Payload {
+		/*
 		let payload: [String] = [cert.uvciHash![0..<(cert.uvciHash!.count/2)].toHexString(),
 								 cert.signatureHash![0..<(cert.signatureHash!.count/2)].toHexString(),
 								 cert.countryCodeUvciHash![0..<(cert.countryCodeUvciHash!.count/2)].toHexString()]
+		 */
+		let payload: [String] = [cert.uvciHash!.dropLast(16).toHexString(),
+								 cert.signatureHash!.dropLast(16).toHexString(),
+								 cert.countryCodeUvciHash!.dropLast(16).toHexString()]
 		return Payload(sub: cert.uvciHash!.toHexString(), payload: payload, exp: cert.exp.timeIntervalSince1970)
 	}
 	// payload: Payload, with keyPair: SecKey

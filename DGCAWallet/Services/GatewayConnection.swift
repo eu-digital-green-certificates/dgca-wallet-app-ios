@@ -47,7 +47,7 @@ enum GatewayError: Error {
 
 typealias ValueSetsCompletion = ([ValueSet]?, Error?) -> Void
 typealias ValueSetCompletionHandler = (ValueSet?, Error?) -> Void
-typealias RulesCompletion = ([Rule]?, Error?) -> Void
+typealias RulesCompletion = ([Rule]?, DataOperationError?) -> Void
 typealias RuleCompletionHandler = (Rule?, Error?) -> Void
 typealias CountriesCompletion = ([CountryModel]?, Error?) -> Void
 typealias TicketingCompletion = (AccessTokenResponse?, Error?) -> Void
@@ -141,14 +141,14 @@ class GatewayConnection: ContextConnection {
                 let revokedHashes = response as [String]
                 for revokedHash in revokedHashes {
                     certs.forEach { date, cert in
-                        if revokedHash.elementsEqual(cert.uvciHash![0..<cert.uvciHash!.count/2].toHexString()) ||
-                            revokedHash.elementsEqual(cert.signatureHash![0..<cert.signatureHash!.count/2].toHexString()) ||
-                            revokedHash.elementsEqual(cert.countryCodeUvciHash![0..<cert.countryCodeUvciHash!.count/2].toHexString()) {
+                        if revokedHash.elementsEqual(cert.uvciHash!.dropLast(16).toHexString()) ||
+                            revokedHash.elementsEqual(cert.signatureHash!.dropLast(16).toHexString()) ||
+                            revokedHash.elementsEqual(cert.countryCodeUvciHash!.dropLast(16).toHexString()) {
                             cert.isRevoked = true
                             count -= 1;
                             // remove old certificate and add new
                             DataCenter.localDataManager.remove(withDate: date) { status in
-                                guard case .success(_) = status else { completion(false, nil, nil); return }
+                                guard case .success = status else { completion(false, nil, nil); return }
                                 var storedTan: String?
                                 certStrings.forEach { certString in
                                     if certString.cert!.certHash.elementsEqual(cert.certHash) {
@@ -156,7 +156,7 @@ class GatewayConnection: ContextConnection {
                                     }
                                 }
                                 DataCenter.localDataManager.add(cert, with: storedTan) { status in
-                                    guard case .success(_) = status else { completion(false, nil, nil); return }
+                                    guard case .success = status else { completion(false, nil, nil); return }
                                     if count == 0 {
                                         completion(true, nil, nil)
                                         return
@@ -245,7 +245,7 @@ extension GatewayConnection {
             guard case let .success(result) = $0.result, let response = result,
                   let responseStr = String(data: response, encoding: .utf8)
             else {
-                completion(nil, GatewayError.parsingError)
+                completion(nil, DataOperationError.dataError(description: "unknown"))
                 return
             }
             let ruleHashes: [RuleHash] = CertLogicEngine.getItems(from: responseStr)
@@ -262,11 +262,11 @@ extension GatewayConnection {
                 if !DataCenter.localDataManager.isRuleExistWithHash(hash: ruleHash.hash) {
                     getRules(ruleHash: ruleHash) { rule, error in
                         guard error == nil else {
-                            completion(nil, GatewayError.connection(error: error!))
+                            completion(nil, DataOperationError.dataError(description: error!.localizedDescription))
                             return
                         }
                         guard let rule = rule else {
-                            completion(nil, GatewayError.parsingError)
+                            completion(nil, DataOperationError.dataError(description: error!.localizedDescription))
                             return
                         }
                         rulesItems.append(rule)
@@ -310,11 +310,11 @@ extension GatewayConnection {
     static func loadRulesFromServer(completion: @escaping RulesCompletion) {
         getListOfRules { rulesList, error in
             guard error == nil else {
-                completion(nil, GatewayError.connection(error: error!))
+                completion(nil, DataOperationError.dataError(description: error!.localizedDescription))
                 return
             }
             guard let rules = rulesList else {
-                completion(nil, GatewayError.parsingError)
+                completion(nil, DataOperationError.dataError(description: error!.localizedDescription))
                 return
             }
             DataCenter.addRules(rules)

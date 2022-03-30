@@ -187,7 +187,7 @@ class DataCenter {
         }
         
         group.notify(queue: .main) {
-            completion(.success(true))
+            completion(.success)
         }
     }
     
