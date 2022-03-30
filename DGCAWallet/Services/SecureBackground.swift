@@ -27,62 +27,62 @@
 
 import UIKit
 import LocalAuthentication
-import SwiftDGC
+import DGCCoreLibrary
 
 struct SecureBackground {
-  static var imageView: UIImageView?
-  public static var image: UIImage?
+    static var imageView: UIImageView?
+    public static var image: UIImage?
 
-  public static func enable() {
-    guard !paused else { return }
-	
-    disable()
-	// return
-	guard let image = image else { return }
-    let imageView = UIImageView(image: image)
-      UIApplication.shared.windows.first?.addSubview(imageView)
-    Self.imageView = imageView
-    Self.activation = Date()
-  }
-
-  public static func disable() {
-    if imageView != nil {
-      if activation.timeIntervalSinceNow < -1 {
-          // (UIApplication.shared.windows.first?.rootViewController as? UINavigationController)?.popToRootViewController(animated: false)
-      }
-      imageView?.removeFromSuperview()
-      imageView = nil
+    public static func enable() {
+        guard !paused else { return }
+        
+        disable()
+        // return
+        guard let image = image else { return }
+        let imageView = UIImageView(image: image)
+        UIApplication.shared.windows.first?.addSubview(imageView)
+        Self.imageView = imageView
+        Self.activation = Date()
     }
-  }
 
-  static var paused = false
-  static var activation = Date()
-    
-  public static func checkId(from controller: UIViewController? = nil, completion: ((Bool) -> Void)?) {
-    guard !paused else { return }
-      
-    paused = true
-    let context = LAContext()
-      context.localizedCancelTitle = "Try Later".localized
-      let reason = "Could not verify device ownership".localized
-    context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason ) { success, err in
-      if success {
-        paused = false
-        completion?(true)
-      } else {
-        paused = false
-        if controller == nil || (err as? LAError)?.code != LAError.passcodeNotSet {
-          completion?(false)
-          return
-        }
-          
-        DispatchQueue.main.async {
-            controller?.showAlert(title: "Could not verify device ownership".localized,
-                subtitle: "Please try setting a passcode for this device before opening the app.".localized) { _ in
-              completion?(false)
+    public static func disable() {
+        if imageView != nil {
+          if activation.timeIntervalSinceNow < -1 {
+              // (UIApplication.shared.windows.first?.rootViewController as? UINavigationController)?.popToRootViewController(animated: false)
           }
+          imageView?.removeFromSuperview()
+          imageView = nil
         }
-      }
     }
-  }
+
+    static var paused = false
+    static var activation = Date()
+
+    public static func checkId(from controller: UIViewController? = nil, completion: ((Bool) -> Void)?) {
+        guard !paused else { return }
+          
+        paused = true
+        let context = LAContext()
+        context.localizedCancelTitle = "Try Later".localized
+        let reason = "Could not verify device ownership".localized
+        context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason ) { success, err in
+            if success {
+                paused = false
+                completion?(true)
+            } else {
+                paused = false
+                if controller == nil || (err as? LAError)?.code != LAError.passcodeNotSet {
+                    completion?(false)
+                    return
+                }
+                  
+                DispatchQueue.main.async {
+                    controller?.showAlert(title: "Could not verify device ownership".localized,
+                        subtitle: "Please try setting a passcode for this device before opening the app.".localized) { _ in
+                      completion?(false)
+                    }
+                }
+            }
+        }
+    }
 }

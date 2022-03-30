@@ -28,7 +28,7 @@
 
 
 import UIKit
-import SwiftDGC
+import DCCInspection
 
 class ServerCell: UITableViewCell {
 

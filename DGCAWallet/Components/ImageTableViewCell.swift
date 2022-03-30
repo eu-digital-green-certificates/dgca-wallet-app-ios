@@ -27,6 +27,7 @@
         
 
 import UIKit
+import DCCInspection
 
 class ImageTableViewCell: UITableViewCell {
   @IBOutlet fileprivate weak var imagePreviewView: UIImageView!

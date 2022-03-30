@@ -27,7 +27,8 @@
         
 
 import UIKit
-import SwiftDGC
+import DCCInspection
+import DGCCoreLibrary
 
 public typealias OnDateChangedHandler = (Date) -> Void
 public typealias OnCountryChangedHandler = (String?) -> Void
@@ -37,10 +38,10 @@ class ExtendedValidityCell: UITableViewCell {
       static let userDefaultsCountryKey = "UDWalletCountryKey"
     }
 
-  @IBOutlet fileprivate weak var destinationLabel: UILabel!
-  @IBOutlet fileprivate weak var countryPicker: UIPickerView!
-  @IBOutlet fileprivate weak var dateLabel: UILabel!
-  @IBOutlet fileprivate weak var datePicker: UIDatePicker!
+    @IBOutlet fileprivate weak var destinationLabel: UILabel!
+    @IBOutlet fileprivate weak var countryPicker: UIPickerView!
+    @IBOutlet fileprivate weak var dateLabel: UILabel!
+    @IBOutlet fileprivate weak var datePicker: UIDatePicker!
     
   private var countryItems: [CountryModel] = []
   var dataHandler: OnDateChangedHandler?
@@ -76,7 +77,7 @@ class ExtendedValidityCell: UITableViewCell {
       // Fallback on earlier versions
     }
     datePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
-    setListOfRuleCounties(list: DataCenter.countryCodes)
+    setListOfRuleCounties(list: DCCDataCenter.countryCodes)
   }
 }
 

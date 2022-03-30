@@ -25,7 +25,7 @@
 //
 
 import UIKit
-import SwiftDGC
+import DCCInspection
 
 class WalletCell: UITableViewCell {
 	@IBOutlet fileprivate weak var typeLabel: UILabel!

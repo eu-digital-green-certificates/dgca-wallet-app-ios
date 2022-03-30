@@ -28,7 +28,8 @@
         
 
 import UIKit
-import SwiftDGC
+import DGCCoreLibrary
+import DCCInspection
 
 class CertificateCell: UITableViewCell {
 

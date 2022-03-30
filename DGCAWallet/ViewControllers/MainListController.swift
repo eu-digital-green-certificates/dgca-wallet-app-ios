@@ -28,10 +28,10 @@
 // swiftlint:disable file_length
 
 import UIKit
-import SwiftDGC
 import UniformTypeIdentifiers
 import MobileCoreServices
-
+import DGCCoreLibrary
+import DCCInspection
 
 class MainListController: UIViewController {
 	let refreshControl = UIRefreshControl()
@@ -54,24 +54,15 @@ class MainListController: UIViewController {
 	@IBOutlet fileprivate weak var emptyView: UIView!
 	@IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
 	@IBOutlet fileprivate weak var titleLabel: UILabel!
-	
-	lazy var indicator: UIActivityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
-	
-	lazy var activityAlert: UIAlertController = {
-		let controller = UIAlertController(title: "Loading data", message: "\n\n\n", preferredStyle: .alert)
-		
-		controller.view.addSubview(indicator)
-		return controller
-	}()
-	
-	var downloadedDataHasExpired: Bool {
-		return DataCenter.lastFetch.timeIntervalSinceNow < -SharedConstants.expiredDataInterval
-	}
-	
+			
 	private var expireDataTimer: Timer?
 	private var scannedToken: String = ""
 	private var loading = false
 	
+    var downloadedDataHasExpired: Bool {
+        return DCCDataCenter.lastFetch.timeIntervalSinceNow < -SharedConstants.expiredDataInterval
+    }
+
 	override var preferredStatusBarStyle: UIStatusBarStyle {
 		return .lightContent
 	}
@@ -106,16 +97,16 @@ class MainListController: UIViewController {
 			scene?.isNFCFunctionality = false
 		}
 		expireDataTimer = Timer.scheduledTimer(timeInterval: 1800, target: self, selector: #selector(reloadExpiredData),
-											   userInfo: nil, repeats: true)
+            userInfo: nil, repeats: true)
 		
 		self.reloadTable()
 	}
 	
 	// MARK: - Actions
 	@objc func reloadExpiredData() {
-		if downloadedDataHasExpired {
-			showAlertReloadDatabase()
-		}
+        if downloadedDataHasExpired {
+             showAlertReloadDatabase()
+        }
 	}
 	
 	func showAlertReloadDatabase() {
@@ -124,14 +115,14 @@ class MainListController: UIViewController {
 		alert.addAction(UIAlertAction(title: "Later".localized, style: .default, handler: { _ in }))
 		
 		alert.addAction(UIAlertAction(title: "Reload".localized, style: .default, handler: { (_: UIAlertAction!) in
-			DataCenter.reloadStorageData(completion: { _ in })
+			DCCDataCenter.reloadWalletStorageData(completion: { _ in })
 		}))
 		self.present(alert, animated: true, completion: nil)
 	}
 	
 	// MARK: - Private UI methods
 	private func reloadAllComponents(completion: @escaping DataCompletionHandler) {
-		DataCenter.initializeAllStorageData { result in
+        DCCDataCenter.initializeAllWalletStorageData { result in
 			completion(.success)
 		}
 	}
@@ -152,41 +143,35 @@ class MainListController: UIViewController {
 	
 	private func reloadTable() {
 		emptyView.alpha = listCertElements.isEmpty && listImageElements.isEmpty && listPdfElements.isEmpty ? 1 : 0
-		/*
-		GatewayConnection.lookup(certStrings: listCertElements) { success, _, _ in
-					}
-		 */
 		self.table.reloadData()
 		self.refreshControl.endRefreshing()
-
 	}
 	
 	// MARK: Actions
 	@IBAction func addNew() {
 		guard loading == false else { return }
 		
-		let menuActionSheet = UIAlertController(title: "Add new?".localized, message: "Do you want to add new certificate, image or PDF file?".localized,
-												preferredStyle: UIAlertController.Style.actionSheet)
+		let menuActionSheet = UIAlertController(title: "Add new?".localized, message: "Do you want to add new certificate, image or PDF file?".localized, preferredStyle: UIAlertController.Style.actionSheet)
 		
 		menuActionSheet.addAction(UIAlertAction(title: "Scan certificate".localized, style: UIAlertAction.Style.default,
-												handler: {[weak self] _ in
-			self?.scanNewCertificate()
-		})
+            handler: {[weak self] _ in
+                self?.scanNewCertificate()
+            })
 		)
 		menuActionSheet.addAction(UIAlertAction(title: "Image import".localized, style: UIAlertAction.Style.default,
-												handler: { [weak self] _ in
-			self?.addImageActivity()
-		})
+            handler: { [weak self] _ in
+                self?.addImageActivity()
+            })
 		)
 		menuActionSheet.addAction(UIAlertAction(title: "PDF Import".localized, style: UIAlertAction.Style.default,
-												handler: { [weak self] _ in
-			self?.addPdf()
-		})
+            handler: { [weak self] _ in
+                self?.addPdf()
+            })
 		)
 		menuActionSheet.addAction(UIAlertAction(title: "NFC Import".localized, style: UIAlertAction.Style.default,
-												handler: { [weak self] _ in
-			self?.scanNFC()
-		})
+            handler: { [weak self] _ in
+                self?.scanNFC()
+            })
 		)
 		menuActionSheet.addAction(UIAlertAction(title: "Cancel".localized, style: UIAlertAction.Style.cancel, handler: nil))
 		present(menuActionSheet, animated: true, completion: nil)
@@ -212,7 +197,7 @@ class MainListController: UIViewController {
 			} catch {
 				let alertController: UIAlertController = {
 					let controller = UIAlertController(title: "Cannot read NFC".localized,
-													   message: "An error occurred while reading NFC".localized, preferredStyle: .alert)
+                        message: "An error occurred while reading NFC".localized, preferredStyle: .alert)
 					
 					let actionRetry = UIAlertAction(title: "Retry".localized, style: .default) { _ in
 						self?.scanNFC()
@@ -335,7 +320,7 @@ extension MainListController: ScanWalletDelegate {
 		}
 	}
 	
-	func walletController(_ controller: ScanWalletController, didScanInfo ticketing: SwiftDGC.CheckInQR) {
+	func walletController(_ controller: ScanWalletController, didScanInfo ticketing: CheckInQR) {
 		if scannedToken == ticketing.token {
 			return
 		}
@@ -366,7 +351,7 @@ extension MainListController: CertificateManaging {
 	}
 	
     func certificateViewer(_ controller: CertificateViewerController, didAddCeCertificate cert: HCert) {
-        GatewayConnection.lookup(certStrings: [DataCenter.certStrings.last!]) { success, _, _ in
+        GatewayConnection.lookup(certStrings: [DCCDataCenter.certStrings.last!]) { success, _, _ in
             if success {
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(150)) {
                     self.reloadTable()
@@ -379,15 +364,15 @@ extension MainListController: CertificateManaging {
 // MARK: UITable delegate
 extension MainListController: UITableViewDelegate, UITableViewDataSource {
 	var listCertElements: [DatedCertString] {
-		return DataCenter.certStrings.reversed()
+		return DCCDataCenter.certStrings.reversed()
 	}
 	
 	var listImageElements: [SavedImage] {
-		return DataCenter.images
+		return DCCDataCenter.images
 	}
 	
 	var listPdfElements: [SavedPDF] {
-		return DataCenter.pdfs
+		return DCCDataCenter.pdfs
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -475,7 +460,7 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
 					   actionTitle: "Confirm".localized, cancelTitle: "Cancel".localized) { [weak self] in
 				if $0 {
 					self?.startActivity()
-					DataCenter.localDataManager.remove(withDate: savedCert.date) { _ in
+					DCCDataCenter.localDataManager.remove(withDate: savedCert.date) { _ in
 						DispatchQueue.main.async {
 							self?.stopActivity()
 							self?.reloadTable()
@@ -490,7 +475,7 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
 					   actionTitle: "Confirm".localized, cancelTitle:"Cancel".localized) { [weak self] in
 				if $0 {
 					self?.startActivity()
-					DataCenter.imageDataManager.deleteImage(with: savedImage.identifier) { _ in
+					DCCDataCenter.localImageManager.deleteImage(with: savedImage.identifier) { _ in
 						DispatchQueue.main.async {
 							self?.stopActivity()
 							self?.reloadTable()
@@ -504,7 +489,7 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
 					   actionTitle: "Confirm".localized, cancelTitle: "Cancel".localized) { [weak self] in
 				if $0 {
 					self?.startActivity()
-					DataCenter.pdfDataManager.deletePDF(with: savedPDF.identifier) { _ in
+					DCCDataCenter.localImageManager.deletePDF(with: savedPDF.identifier) { _ in
 						DispatchQueue.main.async {
 							self?.stopActivity()
 							self?.reloadTable()
@@ -547,8 +532,7 @@ extension MainListController: UIImagePickerControllerDelegate, UINavigationContr
 			present(picker, animated: true, completion: nil)
 		} else {
 			let alertController: UIAlertController = {
-				let controller = UIAlertController(title:"Cannot scan".localized, message: "You don't have a camera.".localized,
-												   preferredStyle: .alert)
+				let controller = UIAlertController(title:"Cannot scan".localized, message: "You don't have a camera.".localized,  preferredStyle: .alert)
 				let action = UIAlertAction(title: "OK".localized, style: .default)
 				controller.addAction(action)
 				return controller
@@ -569,7 +553,7 @@ extension MainListController: UIImagePickerControllerDelegate, UINavigationContr
 	}
 	
 	func imagePickerController(_ picker: UIImagePickerController,
-							   didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+            didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
 		picker.dismiss(animated: true, completion: nil)
 		guard let image = info[.originalImage] as? UIImage else {
 			fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
@@ -608,11 +592,11 @@ extension MainListController {
 			let savedImg = SavedImage(fileName: fileName ?? UUID().uuidString, image: image)
 			
 			self?.startActivity()
-			DataCenter.imageDataManager.add(savedImage: savedImg) { _ in
+			DCCDataCenter.localImageManager.add(savedImage: savedImg) { _ in
 				DispatchQueue.main.async {
 					self?.stopActivity()
 					self?.table.reloadData()
-					let rowCount = DataCenter.images.count
+					let rowCount = DCCDataCenter.images.count
 					if rowCount > 0 {
 						let scrollToNum = rowCount - 1
 						let path = IndexPath(row: scrollToNum, section: TableSection.images.rawValue)
@@ -687,11 +671,11 @@ extension MainListController: UIDocumentPickerDelegate {
 			let pdf = SavedPDF(fileName: fileName ?? UUID().uuidString, pdfUrl: url as URL)
 			
 			self?.startActivity()
-			DataCenter.pdfDataManager.add(savedPdf: pdf) { _ in
+			DCCDataCenter.localImageManager.add(savedPdf: pdf) { _ in
 				DispatchQueue.main.async {
 					self?.stopActivity()
 					self?.table.reloadData()
-					let rowsCount = DataCenter.pdfs.count
+					let rowsCount = DCCDataCenter.pdfs.count
 					if rowsCount > 0 {
 						let scrollToNum = rowsCount-1
 						let path = IndexPath(row: scrollToNum, section: TableSection.pdfs.rawValue)

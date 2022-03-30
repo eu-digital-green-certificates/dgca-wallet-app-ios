@@ -28,6 +28,7 @@
 
 import UIKit
 import PDFKit
+import DCCInspection
 
 class PDFTableViewCell: UITableViewCell {
   @IBOutlet fileprivate weak var pdfView: UIView!

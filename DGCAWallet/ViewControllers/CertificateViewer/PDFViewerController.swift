@@ -28,7 +28,7 @@
 
 import UIKit
 import PDFKit
-import SwiftDGC
+import DCCInspection
 
 class PDFViewerController: UIViewController {
 

@@ -1170,6 +1170,32 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tRY-SM-ALI">
+                                <rect key="frame" x="64" y="617" width="262" height="4"/>
+                            </progressView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L0p-Da-kgb" customClass="RoundedButton" customModule="DGCAWallet" customModuleProvider="target">
+                                <rect key="frame" x="131" y="557" width="128" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="WH5-kT-YUj"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="128" id="gwa-s4-FSd"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Reload">
+                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="21"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="radius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="padding">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="reloadAction" destination="ysI-lD-MMP" eventType="touchUpInside" id="yUX-39-myL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2IL-4a-0QH"/>
                         <color key="backgroundColor" name="walletBlue"/>
@@ -1179,15 +1205,20 @@
                             <constraint firstItem="9nO-9e-hKR" firstAttribute="centerY" secondItem="nK0-Ka-oxK" secondAttribute="centerY" id="1EC-kR-o8z"/>
                             <constraint firstItem="6dc-Ly-1LW" firstAttribute="leading" secondItem="2IL-4a-0QH" secondAttribute="leading" constant="16" id="1WQ-ap-biP"/>
                             <constraint firstItem="2IL-4a-0QH" firstAttribute="bottom" secondItem="Yx8-qg-PWV" secondAttribute="bottom" constant="32" id="5iX-L0-KYG"/>
+                            <constraint firstItem="6dc-Ly-1LW" firstAttribute="top" secondItem="tRY-SM-ALI" secondAttribute="bottom" constant="33" id="5nL-3q-MfD"/>
+                            <constraint firstItem="L0p-Da-kgb" firstAttribute="centerX" secondItem="nK0-Ka-oxK" secondAttribute="centerX" id="96i-U5-UTD"/>
                             <constraint firstItem="N7y-9d-COU" firstAttribute="top" secondItem="bgA-BE-q6I" secondAttribute="bottom" constant="8" id="Kcp-bY-ngv"/>
+                            <constraint firstItem="tRY-SM-ALI" firstAttribute="top" secondItem="L0p-Da-kgb" secondAttribute="bottom" constant="20" id="MFU-jI-mtX"/>
                             <constraint firstAttribute="bottom" secondItem="4uz-H9-TEA" secondAttribute="bottom" id="Nf8-2D-RJX"/>
                             <constraint firstItem="Y0y-FM-nxg" firstAttribute="top" secondItem="nK0-Ka-oxK" secondAttribute="top" id="RzH-PP-GTn"/>
                             <constraint firstAttribute="trailing" secondItem="Y0y-FM-nxg" secondAttribute="trailing" id="TCR-cd-c89"/>
                             <constraint firstItem="Y0y-FM-nxg" firstAttribute="leading" secondItem="nK0-Ka-oxK" secondAttribute="leading" id="YLV-On-uAX"/>
                             <constraint firstItem="Yx8-qg-PWV" firstAttribute="top" secondItem="4uz-H9-TEA" secondAttribute="top" constant="24" id="ZcQ-gu-zK3"/>
+                            <constraint firstItem="2IL-4a-0QH" firstAttribute="trailing" secondItem="tRY-SM-ALI" secondAttribute="trailing" constant="64" id="dGE-5E-EO2"/>
                             <constraint firstItem="bgA-BE-q6I" firstAttribute="centerX" secondItem="nK0-Ka-oxK" secondAttribute="centerX" id="deP-Kv-Hzf"/>
                             <constraint firstItem="2IL-4a-0QH" firstAttribute="trailing" secondItem="6dc-Ly-1LW" secondAttribute="trailing" constant="16" id="dh8-ns-3PC"/>
                             <constraint firstAttribute="trailing" secondItem="4uz-H9-TEA" secondAttribute="trailing" id="jwk-iZ-8BZ"/>
+                            <constraint firstItem="tRY-SM-ALI" firstAttribute="leading" secondItem="2IL-4a-0QH" secondAttribute="leading" constant="64" id="jxw-nF-54g"/>
                             <constraint firstItem="bgA-BE-q6I" firstAttribute="top" secondItem="Y0y-FM-nxg" secondAttribute="bottom" constant="8" id="mFm-n7-dLO"/>
                             <constraint firstItem="4uz-H9-TEA" firstAttribute="leading" secondItem="nK0-Ka-oxK" secondAttribute="leading" id="oIn-3D-Dnv"/>
                             <constraint firstItem="4uz-H9-TEA" firstAttribute="top" secondItem="6dc-Ly-1LW" secondAttribute="bottom" constant="20" id="rKN-PW-3sE"/>
@@ -1200,15 +1231,20 @@
                         <outlet property="activityIndicator" destination="9nO-9e-hKR" id="cNx-Wq-0Wh"/>
                         <outlet property="appNameLabel" destination="N7y-9d-COU" id="FkU-Jh-zxP"/>
                         <outlet property="messageLabel" destination="6dc-Ly-1LW" id="taF-7d-xwg"/>
+                        <outlet property="progresBar" destination="tRY-SM-ALI" id="sLK-NR-XNB"/>
+                        <outlet property="reloadButton" destination="L0p-Da-kgb" id="ve3-to-PHt"/>
                         <segue destination="BcE-gA-Tuj" kind="show" identifier="showMainList" id="GGI-dr-YbQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k79-Ja-kNa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-726" y="119"/>
+            <point key="canvasLocation" x="-726.15384615384608" y="118.72037914691943"/>
         </scene>
     </scenes>
     <designables>
+        <designable name="L0p-Da-kgb">
+            <size key="intrinsicContentSize" width="91.666666666666671" height="39.333333333333336"/>
+        </designable>
         <designable name="MID-ne-Jur">
             <size key="intrinsicContentSize" width="112" height="51"/>
         </designable>

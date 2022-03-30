@@ -26,8 +26,7 @@
 //  
 
 import UIKit
-import SwiftDGC
-
+import DCCInspection
 
 class SettingsTableController: UITableViewController {
 
@@ -45,7 +44,7 @@ class SettingsTableController: UITableViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    versionLabel.text = DataCenter.appVersion
+    versionLabel.text = DCCDataCenter.appVersion
     reloadLabel.text = "Reload".localized
     licensesLabel.text = "Licenses".localized
     privacyInfoLabel.text = "Privacy Information".localized
@@ -61,7 +60,7 @@ class SettingsTableController: UITableViewController {
           showLicenses()
         }
     case 1:
-      reloadAllData()
+        reloadAllData()
     default:
         break
     }
@@ -82,7 +81,7 @@ class SettingsTableController: UITableViewController {
     switch section {
     case 1:
       let format = "Last Updated: %@".localized
-      return String(format: format, DataCenter.lastFetch.dateTimeString)
+      return String(format: format, DCCDataCenter.lastFetch.dateTimeString)
     default:
       return nil
     }
@@ -94,7 +93,7 @@ class SettingsTableController: UITableViewController {
   
   func reloadAllData() {
     activityIndicator.startAnimating()
-    DataCenter.reloadStorageData { result in
+    DCCDataCenter.reloadWalletStorageData { result in
       DispatchQueue.main.async { [weak self] in
         self?.activityIndicator.stopAnimating()
         self?.tableView.reloadData()
@@ -104,7 +103,7 @@ class SettingsTableController: UITableViewController {
   }
 
   func openPrivacyDoc() {
-    let link = DataCenter.localDataManager.versionedConfig["privacyUrl"].string ?? ""
+    let link = DCCDataCenter.localDataManager.versionedConfig["privacyUrl"].string ?? ""
     openUrl(link)
   }
 

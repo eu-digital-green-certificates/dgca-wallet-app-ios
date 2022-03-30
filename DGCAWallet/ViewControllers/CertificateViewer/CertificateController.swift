@@ -25,8 +25,8 @@
 //  Created by Yannick Spreen on 4/30/21.
 //  
 
-import SwiftDGC
 import UIKit
+import DCCInspection
 
 class CertificateController: UIViewController {
   @IBOutlet fileprivate weak var table: UITableView!
@@ -44,23 +44,20 @@ class CertificateController: UIViewController {
     table.contentInset = .init(top: 0, left: 0, bottom: 32, right: 0)
   }
   
-  private func validateAndSetupInterface() {
-    guard let hCert = hCert else { return }
+    private func validateAndSetupInterface() {
+      guard let hCert = hCert else { return }
     
-    activityIndicator.startAnimating()
-    let validator = CertificateValidator(with: hCert)
-    DispatchQueue.global(qos: .userInitiated).async {
-      validator.validate {[weak self] (state) in
-        self?.validityState = state
-        let builder = SectionBuilder(with: hCert, validity: state, for: .wallet)
-        self?.sectionBuilder = builder
-        DispatchQueue.main.async {
-          self?.activityIndicator.stopAnimating()
-          self?.table.reloadData()
-        }
+      activityIndicator.startAnimating()
+      let validator = DCCCertificateValidator(with: hCert)
+      let state = validator.validateWalletCertificate()
+      self.validityState = state
+      let builder = SectionBuilder(with: hCert, validity: state, for: .wallet)
+      self.sectionBuilder = builder
+      DispatchQueue.main.async {
+        self.activityIndicator.stopAnimating()
+        self.table.reloadData()
       }
     }
-  }
 }
 
 extension CertificateController: UITableViewDataSource {

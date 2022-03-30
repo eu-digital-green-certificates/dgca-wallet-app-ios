@@ -25,7 +25,7 @@
 //
 
 import UIKit
-import SwiftDGC
+import DCCInspection
 
 class InfoCell: UITableViewCell {
   @IBOutlet fileprivate weak var headerLabel: UILabel!

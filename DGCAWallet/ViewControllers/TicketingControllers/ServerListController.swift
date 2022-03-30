@@ -26,7 +26,8 @@
 //  
 
 import UIKit
-import SwiftDGC
+import DCCInspection
+import DGCCoreLibrary
 
 class ServerListController: UIViewController {
   private enum Segues {

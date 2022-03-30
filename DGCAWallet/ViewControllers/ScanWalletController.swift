@@ -6,9 +6,11 @@
 //
 
 import UIKit
-import SwiftDGC
 import Vision
 import AVFoundation
+import DGCCoreLibrary
+import DCCInspection
+
 
  protocol ScanWalletDelegate: AnyObject {
   func walletController(_ controller: ScanWalletController, didScanCertificate certificate: HCert)

@@ -25,8 +25,8 @@
 //  Created by Yannick Spreen on 4/30/21.
 //  
 
-import SwiftDGC
 import UIKit
+import DCCInspection
 
 class CertCodeController: UIViewController {
   @IBOutlet fileprivate weak var imageView: UIImageView!

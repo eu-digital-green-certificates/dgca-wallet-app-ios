@@ -27,6 +27,7 @@
         
 
 import UIKit
+import DCCInspection
 
 class TokenInfoCell: UITableViewCell {
   

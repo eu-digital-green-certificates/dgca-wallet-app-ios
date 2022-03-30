@@ -27,8 +27,9 @@
 
 
 import UIKit
-import SwiftDGC
 import CryptoSwift
+import DGCCoreLibrary
+import DCCInspection
 
 class TicketingAcceptanceController: UIViewController {
   private enum Segues {

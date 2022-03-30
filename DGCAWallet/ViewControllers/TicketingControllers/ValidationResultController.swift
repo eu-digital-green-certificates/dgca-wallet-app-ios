@@ -27,7 +27,7 @@
 
 
 import UIKit
-import SwiftDGC
+import DCCInspection
 
 class ValidationResultController: UIViewController {
   @IBOutlet fileprivate weak var titleLabel: UILabel!

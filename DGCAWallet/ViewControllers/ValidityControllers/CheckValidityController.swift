@@ -27,7 +27,7 @@
         
 
 import UIKit
-import SwiftDGC
+import DCCInspection
 
 class CheckValidityController: UIViewController {
   private enum Constants {
@@ -36,10 +36,10 @@ class CheckValidityController: UIViewController {
     static let showRuleValidationResult = "showRuleValidationResult"
     static let bottomOffset: CGFloat = 32.0
   }
-  
-  @IBOutlet fileprivate weak var closeButton: UIButton!
-  @IBOutlet fileprivate weak var checkValidityButton: UIButton!
-  @IBOutlet fileprivate weak var tableView: UITableView!
+
+    @IBOutlet fileprivate weak var closeButton: UIButton!
+    @IBOutlet fileprivate weak var checkValidityButton: UIButton!
+    @IBOutlet fileprivate weak var tableView: UITableView!
     
   private var items: [ValidityCellModel] = []
   private var hCert: HCert?
@@ -51,42 +51,42 @@ class CheckValidityController: UIViewController {
     checkValidityButton.setTitle("I Agree, check validity".localized, for: .normal)
     closeButton.setTitle("Done".localized, for: .normal)
   }
-    
-  @IBAction func closeButtonAction(_ sender: Any) {
-    self.dismiss(animated: true, completion: nil)
-  }
+
+    @IBAction func closeButtonAction(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
   private func setupView() {
     setupInitialDate()
     tableView.contentInset = .init(top: .zero, left: .zero, bottom: Constants.bottomOffset, right: .zero)
     tableView.reloadData()
   }
-    
+
   private func setupTableView() {
     tableView.contentInset = .init(top: .zero, left: .zero, bottom: Constants.bottomOffset, right: .zero)
   }
-    
+
   private func setupInitialDate() {
     items.append(ValidityCellModel(title: "Check country rules conformance of your certificate".localized, description: "",
         needChangeTitleFont: true))
     items.append(ValidityCellModel(cellType: .countryAndTimeSelection))
     items.append(ValidityCellModel(title: "Disclaimer".localized, description: "disclaimer_text".localized))
   }
-    
-  func setupCheckValidity(with cert: HCert?) {
-    self.hCert = cert
-  }
-    
-  @IBAction func checkValidityAction(_ sender: Any) {
-    performSegue(withIdentifier: Constants.showRuleValidationResult, sender: nil)
-  }
+
+    func setupCheckValidity(with cert: HCert?) {
+        self.hCert = cert
+    }
+
+    @IBAction func checkValidityAction(_ sender: Any) {
+        performSegue(withIdentifier: Constants.showRuleValidationResult, sender: nil)
+    }
 }
 
 extension CheckValidityController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return items.count
   }
-  
+
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let item: ValidityCellModel = items[indexPath.row]
     if item.cellType == .titleAndDescription {

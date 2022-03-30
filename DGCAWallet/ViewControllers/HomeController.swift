@@ -26,44 +26,105 @@
 //  
 
 import UIKit
-import SwiftDGC
+import DGCCoreLibrary
+import DCCInspection
 
 class HomeController: UIViewController {
   private enum Constants {
     static let scannerSegueID = "showMainList"
   }
 
-  @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
-  @IBOutlet fileprivate weak var appNameLabel: UILabel!
-  @IBOutlet fileprivate weak var messageLabel: UILabel!
-    
+    @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet fileprivate weak var appNameLabel: UILabel!
+    @IBOutlet fileprivate weak var messageLabel: UILabel!
+    @IBOutlet fileprivate weak var progresBar: UIProgressView!
+    @IBOutlet fileprivate weak var reloadButton: UIButton!
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
       return .lightContent
     }
 
     override func viewDidLoad() {
-      super.viewDidLoad()
-      CoreManager.config = HCertConfig(prefetchAllCodes: true, checkSignatures: false, debugPrintJsonErrors: true)
-      appNameLabel.text = "Wallet App".localized
+        super.viewDidLoad()
+        appNameLabel.text = "Wallet App".localized
+
+        let center = NotificationCenter.default
+        center.addObserver(forName: Notification.Name("LoadingRevocationsNotificationName"), object: nil, queue: .main) { notification in
+            let strMessage = notification.userInfo?["name"] as? String ?? "Loading data".localized
+            self.messageLabel?.text = strMessage
+            let percentage = notification.userInfo?["progress" ] as? Float ?? 0.0
+            self.progresBar?.setProgress(min(1.0, percentage), animated: true)
+        }
+        reloadData()
+    }
+
+    deinit {
+        let center = NotificationCenter.default
+        center.removeObserver(self)
+    }
+    
+    private func reloadData() {
+        reloadButton.isHidden = true
         self.activityIndicator.startAnimating()
-        messageLabel.text = "Loading data".localized
-        DataCenter.initializeAllStorageData {[unowned self] result in
-            DispatchQueue.main.async {
-              self.activityIndicator.stopAnimating()
-              self.loadComplete()
+        DCCDataCenter.prepareWalletLocalData {[unowned self] result in
+            if case let .failure(error) = result {
+                DispatchQueue.main.async {
+                    DGCLogger.logError(error)
+                    self.activityIndicator.stopAnimating()
+                    self.showAlertCannotReload()
+                }
+                
+            } else if case .noData = result {
+                DispatchQueue.main.async {
+                    DGCLogger.logInfo("No input data. Possible error - No internet connection")
+                    self.reloadButton.isHidden = false
+                    self.activityIndicator.stopAnimating()
+                    self.showAlertNoData()
+                }
+                
+            } else {
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                    self.loadComplete()
+                }
             }
         }
     }
 
+    @IBAction func reloadAction() {
+        reloadData()
+    }
+    
+    private func showAlertNoData() {
+        let title = "Cannot load data".localized
+        let message = "Please check the internet connection and try again.".localized
+        
+        let infoAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default) { action in
+        }
+        infoAlertController.addAction(action)
+        self.present(infoAlertController, animated: true)
+    }
+    
+    func showAlertCannotReload() {
+        let alert = UIAlertController(title: "Cannot update stored data".localized, message: "You can continue working. Please update your data later.".localized, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Later".localized, style: .default, handler: { _ in
+            self.activityIndicator.stopAnimating()
+            self.loadComplete()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Reload".localized, style: .default, handler: { [unowned self] (_ : UIAlertAction!) in
+            self.reloadData()
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     private func loadComplete() {
         let renderer = UIGraphicsImageRenderer(size: self.view.bounds.size)
         SecureBackground.image = renderer.image { rendererContext in
-          self.view.layer.render(in: rendererContext.cgContext)
+            self.view.layer.render(in: rendererContext.cgContext)
         }
-        if DataCenter.localDataManager.versionedConfig["outdated"].bool == true {
-          showAlert(title: "Update Available".localized, subtitle: "This version of the app is out of date.".localized)
-        } else {
-          performSegue(withIdentifier: Constants.scannerSegueID, sender: nil)
-        }
+        performSegue(withIdentifier: Constants.scannerSegueID, sender: nil)
     }
 }

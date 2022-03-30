@@ -27,6 +27,7 @@
         
 
 import UIKit
+import DCCInspection
 
 class SimpleValidityCell: UITableViewCell {
   @IBOutlet fileprivate weak var titleLabel: UILabel!

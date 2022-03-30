@@ -27,7 +27,7 @@
         
 
 import UIKit
-import SwiftDGC
+import DCCInspection
 import CertLogic
 
 public typealias OnCloseHandler = () -> Void
@@ -132,7 +132,7 @@ extension RuleValidationResultVC {
       
     let certType = getCertificationType(type: hCert.certificateType)
     if let countryCode = hCert.ruleCountryCode {
-      let valueSets = DataCenter.localDataManager.getValueSetsForExternalParameters()
+      let valueSets = DCCDataCenter.localDataManager.getValueSetsForExternalParameters()
       let filterParameter = FilterParameter(validationClock: self.selectedDate,
         countryCode: countryCode,
         certificationType: certType)
@@ -208,7 +208,7 @@ extension RuleValidationResultVC {
 
 // MARK: External CertType from HCert type
 extension RuleValidationResultVC {
-  private func getCertificationType(type: SwiftDGC.HCertType) -> CertificateType {
+  private func getCertificationType(type: HCertType) -> CertificateType {
     var certType: CertificateType = .general
     switch type {
     case .recovery:

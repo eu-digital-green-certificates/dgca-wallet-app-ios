@@ -7,7 +7,8 @@
 
 @testable import DGCAWallet
 import XCTest
-import SwiftDGC
+import DGCCoreLibrary
+import DCCInspection
 
 class EHNTests: XCTestCase {
 
@@ -66,7 +67,7 @@ class EHNTests: XCTestCase {
         //let yParam = (elem["coord"] as? [String])?[1]
       {
         print("We know this KID - check if this sig works...")
-          if COSE.verify(_cbor: data, with: xParam) {
+          if COSE.verify(data, with: xParam) {
           print("All is well! Payload: ", payload)
           return
         }
@@ -128,7 +129,7 @@ class EHNTests: XCTestCase {
       }
       let encodedCert = body.base64EncodedString()
       XCTAssert(KID.string(from: KID.from(encodedCert)) == kid)
-        if COSE.verify(_cbor: data, with: encodedCert) {
+        if COSE.verify(data, with: encodedCert) {
         expectation.fulfill()
       } else {
         XCTAssert(false)

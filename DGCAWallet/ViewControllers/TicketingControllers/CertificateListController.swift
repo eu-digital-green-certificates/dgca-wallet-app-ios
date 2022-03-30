@@ -26,6 +26,7 @@
 //  
 
 import UIKit
+import DCCInspection
 
 class CertificateListController: UIViewController {
   let showTicketAcceptController = "showTicketAcceptController"

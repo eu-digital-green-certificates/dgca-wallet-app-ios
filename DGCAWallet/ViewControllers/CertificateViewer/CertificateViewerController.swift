@@ -25,8 +25,9 @@
 //
 
 import UIKit
-import SwiftDGC
 import PDFKit
+import DGCCoreLibrary
+import DCCInspection
 
 protocol CertificateManaging: AnyObject {
   func certificateViewer(_ controller: CertificateViewerController, didDeleteCertificate cert: HCert)
@@ -111,7 +112,7 @@ class CertificateViewerController: UIViewController {
         shareButton.isHidden = false
       }
       nameLabel.textColor = .white
-      headerBackground.backgroundColor = .walletBlue
+      headerBackground.backgroundColor = .verifierBlue
     }
     
     view.layoutIfNeeded()
@@ -150,7 +151,7 @@ class CertificateViewerController: UIViewController {
 		showAlert( title: "Delete Certificate".localized, subtitle: "cert.delete.body".localized,
         actionTitle: "Confirm".localized, cancelTitle: "Cancel".localized) { [unowned self] in
       if $0 {
-        DataCenter.localDataManager.remove(withDate: certDate) { _ in
+        DCCDataCenter.localDataManager.remove(withDate: certDate) { _ in
           self.delegate?.certificateViewer(self, didDeleteCertificate: cert)
           DispatchQueue.main.async {
             self.dismiss(animated: true, completion: nil)
@@ -160,29 +161,31 @@ class CertificateViewerController: UIViewController {
     }
   }
   
+  typealias CompletionHandler = () -> Void
+  
   private func saveCert(completion: @escaping CompletionHandler) {
     showInputDialog(title: "Confirm TAN".localized,
         subtitle: "Please enter the TAN that was provided together with your certificate:".localized,
         actionTitle: "Confirm".localized, inputPlaceholder: "XYZ12345" ) { [unowned self] in
       guard let certificate = self.hCert else {
-        DGCLogger.logInfo("Certificate error")
-        completion()
-        return
+          DGCLogger.logInfo("Certificate error")
+          completion()
+          return
       }
         
       GatewayConnection.claim(cert: certificate, with: $0) { success, newTan, error in
         guard error == nil else {
-          completion()
-          DispatchQueue.main.async {
-            self.showAlert(title:"Cannot save the Certificate".localized, subtitle: "Check the TAN and try again.".localized)
-          }
+            completion()
+            DispatchQueue.main.async {
+              self.showAlert(title:"Cannot save the Certificate".localized, subtitle: "Check the TAN and try again.".localized)
+            }
 
-          DGCLogger.logError(error!)
-          return
+            DGCLogger.logError(error!)
+            return
         }
-        
+
         if success {
-					DataCenter.localDataManager.add(certificate, with: newTan) { _ in
+					DCCDataCenter.localDataManager.add(certificate, with: newTan) { _ in
 						completion()
 						DispatchQueue.main.async {
 							self.showAlert(title: "Certificate saved successfully".localized, subtitle: "Now it is available in the wallet".localized) { _ in

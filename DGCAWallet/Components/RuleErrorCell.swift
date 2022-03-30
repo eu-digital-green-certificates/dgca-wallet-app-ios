@@ -26,7 +26,7 @@
 //  
 
 import UIKit
-import SwiftDGC
+import DCCInspection
 
 class RuleErrorCell: UITableViewCell {
   @IBOutlet fileprivate weak var ruleLabel: UILabel!
@@ -62,16 +62,16 @@ class RuleErrorCell: UITableViewCell {
     currentValueLabel.text = infoItem.content
     switch infoItem.ruleValidationResult {
     case .invalid:
-        failedLabel.textColor = .walletRed
+        failedLabel.textColor = .certificateRed
         failedLabel.text = "Failed".localized
     case .ruleInvalid:
-        failedLabel.textColor = .walletGreen
+        failedLabel.textColor = .certificateLimited
         failedLabel.text = "Passed".localized
     case .valid:
-        failedLabel.textColor = .walletGreen
+        failedLabel.textColor = .certificateGreen
         failedLabel.text = "Open".localized
     case .revoked:
-        failedLabel.textColor = .walletRed
+        failedLabel.textColor = .certificateRed
         failedLabel.text = "Revoked".localized
     }
 
