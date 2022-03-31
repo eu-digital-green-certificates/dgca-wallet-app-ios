@@ -27,7 +27,7 @@
 
 import UIKit
 import DGCCoreLibrary
-import DCCInspection
+import DGCVerificationCenter
 
 class HomeController: UIViewController {
   private enum Constants {
@@ -66,7 +66,7 @@ class HomeController: UIViewController {
     private func reloadData() {
         reloadButton.isHidden = true
         self.activityIndicator.startAnimating()
-        DCCDataCenter.prepareWalletLocalData {[unowned self] result in
+        AppManager.shared.verificationCenter.prepareStoredData(appType: .wallet)  {[unowned self] result in
             if case let .failure(error) = result {
                 DispatchQueue.main.async {
                     DGCLogger.logError(error)

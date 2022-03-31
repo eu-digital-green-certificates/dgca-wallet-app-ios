@@ -60,7 +60,7 @@ class MainListController: UIViewController {
 	private var loading = false
 	
     var downloadedDataHasExpired: Bool {
-        return DCCDataCenter.lastFetch.timeIntervalSinceNow < -SharedConstants.expiredDataInterval
+        return DCCDataCenter.downloadedDataHasExpired
     }
 
 	override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -115,18 +115,12 @@ class MainListController: UIViewController {
 		alert.addAction(UIAlertAction(title: "Later".localized, style: .default, handler: { _ in }))
 		
 		alert.addAction(UIAlertAction(title: "Reload".localized, style: .default, handler: { (_: UIAlertAction!) in
-			DCCDataCenter.reloadWalletStorageData(completion: { _ in })
+            AppManager.shared.verificationCenter.updateStoredData(appType: .wallet, completion: { _ in })
 		}))
 		self.present(alert, animated: true, completion: nil)
 	}
 	
 	// MARK: - Private UI methods
-	private func reloadAllComponents(completion: @escaping DataCompletionHandler) {
-        DCCDataCenter.initializeAllWalletStorageData { result in
-			completion(.success)
-		}
-	}
-	
 	private func startActivity() {
 		loading = true
 		activityIndicator.startAnimating()

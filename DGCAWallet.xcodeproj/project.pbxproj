@@ -86,6 +86,15 @@
 		D2BBDEC02798B25E0043A8A7 /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB1A269DBB4C00074F66 /* context.jsonc */; };
 		D2BBDEC12798B25E0043A8A7 /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB1A269DBB4C00074F66 /* context.jsonc */; };
 		D2BBDEC22798B25F0043A8A7 /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB1A269DBB4C00074F66 /* context.jsonc */; };
+		D2D8F2C627F5ECAD00508610 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D8F2C527F5ECAD00508610 /* AppManager.swift */; };
+		D2D8F2C727F5ED3500508610 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D8F2C527F5ECAD00508610 /* AppManager.swift */; };
+		D2D8F2C827F5ED3500508610 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D8F2C527F5ECAD00508610 /* AppManager.swift */; };
+		D2D8F2C927F5ED3900508610 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE891304263581D900CB92AF /* HomeController.swift */; };
+		D2D8F2CA27F5ED3A00508610 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE891304263581D900CB92AF /* HomeController.swift */; };
+		D2D8F2CB27F5ED3C00508610 /* MainListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED949C9263B50CE00883558 /* MainListController.swift */; };
+		D2D8F2CC27F5ED3D00508610 /* MainListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED949C9263B50CE00883558 /* MainListController.swift */; };
+		D2D8F2CD27F5ED3F00508610 /* ScanWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C8950272353610090398A /* ScanWalletController.swift */; };
+		D2D8F2CE27F5ED4000508610 /* ScanWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C8950272353610090398A /* ScanWalletController.swift */; };
 		D2DFDB3E27C50E5900BA15B9 /* SquareViewFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DFDB3D27C50E5900BA15B9 /* SquareViewFinder.swift */; };
 		D2DFDB3F27C50E5900BA15B9 /* SquareViewFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DFDB3D27C50E5900BA15B9 /* SquareViewFinder.swift */; };
 		D2DFDB4027C50E5900BA15B9 /* SquareViewFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DFDB3D27C50E5900BA15B9 /* SquareViewFinder.swift */; };
@@ -176,6 +185,7 @@
 		D23EF7A4272057F40097D82B /* CertificateCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertificateCell.swift; sourceTree = "<group>"; };
 		D23EF7A5272057F40097D82B /* ServerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerCell.swift; sourceTree = "<group>"; };
 		D24C8950272353610090398A /* ScanWalletController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ScanWalletController.swift; sourceTree = "<group>"; tabWidth = 2; };
+		D2D8F2C527F5ECAD00508610 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		D2DFDB3D27C50E5900BA15B9 /* SquareViewFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquareViewFinder.swift; sourceTree = "<group>"; };
 		DA01661B265541C0005B73A1 /* LicenseTableController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = LicenseTableController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		DA01661D26554992005B73A1 /* OpenSourceNotices.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = OpenSourceNotices.json; sourceTree = "<group>"; };
@@ -372,6 +382,7 @@
 				CE13CF1E262DDE800070C80E /* SupportingFiles */,
 				FEC54BDF271F24120048B6BC /* Ticketing */,
 				5C00071A26D38C5C002E5013 /* NFC */,
+				D2D8F2C427F5EC2E00508610 /* Models */,
 				CE13CF1D262DDE730070C80E /* Components */,
 				CE13CF1C262DDE600070C80E /* ViewControllers */,
 				CE13CF1B262DDE540070C80E /* Extensions */,
@@ -442,6 +453,14 @@
 				5C50CF0F269700710015EE29 /* RuleValidationResultVC.swift */,
 			);
 			path = ValidityControllers;
+			sourceTree = "<group>";
+		};
+		D2D8F2C427F5EC2E00508610 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D2D8F2C527F5ECAD00508610 /* AppManager.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		D2DFDB1F27C4F40500BA15B9 /* Resources */ = {
@@ -646,6 +665,7 @@
 				5C00073626D625D0002E5013 /* PDFTableViewCell.swift in Sources */,
 				CE891305263581D900CB92AF /* HomeController.swift in Sources */,
 				FEEAD6DB273BBE9600D883EB /* TokenInfoCell.swift in Sources */,
+				D2D8F2C627F5ECAD00508610 /* AppManager.swift in Sources */,
 				5C00071C26D38CC3002E5013 /* NFCHelper.swift in Sources */,
 				D2DFDB3E27C50E5900BA15B9 /* SquareViewFinder.swift in Sources */,
 				CE260F56263DD1720083A200 /* WalletCell.swift in Sources */,
@@ -677,6 +697,8 @@
 				5C00071D26D38CC3002E5013 /* NFCHelper.swift in Sources */,
 				5C50CF0A269700550015EE29 /* CheckValidityController.swift in Sources */,
 				5C556D4526F9DAF7007E2C2E /* TicketingAcceptanceController.swift in Sources */,
+				D2D8F2C927F5ED3900508610 /* HomeController.swift in Sources */,
+				D2D8F2CB27F5ED3C00508610 /* MainListController.swift in Sources */,
 				5C50CF3B26973D9D0015EE29 /* UserDefaults+.swift in Sources */,
 				5C50CF3F26983E090015EE29 /* UITableView+.swift in Sources */,
 				5C00073B26D625DE002E5013 /* ImageTableViewCell.swift in Sources */,
@@ -687,10 +709,12 @@
 				5C00073726D625D0002E5013 /* PDFTableViewCell.swift in Sources */,
 				5C50CF23269704240015EE29 /* UIViewController+.swift in Sources */,
 				D2B605BD2743CA92000D914A /* ValidationResultController.swift in Sources */,
+				D2D8F2C727F5ED3500508610 /* AppManager.swift in Sources */,
 				5C50CF3026972BFD0015EE29 /* ExtendedValidityCell.swift in Sources */,
 				5C556D4A26F9F8AC007E2C2E /* CertificateListController.swift in Sources */,
 				D2DFDB3F27C50E5900BA15B9 /* SquareViewFinder.swift in Sources */,
 				CEFAD87F262714C4009AFEF9 /* EHNTests.swift in Sources */,
+				D2D8F2CD27F5ED3F00508610 /* ScanWalletController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -700,8 +724,10 @@
 			files = (
 				5C00073826D625D0002E5013 /* PDFTableViewCell.swift in Sources */,
 				5C00073C26D625DE002E5013 /* ImageTableViewCell.swift in Sources */,
+				D2D8F2CE27F5ED4000508610 /* ScanWalletController.swift in Sources */,
 				5C50CF3C26973D9D0015EE29 /* UserDefaults+.swift in Sources */,
 				D2DFDB4027C50E5900BA15B9 /* SquareViewFinder.swift in Sources */,
+				D2D8F2CC27F5ED3D00508610 /* MainListController.swift in Sources */,
 				5C50CF4026983E090015EE29 /* UITableView+.swift in Sources */,
 				5C556D4626F9DAF7007E2C2E /* TicketingAcceptanceController.swift in Sources */,
 				5C556D4B26F9F8AC007E2C2E /* CertificateListController.swift in Sources */,
@@ -713,7 +739,9 @@
 				5C50CF1D2697023B0015EE29 /* RuleErrorCell.swift in Sources */,
 				5C00071E26D38CC3002E5013 /* NFCHelper.swift in Sources */,
 				5C50CF13269700710015EE29 /* RuleValidationResultVC.swift in Sources */,
+				D2D8F2C827F5ED3500508610 /* AppManager.swift in Sources */,
 				5C50CF24269704240015EE29 /* UIViewController+.swift in Sources */,
+				D2D8F2CA27F5ED3A00508610 /* HomeController.swift in Sources */,
 				5C50CF2926972BCA0015EE29 /* SimpleValidityCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

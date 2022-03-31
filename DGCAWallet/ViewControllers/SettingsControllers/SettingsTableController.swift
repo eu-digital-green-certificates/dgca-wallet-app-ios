@@ -26,7 +26,7 @@
 //  
 
 import UIKit
-import DCCInspection
+import DGCVerificationCenter
 
 class SettingsTableController: UITableViewController {
 
@@ -44,7 +44,7 @@ class SettingsTableController: UITableViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    versionLabel.text = DCCDataCenter.appVersion
+    versionLabel.text = AppManager.appVersion
     reloadLabel.text = "Reload".localized
     licensesLabel.text = "Licenses".localized
     privacyInfoLabel.text = "Privacy Information".localized
@@ -81,7 +81,7 @@ class SettingsTableController: UITableViewController {
     switch section {
     case 1:
       let format = "Last Updated: %@".localized
-      return String(format: format, DCCDataCenter.lastFetch.dateTimeString)
+      return String(format: format, AppManager.shared.lastFetch)
     default:
       return nil
     }
@@ -93,7 +93,7 @@ class SettingsTableController: UITableViewController {
   
   func reloadAllData() {
     activityIndicator.startAnimating()
-    DCCDataCenter.reloadWalletStorageData { result in
+    AppManager.shared.verificationCenter.updateStoredData(appType: .wallet) { result in
       DispatchQueue.main.async { [weak self] in
         self?.activityIndicator.stopAnimating()
         self?.tableView.reloadData()
@@ -103,8 +103,8 @@ class SettingsTableController: UITableViewController {
   }
 
   func openPrivacyDoc() {
-    let link = DCCDataCenter.localDataManager.versionedConfig["privacyUrl"].string ?? ""
-    openUrl(link)
+//    let link = DCCDataCenter.localDataManager.versionedConfig["privacyUrl"].string ?? ""
+//    openUrl(link)
   }
 
   func openEuCertDoc() {

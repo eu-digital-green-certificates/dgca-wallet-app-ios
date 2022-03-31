@@ -19,21 +19,33 @@
  * ---license-end
  */
 //  
-//  TicketingData.swift
+//  AppManager.swift
 //  DGCAWallet
 //  
-//  Created by Illia Vlasov on 20.09.2021.
+//  Created by Igor Khomiak on 31.03.2022.
 //  
         
 
-import Foundation
+import UIKit
+import DGCVerificationCenter
 
-struct TicketingQR : Codable {
-  var protocolName    : String
-  var protocolVersion : String
-  var serviceIdentity : String
-  var token           : String
-  var consent         : String
-  var subject         : String
-  var serviceProvider : String
+class AppManager {
+    
+    static var appVersion: String {
+        let versionValue = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "?.?.?"
+        let buildNumValue = (Bundle.main.infoDictionary?["CFBundleVersion"] as? String) ?? "?.?.?"
+        return "\(versionValue)(\(buildNumValue))"
+    }
+    
+    static let shared = AppManager()
+    
+    var lastFetch: String {
+        return "" //lastFetch.dateTimeString
+    }
+    
+    var verificationCenter: DGCVerificationCenter
+    
+    init() {
+        self.verificationCenter = DGCVerificationCenter()
+    }
 }
