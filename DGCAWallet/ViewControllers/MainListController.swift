@@ -347,9 +347,7 @@ extension MainListController: CertificateManaging {
     func certificateViewer(_ controller: CertificateViewerController, didAddCeCertificate cert: HCert) {
         GatewayConnection.lookup(certStrings: [DCCDataCenter.certStrings.last!]) { success, _, _ in
             if success {
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(150)) {
-                    self.reloadTable()
-                }
+				self.reloadTable()
             }
         }
     }
