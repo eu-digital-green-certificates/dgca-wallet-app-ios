@@ -203,15 +203,25 @@
                 <viewControllerPlaceholder storyboardName="Settings" id="gXl-Zy-tPQ" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hir-1F-Okb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1961" y="615"/>
+            <point key="canvasLocation" x="1704" y="653"/>
         </scene>
-        <!--CertificateViewer-->
+        <!--DCCCertificateViewer-->
+        <scene sceneID="JnP-cB-YcS">
+            <objects>
+                <viewControllerPlaceholder storyboardName="DCCCertificateViewer" id="BFW-C8-ZeQ" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="uJE-z0-Xsd"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BxT-gC-paa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3361" y="653"/>
+        </scene>
+        <!--DCCCertificateViewer-->
         <scene sceneID="qN7-Hs-YYH">
             <objects>
-                <viewControllerPlaceholder storyboardName="CertificateViewer" id="HGm-5B-uyQ" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="DCCCertificateViewer" id="HGm-5B-uyQ" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hr0-Nb-7z5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1542" y="663"/>
+            <point key="canvasLocation" x="2332" y="654"/>
         </scene>
         <!--Server List Controller-->
         <scene sceneID="302-Z6-2rd">
@@ -336,7 +346,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CertificateCell" rowHeight="77" id="jYu-JM-UXs" customClass="CertificateCell" customModule="DGCAWallet" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DCCCertificateCell" rowHeight="77" id="jYu-JM-UXs" customClass="DCCCertificateCell" customModule="DGCAWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.666666030883789" width="374" height="77"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jYu-JM-UXs" id="bd7-IO-9sW">
@@ -967,7 +977,7 @@
                                             <outlet property="timeLabel" destination="ZEe-eT-8Ct" id="Lnm-A7-9lk"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="walletCell" rowHeight="101" id="JcT-Kw-bMh" customClass="WalletCell" customModule="DGCAWallet" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WalletCell" rowHeight="101" id="JcT-Kw-bMh" customClass="WalletCell" customModule="DGCAWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="238.66666603088379" width="390" height="101"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JcT-Kw-bMh" id="m3f-OR-BSb">
@@ -1110,8 +1120,9 @@
                         <segue destination="Cp6-NF-vHs" kind="show" identifier="showServicesList" id="Tn6-HN-bIx"/>
                         <segue destination="Zgy-od-xp6" kind="presentation" identifier="showPDFViewer" id="Dow-6R-6Bm"/>
                         <segue destination="x7R-KV-5e1" kind="presentation" identifier="showImageViewer" id="7uC-PL-Ija"/>
-                        <segue destination="HGm-5B-uyQ" kind="presentation" identifier="showCertificateViewer" id="u2N-XI-ku3"/>
+                        <segue destination="HGm-5B-uyQ" kind="presentation" identifier="showSavedDCCCertificate" id="u2N-XI-ku3"/>
                         <segue destination="gXl-Zy-tPQ" kind="presentation" identifier="showSettingsController" id="ZZq-TN-Pzk"/>
+                        <segue destination="BFW-C8-ZeQ" kind="presentation" identifier="showScannedDCCCertificate" id="vDP-Sh-UUi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nMj-BI-krI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

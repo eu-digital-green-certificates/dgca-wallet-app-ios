@@ -19,7 +19,7 @@
  * ---license-end
  */
 //  
-//  CertificateController.swift
+//  DCCCertificateController.swift
 //  DGCAWallet
 //  
 //  Created by Yannick Spreen on 4/30/21.
@@ -27,16 +27,17 @@
 
 import UIKit
 import DCCInspection
+import DGCVerificationCenter
 
-class CertificateController: UIViewController {
+class DCCCertificateController: UIViewController {
   @IBOutlet fileprivate weak var table: UITableView!
   @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
 
-  var hCert: HCert? {
-    (parent as? CertPagesController)?.embeddingVC?.hCert
+  var certificate: MultiTypeCertificate? {
+    (parent as? CertPagesController)?.embeddingVC?.certificate
   }
   private var validityState: ValidityState?
-  private var sectionBuilder: SectionBuilder?
+  private var sectionBuilder: DCCSectionBuilder?
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -45,13 +46,13 @@ class CertificateController: UIViewController {
   }
   
     private func validateAndSetupInterface() {
-      guard let hCert = hCert else { return }
+      guard let hCert = certificate?.digitalCertificate as? HCert else { return }
     
       activityIndicator.startAnimating()
       let validator = DCCCertificateValidator(with: hCert)
       let state = validator.validateWalletCertificate()
       self.validityState = state
-      let builder = SectionBuilder(with: hCert, validity: state, for: .wallet)
+      let builder = DCCSectionBuilder(with: hCert, validity: state, for: .wallet)
       self.sectionBuilder = builder
       DispatchQueue.main.async {
         self.activityIndicator.stopAnimating()
@@ -60,7 +61,7 @@ class CertificateController: UIViewController {
     }
 }
 
-extension CertificateController: UITableViewDataSource {
+extension DCCCertificateController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return self.sectionBuilder?.infoSection.count ?? 0
   }

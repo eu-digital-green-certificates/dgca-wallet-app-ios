@@ -26,7 +26,7 @@
 //  
 
 import UIKit
-import DCCInspection
+import DGCCoreLibrary
 
 class RuleErrorCell: UITableViewCell {
   @IBOutlet fileprivate weak var ruleLabel: UILabel!
@@ -64,38 +64,38 @@ class RuleErrorCell: UITableViewCell {
     case .invalid:
         failedLabel.textColor = .certificateRed
         failedLabel.text = "Failed".localized
-    case .ruleInvalid:
+    case .partlyValid:
         failedLabel.textColor = .certificateLimited
         failedLabel.text = "Passed".localized
     case .valid:
         failedLabel.textColor = .certificateGreen
         failedLabel.text = "Open".localized
-    case .revoked:
-        failedLabel.textColor = .certificateRed
-        failedLabel.text = "Revoked".localized
+//    case .revoked:
+//        failedLabel.textColor = .certificateRed
+//        failedLabel.text = "Revoked".localized
     }
 
     if let countryName = infoItem.countryName {
       switch infoItem.ruleValidationResult {
       case .invalid:
           resultValueLabel.text = String(format: "Failed for %@ (see settings)".localized, countryName)
-      case .ruleInvalid:
+      case .partlyValid:
           resultValueLabel.text = String(format: "Passed for %@ (see settings)".localized, countryName)
       case .valid:
           resultValueLabel.text = String(format: "Open for %@ (see settings)".localized, countryName)
-      case .revoked:
-          resultValueLabel.text = String(format: "Revoked for %@ (see settings)".localized, countryName)
+//      case .revoked:
+//          resultValueLabel.text = String(format: "Revoked for %@ (see settings)".localized, countryName)
       }
     } else {
       switch infoItem.ruleValidationResult {
       case .invalid:
           resultValueLabel.text = "Failed".localized
-      case .ruleInvalid:
+      case .partlyValid:
           resultValueLabel.text = "Passed".localized
       case .valid:
           resultValueLabel.text = "Open".localized
-      case .revoked:
-          resultValueLabel.text = "Revoked".localized
+//      case .revoked:
+//          resultValueLabel.text = "Revoked".localized
       }
     }
   }

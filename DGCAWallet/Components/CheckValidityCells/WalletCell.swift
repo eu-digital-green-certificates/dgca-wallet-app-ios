@@ -18,14 +18,14 @@
  * ---license-end
  */
 //
-//  InfoCell.swift
+//  WalletCell.swift
 //  DGCAWallet
 //
 //  Created by Yannick Spreen on 4/20/21.
 //
 
 import UIKit
-import DCCInspection
+import DGCVerificationCenter
 
 class WalletCell: UITableViewCell {
 	@IBOutlet fileprivate weak var typeLabel: UILabel!
@@ -33,13 +33,12 @@ class WalletCell: UITableViewCell {
 	@IBOutlet fileprivate weak var dateLabel: UILabel!
 	@IBOutlet fileprivate weak var revocationLabel: UILabel!
 	
-	func setupCell(_ dated: DatedCertString) {
-		guard let cert = dated.cert else { return }
-		typeLabel.text = cert.certTypeString
-		nameLabel.text = cert.fullName
-		dateLabel.text = String(format: "Scanned %@".localized, dated.date.localDateString)
+	func setupCell(_ certificate: MultiTypeCertificate) {
+		typeLabel.text = certificate.certTypeString
+		nameLabel.text = certificate.fullName
+		dateLabel.text = String(format: "Scanned %@".localized, certificate.scannedDate.localDateString)
 		// guard let cert = dated.cert else { return }
-        if cert.isRevoked {
+        if certificate.isRevoked {
             revocationLabel.isHidden = false
             revocationLabel.text = "Certificate revoked"
         } else {

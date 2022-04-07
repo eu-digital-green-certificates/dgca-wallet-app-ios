@@ -40,7 +40,7 @@ class PDFTableViewCell: UITableViewCell {
       setupView()
     }
   }
-  
+
   private var pdfViewer: PDFView?
   func setPDF(pdf: SavedPDF) {
     savedPDF = pdf

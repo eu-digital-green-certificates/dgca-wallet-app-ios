@@ -118,8 +118,8 @@ extension CertificateListController: UITableViewDataSource, UITableViewDelegate 
       return cell
       
     } else {
-      let cellID = String(describing: CertificateCell.self)
-      guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as? CertificateCell
+      let cellID = String(describing: DCCCertificateCell.self)
+      guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as? DCCCertificateCell
       else { return UITableViewCell() }
       
       let savedCert = stringCertificates[indexPath.row]

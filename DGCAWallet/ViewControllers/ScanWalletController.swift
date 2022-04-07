@@ -10,10 +10,11 @@ import Vision
 import AVFoundation
 import DGCCoreLibrary
 import DCCInspection
+import DGCVerificationCenter
 
 
  protocol ScanWalletDelegate: AnyObject {
-  func walletController(_ controller: ScanWalletController, didScanCertificate certificate: HCert)
+  func walletController(_ controller: ScanWalletController, didScanCertificate certificate: MultiTypeCertificate)
   func walletController(_ controller: ScanWalletController, didScanInfo info: CheckInQR)
   func walletController(_ controller: ScanWalletController, didFailWithError error: CertificateParsingError)
   func disableBackgroundDetection()
@@ -183,8 +184,8 @@ extension ScanWalletController  {
   private func observationHandler(payloadString: String?) {
     guard let barcodeString = payloadString, !barcodeString.isEmpty else { return }
 
-    if let hCert = try? HCert(from: barcodeString) {
-      delegate?.walletController(self, didScanCertificate: hCert)
+    if let certificate = MultiTypeCertificate(from: barcodeString) {
+      delegate?.walletController(self, didScanCertificate: certificate)
       
     } else if let payloadData = (payloadString ?? "").data(using: .utf8),
         let ticketing = try? JSONDecoder().decode(CheckInQR.self, from: payloadData) {

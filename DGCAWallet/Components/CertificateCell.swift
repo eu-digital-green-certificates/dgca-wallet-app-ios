@@ -19,7 +19,7 @@
  * ---license-end
  */
 //  
-//  CertificateCell.swift
+//  DCCCertificateCell.swift
 //  DGCAWallet
 //  
 //  Created by Alexandr Chernyy on 21.09.2021.
@@ -31,7 +31,7 @@ import UIKit
 import DGCCoreLibrary
 import DCCInspection
 
-class CertificateCell: UITableViewCell {
+class DCCCertificateCell: UITableViewCell {
 
   @IBOutlet fileprivate weak var nameLabel: UILabel!
   @IBOutlet fileprivate weak var certTypeLabel: UILabel!

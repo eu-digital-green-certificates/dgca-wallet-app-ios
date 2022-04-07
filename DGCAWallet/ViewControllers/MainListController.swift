@@ -31,7 +31,11 @@ import UIKit
 import UniformTypeIdentifiers
 import MobileCoreServices
 import DGCCoreLibrary
+import DGCVerificationCenter
+
+#if canImport(DCCInspection)
 import DCCInspection
+#endif
 
 class MainListController: UIViewController {
 	let refreshControl = UIRefreshControl()
@@ -40,13 +44,27 @@ class MainListController: UIViewController {
 		static let showScannerSegue = "showScannerSegue"
 		static let showServicesList = "showServicesList"
 		static let showSettingsController = "showSettingsController"
-		static let showCertificateViewer = "showCertificateViewer"
+        
+        static let showSavedDCCCertificate = "showSavedDCCCertificate"
+        static let showSavedICAOCertificate = "showSavedICAOCertificate"
+        static let showSavedDIVOCCertificate = "showSavedDIVOCCertificate"
+        static let showSavedVCCertificate = "showSavedVCCertificate"
+        static let showSavedSHCCertificate = "showSavedSHCCertificate"
+
+		static let showScannedDCCCertificate = "showScannedDCCCertificate"
+        static let showScannedICAOCertificate = "showScannedICAOCertificate"
+        static let showScannedDIVOCCertificate = "showScannedDIVOCCertificate"
+        static let showScannedVCCertificate = "showScannedVCCertificate"
+        static let showScannedSHCCertificate = "showScannedSHCCertificate"
+
 		static let showPDFViewer = "showPDFViewer"
 		static let showImageViewer = "showImageViewer"
 	}
 	
 	private enum TableSection: Int, CaseIterable {
-		case certificates, images, pdfs
+		case multiTypeCertificates
+        case images
+        case pdfs
 	}
 	
 	@IBOutlet fileprivate weak var addButton: RoundedButton!
@@ -61,6 +79,16 @@ class MainListController: UIViewController {
 	
     var downloadedDataHasExpired: Bool {
         return DCCDataCenter.downloadedDataHasExpired
+    }
+
+    var certificates: [MultiTypeCertificate] = []
+        
+    var listImageElements: [SavedImage] {
+        return DCCDataCenter.images
+    }
+    
+    var listPdfElements: [SavedPDF] {
+        return DCCDataCenter.pdfs
     }
 
 	override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -80,10 +108,26 @@ class MainListController: UIViewController {
 		refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
 		refreshControl.addTarget(self, action: #selector(self.refresh), for: .valueChanged)
 		table.refreshControl = refreshControl
-        self.reloadTable()
+        self.refresh()
 	}
 	
 	@objc func refresh() {
+    #if canImport(DCCInspection)
+        let listCertElements = DCCDataCenter.certStrings.reversed()
+        for certString in listCertElements {
+            guard let hCert: HCert = certString.cert else { continue }
+            let multiTypeCert = MultiTypeCertificate(with: hCert,
+                type: .dcc,
+                scannedDate: certString.date,
+                storedTan: certString.storedTAN,
+                ruleCountryCode: nil)
+            
+            certificates.append(multiTypeCert)
+        }
+    #endif
+
+        //TODO: Add other standards
+        
 		self.reloadTable()
 	}
 	
@@ -135,8 +179,8 @@ class MainListController: UIViewController {
 		addButton.backgroundColor = UIColor.walletBlue
 	}
 	
-	private func reloadTable() {
-		emptyView.alpha = listCertElements.isEmpty && listImageElements.isEmpty && listPdfElements.isEmpty ? 1 : 0
+    private func reloadTable() {
+        emptyView.alpha = certificates.isEmpty && listImageElements.isEmpty && listPdfElements.isEmpty ? 1 : 0
 		self.table.reloadData()
 		self.refreshControl.endRefreshing()
 	}
@@ -183,12 +227,9 @@ class MainListController: UIViewController {
 				let scene = self?.sceneDelegate
 				scene?.isNFCFunctionality = false
 			}
-			
-			do {
-				let hCert = try HCert(from: barcodeString)
-				self?.saveQrCode(cert: hCert)
-				
-			} catch {
+            if let certificate = MultiTypeCertificate(from: barcodeString) {
+                self?.saveQrCode(certificate: certificate)
+            } else {
 				let alertController: UIAlertController = {
 					let controller = UIAlertController(title: "Cannot read NFC".localized,
                         message: "An error occurred while reading NFC".localized, preferredStyle: .alert)
@@ -268,21 +309,30 @@ class MainListController: UIViewController {
 			guard let savedImage = sender as? SavedImage else { return }
 			serviceController.setImage(image: savedImage)
 			
-			
-		case SegueIdentifiers.showCertificateViewer:
-			guard let serviceController = segue.destination as? CertificateViewerController else { return }
-			if let savedCertificate = sender as? DatedCertString {
-				serviceController.hCert = savedCertificate.cert
-				serviceController.isSaved = true
-				serviceController.certDate = savedCertificate.date
-				serviceController.tan = savedCertificate.storedTAN
-			} else if let certificate = sender as? HCert {
-				serviceController.hCert = certificate
+        case SegueIdentifiers.showSavedDCCCertificate:
+            guard let serviceController = segue.destination as? DCCCertificateViewerController else { return }
+            if let savedCertificate = sender as? MultiTypeCertificate {
+                serviceController.certificate = savedCertificate
+                serviceController.isSaved = true
+                serviceController.certDate = savedCertificate.scannedDate
+                serviceController.tan = savedCertificate.storedTan
+            }
+            serviceController.delegate = self
+
+		case SegueIdentifiers.showScannedDCCCertificate:
+			guard let serviceController = segue.destination as? DCCCertificateViewerController else { return }
+			if let certificate = sender as? MultiTypeCertificate {
+                serviceController.certificate = certificate
 				serviceController.isSaved = false
 			}
-			
 			serviceController.delegate = self
-			
+            
+        case SegueIdentifiers.showScannedICAOCertificate:
+            ()  // TODO implement ICAOCertificateViewerController
+            
+        case SegueIdentifiers.showScannedDIVOCCertificate:
+            ()  // TODO implement ICAOCertificateViewerController
+
 		default:
 			break
 		}
@@ -305,12 +355,22 @@ extension MainListController: ScanWalletDelegate {
 		SecureBackground.paused = false
 	}
 	
-	func walletController(_ controller: ScanWalletController, didScanCertificate certificate: HCert) {
+	func walletController(_ controller: ScanWalletController, didScanCertificate certificate: MultiTypeCertificate) {
 		DispatchQueue.main.async { [weak self] in
-			self?.dismiss(animated: true, completion: {
-				self?.performSegue(withIdentifier: SegueIdentifiers.showCertificateViewer, sender: certificate)
-				self?.reloadTable()
-			})
+            switch certificate.certificateType {
+            case .dcc:
+                self?.performSegue(withIdentifier: SegueIdentifiers.showScannedDCCCertificate, sender: certificate)
+            case .icao:
+                self?.performSegue(withIdentifier: SegueIdentifiers.showScannedICAOCertificate, sender: certificate)
+            case .divoc:
+                self?.performSegue(withIdentifier: SegueIdentifiers.showScannedDIVOCCertificate, sender: certificate)
+            case .vc:
+                self?.performSegue(withIdentifier: SegueIdentifiers.showScannedDIVOCCertificate, sender: certificate)
+            case .shc:
+                self?.performSegue(withIdentifier: SegueIdentifiers.showScannedDIVOCCertificate, sender: certificate)
+            }
+            self?.reloadTable()
+            self?.dismiss(animated: true, completion: nil)
 		}
 	}
 	
@@ -338,43 +398,50 @@ extension MainListController: ScanWalletDelegate {
 
 // MARK: CertificateManaging
 extension MainListController: CertificateManaging {
-	func certificateViewer(_ controller: CertificateViewerController, didDeleteCertificate cert: HCert) {
+	func certificateViewer(_ controller: UIViewController, didDeleteCertificate certificate: MultiTypeCertificate) {
 		DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(150)) {
 			self.reloadTable()
 		}
 	}
 	
-    func certificateViewer(_ controller: CertificateViewerController, didAddCeCertificate cert: HCert) {
-        GatewayConnection.lookup(certStrings: [DCCDataCenter.certStrings.last!]) { success, _, _ in
-            if success {
-				self.reloadTable()
+    func certificateViewer(_ controller: UIViewController, didAddCeCertificate certificate: MultiTypeCertificate) {
+        switch certificate.certificateType {
+        case .dcc:
+            GatewayConnection.lookup(certStrings: [DCCDataCenter.certStrings.last!]) { success, _, _ in
+                if success {
+                    self.reloadTable()
+                }
             }
+        case .icao:
+            self.reloadTable()
+            //TODO implement ICAO
+        case .divoc:
+            self.reloadTable()
+            //TODO implement DIVOC
+        case .vc:
+            self.reloadTable()
+            //TODO implement VC
+        case .shc:
+            self.reloadTable()
+            //TODO implement SHC
         }
     }
 }
 
 // MARK: UITable delegate
 extension MainListController: UITableViewDelegate, UITableViewDataSource {
-	var listCertElements: [DatedCertString] {
-		return DCCDataCenter.certStrings.reversed()
-	}
-	
-	var listImageElements: [SavedImage] {
-		return DCCDataCenter.images
-	}
-	
-	var listPdfElements: [SavedPDF] {
-		return DCCDataCenter.pdfs
-	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		switch section {
-		case TableSection.certificates.rawValue:
-			return listCertElements.count
-		case TableSection.images.rawValue:
+		case TableSection.multiTypeCertificates.rawValue:
+			return certificates.count
+
+        case TableSection.images.rawValue:
 			return listImageElements.count
+            
 		case  TableSection.pdfs.rawValue:
 			return listPdfElements.count
+            
 		default:
 			return .zero
 		}
@@ -386,12 +453,15 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		switch section {
-		case TableSection.certificates.rawValue:
-			return !listCertElements.isEmpty ? "Certificates".localized : nil
+		case TableSection.multiTypeCertificates.rawValue:
+			return !certificates.isEmpty ? "Certificates".localized : nil
+            
 		case TableSection.images.rawValue:
 			return !listImageElements.isEmpty ? "Images".localized : nil
+            
 		case TableSection.pdfs.rawValue:
 			return !listPdfElements.isEmpty ? "PDF files".localized : nil
+            
 		default:
 			return nil
 		}
@@ -399,13 +469,13 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		switch indexPath.section {
-		case TableSection.certificates.rawValue:
-			guard let walletCell = table.dequeueReusableCell(withIdentifier: "walletCell", for: indexPath) as? WalletCell
+		case TableSection.multiTypeCertificates.rawValue:
+			guard let walletCell = table.dequeueReusableCell(withIdentifier: "WalletCell", for: indexPath) as? WalletCell
 			else { return UITableViewCell() }
 			
-			walletCell.setupCell(listCertElements[indexPath.row])
+            walletCell.setupCell(certificates[indexPath.row])
 			return walletCell
-			
+            
 		case TableSection.images.rawValue:
 			guard let imageCell = table.dequeueReusableCell(withIdentifier: "ImageTableViewCell", for: indexPath) as? ImageTableViewCell
 			else { return UITableViewCell() }
@@ -430,8 +500,20 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
 		
 		table.deselectRow(at: indexPath, animated: true)
 		switch indexPath.section {
-		case TableSection.certificates.rawValue:
-			self.performSegue(withIdentifier: SegueIdentifiers.showCertificateViewer, sender: listCertElements[indexPath.row])
+		case TableSection.multiTypeCertificates.rawValue:
+            let cert = certificates[indexPath.row]
+            switch cert.certificateType {
+            case .dcc:
+                self.performSegue(withIdentifier: SegueIdentifiers.showSavedDCCCertificate, sender: certificates[indexPath.row])
+            case .icao:
+                self.performSegue(withIdentifier: SegueIdentifiers.showSavedICAOCertificate, sender: certificates[indexPath.row])
+            case .divoc:
+                self.performSegue(withIdentifier: SegueIdentifiers.showSavedDIVOCCertificate, sender: certificates[indexPath.row])
+            case .vc:
+                self.performSegue(withIdentifier: SegueIdentifiers.showSavedVCCertificate, sender: certificates[indexPath.row])
+            case .shc:
+                self.performSegue(withIdentifier: SegueIdentifiers.showSavedSHCCertificate, sender: certificates[indexPath.row])
+            }
 			
 		case TableSection.images.rawValue:
 			self.performSegue(withIdentifier: SegueIdentifiers.showImageViewer, sender: listImageElements[indexPath.row])
@@ -446,13 +528,13 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 		switch indexPath.section {
-		case TableSection.certificates.rawValue:
-			let savedCert = listCertElements[indexPath.row]
+		case TableSection.multiTypeCertificates.rawValue:
+			let savedCert = certificates[indexPath.row]
 			showAlert( title: "Delete Certificate".localized, subtitle: "cert.delete.body".localized,
 					   actionTitle: "Confirm".localized, cancelTitle: "Cancel".localized) { [weak self] in
 				if $0 {
 					self?.startActivity()
-					DCCDataCenter.localDataManager.remove(withDate: savedCert.date) { _ in
+					DCCDataCenter.localDataManager.remove(withDate: savedCert.scannedDate) { _ in
 						DispatchQueue.main.async {
 							self?.stopActivity()
 							self?.reloadTable()
@@ -466,24 +548,21 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
 			showAlert( title: "Delete Certificate".localized, subtitle: "cert.delete.body".localized,
 					   actionTitle: "Confirm".localized, cancelTitle:"Cancel".localized) { [weak self] in
 				if $0 {
-					self?.startActivity()
 					DCCDataCenter.localImageManager.deleteImage(with: savedImage.identifier) { _ in
 						DispatchQueue.main.async {
-							self?.stopActivity()
 							self?.reloadTable()
 						}
 					}
 				}
 			}
+            
 		case TableSection.pdfs.rawValue:
 			let savedPDF = listPdfElements[indexPath.row]
 			showAlert( title: "Delete Certificate".localized, subtitle: "cert.delete.body".localized,
 					   actionTitle: "Confirm".localized, cancelTitle: "Cancel".localized) { [weak self] in
 				if $0 {
-					self?.startActivity()
 					DCCDataCenter.localImageManager.deletePDF(with: savedPDF.identifier) { _ in
 						DispatchQueue.main.async {
-							self?.stopActivity()
 							self?.reloadTable()
 						}
 					}
@@ -562,25 +641,32 @@ extension MainListController: UIImagePickerControllerDelegate, UINavigationContr
 // MARK: QR Code, PDF. Image sources
 extension MainListController {
 	private func tryFoundQRCodeIn(image: UIImage) {
-		if let qrString = image.qrCodeString() {
-			do {
-				let hCert = try HCert(from: qrString)
-				self.saveQrCode(cert: hCert)
-			} catch {
-			}
-			
+		if let qrString = image.qrCodeString(), let certificate = MultiTypeCertificate(from: qrString) {
+            self.saveQrCode(certificate: certificate)
+
 		} else {
 			self.saveImage(image: image)
 		}
 	}
 	
-	private func saveQrCode(cert: HCert) {
-		self.performSegue(withIdentifier: SegueIdentifiers.showCertificateViewer, sender: cert)
+	private func saveQrCode(certificate: MultiTypeCertificate) {
+        switch certificate.certificateType {
+        case .dcc:
+            self.performSegue(withIdentifier: SegueIdentifiers.showScannedDCCCertificate, sender: certificate)
+        case .icao:
+            self.performSegue(withIdentifier: SegueIdentifiers.showScannedICAOCertificate, sender: certificate)
+        case .divoc:
+            self.performSegue(withIdentifier: SegueIdentifiers.showScannedDIVOCCertificate, sender: certificate)
+        case .vc:
+            self.performSegue(withIdentifier: SegueIdentifiers.showScannedVCCertificate, sender: certificate)
+        case .shc:
+            self.performSegue(withIdentifier: SegueIdentifiers.showScannedSHCCertificate, sender: certificate)
+       }
 	}
 	
 	private func saveImage(image: UIImage) {
 		showInputDialog(title: "Save image".localized, subtitle: "Please enter the image name".localized,
-						inputPlaceholder: "filename".localized) { [weak self] fileName in
+                inputPlaceholder: "filename".localized) { [weak self] fileName in
 			let savedImg = SavedImage(fileName: fileName ?? UUID().uuidString, image: image)
 			
 			self?.startActivity()
@@ -644,22 +730,18 @@ extension MainListController: UIDocumentPickerDelegate {
 			return
 		}
 		for image in images {
-			if let qrString = image.qrCodeString() {
-				do {
-					let hCert = try HCert(from: qrString)
-					self.saveQrCode(cert: hCert)
-				} catch {
-					savePDFFile(url: url)
-				}
-				return
-			}
+            if let qrString = image.qrCodeString(), let certificate = MultiTypeCertificate(from: qrString) {
+                self.saveQrCode(certificate: certificate)
+            } else {
+                savePDFFile(url: url)
+                break
+            }
 		}
-		savePDFFile(url: url)
 	}
 	
 	private func savePDFFile(url: NSURL) {
 		showInputDialog(title: "Save PDF file".localized, subtitle: "Please enter the pdf file name".localized,
-						inputPlaceholder: "filename".localized) { [weak self] fileName in
+                inputPlaceholder: "filename".localized) { [weak self] fileName in
 			let pdf = SavedPDF(fileName: fileName ?? UUID().uuidString, pdfUrl: url as URL)
 			
 			self?.startActivity()

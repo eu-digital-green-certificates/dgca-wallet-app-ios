@@ -18,7 +18,7 @@
  * ---license-end
  */
 //
-//  CertificateViewerController.swift
+//  DCCCertificateViewerController.swift
 //  DGCAWallet
 //
 //  Created by Yannick Spreen on 4/19/21.
@@ -28,14 +28,15 @@ import UIKit
 import PDFKit
 import DGCCoreLibrary
 import DCCInspection
+import DGCVerificationCenter
 
 protocol CertificateManaging: AnyObject {
-  func certificateViewer(_ controller: CertificateViewerController, didDeleteCertificate cert: HCert)
-  func certificateViewer(_ controller: CertificateViewerController, didAddCeCertificate cert: HCert)
+  func certificateViewer(_ controller: UIViewController, didDeleteCertificate certificate: MultiTypeCertificate)
+  func certificateViewer(_ controller: UIViewController, didAddCeCertificate certificate: MultiTypeCertificate)
 }
 
 
-class CertificateViewerController: UIViewController {
+class DCCCertificateViewerController: UIViewController {
   private enum Constants {
     static let showValidityController = "showValidityController"
     static let embedCertPagesController = "embedCertPagesController"
@@ -51,13 +52,13 @@ class CertificateViewerController: UIViewController {
   @IBOutlet fileprivate weak var checkValidityButton: UIButton!
   @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
 
-  var hCert: HCert?
-  var certDate: Date?
-  var tan: String?
-  
+  var certificate: MultiTypeCertificate?
   weak var delegate: CertificateManaging?
 
-  public var isSaved = true
+  var certDate: Date?
+  var tan: String?
+  var isSaved = true
+  
   private var isEditMode = false
   
   deinit {
@@ -76,7 +77,7 @@ class CertificateViewerController: UIViewController {
   }
   
   func setupInterface() {
-    guard let hCert = hCert else { return }
+    guard let hCert = certificate?.digitalCertificate as? HCert else { return }
     
     nameLabel.text = hCert.fullName
     shareButton.setTitle("Share".localized, for: .normal)
@@ -145,14 +146,14 @@ class CertificateViewerController: UIViewController {
   }
 
   @IBAction func deleteCertificateAction() {
-    guard let certDate = certDate else { return }
-    guard let cert = self.hCert else { return }
+    guard let certificate = certificate,
+        let certDate = certDate else { return }
 		
 		showAlert( title: "Delete Certificate".localized, subtitle: "cert.delete.body".localized,
         actionTitle: "Confirm".localized, cancelTitle: "Cancel".localized) { [unowned self] in
       if $0 {
         DCCDataCenter.localDataManager.remove(withDate: certDate) { _ in
-          self.delegate?.certificateViewer(self, didDeleteCertificate: cert)
+          self.delegate?.certificateViewer(self, didDeleteCertificate: certificate)
           DispatchQueue.main.async {
             self.dismiss(animated: true, completion: nil)
           }
@@ -167,13 +168,13 @@ class CertificateViewerController: UIViewController {
     showInputDialog(title: "Confirm TAN".localized,
         subtitle: "Please enter the TAN that was provided together with your certificate:".localized,
         actionTitle: "Confirm".localized, inputPlaceholder: "XYZ12345" ) { [unowned self] in
-      guard let certificate = self.hCert else {
+      guard let certificate = certificate, let hCert = certificate.digitalCertificate as? HCert else {
           DGCLogger.logInfo("Certificate error")
           completion()
           return
       }
         
-      GatewayConnection.claim(cert: certificate, with: $0) { success, newTan, error in
+      GatewayConnection.claim(cert: hCert, with: $0) { success, newTan, error in
         guard error == nil else {
             completion()
             DispatchQueue.main.async {
@@ -185,16 +186,16 @@ class CertificateViewerController: UIViewController {
         }
 
         if success {
-					DCCDataCenter.localDataManager.add(certificate, with: newTan) { _ in
-						completion()
-						DispatchQueue.main.async {
-							self.showAlert(title: "Certificate saved successfully".localized, subtitle: "Now it is available in the wallet".localized) { _ in
-								self.dismiss(animated: true) {
-									self.delegate?.certificateViewer(self, didAddCeCertificate: certificate)
-								}
-							}
-						}
-					}
+            DCCDataCenter.localDataManager.add(hCert, with: newTan) { _ in
+                completion()
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Certificate saved successfully".localized, subtitle: "Now it is available in the wallet".localized) { _ in
+                        self.dismiss(animated: true) {
+                            self.delegate?.certificateViewer(self, didAddCeCertificate: certificate)
+                        }
+                    }
+                }
+            }
         } else {
           completion()
           DispatchQueue.main.async {
@@ -208,7 +209,8 @@ class CertificateViewerController: UIViewController {
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     switch segue.identifier {
     case Constants.showValidityController:
-      guard let checkController = segue.destination as? CheckValidityController else { return }
+      guard let checkController = segue.destination as? CheckValidityController,
+            let hCert = certificate?.digitalCertificate as? HCert else { return }
       checkController.setupCheckValidity(with: hCert)
       
     case Constants.embedCertPagesController:
@@ -234,9 +236,10 @@ class CertificateViewerController: UIViewController {
   }
 }
 
-extension CertificateViewerController {
+extension DCCCertificateViewerController {
   private func shareQRCodeLikeImage() {
-    guard let hCert = hCert, let savedImage = hCert.qrCode else { return }
+    guard let hCert = certificate?.digitalCertificate as? HCert,
+          let savedImage = hCert.qrCode else { return }
       
     let imageToShare = [ savedImage ]
     let activityViewController = UIActivityViewController(activityItems: imageToShare as [Any],
@@ -246,7 +249,8 @@ extension CertificateViewerController {
   }
   
   private func shareQrCodeLikePDF() {
-    guard let hCert = hCert, let savedImage = hCert.qrCode else { return }
+    guard let hCert = certificate?.digitalCertificate as? HCert,
+          let savedImage = hCert.qrCode else { return }
       
     let pdfDocument = PDFDocument()
     let pdfPage = PDFPage(image: savedImage)

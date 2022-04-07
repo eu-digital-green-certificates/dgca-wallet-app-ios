@@ -29,28 +29,29 @@
 import UIKit
 import DCCInspection
 import CertLogic
+import DGCCoreLibrary
 
 public typealias OnCloseHandler = () -> Void
 
 class RuleValidationResultVC: UIViewController {
-  private enum Constants {
-    static let ruleCellId = "RuleErrorCell"
-  }
-  
-  @IBOutlet fileprivate weak var closeButton: UIButton!
-  @IBOutlet fileprivate weak var okButton: UIButton!
-  @IBOutlet fileprivate weak var resultLabel: UILabel!
-  @IBOutlet fileprivate weak var resultIcon: UIImageView!
-  @IBOutlet fileprivate weak var resultDescriptionLabel: UILabel!
-  @IBOutlet fileprivate weak var noWarrantyLabel: UILabel!
-  @IBOutlet fileprivate weak var tableView: UITableView!
- 
-  var closeHandler: OnCloseHandler?
+    private enum Constants {
+        static let ruleCellId = "RuleErrorCell"
+    }
 
-  private var hCert: HCert?
-  private var selectedDate = Date()
-  private var items: [InfoSection] = []
-    
+    @IBOutlet fileprivate weak var closeButton: UIButton!
+    @IBOutlet fileprivate weak var okButton: UIButton!
+    @IBOutlet fileprivate weak var resultLabel: UILabel!
+    @IBOutlet fileprivate weak var resultIcon: UIImageView!
+    @IBOutlet fileprivate weak var resultDescriptionLabel: UILabel!
+    @IBOutlet fileprivate weak var noWarrantyLabel: UILabel!
+    @IBOutlet fileprivate weak var tableView: UITableView!
+ 
+    var closeHandler: OnCloseHandler?
+
+    private var hCert: HCert?
+    private var selectedDate = Date()
+    private var items: [InfoSection] = []
+
   override func viewDidLoad() {
     super.viewDidLoad()
     setupInterface()
@@ -69,24 +70,19 @@ class RuleValidationResultVC: UIViewController {
     okButton.setTitle("OK".localized, for: .normal)
     tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 32, right: 0)
 
-    let validity: HCertValidity = self.validateCertLogicRules()
+    let validity: VerificationResult = self.validateCertLogicRules()
     switch validity {
-      case .valid:
-      resultLabel.text = "Valid certificate".localized
-      resultDescriptionLabel.text = "Your certificate is valid and confirms...".localized
-        resultIcon.image = UIImage(named: "icon_large_valid")
-      case .invalid:
-      resultLabel.text = "Invalid certificate".localized
-      resultDescriptionLabel.text = "Your certificate did not allows you to enter the chosen country".localized
-      case .ruleInvalid:
-      resultLabel.text = "Certificate has limitation".localized
-      resultDescriptionLabel.text = "Your certificate is valid but has the following restrictions:".localized
-        resultIcon.image = UIImage(named: "icon_large_warning")
-    case .revoked:
-      resultLabel.text = "Certificate was revoked".localized
-      resultDescriptionLabel.text = "Your certificate did not allows you to enter the chosen country".localized
-        resultIcon.image = UIImage(named: "icon_large_warning")
-
+    case .valid:
+    resultLabel.text = "Valid certificate".localized
+    resultDescriptionLabel.text = "Your certificate is valid and confirms...".localized
+      resultIcon.image = UIImage(named: "icon_large_valid")
+    case .invalid:
+    resultLabel.text = "Invalid certificate".localized
+    resultDescriptionLabel.text = "Your certificate did not allows you to enter the chosen country".localized
+    case .partlyValid:
+    resultLabel.text = "Certificate has limitation".localized
+    resultDescriptionLabel.text = "Your certificate is valid but has the following restrictions:".localized
+      resultIcon.image = UIImage(named: "icon_large_warning")
     }
     resultIcon.isHidden = false
     tableView.isHidden = false
@@ -126,8 +122,8 @@ extension RuleValidationResultVC: UITableViewDataSource {
 }
 
 extension RuleValidationResultVC {
-  private func validateCertLogicRules() -> HCertValidity {
-    var validity: HCertValidity = .valid
+  private func validateCertLogicRules() -> VerificationResult {
+    var validity: VerificationResult = .valid
     guard let hCert = hCert else { return validity }
       
     let certType = getCertificationType(type: hCert.certificateType)
@@ -147,7 +143,7 @@ extension RuleValidationResultVC {
         
       let failsAndOpen = result.filter { $0.result != .passed }
       if failsAndOpen.count > 0 {
-        validity = .ruleInvalid
+        validity = .partlyValid
         result.sorted(by: { $0.result.rawValue < $1.result.rawValue }).forEach { validationResult in
           if let error = validationResult.validationErrors?.first {
             switch validationResult.result {
@@ -158,7 +154,7 @@ extension RuleValidationResultVC {
             case .open:
               items.append(InfoSection(header: "Certificate logic engine error".localized, content: error.localizedDescription,
                 countryName: hCert.ruleCountryCode,
-                ruleValidationResult: .ruleInvalid))
+                ruleValidationResult: .partlyValid))
             case .passed:
               items.append(InfoSection(header: "Certificate logic engine error".localized, content: error.localizedDescription,
                 countryName: hCert.ruleCountryCode,
@@ -190,7 +186,7 @@ extension RuleValidationResultVC {
               items.append(InfoSection(header: errorString,
                 content: detailsError,
                 countryName: hCert.ruleCountryCode,
-                ruleValidationResult: .ruleInvalid))
+                ruleValidationResult: .partlyValid))
             case .passed:
               items.append(InfoSection(header: errorString,
                 content: detailsError,
