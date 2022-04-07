@@ -185,7 +185,7 @@ class MainListController: UIViewController {
 			}
 			
 			do {
-				let hCert = try HCert(from: barcodeString)
+				let hCert = try HCert(payload: barcodeString) //HCert(from: barcodeString)
 				self?.saveQrCode(cert: hCert)
 				
 			} catch {
@@ -347,7 +347,9 @@ extension MainListController: CertificateManaging {
     func certificateViewer(_ controller: CertificateViewerController, didAddCeCertificate cert: HCert) {
         GatewayConnection.lookup(certStrings: [DCCDataCenter.certStrings.last!]) { success, _, _ in
             if success {
-				self.reloadTable()
+				DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(150)) {
+					self.reloadTable()
+				}
             }
         }
     }
@@ -564,7 +566,7 @@ extension MainListController {
 	private func tryFoundQRCodeIn(image: UIImage) {
 		if let qrString = image.qrCodeString() {
 			do {
-				let hCert = try HCert(from: qrString)
+				let hCert = try HCert(payload: qrString)
 				self.saveQrCode(cert: hCert)
 			} catch {
 			}
@@ -646,7 +648,7 @@ extension MainListController: UIDocumentPickerDelegate {
 		for image in images {
 			if let qrString = image.qrCodeString() {
 				do {
-					let hCert = try HCert(from: qrString)
+					let hCert = try HCert(payload: qrString)
 					self.saveQrCode(cert: hCert)
 				} catch {
 					savePDFFile(url: url)

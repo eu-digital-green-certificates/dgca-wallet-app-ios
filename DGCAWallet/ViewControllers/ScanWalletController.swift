@@ -183,7 +183,7 @@ extension ScanWalletController  {
   private func observationHandler(payloadString: String?) {
     guard let barcodeString = payloadString, !barcodeString.isEmpty else { return }
 
-    if let hCert = try? HCert(from: barcodeString) {
+    if let hCert = try? HCert(payload: barcodeString) {
       delegate?.walletController(self, didScanCertificate: hCert)
       
     } else if let payloadData = (payloadString ?? "").data(using: .utf8),
