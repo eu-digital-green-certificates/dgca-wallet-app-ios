@@ -31,43 +31,43 @@ import PDFKit
 import DCCInspection
 
 class PDFTableViewCell: UITableViewCell {
-  @IBOutlet fileprivate weak var pdfView: UIView!
-  @IBOutlet fileprivate weak var nameLabel: UILabel!
-  @IBOutlet fileprivate weak var timeLabel: UILabel!
+    @IBOutlet fileprivate weak var pdfView: UIView!
+    @IBOutlet fileprivate weak var nameLabel: UILabel!
+    @IBOutlet fileprivate weak var timeLabel: UILabel!
   
-  private var savedPDF: SavedPDF? {
-    didSet {
-      setupView()
-    }
-  }
-
-  private var pdfViewer: PDFView?
-  func setPDF(pdf: SavedPDF) {
-    savedPDF = pdf
-  }
-  
-  private func setupView() {
-    guard let savedPDF = savedPDF else {
-      nameLabel.text = ""
-      return
-    }
-    if pdfViewer == nil {
-      pdfViewer = PDFView(frame: pdfView.bounds)
-      pdfViewer?.autoScales = true
-      let scrollView = pdfViewer?.subviews[0] as? UIScrollView
-      if scrollView != nil {
-        scrollView!.isScrollEnabled = false
+    private var savedPDF: SavedPDF? {
+      didSet {
+        setupView()
       }
-      pdfView.addSubview(pdfViewer!)
     }
-    if let document = savedPDF.pdf {
-      pdfViewer!.document = document
+
+    private var pdfViewer: PDFView?
+    func setPDF(pdf: SavedPDF) {
+      savedPDF = pdf
     }
-    nameLabel.text = savedPDF.fileName
-    timeLabel.text = savedPDF.dateString
-  }
     
-  override func prepareForReuse() {
-    savedPDF = nil
-  }
+    private func setupView() {
+      guard let savedPDF = savedPDF else {
+        nameLabel.text = ""
+        return
+      }
+      if pdfViewer == nil {
+        pdfViewer = PDFView(frame: pdfView.bounds)
+        pdfViewer?.autoScales = true
+        let scrollView = pdfViewer?.subviews[0] as? UIScrollView
+        if scrollView != nil {
+          scrollView!.isScrollEnabled = false
+        }
+        pdfView.addSubview(pdfViewer!)
+      }
+      if let document = savedPDF.pdf {
+        pdfViewer!.document = document
+      }
+      nameLabel.text = savedPDF.fileName
+      timeLabel.text = savedPDF.dateString
+    }
+      
+    override func prepareForReuse() {
+      savedPDF = nil
+    }
 }

@@ -33,10 +33,8 @@
 		5C50CF2726972BCA0015EE29 /* SimpleValidityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF2526972BCA0015EE29 /* SimpleValidityCell.swift */; };
 		5C50CF2826972BCA0015EE29 /* SimpleValidityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF2526972BCA0015EE29 /* SimpleValidityCell.swift */; };
 		5C50CF2926972BCA0015EE29 /* SimpleValidityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF2526972BCA0015EE29 /* SimpleValidityCell.swift */; };
-		5C50CF2F26972BFD0015EE29 /* ExtendedValidityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF2D26972BFD0015EE29 /* ExtendedValidityCell.swift */; };
 		5C50CF3026972BFD0015EE29 /* ExtendedValidityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF2D26972BFD0015EE29 /* ExtendedValidityCell.swift */; };
 		5C50CF3126972BFD0015EE29 /* ExtendedValidityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF2D26972BFD0015EE29 /* ExtendedValidityCell.swift */; };
-		5C50CF3A26973D9D0015EE29 /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF3926973D9D0015EE29 /* UserDefaults+.swift */; };
 		5C50CF3B26973D9D0015EE29 /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF3926973D9D0015EE29 /* UserDefaults+.swift */; };
 		5C50CF3C26973D9D0015EE29 /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF3926973D9D0015EE29 /* UserDefaults+.swift */; };
 		5C50CF3E26983E090015EE29 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF3D26983E090015EE29 /* UITableView+.swift */; };
@@ -82,6 +80,7 @@
 		D277554C27FF1D12005FEE00 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13CF22262DDF810070C80E /* RoundedButton.swift */; };
 		D277554D27FF1D12005FEE00 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13CF22262DDF810070C80E /* RoundedButton.swift */; };
 		D277554F27FF49AD005FEE00 /* WalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D277554E27FF49AD005FEE00 /* WalletCell.swift */; };
+		D277555028001AE3005FEE00 /* ExtendedValidityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF2D26972BFD0015EE29 /* ExtendedValidityCell.swift */; };
 		D2B4550327F48C6C00D8A296 /* DGCVerificationCenter in Frameworks */ = {isa = PBXBuildFile; productRef = D2B4550227F48C6C00D8A296 /* DGCVerificationCenter */; };
 		D2B605BD2743CA92000D914A /* ValidationResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC54BE727201D660048B6BC /* ValidationResultController.swift */; };
 		D2B605BE2743CA92000D914A /* ValidationResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC54BE727201D660048B6BC /* ValidationResultController.swift */; };
@@ -647,7 +646,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEE9DA5D263C865200A31532 /* Brightness.swift in Sources */,
-				5C50CF3A26973D9D0015EE29 /* UserDefaults+.swift in Sources */,
 				CE13CF0A262DCDDA0070C80E /* DCCCertificateViewerController.swift in Sources */,
 				CEDABD40263C5FF4007A9B97 /* DCCCertificateController.swift in Sources */,
 				CE37B643263867D700DEE13D /* SecureBackground.swift in Sources */,
@@ -667,6 +665,7 @@
 				5C00073626D625D0002E5013 /* PDFTableViewCell.swift in Sources */,
 				CE891305263581D900CB92AF /* HomeController.swift in Sources */,
 				FEEAD6DB273BBE9600D883EB /* TokenInfoCell.swift in Sources */,
+				D277555028001AE3005FEE00 /* ExtendedValidityCell.swift in Sources */,
 				D2D8F2C627F5ECAD00508610 /* AppManager.swift in Sources */,
 				5C00071C26D38CC3002E5013 /* NFCHelper.swift in Sources */,
 				D2DFDB3E27C50E5900BA15B9 /* SquareViewFinder.swift in Sources */,
@@ -687,7 +686,6 @@
 				D23EF7A6272057F40097D82B /* CertificateCell.swift in Sources */,
 				5C00074726D641E2002E5013 /* PDFViewerController.swift in Sources */,
 				5C00073F26D641CC002E5013 /* ImageViewerController.swift in Sources */,
-				5C50CF2F26972BFD0015EE29 /* ExtendedValidityCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

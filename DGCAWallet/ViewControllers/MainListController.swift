@@ -72,7 +72,7 @@ class MainListController: UIViewController {
 	@IBOutlet fileprivate weak var emptyView: UIView!
 	@IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
 	@IBOutlet fileprivate weak var titleLabel: UILabel!
-			
+    
 	private var expireDataTimer: Timer?
 	private var scannedToken: String = ""
 	private var loading = false
@@ -80,9 +80,9 @@ class MainListController: UIViewController {
     var downloadedDataHasExpired: Bool {
         return DCCDataCenter.downloadedDataHasExpired
     }
-
+    
     var certificates: [MultiTypeCertificate] = []
-        
+    
     var listImageElements: [SavedImage] {
         return DCCDataCenter.images
     }
@@ -90,7 +90,7 @@ class MainListController: UIViewController {
     var listPdfElements: [SavedPDF] {
         return DCCDataCenter.pdfs
     }
-
+    
 	override var preferredStatusBarStyle: UIStatusBarStyle {
 		return .lightContent
 	}
