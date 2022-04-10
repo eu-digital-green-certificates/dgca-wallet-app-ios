@@ -49,9 +49,9 @@ class DCCCertCodeController: UIViewController {
         imageView.image = hCert.qrCode
         tanLabel.text = ""
         if tan != nil {
-            tanLabel.text = String(format: "TAN: %@".localized, "tap to reveal".localized)
-          tanLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapToReveal)))
-          tanLabel.isUserInteractionEnabled = true
+			tanLabel.text = String(format: "TAN: %@".localized, "tap to reveal".localized)
+			tanLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapToReveal)))
+			tanLabel.isUserInteractionEnabled = true
         }
     }
 

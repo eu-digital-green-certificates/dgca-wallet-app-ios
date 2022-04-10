@@ -55,7 +55,7 @@ class MainListController: UIViewController {
         static let showScannedICAOCertificate = "showScannedICAOCertificate"
         static let showScannedDIVOCCertificate = "showScannedDIVOCCertificate"
         static let showScannedVCCertificate = "showScannedVCCertificate"
-        static let showScannedSHCCertificate = "showScannedSHCCertificate"
+        static let showScannedSHCertificate = "showScannedSHCertificate"
 
 		static let showPDFViewer = "showPDFViewer"
 		static let showImageViewer = "showImageViewer"
@@ -109,6 +109,10 @@ class MainListController: UIViewController {
 		refreshControl.addTarget(self, action: #selector(self.refresh), for: .valueChanged)
 		table.refreshControl = refreshControl
         self.refresh()
+		// let smVC = UIStoryboard.init(name: "SmartHealth", bundle: nil).instantiateInitialViewController()
+		// let smartHealthVC = smartHealthStoryboard.instantiateViewController(withIdentifier: "SmartHealthCardVC") as! SmartHealthCardVC
+		// self.navigationController?.pushViewController(smVC!, animated: true)
+		self.performSegue(withIdentifier: SegueIdentifiers.showScannedSHCertificate, sender: nil)
 	}
 	
 	@objc func refresh() {
@@ -332,6 +336,12 @@ class MainListController: UIViewController {
             
         case SegueIdentifiers.showScannedDIVOCCertificate:
             ()  // TODO implement ICAOCertificateViewerController
+			
+		case SegueIdentifiers.showScannedSHCertificate:
+			guard let shVC = segue.destination as? SmartHealthCardVC else { return }
+			if let payload = sender as? String {
+				shVC.payload = payload
+			}
 
 		default:
 			break
@@ -660,7 +670,7 @@ extension MainListController {
         case .vc:
             self.performSegue(withIdentifier: SegueIdentifiers.showScannedVCCertificate, sender: certificate)
         case .shc:
-            self.performSegue(withIdentifier: SegueIdentifiers.showScannedSHCCertificate, sender: certificate)
+            self.performSegue(withIdentifier: SegueIdentifiers.showScannedSHCertificate, sender: certificate)
        }
 	}
 	
