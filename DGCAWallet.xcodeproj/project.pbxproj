@@ -196,6 +196,7 @@
 		DA01661D26554992005B73A1 /* OpenSourceNotices.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = OpenSourceNotices.json; sourceTree = "<group>"; };
 		DA01661F26554E02005B73A1 /* LicenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseCell.swift; sourceTree = "<group>"; };
 		DA01662126558B2F005B73A1 /* LicenseController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = LicenseController.swift; sourceTree = "<group>"; tabWidth = 2; };
+		DA0852E12803669D00FDD10A /* DGCSHInspection */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DGCSHInspection; path = ../../DGCSHInspection; sourceTree = "<group>"; };
 		DA97677127FC77A700D3607E /* dgca-verification-dcc-inspection */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "dgca-verification-dcc-inspection"; path = "../../dgca-verification-dcc-inspection"; sourceTree = "<group>"; };
 		DA97677227FC795A00D3607E /* dgca-verification-core-library */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "dgca-verification-core-library"; path = "../../dgca-verification-core-library"; sourceTree = "<group>"; };
 		DA97677327FC7A6900D3607E /* dgca-verification-center */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "dgca-verification-center"; path = "../../dgca-verification-center"; sourceTree = "<group>"; };
@@ -391,6 +392,7 @@
 		CEA6D6EA261F8D2700715333 /* DGCAWallet */ = {
 			isa = PBXGroup;
 			children = (
+				DA0852E12803669D00FDD10A /* DGCSHInspection */,
 				DA97677227FC795A00D3607E /* dgca-verification-core-library */,
 				DA97677127FC77A700D3607E /* dgca-verification-dcc-inspection */,
 				5C00072026D38D6D002E5013 /* DGCAWallet.entitlements */,
