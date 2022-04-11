@@ -361,6 +361,8 @@ extension MainListController: ScanWalletDelegate {
 	
 	func walletController(_ controller: ScanWalletController, didScanCertificate certificate: MultiTypeCertificate) {
 		DispatchQueue.main.async { [weak self] in
+            self?.dismiss(animated: true, completion: nil)
+
             switch certificate.certificateType {
             case .dcc:
                 self?.performSegue(withIdentifier: SegueIdentifiers.showScannedDCCCertificate, sender: certificate)
@@ -374,7 +376,6 @@ extension MainListController: ScanWalletDelegate {
                 self?.performSegue(withIdentifier: SegueIdentifiers.showScannedDIVOCCertificate, sender: certificate)
             }
             self?.reloadTable()
-            self?.dismiss(animated: true, completion: nil)
 		}
 	}
 	
