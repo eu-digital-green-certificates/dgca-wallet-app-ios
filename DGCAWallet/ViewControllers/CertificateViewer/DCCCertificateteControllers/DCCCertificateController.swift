@@ -30,48 +30,48 @@ import DCCInspection
 import DGCVerificationCenter
 
 class DCCCertificateController: UIViewController {
-  @IBOutlet fileprivate weak var table: UITableView!
-  @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet fileprivate weak var table: UITableView!
+    @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
 
-  var certificate: MultiTypeCertificate? {
-    (parent as? CertPagesController)?.embeddingVC?.certificate
-  }
-  private var validityState: ValidityState?
-  private var sectionBuilder: DCCSectionBuilder?
+    var certificate: MultiTypeCertificate? {
+        (parent as? CertPagesController)?.embeddingVC?.certificate
+    }
+    private var validityState: ValidityState?
+    private var sectionBuilder: DCCSectionBuilder?
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    validateAndSetupInterface()
-    table.contentInset = .init(top: 0, left: 0, bottom: 32, right: 0)
-  }
-  
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        validateAndSetupInterface()
+        table.contentInset = .init(top: 0, left: 0, bottom: 32, right: 0)
+    }
+
     private func validateAndSetupInterface() {
-      guard let hCert = certificate?.digitalCertificate as? HCert else { return }
-    
-      activityIndicator.startAnimating()
-      let validator = DCCCertificateValidator(with: hCert)
-      let state = validator.validateWalletCertificate()
-      self.validityState = state
-      let builder = DCCSectionBuilder(with: hCert, validity: state, for: .wallet)
-      self.sectionBuilder = builder
-      DispatchQueue.main.async {
-        self.activityIndicator.stopAnimating()
-        self.table.reloadData()
-      }
+        guard let hCert = certificate?.digitalCertificate as? HCert else { return }
+      
+        activityIndicator.startAnimating()
+        let validator = DCCCertificateValidator(with: hCert)
+        let state = validator.validateWalletCertificate()
+        self.validityState = state
+        let builder = DCCSectionBuilder(with: hCert, validity: state, for: .wallet)
+        self.sectionBuilder = builder
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+            self.table.reloadData()
+        }
     }
 }
 
 extension DCCCertificateController: UITableViewDataSource {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return self.sectionBuilder?.infoSection.count ?? 0
-  }
-
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: "infoCell", for: indexPath) as? InfoCell
-    else {  return UITableViewCell() }
-    if let infoSection = self.sectionBuilder?.infoSection[indexPath.row] {
-      cell.setupCell(infoSection)
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.sectionBuilder?.infoSection.count ?? 0
     }
-    return cell
-  }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "infoCell", for: indexPath) as? InfoCell
+        else {  return UITableViewCell() }
+        if let infoSection = self.sectionBuilder?.infoSection[indexPath.row] {
+            cell.setupCell(infoSection)
+        }
+        return cell
+    }
 }

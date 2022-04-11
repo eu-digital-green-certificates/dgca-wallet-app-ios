@@ -45,7 +45,7 @@ class DCCCertCodeController: UIViewController {
         super.viewDidLoad()
         
         guard let hCert = certificate?.digitalCertificate as? HCert else { return }
-
+        
         imageView.image = hCert.qrCode
         tanLabel.text = ""
         if tan != nil {
