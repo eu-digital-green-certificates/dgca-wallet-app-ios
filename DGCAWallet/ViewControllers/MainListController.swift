@@ -37,6 +37,8 @@ import DGCVerificationCenter
 import DCCInspection
 #endif
 
+let dataReloadedNotification = Notification.Name("DataReloaded")
+
 class MainListController: UIViewController {
 	let refreshControl = UIRefreshControl()
 	let center = NotificationCenter.default
@@ -101,17 +103,30 @@ class MainListController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		center.addObserver(self, selector: #selector(refresh), name: Notification.Name("DataReloaded"), object: nil)
+        center.addObserver(forName: dataReloadedNotification, object: nil, queue: .main) { [unowned self] notification in
+            self.reloadInternalData()
+        }
 		self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 		self.titleLabel.text = "Certificate Wallet".localized
 		self.addButton.setTitle("Add New".localized, for: .normal)
 		refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-		refreshControl.addTarget(self, action: #selector(self.refresh), for: .valueChanged)
+		refreshControl.addTarget(self, action: #selector(reloadInternalData), for: .valueChanged)
+        
 		table.refreshControl = refreshControl
-        self.refresh()
+        
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        appDelegate?.isNFCFunctionality = false
+        if #available(iOS 13.0, *) {
+            let scene = self.sceneDelegate
+            scene?.isNFCFunctionality = false
+        }
+        expireDataTimer = Timer.scheduledTimer(timeInterval: 1800, target: self, selector: #selector(reloadExpiredData),
+            userInfo: nil, repeats: true)
+        
+        self.reloadTable()
 	}
 	
-	@objc func refresh() {
+	@objc func reloadInternalData() {
     #if canImport(DCCInspection)
         let listCertElements = DCCDataCenter.certStrings.reversed()
         for certString in listCertElements {
@@ -125,25 +140,14 @@ class MainListController: UIViewController {
             certificates.append(multiTypeCert)
         }
     #endif
-
-        //TODO: Add other standards
         
+        //TODO: Add other standards
 		self.reloadTable()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		let appDelegate = UIApplication.shared.delegate as? AppDelegate
-		appDelegate?.isNFCFunctionality = false
-		if #available(iOS 13.0, *) {
-			let scene = self.sceneDelegate
-			scene?.isNFCFunctionality = false
-		}
-		expireDataTimer = Timer.scheduledTimer(timeInterval: 1800, target: self, selector: #selector(reloadExpiredData),
-            userInfo: nil, repeats: true)
-		
-		self.reloadTable()
 	}
 	
 	// MARK: - Actions

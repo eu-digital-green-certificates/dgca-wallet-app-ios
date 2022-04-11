@@ -50,7 +50,6 @@
 		5C556D5226F9F8C6007E2C2E /* ServerListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4F26F9F8C6007E2C2E /* ServerListController.swift */; };
 		5C556D5326F9F8C6007E2C2E /* ServerListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4F26F9F8C6007E2C2E /* ServerListController.swift */; };
 		CE13CF0A262DCDDA0070C80E /* DCCCertificateViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13CF09262DCDDA0070C80E /* DCCCertificateViewerController.swift */; };
-		CE13CF23262DDF810070C80E /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13CF22262DDF810070C80E /* RoundedButton.swift */; };
 		CE37B643263867D700DEE13D /* SecureBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37B642263867D700DEE13D /* SecureBackground.swift */; };
 		CE4BD254264FF28900689FD6 /* SettingsTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4BD253264FF28900689FD6 /* SettingsTableController.swift */; };
 		CE4BD255264FF39400689FD6 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE4BD257264FF39400689FD6 /* Settings.storyboard */; };
@@ -77,10 +76,20 @@
 		D23EF7A6272057F40097D82B /* CertificateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23EF7A4272057F40097D82B /* CertificateCell.swift */; };
 		D23EF7A7272057F40097D82B /* ServerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D23EF7A5272057F40097D82B /* ServerCell.swift */; };
 		D24C8951272353610090398A /* ScanWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24C8950272353610090398A /* ScanWalletController.swift */; };
-		D277554C27FF1D12005FEE00 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13CF22262DDF810070C80E /* RoundedButton.swift */; };
-		D277554D27FF1D12005FEE00 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13CF22262DDF810070C80E /* RoundedButton.swift */; };
 		D277554F27FF49AD005FEE00 /* WalletCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D277554E27FF49AD005FEE00 /* WalletCell.swift */; };
 		D277555028001AE3005FEE00 /* ExtendedValidityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C50CF2D26972BFD0015EE29 /* ExtendedValidityCell.swift */; };
+		D277555D28041B59005FEE00 /* DataManagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D277555C28041B58005FEE00 /* DataManagerController.swift */; };
+		D277555E28041B59005FEE00 /* DataManagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D277555C28041B58005FEE00 /* DataManagerController.swift */; };
+		D277555F28041B59005FEE00 /* DataManagerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D277555C28041B58005FEE00 /* DataManagerController.swift */; };
+		D277556128041CEB005FEE00 /* CertTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D277556028041CEB005FEE00 /* CertTypeCell.swift */; };
+		D277556228041CEB005FEE00 /* CertTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D277556028041CEB005FEE00 /* CertTypeCell.swift */; };
+		D277556328041CEB005FEE00 /* CertTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D277556028041CEB005FEE00 /* CertTypeCell.swift */; };
+		D27755662804347B005FEE00 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27755642804347B005FEE00 /* RoundedButton.swift */; };
+		D27755672804347B005FEE00 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27755642804347B005FEE00 /* RoundedButton.swift */; };
+		D27755682804347B005FEE00 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27755642804347B005FEE00 /* RoundedButton.swift */; };
+		D27755692804347B005FEE00 /* RoundedBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27755652804347B005FEE00 /* RoundedBox.swift */; };
+		D277556A2804347B005FEE00 /* RoundedBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27755652804347B005FEE00 /* RoundedBox.swift */; };
+		D277556B2804347B005FEE00 /* RoundedBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27755652804347B005FEE00 /* RoundedBox.swift */; };
 		D2B4550327F48C6C00D8A296 /* DGCVerificationCenter in Frameworks */ = {isa = PBXBuildFile; productRef = D2B4550227F48C6C00D8A296 /* DGCVerificationCenter */; };
 		D2B605BD2743CA92000D914A /* ValidationResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC54BE727201D660048B6BC /* ValidationResultController.swift */; };
 		D2B605BE2743CA92000D914A /* ValidationResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC54BE727201D660048B6BC /* ValidationResultController.swift */; };
@@ -147,7 +156,6 @@
 		5CFEDB18269DBB4C00074F66 /* context.jsonc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = context.jsonc; sourceTree = "<group>"; };
 		5CFEDB1A269DBB4C00074F66 /* context.jsonc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = context.jsonc; sourceTree = "<group>"; };
 		CE13CF09262DCDDA0070C80E /* DCCCertificateViewerController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = DCCCertificateViewerController.swift; sourceTree = "<group>"; tabWidth = 4; };
-		CE13CF22262DDF810070C80E /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		CE37B642263867D700DEE13D /* SecureBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureBackground.swift; sourceTree = "<group>"; };
 		CE4BD253264FF28900689FD6 /* SettingsTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		CE4BD256264FF39400689FD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
@@ -186,6 +194,10 @@
 		D23EF7A5272057F40097D82B /* ServerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerCell.swift; sourceTree = "<group>"; };
 		D24C8950272353610090398A /* ScanWalletController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ScanWalletController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		D277554E27FF49AD005FEE00 /* WalletCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletCell.swift; sourceTree = "<group>"; };
+		D277555C28041B58005FEE00 /* DataManagerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManagerController.swift; sourceTree = "<group>"; };
+		D277556028041CEB005FEE00 /* CertTypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertTypeCell.swift; sourceTree = "<group>"; };
+		D27755642804347B005FEE00 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		D27755652804347B005FEE00 /* RoundedBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedBox.swift; sourceTree = "<group>"; };
 		D2D8F2C527F5ECAD00508610 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		D2DFDB3D27C50E5900BA15B9 /* SquareViewFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquareViewFinder.swift; sourceTree = "<group>"; };
 		DA01661B265541C0005B73A1 /* LicenseTableController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = LicenseTableController.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -436,8 +448,10 @@
 			isa = PBXGroup;
 			children = (
 				CE4BD253264FF28900689FD6 /* SettingsTableController.swift */,
+				D277555C28041B58005FEE00 /* DataManagerController.swift */,
 				DA01661B265541C0005B73A1 /* LicenseTableController.swift */,
 				DA01662126558B2F005B73A1 /* LicenseController.swift */,
+				D277556028041CEB005FEE00 /* CertTypeCell.swift */,
 			);
 			path = SettingsControllers;
 			sourceTree = "<group>";
@@ -466,7 +480,8 @@
 			isa = PBXGroup;
 			children = (
 				D2D8F2C527F5ECAD00508610 /* AppManager.swift */,
-				CE13CF22262DDF810070C80E /* RoundedButton.swift */,
+				D27755652804347B005FEE00 /* RoundedBox.swift */,
+				D27755642804347B005FEE00 /* RoundedButton.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -652,11 +667,12 @@
 				5C556D4926F9F8AC007E2C2E /* CertificateListController.swift in Sources */,
 				FEBE53B62721A3EA003B61FB /* LimitationCell.swift in Sources */,
 				CEDABD49263C70EF007A9B97 /* CertPagesController.swift in Sources */,
+				D277555D28041B59005FEE00 /* DataManagerController.swift in Sources */,
 				CE4BD254264FF28900689FD6 /* SettingsTableController.swift in Sources */,
 				CED2726026398683003D47A9 /* UIFont.swift in Sources */,
 				FEC54BE927201D660048B6BC /* ValidationResultController.swift in Sources */,
 				CEE9DA55263C7D4000A31532 /* DCCCertCodeController.swift in Sources */,
-				CE13CF23262DDF810070C80E /* RoundedButton.swift in Sources */,
+				D27755692804347B005FEE00 /* RoundedBox.swift in Sources */,
 				5C556D5126F9F8C6007E2C2E /* ServerListController.swift in Sources */,
 				5C50CF2726972BCA0015EE29 /* SimpleValidityCell.swift in Sources */,
 				DA01662026554E02005B73A1 /* LicenseCell.swift in Sources */,
@@ -671,6 +687,7 @@
 				D2DFDB3E27C50E5900BA15B9 /* SquareViewFinder.swift in Sources */,
 				D277554F27FF49AD005FEE00 /* WalletCell.swift in Sources */,
 				D23EF7A7272057F40097D82B /* ServerCell.swift in Sources */,
+				D277556128041CEB005FEE00 /* CertTypeCell.swift in Sources */,
 				CEA15570262F79DE0024B7AC /* InfoCell.swift in Sources */,
 				D24C8951272353610090398A /* ScanWalletController.swift in Sources */,
 				CED949CA263B50CE00883558 /* MainListController.swift in Sources */,
@@ -682,6 +699,7 @@
 				5C50CF3E26983E090015EE29 /* UITableView+.swift in Sources */,
 				CEA6D6EE261F8D2700715333 /* SceneDelegate.swift in Sources */,
 				5C00073A26D625DE002E5013 /* ImageTableViewCell.swift in Sources */,
+				D27755662804347B005FEE00 /* RoundedButton.swift in Sources */,
 				5C50CF22269704240015EE29 /* UIViewController+.swift in Sources */,
 				D23EF7A6272057F40097D82B /* CertificateCell.swift in Sources */,
 				5C00074726D641E2002E5013 /* PDFViewerController.swift in Sources */,
@@ -697,10 +715,12 @@
 				5C00071D26D38CC3002E5013 /* NFCHelper.swift in Sources */,
 				5C50CF0A269700550015EE29 /* CheckValidityController.swift in Sources */,
 				5C556D4526F9DAF7007E2C2E /* TicketingAcceptanceController.swift in Sources */,
+				D277556A2804347B005FEE00 /* RoundedBox.swift in Sources */,
 				D2D8F2C927F5ED3900508610 /* HomeController.swift in Sources */,
-				D277554D27FF1D12005FEE00 /* RoundedButton.swift in Sources */,
 				D2D8F2CB27F5ED3C00508610 /* MainListController.swift in Sources */,
+				D277555E28041B59005FEE00 /* DataManagerController.swift in Sources */,
 				5C50CF3B26973D9D0015EE29 /* UserDefaults+.swift in Sources */,
+				D277556228041CEB005FEE00 /* CertTypeCell.swift in Sources */,
 				5C50CF3F26983E090015EE29 /* UITableView+.swift in Sources */,
 				5C00073B26D625DE002E5013 /* ImageTableViewCell.swift in Sources */,
 				5C50CF1C2697023B0015EE29 /* RuleErrorCell.swift in Sources */,
@@ -716,6 +736,7 @@
 				D2DFDB3F27C50E5900BA15B9 /* SquareViewFinder.swift in Sources */,
 				CEFAD87F262714C4009AFEF9 /* EHNTests.swift in Sources */,
 				D2D8F2CD27F5ED3F00508610 /* ScanWalletController.swift in Sources */,
+				D27755672804347B005FEE00 /* RoundedButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -728,6 +749,7 @@
 				D2D8F2CE27F5ED4000508610 /* ScanWalletController.swift in Sources */,
 				5C50CF3C26973D9D0015EE29 /* UserDefaults+.swift in Sources */,
 				D2DFDB4027C50E5900BA15B9 /* SquareViewFinder.swift in Sources */,
+				D277556328041CEB005FEE00 /* CertTypeCell.swift in Sources */,
 				D2D8F2CC27F5ED3D00508610 /* MainListController.swift in Sources */,
 				5C50CF4026983E090015EE29 /* UITableView+.swift in Sources */,
 				5C556D4626F9DAF7007E2C2E /* TicketingAcceptanceController.swift in Sources */,
@@ -740,8 +762,10 @@
 				5C50CF1D2697023B0015EE29 /* RuleErrorCell.swift in Sources */,
 				5C00071E26D38CC3002E5013 /* NFCHelper.swift in Sources */,
 				5C50CF13269700710015EE29 /* RuleValidationResultVC.swift in Sources */,
-				D277554C27FF1D12005FEE00 /* RoundedButton.swift in Sources */,
+				D277555F28041B59005FEE00 /* DataManagerController.swift in Sources */,
 				D2D8F2C827F5ED3500508610 /* AppManager.swift in Sources */,
+				D277556B2804347B005FEE00 /* RoundedBox.swift in Sources */,
+				D27755682804347B005FEE00 /* RoundedButton.swift in Sources */,
 				5C50CF24269704240015EE29 /* UIViewController+.swift in Sources */,
 				D2D8F2CA27F5ED3A00508610 /* HomeController.swift in Sources */,
 				5C50CF2926972BCA0015EE29 /* SimpleValidityCell.swift in Sources */,
