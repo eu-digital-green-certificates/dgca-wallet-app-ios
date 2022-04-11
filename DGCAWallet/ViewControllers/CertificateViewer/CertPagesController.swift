@@ -32,8 +32,8 @@ class CertPagesController: UIPageViewController {
 
     var index = 0
     let vcs: [UIViewController] = [
-      UIStoryboard(name: "CertificateViewer", bundle: .main).instantiateViewController(withIdentifier: "code"),
-      UIStoryboard(name: "CertificateViewer", bundle: .main).instantiateViewController(withIdentifier: "infoTable")
+      UIStoryboard(name: "DCCCertificateViewer", bundle: .main).instantiateViewController(withIdentifier: "code"),
+      UIStoryboard(name: "DCCCertificateViewer", bundle: .main).instantiateViewController(withIdentifier: "infoTable")
     ]
 
     override func viewDidLoad() {
