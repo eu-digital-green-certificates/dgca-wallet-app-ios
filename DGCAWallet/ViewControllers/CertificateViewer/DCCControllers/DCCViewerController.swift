@@ -18,7 +18,7 @@
  * ---license-end
  */
 //
-//  DCCCertificateViewerController.swift
+//  DCCViewerController.swift
 //  DGCAWallet
 //
 //  Created by Yannick Spreen on 4/19/21.
@@ -35,7 +35,7 @@ protocol CertificateManaging: AnyObject {
   func certificateViewer(_ controller: UIViewController, didAddCeCertificate certificate: MultiTypeCertificate)
 }
 
-class DCCCertificateViewerController: UIViewController {
+class DCCViewerController: UIViewController {
     private enum Constants {
       static let showValidityController = "showValidityController"
       static let embedCertPagesController = "embedCertPagesController"
@@ -236,21 +236,21 @@ class DCCCertificateViewerController: UIViewController {
     }
 }
 
-extension DCCCertificateViewerController {
+extension DCCViewerController {
     private func shareQRCodeLikeImage() {
         guard let hCert = certificate?.digitalCertificate as? HCert,
-              let savedImage = hCert.qrCode else { return }
+            let savedImage = hCert.qrCode else { return }
           
         let imageToShare = [ savedImage ]
         let activityViewController = UIActivityViewController(activityItems: imageToShare as [Any],
-          applicationActivities: nil)
+            applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
         self.present(activityViewController, animated: true, completion: nil)
     }
     
     private func shareQrCodeLikePDF() {
         guard let hCert = certificate?.digitalCertificate as? HCert,
-              let savedImage = hCert.qrCode else { return }
+            let savedImage = hCert.qrCode else { return }
           
         let pdfDocument = PDFDocument()
         let pdfPage = PDFPage(image: savedImage)

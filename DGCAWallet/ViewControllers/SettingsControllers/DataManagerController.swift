@@ -46,7 +46,7 @@ class DataManagerController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Verifiable Certificates".localized
+        title = "Applicable Types".localized
         applicableInspectors = AppManager.shared.verificationCenter.applicableInspectors
     }
 

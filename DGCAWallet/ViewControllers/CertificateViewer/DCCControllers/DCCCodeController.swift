@@ -19,7 +19,7 @@
  * ---license-end
  */
 //  
-//  DCCCertCodeController.swift
+//  DCCCodeController.swift
 //  DGCAWallet
 //  
 //  Created by Yannick Spreen on 4/30/21.
@@ -29,7 +29,7 @@ import UIKit
 import DCCInspection
 import DGCVerificationCenter
 
-class DCCCertCodeController: UIViewController {
+class DCCCodeController: UIViewController {
     @IBOutlet fileprivate weak var imageView: UIImageView!
     @IBOutlet fileprivate weak var tanLabel: UILabel!
 
@@ -43,15 +43,14 @@ class DCCCertCodeController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         guard let hCert = certificate?.digitalCertificate as? HCert else { return }
         
         imageView.image = hCert.qrCode
         tanLabel.text = ""
         if tan != nil {
             tanLabel.text = String(format: "TAN: %@".localized, "tap to reveal".localized)
-          tanLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapToReveal)))
-          tanLabel.isUserInteractionEnabled = true
+            tanLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapToReveal)))
+            tanLabel.isUserInteractionEnabled = true
         }
     }
 

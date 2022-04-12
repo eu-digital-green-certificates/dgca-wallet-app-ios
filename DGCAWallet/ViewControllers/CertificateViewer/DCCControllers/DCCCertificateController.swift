@@ -69,6 +69,7 @@ extension DCCCertificateController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "infoCell", for: indexPath) as? InfoCell
         else {  return UITableViewCell() }
+        
         if let infoSection = self.sectionBuilder?.infoSection[indexPath.row] {
             cell.setupCell(infoSection)
         }

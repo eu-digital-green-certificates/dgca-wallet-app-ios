@@ -164,3 +164,27 @@
 
 "Failed to confirm ticketing request" = "Ticketanfrage konnte nicht bestätigt werden";
 "Please create new ticketing request and try again..." = "Bitte erstellen Sie eine neue Ticketanfrage und versuchen Sie es erneut. Sollte dies erneut passieren, besuchen Sie bitte die EU Website.";
+
+"Cannot update stored data" = "Cannot update stored data";
+"Please update your data later." = "Please update your data later.";
+"Country codes list empty" = "Country codes list empty";
+"Certificate has been revoked" = "Certificate has been revoked";
+"Barcode reading Error" = "Barcode reading Error";
+"Something went wrong." = "Something went wrong.";
+"No camera available" = "No camera available";
+"The app requires access the camera" = "The app requires access the camera";
+"Pull to refresh" = "Pull to refresh";
+"No permission to use the camera" = "No permission to use the camera";
+"Please open the Settings and grant permission for this app to use your camera." = "Please open the Settings and grant permission for this app to use your camera.";
+"The update may take some time." = "The update may take some time.";
+"Reload data?" = "Reload data?";
+"Later" = "Later";
+"Do you want to add new certificate, image or PDF file?" = "Do you want to add new certificate, image or PDF file?";
+
+"Loading data" = "Loading data";
+"Cannot load data" = "Cannot load data";
+"Stored data is up to date" = "Stored data is up to date";
+"Please check the internet connection and try again." = "Please check the internet connection and try again.";
+"Manage Data" = "Manage Data";
+"Applicable Types" = "Applicable Types";
+"Check country rules conformance of your certificate" = "Check country rules conformance of your certificate";

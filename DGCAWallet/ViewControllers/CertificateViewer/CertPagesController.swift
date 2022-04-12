@@ -28,59 +28,58 @@
 import UIKit
 
 class CertPagesController: UIPageViewController {
-    weak var embeddingVC: DCCCertificateViewerController?
+    weak var embeddingVC: DCCViewerController?
 
     var index = 0
     let vcs: [UIViewController] = [
-      UIStoryboard(name: "DCCCertificateViewer", bundle: .main).instantiateViewController(withIdentifier: "code"),
-      UIStoryboard(name: "DCCCertificateViewer", bundle: .main).instantiateViewController(withIdentifier: "infoTable")
+        UIStoryboard(name: "DCCCertificateViewer", bundle: .main).instantiateViewController(withIdentifier: "code"),
+        UIStoryboard(name: "DCCCertificateViewer", bundle: .main).instantiateViewController(withIdentifier: "infoTable")
     ]
 
     override func viewDidLoad() {
-      super.viewDidLoad()
-      guard let embeddingVC = embeddingVC else { return }
-        
-      self.dataSource = self
-      self.delegate = self
-        
-      index = embeddingVC.isSaved ? 0 : 1
-      setViewControllers([vcs[index]], direction: .forward, animated: false)
-      let appearance = UIPageControl.appearance(whenContainedInInstancesOf: [UIPageViewController.self])
-      appearance.pageIndicatorTintColor = UIColor.disabledText
-      appearance.currentPageIndicatorTintColor = UIColor.walletBlack
+        super.viewDidLoad()
+        guard let embeddingVC = embeddingVC else { return }
+          
+        self.dataSource = self
+        self.delegate = self
+          
+        index = embeddingVC.isSaved ? 0 : 1
+        setViewControllers([vcs[index]], direction: .forward, animated: false)
+        let appearance = UIPageControl.appearance(whenContainedInInstancesOf: [UIPageViewController.self])
+        appearance.pageIndicatorTintColor = UIColor.disabledText
+        appearance.currentPageIndicatorTintColor = UIColor.walletBlack
     }
 
     override func viewDidAppear(_ animated: Bool) {
-      super.viewDidAppear(animated)
-
-      setBrightness()
+        super.viewDidAppear(animated)
+        setBrightness()
     }
 
     func setBrightness() {
-       index == 0 ? Brightness.forceFull() : Brightness.reset()
+        index == 0 ? Brightness.forceFull() : Brightness.reset()
         Brightness.forceFull()
     }
 }
 
 extension CertPagesController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController,
-      viewControllerBefore viewController: UIViewController) -> UIViewController? {
-      let index = vcs.firstIndex(of: viewController) ?? 0
-      return index == 0 ? nil : vcs[index - 1]
+            viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        let index = vcs.firstIndex(of: viewController) ?? 0
+        return index == 0 ? nil : vcs[index - 1]
     }
 
     func pageViewController( _ pageViewController: UIPageViewController,
-      viewControllerAfter viewController: UIViewController) -> UIViewController? {
-      let index = vcs.firstIndex(of: viewController) ?? vcs.count - 1
-      return index == vcs.count - 1 ? nil : vcs[index + 1]
+            viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        let index = vcs.firstIndex(of: viewController) ?? vcs.count - 1
+        return index == vcs.count - 1 ? nil : vcs[index + 1]
     }
 
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
-      return vcs.count
+        return vcs.count
     }
 
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-      return index
+        return index
     }
 }
 

@@ -43,17 +43,21 @@ class SettingsTableController: UITableViewController {
     @IBOutlet fileprivate weak var privacyInfoLabel: UILabel!
     @IBOutlet fileprivate weak var licensesLabel: UILabel!
     
-
     override func viewDidLoad() {
       super.viewDidLoad()
       versionLabel.text = AppManager.appVersion
         
         var filterType: String = ""
+        var colaboratorsType = ""
         #if canImport(DCCInspection)
-        filterType = sliceType.rawValue.uppercased().contains("BLOOM") ? "BLOOM" : "HASH"
+            filterType = sliceType.rawValue.uppercased().contains("BLOOM") ? "BLOOM" : "HASH"
+            let link = DCCDataCenter.localDataManager.versionedConfig["context"]["url"].rawString()
+            colaboratorsType = link!.contains("acc2") ? "ACC2" : "TST"
+
         #endif
         
-        appNameLabel.text = (Bundle.main.infoDictionary?["CFBundleDisplayName"] as! String) + " (" + filterType + ")"
+        appNameLabel.text = (Bundle.main.infoDictionary?["CFBundleDisplayName"] as! String) +
+            " (" + filterType + ", " + colaboratorsType + ")"
         manageDataLabel.text = "Manage Data".localized
         licensesLabel.text = "Licenses".localized
         privacyInfoLabel.text = "Privacy Information".localized

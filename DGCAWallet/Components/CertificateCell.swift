@@ -37,28 +37,28 @@ class DCCCertificateCell: UITableViewCell {
   @IBOutlet fileprivate weak var certTypeLabel: UILabel!
   @IBOutlet fileprivate weak var descriptionLabel: UILabel!
   
-  private var hCert: HCert? {
-    didSet {
-      setupView()
+    private var hCert: HCert? {
+      didSet {
+        setupView()
+      }
     }
-  }
 
-  private func setupView() {
-    if let hCert = hCert {
-      nameLabel.text = hCert.fullName
-      descriptionLabel.text = hCert.exp.dateString
-      certTypeLabel.text = hCert.certificateType.rawValue
-    } else {
-      nameLabel.text = ""
-      descriptionLabel.text = ""
+    private func setupView() {
+      if let hCert = hCert {
+        nameLabel.text = hCert.fullName
+        descriptionLabel.text = hCert.exp.dateString
+        certTypeLabel.text = hCert.certificateType.rawValue
+      } else {
+        nameLabel.text = ""
+        descriptionLabel.text = ""
+      }
     }
-  }
 
-  func setCertificate(cert: HCert) {
-    hCert = cert
-  }
-  
-  override func prepareForReuse() {
-    hCert = nil
-  }
+    func setCertificate(cert: HCert) {
+      hCert = cert
+    }
+    
+    override func prepareForReuse() {
+      hCert = nil
+    }
 }

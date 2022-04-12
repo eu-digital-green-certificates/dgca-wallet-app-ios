@@ -314,7 +314,7 @@ class MainListController: UIViewController {
 			serviceController.setImage(image: savedImage)
 			
         case SegueIdentifiers.showSavedDCCCertificate:
-            guard let serviceController = segue.destination as? DCCCertificateViewerController else { return }
+            guard let serviceController = segue.destination as? DCCViewerController else { return }
             if let savedCertificate = sender as? MultiTypeCertificate {
                 serviceController.certificate = savedCertificate
                 serviceController.isSaved = true
@@ -324,7 +324,7 @@ class MainListController: UIViewController {
             serviceController.delegate = self
 
 		case SegueIdentifiers.showScannedDCCCertificate:
-			guard let serviceController = segue.destination as? DCCCertificateViewerController else { return }
+			guard let serviceController = segue.destination as? DCCViewerController else { return }
 			if let certificate = sender as? MultiTypeCertificate {
                 serviceController.certificate = certificate
 				serviceController.isSaved = false
@@ -362,7 +362,7 @@ extension MainListController: ScanWalletDelegate {
 	func walletController(_ controller: ScanWalletController, didScanCertificate certificate: MultiTypeCertificate) {
 		DispatchQueue.main.async { [weak self] in
             self?.dismiss(animated: true, completion: nil)
-
+            
             switch certificate.certificateType {
             case .dcc:
                 self?.performSegue(withIdentifier: SegueIdentifiers.showScannedDCCCertificate, sender: certificate)
