@@ -152,7 +152,7 @@
 		5C50CF3D26983E090015EE29 /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
 		5C556D4026F9DAF7007E2C2E /* TicketingAcceptanceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = TicketingAcceptanceController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		5C556D4726F9F8AC007E2C2E /* CertificateListController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CertificateListController.swift; sourceTree = "<group>"; tabWidth = 2; };
-		5C556D4F26F9F8C6007E2C2E /* ServerListController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ServerListController.swift; sourceTree = "<group>"; tabWidth = 2; };
+		5C556D4F26F9F8C6007E2C2E /* ServerListController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ServerListController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		5CFEDB18269DBB4C00074F66 /* context.jsonc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = context.jsonc; sourceTree = "<group>"; };
 		5CFEDB1A269DBB4C00074F66 /* context.jsonc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = context.jsonc; sourceTree = "<group>"; };
 		CE13CF09262DCDDA0070C80E /* DCCViewerController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = DCCViewerController.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -319,7 +319,7 @@
 				D2B605BA2743C97D000D914A /* CertificateViewer */,
 				D2B605BB2743C9BB000D914A /* SettingsControllers */,
 				D2B605BF2743CC25000D914A /* ValidityControllers */,
-				D2B605BC2743CA18000D914A /* TicketingControllers */,
+				D2B605BC2743CA18000D914A /* DCCTicketingControllers */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -456,7 +456,7 @@
 			path = SettingsControllers;
 			sourceTree = "<group>";
 		};
-		D2B605BC2743CA18000D914A /* TicketingControllers */ = {
+		D2B605BC2743CA18000D914A /* DCCTicketingControllers */ = {
 			isa = PBXGroup;
 			children = (
 				5C556D4726F9F8AC007E2C2E /* CertificateListController.swift */,
@@ -464,7 +464,7 @@
 				5C556D4026F9DAF7007E2C2E /* TicketingAcceptanceController.swift */,
 				FEC54BE727201D660048B6BC /* ValidationResultController.swift */,
 			);
-			path = TicketingControllers;
+			path = DCCTicketingControllers;
 			sourceTree = "<group>";
 		};
 		D2B605BF2743CC25000D914A /* ValidityControllers */ = {
