@@ -183,7 +183,6 @@ extension ScanWalletController  {
   
   private func observationHandler(payloadString: String?) {
     guard let barcodeString = payloadString, !barcodeString.isEmpty else { return }
-	  
 	  /// MARK: END OF SCANNING
     if let certificate = MultiTypeCertificate(from: barcodeString) {
       delegate?.walletController(self, didScanCertificate: certificate)

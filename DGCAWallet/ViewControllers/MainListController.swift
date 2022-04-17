@@ -112,7 +112,8 @@ class MainListController: UIViewController {
 		// let smVC = UIStoryboard.init(name: "SmartHealth", bundle: nil).instantiateInitialViewController()
 		// let smartHealthVC = smartHealthStoryboard.instantiateViewController(withIdentifier: "SmartHealthCardVC") as! SmartHealthCardVC
 		// self.navigationController?.pushViewController(smVC!, animated: true)
-		self.performSegue(withIdentifier: SegueIdentifiers.showScannedSHCertificate, sender: nil)
+		//self.performSegue(withIdentifier: SegueIdentifiers.showScannedSHCertificate, sender: nil)
+        
 	}
 	
 	@objc func refresh() {
@@ -338,9 +339,9 @@ class MainListController: UIViewController {
             ()  // TODO implement ICAOCertificateViewerController
 			
 		case SegueIdentifiers.showScannedSHCertificate:
-			guard let shVC = segue.destination as? SmartHealthCardVC else { return }
-			if let payload = sender as? String {
-				shVC.payload = payload
+			guard let shVC = segue.destination as? CardContainerController else { return }
+			if let certificate = sender as? MultiTypeCertificate {
+				shVC.certificate = certificate
 			}
 
 		default:
@@ -367,6 +368,7 @@ extension MainListController: ScanWalletDelegate {
 	
 	func walletController(_ controller: ScanWalletController, didScanCertificate certificate: MultiTypeCertificate) {
 		DispatchQueue.main.async { [weak self] in
+            self?.dismiss(animated: true, completion: nil)
             switch certificate.certificateType {
             case .dcc:
                 self?.performSegue(withIdentifier: SegueIdentifiers.showScannedDCCCertificate, sender: certificate)
@@ -377,10 +379,11 @@ extension MainListController: ScanWalletDelegate {
             case .vc:
                 self?.performSegue(withIdentifier: SegueIdentifiers.showScannedDIVOCCertificate, sender: certificate)
             case .shc:
-                self?.performSegue(withIdentifier: SegueIdentifiers.showScannedDIVOCCertificate, sender: certificate)
+                // self?.performSegue(withIdentifier: "showOtherVC", sender: nil)
+                self?.performSegue(withIdentifier: SegueIdentifiers.showScannedSHCertificate, sender: certificate)
             }
             self?.reloadTable()
-            self?.dismiss(animated: true, completion: nil)
+            
 		}
 	}
 	

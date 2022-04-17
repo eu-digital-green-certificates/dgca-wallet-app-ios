@@ -49,6 +49,10 @@
 		5C556D5126F9F8C6007E2C2E /* ServerListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4F26F9F8C6007E2C2E /* ServerListController.swift */; };
 		5C556D5226F9F8C6007E2C2E /* ServerListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4F26F9F8C6007E2C2E /* ServerListController.swift */; };
 		5C556D5326F9F8C6007E2C2E /* ServerListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C556D4F26F9F8C6007E2C2E /* ServerListController.swift */; };
+		CA669CF1280AE87F0017E563 /* DataCompression in Frameworks */ = {isa = PBXBuildFile; productRef = CA669CF0280AE87F0017E563 /* DataCompression */; };
+		CABCB8E828073E3B00814185 /* CardPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABCB8E728073E3B00814185 /* CardPageController.swift */; };
+		CABCB8EA28073E4C00814185 /* CardPayloadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABCB8E928073E4C00814185 /* CardPayloadController.swift */; };
+		CABCB8EC28073EBA00814185 /* CardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABCB8EB28073EBA00814185 /* CardController.swift */; };
 		CE13CF0A262DCDDA0070C80E /* DCCCertificateViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13CF09262DCDDA0070C80E /* DCCCertificateViewerController.swift */; };
 		CE13CF23262DDF810070C80E /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13CF22262DDF810070C80E /* RoundedButton.swift */; };
 		CE37B643263867D700DEE13D /* SecureBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE37B642263867D700DEE13D /* SecureBackground.swift */; };
@@ -103,10 +107,11 @@
 		DA01661E26554992005B73A1 /* OpenSourceNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = DA01661D26554992005B73A1 /* OpenSourceNotices.json */; };
 		DA01662026554E02005B73A1 /* LicenseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01661F26554E02005B73A1 /* LicenseCell.swift */; };
 		DA01662226558B2F005B73A1 /* LicenseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01662126558B2F005B73A1 /* LicenseController.swift */; };
-		DA9767752800510400D3607E /* SmartHealthCardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9767742800510400D3607E /* SmartHealthCardVC.swift */; };
+		DA9767752800510400D3607E /* SmartHealthCardContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9767742800510400D3607E /* SmartHealthCardContainerController.swift */; };
 		DA9767772800529900D3607E /* SmartHealth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA9767762800529900D3607E /* SmartHealth.storyboard */; };
 		DA976779280060A800D3607E /* SHPayloadInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA976778280060A800D3607E /* SHPayloadInterpreter.swift */; };
 		DA97677C2800726A00D3607E /* SwiftPath in Frameworks */ = {isa = PBXBuildFile; productRef = DA97677B2800726A00D3607E /* SwiftPath */; };
+		DA991A5928044E7000AAC13E /* DGCSHInspection in Frameworks */ = {isa = PBXBuildFile; productRef = DA991A5828044E7000AAC13E /* DGCSHInspection */; };
 		FEBE53B62721A3EA003B61FB /* LimitationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBE53B42721A3EA003B61FB /* LimitationCell.swift */; };
 		FEC54BE927201D660048B6BC /* ValidationResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC54BE727201D660048B6BC /* ValidationResultController.swift */; };
 		FEEAD6DB273BBE9600D883EB /* TokenInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEAD6DA273BBE9600D883EB /* TokenInfoCell.swift */; };
@@ -150,6 +155,9 @@
 		5C556D4F26F9F8C6007E2C2E /* ServerListController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ServerListController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		5CFEDB18269DBB4C00074F66 /* context.jsonc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = context.jsonc; sourceTree = "<group>"; };
 		5CFEDB1A269DBB4C00074F66 /* context.jsonc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = context.jsonc; sourceTree = "<group>"; };
+		CABCB8E728073E3B00814185 /* CardPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPageController.swift; sourceTree = "<group>"; };
+		CABCB8E928073E4C00814185 /* CardPayloadController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPayloadController.swift; sourceTree = "<group>"; };
+		CABCB8EB28073EBA00814185 /* CardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardController.swift; sourceTree = "<group>"; };
 		CE13CF09262DCDDA0070C80E /* DCCCertificateViewerController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = DCCCertificateViewerController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		CE13CF22262DDF810070C80E /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		CE37B642263867D700DEE13D /* SecureBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureBackground.swift; sourceTree = "<group>"; };
@@ -196,11 +204,11 @@
 		DA01661D26554992005B73A1 /* OpenSourceNotices.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = OpenSourceNotices.json; sourceTree = "<group>"; };
 		DA01661F26554E02005B73A1 /* LicenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseCell.swift; sourceTree = "<group>"; };
 		DA01662126558B2F005B73A1 /* LicenseController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = LicenseController.swift; sourceTree = "<group>"; tabWidth = 2; };
-		DA0852E12803669D00FDD10A /* DGCSHInspection */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DGCSHInspection; path = ../../DGCSHInspection; sourceTree = "<group>"; };
-		DA97677127FC77A700D3607E /* dgca-verification-dcc-inspection */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "dgca-verification-dcc-inspection"; path = "../../dgca-verification-dcc-inspection"; sourceTree = "<group>"; };
+		DA835707280425D00077402B /* dgca-verification-dcc-inspection */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "dgca-verification-dcc-inspection"; path = "../../dgca-verification-dcc-inspection"; sourceTree = "<group>"; };
+		DA835708280429C90077402B /* dgc-sh-inspection */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "dgc-sh-inspection"; path = "../../dgc-sh-inspection"; sourceTree = "<group>"; };
 		DA97677227FC795A00D3607E /* dgca-verification-core-library */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "dgca-verification-core-library"; path = "../../dgca-verification-core-library"; sourceTree = "<group>"; };
 		DA97677327FC7A6900D3607E /* dgca-verification-center */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "dgca-verification-center"; path = "../../dgca-verification-center"; sourceTree = "<group>"; };
-		DA9767742800510400D3607E /* SmartHealthCardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartHealthCardVC.swift; sourceTree = "<group>"; };
+		DA9767742800510400D3607E /* SmartHealthCardContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartHealthCardContainerController.swift; sourceTree = "<group>"; };
 		DA9767762800529900D3607E /* SmartHealth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SmartHealth.storyboard; sourceTree = "<group>"; };
 		DA976778280060A800D3607E /* SHPayloadInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHPayloadInterpreter.swift; sourceTree = "<group>"; };
 		FEBE53B42721A3EA003B61FB /* LimitationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitationCell.swift; sourceTree = "<group>"; };
@@ -215,6 +223,8 @@
 			files = (
 				D2B4550327F48C6C00D8A296 /* DGCVerificationCenter in Frameworks */,
 				DA97677C2800726A00D3607E /* SwiftPath in Frameworks */,
+				DA991A5928044E7000AAC13E /* DGCSHInspection in Frameworks */,
+				CA669CF1280AE87F0017E563 /* DataCompression in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,6 +287,17 @@
 				5CFEDB1A269DBB4C00074F66 /* context.jsonc */,
 			);
 			path = Release;
+			sourceTree = "<group>";
+		};
+		CAD8EC2628073CEA0095CD52 /* SmartHealthCard */ = {
+			isa = PBXGroup;
+			children = (
+				DA9767742800510400D3607E /* SmartHealthCardContainerController.swift */,
+				CABCB8E728073E3B00814185 /* CardPageController.swift */,
+				CABCB8E928073E4C00814185 /* CardPayloadController.swift */,
+				CABCB8EB28073EBA00814185 /* CardController.swift */,
+			);
+			path = SmartHealthCard;
 			sourceTree = "<group>";
 		};
 		CE13CF19262DDE200070C80E /* Storyboards */ = {
@@ -392,10 +413,10 @@
 		CEA6D6EA261F8D2700715333 /* DGCAWallet */ = {
 			isa = PBXGroup;
 			children = (
-				DA0852E12803669D00FDD10A /* DGCSHInspection */,
 				DA97677227FC795A00D3607E /* dgca-verification-core-library */,
-				DA97677127FC77A700D3607E /* dgca-verification-dcc-inspection */,
 				5C00072026D38D6D002E5013 /* DGCAWallet.entitlements */,
+				DA835707280425D00077402B /* dgca-verification-dcc-inspection */,
+				DA835708280429C90077402B /* dgc-sh-inspection */,
 				DA97677327FC7A6900D3607E /* dgca-verification-center */,
 				CE13CF1E262DDE800070C80E /* SupportingFiles */,
 				5C00071A26D38C5C002E5013 /* NFC */,
@@ -442,11 +463,11 @@
 		D2B605BA2743C97D000D914A /* CertificateViewer */ = {
 			isa = PBXGroup;
 			children = (
+				CAD8EC2628073CEA0095CD52 /* SmartHealthCard */,
 				5C00074526D641E2002E5013 /* PDFViewerController.swift */,
 				5C00073D26D641CC002E5013 /* ImageViewerController.swift */,
 				CEDABD48263C70EF007A9B97 /* CertPagesController.swift */,
 				D2247C1A27FEEF9E00A80A78 /* DCCCertificateteControllers */,
-				DA9767742800510400D3607E /* SmartHealthCardVC.swift */,
 			);
 			path = CertificateViewer;
 			sourceTree = "<group>";
@@ -517,6 +538,8 @@
 			packageProductDependencies = (
 				D2B4550227F48C6C00D8A296 /* DGCVerificationCenter */,
 				DA97677B2800726A00D3607E /* SwiftPath */,
+				DA991A5828044E7000AAC13E /* DGCSHInspection */,
+				CA669CF0280AE87F0017E563 /* DataCompression */,
 			);
 			productName = DGCAWallet;
 			productReference = CEA6D6E8261F8D2700715333 /* DGCAWallet.app */;
@@ -593,6 +616,7 @@
 			packageReferences = (
 				D2B4550127F48C6C00D8A296 /* XCRemoteSwiftPackageReference "dgca-verification-center" */,
 				DA97677A2800726A00D3607E /* XCRemoteSwiftPackageReference "SwiftPath" */,
+				CA669CEF280AE87F0017E563 /* XCRemoteSwiftPackageReference "DataCompression" */,
 			);
 			productRefGroup = CEA6D6E9261F8D2700715333 /* Products */;
 			projectDirPath = "";
@@ -667,7 +691,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA9767752800510400D3607E /* SmartHealthCardVC.swift in Sources */,
+				DA9767752800510400D3607E /* SmartHealthCardContainerController.swift in Sources */,
 				CEE9DA5D263C865200A31532 /* Brightness.swift in Sources */,
 				CE13CF0A262DCDDA0070C80E /* DCCCertificateViewerController.swift in Sources */,
 				CEDABD40263C5FF4007A9B97 /* DCCCertificateController.swift in Sources */,
@@ -676,6 +700,7 @@
 				FEBE53B62721A3EA003B61FB /* LimitationCell.swift in Sources */,
 				CEDABD49263C70EF007A9B97 /* CertPagesController.swift in Sources */,
 				CE4BD254264FF28900689FD6 /* SettingsTableController.swift in Sources */,
+				CABCB8EC28073EBA00814185 /* CardController.swift in Sources */,
 				CED2726026398683003D47A9 /* UIFont.swift in Sources */,
 				FEC54BE927201D660048B6BC /* ValidationResultController.swift in Sources */,
 				CEE9DA55263C7D4000A31532 /* DCCCertCodeController.swift in Sources */,
@@ -689,10 +714,12 @@
 				CE891305263581D900CB92AF /* HomeController.swift in Sources */,
 				FEEAD6DB273BBE9600D883EB /* TokenInfoCell.swift in Sources */,
 				D277555028001AE3005FEE00 /* ExtendedValidityCell.swift in Sources */,
+				CABCB8E828073E3B00814185 /* CardPageController.swift in Sources */,
 				D2D8F2C627F5ECAD00508610 /* AppManager.swift in Sources */,
 				5C00071C26D38CC3002E5013 /* NFCHelper.swift in Sources */,
 				D2DFDB3E27C50E5900BA15B9 /* SquareViewFinder.swift in Sources */,
 				DA976779280060A800D3607E /* SHPayloadInterpreter.swift in Sources */,
+				CABCB8EA28073E4C00814185 /* CardPayloadController.swift in Sources */,
 				D277554F27FF49AD005FEE00 /* WalletCell.swift in Sources */,
 				D23EF7A7272057F40097D82B /* ServerCell.swift in Sources */,
 				CEA15570262F79DE0024B7AC /* InfoCell.swift in Sources */,
@@ -982,7 +1009,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Digital Green Certificate Wallet development";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1007,7 +1034,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Digital Green Certificate Wallet";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -1137,6 +1164,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		CA669CEF280AE87F0017E563 /* XCRemoteSwiftPackageReference "DataCompression" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mw99/DataCompression.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		D2B4550127F48C6C00D8A296 /* XCRemoteSwiftPackageReference "dgca-verification-center" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/eu-digital-green-certificates/dgca-verification-center.git";
@@ -1156,6 +1191,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CA669CF0280AE87F0017E563 /* DataCompression */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CA669CEF280AE87F0017E563 /* XCRemoteSwiftPackageReference "DataCompression" */;
+			productName = DataCompression;
+		};
 		D2B4550227F48C6C00D8A296 /* DGCVerificationCenter */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D2B4550127F48C6C00D8A296 /* XCRemoteSwiftPackageReference "dgca-verification-center" */;
@@ -1165,6 +1205,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DA97677A2800726A00D3607E /* XCRemoteSwiftPackageReference "SwiftPath" */;
 			productName = SwiftPath;
+		};
+		DA991A5828044E7000AAC13E /* DGCSHInspection */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DGCSHInspection;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

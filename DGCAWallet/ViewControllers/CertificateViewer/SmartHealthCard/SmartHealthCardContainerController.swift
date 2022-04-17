@@ -28,38 +28,45 @@
 
 import UIKit
 import DGCVerificationCenter
+import DGCSHInspection
 
-public class SmartHealthCardVC: UIViewController {
-	
-	@IBOutlet weak var cardTitle: UILabel!
-	
-	@IBOutlet weak var holderNameLabel: UILabel!
-	@IBOutlet weak var holderDobLabel: UILabel!
-	@IBOutlet weak var issuerLabel: UILabel!
-	@IBOutlet weak var firstDoseDateLabel: UILabel!
-	@IBOutlet weak var secondDoseLabel: UILabel!
+public class CardContainerController: UIViewController {
 	@IBOutlet weak var smartCardView: UIView!
 	
-	public var payload: String!
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var cardSubtitleLabel: UILabel!
+    
+    public var certificate: MultiTypeCertificate?
+    public var shCert: SHCert!
+    
+    // private var controllers: [UIViewController] = []
 	
+    public override func viewWillLayoutSubviews() {
+        print("callled")
+    }
+    
 	public override func viewDidLoad() {
 		super.viewDidLoad()
-		setupView()
+        setupView()
+        guard let shCert = certificate?.digitalCertificate as? SHCert else { return }
+        self.shCert = shCert
 	}
 	
-	private func setupView() {
-		setupCardShadow()
-	}
-	
-	private func setupCardShadow() {
-		smartCardView.layer.shadowOpacity = 0.7
-		smartCardView.layer.shadowOffset = CGSize(width: 3, height: 3)
-		smartCardView.layer.shadowRadius = 15.0
-		smartCardView.layer.shadowColor = UIColor.darkGray.cgColor
-	}
+    public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? CardPageController,
+                           segue.identifier == "pageEmbedSegue" {
+            guard let shCert = certificate?.digitalCertificate as? SHCert else { return }
+            vc.shCert = shCert
+            // vc.controllers = controllers
+        }
+    }
+    
+	private func setupView() {}
 	
 	@IBAction func didPressDoneBtn(_ sender: UIButton) {
+        self.dismiss(animated: true)
 	}
+	
 	@IBAction func didPressSaveBtn(_ sender: UIButton) {
 	}
 	
