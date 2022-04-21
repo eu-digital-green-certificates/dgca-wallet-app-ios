@@ -37,15 +37,24 @@ class CardController: UIViewController {
     @IBOutlet weak var issuerLabel: UILabel!
     @IBOutlet weak var lastDoseLabel: UILabel!
     @IBOutlet weak var doseCountLabel: UILabel!
+    @IBOutlet weak var qrContainerView: UIView!
     @IBOutlet weak var qrCodeImageView: UIImageView!
     @IBOutlet weak var cardView: UIView!
     
     public var shCert: SHCert!
+    public var editMode: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
         setupCardShadow()
         loadData()
+    }
+    
+    private func setupView() {
+        if !editMode {
+            qrContainerView.isHidden = true
+        }
     }
     
     private func loadData() {

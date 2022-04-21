@@ -18,6 +18,14 @@
             </objects>
             <point key="canvasLocation" x="-1004" y="532"/>
         </scene>
+        <!--SmartHealth-->
+        <scene sceneID="zqH-LI-Xsu">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SmartHealth" id="0tF-nU-KNN" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nm6-IQ-zgM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1381" y="749"/>
+        </scene>
         <!--Scan Wallet Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -1132,6 +1140,7 @@
                         <segue destination="gXl-Zy-tPQ" kind="presentation" identifier="showSettingsController" id="ZZq-TN-Pzk"/>
                         <segue destination="BFW-C8-ZeQ" kind="presentation" identifier="showScannedDCCCertificate" id="vDP-Sh-UUi"/>
                         <segue destination="Huc-UR-aQm" kind="presentation" identifier="showScannedSHCertificate" id="YNW-8O-ho9"/>
+                        <segue destination="0tF-nU-KNN" kind="presentation" identifier="showSavedSHCCertificate" id="Yl8-gc-zgK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nMj-BI-krI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

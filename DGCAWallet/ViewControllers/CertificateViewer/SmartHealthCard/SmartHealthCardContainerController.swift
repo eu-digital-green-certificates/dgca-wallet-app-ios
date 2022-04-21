@@ -35,9 +35,13 @@ public class CardContainerController: UIViewController {
 	
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var cardSubtitleLabel: UILabel!
+    @IBOutlet weak var saveButton: UIButton!
     
     public var certificate: MultiTypeCertificate?
     public var shCert: SHCert!
+    public var editMode: Bool = false
+    
+    weak var delegate: CertificateManaging?
     
     // private var controllers: [UIViewController] = []
 	
@@ -57,17 +61,31 @@ public class CardContainerController: UIViewController {
                            segue.identifier == "pageEmbedSegue" {
             guard let shCert = certificate?.digitalCertificate as? SHCert else { return }
             vc.shCert = shCert
+            vc.editMode = self.editMode
             // vc.controllers = controllers
         }
     }
     
-	private func setupView() {}
+	private func setupView() {
+        if editMode {
+            self.saveButton.isHidden = true
+        }
+    }
 	
 	@IBAction func didPressDoneBtn(_ sender: UIButton) {
         self.dismiss(animated: true)
 	}
 	
 	@IBAction func didPressSaveBtn(_ sender: UIButton) {
+        SHDataCenter.shDataManager.add(shCert) { result in
+            DispatchQueue.main.async {
+                self.showAlert(title: "SHCert saved successfully!", subtitle: "Your certificate is now awailable in the wallet") { _ in
+                    self.dismiss(animated: true)
+                    self.delegate?.certificateViewer(self, didAddCeCertificate: MultiTypeCertificate(from: self.shCert.fullPayloadString)!)
+                    // (self, didAdd: MultiTypeCertificate(from: self.shCert.fullPayloadString)!)
+                }
+            }
+        }
 	}
 	
 }

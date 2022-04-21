@@ -19,10 +19,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g7y-Ew-epd">
-                                <rect key="frame" x="20" y="74" width="334" height="555.33333333333337"/>
+                                <rect key="frame" x="20" y="74" width="335" height="557"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SubTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xsq-mC-Cte">
-                                        <rect key="frame" x="214.33333333333334" y="15.000000000000002" width="94.666666666666657" height="25.666666666666671"/>
+                                        <rect key="frame" x="215.33333333333334" y="15.000000000000002" width="94.666666666666657" height="25.666666666666671"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Xsq-mC-Cte" secondAttribute="height" multiplier="107:29" id="Mbu-R5-g6Q"/>
                                         </constraints>
@@ -127,7 +127,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Gb-gx-b96">
-                                        <rect key="frame" x="77" y="360.33333333333331" width="180" height="179.99999999999994"/>
+                                        <rect key="frame" x="77" y="362" width="180" height="180"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smart-health-qr" translatesAutoresizingMaskIntoConstraints="NO" id="u6t-VH-XKD">
                                                 <rect key="frame" x="10" y="10" width="160" height="160"/>
@@ -207,6 +207,7 @@
                         <outlet property="lastDoseLabel" destination="n0j-Dx-VTL" id="CaL-55-bX3"/>
                         <outlet property="nameLabel" destination="n0d-Ba-hDw" id="xfv-uG-Qrk"/>
                         <outlet property="qrCodeImageView" destination="u6t-VH-XKD" id="H5h-7K-G7v"/>
+                        <outlet property="qrContainerView" destination="9Gb-gx-b96" id="4re-ul-MyQ"/>
                         <outlet property="subtitleLabel" destination="Xsq-mC-Cte" id="3qX-ja-fI0"/>
                         <outlet property="titleLabel" destination="sdB-xb-e5q" id="uzB-E3-jV7"/>
                     </connections>
@@ -286,6 +287,7 @@
                     </view>
                     <connections>
                         <outlet property="containerView" destination="hYc-54-hI0" id="fOs-cH-eQA"/>
+                        <outlet property="saveButton" destination="4jK-Bn-Jec" id="kPV-HS-iD8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

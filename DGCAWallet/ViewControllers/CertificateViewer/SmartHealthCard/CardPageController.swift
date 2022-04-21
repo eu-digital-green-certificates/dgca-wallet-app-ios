@@ -32,6 +32,7 @@ import DGCSHInspection
 class CardPageController: UIPageViewController {
     var controllers: [UIViewController] = []
     public var shCert: SHCert!
+    public var editMode: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +44,7 @@ class CardPageController: UIPageViewController {
         }
         guard let cardView = self.storyboard?.instantiateViewController(withIdentifier: "CardController") as? CardController else { return }
         cardView.shCert = shCert
+        cardView.editMode = self.editMode
         controllers.append(cardView)
         guard let payloadController = self.storyboard?.instantiateViewController(withIdentifier: "CardPayloadController") as? CardPayloadController else { return }
         payloadController.shCert = shCert

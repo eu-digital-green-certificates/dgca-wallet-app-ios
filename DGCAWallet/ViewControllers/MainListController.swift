@@ -37,6 +37,10 @@ import DGCVerificationCenter
 import DCCInspection
 #endif
 
+#if canImport(DGCSHInspection)
+import DGCSHInspection
+#endif
+
 class MainListController: UIViewController {
 	let refreshControl = UIRefreshControl()
 	let center = NotificationCenter.default
@@ -109,15 +113,11 @@ class MainListController: UIViewController {
 		refreshControl.addTarget(self, action: #selector(self.refresh), for: .valueChanged)
 		table.refreshControl = refreshControl
         self.refresh()
-		// let smVC = UIStoryboard.init(name: "SmartHealth", bundle: nil).instantiateInitialViewController()
-		// let smartHealthVC = smartHealthStoryboard.instantiateViewController(withIdentifier: "SmartHealthCardVC") as! SmartHealthCardVC
-		// self.navigationController?.pushViewController(smVC!, animated: true)
-		//self.performSegue(withIdentifier: SegueIdentifiers.showScannedSHCertificate, sender: nil)
-        
 	}
 	
 	@objc func refresh() {
-    #if canImport(DCCInspection)
+        certificates = []
+        #if canImport(DCCInspection)
         let listCertElements = DCCDataCenter.certStrings.reversed()
         for certString in listCertElements {
             guard let hCert: HCert = certString.cert else { continue }
@@ -126,14 +126,22 @@ class MainListController: UIViewController {
                 scannedDate: certString.date,
                 storedTan: certString.storedTAN,
                 ruleCountryCode: nil)
-            
             certificates.append(multiTypeCert)
         }
-    #endif
-
-        //TODO: Add other standards
-        
-		self.reloadTable()
+        #endif
+        #if canImport(DGCSHInspection)
+        let certStrings = SHDataCenter.certStrings.reversed()
+        for cString in certStrings {
+            guard let shCert: SHCert = cString.cert else { continue }
+            let multiTypeCert = MultiTypeCertificate(with: shCert,
+                                                     type: .shc,
+                                                     scannedDate: cString.date,
+                                                     storedTan: nil,
+                                                     ruleCountryCode: nil)
+            certificates.append(multiTypeCert)
+        }
+        #endif
+        self.reloadTable()
 	}
 	
 	override func viewWillAppear(_ animated: Bool) {
@@ -343,7 +351,19 @@ class MainListController: UIViewController {
 			if let certificate = sender as? MultiTypeCertificate {
 				shVC.certificate = certificate
 			}
-
+            shVC.editMode = false
+            shVC.delegate = self
+            break
+            
+        case SegueIdentifiers.showSavedSHCCertificate:
+            guard let shVC = segue.destination as? CardContainerController else { return }
+            if let certificate = sender as? MultiTypeCertificate {
+                shVC.certificate = certificate
+            }
+            shVC.editMode = true
+            shVC.delegate = self
+            break
+            
 		default:
 			break
 		}
@@ -379,7 +399,6 @@ extension MainListController: ScanWalletDelegate {
             case .vc:
                 self?.performSegue(withIdentifier: SegueIdentifiers.showScannedDIVOCCertificate, sender: certificate)
             case .shc:
-                // self?.performSegue(withIdentifier: "showOtherVC", sender: nil)
                 self?.performSegue(withIdentifier: SegueIdentifiers.showScannedSHCertificate, sender: certificate)
             }
             self?.reloadTable()
