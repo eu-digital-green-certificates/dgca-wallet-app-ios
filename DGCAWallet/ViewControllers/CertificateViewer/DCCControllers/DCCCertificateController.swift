@@ -50,7 +50,7 @@ class DCCCertificateController: UIViewController {
       
         activityIndicator.startAnimating()
         let validator = DCCCertificateValidator(with: hCert)
-        let state = validator.validateWalletCertificate()
+        let state = validator.validateDCCCertificate()
         self.validityState = state
         let builder = DCCSectionBuilder(with: hCert, validity: state, for: .wallet)
         self.sectionBuilder = builder
