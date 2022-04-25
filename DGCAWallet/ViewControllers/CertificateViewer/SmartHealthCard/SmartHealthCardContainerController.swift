@@ -81,8 +81,12 @@ public class CardContainerController: UIViewController {
             DispatchQueue.main.async {
                 self.showAlert(title: "SHCert saved successfully!", subtitle: "Your certificate is now awailable in the wallet") { _ in
                     self.dismiss(animated: true)
-                    self.delegate?.certificateViewer(self, didAddCeCertificate: MultiTypeCertificate(from: self.shCert.fullPayloadString)!)
-                    // (self, didAdd: MultiTypeCertificate(from: self.shCert.fullPayloadString)!)
+                    do {
+                        self.delegate?.certificateViewer(self, didAddCeCertificate: try MultiTypeCertificate(from: self.shCert.fullPayloadString)!)
+                        // (self, didAdd: MultiTypeCertificate(from: self.shCert.fullPayloadString)!)
+                    } catch {
+                        print("Error adding certificate")
+                    }
                 }
             }
         }

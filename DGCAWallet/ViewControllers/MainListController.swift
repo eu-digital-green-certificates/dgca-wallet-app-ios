@@ -566,12 +566,38 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
 					   actionTitle: "Confirm".localized, cancelTitle: "Cancel".localized) { [weak self] in
 				if $0 {
 					self?.startActivity()
-					DCCDataCenter.localDataManager.remove(withDate: savedCert.scannedDate) { _ in
-						DispatchQueue.main.async {
-							self?.stopActivity()
-							self?.reloadTable()
-						}
-					} // LocalData
+                    switch savedCert.certificateType {
+                    case .dcc:
+                        DCCDataCenter.localDataManager.remove(withDate: savedCert.scannedDate) { _ in
+                            DispatchQueue.main.async {
+                                self?.stopActivity()
+                                self?.reloadTable()
+                            }
+                        } // LocalData
+                        break
+                    case .shc:
+                        SHDataCenter.shDataManager.remove(withDate: savedCert.scannedDate) { _ in
+                            DispatchQueue.main.async {
+                                self?.stopActivity()
+                                self?.reloadTable()
+                            }
+                        }
+                    case .icao:
+                        DispatchQueue.main.async {
+                            self?.stopActivity()
+                            self?.reloadTable()
+                        }
+                    case .divoc:
+                        DispatchQueue.main.async {
+                            self?.stopActivity()
+                            self?.reloadTable()
+                        }
+                    case .vc:
+                        DispatchQueue.main.async {
+                            self?.stopActivity()
+                            self?.reloadTable()
+                        }
+                    }
 				}
 			}
 			

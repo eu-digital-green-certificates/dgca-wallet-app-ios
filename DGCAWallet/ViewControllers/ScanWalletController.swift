@@ -11,6 +11,8 @@ import AVFoundation
 import DGCCoreLibrary
 import DCCInspection
 import DGCVerificationCenter
+import SwiftUI
+import DGCSHInspection
 
 
  protocol ScanWalletDelegate: AnyObject {
@@ -184,16 +186,39 @@ extension ScanWalletController  {
   private func observationHandler(payloadString: String?) {
     guard let barcodeString = payloadString, !barcodeString.isEmpty else { return }
 	  /// MARK: END OF SCANNING
-    if let certificate = MultiTypeCertificate(from: barcodeString) {
-      delegate?.walletController(self, didScanCertificate: certificate)
-      
-    } else if let payloadData = (payloadString ?? "").data(using: .utf8),
-        let ticketing = try? JSONDecoder().decode(CheckInQR.self, from: payloadData) {
-        delegate?.walletController(self, didScanInfo: ticketing)
-    } else {
-      DGCLogger.logInfo("Error when validating the certificate? \(barcodeString)")
-      delegate?.walletController(self, didFailWithError: CertificateParsingError.unknown)
-    }
+      do {
+          if let certificate = try MultiTypeCertificate(payload: barcodeString, ruleCountryCode: nil) {
+              self.delegate?.walletController(self, didScanCertificate: certificate)
+          } else if let payloadData = (payloadString ?? "").data(using: .utf8),
+              let ticketing = try? JSONDecoder().decode(CheckInQR.self, from: payloadData) {
+              self.delegate?.walletController(self, didScanInfo: ticketing)
+          } else {
+            DGCLogger.logInfo("Error when validating the certificate? \(barcodeString)")
+            self.delegate?.walletController(self, didFailWithError: CertificateParsingError.unknown)
+          }
+      } catch SHParsingError.kidNotFound(let rawUrl) {
+          print("failed with SHParsing error.")
+          // since kid is not in list of trusted issuers, make sure to ask user first
+          self.showAlert(title: "WARNING", subtitle: "Unknown issuer. Do you wish to proceed at your own risk?", actionTitle: "Ignore warning", cancelTitle: "Back to safety") { response in
+              if response { // user wishes to proceed
+                  TrustedListLoader.resolveUnknownIssuer(rawUrl) { kidList, result in
+                      if let certificate = try? MultiTypeCertificate(payload: barcodeString, ruleCountryCode: nil) {
+                          self.delegate?.walletController(self, didScanCertificate: certificate)
+                      } else {
+                          DGCLogger.logInfo("Error when validating the certificate? \(barcodeString)")
+                          self.delegate?.walletController(self, didFailWithError: CertificateParsingError.unknown)
+                      }
+                  }
+              } else { // user wishes to not proceed
+                  DGCLogger.logInfo("User wished to abort scanning certificate.")
+                  self.delegate?.walletController(self, didFailWithError: CertificateParsingError.unknown)
+              }
+          }
+      } catch {
+          print("Generic error was thrown")
+          delegate?.walletController(self, didFailWithError: CertificateParsingError.unknown)
+      }
+    
   }
 }
 
