@@ -30,47 +30,47 @@ import SwiftyJSON
 import WebKit
 
 class LicenseController: UIViewController, WKNavigationDelegate {
-  @IBOutlet fileprivate weak var packageNameLabel: UILabel!
-  @IBOutlet fileprivate weak var licenseWebView: WKWebView!
-  @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet fileprivate weak var packageNameLabel: UILabel!
+    @IBOutlet fileprivate weak var licenseWebView: WKWebView!
+    @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
 
-  var licenseObject: JSON = []
+    var licenseObject: JSON = []
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    packageNameLabel.text = licenseObject["name"].string
-    licenseWebView.isUserInteractionEnabled = false
-    licenseWebView.navigationDelegate = self
-    if #available(iOS 13.0, *) {
-      activityIndicator.style = .medium
-    } else {
-      activityIndicator.style = .gray
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        packageNameLabel.text = licenseObject["name"].string
+        licenseWebView.isUserInteractionEnabled = false
+        licenseWebView.navigationDelegate = self
+        if #available(iOS 13.0, *) {
+          activityIndicator.style = .medium
+        } else {
+          activityIndicator.style = .gray
+        }
+
+        if let licenseUrl = licenseObject["licenseUrl"].string {
+          loadWebView(licenseUrl)
+        }
     }
 
-    if let licenseUrl = licenseObject["licenseUrl"].string {
-      loadWebView(licenseUrl)
-    }
-  }
-
-  @IBAction func doneAction(_ sender: Any) {
-    self.dismiss(animated: true)
-  }
-
-  func loadWebView(_ packageLink: String) {
-    DispatchQueue.main.async { [weak self] in
-      let request = URLRequest(url: URL(string: packageLink)!)
-      self?.licenseWebView?.load(request)
+    @IBAction func doneAction(_ sender: Any) {
+      self.dismiss(animated: true)
     }
 
-    activityIndicator.startAnimating()
-    licenseWebView.navigationDelegate = self
-  }
+    func loadWebView(_ packageLink: String) {
+      DispatchQueue.main.async { [weak self] in
+        let request = URLRequest(url: URL(string: packageLink)!)
+        self?.licenseWebView?.load(request)
+      }
 
-  func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-    activityIndicator.stopAnimating()
-  }
+      activityIndicator.startAnimating()
+      licenseWebView.navigationDelegate = self
+    }
 
-  func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-    activityIndicator.stopAnimating()
-  }
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+      activityIndicator.stopAnimating()
+    }
+
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+      activityIndicator.stopAnimating()
+    }
 }
