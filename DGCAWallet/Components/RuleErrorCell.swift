@@ -29,78 +29,71 @@ import UIKit
 import DGCCoreLibrary
 
 class RuleErrorCell: UITableViewCell {
-  @IBOutlet fileprivate weak var ruleLabel: UILabel!
-  @IBOutlet fileprivate weak var ruleValueLabel: UILabel!
-  @IBOutlet fileprivate weak var currentLabel: UILabel!
-  @IBOutlet fileprivate weak var currentValueLabel: UILabel!
-  @IBOutlet fileprivate weak var resultLabel: UILabel!
-  @IBOutlet fileprivate weak var resultValueLabel: UILabel!
-  @IBOutlet fileprivate weak var failedLabel: UILabel!
+    @IBOutlet fileprivate weak var ruleLabel: UILabel!
+    @IBOutlet fileprivate weak var ruleValueLabel: UILabel!
+    @IBOutlet fileprivate weak var currentLabel: UILabel!
+    @IBOutlet fileprivate weak var currentValueLabel: UILabel!
+    @IBOutlet fileprivate weak var resultLabel: UILabel!
+    @IBOutlet fileprivate weak var resultValueLabel: UILabel!
+    @IBOutlet fileprivate weak var failedLabel: UILabel!
     
-  private var infoItem: InfoSection? {
-    didSet {
-      setupView()
-    }
-  }
-
-  override func prepareForReuse() {
-    setLabels()
-  }
-    
-  private func setLabels() {
-      ruleLabel.text = "Rule".localized
-    ruleValueLabel.text = ""
-      currentLabel.text = "Current".localized
-    currentValueLabel.text = ""
-      resultLabel.text = "Result".localized
-    resultValueLabel.text = ""
-  }
-    
-  private func setupView() {
-    guard let infoItem = infoItem else { return }
-    ruleValueLabel.text = infoItem.header
-    currentValueLabel.text = infoItem.content
-    switch infoItem.ruleValidationResult {
-    case .invalid:
-        failedLabel.textColor = .certificateRed
-        failedLabel.text = "Failed".localized
-    case .partlyValid:
-        failedLabel.textColor = .certificateLimited
-        failedLabel.text = "Passed".localized
-    case .valid:
-        failedLabel.textColor = .certificateGreen
-        failedLabel.text = "Open".localized
-//    case .revoked:
-//        failedLabel.textColor = .certificateRed
-//        failedLabel.text = "Revoked".localized
+    private var infoItem: InfoSection? {
+        didSet {
+          setupView()
+        }
     }
 
-    if let countryName = infoItem.countryName {
-      switch infoItem.ruleValidationResult {
-      case .invalid:
-          resultValueLabel.text = String(format: "Failed for %@ (see settings)".localized, countryName)
-      case .partlyValid:
-          resultValueLabel.text = String(format: "Passed for %@ (see settings)".localized, countryName)
-      case .valid:
-          resultValueLabel.text = String(format: "Open for %@ (see settings)".localized, countryName)
-//      case .revoked:
-//          resultValueLabel.text = String(format: "Revoked for %@ (see settings)".localized, countryName)
-      }
-    } else {
-      switch infoItem.ruleValidationResult {
-      case .invalid:
-          resultValueLabel.text = "Failed".localized
-      case .partlyValid:
-          resultValueLabel.text = "Passed".localized
-      case .valid:
-          resultValueLabel.text = "Open".localized
-//      case .revoked:
-//          resultValueLabel.text = "Revoked".localized
-      }
+    override func prepareForReuse() {
+      setLabels()
     }
-  }
-    
-  func setupCell(with info: InfoSection) {
-    self.infoItem = info
-  }
+      
+    private func setLabels() {
+        ruleLabel.text = "Rule".localized
+        ruleValueLabel.text = ""
+        currentLabel.text = "Current".localized
+        currentValueLabel.text = ""
+        resultLabel.text = "Result".localized
+        resultValueLabel.text = ""
+    }
+
+    private func setupView() {
+        guard let infoItem = infoItem else { return }
+        ruleValueLabel.text = infoItem.header
+        currentValueLabel.text = infoItem.content
+        switch infoItem.ruleValidationResult {
+        case .invalid:
+            failedLabel.textColor = .certificateRed
+            failedLabel.text = "Failed".localized
+        case .partlyValid:
+            failedLabel.textColor = .certificateLimited
+            failedLabel.text = "Passed".localized
+        case .valid:
+            failedLabel.textColor = .certificateGreen
+            failedLabel.text = "Open".localized
+        }
+
+        if let countryName = infoItem.countryName {
+            switch infoItem.ruleValidationResult {
+            case .invalid:
+                resultValueLabel.text = String(format: "Failed for %@ (see settings)".localized, countryName)
+            case .partlyValid:
+                resultValueLabel.text = String(format: "Passed for %@ (see settings)".localized, countryName)
+            case .valid:
+                resultValueLabel.text = String(format: "Open for %@ (see settings)".localized, countryName)
+            }
+          } else {
+            switch infoItem.ruleValidationResult {
+            case .invalid:
+                resultValueLabel.text = "Failed".localized
+            case .partlyValid:
+                resultValueLabel.text = "Passed".localized
+            case .valid:
+                resultValueLabel.text = "Open".localized
+            }
+          }
+      }
+
+    func setupCell(with info: InfoSection) {
+        self.infoItem = info
+    }
 }

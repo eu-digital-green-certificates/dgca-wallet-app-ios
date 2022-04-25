@@ -27,98 +27,88 @@
 
 import UIKit
 import DGCVerificationCenter
+import DGCCoreLibrary
+
+#if canImport(DCCInspection)
+import DCCInspection
+#endif
 
 class SettingsTableController: UITableViewController {
 
-  @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
-  @IBOutlet fileprivate weak var versionLabel: UILabel!
-  @IBOutlet fileprivate weak var reloadLabel: UILabel!
-  @IBOutlet fileprivate weak var privacyInfoLabel: UILabel!
-  @IBOutlet fileprivate weak var licensesLabel: UILabel!
-	let nc = NotificationCenter.default
-	
-  deinit {
-      let center = NotificationCenter.default
-      center.removeObserver(self)
-  }
+    let showDataManagerSegue = "showDataManagerSegue"
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    versionLabel.text = AppManager.appVersion
-    reloadLabel.text = "Reload".localized
-    licensesLabel.text = "Licenses".localized
-    privacyInfoLabel.text = "Privacy Information".localized
-    self.title = "Settings".localized
-  }
-  
-  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    switch indexPath.section {
-    case 0:
-        if indexPath.row == 0 {
-          openPrivacyDoc()
-        } else if indexPath.row == 1 {
-          showLicenses()
+    @IBOutlet fileprivate weak var appNameLabel: UILabel!
+    @IBOutlet fileprivate weak var versionLabel: UILabel!
+    @IBOutlet fileprivate weak var manageDataLabel: UILabel!
+    @IBOutlet fileprivate weak var privacyInfoLabel: UILabel!
+    @IBOutlet fileprivate weak var licensesLabel: UILabel!
+    
+    override func viewDidLoad() {
+      super.viewDidLoad()
+      versionLabel.text = AppManager.appVersion
+        
+        var filterType: String = ""
+        var colaboratorsType = ""
+        #if canImport(DCCInspection)
+        filterType = "HASH" // sliceType.rawValue.uppercased().contains("BLOOM") ? "BLOOM" : "HASH"
+            let link = DCCDataCenter.localDataManager.versionedConfig["context"]["url"].rawString()
+            colaboratorsType = link!.contains("acc2") ? "ACC2" : "TST"
+
+        #endif
+        
+        appNameLabel.text = (Bundle.main.infoDictionary?["CFBundleDisplayName"] as! String) +
+            " (" + filterType + ", " + colaboratorsType + ")"
+        manageDataLabel.text = "Manage Data".localized
+        licensesLabel.text = "Licenses".localized
+        privacyInfoLabel.text = "Privacy Information".localized
+        self.title = "Settings".localized
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 1:
+            if indexPath.row == 0 {
+              openPrivacyDoc()
+            } else if indexPath.row == 1 {
+              showLicenses()
+            }
+        case 2:
+            showDataManager()
+            
+        default:
+            break
         }
-    case 1:
-        reloadAllData()
-    default:
-        break
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
-
-    tableView.deselectRow(at: indexPath, animated: true)
-  }
-
-  override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    switch section {
-    case 1:
-      return "COVID-19 vaccination verification data".localized
-    default:
-      return nil
+    
+    @IBAction func doneAction(_ sender: Any) {
+        self.dismiss(animated: true)
     }
-
-  }
-  override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-    switch section {
-    case 1:
-      let format = "Last Updated: %@".localized
-      return String(format: format, AppManager.shared.lastFetch)
-    default:
-      return nil
+    
+    func showDataManager() {
+        performSegue(withIdentifier: showDataManagerSegue, sender: self)
     }
-  }
-
-  @IBAction func doneAction(_ sender: Any) {
-    self.dismiss(animated: true)
-  }
-  
-  func reloadAllData() {
-    activityIndicator.startAnimating()
-    AppManager.shared.verificationCenter.updateStoredData(appType: .wallet) { result in
-      DispatchQueue.main.async { [weak self] in
-        self?.activityIndicator.stopAnimating()
-        self?.tableView.reloadData()
-				self?.nc.post(name: Notification.Name("DataReloaded"), object: nil)
-      }
+    
+    func openPrivacyDoc() {
+#if canImport(DCCInspection)
+        let link = DCCDataCenter.localDataManager.versionedConfig["privacyUrl"].string ?? ""
+        openUrl(link)
+#endif
     }
-  }
-
-  func openPrivacyDoc() {
-//    let link = DCCDataCenter.localDataManager.versionedConfig["privacyUrl"].string ?? ""
-//    openUrl(link)
-  }
-
-  func openEuCertDoc() {
-    let link = "https://ec.europa.eu/health/ehealth/covid-19_en"
-    openUrl(link)
-  }
-
-  func showLicenses() {
-    self.performSegue(withIdentifier: "showLicenses", sender: nil)
-  }
-  
-  func openUrl(_ string: String) {
-    if let url = URL(string: string) {
-      UIApplication.shared.open(url)
+    
+    func openEuCertDoc() {
+        let link = "https://ec.europa.eu/health/ehealth/covid-19_en"
+        openUrl(link)
     }
-  }
+    
+    func showLicenses() {
+        self.performSegue(withIdentifier: "showLicenses", sender: nil)
+    }
+    
+    func openUrl(_ string: String) {
+        if let url = URL(string: string) {
+            UIApplication.shared.open(url)
+        }
+    }
 }

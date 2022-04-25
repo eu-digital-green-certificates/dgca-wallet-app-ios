@@ -40,7 +40,7 @@ class WalletCell: UITableViewCell {
 		// guard let cert = dated.cert else { return }
         if certificate.isRevoked {
             revocationLabel.isHidden = false
-            revocationLabel.text = "Certificate revoked"
+            revocationLabel.text = "Certificate has been revoked".localized
         } else {
             revocationLabel.isHidden = true
         }

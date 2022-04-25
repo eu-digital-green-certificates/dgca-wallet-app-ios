@@ -320,6 +320,9 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="radius">
                                         <real key="value" value="6"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="nextButtonAction:" destination="Cp6-NF-vHs" eventType="touchUpInside" id="DZH-2S-IYk"/>
@@ -469,6 +472,9 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="padding">
                                         <real key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -736,6 +742,9 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="padding">
                                         <real key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -1061,6 +1070,7 @@
                                 <rect key="frame" x="366" y="79.5" width="32" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="bG5-p7-TbQ" secondAttribute="height" multiplier="1:1" id="Rqx-rj-r07"/>
+                                    <constraint firstAttribute="width" constant="32" id="xMc-c0-wdV"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="gear_white"/>
                                 <connections>
@@ -1088,6 +1098,9 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="radius">
                                         <real key="value" value="6"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="addNew" destination="BcE-gA-Tuj" eventType="touchUpInside" id="ox7-Wv-5g3"/>
@@ -1114,7 +1127,6 @@
                             <constraint firstItem="MID-ne-Jur" firstAttribute="top" secondItem="emV-oh-VSt" secondAttribute="bottom" constant="16" id="bin-s2-AUs"/>
                             <constraint firstItem="emV-oh-VSt" firstAttribute="top" secondItem="cE2-eV-IV4" secondAttribute="bottom" id="c0G-cv-PAJ"/>
                             <constraint firstItem="MID-ne-Jur" firstAttribute="top" secondItem="W03-Gm-CHU" secondAttribute="bottom" id="cdj-Np-KPj"/>
-                            <constraint firstItem="bG5-p7-TbQ" firstAttribute="height" secondItem="Q38-2s-CMN" secondAttribute="height" multiplier="0.831169" id="ehB-Cg-UAP"/>
                             <constraint firstAttribute="trailing" secondItem="W03-Gm-CHU" secondAttribute="trailing" id="j3V-s5-330"/>
                             <constraint firstItem="W03-Gm-CHU" firstAttribute="top" secondItem="cE2-eV-IV4" secondAttribute="bottom" id="jvg-6p-zuW"/>
                             <constraint firstItem="bG5-p7-TbQ" firstAttribute="leading" secondItem="Q38-2s-CMN" secondAttribute="trailing" constant="16" id="kO0-Q9-pxl"/>
@@ -1219,6 +1231,9 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="padding">
                                         <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>

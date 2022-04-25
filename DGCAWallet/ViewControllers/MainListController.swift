@@ -41,6 +41,8 @@ import DCCInspection
 import DGCSHInspection
 #endif
 
+let dataReloadedNotification = Notification.Name("DataReloaded")
+
 class MainListController: UIViewController {
 	let refreshControl = UIRefreshControl()
 	let center = NotificationCenter.default
@@ -105,14 +107,27 @@ class MainListController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		center.addObserver(self, selector: #selector(refresh), name: Notification.Name("DataReloaded"), object: nil)
+        center.addObserver(forName: dataReloadedNotification, object: nil, queue: .main) { [unowned self] notification in
+            self.refresh()
+        }
 		self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 		self.titleLabel.text = "Certificate Wallet".localized
 		self.addButton.setTitle("Add New".localized, for: .normal)
 		refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-		refreshControl.addTarget(self, action: #selector(self.refresh), for: .valueChanged)
+		refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        
 		table.refreshControl = refreshControl
-        self.refresh()
+        
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        appDelegate?.isNFCFunctionality = false
+        if #available(iOS 13.0, *) {
+            let scene = self.sceneDelegate
+            scene?.isNFCFunctionality = false
+        }
+        expireDataTimer = Timer.scheduledTimer(timeInterval: 1800, target: self, selector: #selector(reloadExpiredData),
+            userInfo: nil, repeats: true)
+        
+        self.reloadTable()
 	}
 	
 	@objc func refresh() {
@@ -147,16 +162,6 @@ class MainListController: UIViewController {
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		
-		let appDelegate = UIApplication.shared.delegate as? AppDelegate
-		appDelegate?.isNFCFunctionality = false
-		if #available(iOS 13.0, *) {
-			let scene = self.sceneDelegate
-			scene?.isNFCFunctionality = false
-		}
-		expireDataTimer = Timer.scheduledTimer(timeInterval: 1800, target: self, selector: #selector(reloadExpiredData),
-            userInfo: nil, repeats: true)
-		
-		self.reloadTable()
 	}
 	
 	// MARK: - Actions
@@ -323,7 +328,7 @@ class MainListController: UIViewController {
 			serviceController.setImage(image: savedImage)
 			
         case SegueIdentifiers.showSavedDCCCertificate:
-            guard let serviceController = segue.destination as? DCCCertificateViewerController else { return }
+            guard let serviceController = segue.destination as? DCCViewerController else { return }
             if let savedCertificate = sender as? MultiTypeCertificate {
                 serviceController.certificate = savedCertificate
                 serviceController.isSaved = true
@@ -333,7 +338,7 @@ class MainListController: UIViewController {
             serviceController.delegate = self
 
 		case SegueIdentifiers.showScannedDCCCertificate:
-			guard let serviceController = segue.destination as? DCCCertificateViewerController else { return }
+			guard let serviceController = segue.destination as? DCCViewerController else { return }
 			if let certificate = sender as? MultiTypeCertificate {
                 serviceController.certificate = certificate
 				serviceController.isSaved = false
@@ -374,7 +379,7 @@ class MainListController: UIViewController {
 extension MainListController: ScanWalletDelegate {
 	func walletController(_ controller: ScanWalletController, didFailWithError error: CertificateParsingError) {
 		DispatchQueue.main.async {
-			self.showInfoAlert(withTitle: "Barcode reading Error".localized, message: "Something went wrong.".localized)
+			self.showInfoAlert(withTitle: "Cannot read Barcode".localized, message: "Something went wrong.".localized)
 		}
 	}
 	
