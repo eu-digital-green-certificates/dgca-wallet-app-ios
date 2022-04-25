@@ -85,7 +85,7 @@ class DataManagerController: UITableViewController {
         let message = "Please check the internet connection and try again.".localized
         
         let infoAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Continue", style: .default) { action in
+        let action = UIAlertAction(title: "Continue".localized, style: .default) { action in
             self.tableView.reloadData()
         }
         infoAlertController.addAction(action)
@@ -97,7 +97,7 @@ class DataManagerController: UITableViewController {
         let message = ""
         
         let infoAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Continue", style: .default) { action in
+        let action = UIAlertAction(title: "Continue".localized, style: .default) { action in
             self.tableView.reloadData()
         }
         infoAlertController.addAction(action)

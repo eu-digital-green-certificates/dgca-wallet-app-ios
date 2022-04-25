@@ -27,7 +27,7 @@ class ScanWalletController: UIViewController {
 
     lazy var detectBarcodeRequest = VNDetectBarcodesRequest { request, error in
       guard error == nil else {
-        self.showAlert(withTitle: "Barcode reading Error".localized,
+        self.showAlert(withTitle: "Cannot read Barcode".localized,
             message: error?.localizedDescription ?? "Something went wrong.".localized)
         return
       }
@@ -231,7 +231,7 @@ extension ScanWalletController {
     }
 
     private func showPermissionsAlert() {
-        showAlert(withTitle: "No permission to use the camera".localized,
+        showAlert(withTitle: "Wallet App would like to access the camera".localized,
             message: "Please open the Settings and grant permission for this app to use your camera.".localized
         )
     }

@@ -347,7 +347,7 @@ class MainListController: UIViewController {
 extension MainListController: ScanWalletDelegate {
 	func walletController(_ controller: ScanWalletController, didFailWithError error: CertificateParsingError) {
 		DispatchQueue.main.async {
-			self.showInfoAlert(withTitle: "Barcode reading Error".localized, message: "Something went wrong.".localized)
+			self.showInfoAlert(withTitle: "Cannot read Barcode".localized, message: "Something went wrong.".localized)
 		}
 	}
 	
