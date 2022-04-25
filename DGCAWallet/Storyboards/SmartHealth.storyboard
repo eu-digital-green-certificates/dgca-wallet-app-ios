@@ -19,10 +19,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g7y-Ew-epd">
-                                <rect key="frame" x="20" y="74" width="335" height="557"/>
+                                <rect key="frame" x="20" y="74" width="334" height="555.33333333333337"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SubTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xsq-mC-Cte">
-                                        <rect key="frame" x="215.33333333333334" y="15.000000000000002" width="94.666666666666657" height="25.666666666666671"/>
+                                        <rect key="frame" x="214.33333333333334" y="15.000000000000002" width="94.666666666666657" height="25.666666666666671"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Xsq-mC-Cte" secondAttribute="height" multiplier="107:29" id="Mbu-R5-g6Q"/>
                                         </constraints>
@@ -127,7 +127,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Gb-gx-b96">
-                                        <rect key="frame" x="77" y="362" width="180" height="180"/>
+                                        <rect key="frame" x="77" y="360.33333333333331" width="180" height="179.99999999999994"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smart-health-qr" translatesAutoresizingMaskIntoConstraints="NO" id="u6t-VH-XKD">
                                                 <rect key="frame" x="10" y="10" width="160" height="160"/>
@@ -147,12 +147,22 @@
                                             <constraint firstItem="u6t-VH-XKD" firstAttribute="leading" secondItem="9Gb-gx-b96" secondAttribute="leading" constant="10" id="mEo-W8-6mT"/>
                                         </constraints>
                                     </view>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ec-Ce-5Oe">
+                                        <rect key="frame" x="42" y="267.66666666666669" width="250" height="20.333333333333314"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="250" id="SaL-GJ-DoG"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" name="AccentColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="g7y-Ew-epd" secondAttribute="height" multiplier="187:311" id="16Z-MR-kZ8"/>
                                     <constraint firstItem="9Gb-gx-b96" firstAttribute="leading" secondItem="g7y-Ew-epd" secondAttribute="leading" constant="77" id="1X5-iQ-uGg"/>
                                     <constraint firstItem="n0d-Ba-hDw" firstAttribute="leading" relation="lessThanOrEqual" secondItem="g7y-Ew-epd" secondAttribute="leading" constant="15" id="2Xd-2C-m9a"/>
+                                    <constraint firstItem="8ec-Ce-5Oe" firstAttribute="centerY" secondItem="g7y-Ew-epd" secondAttribute="centerY" id="46W-6a-MeH"/>
                                     <constraint firstItem="sdB-xb-e5q" firstAttribute="top" secondItem="g7y-Ew-epd" secondAttribute="top" constant="15" id="4JW-Ko-ZCX"/>
                                     <constraint firstItem="sdB-xb-e5q" firstAttribute="top" secondItem="Xsq-mC-Cte" secondAttribute="top" id="6MV-YK-s8h"/>
                                     <constraint firstItem="sdB-xb-e5q" firstAttribute="leading" secondItem="g7y-Ew-epd" secondAttribute="leading" constant="15" id="AOM-HM-bKk"/>
@@ -178,6 +188,7 @@
                                     <constraint firstItem="n0d-Ba-hDw" firstAttribute="leading" secondItem="u4x-cB-c9U" secondAttribute="leading" id="lBY-5H-7ay"/>
                                     <constraint firstAttribute="bottom" secondItem="9Gb-gx-b96" secondAttribute="bottom" constant="15" id="qab-oS-vwT"/>
                                     <constraint firstItem="HaZ-Jw-4Ti" firstAttribute="leading" secondItem="eoI-wX-WZX" secondAttribute="trailing" constant="160" id="qg3-Uj-6lh"/>
+                                    <constraint firstItem="8ec-Ce-5Oe" firstAttribute="centerX" secondItem="g7y-Ew-epd" secondAttribute="centerX" id="ut7-9Z-0CW"/>
                                     <constraint firstItem="5XQ-1B-KMX" firstAttribute="top" secondItem="HaZ-Jw-4Ti" secondAttribute="bottom" constant="5" id="vmW-BE-Jh6"/>
                                     <constraint firstItem="n0j-Dx-VTL" firstAttribute="leading" secondItem="g7y-Ew-epd" secondAttribute="leading" constant="15" id="wiZ-Ye-O43"/>
                                     <constraint firstItem="eoI-wX-WZX" firstAttribute="top" secondItem="my4-yu-dL3" secondAttribute="bottom" constant="10" id="wkK-7o-Czp"/>
@@ -200,9 +211,10 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="cardView" destination="g7y-Ew-epd" id="MjN-A0-fLl"/>
+                        <outlet property="cardView" destination="8ec-Ce-5Oe" id="Dtg-Av-wq8"/>
                         <outlet property="dobLabel" destination="fXb-r4-2zC" id="AhN-ka-R4c"/>
                         <outlet property="doseCountLabel" destination="5XQ-1B-KMX" id="9OU-Yg-Z47"/>
+                        <outlet property="invalidLabel" destination="8ec-Ce-5Oe" id="CIP-yi-vNL"/>
                         <outlet property="issuerLabel" destination="my4-yu-dL3" id="Y7c-yS-12N"/>
                         <outlet property="lastDoseLabel" destination="n0j-Dx-VTL" id="CaL-55-bX3"/>
                         <outlet property="nameLabel" destination="n0d-Ba-hDw" id="xfv-uG-Qrk"/>
