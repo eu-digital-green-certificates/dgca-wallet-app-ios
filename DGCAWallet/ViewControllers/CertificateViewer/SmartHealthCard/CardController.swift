@@ -40,6 +40,7 @@ class CardController: UIViewController {
     @IBOutlet weak var qrContainerView: UIView!
     @IBOutlet weak var qrCodeImageView: UIImageView!
     @IBOutlet weak var cardView: UIView!
+    @IBOutlet weak var invalidLabel: UILabel!
     
     public var shCert: SHCert!
     public var editMode: Bool = false
@@ -72,7 +73,11 @@ class CardController: UIViewController {
         nameLabel.text = shCert.fullName
         dobLabel.text = shCert.dateOfBirth
         issuerLabel.text = shCert.issuer
-        lastDoseLabel.text = shCert.dates.last!.string!
+        lastDoseLabel.text = shCert.dates.last?.string ?? ""
+        if shCert.firstName == "" && shCert.lastName == "" {
+            self.invalidLabel.isHidden = false
+            self.invalidLabel.text = "Unable to find valid information in payload. Swipe right to view full data collected."
+        }
     }
     
     private func setupCardShadow() {
