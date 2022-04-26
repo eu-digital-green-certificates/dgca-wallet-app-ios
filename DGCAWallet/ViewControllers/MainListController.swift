@@ -245,7 +245,7 @@ class MainListController: UIViewController {
 				let scene = self?.sceneDelegate
 				scene?.isNFCFunctionality = false
 			}
-            if let certificate = MultiTypeCertificate(from: barcodeString) {
+            if let certificate = try? MultiTypeCertificate(from: barcodeString) {
                 self?.saveQrCode(certificate: certificate)
             } else {
 				let alertController: UIAlertController = {
@@ -395,6 +395,9 @@ extension MainListController: ScanWalletDelegate {
 		DispatchQueue.main.async { [weak self] in
             self?.dismiss(animated: true, completion: nil)
             switch certificate.certificateType {
+            case .unknown:
+                // TODO: Show Alert here
+                break
             case .dcc:
                 self?.performSegue(withIdentifier: SegueIdentifiers.showScannedDCCCertificate, sender: certificate)
             case .icao:
@@ -443,6 +446,9 @@ extension MainListController: CertificateManaging {
 	
     func certificateViewer(_ controller: UIViewController, didAddCeCertificate certificate: MultiTypeCertificate) {
         switch certificate.certificateType {
+        case .unknown:
+            //TODO: add alert here
+            break
         case .dcc:
             GatewayConnection.lookup(certStrings: [DCCDataCenter.certStrings.last!]) { success, _, _ in
                 if success {
@@ -550,6 +556,8 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
                 self.performSegue(withIdentifier: SegueIdentifiers.showSavedVCCertificate, sender: certificates[indexPath.row])
             case .shc:
                 self.performSegue(withIdentifier: SegueIdentifiers.showSavedSHCCertificate, sender: certificates[indexPath.row])
+            default:
+                break
             }
 			
 		case TableSection.images.rawValue:
@@ -602,6 +610,8 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
                             self?.stopActivity()
                             self?.reloadTable()
                         }
+                    default:
+                        break
                     }
 				}
 			}
@@ -704,7 +714,8 @@ extension MainListController: UIImagePickerControllerDelegate, UINavigationContr
 // MARK: QR Code, PDF. Image sources
 extension MainListController {
 	private func tryFoundQRCodeIn(image: UIImage) {
-		if let qrString = image.qrCodeString(), let certificate = MultiTypeCertificate(from: qrString) {
+		if let qrString = image.qrCodeString(),
+            let certificate = try? MultiTypeCertificate(from: qrString) {
             self.saveQrCode(certificate: certificate)
 
 		} else {
@@ -714,6 +725,9 @@ extension MainListController {
 	
 	private func saveQrCode(certificate: MultiTypeCertificate) {
         switch certificate.certificateType {
+        case .unknown:
+            // TODO: Show alert here
+            break
         case .dcc:
             self.performSegue(withIdentifier: SegueIdentifiers.showScannedDCCCertificate, sender: certificate)
         case .icao:
@@ -793,7 +807,8 @@ extension MainListController: UIDocumentPickerDelegate {
 			return
 		}
 		for image in images {
-            if let qrString = image.qrCodeString(), let certificate = MultiTypeCertificate(from: qrString) {
+            if let qrString = image.qrCodeString(),
+                let certificate = try? MultiTypeCertificate(from: qrString) {
                 self.saveQrCode(certificate: certificate)
             } else {
                 savePDFFile(url: url)

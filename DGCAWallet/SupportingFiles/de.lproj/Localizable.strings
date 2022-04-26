@@ -188,3 +188,6 @@
 "Manage Data" = "Manage Data";
 "Applicable Types" = "Applicable Types";
 "Check country rules conformance of your certificate" = "Check country rules conformance of your certificate";
+"Unknown issuer of Smart Card" = "Unknown issuer of Smart Card";
+"Do you want to continue to identify the issuer?" = "Do you want to continue to identify the issuer?";
+"Continue" = "Continue";
