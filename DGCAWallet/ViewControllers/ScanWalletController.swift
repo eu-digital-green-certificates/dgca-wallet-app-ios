@@ -9,10 +9,14 @@ import UIKit
 import Vision
 import AVFoundation
 import DGCCoreLibrary
-import DCCInspection
 import DGCVerificationCenter
 import SwiftUI
+#if canImport(DCCInspection)
+import DCCInspection
+#endif
+#if canImport(DGCSHInspection)
 import DGCSHInspection
+#endif
 
 
 protocol ScanWalletDelegate: AnyObject {
@@ -82,7 +86,7 @@ class ScanWalletController: UIViewController {
       SquareViewFinder.create(from: self)
       createDismissButton()
     }
-  
+    
     override func viewWillDisappear(_ animated: Bool) {
       super.viewWillDisappear(animated)
       captureSession?.stopRunning()
@@ -189,9 +193,11 @@ extension ScanWalletController  {
         do {
             let certificate = try MultiTypeCertificate(from: barcodeString)
             self.delegate?.walletController(self, didScanCertificate: certificate)
-            
+
         } catch SHParsingError.kidNotFound(let rawUrl) {
-            DGCLogger.logInfo("Error when parsing SH card.")
+            #if canImport(DGCSHInspection)
+
+            DGCLogger.logInfo("Error parsing SH card.")
             // since kid is not in list of trusted issuers, make sure to ask user first
             self.showAlert(title: "Unknown issuer of Smart Card".localized,
                 subtitle: "Do you want to continue to identify the issuer?",
@@ -207,10 +213,12 @@ extension ScanWalletController  {
                         }
                     }
                 } else { // user cancels
-                    DGCLogger.logInfo("User did cancel verifying.")
+                    DGCLogger.logInfo("User cancelled verifying.")
                     self.delegate?.walletController(self, didFailWithError: CertificateParsingError.unknown)
                 }
             }
+            #endif
+
         } catch let error {
             if let payloadData = (payloadString ?? "").data(using: .utf8),
                 let ticketing = try? JSONDecoder().decode(CheckInQR.self, from: payloadData) {
@@ -226,15 +234,15 @@ extension ScanWalletController  {
 
 extension ScanWalletController: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer,
-      from connection: AVCaptureConnection) {
-      guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
-      
-      let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .right)
-      do {
-        try imageRequestHandler.perform([detectBarcodeRequest])
-      } catch {
-        DGCLogger.logError(error)
-      }
+        from connection: AVCaptureConnection) {
+        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
+        
+        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .right)
+        do {
+          try imageRequestHandler.perform([detectBarcodeRequest])
+        } catch {
+          DGCLogger.logError(error)
+        }
     }
 }
 

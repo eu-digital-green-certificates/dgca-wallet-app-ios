@@ -27,27 +27,26 @@
         
 
 import UIKit
-import DGCSHInspection
+import DGCVerificationCenter
 
 class CardPageController: UIPageViewController {
     var controllers: [UIViewController] = []
-    public var shCert: SHCert!
-    public var editMode: Bool = false
+    var certificate: MultiTypeCertificate?
+    var editMode: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        guard let cardView = self.storyboard?.instantiateViewController(withIdentifier: "CardController") as? CardController else { return }
+        
         delegate = self
         dataSource = self
-        if shCert == nil {
-            print("shcert was nil")
-            return
-        }
-        guard let cardView = self.storyboard?.instantiateViewController(withIdentifier: "CardController") as? CardController else { return }
-        cardView.shCert = shCert
+        
+        cardView.certificate = self.certificate
         cardView.editMode = self.editMode
         controllers.append(cardView)
         guard let payloadController = self.storyboard?.instantiateViewController(withIdentifier: "CardPayloadController") as? CardPayloadController else { return }
-        payloadController.shCert = shCert
+        payloadController.certificate = certificate
         controllers.append(payloadController)
         
         setViewControllers([cardView], direction: .forward, animated: true)
@@ -57,19 +56,11 @@ class CardPageController: UIPageViewController {
 extension CardPageController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let index = controllers.firstIndex(of: viewController) else { return nil }
-        if index == 0 {
-            return nil
-        } else {
-            return controllers[index - 1]
-        }
+        return index == 0 ? nil : controllers[index - 1]
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard let index = controllers.firstIndex(of: viewController) else { return nil }
-        if index == controllers.count - 1 {
-            return nil
-        } else {
-            return controllers[index + 1]
-        }
+        return index == controllers.count - 1 ? nil : controllers[index + 1]
     }
 }

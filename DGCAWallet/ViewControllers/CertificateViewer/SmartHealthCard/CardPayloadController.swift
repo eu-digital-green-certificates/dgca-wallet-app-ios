@@ -27,19 +27,26 @@
         
 
 import UIKit
+import DGCVerificationCenter
+#if canImport(DGCSHInspection)
 import DGCSHInspection
+#endif
 
 class CardPayloadController: UIViewController {
     
     @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var payloadTextView: UITextView!
     
-    public var shCert: SHCert!
-    
+    var certificate: MultiTypeCertificate?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCardShadow()
-        payloadTextView.text = shCert.prettyBody
+#if canImport(DGCSHInspection)
+        if let shCert = certificate?.digitalCertificate as? SHCert {
+            payloadTextView.text = shCert.prettyBody
+        }
+#endif
     }
     
     private func setupCardShadow() {

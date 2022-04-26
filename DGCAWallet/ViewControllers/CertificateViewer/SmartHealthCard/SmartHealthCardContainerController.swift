@@ -28,42 +28,39 @@
 
 import UIKit
 import DGCVerificationCenter
-import DGCSHInspection
 import DGCCoreLibrary
 
-public class CardContainerController: UIViewController {
+#if canImport(DGCSHInspection)
+import DGCSHInspection
+#endif
+
+class CardContainerController: UIViewController {
 	@IBOutlet weak var smartCardView: UIView!
 	
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var cardSubtitleLabel: UILabel!
     @IBOutlet weak var saveButton: UIButton!
     
-    public var certificate: MultiTypeCertificate?
-    public var shCert: SHCert!
-    public var editMode: Bool = false
+    var certificate: MultiTypeCertificate?
+    var editMode: Bool = false
     
     weak var delegate: CertificateManaging?
         
-	public override func viewDidLoad() {
+    override func viewDidLoad() {
 		super.viewDidLoad()
         setupView()
-        guard let shCert = certificate?.digitalCertificate as? SHCert else { return }
-        self.shCert = shCert
 	}
 	
-    public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? CardPageController, segue.identifier == "pageEmbedSegue" {
-            guard let shCert = certificate?.digitalCertificate as? SHCert else { return }
-            vc.shCert = shCert
-            vc.editMode = self.editMode
-            // vc.controllers = controllers
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationController = segue.destination as? CardPageController,
+            segue.identifier == "pageEmbedSegue" {
+            destinationController.certificate = self.certificate
+            destinationController.editMode = self.editMode
         }
     }
     
 	private func setupView() {
-        if editMode {
-            self.saveButton.isHidden = true
-        }
+        self.saveButton.isHidden = editMode
     }
 	
 	@IBAction func didPressDoneBtn(_ sender: UIButton) {
@@ -71,17 +68,27 @@ public class CardContainerController: UIViewController {
 	}
 	
 	@IBAction func didPressSaveBtn(_ sender: UIButton) {
+        #if canImport(DGCSHInspection)
+
+        guard let shCert = certificate?.digitalCertificate as? SHCert else { return }
+
         SHDataCenter.shDataManager.add(shCert) { result in
-            DispatchQueue.main.async {
-                self.showAlert(title: "Smart Helth Card saved successfully".localized, subtitle: "Your card is now awailable in the Wallet App".localized) { _ in
-                    self.dismiss(animated: true)
-                    if let cert = try? MultiTypeCertificate(from: self.shCert.fullPayloadString) {
-                        self.delegate?.certificateViewer(self, didAddCeCertificate: cert)
-                    } else {
-                        DGCLogger.logError("Cannot add SHC certificate")
+            if case .success = result {
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Smart Helth Card saved successfully".localized, subtitle: "Your card is now awailable in the Wallet App".localized) { _ in
+                        self.dismiss(animated: true)
+                    }
+                }
+
+            } else if case .failure(let error) = result {
+                DispatchQueue.main.async {
+                    DGCLogger.logError(error)
+                    self.showAlert(title: "Cannot save Smart Helth Card".localized, subtitle: "An error occurred while saving".localized) { _ in
+                        self.dismiss(animated: true)
                     }
                 }
             }
         }
-	}
+        #endif
+    }
 }

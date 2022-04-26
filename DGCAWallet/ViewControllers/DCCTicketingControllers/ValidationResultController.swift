@@ -27,7 +27,9 @@
 
 
 import UIKit
+#if canImport(DCCInspection)
 import DCCInspection
+#endif
 
 class ValidationResultController: UIViewController {
   @IBOutlet fileprivate weak var titleLabel: UILabel!
@@ -36,7 +38,7 @@ class ValidationResultController: UIViewController {
   @IBOutlet fileprivate weak var limitationsTableView: UITableView!
   @IBOutlet fileprivate weak var okButton: UIButton!
 
-  public var accessTokenResponse : AccessTokenResponse?
+  var accessTokenResponse : AccessTokenResponse?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -51,7 +53,7 @@ class ValidationResultController: UIViewController {
 
     guard let result = accessTokenResponse?.result else {
       showInfoAlert(withTitle: "Unable to verify certificate".localized,
-        message: "Make sure you select the desired service...".localized)
+          message: "Make sure you select the desired service...".localized)
       
       titleLabel.text = "Validation error".localized
       detailLabel.text = "Please refer to the Re-open EU website.".localized

@@ -119,20 +119,20 @@ class DCCViewerController: UIViewController {
     }
 
     @IBAction func closeButtonClick() {
-      if isSaved {
-         dismiss(animated: true, completion: nil)
-      } else {
-        activityIndicator.startAnimating()
-        saveCert {[weak self] in
-          DispatchQueue.main.async {
-            self?.activityIndicator.stopAnimating()
-          }
+        if isSaved {
+            dismiss(animated: true, completion: nil)
+        } else {
+            activityIndicator.startAnimating()
+            saveCert {[weak self] in
+                DispatchQueue.main.async {
+                    self?.activityIndicator.stopAnimating()
+                }
+            }
         }
-      }
     }
 
     @IBAction func cancelButtonClick() {
-      dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
     @IBAction func checkValidityAction(_ sender: Any) {

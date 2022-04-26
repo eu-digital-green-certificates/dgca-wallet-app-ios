@@ -199,3 +199,5 @@
 "COVID-19" = "COVID-19";
 "Smart Health Card" = "Smart Health Card";
 "Could not find valid payload information. Swipe right to view all collected data." = "Could not find valid payload information. Swipe right to view all collected data.";
+"Cannot save Smart Helth Card" = "Cannot save Smart Helth Card";
+"An error occurred while saving" = "An error occurred while saving";

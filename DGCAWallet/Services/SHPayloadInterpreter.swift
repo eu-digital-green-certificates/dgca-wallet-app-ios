@@ -29,7 +29,7 @@
 import Foundation
 import SwiftPath
 
-public class SHInterpreter {
+class SHInterpreter {
 	
 	private var jsonPaths: [String:String] = [
 		"givenName": "$.vc..name..given.*",
@@ -42,7 +42,7 @@ public class SHInterpreter {
 	
 	private var dataMap: [String:String] = [:]
 	
-	public init(payload: String) {
+    init(payload: String) {
 		jsonPaths.forEach { key, value in
 			if let jsonPath = SwiftPath(value),
                let _ = try? jsonPath.evaluate(with: payload) {

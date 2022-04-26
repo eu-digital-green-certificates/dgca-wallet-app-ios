@@ -257,7 +257,7 @@ class MainListController: UIViewController {
 					}
 					controller.addAction(actionRetry)
 					
-					let actionOk = UIAlertAction(title: "OK".localized, style: .default)
+					let actionOk = UIAlertAction(title: "Cancel".localized, style: .cancel)
 					controller.addAction(actionOk)
 					return controller
 				}()
@@ -410,7 +410,6 @@ extension MainListController: ScanWalletDelegate {
                 self?.performSegue(withIdentifier: SegueIdentifiers.showScannedSHCertificate, sender: certificate)
             }
             self?.reloadTable()
-            
 		}
 	}
 	

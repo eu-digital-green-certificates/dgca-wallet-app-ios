@@ -30,8 +30,8 @@ import UIKit
 import DCCInspection
 import DGCCoreLibrary
 
-public typealias OnDateChangedHandler = (Date) -> Void
-public typealias OnCountryChangedHandler = (String?) -> Void
+typealias OnDateChangedHandler = (Date) -> Void
+typealias OnCountryChangedHandler = (String?) -> Void
 
 class ExtendedValidityCell: UITableViewCell {
     private enum Constants {
@@ -92,15 +92,15 @@ extension ExtendedValidityCell {
 }
 
 extension ExtendedValidityCell: UIPickerViewDataSource, UIPickerViewDelegate {
-    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
       return 1
     }
     
-    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return countryItems.isEmpty ? 1 : countryItems.count
     }
       
-    public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if countryItems.count == 0 {
             return "Country codes list empty".localized
         } else {
@@ -108,14 +108,14 @@ extension ExtendedValidityCell: UIPickerViewDataSource, UIPickerViewDelegate {
         }
     }
       
-    public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
       self.selectedCounty = countryItems[row]
       countryHandler?(self.selectedCounty?.code)
     }
 }
 
 extension ExtendedValidityCell {
-    public func setListOfRuleCounties(list: [CountryModel]) {
+    func setListOfRuleCounties(list: [CountryModel]) {
         self.countryItems = list
         self.countryPicker.reloadAllComponents()
         guard self.countryItems.count > 0 else { return }

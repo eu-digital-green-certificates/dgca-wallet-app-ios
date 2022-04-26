@@ -57,8 +57,4 @@ class DCCCertificateCell: UITableViewCell {
     func setCertificate(cert: HCert) {
       hCert = cert
     }
-    
-    override func prepareForReuse() {
-      hCert = nil
-    }
 }

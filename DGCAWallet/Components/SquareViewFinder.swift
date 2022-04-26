@@ -27,7 +27,7 @@
 import UIKit
 
 class SquareViewFinder {
-  public static func newView(from view: UIView? = nil) -> UIView {
+    static func newView(from view: UIView? = nil) -> UIView {
     let view = view ?? UIView(frame: .zero)
     view.frame = .zero
     view.translatesAutoresizingMaskIntoConstraints = false

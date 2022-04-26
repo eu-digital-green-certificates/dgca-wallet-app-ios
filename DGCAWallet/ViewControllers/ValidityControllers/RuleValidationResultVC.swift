@@ -31,7 +31,7 @@ import DCCInspection
 import CertLogic
 import DGCCoreLibrary
 
-public typealias OnCloseHandler = () -> Void
+typealias OnCloseHandler = () -> Void
 
 class RuleValidationResultVC: UIViewController {
     private enum Constants {

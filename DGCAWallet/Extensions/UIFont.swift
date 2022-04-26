@@ -30,7 +30,7 @@
 import UIKit
 
 extension UIFont {
-  public var weight: UIFont.Weight {
+    var weight: UIFont.Weight {
     guard let weightNumber = traits[.weight] as? NSNumber else { return .regular }
     let weightRawValue = CGFloat(weightNumber.doubleValue)
     let weight = UIFont.Weight(rawValue: weightRawValue)

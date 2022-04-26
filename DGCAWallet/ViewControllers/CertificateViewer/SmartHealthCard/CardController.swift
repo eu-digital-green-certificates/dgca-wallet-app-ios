@@ -27,7 +27,11 @@
         
 
 import UIKit
+import DGCVerificationCenter
+
+#if canImport(DGCSHInspection)
 import DGCSHInspection
+#endif
 
 class CardController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
@@ -42,8 +46,8 @@ class CardController: UIViewController {
     @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var invalidLabel: UILabel!
     
-    public var shCert: SHCert!
-    public var editMode: Bool = false
+    var certificate: MultiTypeCertificate?
+    var editMode: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,25 +63,27 @@ class CardController: UIViewController {
     }
     
     private func loadData() {
+    #if canImport(DGCSHInspection)
+        guard let shCert = self.certificate?.digitalCertificate as? SHCert else { return }
+
         switch shCert.type {
             case .immunization:
                 self.titleLabel.text = "Vaccination Card".localized
                 self.subtitleLabel.text = "COVID-19".localized
-                break
             case .other:
             self.titleLabel.text = "Smart Health Card".localized
             self.subtitleLabel.isHidden = true
-                break
         }
         subtitleLabel.text = shCert.subType.uppercased()
         nameLabel.text = shCert.fullName
         dobLabel.text = shCert.dateOfBirth
         issuerLabel.text = shCert.issuer
-        lastDoseLabel.text = shCert.dates.last?.string ?? ""
+        lastDoseLabel.text = shCert.dates.last?.string
         if shCert.firstName == "" && shCert.lastName == "" {
             self.invalidLabel.isHidden = false
             self.invalidLabel.text = "Could not find valid payload information. Swipe right to view all collected data.".localized
         }
+    #endif
     }
     
     private func setupCardShadow() {

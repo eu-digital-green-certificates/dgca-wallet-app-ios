@@ -31,9 +31,9 @@ import DGCCoreLibrary
 
 struct SecureBackground {
     static var imageView: UIImageView?
-    public static var image: UIImage?
+    static var image: UIImage?
 
-    public static func enable() {
+    static func enable() {
         guard !paused else { return }
         
         disable()
@@ -45,7 +45,7 @@ struct SecureBackground {
         Self.activation = Date()
     }
 
-    public static func disable() {
+    static func disable() {
         if imageView != nil {
           if activation.timeIntervalSinceNow < -1 {
               // (UIApplication.shared.windows.first?.rootViewController as? UINavigationController)?.popToRootViewController(animated: false)
@@ -58,7 +58,7 @@ struct SecureBackground {
     static var paused = false
     static var activation = Date()
 
-    public static func checkId(from controller: UIViewController? = nil, completion: ((Bool) -> Void)?) {
+    static func checkId(from controller: UIViewController? = nil, completion: ((Bool) -> Void)?) {
         guard !paused else { return }
           
         paused = true

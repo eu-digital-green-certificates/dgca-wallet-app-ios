@@ -30,10 +30,10 @@ import SwiftyJSON
 
 
 class LicenseTableController: UITableViewController {
-  public var licenses: [JSON] = []
-  private var selectedLicense: JSON = []
+    var licenses: [JSON] = []
+    private var selectedLicense: JSON = []
 
-  private let showLicenseDetails = "showLicenseDetails"
+    private let showLicenseDetails = "showLicenseDetails"
   
   override func viewDidLoad() {
     super.viewDidLoad()
