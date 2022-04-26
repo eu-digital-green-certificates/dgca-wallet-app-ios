@@ -176,7 +176,7 @@ class MainListController: UIViewController {
 		
 		alert.addAction(UIAlertAction(title: "Later".localized, style: .default, handler: { _ in }))
 		
-		alert.addAction(UIAlertAction(title: "Reload".localized, style: .default, handler: { (_: UIAlertAction!) in
+		alert.addAction(UIAlertAction(title: "Reload".localized, style: .default, handler: { (_: UIAlertAction) in
             AppManager.shared.verificationCenter.updateStoredData(appType: .wallet, completion: { _ in })
 		}))
 		self.present(alert, animated: true, completion: nil)
@@ -794,8 +794,9 @@ extension MainListController: UIDocumentPickerDelegate {
 			context.fill(CGRect(x: 0, y: 0, width: width, height: height))
 			context.scaleBy(x: scale, y: scale)
 			context.drawPDFPage(pdfPage)
-			let image = context.makeImage()!
-			images.append(UIImage(cgImage: image))
+            if let image = context.makeImage() {
+                images.append(UIImage(cgImage: image))
+            }
 		}
 		return images
 	}

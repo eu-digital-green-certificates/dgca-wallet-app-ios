@@ -253,8 +253,9 @@ extension DCCViewerController {
             let savedImage = hCert.qrCode else { return }
           
         let pdfDocument = PDFDocument()
-        let pdfPage = PDFPage(image: savedImage)
-        pdfDocument.insert(pdfPage!, at: 0)
+        if let pdfPage = PDFPage(image: savedImage) {
+            pdfDocument.insert(pdfPage, at: 0)
+        }
         let data = pdfDocument.dataRepresentation()
         let pdfToShare = [ data ]
         let activityViewController = UIActivityViewController(activityItems: pdfToShare as [Any],

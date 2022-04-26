@@ -54,14 +54,16 @@ class PDFTableViewCell: UITableViewCell {
       if pdfViewer == nil {
         pdfViewer = PDFView(frame: pdfView.bounds)
         pdfViewer?.autoScales = true
-        let scrollView = pdfViewer?.subviews[0] as? UIScrollView
+          let scrollView = pdfViewer?.subviews.first as? UIScrollView
         if scrollView != nil {
-          scrollView!.isScrollEnabled = false
+          scrollView?.isScrollEnabled = false
         }
-        pdfView.addSubview(pdfViewer!)
+          if let pdf = pdfViewer {
+              pdfView.addSubview(pdf)
+          }
       }
       if let document = savedPDF.pdf {
-        pdfViewer!.document = document
+        pdfViewer?.document = document
       }
       nameLabel.text = savedPDF.fileName
       timeLabel.text = savedPDF.dateString

@@ -114,7 +114,7 @@ class HomeController: UIViewController {
             self.loadComplete()
         }))
         
-        alert.addAction(UIAlertAction(title: "Reload".localized, style: .default, handler: { [unowned self] (_ : UIAlertAction!) in
+        alert.addAction(UIAlertAction(title: "Reload".localized, style: .default, handler: { [unowned self] (_ : UIAlertAction) in
             self.reloadData()
         }))
         self.present(alert, animated: true, completion: nil)
