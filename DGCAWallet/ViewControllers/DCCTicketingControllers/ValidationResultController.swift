@@ -50,7 +50,7 @@ class ValidationResultController: UIViewController {
     limitationsTableView.tableFooterView = UIView()
     iconImage.image = iconImage.image?.withRenderingMode(.alwaysTemplate)
     okButton.setTitle("OK".localized, for: .normal)
-
+    
     guard let result = accessTokenResponse?.result else {
       showInfoAlert(withTitle: "Unable to verify certificate".localized,
           message: "Make sure you select the desired service...".localized)
