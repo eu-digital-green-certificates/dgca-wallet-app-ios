@@ -45,7 +45,7 @@ public class SHInterpreter {
 	public init(payload: String) {
 		jsonPaths.forEach { key, value in
 			if let jsonPath = SwiftPath(value),
-			   let mapped = try? jsonPath.evaluate(with: payload) {
+               let _ = try? jsonPath.evaluate(with: payload) {
 				
 			}
 		}

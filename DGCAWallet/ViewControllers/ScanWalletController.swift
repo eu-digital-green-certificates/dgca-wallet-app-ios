@@ -187,7 +187,7 @@ extension ScanWalletController  {
     guard let barcodeString = payloadString, !barcodeString.isEmpty else { return }
 	  /// MARK: END OF SCANNING
       do {
-          if let certificate = try MultiTypeCertificate(payload: barcodeString, ruleCountryCode: nil) {
+          if let certificate = MultiTypeCertificate(from: barcodeString) {
               self.delegate?.walletController(self, didScanCertificate: certificate)
           } else if let payloadData = (payloadString ?? "").data(using: .utf8),
               let ticketing = try? JSONDecoder().decode(CheckInQR.self, from: payloadData) {
@@ -202,7 +202,7 @@ extension ScanWalletController  {
           self.showAlert(title: "WARNING", subtitle: "Unknown issuer. Do you wish to proceed at your own risk?", actionTitle: "Ignore warning", cancelTitle: "Back to safety") { response in
               if response { // user wishes to proceed
                   TrustedListLoader.resolveUnknownIssuer(rawUrl) { kidList, result in
-                      if let certificate = try? MultiTypeCertificate(payload: barcodeString, ruleCountryCode: nil) {
+                      if let certificate = MultiTypeCertificate(from: barcodeString) {
                           self.delegate?.walletController(self, didScanCertificate: certificate)
                       } else {
                           DGCLogger.logInfo("Error when validating the certificate? \(barcodeString)")

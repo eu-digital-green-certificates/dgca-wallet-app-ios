@@ -28,6 +28,7 @@
 import UIKit
 import DCCInspection
 import DGCVerificationCenter
+import DGCCoreLibrary
 
 class DCCCertificateController: UIViewController {
     @IBOutlet fileprivate weak var table: UITableView!

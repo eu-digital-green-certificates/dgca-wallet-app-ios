@@ -120,7 +120,6 @@
 		DA9767752800510400D3607E /* SmartHealthCardContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9767742800510400D3607E /* SmartHealthCardContainerController.swift */; };
 		DA9767772800529900D3607E /* SmartHealth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA9767762800529900D3607E /* SmartHealth.storyboard */; };
 		DA976779280060A800D3607E /* SHPayloadInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA976778280060A800D3607E /* SHPayloadInterpreter.swift */; };
-		DA991A5928044E7000AAC13E /* DGCSHInspection in Frameworks */ = {isa = PBXBuildFile; productRef = DA991A5828044E7000AAC13E /* DGCSHInspection */; };
 		FEBE53B62721A3EA003B61FB /* LimitationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBE53B42721A3EA003B61FB /* LimitationCell.swift */; };
 		FEC54BE927201D660048B6BC /* ValidationResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC54BE727201D660048B6BC /* ValidationResultController.swift */; };
 		FEEAD6DB273BBE9600D883EB /* TokenInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEEAD6DA273BBE9600D883EB /* TokenInfoCell.swift */; };
@@ -230,7 +229,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2B4550327F48C6C00D8A296 /* DGCVerificationCenter in Frameworks */,
-				DA991A5928044E7000AAC13E /* DGCSHInspection in Frameworks */,
 				CA669CF1280AE87F0017E563 /* DataCompression in Frameworks */,
 				D2D581092817284F007EBD8B /* SwiftPath in Frameworks */,
 			);
@@ -544,7 +542,6 @@
 			name = DGCAWallet;
 			packageProductDependencies = (
 				D2B4550227F48C6C00D8A296 /* DGCVerificationCenter */,
-				DA991A5828044E7000AAC13E /* DGCSHInspection */,
 				CA669CF0280AE87F0017E563 /* DataCompression */,
 				D2D581082817284F007EBD8B /* SwiftPath */,
 			);
@@ -1221,10 +1218,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D2D581072817284F007EBD8B /* XCRemoteSwiftPackageReference "SwiftPath" */;
 			productName = SwiftPath;
-		};
-		DA991A5828044E7000AAC13E /* DGCSHInspection */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = DGCSHInspection;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

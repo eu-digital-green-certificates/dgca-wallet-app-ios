@@ -123,14 +123,14 @@
                             <tableViewSection headerTitle="Trusted Public Keys and Revocation Data" id="3pf-6v-wgT" userLabel="Trusted Public Keys, Revocation Data">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="eKk-HB-cRH">
-                                        <rect key="frame" x="0.0" y="267" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="267" width="414" height="44.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eKk-HB-cRH" id="OUZ-m9-MQq">
-                                            <rect key="frame" x="0.0" y="0.0" width="385.5" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="385.5" height="44.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manage Data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AYl-mR-IpX">
-                                                    <rect key="frame" x="20" y="11" width="107" height="22"/>
+                                                    <rect key="frame" x="20" y="11" width="107" height="22.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -138,6 +138,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="AYl-mR-IpX" firstAttribute="leading" secondItem="OUZ-m9-MQq" secondAttribute="leadingMargin" id="DMa-3r-sEL"/>
+                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="AYl-mR-IpX" secondAttribute="trailing" constant="20" id="Ogs-8q-he7"/>
                                                 <constraint firstItem="AYl-mR-IpX" firstAttribute="centerY" secondItem="OUZ-m9-MQq" secondAttribute="centerY" id="oZi-db-n7i"/>
                                                 <constraint firstItem="AYl-mR-IpX" firstAttribute="top" secondItem="OUZ-m9-MQq" secondAttribute="topMargin" id="u3G-W7-64Y"/>
                                             </constraints>
@@ -375,13 +376,13 @@
         <!--Data Manager Controller-->
         <scene sceneID="jQW-oG-FnD">
             <objects>
-                <tableViewController id="GxB-dx-s9l" customClass="DataManagerController" customModule="DGCAVerifier" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="GxB-dx-s9l" customClass="DataManagerController" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="Aer-ev-dX5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CertTypeCell" rowHeight="176" id="Uha-5l-is6" customClass="CertTypeCell" customModule="DGCAVerifier" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CertTypeCell" rowHeight="176" id="Uha-5l-is6" customClass="CertTypeCell" customModule="DGCAWallet" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="44.5" width="414" height="176"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Uha-5l-is6" id="ded-Js-SUz">
@@ -397,7 +398,7 @@
                                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="2ic-re-mjL">
                                             <rect key="frame" x="20" y="131.5" width="20" height="20"/>
                                         </activityIndicatorView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ci-i5-QOs" customClass="RoundedButton" customModule="DGCAVerifier" customModuleProvider="target">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ci-i5-QOs" customClass="RoundedButton" customModule="DGCAWallet" customModuleProvider="target">
                                             <rect key="frame" x="107" y="123" width="200" height="37"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="37" id="Ng8-Q9-S3V"/>

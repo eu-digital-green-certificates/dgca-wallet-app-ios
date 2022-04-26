@@ -42,13 +42,7 @@ public class CardContainerController: UIViewController {
     public var editMode: Bool = false
     
     weak var delegate: CertificateManaging?
-    
-    // private var controllers: [UIViewController] = []
-	
-    public override func viewWillLayoutSubviews() {
-        print("callled")
-    }
-    
+        
 	public override func viewDidLoad() {
 		super.viewDidLoad()
         setupView()
@@ -57,8 +51,7 @@ public class CardContainerController: UIViewController {
 	}
 	
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? CardPageController,
-                           segue.identifier == "pageEmbedSegue" {
+        if let vc = segue.destination as? CardPageController, segue.identifier == "pageEmbedSegue" {
             guard let shCert = certificate?.digitalCertificate as? SHCert else { return }
             vc.shCert = shCert
             vc.editMode = self.editMode
@@ -81,16 +74,13 @@ public class CardContainerController: UIViewController {
             DispatchQueue.main.async {
                 self.showAlert(title: "SHCert saved successfully!", subtitle: "Your certificate is now awailable in the wallet") { _ in
                     self.dismiss(animated: true)
-                    do {
-                        self.delegate?.certificateViewer(self, didAddCeCertificate: try MultiTypeCertificate(from: self.shCert.fullPayloadString)!)
-                        // (self, didAdd: MultiTypeCertificate(from: self.shCert.fullPayloadString)!)
-                    } catch {
+                    if let cert = MultiTypeCertificate(from: self.shCert.fullPayloadString) {
+                        self.delegate?.certificateViewer(self, didAddCeCertificate: cert)
+                    } else {
                         print("Error adding certificate")
                     }
                 }
             }
         }
 	}
-	
 }
-
