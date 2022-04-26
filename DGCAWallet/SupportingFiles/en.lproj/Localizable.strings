@@ -193,3 +193,9 @@
 "Unknown issuer of Smart Card" = "Unknown issuer of Smart Card";
 "Do you want to continue to identify the issuer?" = "Do you want to continue to identify the issuer?";
 "Continue" = "Continue";
+"Smart Helth Card saved successfully" = "Smart Helth Card saved successfully";
+"Your card is now awailable in the Wallet App" = "Your card is now awailable in the Wallet App";
+"Vaccination Card" = "Vaccination Card";
+"COVID-19" = "COVID-19";
+"Smart Health Card" = "Smart Health Card";
+"Could not find valid payload information. Swipe right to view all collected data." = "Could not find valid payload information. Swipe right to view all collected data.";

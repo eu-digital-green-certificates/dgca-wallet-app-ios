@@ -61,11 +61,11 @@ class CardController: UIViewController {
     private func loadData() {
         switch shCert.type {
             case .immunization:
-                self.titleLabel.text = "Vaccination Card"
-                self.subtitleLabel.text = "COVID-19"
+                self.titleLabel.text = "Vaccination Card".localized
+                self.subtitleLabel.text = "COVID-19".localized
                 break
             case .other:
-            self.titleLabel.text = "Smart Health Card"
+            self.titleLabel.text = "Smart Health Card".localized
             self.subtitleLabel.isHidden = true
                 break
         }
@@ -76,7 +76,7 @@ class CardController: UIViewController {
         lastDoseLabel.text = shCert.dates.last?.string ?? ""
         if shCert.firstName == "" && shCert.lastName == "" {
             self.invalidLabel.isHidden = false
-            self.invalidLabel.text = "Unable to find valid information in payload. Swipe right to view full data collected."
+            self.invalidLabel.text = "Could not find valid payload information. Swipe right to view all collected data.".localized
         }
     }
     
@@ -86,6 +86,4 @@ class CardController: UIViewController {
         cardView.layer.shadowRadius = 15.0
         cardView.layer.shadowColor = UIColor.darkGray.cgColor
     }
-    
-    
 }

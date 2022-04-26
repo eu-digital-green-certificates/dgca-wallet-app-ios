@@ -29,6 +29,7 @@
 import UIKit
 import DGCVerificationCenter
 import DGCSHInspection
+import DGCCoreLibrary
 
 public class CardContainerController: UIViewController {
 	@IBOutlet weak var smartCardView: UIView!
@@ -72,12 +73,12 @@ public class CardContainerController: UIViewController {
 	@IBAction func didPressSaveBtn(_ sender: UIButton) {
         SHDataCenter.shDataManager.add(shCert) { result in
             DispatchQueue.main.async {
-                self.showAlert(title: "SHCert saved successfully!", subtitle: "Your certificate is now awailable in the wallet") { _ in
+                self.showAlert(title: "Smart Helth Card saved successfully".localized, subtitle: "Your card is now awailable in the Wallet App".localized) { _ in
                     self.dismiss(animated: true)
                     if let cert = try? MultiTypeCertificate(from: self.shCert.fullPayloadString) {
                         self.delegate?.certificateViewer(self, didAddCeCertificate: cert)
                     } else {
-                        print("Error adding certificate")
+                        DGCLogger.logError("Cannot add SHC certificate")
                     }
                 }
             }
