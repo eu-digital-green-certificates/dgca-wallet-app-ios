@@ -54,13 +54,11 @@ class MainListController: UIViewController {
         static let showSavedDCCCertificate = "showSavedDCCCertificate"
         static let showSavedICAOCertificate = "showSavedICAOCertificate"
         static let showSavedDIVOCCertificate = "showSavedDIVOCCertificate"
-        static let showSavedVCCertificate = "showSavedVCCertificate"
-        static let showSavedSHCCertificate = "showSavedSHCCertificate"
+         static let showSavedSHCCertificate = "showSavedSHCCertificate"
 
 		static let showScannedDCCCertificate = "showScannedDCCCertificate"
         static let showScannedICAOCertificate = "showScannedICAOCertificate"
         static let showScannedDIVOCCertificate = "showScannedDIVOCCertificate"
-        static let showScannedVCCertificate = "showScannedVCCertificate"
         static let showScannedSHCertificate = "showScannedSHCertificate"
 
 		static let showPDFViewer = "showPDFViewer"
@@ -404,8 +402,6 @@ extension MainListController: ScanWalletDelegate {
                 self?.performSegue(withIdentifier: SegueIdentifiers.showScannedICAOCertificate, sender: certificate)
             case .divoc:
                 self?.performSegue(withIdentifier: SegueIdentifiers.showScannedDIVOCCertificate, sender: certificate)
-            case .vc:
-                self?.performSegue(withIdentifier: SegueIdentifiers.showScannedDIVOCCertificate, sender: certificate)
             case .shc:
                 self?.performSegue(withIdentifier: SegueIdentifiers.showScannedSHCertificate, sender: certificate)
             }
@@ -460,9 +456,6 @@ extension MainListController: CertificateManaging {
         case .divoc:
             self.reloadTable()
             //TODO implement DIVOC
-        case .vc:
-            self.reloadTable()
-            //TODO implement VC
         case .shc:
             self.reloadTable()
             //TODO implement SHC
@@ -551,8 +544,6 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
                 self.performSegue(withIdentifier: SegueIdentifiers.showSavedICAOCertificate, sender: certificates[indexPath.row])
             case .divoc:
                 self.performSegue(withIdentifier: SegueIdentifiers.showSavedDIVOCCertificate, sender: certificates[indexPath.row])
-            case .vc:
-                self.performSegue(withIdentifier: SegueIdentifiers.showSavedVCCertificate, sender: certificates[indexPath.row])
             case .shc:
                 self.performSegue(withIdentifier: SegueIdentifiers.showSavedSHCCertificate, sender: certificates[indexPath.row])
             default:
@@ -600,11 +591,6 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
                             self?.reloadTable()
                         }
                     case .divoc:
-                        DispatchQueue.main.async {
-                            self?.stopActivity()
-                            self?.reloadTable()
-                        }
-                    case .vc:
                         DispatchQueue.main.async {
                             self?.stopActivity()
                             self?.reloadTable()
@@ -733,8 +719,6 @@ extension MainListController {
             self.performSegue(withIdentifier: SegueIdentifiers.showScannedICAOCertificate, sender: certificate)
         case .divoc:
             self.performSegue(withIdentifier: SegueIdentifiers.showScannedDIVOCCertificate, sender: certificate)
-        case .vc:
-            self.performSegue(withIdentifier: SegueIdentifiers.showScannedVCCertificate, sender: certificate)
         case .shc:
             self.performSegue(withIdentifier: SegueIdentifiers.showScannedSHCertificate, sender: certificate)
        }
