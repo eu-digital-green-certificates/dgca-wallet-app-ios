@@ -194,7 +194,7 @@ extension ScanWalletController  {
             let certificate = try MultiTypeCertificate(from: barcodeString)
             self.delegate?.walletController(self, didScanCertificate: certificate)
 
-        } catch SHParsingError.kidNotFound(let rawUrl) {
+        } catch CertificateParsingError.kidNotFound(let rawUrl) {
             #if canImport(DGCSHInspection)
 
             DGCLogger.logInfo("Error parsing SH card.")
@@ -209,12 +209,12 @@ extension ScanWalletController  {
                             self.delegate?.walletController(self, didScanCertificate: certificate)
                         } else {
                             DGCLogger.logInfo("Error validating barcodeString: \(barcodeString)")
-                            self.delegate?.walletController(self, didFailWithError: CertificateParsingError.unknown)
+                            self.delegate?.walletController(self, didFailWithError: CertificateParsingError.unknownFormat)
                         }
                     }
                 } else { // user cancels
                     DGCLogger.logInfo("User cancelled verifying.")
-                    self.delegate?.walletController(self, didFailWithError: CertificateParsingError.unknown)
+                    self.delegate?.walletController(self, didFailWithError: CertificateParsingError.unknownFormat)
                 }
             }
             #endif
@@ -226,7 +226,7 @@ extension ScanWalletController  {
             } else {
                 DGCLogger.logInfo("Cannot recognise barcodeString: \(barcodeString)")
                 DGCLogger.logError(error)
-                self.delegate?.walletController(self, didFailWithError: CertificateParsingError.unknown)
+                self.delegate?.walletController(self, didFailWithError: CertificateParsingError.unknownFormat)
             }
         }
     }

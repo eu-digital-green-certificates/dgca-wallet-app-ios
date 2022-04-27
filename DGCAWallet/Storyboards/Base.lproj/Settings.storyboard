@@ -404,11 +404,10 @@
                                                 <constraint firstAttribute="height" constant="37" id="Ng8-Q9-S3V"/>
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="U3k-j9-urs"/>
                                             </constraints>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                             <color key="tintColor" name="verifierBlue"/>
-                                            <state key="normal" title="Button"/>
-                                            <buttonConfiguration key="configuration" style="plain" title="Reload Data">
-                                                <fontDescription key="titleFontDescription" type="boldSystem" pointSize="19"/>
-                                            </buttonConfiguration>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <state key="normal" title="Reload Data"/>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="radius">
                                                     <real key="value" value="6"/>
@@ -479,7 +478,7 @@
     </scenes>
     <designables>
         <designable name="8Ci-i5-QOs">
-            <size key="intrinsicContentSize" width="133" height="37"/>
+            <size key="intrinsicContentSize" width="121" height="35"/>
         </designable>
     </designables>
     <resources>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jux-UG-HDu">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -19,10 +19,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g7y-Ew-epd">
-                                <rect key="frame" x="20" y="74" width="334" height="555.33333333333337"/>
+                                <rect key="frame" x="20" y="74" width="335" height="557"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SubTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xsq-mC-Cte">
-                                        <rect key="frame" x="214.33333333333334" y="15.000000000000002" width="94.666666666666657" height="25.666666666666671"/>
+                                        <rect key="frame" x="215.33333333333334" y="15.000000000000002" width="94.666666666666657" height="25.666666666666671"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Xsq-mC-Cte" secondAttribute="height" multiplier="107:29" id="Mbu-R5-g6Q"/>
                                         </constraints>
@@ -127,7 +127,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Gb-gx-b96">
-                                        <rect key="frame" x="77" y="360.33333333333331" width="180" height="179.99999999999994"/>
+                                        <rect key="frame" x="77.666666666666686" y="362" width="180" height="180"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smart-health-qr" translatesAutoresizingMaskIntoConstraints="NO" id="u6t-VH-XKD">
                                                 <rect key="frame" x="10" y="10" width="160" height="160"/>
@@ -148,7 +148,7 @@
                                         </constraints>
                                     </view>
                                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ec-Ce-5Oe">
-                                        <rect key="frame" x="42" y="267.66666666666669" width="250" height="20.333333333333314"/>
+                                        <rect key="frame" x="42.666666666666657" y="268.33333333333331" width="249.99999999999997" height="20.333333333333314"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="250" id="SaL-GJ-DoG"/>
                                         </constraints>
@@ -160,7 +160,6 @@
                                 <color key="backgroundColor" name="AccentColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="g7y-Ew-epd" secondAttribute="height" multiplier="187:311" id="16Z-MR-kZ8"/>
-                                    <constraint firstItem="9Gb-gx-b96" firstAttribute="leading" secondItem="g7y-Ew-epd" secondAttribute="leading" constant="77" id="1X5-iQ-uGg"/>
                                     <constraint firstItem="n0d-Ba-hDw" firstAttribute="leading" relation="lessThanOrEqual" secondItem="g7y-Ew-epd" secondAttribute="leading" constant="15" id="2Xd-2C-m9a"/>
                                     <constraint firstItem="8ec-Ce-5Oe" firstAttribute="centerY" secondItem="g7y-Ew-epd" secondAttribute="centerY" id="46W-6a-MeH"/>
                                     <constraint firstItem="sdB-xb-e5q" firstAttribute="top" secondItem="g7y-Ew-epd" secondAttribute="top" constant="15" id="4JW-Ko-ZCX"/>
@@ -172,7 +171,6 @@
                                     <constraint firstItem="fXb-r4-2zC" firstAttribute="leading" secondItem="g7y-Ew-epd" secondAttribute="leading" constant="15" id="Fvm-5B-Xyf"/>
                                     <constraint firstAttribute="trailing" secondItem="Xsq-mC-Cte" secondAttribute="trailing" constant="25" id="Jeq-xP-dOY"/>
                                     <constraint firstItem="eoI-wX-WZX" firstAttribute="top" secondItem="HaZ-Jw-4Ti" secondAttribute="top" id="Jpc-8p-SvA"/>
-                                    <constraint firstAttribute="trailing" secondItem="9Gb-gx-b96" secondAttribute="trailing" constant="77" id="Pcj-p2-HOp"/>
                                     <constraint firstItem="n0j-Dx-VTL" firstAttribute="top" secondItem="eoI-wX-WZX" secondAttribute="bottom" constant="5" id="QQw-H0-cyx"/>
                                     <constraint firstItem="n0d-Ba-hDw" firstAttribute="top" secondItem="u4x-cB-c9U" secondAttribute="bottom" constant="5" id="RhW-em-FKe"/>
                                     <constraint firstItem="my4-yu-dL3" firstAttribute="leading" secondItem="g7y-Ew-epd" secondAttribute="leading" constant="15" id="UPK-2L-cAe"/>
@@ -236,14 +234,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZfC-bY-oMP">
-                                <rect key="frame" x="7" y="54" width="110" height="35"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZfC-bY-oMP">
+                                <rect key="frame" x="7" y="54" width="102.66666666666667" height="32.666666666666657"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="ZfC-bY-oMP" secondAttribute="height" multiplier="22:7" id="ZHL-wF-pBx"/>
                                 </constraints>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" titleAlignment="leading">
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Button">
                                     <attributedString key="attributedTitle">
                                         <fragment content="Done">
                                             <attributes>
@@ -251,19 +249,19 @@
                                             </attributes>
                                         </fragment>
                                     </attributedString>
-                                </buttonConfiguration>
+                                </state>
                                 <connections>
                                     <action selector="didPressDoneBtn:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="kma-1C-jdk"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4jK-Bn-Jec">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4jK-Bn-Jec" customClass="RoundedButton" customModule="DGCAWallet" customModuleProvider="target">
                                 <rect key="frame" x="100" y="733" width="175" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="RxQ-1q-fx5"/>
                                 </constraints>
                                 <color key="tintColor" name="AccentColor"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled">
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Button">
                                     <attributedString key="attributedTitle">
                                         <fragment content="SAVE">
                                             <attributes>
@@ -271,13 +269,27 @@
                                             </attributes>
                                         </fragment>
                                     </attributedString>
-                                </buttonConfiguration>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="padding">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="radius">
+                                        <real key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" name="verifierBlue"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="didPressSaveBtn:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="PM6-VX-naM"/>
                                 </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hYc-54-hI0">
-                                <rect key="frame" x="0.0" y="89" width="375" height="634"/>
+                                <rect key="frame" x="0.0" y="86.666666666666686" width="375" height="636.33333333333326"/>
                                 <connections>
                                     <segue destination="bEn-4T-Txt" kind="embed" identifier="pageEmbedSegue" id="qyy-iT-Xyh"/>
                                 </connections>
@@ -373,6 +385,9 @@
         <image name="smart-health-qr" width="905" height="902"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="verifierBlue">
+            <color red="0.0" green="0.26666666666666666" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
