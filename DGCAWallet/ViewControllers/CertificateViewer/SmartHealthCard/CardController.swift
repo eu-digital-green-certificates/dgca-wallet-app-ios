@@ -74,6 +74,7 @@ class CardController: UIViewController {
             self.titleLabel.text = "Smart Health Card".localized
             self.subtitleLabel.isHidden = true
         }
+        
         subtitleLabel.text = shCert.subType.uppercased()
         nameLabel.text = shCert.fullName
         dobLabel.text = shCert.dateOfBirth

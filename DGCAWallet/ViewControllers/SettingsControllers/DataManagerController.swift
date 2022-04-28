@@ -36,7 +36,6 @@ protocol DataManagingProtocol: AnyObject {
 }
 
 class DataManagerController: UITableViewController {
-
     var applicableInspectors: [ApplicableInspector] = []
     
     override func viewDidLoad() {
@@ -47,7 +46,6 @@ class DataManagerController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -60,21 +58,10 @@ class DataManagerController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CertTypeCell", for: indexPath) as! CertTypeCell
-
         cell.applicant = applicableInspectors[indexPath.row]
         cell.delegate = self
         return cell
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     private func showAlertCannotReload() {
         let title = "Cannot update stored data".localized

@@ -75,7 +75,8 @@ class CardContainerController: UIViewController {
         SHDataCenter.shDataManager.add(shCert) { result in
             if case .success = result {
                 DispatchQueue.main.async {
-                    self.showAlert(title: "Smart Helth Card saved successfully".localized, subtitle: "Your card is now awailable in the Wallet App".localized) { _ in
+                    self.showAlert(title: "Smart Helth Card saved successfully".localized,
+                        subtitle: "Your card is now awailable in the Wallet App".localized) { _ in
                         self.dismiss(animated: true)
                     }
                 }

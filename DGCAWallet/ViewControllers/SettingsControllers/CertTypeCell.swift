@@ -45,7 +45,7 @@ class CertTypeCell: UITableViewCell {
             certTaskName.text = applicant?.type.certificateTaskDescription
             
             let dateString = applicant?.inspector.lastUpdate.dateString ?? ""
-            lastUpdateLabel.text = "Last updated: " + dateString
+            lastUpdateLabel.text = "Last updated: ".localized + dateString
         }
     }
     
