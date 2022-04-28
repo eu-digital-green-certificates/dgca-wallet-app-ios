@@ -31,8 +31,8 @@ import DCCInspection
 import DGCVerificationCenter
 
 protocol CertificateManaging: AnyObject {
-  func certificateViewer(_ controller: UIViewController, didDeleteCertificate certificate: MultiTypeCertificate)
-  func certificateViewer(_ controller: UIViewController, didAddCeCertificate certificate: MultiTypeCertificate)
+    func certificateViewer(_ controller: UIViewController, didDeleteCertificate certificate: MultiTypeCertificate)
+    func certificateViewer(_ controller: UIViewController, didAddCeCertificate certificate: MultiTypeCertificate)
 }
 
 class DCCViewerController: UIViewController {
@@ -53,7 +53,7 @@ class DCCViewerController: UIViewController {
     
     var certificate: MultiTypeCertificate?
     weak var delegate: CertificateManaging?
-
+    
     var certDate: Date?
     var tan: String?
     var isSaved = true
@@ -64,7 +64,7 @@ class DCCViewerController: UIViewController {
         let center = NotificationCenter.default
         center.removeObserver(self)
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupInterface()
@@ -97,17 +97,17 @@ class DCCViewerController: UIViewController {
             cancelButton.isHidden = true
             dismissButton.setTitle("Done".localized, for: .normal)
             if isEditMode {
-              editButton.setTitle("Done".localized, for: .normal)
-              deleteButton.isHidden = false
-              checkValidityButton.isHidden = true
-              dismissButton.isHidden = true
-              shareButton.isHidden = true
+                editButton.setTitle("Done".localized, for: .normal)
+                deleteButton.isHidden = false
+                checkValidityButton.isHidden = true
+                dismissButton.isHidden = true
+                shareButton.isHidden = true
             } else {
-              editButton.setTitle("Edit".localized, for: .normal)
-              deleteButton.isHidden = true
-              checkValidityButton.isHidden = false
-              dismissButton.isHidden = false
-              shareButton.isHidden = false
+                editButton.setTitle("Edit".localized, for: .normal)
+                deleteButton.isHidden = true
+                checkValidityButton.isHidden = false
+                dismissButton.isHidden = false
+                shareButton.isHidden = false
             }
             nameLabel.textColor = .white
             headerBackground.backgroundColor = .verifierBlue
@@ -138,14 +138,12 @@ class DCCViewerController: UIViewController {
     }
     
     @IBAction func editAction() {
-      isEditMode = !isEditMode
-      setupInterface()
+        isEditMode = !isEditMode
+        setupInterface()
     }
 
     @IBAction func deleteCertificateAction() {
-        guard let certificate = certificate,
-            let certDate = certDate else { return }
-            
+        guard let certificate = certificate, let certDate = certDate else { return }
             showAlert( title: "Delete Certificate".localized, subtitle: "cert.delete.body".localized,
             actionTitle: "Confirm".localized, cancelTitle: "Cancel".localized) { [unowned self] in
                 if $0 {
@@ -175,7 +173,8 @@ class DCCViewerController: UIViewController {
                 guard error == nil else {
                     completion()
                     DispatchQueue.main.async {
-                        self.showAlert(title:"Cannot save the Certificate".localized, subtitle: "Check the TAN and try again.".localized)
+                        self.showAlert(title:"Cannot save the Certificate".localized,
+                            subtitle: "Check the TAN and try again.".localized)
                     }
                     
                     DGCLogger.logError(error!)
@@ -186,7 +185,8 @@ class DCCViewerController: UIViewController {
                     DCCDataCenter.localDataManager.add(hCert, with: newTan) { _ in
                         completion()
                         DispatchQueue.main.async {
-                            self.showAlert(title: "Certificate saved successfully".localized, subtitle: "Now it is available in the wallet".localized) { _ in
+                            self.showAlert(title: "Certificate saved successfully".localized,
+                                subtitle: "Now it is available in the wallet".localized) { _ in
                                 self.dismiss(animated: true) {
                                     self.delegate?.certificateViewer(self, didAddCeCertificate: certificate)
                                 }
@@ -197,7 +197,8 @@ class DCCViewerController: UIViewController {
                 } else {
                   completion()
                   DispatchQueue.main.async {
-                    self.showAlert(title:"Cannot save the Certificate".localized, subtitle: "Check the TAN and try again.".localized)
+                    self.showAlert(title:"Cannot save the Certificate".localized,
+                        subtitle: "Check the TAN and try again.".localized)
                   }
                 }
             }
@@ -207,13 +208,13 @@ class DCCViewerController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case Constants.showValidityController:
-          guard let checkController = segue.destination as? CheckValidityController,
+            guard let checkController = segue.destination as? CheckValidityController,
                 let hCert = certificate?.digitalCertificate as? HCert else { return }
-          checkController.setupCheckValidity(with: hCert)
+            checkController.setupCheckValidity(with: hCert)
           
         case Constants.embedCertPagesController:
-          guard let childController = segue.destination as? CertPagesController else { return }
-          childController.embeddingVC = self
+            guard let childController = segue.destination as? CertPagesController else { return }
+            childController.embeddingVC = self
         
         default:
           break
@@ -222,12 +223,14 @@ class DCCViewerController: UIViewController {
     
     @IBAction func shareAction(_ sender: Any) {
         let menuActionSheet =  UIAlertController(title: "Share QR Code?".localized,
-              message: "Do you want to share DCC certificate via image or PDF file?".localized, preferredStyle: .actionSheet)
-        menuActionSheet.addAction(UIAlertAction(title: "Export as Image".localized, style: .default, handler: { [weak self] _ in
-              self?.shareQRCodeLikeImage()
+            message: "Do you want to share DCC certificate via image or PDF file?".localized, preferredStyle: .actionSheet)
+        menuActionSheet.addAction(UIAlertAction(title: "Export as Image".localized, style: .default,
+            handler: { [weak self] _ in
+                self?.shareQRCodeLikeImage()
             }))
-        menuActionSheet.addAction(UIAlertAction(title: "Export as PDF".localized, style: .default, handler: { [weak self] _ in
-              self?.shareQrCodeLikePDF()
+        menuActionSheet.addAction(UIAlertAction(title: "Export as PDF".localized, style: .default,
+            handler: { [weak self] _ in
+                self?.shareQrCodeLikePDF()
             }))
         menuActionSheet.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil))
         present(menuActionSheet, animated: true, completion: nil)
@@ -236,8 +239,7 @@ class DCCViewerController: UIViewController {
 
 extension DCCViewerController {
     private func shareQRCodeLikeImage() {
-        guard let hCert = certificate?.digitalCertificate as? HCert,
-            let savedImage = hCert.qrCode else { return }
+        guard let hCert = certificate?.digitalCertificate as? HCert, let savedImage = hCert.qrCode else { return }
           
         let imageToShare = [ savedImage ]
         let activityViewController = UIActivityViewController(activityItems: imageToShare as [Any],
@@ -247,8 +249,7 @@ extension DCCViewerController {
     }
     
     private func shareQrCodeLikePDF() {
-        guard let hCert = certificate?.digitalCertificate as? HCert,
-            let savedImage = hCert.qrCode else { return }
+        guard let hCert = certificate?.digitalCertificate as? HCert, let savedImage = hCert.qrCode else { return }
           
         let pdfDocument = PDFDocument()
         if let pdfPage = PDFPage(image: savedImage) {
@@ -257,7 +258,7 @@ extension DCCViewerController {
         let data = pdfDocument.dataRepresentation()
         let pdfToShare = [ data ]
         let activityViewController = UIActivityViewController(activityItems: pdfToShare as [Any],
-          applicationActivities: nil)
+            applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
         self.present(activityViewController, animated: true, completion: nil)
     }

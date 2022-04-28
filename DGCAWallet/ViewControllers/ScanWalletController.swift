@@ -187,48 +187,59 @@ extension ScanWalletController  {
     private func observationHandler(payloadString: String?) {
       guard let barcodeString = payloadString, !barcodeString.isEmpty else { return }
         /// MARK: END OF SCANNING
-        do {
-            let certificate = try MultiTypeCertificate(from: barcodeString)
-            self.delegate?.walletController(self, didScanCertificate: certificate)
+        
+        if CertificateApplicant.isApplicableDCCFormat(payload: barcodeString) {
+            do {
+                let certificate = try MultiTypeCertificate(from: barcodeString)
+                self.delegate?.walletController(self, didScanCertificate: certificate)
 
-        } catch CertificateParsingError.kidNotFound(let rawUrl) {
-            #if canImport(DGCSHInspection)
-
-            DGCLogger.logInfo("Error parsing SH card.")
-            // since kid is not in list of trusted issuers, make sure to ask user first
-            self.showAlert(title: "Unknown issuer of Smart Card".localized,
-                subtitle: "Do you want to continue to identify the issuer?",
-                actionTitle: "Continue".localized,
-                cancelTitle: "Cancel".localized ) { response in
-                if response {
-                    
-                    #if canImport(DGCSHInspection)
-                    TrustedListLoader.resolveUnknownIssuer(rawUrl) { kidList, result in
-                        if let certificate = try? MultiTypeCertificate(from: barcodeString) {
-                            self.delegate?.walletController(self, didScanCertificate: certificate)
-                        } else {
-                            DGCLogger.logInfo("Error validating barcodeString: \(barcodeString)")
-                            self.delegate?.walletController(self, didFailWithError: CertificateParsingError.unknownFormat)
+            } catch let error as CertificateParsingError {
+                self.delegate?.walletController(self, didFailWithError: error)
+            } catch {
+                self.delegate?.walletController(self, didFailWithError: CertificateParsingError.invalidStructure)
+            }
+            
+        } else if CertificateApplicant.isApplicableSHCFormat(payload: barcodeString) {
+            do {
+                let certificate = try MultiTypeCertificate(from: barcodeString)
+                self.delegate?.walletController(self, didScanCertificate: certificate)
+                
+            } catch CertificateParsingError.kidNotFound(let rawUrl) {
+                DGCLogger.logInfo("Error kidNotFound when parse SH card.")
+                self.showAlert(title: "Unknown issuer of Smart Card".localized,
+                    subtitle: "Do you want to continue to identify the issuer?",
+                    actionTitle: "Continue".localized,
+                    cancelTitle: "Cancel".localized ) { response in
+                    if response {
+                        #if canImport(DGCSHInspection)
+                        TrustedListLoader.resolveUnknownIssuer(rawUrl) { kidList, result in
+                            if let certificate = try? MultiTypeCertificate(from: barcodeString) {
+                                self.delegate?.walletController(self, didScanCertificate: certificate)
+                            } else {
+                                DGCLogger.logInfo("Error validating barcodeString: \(barcodeString)")
+                                self.delegate?.walletController(self, didFailWithError: CertificateParsingError.unknownFormat)
+                            }
                         }
+                        #endif
+                        
+                    } else { // user cancels
+                        DGCLogger.logInfo("User cancelled verifying.")
                     }
-                    #endif
-                    
-                } else { // user cancels
-                    DGCLogger.logInfo("User cancelled verifying.")
-                    self.delegate?.walletController(self, didFailWithError: CertificateParsingError.unknownFormat)
                 }
-            }
-            #endif
 
-        } catch let error {
-            if let payloadData = (payloadString ?? "").data(using: .utf8),
-                let ticketing = try? JSONDecoder().decode(CheckInQR.self, from: payloadData) {
-                self.delegate?.walletController(self, didScanInfo: ticketing)
-            } else {
-                DGCLogger.logInfo("Cannot recognise barcodeString: \(barcodeString)")
-                DGCLogger.logError(error)
-                self.delegate?.walletController(self, didFailWithError: CertificateParsingError.unknownFormat)
+            } catch let error as CertificateParsingError {
+                self.delegate?.walletController(self, didFailWithError: error)
+            } catch {
+                self.delegate?.walletController(self, didFailWithError: CertificateParsingError.invalidStructure)
             }
+            
+       } else if let payloadData = (payloadString ?? "").data(using: .utf8),
+            let ticketing = try? JSONDecoder().decode(CheckInQR.self, from: payloadData) {
+            self.delegate?.walletController(self, didScanInfo: ticketing)
+           
+        } else {
+            DGCLogger.logInfo("Cannot recognise barcodeString: \(barcodeString)")
+            self.delegate?.walletController(self, didFailWithError: CertificateParsingError.unknownFormat)
         }
     }
 }
