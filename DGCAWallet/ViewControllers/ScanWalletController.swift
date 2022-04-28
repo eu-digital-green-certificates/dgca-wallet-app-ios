@@ -17,9 +17,9 @@ import DGCSHInspection
 #endif
 
 protocol ScanWalletDelegate: AnyObject {
-    func walletController(_ controller: ScanWalletController, didScanCertificate certificate: MultiTypeCertificate)
-    func walletController(_ controller: ScanWalletController, didScanInfo info: CheckInQR)
-    func walletController(_ controller: ScanWalletController, didFailWithError error: CertificateParsingError)
+    func walletController(_ controller: UIViewController, didScanCertificate certificate: MultiTypeCertificate)
+    func walletController(_ controller: UIViewController, didScanInfo info: CheckInQR)
+    func walletController(_ controller: UIViewController, didFailWithError error: CertificateParsingError)
     func disableBackgroundDetection()
     func enableBackgroundDetection()
 }

@@ -373,7 +373,7 @@ class MainListController: UIViewController {
 
 // MARK: - ScanWalletDelegate
 extension MainListController: ScanWalletDelegate {
-	func walletController(_ controller: ScanWalletController, didFailWithError error: CertificateParsingError) {
+	func walletController(_ controller: UIViewController, didFailWithError error: CertificateParsingError) {
 		DispatchQueue.main.async {
 			self.showInfoAlert(withTitle: "Cannot read Barcode".localized, message: "Something went wrong.".localized)
 		}
@@ -387,7 +387,7 @@ extension MainListController: ScanWalletDelegate {
 		SecureBackground.paused = false
 	}
 	
-	func walletController(_ controller: ScanWalletController, didScanCertificate certificate: MultiTypeCertificate) {
+	func walletController(_ controller: UIViewController, didScanCertificate certificate: MultiTypeCertificate) {
 		DispatchQueue.main.async { [weak self] in
             self?.dismiss(animated: true, completion: nil)
             switch certificate.certificateType {
@@ -407,7 +407,7 @@ extension MainListController: ScanWalletDelegate {
 		}
 	}
 	
-	func walletController(_ controller: ScanWalletController, didScanInfo ticketing: CheckInQR) {
+	func walletController(_ controller: UIViewController, didScanInfo ticketing: CheckInQR) {
 		if scannedToken == ticketing.token {
 			return
 		}
@@ -698,9 +698,14 @@ extension MainListController: UIImagePickerControllerDelegate, UINavigationContr
 extension MainListController {
 	private func tryFoundQRCodeIn(image: UIImage) {
 		if let qrString = image.qrCodeString(),
-            let certificate = try? MultiTypeCertificate(from: qrString) {
-            self.saveQrCode(certificate: certificate)
-
+           CertificateApplicant.isApplicableFormatForVerification(payload: qrString) {
+            
+           if let certificate = try? MultiTypeCertificate(from: qrString) {
+                self.saveQrCode(certificate: certificate)
+           } else {
+                self.saveImage(image: image)
+           }
+        
 		} else {
 			self.saveImage(image: image)
 		}
@@ -764,20 +769,23 @@ extension MainListController: UIDocumentPickerDelegate {
 			let scale = dpi / 72.0
 			let width = Int(mediaBoxRect.width * scale)
 			let height = Int(mediaBoxRect.height * scale)
-			let context = CGContext(data: nil,
-									width: width,
-									height: height,
-									bitsPerComponent: 8,
-									bytesPerRow: 0,
-									space: colorSpace,
-									bitmapInfo: bitmapInfo)!
-			context.interpolationQuality = .high
-			context.setFillColor(UIColor.white.cgColor)
-			context.fill(CGRect(x: 0, y: 0, width: width, height: height))
-			context.scaleBy(x: scale, y: scale)
-			context.drawPDFPage(pdfPage)
-            if let image = context.makeImage() {
-                images.append(UIImage(cgImage: image))
+			if let context = CGContext(
+                data: nil,
+                width: width,
+                height: height,
+                bitsPerComponent: 8,
+                bytesPerRow: 0,
+                space: colorSpace,
+                bitmapInfo: bitmapInfo
+            ) {
+                context.interpolationQuality = .high
+                context.setFillColor(UIColor.white.cgColor)
+                context.fill(CGRect(x: 0, y: 0, width: width, height: height))
+                context.scaleBy(x: scale, y: scale)
+                context.drawPDFPage(pdfPage)
+                if let image = context.makeImage() {
+                    images.append(UIImage(cgImage: image))
+                }
             }
 		}
 		return images
@@ -788,10 +796,16 @@ extension MainListController: UIDocumentPickerDelegate {
 			savePDFFile(url: url)
 			return
 		}
+        
 		for image in images {
             if let qrString = image.qrCodeString(),
-                let certificate = try? MultiTypeCertificate(from: qrString) {
-                self.saveQrCode(certificate: certificate)
+                CertificateApplicant.isApplicableFormatForVerification(payload: qrString) {
+                if let certificate = try? MultiTypeCertificate(from: qrString) {
+                     self.saveQrCode(certificate: certificate)
+                } else {
+                    savePDFFile(url: url)
+                    break
+                }
             } else {
                 savePDFFile(url: url)
                 break
