@@ -117,7 +117,7 @@
 		DA01661E26554992005B73A1 /* OpenSourceNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = DA01661D26554992005B73A1 /* OpenSourceNotices.json */; };
 		DA01662026554E02005B73A1 /* LicenseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01661F26554E02005B73A1 /* LicenseCell.swift */; };
 		DA01662226558B2F005B73A1 /* LicenseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01662126558B2F005B73A1 /* LicenseController.swift */; };
-		DA9767752800510400D3607E /* SmartHealthCardContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9767742800510400D3607E /* SmartHealthCardContainerController.swift */; };
+		DA9767752800510400D3607E /* CardContainerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9767742800510400D3607E /* CardContainerController.swift */; };
 		DA9767772800529900D3607E /* SmartHealth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA9767762800529900D3607E /* SmartHealth.storyboard */; };
 		DA976779280060A800D3607E /* SHPayloadInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA976778280060A800D3607E /* SHPayloadInterpreter.swift */; };
 		FEBE53B62721A3EA003B61FB /* LimitationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEBE53B42721A3EA003B61FB /* LimitationCell.swift */; };
@@ -215,7 +215,7 @@
 		DA01661D26554992005B73A1 /* OpenSourceNotices.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = OpenSourceNotices.json; sourceTree = "<group>"; };
 		DA01661F26554E02005B73A1 /* LicenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseCell.swift; sourceTree = "<group>"; };
 		DA01662126558B2F005B73A1 /* LicenseController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = LicenseController.swift; sourceTree = "<group>"; tabWidth = 2; };
-		DA9767742800510400D3607E /* SmartHealthCardContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartHealthCardContainerController.swift; sourceTree = "<group>"; };
+		DA9767742800510400D3607E /* CardContainerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardContainerController.swift; sourceTree = "<group>"; };
 		DA9767762800529900D3607E /* SmartHealth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SmartHealth.storyboard; sourceTree = "<group>"; };
 		DA976778280060A800D3607E /* SHPayloadInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHPayloadInterpreter.swift; sourceTree = "<group>"; };
 		FEBE53B42721A3EA003B61FB /* LimitationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitationCell.swift; sourceTree = "<group>"; };
@@ -298,7 +298,7 @@
 		CAD8EC2628073CEA0095CD52 /* SmartHealthCard */ = {
 			isa = PBXGroup;
 			children = (
-				DA9767742800510400D3607E /* SmartHealthCardContainerController.swift */,
+				DA9767742800510400D3607E /* CardContainerController.swift */,
 				CABCB8E728073E3B00814185 /* CardPageController.swift */,
 				CABCB8E928073E4C00814185 /* CardPayloadController.swift */,
 				CABCB8EB28073EBA00814185 /* CardController.swift */,
@@ -695,7 +695,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA9767752800510400D3607E /* SmartHealthCardContainerController.swift in Sources */,
+				DA9767752800510400D3607E /* CardContainerController.swift in Sources */,
 				CEE9DA5D263C865200A31532 /* Brightness.swift in Sources */,
 				CE13CF0A262DCDDA0070C80E /* DCCViewerController.swift in Sources */,
 				CEDABD40263C5FF4007A9B97 /* DCCCertificateController.swift in Sources */,

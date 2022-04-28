@@ -76,9 +76,7 @@ class DCCViewerController: UIViewController {
     }
     
     func setupInterface() {
-        guard let hCert = certificate?.digitalCertificate as? HCert else { return }
-        
-        nameLabel.text = hCert.fullName
+        nameLabel.text = certificate?.fullName
         shareButton.setTitle("Share".localized, for: .normal)
         deleteButton.setTitle("Delete Certificate".localized, for: .normal)
         checkValidityButton.setTitle("Check Validity".localized, for: .normal)

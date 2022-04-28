@@ -11,13 +11,10 @@ import AVFoundation
 import DGCCoreLibrary
 import DGCVerificationCenter
 import SwiftUI
-#if canImport(DCCInspection)
-import DCCInspection
-#endif
+
 #if canImport(DGCSHInspection)
 import DGCSHInspection
 #endif
-
 
 protocol ScanWalletDelegate: AnyObject {
     func walletController(_ controller: ScanWalletController, didScanCertificate certificate: MultiTypeCertificate)
@@ -204,6 +201,8 @@ extension ScanWalletController  {
                 actionTitle: "Continue".localized,
                 cancelTitle: "Cancel".localized ) { response in
                 if response {
+                    
+                    #if canImport(DGCSHInspection)
                     TrustedListLoader.resolveUnknownIssuer(rawUrl) { kidList, result in
                         if let certificate = try? MultiTypeCertificate(from: barcodeString) {
                             self.delegate?.walletController(self, didScanCertificate: certificate)
@@ -212,6 +211,8 @@ extension ScanWalletController  {
                             self.delegate?.walletController(self, didFailWithError: CertificateParsingError.unknownFormat)
                         }
                     }
+                    #endif
+                    
                 } else { // user cancels
                     DGCLogger.logInfo("User cancelled verifying.")
                     self.delegate?.walletController(self, didFailWithError: CertificateParsingError.unknownFormat)

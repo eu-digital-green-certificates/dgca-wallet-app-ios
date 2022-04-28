@@ -30,10 +30,6 @@ import UIKit
 import DGCVerificationCenter
 import DGCCoreLibrary
 
-#if canImport(DCCInspection)
-import DCCInspection
-#endif
-
 protocol DataManagingProtocol: AnyObject {
     func loadingInspector(_ inspector: ApplicableInspector, didFinishLoadingData value: Bool)
     func loadingInspector(_ inspector: ApplicableInspector, didFailLoadingDataWith error: Error)

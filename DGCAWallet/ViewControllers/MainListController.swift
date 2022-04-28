@@ -356,7 +356,6 @@ class MainListController: UIViewController {
 			}
             shVC.editMode = false
             shVC.delegate = self
-            break
             
         case SegueIdentifiers.showSavedSHCCertificate:
             guard let shVC = segue.destination as? CardContainerController else { return }
@@ -365,7 +364,6 @@ class MainListController: UIViewController {
             }
             shVC.editMode = true
             shVC.delegate = self
-            break
             
 		default:
 			break

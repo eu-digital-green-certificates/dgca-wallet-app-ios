@@ -27,7 +27,7 @@
         
 
 import UIKit
-import DCCInspection
+import DGCVerificationCenter
 import DGCCoreLibrary
 
 typealias OnDateChangedHandler = (Date) -> Void
@@ -81,7 +81,7 @@ class ExtendedValidityCell: UITableViewCell {
           // Fallback on earlier versions
         }
         datePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
-        setListOfRuleCounties(list: DCCDataCenter.countryCodes)
+        setListOfRuleCounties(list: DGCVerificationCenter.countryCodes)
     }
 }
 
