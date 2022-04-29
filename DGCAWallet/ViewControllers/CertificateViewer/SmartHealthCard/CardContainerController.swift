@@ -69,14 +69,15 @@ class CardContainerController: UIViewController {
 	
 	@IBAction func didPressSaveBtn(_ sender: UIButton) {
         #if canImport(DGCSHInspection)
-
-        guard let shCert = certificate?.digitalCertificate as? SHCert else { return }
-
+        
+        guard let certificate = certificate, let shCert = certificate.digitalCertificate as? SHCert else { return }
+        
         SHDataCenter.shDataManager.add(shCert) { result in
             if case .success = result {
                 DispatchQueue.main.async {
                     self.showAlert(title: "Smart Helth Card saved successfully".localized,
                         subtitle: "Your card is now awailable in the Wallet App".localized) { _ in
+                        self.delegate?.certificateViewer(self, didAddCeCertificate: certificate)
                         self.dismiss(animated: true)
                     }
                 }

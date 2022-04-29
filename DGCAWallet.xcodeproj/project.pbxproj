@@ -102,6 +102,8 @@
 		D2BBDEC22798B25F0043A8A7 /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB1A269DBB4C00074F66 /* context.jsonc */; };
 		D2D581092817284F007EBD8B /* SwiftPath in Frameworks */ = {isa = PBXBuildFile; productRef = D2D581082817284F007EBD8B /* SwiftPath */; };
 		D2D7828E281BEA3700EB5006 /* LocalAuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D7828D281BEA3700EB5006 /* LocalAuthenticationController.swift */; };
+		D2D7828F281C72A400EB5006 /* DCCViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13CF09262DCDDA0070C80E /* DCCViewerController.swift */; };
+		D2D78290281C72A500EB5006 /* DCCViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13CF09262DCDDA0070C80E /* DCCViewerController.swift */; };
 		D2D8F2C627F5ECAD00508610 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D8F2C527F5ECAD00508610 /* AppManager.swift */; };
 		D2D8F2C727F5ED3500508610 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D8F2C527F5ECAD00508610 /* AppManager.swift */; };
 		D2D8F2C827F5ED3500508610 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D8F2C527F5ECAD00508610 /* AppManager.swift */; };
@@ -769,6 +771,7 @@
 				5C00073B26D625DE002E5013 /* ImageTableViewCell.swift in Sources */,
 				5C50CF1C2697023B0015EE29 /* RuleErrorCell.swift in Sources */,
 				5C556D5226F9F8C6007E2C2E /* ServerListController.swift in Sources */,
+				D2D7828F281C72A400EB5006 /* DCCViewerController.swift in Sources */,
 				5C50CF12269700710015EE29 /* RuleValidationResultVC.swift in Sources */,
 				CEA6D703261F8D2900715333 /* DGCAWalletTests.swift in Sources */,
 				5C00073726D625D0002E5013 /* PDFTableViewCell.swift in Sources */,
@@ -796,6 +799,7 @@
 				D277556328041CEB005FEE00 /* CertTypeCell.swift in Sources */,
 				D2D8F2CC27F5ED3D00508610 /* MainListController.swift in Sources */,
 				5C50CF4026983E090015EE29 /* UITableView+.swift in Sources */,
+				D2D78290281C72A500EB5006 /* DCCViewerController.swift in Sources */,
 				5C556D4626F9DAF7007E2C2E /* TicketingAcceptanceController.swift in Sources */,
 				5C556D4B26F9F8AC007E2C2E /* CertificateListController.swift in Sources */,
 				CEA6D70E261F8D2900715333 /* DGCAWalletUITests.swift in Sources */,

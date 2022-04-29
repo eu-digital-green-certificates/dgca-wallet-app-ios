@@ -75,7 +75,7 @@ class ServerListController: UIViewController {
             return
         }
         guard let accessTokenService = serverListInfo?.service?.first(where: { $0.type == "AccessTokenService" }),
-              let url = URL(string: accessTokenService.serviceEndpoint), let serviceURL = URL(string: service.serviceEndpoint) else {
+            let url = URL(string: accessTokenService.serviceEndpoint), let serviceURL = URL(string: service.serviceEndpoint) else {
             showAlertInternalError()
             return
         }

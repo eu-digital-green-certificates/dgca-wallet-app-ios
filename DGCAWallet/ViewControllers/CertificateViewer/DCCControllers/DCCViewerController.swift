@@ -120,15 +120,10 @@ class DCCViewerController: UIViewController {
         if isSaved {
             dismiss(animated: true, completion: nil)
         } else {
-            activityIndicator.startAnimating()
-            saveCert {[weak self] in
-                DispatchQueue.main.async {
-                    self?.activityIndicator.stopAnimating()
-                }
-            }
+            saveDCCCertificate()
         }
     }
-
+    
     @IBAction func cancelButtonClick() {
         dismiss(animated: true, completion: nil)
     }
@@ -141,7 +136,7 @@ class DCCViewerController: UIViewController {
         isEditMode = !isEditMode
         setupInterface()
     }
-
+    
     @IBAction func deleteCertificateAction() {
         guard let certificate = certificate, let certDate = certDate else { return }
             showAlert( title: "Delete Certificate".localized, subtitle: "cert.delete.body".localized,
@@ -157,23 +152,20 @@ class DCCViewerController: UIViewController {
         }
     }
     
-    typealias CompletionHandler = () -> Void
-    
-    private func saveCert(completion: @escaping CompletionHandler) {
+    private func saveDCCCertificate() {
+        guard let certificate = certificate, let hCert = certificate.digitalCertificate as? HCert else {
+            DGCLogger.logInfo("Certificate error")
+            return
+        }
+
         showInputDialog(title: "Confirm TAN".localized,
             subtitle: "Please enter the TAN that was provided together with your certificate:".localized,
             actionTitle: "Confirm".localized, inputPlaceholder: "XYZ12345" ) { [unowned self] in
-            guard let certificate = certificate, let hCert = certificate.digitalCertificate as? HCert else {
-                DGCLogger.logInfo("Certificate error")
-                completion()
-                return
-            }
             
             GatewayConnection.claim(cert: hCert, with: $0) { success, newTan, error in
                 guard error == nil else {
-                    completion()
                     DispatchQueue.main.async {
-                        self.showAlert(title:"Cannot save the Certificate".localized,
+                        self.showAlert(title: "Cannot claim the certificate".localized,
                             subtitle: "Check the TAN and try again.".localized)
                     }
                     
@@ -183,23 +175,20 @@ class DCCViewerController: UIViewController {
                 
                 if success {
                     DCCDataCenter.localDataManager.add(hCert, with: newTan) { _ in
-                        completion()
                         DispatchQueue.main.async {
                             self.showAlert(title: "Certificate saved successfully".localized,
                                 subtitle: "Now it is available in the wallet".localized) { _ in
-                                self.dismiss(animated: true) {
-                                    self.delegate?.certificateViewer(self, didAddCeCertificate: certificate)
-                                }
+                                self.delegate?.certificateViewer(self, didAddCeCertificate: certificate)
+                                self.dismiss(animated: true)
                             }
                         }
                     }
                     
                 } else {
-                  completion()
-                  DispatchQueue.main.async {
-                    self.showAlert(title:"Cannot save the Certificate".localized,
-                        subtitle: "Check the TAN and try again.".localized)
-                  }
+                    DispatchQueue.main.async {
+                        self.showAlert(title:"Cannot save the Certificate".localized,
+                            subtitle: "Check the TAN and try again.".localized)
+                    }
                 }
             }
         }

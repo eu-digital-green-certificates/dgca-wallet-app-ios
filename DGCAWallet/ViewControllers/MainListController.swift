@@ -125,7 +125,7 @@ class MainListController: UIViewController {
         expireDataTimer = Timer.scheduledTimer(timeInterval: 1800, target: self, selector: #selector(reloadExpiredData),
             userInfo: nil, repeats: true)
         
-        self.reloadTable()
+        self.refresh()
 	}
 	
 	@objc func refresh() {
@@ -156,14 +156,11 @@ class MainListController: UIViewController {
         }
         #endif
         
-        self.reloadTable()
+        emptyView.alpha = certificates.isEmpty && listImageElements.isEmpty && listPdfElements.isEmpty ? 1 : 0
+        self.table.reloadData()
+        self.refreshControl.endRefreshing()
 	}
-	
-	override func viewWillAppear(_ animated: Bool) {
-		super.viewWillAppear(animated)
-		
-	}
-	
+    
 	// MARK: - Actions
 	@objc func reloadExpiredData() {
         if downloadedDataHasExpired {
@@ -173,9 +170,7 @@ class MainListController: UIViewController {
 	
 	func showAlertReloadDatabase() {
 		let alert = UIAlertController(title: "Reload data?".localized, message: "The update may take some time.".localized, preferredStyle: .alert)
-		
 		alert.addAction(UIAlertAction(title: "Later".localized, style: .default, handler: { _ in }))
-		
 		alert.addAction(UIAlertAction(title: "Reload".localized, style: .default, handler: { (_: UIAlertAction) in
             AppManager.shared.verificationCenter.updateStoredData(appType: .wallet, completion: { _ in })
 		}))
@@ -196,13 +191,7 @@ class MainListController: UIViewController {
 		addButton.isEnabled = true
 		addButton.backgroundColor = UIColor.walletBlue
 	}
-	
-    private func reloadTable() {
-        emptyView.alpha = certificates.isEmpty && listImageElements.isEmpty && listPdfElements.isEmpty ? 1 : 0
-		self.table.reloadData()
-		self.refreshControl.endRefreshing()
-	}
-	
+    
 	// MARK: Actions
 	@IBAction func addNew() {
 		guard loading == false else { return }
@@ -404,7 +393,6 @@ extension MainListController: ScanWalletDelegate {
             case .shc:
                 self?.performSegue(withIdentifier: SegueIdentifiers.showScannedSHCertificate, sender: certificate)
             }
-            self?.reloadTable()
 		}
 	}
 	
@@ -434,30 +422,20 @@ extension MainListController: ScanWalletDelegate {
 extension MainListController: CertificateManaging {
 	func certificateViewer(_ controller: UIViewController, didDeleteCertificate certificate: MultiTypeCertificate) {
 		DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(150)) {
-			self.reloadTable()
+            self.refresh()
 		}
 	}
 	
     func certificateViewer(_ controller: UIViewController, didAddCeCertificate certificate: MultiTypeCertificate) {
         switch certificate.certificateType {
-        case .unknown:
-            //TODO: add alert here
-            break
         case .dcc:
-            GatewayConnection.lookup(certStrings: [DCCDataCenter.certStrings.last!]) { success, _, _ in
-                if success {
-                    self.reloadTable()
-                }
+            guard let certString = DCCDataCenter.certStrings.last else { return }
+            GatewayConnection.lookup(certStrings: [certString]) { success, _, _ in
+                self.refresh()
             }
-        case .icao:
-            self.reloadTable()
-            //TODO implement ICAO
-        case .divoc:
-            self.reloadTable()
-            //TODO implement DIVOC
-        case .shc:
-            self.reloadTable()
-            //TODO implement SHC
+            
+        default:
+            self.refresh()
         }
     }
 }
@@ -469,11 +447,11 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
 		switch section {
 		case TableSection.multiTypeCertificates.rawValue:
 			return certificates.count
-
+            
         case TableSection.images.rawValue:
 			return listImageElements.count
             
-		case  TableSection.pdfs.rawValue:
+		case TableSection.pdfs.rawValue:
 			return listPdfElements.count
             
 		default:
@@ -565,34 +543,21 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
 		case TableSection.multiTypeCertificates.rawValue:
 			let savedCert = certificates[indexPath.row]
 			showAlert( title: "Delete Certificate".localized, subtitle: "cert.delete.body".localized,
-					   actionTitle: "Confirm".localized, cancelTitle: "Cancel".localized) { [weak self] in
+                actionTitle: "Confirm".localized, cancelTitle: "Cancel".localized) { [weak self] in
 				if $0 {
-					self?.startActivity()
                     switch savedCert.certificateType {
                     case .dcc:
                         DCCDataCenter.localDataManager.remove(withDate: savedCert.scannedDate) { _ in
                             DispatchQueue.main.async {
-                                self?.stopActivity()
-                                self?.reloadTable()
+                                self?.refresh()
                             }
-                        } // LocalData
+                        }
                         break
                     case .shc:
                         SHDataCenter.shDataManager.remove(withDate: savedCert.scannedDate) { _ in
                             DispatchQueue.main.async {
-                                self?.stopActivity()
-                                self?.reloadTable()
+                                self?.refresh()
                             }
-                        }
-                    case .icao:
-                        DispatchQueue.main.async {
-                            self?.stopActivity()
-                            self?.reloadTable()
-                        }
-                    case .divoc:
-                        DispatchQueue.main.async {
-                            self?.stopActivity()
-                            self?.reloadTable()
                         }
                     default:
                         break
@@ -603,11 +568,11 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
 		case TableSection.images.rawValue:
 			let savedImage = listImageElements[indexPath.row]
 			showAlert( title: "Delete Certificate".localized, subtitle: "cert.delete.body".localized,
-					   actionTitle: "Confirm".localized, cancelTitle:"Cancel".localized) { [weak self] in
+                actionTitle: "Confirm".localized, cancelTitle:"Cancel".localized) { [weak self] in
 				if $0 {
 					DCCDataCenter.localImageManager.deleteImage(with: savedImage.identifier) { _ in
 						DispatchQueue.main.async {
-							self?.reloadTable()
+							self?.refresh()
 						}
 					}
 				}
@@ -620,7 +585,7 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
 				if $0 {
 					DCCDataCenter.localImageManager.deletePDF(with: savedPDF.identifier) { _ in
 						DispatchQueue.main.async {
-							self?.reloadTable()
+							self?.refresh()
 						}
 					}
 				}
