@@ -222,3 +222,7 @@
 "Authentication was cancelled by the system" = "Authentication was cancelled by the system";
 "The user did cancel" = "The user did cancel";
 "The user chose to use the fallback" = "The user chose to use the fallback";
+
+"Cryptographic signature is invalid" = "Cryptographic signature is invalid";
+"Unknown certificate type." = "Unknown certificate type.";
+"Unknown barcode format." = "Unknown barcode format.";

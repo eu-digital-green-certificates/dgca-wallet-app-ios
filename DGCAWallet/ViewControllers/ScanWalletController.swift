@@ -115,8 +115,23 @@ class ScanWalletController: UIViewController {
      }
 }
 
-extension ScanWalletController  {
-    private func checkPermissions() {
+private extension ScanWalletController {
+    func showAlertWithError(_ error: Error) {
+        DispatchQueue.main.async {
+            switch error {
+            case CertificateParsingError.invalidStructure:
+                self.showAlert(withTitle: "Cannot read Barcode".localized, message: "Cryptographic signature is invalid".localized)
+            case CertificateParsingError.unknownFormat:
+                self.showAlert(withTitle: "Cannot read Barcode".localized, message: "Unknown certificate type.".localized)
+            default:
+                self.showAlert(withTitle: "Cannot read Barcode".localized, message: "Unknown barcode format.".localized)
+            }
+        }
+    }
+}
+
+private extension ScanWalletController  {
+    func checkPermissions() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .notDetermined:
           delegate?.disableBackgroundDetection()
@@ -133,7 +148,7 @@ extension ScanWalletController  {
         }
     }
 
-    private func setupCameraLiveView() {
+    func setupCameraLiveView() {
         captureSession?.sessionPreset = .hd1280x720
         
         let videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)
@@ -156,7 +171,7 @@ extension ScanWalletController  {
         configurePreviewLayer()
     }
 
-    private func processClassification(_ request: VNRequest) {
+    func processClassification(_ request: VNRequest) {
         DispatchQueue.main.async { [self] in
         guard let barcodes = request.results else { return }
             if captureSession?.isRunning == true {
@@ -184,7 +199,7 @@ extension ScanWalletController  {
         }
     }
   
-    private func observationHandler(payloadString: String?) {
+    func observationHandler(payloadString: String?) {
       guard let barcodeString = payloadString, !barcodeString.isEmpty else { return }
         /// MARK: END OF SCANNING
         
@@ -194,9 +209,9 @@ extension ScanWalletController  {
                 self.delegate?.walletController(self, didScanCertificate: certificate)
 
             } catch let error as CertificateParsingError {
-                self.delegate?.walletController(self, didFailWithError: error)
+                self.showAlertWithError(error)
             } catch {
-                self.delegate?.walletController(self, didFailWithError: CertificateParsingError.invalidStructure)
+                self.showAlertWithError(CertificateParsingError.invalidStructure)
             }
             
         } else if CertificateApplicant.isApplicableSHCFormat(payload: barcodeString) {
@@ -217,7 +232,7 @@ extension ScanWalletController  {
                                 self.delegate?.walletController(self, didScanCertificate: certificate)
                             } else {
                                 DGCLogger.logInfo("Error validating barcodeString: \(barcodeString)")
-                                self.delegate?.walletController(self, didFailWithError: CertificateParsingError.unknownFormat)
+                                self.showAlertWithError(CertificateParsingError.unknownFormat)
                             }
                         }
                         #endif
@@ -228,9 +243,9 @@ extension ScanWalletController  {
                 }
 
             } catch let error as CertificateParsingError {
-                self.delegate?.walletController(self, didFailWithError: error)
+                self.showAlertWithError(error)
             } catch {
-                self.delegate?.walletController(self, didFailWithError: CertificateParsingError.invalidStructure)
+                self.showAlertWithError(CertificateParsingError.invalidStructure)
             }
             
        } else if let payloadData = (payloadString ?? "").data(using: .utf8),
@@ -239,7 +254,7 @@ extension ScanWalletController  {
            
         } else {
             DGCLogger.logInfo("Cannot recognise barcodeString: \(barcodeString)")
-            self.delegate?.walletController(self, didFailWithError: CertificateParsingError.unknownFormat)
+            self.showAlertWithError(CertificateParsingError.unknownFormat)
         }
     }
 }
