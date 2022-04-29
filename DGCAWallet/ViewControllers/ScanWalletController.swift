@@ -142,7 +142,7 @@ extension ScanWalletController  {
           let videoDeviceInput = try? AVCaptureDeviceInput(device: device),
           captureSession?.canAddInput(videoDeviceInput) == true
         else {
-          showAlert( withTitle: "No camera available".localized, message: "The app requires access the camera".localized)
+          showAlert(withTitle: "No camera available".localized, message: "The app requires access the camera".localized)
           return
         }
         

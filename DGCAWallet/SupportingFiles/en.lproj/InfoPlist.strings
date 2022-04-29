@@ -32,7 +32,7 @@
 //Privacy - Camera Usage Description
 "NSCameraUsageDescription" = "You will be abble to scan barcodes and images with your camera.";
 //Privacy - Face ID Usage Description
-"NSFaceIDUsageDescription" = "You will use FaceID to unlock sensitive data.";
+"NSFaceIDUsageDescription" = "This app is designed to use Face ID to unlock sensitive data.";
 //Privacy - Photo Library Usage Description
 "NSPhotoLibraryUsageDescription" = "You will be abble to import photos from the photo library.";
 

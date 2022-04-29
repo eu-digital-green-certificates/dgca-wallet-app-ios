@@ -27,7 +27,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Scan barcodes and images with your camera.</string>
 	<key>NSFaceIDUsageDescription</key>
-	<string>Unlock sensitive data.</string>
+	<string>This app was designed to use Face ID to unlock sensitive data.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app requires access to the photo library.</string>
 	<key>UIApplicationSceneManifest</key>

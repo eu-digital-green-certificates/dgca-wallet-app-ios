@@ -608,7 +608,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="n5F-ZU-J9a"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                 <state key="normal" title="Cancel">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -622,7 +622,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="HGS-rw-BmN"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                 <state key="normal" title="Grant Permission">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -865,12 +865,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="ysI-lD-MMP" kind="relationship" relationship="rootViewController" id="hVY-v2-aWx"/>
+                        <segue destination="dgQ-uR-i7Y" kind="relationship" relationship="rootViewController" id="tWU-xg-7f6"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5eU-tP-IWk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1500" y="119"/>
+            <point key="canvasLocation" x="-2117" y="118"/>
         </scene>
         <!--Main List Controller-->
         <scene sceneID="C6e-2t-4NZ">
@@ -1019,7 +1019,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vaccination Shot 1 of 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="Md0-O5-XZH">
-                                                    <rect key="frame" x="20" y="11" width="357.5" height="20.5"/>
+                                                    <rect key="frame" x="20" y="11" width="177.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1047,10 +1047,10 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="iTJ-x3-Wam" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Md0-O5-XZH" secondAttribute="trailing" constant="8" id="89v-5s-0QS"/>
                                                 <constraint firstItem="6NN-i3-YUv" firstAttribute="top" secondItem="Md0-O5-XZH" secondAttribute="bottom" constant="8" id="G7X-Kg-G9n"/>
                                                 <constraint firstAttribute="trailing" secondItem="iTJ-x3-Wam" secondAttribute="trailing" constant="10" id="KC0-RF-Wi9"/>
                                                 <constraint firstItem="Md0-O5-XZH" firstAttribute="leading" secondItem="m3f-OR-BSb" secondAttribute="leadingMargin" id="RIv-q4-GJN"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="Md0-O5-XZH" secondAttribute="trailing" id="UC5-Se-Y5x"/>
                                                 <constraint firstItem="Md0-O5-XZH" firstAttribute="top" secondItem="m3f-OR-BSb" secondAttribute="topMargin" id="c5q-qS-b9t"/>
                                                 <constraint firstItem="iTJ-x3-Wam" firstAttribute="top" secondItem="m3f-OR-BSb" secondAttribute="top" constant="16" id="fW7-VG-vCl"/>
                                                 <constraint firstItem="APa-yy-a1r" firstAttribute="leading" secondItem="m3f-OR-BSb" secondAttribute="leadingMargin" id="g7l-40-0Jk"/>
@@ -1293,7 +1293,83 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k79-Ja-kNa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-726.15384615384608" y="118.72037914691943"/>
+            <point key="canvasLocation" x="-575" y="118"/>
+        </scene>
+        <!--Local Authentication Controller-->
+        <scene sceneID="Tcv-PX-RVv">
+            <objects>
+                <viewController id="dgQ-uR-i7Y" customClass="LocalAuthenticationController" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YZR-Pv-ZeZ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wallet_icon" translatesAutoresizingMaskIntoConstraints="NO" id="yZa-25-L6F">
+                                <rect key="frame" x="151" y="142.5" width="112" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="112" id="Z6I-Vv-gxL"/>
+                                    <constraint firstAttribute="height" constant="150" id="gxW-we-ccA"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s3c-OV-FPv">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="134.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLH-ya-8wr">
+                                <rect key="frame" x="133" y="300.5" width="148" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2qh-vB-Jc1">
+                                <rect key="frame" x="0.0" y="754.5" width="414" height="141.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EU_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Avp-lM-egi">
+                                <rect key="frame" x="117" y="778.5" width="180" height="51.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="IiX-2B-x8h"/>
+                                    <constraint firstAttribute="width" secondItem="Avp-lM-egi" secondAttribute="height" multiplier="7:2" id="UkD-6d-Hw5"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Authentication" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zcF-Ab-WBP">
+                                <rect key="frame" x="16" y="705.5" width="382" height="29"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="giW-Bt-R95"/>
+                        <color key="backgroundColor" name="walletBlue"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="2qh-vB-Jc1" secondAttribute="bottom" id="36f-dK-Wqt"/>
+                            <constraint firstItem="2qh-vB-Jc1" firstAttribute="top" secondItem="zcF-Ab-WBP" secondAttribute="bottom" constant="20" id="Bw6-RX-0mg"/>
+                            <constraint firstAttribute="trailing" secondItem="s3c-OV-FPv" secondAttribute="trailing" id="CUW-ZY-t00"/>
+                            <constraint firstItem="giW-Bt-R95" firstAttribute="trailing" secondItem="zcF-Ab-WBP" secondAttribute="trailing" constant="16" id="M5c-2c-Y5e"/>
+                            <constraint firstItem="MLH-ya-8wr" firstAttribute="centerX" secondItem="YZR-Pv-ZeZ" secondAttribute="centerX" id="Mpi-JX-unR"/>
+                            <constraint firstAttribute="trailing" secondItem="2qh-vB-Jc1" secondAttribute="trailing" id="Uw6-HN-r3e"/>
+                            <constraint firstItem="zcF-Ab-WBP" firstAttribute="leading" secondItem="giW-Bt-R95" secondAttribute="leading" constant="16" id="VcC-oc-WoH"/>
+                            <constraint firstItem="giW-Bt-R95" firstAttribute="bottom" secondItem="Avp-lM-egi" secondAttribute="bottom" constant="32" id="WYs-Yv-fGR"/>
+                            <constraint firstItem="MLH-ya-8wr" firstAttribute="top" secondItem="yZa-25-L6F" secondAttribute="bottom" constant="8" id="XJH-ml-zMd"/>
+                            <constraint firstItem="s3c-OV-FPv" firstAttribute="height" secondItem="YZR-Pv-ZeZ" secondAttribute="height" multiplier="0.15" id="Z4g-BO-41h"/>
+                            <constraint firstItem="Avp-lM-egi" firstAttribute="centerX" secondItem="YZR-Pv-ZeZ" secondAttribute="centerX" id="bh8-q2-IUu"/>
+                            <constraint firstItem="yZa-25-L6F" firstAttribute="centerX" secondItem="YZR-Pv-ZeZ" secondAttribute="centerX" id="eO6-h6-wSD"/>
+                            <constraint firstItem="s3c-OV-FPv" firstAttribute="leading" secondItem="YZR-Pv-ZeZ" secondAttribute="leading" id="fyh-PB-4tS"/>
+                            <constraint firstItem="2qh-vB-Jc1" firstAttribute="leading" secondItem="YZR-Pv-ZeZ" secondAttribute="leading" id="kv8-JM-pbQ"/>
+                            <constraint firstItem="Avp-lM-egi" firstAttribute="top" secondItem="2qh-vB-Jc1" secondAttribute="top" constant="24" id="p0o-2X-gaw"/>
+                            <constraint firstItem="yZa-25-L6F" firstAttribute="top" secondItem="s3c-OV-FPv" secondAttribute="bottom" constant="8" id="xTj-fR-gBR"/>
+                            <constraint firstItem="s3c-OV-FPv" firstAttribute="top" secondItem="YZR-Pv-ZeZ" secondAttribute="top" id="xvO-cE-KeO"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="2n2-1t-O2B"/>
+                    <connections>
+                        <outlet property="appNameLabel" destination="MLH-ya-8wr" id="taC-nt-tzO"/>
+                        <outlet property="messageLabel" destination="zcF-Ab-WBP" id="MVA-p0-FPf"/>
+                        <segue destination="ysI-lD-MMP" kind="show" identifier="showHomeLoadingData" animates="NO" id="cdf-Ld-kc1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oI7-Qz-l9z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1345" y="118"/>
         </scene>
     </scenes>
     <designables>
@@ -1310,7 +1386,7 @@
             <size key="intrinsicContentSize" width="71" height="51"/>
         </designable>
         <designable name="fol-rA-9gU">
-            <size key="intrinsicContentSize" width="56" height="51"/>
+            <size key="intrinsicContentSize" width="32" height="39"/>
         </designable>
     </designables>
     <resources>

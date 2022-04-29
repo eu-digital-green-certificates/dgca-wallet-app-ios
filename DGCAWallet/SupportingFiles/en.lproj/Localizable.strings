@@ -202,3 +202,23 @@
 "Cannot save Smart Helth Card" = "Cannot save Smart Helth Card";
 "An error occurred while saving" = "An error occurred while saving";
 "Last updated: " = "Last updated: ";
+
+"Please authenticate to access the secure data." = "Please authenticate to access the secure data.";
+"Use Passcode" = "Use Passcode";
+"To access the secure data" = "To access the secure data";
+"You did not authenticate successfully" = "You did not authenticate successfully";
+"Authentication could not start because the device does not support biometric authentication." = "Authentication could not start because the device does not support biometric authentication.";
+"Authentication could not continue because the user has been locked out of biometric authentication, due to failing authentication too many times." = "Authentication could not continue because the user has been locked out of biometric authentication, due to failing authentication too many times.";
+"Authentication could not start because the user has not enrolled in biometric authentication." = "Authentication could not start because the user has not enrolled in biometric authentication.";
+"Did not find error code on LAError object" = "Did not find error code on LAError object";
+"Too many failed attempts." = "Too many failed attempts.";
+"TouchID is not available on the device" = "TouchID is not available on the device";
+"Did not find error code on LAError object" = "Did not find error code on LAError object";
+"The user failed to provide valid credentials" = "The user failed to provide valid credentials";
+"Authentication was cancelled by application" = "Authentication was cancelled by application";
+"The context is invalid" = "The context is invalid";
+"Not interactive" = "Not interactive";
+"Passcode is not set on the device" = "Passcode is not set on the device";
+"Authentication was cancelled by the system" = "Authentication was cancelled by the system";
+"The user did cancel" = "The user did cancel";
+"The user chose to use the fallback" = "The user chose to use the fallback";

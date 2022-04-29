@@ -101,6 +101,7 @@
 		D2BBDEC12798B25E0043A8A7 /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB1A269DBB4C00074F66 /* context.jsonc */; };
 		D2BBDEC22798B25F0043A8A7 /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB1A269DBB4C00074F66 /* context.jsonc */; };
 		D2D581092817284F007EBD8B /* SwiftPath in Frameworks */ = {isa = PBXBuildFile; productRef = D2D581082817284F007EBD8B /* SwiftPath */; };
+		D2D7828E281BEA3700EB5006 /* LocalAuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D7828D281BEA3700EB5006 /* LocalAuthenticationController.swift */; };
 		D2D8F2C627F5ECAD00508610 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D8F2C527F5ECAD00508610 /* AppManager.swift */; };
 		D2D8F2C727F5ED3500508610 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D8F2C527F5ECAD00508610 /* AppManager.swift */; };
 		D2D8F2C827F5ED3500508610 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D8F2C527F5ECAD00508610 /* AppManager.swift */; };
@@ -209,6 +210,7 @@
 		D277556028041CEB005FEE00 /* CertTypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CertTypeCell.swift; sourceTree = "<group>"; };
 		D27755642804347B005FEE00 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		D27755652804347B005FEE00 /* RoundedBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedBox.swift; sourceTree = "<group>"; };
+		D2D7828D281BEA3700EB5006 /* LocalAuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthenticationController.swift; sourceTree = "<group>"; };
 		D2D8F2C527F5ECAD00508610 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		D2DFDB3D27C50E5900BA15B9 /* SquareViewFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquareViewFinder.swift; sourceTree = "<group>"; };
 		DA01661B265541C0005B73A1 /* LicenseTableController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = LicenseTableController.swift; sourceTree = "<group>"; tabWidth = 4; };
@@ -345,6 +347,7 @@
 				D24C8950272353610090398A /* ScanWalletController.swift */,
 				CED949C9263B50CE00883558 /* MainListController.swift */,
 				CE891304263581D900CB92AF /* HomeController.swift */,
+				D2D7828D281BEA3700EB5006 /* LocalAuthenticationController.swift */,
 				D2B605BA2743C97D000D914A /* CertificateViewer */,
 				D2B605BB2743C9BB000D914A /* SettingsControllers */,
 				D2B605BF2743CC25000D914A /* ValidityControllers */,
@@ -718,6 +721,7 @@
 				5C00073626D625D0002E5013 /* PDFTableViewCell.swift in Sources */,
 				CE891305263581D900CB92AF /* HomeController.swift in Sources */,
 				FEEAD6DB273BBE9600D883EB /* TokenInfoCell.swift in Sources */,
+				D2D7828E281BEA3700EB5006 /* LocalAuthenticationController.swift in Sources */,
 				D277555028001AE3005FEE00 /* ExtendedValidityCell.swift in Sources */,
 				CABCB8E828073E3B00814185 /* CardPageController.swift in Sources */,
 				D2D8F2C627F5ECAD00508610 /* AppManager.swift in Sources */,
