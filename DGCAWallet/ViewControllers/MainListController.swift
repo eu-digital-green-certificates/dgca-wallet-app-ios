@@ -234,27 +234,79 @@ class MainListController: UIViewController {
 				let scene = self?.sceneDelegate
 				scene?.isNFCFunctionality = false
 			}
-            if let certificate = try? MultiTypeCertificate(from: barcodeString) {
-                self?.saveQrCode(certificate: certificate)
-            } else {
-				let alertController: UIAlertController = {
-					let controller = UIAlertController(title: "Cannot read NFC".localized,
-                        message: "An error occurred while reading NFC".localized, preferredStyle: .alert)
-					
-					let actionRetry = UIAlertAction(title: "Retry".localized, style: .default) { _ in
-						self?.scanNFC()
-					}
-					controller.addAction(actionRetry)
-					
-					let actionOk = UIAlertAction(title: "Cancel".localized, style: .cancel)
-					controller.addAction(actionOk)
-					return controller
-				}()
-				self?.present(alertController, animated: true)
-			}
+            self?.processBarcode(barcode: barcodeString)
 		}
 	}
 	
+    private func processBarcode(barcode: String?) {
+        guard let barcodeString = barcode, !barcodeString.isEmpty else { return }
+        if CertificateApplicant.isApplicableDCCFormat(payload: barcodeString) {
+            do {
+                let certificate = try MultiTypeCertificate(from: barcodeString)
+                self.walletController(self, didScanCertificate: certificate)
+
+            } catch let error as CertificateParsingError {
+                self.showAlertWithError(error)
+            } catch {
+                self.showAlertWithError(CertificateParsingError.invalidStructure)
+            }
+            
+        } else if CertificateApplicant.isApplicableSHCFormat(payload: barcodeString) {
+            do {
+                let certificate = try MultiTypeCertificate(from: barcodeString)
+                self.walletController(self, didScanCertificate: certificate)
+                
+            } catch CertificateParsingError.kidNotFound(let rawUrl) {
+                DGCLogger.logInfo("Error kidNotFound when parse SH card.")
+                self.showAlert(title: "Unknown issuer of Smart Card".localized,
+                    subtitle: "Do you want to continue to identify the issuer?",
+                    actionTitle: "Continue".localized, cancelTitle: "Cancel".localized ) { response in
+                    if response {
+                        #if canImport(DGCSHInspection)
+                        TrustedListLoader.resolveUnknownIssuer(rawUrl) { kidList, result in
+                            if let certificate = try? MultiTypeCertificate(from: barcodeString) {
+                                self.walletController(self, didScanCertificate: certificate)
+                            } else {
+                                DGCLogger.logInfo("Error validating barcodeString: \(barcodeString)")
+                                self.showAlertWithError(CertificateParsingError.unknownFormat)
+                            }
+                        }
+                        #endif
+                        
+                    } else { // user cancels
+                        DGCLogger.logInfo("User cancelled verifying.")
+                    }
+                }
+                
+            } catch let error as CertificateParsingError {
+                self.showAlertWithError(error)
+            } catch {
+                self.showAlertWithError(CertificateParsingError.invalidStructure)
+            }
+            
+        } else if let payloadData = barcodeString.data(using: .utf8),
+            let ticketing = try? JSONDecoder().decode(CheckInQR.self, from: payloadData) {
+            self.walletController(self, didScanInfo: ticketing)
+        
+        } else {
+            DGCLogger.logInfo("Cannot recognise barcodeString: \(barcodeString)")
+            let alertController: UIAlertController = {
+                let controller = UIAlertController(title: "Cannot read NFC".localized,
+                    message: "An error occurred while reading NFC".localized, preferredStyle: .alert)
+                
+                let actionRetry = UIAlertAction(title: "Retry".localized, style: .default) { _ in
+                    self.scanNFC()
+                }
+                controller.addAction(actionRetry)
+                
+                let actionOk = UIAlertAction(title: "Cancel".localized, style: .cancel)
+                controller.addAction(actionOk)
+                return controller
+            }()
+            self.present(alertController, animated: true)
+        }
+    }
+    
 	@IBAction func settingsTapped(_ sender: UIButton) {
 		self.performSegue(withIdentifier: SegueIdentifiers.showSettingsController, sender: nil)
 	}
@@ -359,6 +411,27 @@ class MainListController: UIViewController {
 			break
 		}
 	}
+    
+    private func showAlertWithError(_ error: Error) {
+        DispatchQueue.main.async {
+            switch error {
+            case CertificateParsingError.invalidStructure:
+                self.showAlert(withTitle: "Cannot read Barcode".localized, message: "Cryptographic signature is invalid".localized)
+            case CertificateParsingError.unknownFormat:
+                self.showAlert(withTitle: "Cannot read Barcode".localized, message: "Unknown certificate type.".localized)
+            default:
+                self.showAlert(withTitle: "Cannot read Barcode".localized, message: "Unknown barcode format.".localized)
+            }
+        }
+    }
+    
+    private func showAlert(withTitle title: String, message: String) {
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK".localized, style: .default))
+            self.present(alertController, animated: true)
+        }
+    }
 }
 
 // MARK: - ScanWalletDelegate
@@ -581,7 +654,7 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
 		case TableSection.pdfs.rawValue:
 			let savedPDF = listPdfElements[indexPath.row]
 			showAlert( title: "Delete Certificate".localized, subtitle: "cert.delete.body".localized,
-					   actionTitle: "Confirm".localized, cancelTitle: "Cancel".localized) { [weak self] in
+                actionTitle: "Confirm".localized, cancelTitle: "Cancel".localized) { [weak self] in
 				if $0 {
 					DCCDataCenter.localImageManager.deletePDF(with: savedPDF.identifier) { _ in
 						DispatchQueue.main.async {
@@ -598,7 +671,7 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: UIImagePicker delegate
 extension MainListController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-	private func addImageActivity() {
+    func addImageActivity() {
 		let alert = UIAlertController(title: "Get Image from".localized, message: nil, preferredStyle: .actionSheet)
 		let cameraAction = UIAlertAction(title: "Camera".localized, style: .default) {[weak self] _ in
 			alert.dismiss(animated: true, completion: nil)
@@ -617,7 +690,7 @@ extension MainListController: UIImagePickerControllerDelegate, UINavigationContr
 		present(alert, animated: true, completion: nil)
 	}
 	
-	private func openCamera() {
+    func openCamera() {
 		if UIImagePickerController.isSourceTypeAvailable(.camera) {
 			let picker = UIImagePickerController()
 			picker.delegate = self
@@ -665,19 +738,19 @@ extension MainListController {
 	private func tryFoundQRCodeIn(image: UIImage) {
 		if let qrString = image.qrCodeString(),
            CertificateApplicant.isApplicableFormatForVerification(payload: qrString) {
-            
+        
            if let certificate = try? MultiTypeCertificate(from: qrString) {
                 self.saveQrCode(certificate: certificate)
            } else {
                 self.saveImage(image: image)
            }
-        
+
 		} else {
 			self.saveImage(image: image)
 		}
 	}
 	
-	private func saveQrCode(certificate: MultiTypeCertificate) {
+    private func saveQrCode(certificate: MultiTypeCertificate) {
         switch certificate.certificateType {
         case .unknown:
             // TODO: Show alert here
@@ -690,8 +763,8 @@ extension MainListController {
             self.performSegue(withIdentifier: SegueIdentifiers.showScannedDIVOCCertificate, sender: certificate)
         case .shc:
             self.performSegue(withIdentifier: SegueIdentifiers.showScannedSHCertificate, sender: certificate)
-       }
-	}
+        }
+    }
 	
 	private func saveImage(image: UIImage) {
 		showInputDialog(title: "Save image".localized, subtitle: "Please enter the image name".localized,
@@ -702,7 +775,7 @@ extension MainListController {
 			DCCDataCenter.localImageManager.add(savedImage: savedImg) { _ in
 				DispatchQueue.main.async {
 					self?.stopActivity()
-					self?.table.reloadData()
+					self?.refresh()
 					let rowCount = DCCDataCenter.images.count
 					if rowCount > 0 {
 						let scrollToNum = rowCount - 1
