@@ -142,18 +142,20 @@ class MainListController: UIViewController {
             certificates.append(multiTypeCert)
         }
         #endif
+        
         #if canImport(DGCSHInspection)
         let certStrings = SHDataCenter.certStrings.reversed()
         for cString in certStrings {
             guard let shCert: SHCert = cString.cert else { continue }
             let multiTypeCert = MultiTypeCertificate(with: shCert,
-                                                     type: .shc,
-                                                     scannedDate: cString.date,
-                                                     storedTan: nil,
-                                                     ruleCountryCode: nil)
+                 type: .shc,
+                 scannedDate: cString.date,
+                 storedTan: nil,
+                 ruleCountryCode: nil)
             certificates.append(multiTypeCert)
         }
         #endif
+        
         self.reloadTable()
 	}
 	
@@ -284,7 +286,6 @@ class MainListController: UIViewController {
 		pdfPicker.delegate = self
 		present(pdfPicker, animated: true, completion: nil)
 	}
-	
 	private func scanNFC() {
 		let appDelegate = UIApplication.shared.delegate as? AppDelegate
 		appDelegate?.isNFCFunctionality = true

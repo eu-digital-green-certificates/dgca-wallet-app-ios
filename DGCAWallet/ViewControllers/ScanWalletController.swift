@@ -115,21 +115,6 @@ class ScanWalletController: UIViewController {
      }
 }
 
-private extension ScanWalletController {
-    func showAlertWithError(_ error: Error) {
-        DispatchQueue.main.async {
-            switch error {
-            case CertificateParsingError.invalidStructure:
-                self.showAlert(withTitle: "Cannot read Barcode".localized, message: "Cryptographic signature is invalid".localized)
-            case CertificateParsingError.unknownFormat:
-                self.showAlert(withTitle: "Cannot read Barcode".localized, message: "Unknown certificate type.".localized)
-            default:
-                self.showAlert(withTitle: "Cannot read Barcode".localized, message: "Unknown barcode format.".localized)
-            }
-        }
-    }
-}
-
 private extension ScanWalletController  {
     func checkPermissions() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
@@ -223,8 +208,7 @@ private extension ScanWalletController  {
                 DGCLogger.logInfo("Error kidNotFound when parse SH card.")
                 self.showAlert(title: "Unknown issuer of Smart Card".localized,
                     subtitle: "Do you want to continue to identify the issuer?",
-                    actionTitle: "Continue".localized,
-                    cancelTitle: "Cancel".localized ) { response in
+                    actionTitle: "Continue".localized, cancelTitle: "Cancel".localized ) { response in
                     if response {
                         #if canImport(DGCSHInspection)
                         TrustedListLoader.resolveUnknownIssuer(rawUrl) { kidList, result in
@@ -241,7 +225,7 @@ private extension ScanWalletController  {
                         DGCLogger.logInfo("User cancelled verifying.")
                     }
                 }
-
+                
             } catch let error as CertificateParsingError {
                 self.showAlertWithError(error)
             } catch {
@@ -263,18 +247,17 @@ extension ScanWalletController: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer,
         from connection: AVCaptureConnection) {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
-        
         let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .right)
         do {
-          try imageRequestHandler.perform([detectBarcodeRequest])
+            try imageRequestHandler.perform([detectBarcodeRequest])
         } catch {
-          DGCLogger.logError(error)
+            DGCLogger.logError(error)
         }
     }
 }
 
-extension ScanWalletController {
-    private func configurePreviewLayer() {
+private extension ScanWalletController {
+    func configurePreviewLayer() {
       guard let captureSession = captureSession else { return }
         
       let cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
@@ -284,15 +267,28 @@ extension ScanWalletController {
       camView.layer.insertSublayer(cameraPreviewLayer, at: 0)
     }
     
-    private func showAlert(withTitle title: String, message: String) {
-      DispatchQueue.main.async {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK".localized, style: .default))
-        self.present(alertController, animated: true)
-      }
+    func showAlert(withTitle title: String, message: String) {
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK".localized, style: .default))
+            self.present(alertController, animated: true)
+        }
     }
 
-    private func showPermissionsAlert() {
+    func showAlertWithError(_ error: Error) {
+        DispatchQueue.main.async {
+            switch error {
+            case CertificateParsingError.invalidStructure:
+                self.showAlert(withTitle: "Cannot read Barcode".localized, message: "Cryptographic signature is invalid".localized)
+            case CertificateParsingError.unknownFormat:
+                self.showAlert(withTitle: "Cannot read Barcode".localized, message: "Unknown certificate type.".localized)
+            default:
+                self.showAlert(withTitle: "Cannot read Barcode".localized, message: "Unknown barcode format.".localized)
+            }
+        }
+    }
+
+    func showPermissionsAlert() {
         showAlert(withTitle: "Wallet App would like to access the camera".localized,
             message: "Please open the Settings and grant permission for this app to use your camera.".localized
         )
