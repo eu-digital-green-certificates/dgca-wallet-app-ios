@@ -60,16 +60,18 @@ extension LocalAuthenticationController {
         if localAuthenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
             localAuthenticationContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reasonString) { [unowned self] success, evaluateError in
                 
-                if success {
-                    self.performSegue(withIdentifier: self.showHomeLoadingData, sender: nil)
-                    
-                } else {
-                    //TODO: User did not authenticate successfully, look at error and take appropriate action
-                    guard let error = evaluateError else { return }
-                    
-                    let messageStr = self.evaluateAuthenticationPolicyMessageForLA(errorCode: error._code)
-                    
-                    showAlert(withTitle: "You did not authenticate successfully".localized, message: messageStr)
+                DispatchQueue.main.async {
+                    if success {
+                        self.performSegue(withIdentifier: self.showHomeLoadingData, sender: nil)
+                        
+                    } else {
+                        //TODO: User did not authenticate successfully, look at error and take appropriate action
+                        guard let error = evaluateError else { return }
+                        
+                        let messageStr = self.evaluateAuthenticationPolicyMessageForLA(errorCode: error._code)
+                        
+                        showAlert(withTitle: "You did not authenticate successfully".localized, message: messageStr)
+                    }
                 }
             }
         } else {
