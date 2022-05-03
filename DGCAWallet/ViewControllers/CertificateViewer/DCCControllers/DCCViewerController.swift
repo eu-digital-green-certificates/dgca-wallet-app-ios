@@ -69,7 +69,7 @@ class DCCViewerController: UIViewController {
         super.viewWillAppear(animated)
         setupInterface()
     }
-
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         Brightness.reset()
@@ -80,7 +80,7 @@ class DCCViewerController: UIViewController {
         shareButton.setTitle("Share".localized, for: .normal)
         deleteButton.setTitle("Delete Certificate".localized, for: .normal)
         checkValidityButton.setTitle("Check Validity".localized, for: .normal)
-
+        
         if !isSaved {
             dismissButton.setTitle("Save".localized, for: .normal)
             editButton.isHidden = true
@@ -92,6 +92,7 @@ class DCCViewerController: UIViewController {
             dismissButton.isHidden = false
             nameLabel.textColor = .walletBlack
             headerBackground.backgroundColor = .walletGray10
+            
         } else {
             editButton.isHidden = false
             cancelButton.isHidden = true
@@ -102,6 +103,7 @@ class DCCViewerController: UIViewController {
                 checkValidityButton.isHidden = true
                 dismissButton.isHidden = true
                 shareButton.isHidden = true
+                
             } else {
                 editButton.setTitle("Edit".localized, for: .normal)
                 deleteButton.isHidden = true

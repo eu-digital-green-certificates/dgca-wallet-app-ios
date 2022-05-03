@@ -36,7 +36,7 @@ import DCCInspection
 class SettingsTableController: UITableViewController {
 
     let showDataManagerSegue = "showDataManagerSegue"
-
+    
     @IBOutlet fileprivate weak var appNameLabel: UILabel!
     @IBOutlet fileprivate weak var versionLabel: UILabel!
     @IBOutlet fileprivate weak var manageDataLabel: UILabel!
@@ -44,8 +44,8 @@ class SettingsTableController: UITableViewController {
     @IBOutlet fileprivate weak var licensesLabel: UILabel!
     
     override func viewDidLoad() {
-      super.viewDidLoad()
-      versionLabel.text = AppManager.appVersion
+        super.viewDidLoad()
+        versionLabel.text = DGCVerificationCenter.appVersion
         
         var filterType: String = ""
         var colaboratorsType = ""
@@ -53,7 +53,7 @@ class SettingsTableController: UITableViewController {
         filterType = "HASH" // sliceType.rawValue.uppercased().contains("BLOOM") ? "BLOOM" : "HASH"
             let link = DCCDataCenter.localDataManager.versionedConfig["context"]["url"].rawString()
             colaboratorsType = link!.contains("acc2") ? "ACC2" : "TST"
-
+        
         #endif
         
         appNameLabel.text = (Bundle.main.infoDictionary?["CFBundleDisplayName"] as! String) +

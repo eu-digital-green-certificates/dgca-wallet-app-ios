@@ -30,9 +30,9 @@ import DGCCoreLibrary
 import DGCVerificationCenter
 
 class HomeController: UIViewController {
-  private enum Constants {
-    static let scannerSegueID = "showMainList"
-  }
+    private enum Constants {
+      static let scannerSegueID = "showMainList"
+    }
 
     @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet fileprivate weak var appNameLabel: UILabel!
@@ -43,7 +43,7 @@ class HomeController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
       return .lightContent
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         appNameLabel.text = "Wallet App".localized
@@ -57,7 +57,7 @@ class HomeController: UIViewController {
         }
         reloadData()
     }
-
+    
     deinit {
         let center = NotificationCenter.default
         center.removeObserver(self)
@@ -66,7 +66,7 @@ class HomeController: UIViewController {
     private func reloadData() {
         reloadButton.isHidden = true
         self.activityIndicator.startAnimating()
-        AppManager.shared.verificationCenter.prepareStoredData(appType: .wallet)  {[unowned self] result in
+        DGCVerificationCenter.shared.prepareStoredData(appType: .wallet)  {[unowned self] result in
             if case let .failure(error) = result {
                 DispatchQueue.main.async {
                     DGCLogger.logError(error)

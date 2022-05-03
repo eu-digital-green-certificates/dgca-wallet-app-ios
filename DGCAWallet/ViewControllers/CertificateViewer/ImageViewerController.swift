@@ -31,54 +31,50 @@ import DCCInspection
 
 class ImageViewerController: UIViewController {
 
-  @IBOutlet fileprivate weak var closeButton: UIButton!
-  @IBOutlet fileprivate weak var shareButton: UIButton!
-  @IBOutlet fileprivate weak var imageView: UIImageView!
-  @IBOutlet fileprivate weak var scrollView: UIScrollView!
-  
-  var savedImage: SavedImage?
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    self.closeButton.setTitle("Done".localized, for: .normal)
-    shareButton.setTitle("Share".localized, for: .normal)
-    self.title = "PDF files".localized
-    setupView()
-  }
-
-  func setImage(image: SavedImage? = nil) {
-    savedImage = image
-  }
-
-  private func setupView() {
-    guard let savedImage = savedImage, let scrollView = scrollView, let imageView = imageView else { return }
-      
-    scrollView.backgroundColor = .lightGray
-    imageView.image = savedImage.image
-    scrollView.delegate = self
-    scrollView.minimumZoomScale = 1.0
-    scrollView.maximumZoomScale = 5.0
-    scrollView.zoomScale = 1.0
-    self.navigationItem.title = savedImage.fileName
-  }
+    @IBOutlet fileprivate weak var closeButton: UIButton!
+    @IBOutlet fileprivate weak var shareButton: UIButton!
+    @IBOutlet fileprivate weak var imageView: UIImageView!
+    @IBOutlet fileprivate weak var scrollView: UIScrollView!
     
-  @IBAction func shareAction(_ sender: Any) {
-    guard let savedImage = savedImage else { return }
-      
-    let imageToShare = [ savedImage.image ]
-    let activityViewController = UIActivityViewController(activityItems: imageToShare as [Any],
-       applicationActivities: nil)
-    activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
-    self.present(activityViewController, animated: true, completion: nil)
-  }
+    var savedImage: SavedImage?
     
-  @IBAction func closeAction(_ sender: Any) {
-    self.dismiss(animated: true)
-  }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.closeButton.setTitle("Done".localized, for: .normal)
+        shareButton.setTitle("Share".localized, for: .normal)
+        self.title = "PDF files".localized
+        setupView()
+    }
+    
+    private func setupView() {
+        guard let savedImage = savedImage else { return }
+        
+        scrollView.backgroundColor = .lightGray
+        imageView.image = savedImage.image
+        scrollView.delegate = self
+        scrollView.minimumZoomScale = 1.0
+        scrollView.maximumZoomScale = 5.0
+        scrollView.zoomScale = 1.0
+        self.navigationItem.title = savedImage.fileName
+    }
+    
+    @IBAction func shareAction(_ sender: Any) {
+        guard let savedImage = savedImage else { return }
+        
+        let imageToShare = [ savedImage.image ]
+        let activityViewController = UIActivityViewController(activityItems: imageToShare as [Any],
+            applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
+        self.present(activityViewController, animated: true, completion: nil)
+    }
+    
+    @IBAction func closeAction(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
 }
 
 extension ImageViewerController: UIScrollViewDelegate {
-  func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-     return imageView
-  }
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+       return imageView
+    }
 }

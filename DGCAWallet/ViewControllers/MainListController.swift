@@ -172,7 +172,7 @@ class MainListController: UIViewController {
 		let alert = UIAlertController(title: "Reload data?".localized, message: "The update may take some time.".localized, preferredStyle: .alert)
 		alert.addAction(UIAlertAction(title: "Later".localized, style: .default, handler: { _ in }))
 		alert.addAction(UIAlertAction(title: "Reload".localized, style: .default, handler: { (_: UIAlertAction) in
-            AppManager.shared.verificationCenter.updateStoredData(appType: .wallet, completion: { _ in })
+            DGCVerificationCenter.shared.updateStoredData(appType: .wallet, completion: { _ in })
 		}))
 		self.present(alert, animated: true, completion: nil)
 	}
@@ -352,20 +352,20 @@ class MainListController: UIViewController {
 				  let _ = navController.viewControllers.first as? SettingsTableController else { return }
 			
 		case SegueIdentifiers.showServicesList:
-			guard let serviceController = segue.destination as? ServerListController else { return }
-			guard let listOfServices = sender as? ServerListResponse else { return }
+			guard let serviceController = segue.destination as? ServerListController,
+			    let listOfServices = sender as? ServerListResponse else { return }
 			serviceController.serverListInfo = listOfServices
 			
 			
 		case SegueIdentifiers.showPDFViewer:
-			guard let serviceController = segue.destination as? PDFViewerController else { return }
-			guard let pdf = sender as? SavedPDF else { return }
-			serviceController.setPDF(pdf: pdf)
+			guard let serviceController = segue.destination as? PDFViewerController,
+			    let pdf = sender as? SavedPDF else { return }
+			serviceController.savedPDF = pdf
 			
 		case SegueIdentifiers.showImageViewer:
-			guard let serviceController = segue.destination as? ImageViewerController else { return }
-			guard let savedImage = sender as? SavedImage else { return }
-			serviceController.setImage(image: savedImage)
+			guard let serviceController = segue.destination as? ImageViewerController,
+			    let savedImage = sender as? SavedImage else { return }
+			serviceController.savedImage = savedImage
 			
         case SegueIdentifiers.showSavedDCCCertificate:
             guard let serviceController = segue.destination as? DCCViewerController else { return }

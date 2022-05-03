@@ -45,7 +45,7 @@ class CardContainerController: UIViewController {
     var editMode: Bool = false
     
     weak var delegate: CertificateManaging?
-        
+    
     override func viewDidLoad() {
 		super.viewDidLoad()
         setupView()
@@ -81,11 +81,12 @@ class CardContainerController: UIViewController {
                         self.dismiss(animated: true)
                     }
                 }
-
+                
             } else if case .failure(let error) = result {
                 DispatchQueue.main.async {
                     DGCLogger.logError(error)
-                    self.showAlert(title: "Cannot save Smart Helth Card".localized, subtitle: "An error occurred while saving".localized) { _ in
+                    self.showAlert(title: "Cannot save Smart Helth Card".localized,
+                        subtitle: "An error occurred while saving".localized) { _ in
                         self.dismiss(animated: true)
                     }
                 }

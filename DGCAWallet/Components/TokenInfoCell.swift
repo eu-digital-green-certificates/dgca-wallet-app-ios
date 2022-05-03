@@ -31,8 +31,8 @@ import DCCInspection
 
 class TokenInfoCell: UITableViewCell {
   
-  @IBOutlet weak var fieldName: UILabel!
-  @IBOutlet weak var fieldValue: UILabel!
+    @IBOutlet weak var fieldName: UILabel!
+    @IBOutlet weak var fieldValue: UILabel!
   
     var certificateRecord: CertificateRecord? {
         didSet {

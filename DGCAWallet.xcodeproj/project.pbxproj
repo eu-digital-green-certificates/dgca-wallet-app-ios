@@ -104,9 +104,6 @@
 		D2D7828E281BEA3700EB5006 /* LocalAuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D7828D281BEA3700EB5006 /* LocalAuthenticationController.swift */; };
 		D2D7828F281C72A400EB5006 /* DCCViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13CF09262DCDDA0070C80E /* DCCViewerController.swift */; };
 		D2D78290281C72A500EB5006 /* DCCViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13CF09262DCDDA0070C80E /* DCCViewerController.swift */; };
-		D2D8F2C627F5ECAD00508610 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D8F2C527F5ECAD00508610 /* AppManager.swift */; };
-		D2D8F2C727F5ED3500508610 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D8F2C527F5ECAD00508610 /* AppManager.swift */; };
-		D2D8F2C827F5ED3500508610 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D8F2C527F5ECAD00508610 /* AppManager.swift */; };
 		D2D8F2C927F5ED3900508610 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE891304263581D900CB92AF /* HomeController.swift */; };
 		D2D8F2CA27F5ED3A00508610 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE891304263581D900CB92AF /* HomeController.swift */; };
 		D2D8F2CB27F5ED3C00508610 /* MainListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED949C9263B50CE00883558 /* MainListController.swift */; };
@@ -118,6 +115,8 @@
 		D2DFDB4027C50E5900BA15B9 /* SquareViewFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DFDB3D27C50E5900BA15B9 /* SquareViewFinder.swift */; };
 		D2E7A1E528217ED900A5E2B8 /* LocalSceneAuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E7A1E428217ED900A5E2B8 /* LocalSceneAuthenticationController.swift */; };
 		D2E7A1E728217FF000A5E2B8 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2E7A1E628217FF000A5E2B8 /* Authentication.storyboard */; };
+		D2E7A1E82821B88B00A5E2B8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6D6ED261F8D2700715333 /* SceneDelegate.swift */; };
+		D2E7A1E92821B88C00A5E2B8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6D6ED261F8D2700715333 /* SceneDelegate.swift */; };
 		DA01661C265541C0005B73A1 /* LicenseTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01661B265541C0005B73A1 /* LicenseTableController.swift */; };
 		DA01661E26554992005B73A1 /* OpenSourceNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = DA01661D26554992005B73A1 /* OpenSourceNotices.json */; };
 		DA01662026554E02005B73A1 /* LicenseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01661F26554E02005B73A1 /* LicenseCell.swift */; };
@@ -155,7 +154,7 @@
 		5C00073926D625DE002E5013 /* ImageTableViewCell.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; tabWidth = 4; };
 		5C00073D26D641CC002E5013 /* ImageViewerController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ImageViewerController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		5C00074526D641E2002E5013 /* PDFViewerController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PDFViewerController.swift; sourceTree = "<group>"; tabWidth = 4; };
-		5C50CF07269700540015EE29 /* CheckValidityController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CheckValidityController.swift; sourceTree = "<group>"; tabWidth = 2; };
+		5C50CF07269700540015EE29 /* CheckValidityController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = CheckValidityController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		5C50CF0F269700710015EE29 /* RuleValidationResultVC.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = RuleValidationResultVC.swift; sourceTree = "<group>"; tabWidth = 4; };
 		5C50CF192697023B0015EE29 /* RuleErrorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleErrorCell.swift; sourceTree = "<group>"; };
 		5C50CF21269704240015EE29 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
@@ -215,7 +214,6 @@
 		D27755642804347B005FEE00 /* RoundedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		D27755652804347B005FEE00 /* RoundedBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedBox.swift; sourceTree = "<group>"; };
 		D2D7828D281BEA3700EB5006 /* LocalAuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthenticationController.swift; sourceTree = "<group>"; };
-		D2D8F2C527F5ECAD00508610 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		D2DFDB3D27C50E5900BA15B9 /* SquareViewFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquareViewFinder.swift; sourceTree = "<group>"; };
 		D2E7A1E428217ED900A5E2B8 /* LocalSceneAuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalSceneAuthenticationController.swift; sourceTree = "<group>"; };
 		D2E7A1E628217FF000A5E2B8 /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
@@ -520,7 +518,6 @@
 		D2D8F2C427F5EC2E00508610 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				D2D8F2C527F5ECAD00508610 /* AppManager.swift */,
 				D27755652804347B005FEE00 /* RoundedBox.swift */,
 				D27755642804347B005FEE00 /* RoundedButton.swift */,
 			);
@@ -734,7 +731,6 @@
 				D2D7828E281BEA3700EB5006 /* LocalAuthenticationController.swift in Sources */,
 				D277555028001AE3005FEE00 /* ExtendedValidityCell.swift in Sources */,
 				CABCB8E828073E3B00814185 /* CardPageController.swift in Sources */,
-				D2D8F2C627F5ECAD00508610 /* AppManager.swift in Sources */,
 				5C00071C26D38CC3002E5013 /* NFCHelper.swift in Sources */,
 				D2DFDB3E27C50E5900BA15B9 /* SquareViewFinder.swift in Sources */,
 				DA976779280060A800D3607E /* SHPayloadInterpreter.swift in Sources */,
@@ -780,12 +776,12 @@
 				5C50CF1C2697023B0015EE29 /* RuleErrorCell.swift in Sources */,
 				5C556D5226F9F8C6007E2C2E /* ServerListController.swift in Sources */,
 				D2D7828F281C72A400EB5006 /* DCCViewerController.swift in Sources */,
+				D2E7A1E82821B88B00A5E2B8 /* SceneDelegate.swift in Sources */,
 				5C50CF12269700710015EE29 /* RuleValidationResultVC.swift in Sources */,
 				CEA6D703261F8D2900715333 /* DGCAWalletTests.swift in Sources */,
 				5C00073726D625D0002E5013 /* PDFTableViewCell.swift in Sources */,
 				5C50CF23269704240015EE29 /* UIViewController+.swift in Sources */,
 				D2B605BD2743CA92000D914A /* ValidationResultController.swift in Sources */,
-				D2D8F2C727F5ED3500508610 /* AppManager.swift in Sources */,
 				5C50CF3026972BFD0015EE29 /* ExtendedValidityCell.swift in Sources */,
 				5C556D4A26F9F8AC007E2C2E /* CertificateListController.swift in Sources */,
 				D2DFDB3F27C50E5900BA15B9 /* SquareViewFinder.swift in Sources */,
@@ -810,6 +806,7 @@
 				D2D78290281C72A500EB5006 /* DCCViewerController.swift in Sources */,
 				5C556D4626F9DAF7007E2C2E /* TicketingAcceptanceController.swift in Sources */,
 				5C556D4B26F9F8AC007E2C2E /* CertificateListController.swift in Sources */,
+				D2E7A1E92821B88C00A5E2B8 /* SceneDelegate.swift in Sources */,
 				CEA6D70E261F8D2900715333 /* DGCAWalletUITests.swift in Sources */,
 				5C50CF3126972BFD0015EE29 /* ExtendedValidityCell.swift in Sources */,
 				5C50CF0B269700550015EE29 /* CheckValidityController.swift in Sources */,
@@ -819,7 +816,6 @@
 				5C00071E26D38CC3002E5013 /* NFCHelper.swift in Sources */,
 				5C50CF13269700710015EE29 /* RuleValidationResultVC.swift in Sources */,
 				D277555F28041B59005FEE00 /* DataManagerController.swift in Sources */,
-				D2D8F2C827F5ED3500508610 /* AppManager.swift in Sources */,
 				D277556B2804347B005FEE00 /* RoundedBox.swift in Sources */,
 				D27755682804347B005FEE00 /* RoundedButton.swift in Sources */,
 				5C50CF24269704240015EE29 /* UIViewController+.swift in Sources */,

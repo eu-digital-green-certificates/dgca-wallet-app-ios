@@ -66,9 +66,9 @@ class PDFViewerController: UIViewController {
     navigationItem.title = savedPDF.fileName
   }
   
-  func setPDF(pdf: SavedPDF) {
-    savedPDF = pdf
-  }
+//  func setPDF(pdf: SavedPDF) {
+//    savedPDF = pdf
+//  }
   
   @IBAction func shareAction(_ sender: Any) {
     guard let savedPDF = savedPDF else { return }

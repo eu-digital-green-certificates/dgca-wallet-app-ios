@@ -60,8 +60,10 @@ class SecureBackground {
     }
 
     func disable() {
-        self.secureView?.removeFromSuperview()
-        self.secureView = nil
+        DispatchQueue.main.async {
+            self.secureView?.removeFromSuperview()
+            self.secureView = nil
+        }
     }
 }
 
@@ -146,13 +148,11 @@ extension SecureBackground {
             }
         }
         
-        return message;
+        return message
     }
     
     func evaluateAuthenticationPolicyMessageForLA(errorCode: Int) -> String {
-        
-        var message = ""
-        
+        let message: String
         switch errorCode {
             
         case LAError.authenticationFailed.rawValue:
@@ -178,7 +178,7 @@ extension SecureBackground {
             
         case LAError.userFallback.rawValue:
             message = "The user chose to use the fallback".localized
-
+            
         default:
             message = evaluatePolicyFailErrorMessageForLA(errorCode: errorCode)
         }
@@ -188,8 +188,8 @@ extension SecureBackground {
     
     private func showAlert(withTitle title: String, message: String?) {
         DispatchQueue.main.async {
-          let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-          alertController.addAction(UIAlertAction(title: "OK".localized, style: .default))
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK".localized, style: .default))
             UIViewController.topMostViewController()?.present(alertController, animated: true)
         }
     }

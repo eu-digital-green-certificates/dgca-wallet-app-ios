@@ -36,7 +36,7 @@ class CardPageController: UIPageViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         guard let cardView = self.storyboard?.instantiateViewController(withIdentifier: "CardController") as? CardController else { return }
         
         delegate = self
