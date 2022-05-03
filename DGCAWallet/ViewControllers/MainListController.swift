@@ -443,11 +443,11 @@ extension MainListController: ScanWalletDelegate {
 	}
 	
 	func disableBackgroundDetection() {
-		SecureBackground.paused = true
+        SecureBackground.shared.paused = true
 	}
 	
 	func enableBackgroundDetection() {
-		SecureBackground.paused = false
+        SecureBackground.shared.paused = false
 	}
 	
 	func walletController(_ controller: UIViewController, didScanCertificate certificate: MultiTypeCertificate) {

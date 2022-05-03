@@ -90,7 +90,7 @@ class RuleValidationResultVC: UIViewController {
     resultDescriptionLabel.sizeToFit()
     noWarrantyLabel.sizeToFit()
   }
-    
+
   @IBAction func closeAction(_ sender: Any) {
     dismiss(animated: true) { [weak self] in
       self?.closeHandler?()

@@ -29,7 +29,9 @@
 
 import UIKit
 import DGCCoreLibrary
+#if canImport(DCCInspection)
 import DCCInspection
+#endif
 
 class DCCCertificateCell: UITableViewCell {
 
@@ -37,24 +39,24 @@ class DCCCertificateCell: UITableViewCell {
   @IBOutlet fileprivate weak var certTypeLabel: UILabel!
   @IBOutlet fileprivate weak var descriptionLabel: UILabel!
   
-    private var hCert: HCert? {
-      didSet {
-        setupView()
-      }
+    var hCert: HCert? {
+        didSet {
+            setupView()
+        }
     }
 
     private func setupView() {
-      if let hCert = hCert {
-        nameLabel.text = hCert.fullName
-        descriptionLabel.text = hCert.exp.dateString
-        certTypeLabel.text = hCert.certificateType.rawValue
-      } else {
-        nameLabel.text = ""
-        descriptionLabel.text = ""
-      }
+        if let hCert = hCert {
+            nameLabel.text = hCert.fullName
+            descriptionLabel.text = hCert.exp.dateString
+            certTypeLabel.text = hCert.certificateType.rawValue
+        } else {
+            nameLabel.text = ""
+            descriptionLabel.text = ""
+        }
     }
-
-    func setCertificate(cert: HCert) {
-      hCert = cert
+    
+    override func prepareForReuse() {
+        hCert = nil
     }
 }

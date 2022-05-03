@@ -69,56 +69,56 @@ class TicketingAcceptanceController: UIViewController {
     grandButton.isEnabled = true
   }
 
-  private func setupView(isValidation: Bool) {
-    if isValidation {
-      title = "Consent".localized
-      self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-      certificateTitle.text = String(format: "Certificate type: %@".localized, certificate?.certTypeString ?? "")
-      validToLabel.text = String(format: "Expired date: %@".localized, certificate?.exp.localDateString ?? "")
-      consetsLabel.text = "Consent".localized
-      infoLabel.text = String(format: "Do you agree to share the %@ certificate with %@?".localized,
-        certificate?.certTypeString ?? "", "airline.com")
-    }
-  }
-  
-  func prepareTicketing(with acceptance: TicketingAcceptance, certificate: HCert) {
-    self.ticketingAcceptance = acceptance
-    self.certificate = certificate
-  }
-  
-  @IBAction func cancelButtonAction(_ sender: Any) {
-    guard loading == false else { return }
-    self.navigationController?.popViewController(animated: true)
-  }
-  
-  @IBAction func grandButtonAction(_ sender: Any) {
-    guard loading == false, let certificate = certificate else { return }
-    self.startActivity()
-    ticketingAcceptance?.requestGrandPermissions(for: certificate, completion: { [weak self] response, error in
-      guard error == nil, let response = response else {
-        DispatchQueue.main.async {
-          self?.stopActivity()
-          self?.showInfoAlert(withTitle: "Unable to verify certificate".localized,
-            message: "Make sure you select the desired service...".localized)
+    private func setupView(isValidation: Bool) {
+        if isValidation {
+            title = "Consent".localized
+            self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+            certificateTitle.text = String(format: "Certificate type: %@".localized, certificate?.certTypeString ?? "")
+            validToLabel.text = String(format: "Expired date: %@".localized, certificate?.exp.localDateString ?? "")
+            consetsLabel.text = "Consent".localized
+            infoLabel.text = String(format: "Do you agree to share the %@ certificate with %@?".localized,
+              certificate?.certTypeString ?? "", "airline.com")
         }
-        return
-      }
-      DispatchQueue.main.async {
-        self?.stopActivity()
-        self?.performSegue(withIdentifier: Segues.showValidationResult, sender: response)
-      }
-    })
-  }
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    switch segue.identifier {
-    case Segues.showValidationResult:
-      guard let validationController = segue.destination as? ValidationResultController,
-          let responseModel = sender as? AccessTokenResponse else { return }
-      validationController.accessTokenResponse = responseModel
-      
-    default:
-        break
     }
-  }
+
+    func prepareTicketing(with acceptance: TicketingAcceptance, certificate: HCert) {
+      self.ticketingAcceptance = acceptance
+      self.certificate = certificate
+    }
+
+    @IBAction func cancelButtonAction(_ sender: Any) {
+        guard loading == false else { return }
+        self.navigationController?.popViewController(animated: true)
+    }
+  
+    @IBAction func grandButtonAction(_ sender: Any) {
+        guard loading == false, let certificate = certificate else { return }
+        self.startActivity()
+        ticketingAcceptance?.requestGrandPermissions(for: certificate, completion: { [weak self] response, error in
+            guard error == nil, let response = response else {
+              DispatchQueue.main.async {
+                self?.stopActivity()
+                self?.showInfoAlert(withTitle: "Unable to verify certificate".localized,
+                  message: "Make sure you select the desired service...".localized)
+              }
+              return
+            }
+            DispatchQueue.main.async {
+              self?.stopActivity()
+              self?.performSegue(withIdentifier: Segues.showValidationResult, sender: response)
+            }
+        })
+    }
+  
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case Segues.showValidationResult:
+          guard let validationController = segue.destination as? ValidationResultController,
+              let responseModel = sender as? AccessTokenResponse else { return }
+          validationController.accessTokenResponse = responseModel
+          
+        default:
+            break
+        }
+    }
 }

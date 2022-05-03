@@ -162,5 +162,4 @@ extension LocalAuthenticationController {
         self.present(alertController, animated: true)
       }
     }
-
 }

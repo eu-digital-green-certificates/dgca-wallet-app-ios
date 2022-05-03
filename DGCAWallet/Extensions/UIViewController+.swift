@@ -38,37 +38,65 @@ extension UIViewController {
 }
 
 extension UIViewController {
-    func showInputDialog(
-      title: String? = nil,
-      subtitle: String? = nil,
-      actionTitle: String? = "OK".localized,
-      cancelTitle: String? = "Cancel".localized,
-      inputPlaceholder: String? = nil,
-      inputKeyboardType: UIKeyboardType = UIKeyboardType.default,
-      capitalization: UITextAutocapitalizationType? = nil,
-      handler: ((_ text: String?) -> Void)? = nil) {
-      let alert = UIAlertController(title: title, message: subtitle, preferredStyle: .alert)
-      alert.addTextField { (textField: UITextField) in
-          textField.placeholder = inputPlaceholder
-          textField.keyboardType = inputKeyboardType
-          if let cap = capitalization {
-              textField.autocapitalizationType = cap
-          }
-      }
-      
-      alert.addAction(UIAlertAction(title: actionTitle, style: .default) { _ in
-          guard let textField = alert.textFields?.first else {
+    static func topMostViewController() -> UIViewController? {
+        if #available(iOS 13.0, *) {
+            let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+            return keyWindow?.rootViewController?.topMostViewController()
+        } else {
+            return UIApplication.shared.keyWindow?.rootViewController?.topMostViewController()
+        }
+    }
+    
+    func topMostViewController() -> UIViewController? {
+        if let navigationController = self as? UINavigationController {
+            return navigationController.topViewController?.topMostViewController()
+            
+        } else if let tabBarController = self as? UITabBarController {
+            if let selectedViewController = tabBarController.selectedViewController {
+                return selectedViewController.topMostViewController()
+            } else {
+                return tabBarController.topMostViewController()
+            }
+            
+        } else if let presentedViewController = self.presentedViewController {
+            return presentedViewController.topMostViewController()
+            
+        } else {
+            return self
+        }
+    }
+}
+
+extension UIViewController {
+    func showInputDialog( title: String? = nil, subtitle: String? = nil,
+        actionTitle: String? = "OK".localized,
+        cancelTitle: String? = "Cancel".localized,
+        inputPlaceholder: String? = nil,
+        inputKeyboardType: UIKeyboardType = UIKeyboardType.default,
+        capitalization: UITextAutocapitalizationType? = nil, handler: ((_ text: String?) -> Void)? = nil) {
+        
+        let alert = UIAlertController(title: title, message: subtitle, preferredStyle: .alert)
+        alert.addTextField { (textField: UITextField) in
+            textField.placeholder = inputPlaceholder
+            textField.keyboardType = inputKeyboardType
+            if let cap = capitalization {
+                textField.autocapitalizationType = cap
+            }
+        }
+        
+        alert.addAction(UIAlertAction(title: actionTitle, style: .default) { _ in
+            guard let textField = alert.textFields?.first else {
               handler?(nil)
               return
-          }
-          handler?(textField.text)
+            }
+            handler?(textField.text)
         })
         alert.addAction(UIAlertAction(title: cancelTitle, style: .cancel) { _ in
             handler?(nil)
         })
         present(alert, animated: true, completion: nil)
     }
-
+    
     func showAlert(
         title: String? = nil,
         subtitle: String? = nil,
@@ -86,7 +114,7 @@ extension UIViewController {
         }
         present(alert, animated: true, completion: nil)
     }
-
+    
     func showInfoAlert(withTitle title: String, message: String) {
       let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK".localized, style: .default))

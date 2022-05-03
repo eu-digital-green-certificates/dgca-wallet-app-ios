@@ -28,27 +28,37 @@ import UIKit
 
 @available(iOS 13.0, *)
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-  var window: UIWindow?
-  var isNFCFunctionality = false
-  func scene(_ scene: UIScene,
-             willConnectTo session: UISceneSession,
-             options connectionOptions: UIScene.ConnectionOptions) {
-    if let windowScene = scene as? UIWindowScene {
-      self.window = UIWindow(windowScene: windowScene)
-      self.window?.rootViewController = UIStoryboard(name: "Main", bundle: .main).instantiateInitialViewController()
-      self.window?.makeKeyAndVisible()
+    var window: UIWindow?
+    var isNFCFunctionality = false
+    
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        if let windowScene = scene as? UIWindowScene {
+            self.window = UIWindow(windowScene: windowScene)
+            self.window?.rootViewController = UIStoryboard(name: "Main", bundle: .main).instantiateInitialViewController()
+            self.window?.makeKeyAndVisible()
+        }
     }
-  }
 
-  func sceneWillResignActive(_ scene: UIScene) {
-    if !isNFCFunctionality {
-      SecureBackground.enable()
+    func sceneWillResignActive(_ scene: UIScene) {
+        if !isNFCFunctionality {
+            SecureBackground.shared.enable()
+        }
     }
-  }
 
-  func sceneDidBecomeActive(_ scene: UIScene) {
-    isNFCFunctionality = false
-    SecureBackground.disable()
-  }
-
+    func sceneDidBecomeActive(_ scene: UIScene) {
+      isNFCFunctionality = false
+      #if targetEnvironment(simulator)
+        SecureBackground.shared.disable()
+      #else
+        if !SecureBackground.shared.shouldAuthenticate {
+            SecureBackground.shared.disable()
+        } else {
+            SecureBackground.shared.authenticationWithTouchID { rezult in
+                if rezult {
+                    SecureBackground.shared.disable()
+                }
+            }
+        }
+      #endif
+    }
 }

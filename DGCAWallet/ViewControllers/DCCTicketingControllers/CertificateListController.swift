@@ -69,15 +69,15 @@ class CertificateListController: UIViewController {
   }
     
   private func deselectAllCertificates() {
-    for i in 0..<stringCertificates.count {
-      stringCertificates[i].isSelected = false
-    }
+      for i in 0..<stringCertificates.count {
+          stringCertificates[i].isSelected = false
+      }
   }
 }
 
 extension CertificateListController: UITableViewDataSource, UITableViewDelegate {
   func numberOfSections(in tableView: UITableView) -> Int {
-    return stringCertificates.isEmpty ? 1 : 2
+      return stringCertificates.isEmpty ? 1 : 2
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -86,25 +86,25 @@ extension CertificateListController: UITableViewDataSource, UITableViewDelegate 
 
       switch infoTableValue {
       case 0:
-        return 0
+          return 0
       case 1:
-        return 2
+          return 2
       case 2:
-        return 9
+          return 9
       default:
-        return 0
+          return 0
       }
       
     } else {
-      return stringCertificates.count
+        return stringCertificates.count
     }
   }
   
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     if section == 0 {
-      return "Ticketing information".localized
+        return "Ticketing information".localized
     } else {
-      return "Available Certificates".localized
+        return "Available Certificates".localized
     }
   }
   
@@ -125,7 +125,7 @@ extension CertificateListController: UITableViewDataSource, UITableViewDelegate 
       let savedCert = stringCertificates[indexPath.row]
       cell.accessoryType = savedCert.isSelected ? .checkmark : .none
       if let cert = savedCert.cert {
-        cell.setCertificate(cert: cert)
+          cell.hCert = cert
       }
       return cell
     }

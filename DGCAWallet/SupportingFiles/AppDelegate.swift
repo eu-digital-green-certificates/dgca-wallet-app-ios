@@ -28,30 +28,41 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-  var window: UIWindow?
-  var isNFCFunctionality = false
-  func application(
-    _ application: UIApplication,
-    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
-  ) -> Bool {
-    if #available(iOS 13, *) {
-      return true
-    } else {
-      self.window = UIWindow()
-      self.window?.rootViewController = UIStoryboard(name: "Main", bundle: .main).instantiateInitialViewController()
-      self.window?.makeKeyAndVisible()
-      return true
+    var window: UIWindow?
+    var isNFCFunctionality = false
+    
+    func application(_ application: UIApplication,
+      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        if #available(iOS 13, *) {
+            return true
+        } else {
+            self.window = UIWindow()
+            self.window?.rootViewController = UIStoryboard(name: "Main", bundle: .main).instantiateInitialViewController()
+            self.window?.makeKeyAndVisible()
+            return true
+        }
     }
-  }
 
-  func applicationWillResignActive(_ application: UIApplication) {
-    if !isNFCFunctionality {
-      SecureBackground.enable()
+    func applicationWillResignActive(_ application: UIApplication) {
+        if !isNFCFunctionality {
+            SecureBackground.shared.enable()
+        }
     }
-  }
 
-  func applicationDidBecomeActive(_ application: UIApplication) {
-    isNFCFunctionality = false
-    SecureBackground.disable()
-  }
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        isNFCFunctionality = false
+        #if targetEnvironment(simulator)
+          SecureBackground.shared.disable()
+        #else
+          if !SecureBackground.shared.shouldAuthenticate {
+              SecureBackground.shared.disable()
+          } else {
+              SecureBackground.shared.authenticationWithTouchID { rezult in
+                  if rezult {
+                      SecureBackground.shared.disable()
+                  }
+              }
+          }
+        #endif
+    }
 }

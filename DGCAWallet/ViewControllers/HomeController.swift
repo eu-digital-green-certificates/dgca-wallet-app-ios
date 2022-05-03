@@ -121,10 +121,6 @@ class HomeController: UIViewController {
     }
     
     private func loadComplete() {
-        let renderer = UIGraphicsImageRenderer(size: self.view.bounds.size)
-        SecureBackground.image = renderer.image { rendererContext in
-            self.view.layer.render(in: rendererContext.cgContext)
-        }
         performSegue(withIdentifier: Constants.scannerSegueID, sender: nil)
     }
 }

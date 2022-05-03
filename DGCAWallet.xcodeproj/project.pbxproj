@@ -116,6 +116,8 @@
 		D2DFDB3E27C50E5900BA15B9 /* SquareViewFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DFDB3D27C50E5900BA15B9 /* SquareViewFinder.swift */; };
 		D2DFDB3F27C50E5900BA15B9 /* SquareViewFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DFDB3D27C50E5900BA15B9 /* SquareViewFinder.swift */; };
 		D2DFDB4027C50E5900BA15B9 /* SquareViewFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2DFDB3D27C50E5900BA15B9 /* SquareViewFinder.swift */; };
+		D2E7A1E528217ED900A5E2B8 /* LocalSceneAuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2E7A1E428217ED900A5E2B8 /* LocalSceneAuthenticationController.swift */; };
+		D2E7A1E728217FF000A5E2B8 /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2E7A1E628217FF000A5E2B8 /* Authentication.storyboard */; };
 		DA01661C265541C0005B73A1 /* LicenseTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01661B265541C0005B73A1 /* LicenseTableController.swift */; };
 		DA01661E26554992005B73A1 /* OpenSourceNotices.json in Resources */ = {isa = PBXBuildFile; fileRef = DA01661D26554992005B73A1 /* OpenSourceNotices.json */; };
 		DA01662026554E02005B73A1 /* LicenseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA01661F26554E02005B73A1 /* LicenseCell.swift */; };
@@ -154,14 +156,14 @@
 		5C00073D26D641CC002E5013 /* ImageViewerController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ImageViewerController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		5C00074526D641E2002E5013 /* PDFViewerController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = PDFViewerController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		5C50CF07269700540015EE29 /* CheckValidityController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CheckValidityController.swift; sourceTree = "<group>"; tabWidth = 2; };
-		5C50CF0F269700710015EE29 /* RuleValidationResultVC.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = RuleValidationResultVC.swift; sourceTree = "<group>"; tabWidth = 2; };
+		5C50CF0F269700710015EE29 /* RuleValidationResultVC.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = RuleValidationResultVC.swift; sourceTree = "<group>"; tabWidth = 4; };
 		5C50CF192697023B0015EE29 /* RuleErrorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleErrorCell.swift; sourceTree = "<group>"; };
 		5C50CF21269704240015EE29 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		5C50CF2526972BCA0015EE29 /* SimpleValidityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleValidityCell.swift; sourceTree = "<group>"; };
 		5C50CF2D26972BFD0015EE29 /* ExtendedValidityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedValidityCell.swift; sourceTree = "<group>"; };
 		5C50CF3926973D9D0015EE29 /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
 		5C50CF3D26983E090015EE29 /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
-		5C556D4026F9DAF7007E2C2E /* TicketingAcceptanceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = TicketingAcceptanceController.swift; sourceTree = "<group>"; tabWidth = 2; };
+		5C556D4026F9DAF7007E2C2E /* TicketingAcceptanceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = TicketingAcceptanceController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		5C556D4726F9F8AC007E2C2E /* CertificateListController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = CertificateListController.swift; sourceTree = "<group>"; tabWidth = 2; };
 		5C556D4F26F9F8C6007E2C2E /* ServerListController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ServerListController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		5CFEDB18269DBB4C00074F66 /* context.jsonc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = context.jsonc; sourceTree = "<group>"; };
@@ -215,6 +217,8 @@
 		D2D7828D281BEA3700EB5006 /* LocalAuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthenticationController.swift; sourceTree = "<group>"; };
 		D2D8F2C527F5ECAD00508610 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		D2DFDB3D27C50E5900BA15B9 /* SquareViewFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SquareViewFinder.swift; sourceTree = "<group>"; };
+		D2E7A1E428217ED900A5E2B8 /* LocalSceneAuthenticationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalSceneAuthenticationController.swift; sourceTree = "<group>"; };
+		D2E7A1E628217FF000A5E2B8 /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
 		DA01661B265541C0005B73A1 /* LicenseTableController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = LicenseTableController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		DA01661D26554992005B73A1 /* OpenSourceNotices.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = OpenSourceNotices.json; sourceTree = "<group>"; };
 		DA01661F26554E02005B73A1 /* LicenseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseCell.swift; sourceTree = "<group>"; };
@@ -223,7 +227,7 @@
 		DA9767762800529900D3607E /* SmartHealth.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SmartHealth.storyboard; sourceTree = "<group>"; };
 		DA976778280060A800D3607E /* SHPayloadInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHPayloadInterpreter.swift; sourceTree = "<group>"; };
 		FEBE53B42721A3EA003B61FB /* LimitationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitationCell.swift; sourceTree = "<group>"; };
-		FEC54BE727201D660048B6BC /* ValidationResultController.swift */ = {isa = PBXFileReference; indentWidth = 2; lastKnownFileType = sourcecode.swift; path = ValidationResultController.swift; sourceTree = "<group>"; tabWidth = 2; };
+		FEC54BE727201D660048B6BC /* ValidationResultController.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = ValidationResultController.swift; sourceTree = "<group>"; tabWidth = 4; };
 		FEEAD6DA273BBE9600D883EB /* TokenInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenInfoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -315,6 +319,7 @@
 			children = (
 				CEA6D6F6261F8D2900715333 /* LaunchScreen.storyboard */,
 				CEA6D6F1261F8D2700715333 /* Main.storyboard */,
+				D2E7A1E628217FF000A5E2B8 /* Authentication.storyboard */,
 				CE4BD25A264FF39D00689FD6 /* DCCCertificateViewer.storyboard */,
 				CE4BD257264FF39400689FD6 /* Settings.storyboard */,
 				DA9767762800529900D3607E /* SmartHealth.storyboard */,
@@ -350,6 +355,7 @@
 				CED949C9263B50CE00883558 /* MainListController.swift */,
 				CE891304263581D900CB92AF /* HomeController.swift */,
 				D2D7828D281BEA3700EB5006 /* LocalAuthenticationController.swift */,
+				D2E7A1E428217ED900A5E2B8 /* LocalSceneAuthenticationController.swift */,
 				D2B605BA2743C97D000D914A /* CertificateViewer */,
 				D2B605BB2743C9BB000D914A /* SettingsControllers */,
 				D2B605BF2743CC25000D914A /* ValidityControllers */,
@@ -643,6 +649,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2E7A1E728217FF000A5E2B8 /* Authentication.storyboard in Resources */,
 				CE4BD258264FF39D00689FD6 /* DCCCertificateViewer.storyboard in Resources */,
 				CE6D4A44264835F100A5D33D /* Localizable.strings in Resources */,
 				CEA6D6F8261F8D2900715333 /* LaunchScreen.storyboard in Resources */,
@@ -716,6 +723,7 @@
 				CEE9DA55263C7D4000A31532 /* DCCCodeController.swift in Sources */,
 				D27755692804347B005FEE00 /* RoundedBox.swift in Sources */,
 				5C556D5126F9F8C6007E2C2E /* ServerListController.swift in Sources */,
+				D2E7A1E528217ED900A5E2B8 /* LocalSceneAuthenticationController.swift in Sources */,
 				5C50CF2726972BCA0015EE29 /* SimpleValidityCell.swift in Sources */,
 				DA01662026554E02005B73A1 /* LicenseCell.swift in Sources */,
 				CEA6D6EC261F8D2700715333 /* AppDelegate.swift in Sources */,

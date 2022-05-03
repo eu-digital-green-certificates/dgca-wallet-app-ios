@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="epE-Hg-NZo">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Local Scene Authentication Controller-->
+        <scene sceneID="ESU-nt-yCj">
+            <objects>
+                <viewController id="epE-Hg-NZo" customClass="LocalSceneAuthenticationController" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="A4h-x7-2Ky">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wallet_icon" translatesAutoresizingMaskIntoConstraints="NO" id="Dq0-TD-ciz">
+                                <rect key="frame" x="151" y="142.5" width="112" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="112" id="0uS-7s-p7A"/>
+                                    <constraint firstAttribute="height" constant="150" id="sKN-xA-jxv"/>
+                                </constraints>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dwb-P2-OD7">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="134.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AYG-kr-3jg">
+                                <rect key="frame" x="133" y="300.5" width="148" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sPd-Y0-EYQ">
+                                <rect key="frame" x="0.0" y="754.5" width="414" height="141.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EU_logo" translatesAutoresizingMaskIntoConstraints="NO" id="oNa-5a-hvY">
+                                <rect key="frame" x="117" y="778.5" width="180" height="51.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="oNa-5a-hvY" secondAttribute="height" multiplier="7:2" id="ASP-qL-x0k"/>
+                                    <constraint firstAttribute="width" constant="180" id="rdO-Oz-LZd"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Authentication" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Koa-jr-A5i">
+                                <rect key="frame" x="16" y="705.5" width="382" height="29"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Voy-hD-TBV" customClass="RoundedButton" customModule="DGCAWallet" customModuleProvider="target">
+                                <rect key="frame" x="143" y="537.5" width="128" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="128" id="CGH-5e-q7U"/>
+                                    <constraint firstAttribute="height" constant="40" id="Tbf-nz-2yK"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Try again"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="radius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="padding">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="tryAgainAction" destination="epE-Hg-NZo" eventType="touchUpInside" id="Jj4-44-kj7"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="bcF-j6-Dba"/>
+                        <color key="backgroundColor" name="walletBlue"/>
+                        <constraints>
+                            <constraint firstItem="dwb-P2-OD7" firstAttribute="leading" secondItem="A4h-x7-2Ky" secondAttribute="leading" id="1Vj-2c-3S2"/>
+                            <constraint firstItem="dwb-P2-OD7" firstAttribute="top" secondItem="A4h-x7-2Ky" secondAttribute="top" id="3nY-nn-Mpa"/>
+                            <constraint firstItem="AYG-kr-3jg" firstAttribute="top" secondItem="Dq0-TD-ciz" secondAttribute="bottom" constant="8" id="BNt-KF-770"/>
+                            <constraint firstAttribute="trailing" secondItem="dwb-P2-OD7" secondAttribute="trailing" id="EMF-Ya-g6x"/>
+                            <constraint firstItem="oNa-5a-hvY" firstAttribute="centerX" secondItem="A4h-x7-2Ky" secondAttribute="centerX" id="EdZ-Qi-8CP"/>
+                            <constraint firstItem="Voy-hD-TBV" firstAttribute="centerX" secondItem="A4h-x7-2Ky" secondAttribute="centerX" id="IvH-y8-Y6Q"/>
+                            <constraint firstItem="Koa-jr-A5i" firstAttribute="leading" secondItem="bcF-j6-Dba" secondAttribute="leading" constant="16" id="Rvn-eM-En7"/>
+                            <constraint firstAttribute="trailing" secondItem="sPd-Y0-EYQ" secondAttribute="trailing" id="Xhr-77-hoR"/>
+                            <constraint firstItem="dwb-P2-OD7" firstAttribute="height" secondItem="A4h-x7-2Ky" secondAttribute="height" multiplier="0.15" id="Xkm-xf-uGL"/>
+                            <constraint firstItem="Dq0-TD-ciz" firstAttribute="top" secondItem="dwb-P2-OD7" secondAttribute="bottom" constant="8" id="ab0-cS-OPD"/>
+                            <constraint firstItem="AYG-kr-3jg" firstAttribute="centerX" secondItem="A4h-x7-2Ky" secondAttribute="centerX" id="bUo-WV-fRw"/>
+                            <constraint firstAttribute="bottom" secondItem="sPd-Y0-EYQ" secondAttribute="bottom" id="cmA-hs-TGc"/>
+                            <constraint firstItem="sPd-Y0-EYQ" firstAttribute="leading" secondItem="A4h-x7-2Ky" secondAttribute="leading" id="dRh-mU-JDR"/>
+                            <constraint firstItem="Koa-jr-A5i" firstAttribute="top" secondItem="Voy-hD-TBV" secondAttribute="bottom" constant="128" id="mDF-aI-OeR"/>
+                            <constraint firstItem="oNa-5a-hvY" firstAttribute="top" secondItem="sPd-Y0-EYQ" secondAttribute="top" constant="24" id="meC-jp-pLS"/>
+                            <constraint firstItem="bcF-j6-Dba" firstAttribute="trailing" secondItem="Koa-jr-A5i" secondAttribute="trailing" constant="16" id="p5l-yP-t3Z"/>
+                            <constraint firstItem="sPd-Y0-EYQ" firstAttribute="top" secondItem="Koa-jr-A5i" secondAttribute="bottom" constant="20" id="qet-9k-5KX"/>
+                            <constraint firstItem="Dq0-TD-ciz" firstAttribute="centerX" secondItem="A4h-x7-2Ky" secondAttribute="centerX" id="uAK-5i-Ki3"/>
+                            <constraint firstItem="bcF-j6-Dba" firstAttribute="bottom" secondItem="oNa-5a-hvY" secondAttribute="bottom" constant="32" id="zmn-3z-AfJ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="HAu-ZW-HlD"/>
+                    <connections>
+                        <outlet property="appNameLabel" destination="AYG-kr-3jg" id="nSe-v0-Gzx"/>
+                        <outlet property="messageLabel" destination="Koa-jr-A5i" id="DJW-ri-jfv"/>
+                        <outlet property="tryAgainButton" destination="Voy-hD-TBV" id="nzK-IT-xqs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bqf-yb-PBV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1345" y="118"/>
+        </scene>
+    </scenes>
+    <designables>
+        <designable name="Voy-hD-TBV">
+            <size key="intrinsicContentSize" width="93" height="28"/>
+        </designable>
+    </designables>
+    <resources>
+        <image name="EU_logo" width="72" height="48"/>
+        <image name="wallet_icon" width="112" height="112"/>
+        <namedColor name="walletBlue">
+            <color red="0.0" green="0.2669999897480011" blue="0.57999998331069946" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

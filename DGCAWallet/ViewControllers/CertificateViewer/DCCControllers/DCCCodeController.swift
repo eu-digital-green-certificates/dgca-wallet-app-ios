@@ -26,8 +26,11 @@
 //  
 
 import UIKit
-import DCCInspection
 import DGCVerificationCenter
+
+#if canImport(DCCInspection)
+import DCCInspection
+#endif
 
 class DCCCodeController: UIViewController {
     @IBOutlet fileprivate weak var imageView: UIImageView!
@@ -43,15 +46,17 @@ class DCCCodeController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let hCert = certificate?.digitalCertificate as? HCert else { return }
-        
-        imageView.image = hCert.qrCode
-        tanLabel.text = ""
-        if tan != nil {
-            tanLabel.text = String(format: "TAN: %@".localized, "tap to reveal".localized)
-            tanLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapToReveal)))
-            tanLabel.isUserInteractionEnabled = true
-        }
+        #if canImport(DCCInspection)
+            guard let hCert = certificate?.digitalCertificate as? HCert else { return }
+            
+            imageView.image = hCert.qrCode
+            tanLabel.text = ""
+            if tan != nil {
+                tanLabel.text = String(format: "TAN: %@".localized, "tap to reveal".localized)
+                tanLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapToReveal)))
+                tanLabel.isUserInteractionEnabled = true
+            }
+        #endif
     }
 
     @IBAction func tapToReveal() {

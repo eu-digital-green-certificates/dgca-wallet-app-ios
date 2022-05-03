@@ -27,62 +27,170 @@
 
 import UIKit
 import LocalAuthentication
-import DGCCoreLibrary
 
-struct SecureBackground {
-    static var imageView: UIImageView?
-    static var image: UIImage?
+protocol SecureAuthorising {
+    func tryAgainAuthentication()
+}
 
-    static func enable() {
-        guard !paused else { return }
-        
-        disable()
-        // return
-        guard let image = image else { return }
-        let imageView = UIImageView(image: image)
-        UIApplication.shared.windows.first?.addSubview(imageView)
-        Self.imageView = imageView
-        Self.activation = Date()
+class SecureBackground {
+    static var shared = SecureBackground()
+    
+    var paused = false
+    
+    private var activation = Date()
+    private var secureView: UIView?
+
+    var shouldAuthenticate: Bool {
+        return Date() > activation.addingTimeInterval(3 * 60.0)
+    }
+    
+    func enable() {
+        self.disable()
+        if let authenticationController = UIStoryboard(name: "Authentication", bundle: nil).instantiateInitialViewController() as? LocalSceneAuthenticationController {
+            authenticationController.delegate = self
+            authenticationController.loadView()
+            authenticationController.setupInterface()
+            if let view = authenticationController.view {
+                view.frame = UIScreen.main.bounds
+                UIApplication.shared.windows.first?.addSubview(view)
+                self.secureView = view
+            }
+        }
+        self.activation = Date()
     }
 
-    static func disable() {
-        if imageView != nil {
-          if activation.timeIntervalSinceNow < -1 {
-              // (UIApplication.shared.windows.first?.rootViewController as? UINavigationController)?.popToRootViewController(animated: false)
-          }
-          imageView?.removeFromSuperview()
-          imageView = nil
+    func disable() {
+        self.secureView?.removeFromSuperview()
+        self.secureView = nil
+    }
+}
+
+extension SecureBackground: SecureAuthorising {
+    func tryAgainAuthentication() {
+        self.authenticationWithTouchID { result in
+            if result {
+                self.disable()
+            }
         }
     }
+}
 
-    static var paused = false
-    static var activation = Date()
+extension SecureBackground {
+    func authenticationWithTouchID(completion: @escaping AuthenticationCompletionHandler) {
+        let localAuthenticationContext = LAContext()
+        localAuthenticationContext.localizedFallbackTitle = "Use Passcode".localized
+        
+        var authError: NSError?
+        let reasonString = "To access the secure data".localized
 
-    static func checkId(from controller: UIViewController? = nil, completion: ((Bool) -> Void)?) {
-        guard !paused else { return }
-          
-        paused = true
-        let context = LAContext()
-        context.localizedCancelTitle = "Try Later".localized
-        let reason = "Could not verify device ownership".localized
-        context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason ) { success, err in
-            if success {
-                paused = false
-                completion?(true)
-            } else {
-                paused = false
-                if controller == nil || (err as? LAError)?.code != LAError.passcodeNotSet {
-                    completion?(false)
-                    return
-                }
-                  
+        if localAuthenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
+            localAuthenticationContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reasonString) { [unowned self] success, evaluateError in
+                
                 DispatchQueue.main.async {
-                    controller?.showAlert(title: "Could not verify device ownership".localized,
-                        subtitle: "Please try setting a passcode for this device before opening the app.".localized) { _ in
-                      completion?(false)
+                    if success {
+                        completion(true)
+                        
+                    } else {
+                        //TODO: User did not authenticate successfully, look at error and take appropriate action
+                        guard let error = evaluateError else { return }
+                        
+                        let messageStr = self.evaluateAuthenticationPolicyMessageForLA(errorCode: error._code)
+                        
+                        self.showAlert(withTitle: "You did not authenticate successfully".localized, message: messageStr)
+                        completion(false)
                     }
                 }
             }
+        } else {
+            guard let error = authError else {
+                completion(false)
+                return
+            }
+            
+            let messageStr = self.evaluateAuthenticationPolicyMessageForLA(errorCode: error.code)
+            showAlert(withTitle: "Cannot authenticate".localized, message: messageStr)
+            completion(false)
+        }
+    }
+
+    func evaluatePolicyFailErrorMessageForLA(errorCode: Int) -> String {
+        var message = ""
+        if #available(iOS 11.0, macOS 10.13, *) {
+            switch errorCode {
+                case LAError.biometryNotAvailable.rawValue:
+                message = "Authentication could not start because the device does not support biometric authentication.".localized
+                
+                case LAError.biometryLockout.rawValue:
+                    message = "Authentication could not continue because the user has been locked out of biometric authentication, due to failing authentication too many times.".localized
+                
+                case LAError.biometryNotEnrolled.rawValue:
+                    message = "Authentication could not start because the user has not enrolled in biometric authentication.".localized
+                
+                default:
+                    message = "Did not find error code on LAError object".localized
+            }
+            
+        } else {
+            switch errorCode {
+                case LAError.touchIDLockout.rawValue:
+                    message = "Too many failed attempts.".localized
+                
+                case LAError.touchIDNotAvailable.rawValue:
+                    message = "TouchID is not available on the device".localized
+                
+                case LAError.touchIDNotEnrolled.rawValue:
+                    message = "TouchID is not enrolled on the device".localized
+                
+                default:
+                    message = "Did not find error code on LAError object".localized
+            }
+        }
+        
+        return message;
+    }
+    
+    func evaluateAuthenticationPolicyMessageForLA(errorCode: Int) -> String {
+        
+        var message = ""
+        
+        switch errorCode {
+            
+        case LAError.authenticationFailed.rawValue:
+            message = "The user failed to provide valid credentials".localized
+            
+        case LAError.appCancel.rawValue:
+            message = "Authentication was cancelled by application".localized
+            
+        case LAError.invalidContext.rawValue:
+            message = "The context is invalid".localized
+            
+        case LAError.notInteractive.rawValue:
+            message = "Not interactive"
+            
+        case LAError.passcodeNotSet.rawValue:
+            message = "Passcode is not set on the device".localized
+            
+        case LAError.systemCancel.rawValue:
+            message = "Authentication was cancelled by the system".localized
+            
+        case LAError.userCancel.rawValue:
+            message = "The user did cancel".localized
+            
+        case LAError.userFallback.rawValue:
+            message = "The user chose to use the fallback".localized
+
+        default:
+            message = evaluatePolicyFailErrorMessageForLA(errorCode: errorCode)
+        }
+        
+        return message
+    }
+    
+    private func showAlert(withTitle title: String, message: String?) {
+        DispatchQueue.main.async {
+          let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+          alertController.addAction(UIAlertAction(title: "OK".localized, style: .default))
+            UIViewController.topMostViewController()?.present(alertController, animated: true)
         }
     }
 }
