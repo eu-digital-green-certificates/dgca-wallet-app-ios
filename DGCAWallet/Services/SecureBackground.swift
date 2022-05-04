@@ -41,7 +41,7 @@ class SecureBackground {
     private var secureView: UIView?
 
     var shouldAuthenticate: Bool {
-        return Date() > activation.addingTimeInterval(3 * 60.0)
+        return Date() > activation.addingTimeInterval(60.0)
     }
     
     func enable() {
