@@ -155,10 +155,12 @@ class MainListController: UIViewController {
             certificates.append(multiTypeCert)
         }
         #endif
-        
-        emptyView.alpha = certificates.isEmpty && listImageElements.isEmpty && listPdfElements.isEmpty ? 1 : 0
-        self.table.reloadData()
-        self.refreshControl.endRefreshing()
+
+        DispatchQueue.main.async {
+            self.emptyView.alpha = self.certificates.isEmpty && self.listImageElements.isEmpty && self.listPdfElements.isEmpty ? 1 : 0
+            self.table.reloadData()
+            self.refreshControl.endRefreshing()
+        }
 	}
     
 	// MARK: - Actions
