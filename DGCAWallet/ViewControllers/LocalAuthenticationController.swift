@@ -70,7 +70,7 @@ extension LocalAuthenticationController {
                         
                         let messageStr = self.evaluateAuthenticationPolicyMessageForLA(errorCode: error._code)
                         
-                        showAlert(withTitle: "You did not authenticate successfully".localized, message: messageStr)
+                        self.showAlert(withTitle: "You did not authenticate successfully".localized, message: messageStr)
                     }
                 }
             }

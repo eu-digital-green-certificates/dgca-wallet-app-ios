@@ -94,12 +94,12 @@
 		D27755692804347B005FEE00 /* RoundedBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27755652804347B005FEE00 /* RoundedBox.swift */; };
 		D277556A2804347B005FEE00 /* RoundedBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27755652804347B005FEE00 /* RoundedBox.swift */; };
 		D277556B2804347B005FEE00 /* RoundedBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = D27755652804347B005FEE00 /* RoundedBox.swift */; };
-		D2B4550327F48C6C00D8A296 /* DGCVerificationCenter in Frameworks */ = {isa = PBXBuildFile; productRef = D2B4550227F48C6C00D8A296 /* DGCVerificationCenter */; };
 		D2B605BD2743CA92000D914A /* ValidationResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC54BE727201D660048B6BC /* ValidationResultController.swift */; };
 		D2B605BE2743CA92000D914A /* ValidationResultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC54BE727201D660048B6BC /* ValidationResultController.swift */; };
-		D2BBDEC02798B25E0043A8A7 /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB1A269DBB4C00074F66 /* context.jsonc */; };
-		D2BBDEC12798B25E0043A8A7 /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB1A269DBB4C00074F66 /* context.jsonc */; };
-		D2BBDEC22798B25F0043A8A7 /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB1A269DBB4C00074F66 /* context.jsonc */; };
+		D2BB69862829D850006012E7 /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB18269DBB4C00074F66 /* context.jsonc */; };
+		D2BB69872829D850006012E7 /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB18269DBB4C00074F66 /* context.jsonc */; };
+		D2BB69882829D851006012E7 /* context.jsonc in Resources */ = {isa = PBXBuildFile; fileRef = 5CFEDB18269DBB4C00074F66 /* context.jsonc */; };
+		D2BB698B2829D9C3006012E7 /* DGCVerificationCenter in Frameworks */ = {isa = PBXBuildFile; productRef = D2BB698A2829D9C3006012E7 /* DGCVerificationCenter */; };
 		D2D581092817284F007EBD8B /* SwiftPath in Frameworks */ = {isa = PBXBuildFile; productRef = D2D581082817284F007EBD8B /* SwiftPath */; };
 		D2D7828E281BEA3700EB5006 /* LocalAuthenticationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2D7828D281BEA3700EB5006 /* LocalAuthenticationController.swift */; };
 		D2D7828F281C72A400EB5006 /* DCCViewerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE13CF09262DCDDA0070C80E /* DCCViewerController.swift */; };
@@ -234,7 +234,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2B4550327F48C6C00D8A296 /* DGCVerificationCenter in Frameworks */,
+				D2BB698B2829D9C3006012E7 /* DGCVerificationCenter in Frameworks */,
 				CA669CF1280AE87F0017E563 /* DataCompression in Frameworks */,
 				D2D581092817284F007EBD8B /* SwiftPath in Frameworks */,
 			);
@@ -549,9 +549,9 @@
 			);
 			name = DGCAWallet;
 			packageProductDependencies = (
-				D2B4550227F48C6C00D8A296 /* DGCVerificationCenter */,
 				CA669CF0280AE87F0017E563 /* DataCompression */,
 				D2D581082817284F007EBD8B /* SwiftPath */,
+				D2BB698A2829D9C3006012E7 /* DGCVerificationCenter */,
 			);
 			productName = DGCAWallet;
 			productReference = CEA6D6E8261F8D2700715333 /* DGCAWallet.app */;
@@ -626,9 +626,9 @@
 			);
 			mainGroup = CEA6D6DF261F8D2700715333;
 			packageReferences = (
-				D2B4550127F48C6C00D8A296 /* XCRemoteSwiftPackageReference "dgca-verification-center" */,
 				CA669CEF280AE87F0017E563 /* XCRemoteSwiftPackageReference "DataCompression" */,
 				D2D581072817284F007EBD8B /* XCRemoteSwiftPackageReference "SwiftPath" */,
+				D2BB69892829D9C3006012E7 /* XCRemoteSwiftPackageReference "dgca-verification-center-ios" */,
 			);
 			productRefGroup = CEA6D6E9261F8D2700715333 /* Products */;
 			projectDirPath = "";
@@ -648,11 +648,11 @@
 			files = (
 				D2E7A1E728217FF000A5E2B8 /* Authentication.storyboard in Resources */,
 				CE4BD258264FF39D00689FD6 /* DCCCertificateViewer.storyboard in Resources */,
+				D2BB69862829D850006012E7 /* context.jsonc in Resources */,
 				CE6D4A44264835F100A5D33D /* Localizable.strings in Resources */,
 				CEA6D6F8261F8D2900715333 /* LaunchScreen.storyboard in Resources */,
 				CE4BD255264FF39400689FD6 /* Settings.storyboard in Resources */,
 				CE81533A263FF7EC0030D777 /* README.md in Resources */,
-				D2BBDEC02798B25E0043A8A7 /* context.jsonc in Resources */,
 				DA01661E26554992005B73A1 /* OpenSourceNotices.json in Resources */,
 				DA9767772800529900D3607E /* SmartHealth.storyboard in Resources */,
 				CEA6D6F5261F8D2900715333 /* Assets.xcassets in Resources */,
@@ -665,7 +665,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2BBDEC12798B25E0043A8A7 /* context.jsonc in Resources */,
+				D2BB69872829D850006012E7 /* context.jsonc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -673,7 +673,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2BBDEC22798B25F0043A8A7 /* context.jsonc in Resources */,
+				D2BB69882829D851006012E7 /* context.jsonc in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -947,7 +947,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1003,7 +1003,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1019,22 +1019,22 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DGCAWallet/DGCAWallet.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 9FH6TNGWF2;
 				INFOPLIST_FILE = DGCAWallet/SupportingFiles/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.2;
+				MARKETING_VERSION = 1.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.t-systems.pu-ds.dgca.wallet.dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "Digital Green Certificate Wallet development";
+				PROVISIONING_PROFILE_SPECIFIER = "Digital Green Certificate Wallet";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1046,20 +1046,20 @@
 				CODE_SIGN_ENTITLEMENTS = DGCAWallet/DGCAWallet.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 9FH6TNGWF2;
 				INFOPLIST_FILE = DGCAWallet/SupportingFiles/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.2;
+				MARKETING_VERSION = 1.3.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.t-systems.pu-ds.dgca.wallet.dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Digital Green Certificate Wallet";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -1197,9 +1197,9 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		D2B4550127F48C6C00D8A296 /* XCRemoteSwiftPackageReference "dgca-verification-center" */ = {
+		D2BB69892829D9C3006012E7 /* XCRemoteSwiftPackageReference "dgca-verification-center-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/eu-digital-green-certificates/dgca-verification-center.git";
+			repositoryURL = "https://github.com/eu-digital-green-certificates/dgca-verification-center-ios.git";
 			requirement = {
 				branch = main;
 				kind = branch;
@@ -1221,9 +1221,9 @@
 			package = CA669CEF280AE87F0017E563 /* XCRemoteSwiftPackageReference "DataCompression" */;
 			productName = DataCompression;
 		};
-		D2B4550227F48C6C00D8A296 /* DGCVerificationCenter */ = {
+		D2BB698A2829D9C3006012E7 /* DGCVerificationCenter */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D2B4550127F48C6C00D8A296 /* XCRemoteSwiftPackageReference "dgca-verification-center" */;
+			package = D2BB69892829D9C3006012E7 /* XCRemoteSwiftPackageReference "dgca-verification-center-ios" */;
 			productName = DGCVerificationCenter;
 		};
 		D2D581082817284F007EBD8B /* SwiftPath */ = {
