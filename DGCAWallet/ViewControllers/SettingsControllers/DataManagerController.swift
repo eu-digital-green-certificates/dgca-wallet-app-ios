@@ -62,41 +62,20 @@ class DataManagerController: UITableViewController {
         cell.delegate = self
         return cell
     }
-
-    private func showAlertCannotReload() {
-        let title = "Cannot update stored data".localized
-        let message = "Please check the internet connection and try again.".localized
-        
-        let infoAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Continue".localized, style: .default) { action in
-            self.tableView.reloadData()
-        }
-        infoAlertController.addAction(action)
-        self.present(infoAlertController, animated: true)
-    }
-
-    private func showAlertReloadCompleted() {
-        let title = "Stored data is up to date".localized
-        let message = ""
-        
-        let infoAlertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "Continue".localized, style: .default) { action in
-            self.tableView.reloadData()
-        }
-        infoAlertController.addAction(action)
-        self.present(infoAlertController, animated: true)
-    }
 }
 
 extension DataManagerController: DataManagingProtocol {
     func loadingInspector(_ inspector: ApplicableInspector, didFinishLoadingData value: Bool) {
         NotificationCenter.default.post(name: dataReloadedNotification, object: nil)
 
-        self.tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
     
     func loadingInspector(_ inspector: ApplicableInspector, didFailLoadingDataWith error: Error) {
-        
-        self.tableView.reloadData()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
     }
 }
