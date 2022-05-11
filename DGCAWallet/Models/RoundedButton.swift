@@ -19,7 +19,7 @@
  */
 //
 //  RoundedButton.swift
-//  DGCAVerifier
+//  DGCAWallet
 //
 //  Created by Yannick Spreen on 4/19/21.
 //

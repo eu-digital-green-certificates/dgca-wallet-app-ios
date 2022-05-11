@@ -90,8 +90,14 @@ class DCCViewerController: UIViewController {
             checkValidityButton.isHidden = true
             shareButton.isHidden = false
             dismissButton.isHidden = false
-            nameLabel.textColor = .walletBlack
-            headerBackground.backgroundColor = .walletGray10
+            
+            if certificate?.isRevoked ?? false {
+                headerBackground.backgroundColor = .walletRed
+                nameLabel.textColor = .white
+            } else {
+                nameLabel.textColor = .walletBlack
+                headerBackground.backgroundColor = .walletGray10
+            }
             
         } else {
             editButton.isHidden = false
@@ -112,7 +118,12 @@ class DCCViewerController: UIViewController {
                 shareButton.isHidden = false
             }
             nameLabel.textColor = .white
-            headerBackground.backgroundColor = .verifierBlue
+            if certificate?.isRevoked ?? false {
+                headerBackground.backgroundColor = .walletRed
+            } else {
+                headerBackground.backgroundColor = .walletBlue
+            }
+
         }
         
         view.layoutIfNeeded()

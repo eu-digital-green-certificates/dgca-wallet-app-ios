@@ -20,7 +20,7 @@
  */
 //  
 //  RoundedBox.swift
-//  DGCAVerifier
+//  DGCAWallet
 //  
 //  Created by Igor Khomiak on 08.04.2022.
 //  

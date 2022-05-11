@@ -29,12 +29,12 @@ class ScanWalletController: UIViewController {
     weak var delegate: ScanWalletDelegate?
 
     lazy var detectBarcodeRequest = VNDetectBarcodesRequest { request, error in
-      guard error == nil else {
-        self.showAlert(withTitle: "Cannot read Barcode".localized,
-            message: error?.localizedDescription ?? "Something went wrong.".localized)
-        return
-      }
-      self.processClassification(request)
+        guard error == nil else {
+            self.showAlert(withTitle: "Cannot read Barcode".localized,
+                message: error?.localizedDescription ?? "Something went wrong.".localized)
+            return
+        }
+        self.processClassification(request)
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -80,18 +80,18 @@ class ScanWalletController: UIViewController {
         checkPermissions()
         setupCameraLiveView()
     #endif
-      SquareViewFinder.create(from: self)
-      createDismissButton()
+        SquareViewFinder.create(from: self)
+        createDismissButton()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-      super.viewWillDisappear(animated)
-      captureSession?.stopRunning()
+        super.viewWillDisappear(animated)
+        captureSession?.stopRunning()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-      super.viewDidAppear(animated)
-      captureSession?.startRunning()
+        super.viewDidAppear(animated)
+        captureSession?.startRunning()
     }
 
     private func createDismissButton() {
@@ -119,17 +119,17 @@ private extension ScanWalletController  {
     func checkPermissions() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .notDetermined:
-          delegate?.disableBackgroundDetection()
-          AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
-            self?.delegate?.enableBackgroundDetection()
-            if !granted {
-              self?.showPermissionsAlert()
+            delegate?.disableBackgroundDetection()
+            AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
+                self?.delegate?.enableBackgroundDetection()
+                if !granted {
+                    self?.showPermissionsAlert()
+                }
             }
-          }
         case .denied, .restricted:
-          showPermissionsAlert()
+            showPermissionsAlert()
         default:
-          break
+            break
         }
     }
 
@@ -139,11 +139,11 @@ private extension ScanWalletController  {
         let videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)
         
         guard let device = videoDevice,
-          let videoDeviceInput = try? AVCaptureDeviceInput(device: device),
-          captureSession?.canAddInput(videoDeviceInput) == true
+            let videoDeviceInput = try? AVCaptureDeviceInput(device: device),
+            captureSession?.canAddInput(videoDeviceInput) == true
         else {
-          showAlert(withTitle: "No camera available".localized, message: "The app requires access the camera".localized)
-          return
+            showAlert(withTitle: "No camera available".localized, message: "The app requires access the camera".localized)
+            return
         }
         
         captureSession?.addInput(videoDeviceInput)
@@ -183,7 +183,7 @@ private extension ScanWalletController  {
             }
         }
     }
-  
+    
     func observationHandler(payloadString: String?) {
       guard let barcodeString = payloadString, !barcodeString.isEmpty else { return }
         /// MARK: END OF SCANNING
@@ -225,21 +225,21 @@ private extension ScanWalletController  {
                         DGCLogger.logInfo("User cancelled verifying.")
                     }
                 }
-                
+
             } catch let error as CertificateParsingError {
                 self.showAlertWithError(error)
             } catch {
                 self.showAlertWithError(CertificateParsingError.invalidStructure)
             }
             
-       } else if let payloadData = (payloadString ?? "").data(using: .utf8),
-            let ticketing = try? JSONDecoder().decode(CheckInQR.self, from: payloadData) {
-            self.delegate?.walletController(self, didScanInfo: ticketing)
-           
-        } else {
-            DGCLogger.logInfo("Cannot recognise barcodeString: \(barcodeString)")
-            self.showAlertWithError(CertificateParsingError.unknownFormat)
-        }
+        } else if let payloadData = (payloadString ?? "").data(using: .utf8),
+             let ticketing = try? JSONDecoder().decode(CheckInQR.self, from: payloadData) {
+             self.delegate?.walletController(self, didScanInfo: ticketing)
+         
+         } else {
+             DGCLogger.logInfo("Cannot recognise barcodeString: \(barcodeString)")
+             self.showAlertWithError(CertificateParsingError.unknownFormat)
+         }
     }
 }
 
@@ -258,13 +258,13 @@ extension ScanWalletController: AVCaptureVideoDataOutputSampleBufferDelegate {
 
 private extension ScanWalletController {
     func configurePreviewLayer() {
-      guard let captureSession = captureSession else { return }
-        
-      let cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-      cameraPreviewLayer.videoGravity = .resizeAspectFill
-      cameraPreviewLayer.connection?.videoOrientation = .portrait
-      cameraPreviewLayer.frame = view.frame
-      camView.layer.insertSublayer(cameraPreviewLayer, at: 0)
+        guard let captureSession = captureSession else { return }
+          
+        let cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        cameraPreviewLayer.videoGravity = .resizeAspectFill
+        cameraPreviewLayer.connection?.videoOrientation = .portrait
+        cameraPreviewLayer.frame = view.frame
+        camView.layer.insertSublayer(cameraPreviewLayer, at: 0)
     }
     
     func showAlert(withTitle title: String, message: String) {

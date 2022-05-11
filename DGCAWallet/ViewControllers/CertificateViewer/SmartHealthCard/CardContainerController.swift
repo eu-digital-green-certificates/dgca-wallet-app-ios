@@ -40,6 +40,7 @@ class CardContainerController: UIViewController {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var cardSubtitleLabel: UILabel!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var closeButton: UIButton!
     
     var certificate: MultiTypeCertificate?
     var editMode: Bool = false
@@ -60,16 +61,25 @@ class CardContainerController: UIViewController {
     }
     
 	private func setupView() {
-        self.saveButton.isHidden = editMode
+        if let cert = certificate, cert.isUntrusted  {
+            saveButton.isHidden = true
+            closeButton.isHidden = false
+        } else {
+            saveButton.isHidden = editMode
+            closeButton.isHidden = true
+        }
     }
 	
+    @IBAction func didPressCloseBtn(_ sender: UIButton) {
+        self.dismiss(animated: true)
+    }
+    
 	@IBAction func didPressDoneBtn(_ sender: UIButton) {
         self.dismiss(animated: true)
 	}
 	
 	@IBAction func didPressSaveBtn(_ sender: UIButton) {
         #if canImport(DGCSHInspection)
-        
         guard let certificate = certificate, let shCert = certificate.digitalCertificate as? SHCert else { return }
         
         SHDataCenter.shDataManager.add(shCert) { result in

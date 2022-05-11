@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WCj-Xf-fml">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WCj-Xf-fml">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -164,7 +164,7 @@
                                             <constraint firstAttribute="width" secondItem="zGf-U8-pn3" secondAttribute="height" multiplier="14:9" id="nDE-5U-ZWG"/>
                                         </constraints>
                                     </imageView>
-                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="r19-3o-Fqx">
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="r19-3o-Fqx">
                                         <rect key="frame" x="176.66666666666666" y="364.66666666666669" width="37" height="37"/>
                                         <color key="color" name="walletBlue"/>
                                     </activityIndicatorView>
@@ -251,14 +251,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EU_logo" translatesAutoresizingMaskIntoConstraints="NO" id="w1E-Jo-IbM">
-                                <rect key="frame" x="173.33333333333334" y="720" width="43.333333333333343" height="28"/>
+                                <rect key="frame" x="173.33333333333334" y="754" width="43.333333333333343" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="3qI-8K-9VX"/>
                                     <constraint firstAttribute="width" secondItem="w1E-Jo-IbM" secondAttribute="height" multiplier="14:9" id="5bi-jg-SEO"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Dz-da-bIa">
-                                <rect key="frame" x="16" y="662" width="358" height="50"/>
+                                <rect key="frame" x="16" y="696" width="358" height="50"/>
                                 <color key="backgroundColor" name="walletBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="RrE-Wb-wOA"/>
@@ -278,7 +278,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="el4-fh-MYD">
-                                <rect key="frame" x="0.0" y="57" width="390" height="597"/>
+                                <rect key="frame" x="0.0" y="101" width="390" height="587"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SimpleValidityCell" rowHeight="60" id="d4x-Lr-vTo" customClass="SimpleValidityCell" customModule="DGCAWallet" customModuleProvider="target">
@@ -391,7 +391,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xY8-6t-NMi">
-                                <rect key="frame" x="325" y="16" width="45" height="33"/>
+                                <rect key="frame" x="325" y="60" width="45" height="33"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <state key="normal" title="Close">
                                     <color key="titleColor" name="walletBlue"/>
@@ -438,7 +438,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Valid certifivate" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qfD-px-d4M">
-                                <rect key="frame" x="16" y="65" width="358" height="32"/>
+                                <rect key="frame" x="16" y="109" width="358" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="bP4-rd-vy3"/>
                                 </constraints>
@@ -447,7 +447,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check" translatesAutoresizingMaskIntoConstraints="NO" id="z1T-hw-p7A">
-                                <rect key="frame" x="145" y="113" width="100" height="100"/>
+                                <rect key="frame" x="145" y="157" width="100" height="100"/>
                                 <color key="tintColor" name="walletGreen"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="EF7-tW-RYj"/>
@@ -455,7 +455,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBu-JJ-ecS">
-                                <rect key="frame" x="16" y="229" width="358" height="50"/>
+                                <rect key="frame" x="16" y="273" width="358" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="nzH-F0-szl"/>
                                 </constraints>
@@ -464,7 +464,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wTp-cM-ruV">
-                                <rect key="frame" x="16" y="615" width="358" height="61"/>
+                                <rect key="frame" x="16" y="649" width="358" height="61"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="61" id="7eE-WY-tYj"/>
                                 </constraints>
@@ -473,7 +473,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FTE-1r-vbZ">
-                                <rect key="frame" x="16" y="295" width="358" height="304"/>
+                                <rect key="frame" x="16" y="339" width="358" height="294"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RuleErrorCell" rowHeight="131" id="mGD-c5-un9" customClass="RuleErrorCell" customModule="DGCAWallet" customModuleProvider="target">
@@ -604,7 +604,7 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h4c-Yf-R4i">
-                                <rect key="frame" x="325" y="16" width="45" height="33"/>
+                                <rect key="frame" x="325" y="60" width="45" height="33"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <state key="normal" title="Close">
                                     <color key="titleColor" name="walletBlue"/>
@@ -614,14 +614,14 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EU_logo" translatesAutoresizingMaskIntoConstraints="NO" id="uEv-9d-tfV">
-                                <rect key="frame" x="16" y="692" width="72" height="48"/>
+                                <rect key="frame" x="16" y="726" width="72" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="72" id="cP3-hh-0tY"/>
                                     <constraint firstAttribute="height" constant="48" id="ham-2l-hW2"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eOj-kZ-7kv" customClass="RoundedButton" customModule="DGCAWallet" customModuleProvider="target">
-                                <rect key="frame" x="104" y="692" width="266" height="48"/>
+                                <rect key="frame" x="104" y="726" width="266" height="48"/>
                                 <color key="backgroundColor" name="walletGreen"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="rsX-gd-sFl"/>
@@ -784,9 +784,9 @@
                                     <outlet property="delegate" destination="Rtb-d3-6Ll" id="6Sl-Au-TrT"/>
                                 </connections>
                             </tableView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="9Xz-H7-a0H">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="9Xz-H7-a0H">
                                 <rect key="frame" x="169" y="181.66666666666666" width="37" height="37"/>
-                                <color key="color" systemColor="secondaryLabelColor"/>
+                                <color key="color" name="walletBlue"/>
                             </activityIndicatorView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradient" translatesAutoresizingMaskIntoConstraints="NO" id="8HZ-m0-XR3">
                                 <rect key="frame" x="0.0" y="368" width="375" height="32"/>
@@ -861,9 +861,6 @@
         <namedColor name="walletRed">
             <color red="0.85500001907348633" green="0.1289999932050705" blue="0.19200000166893005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="secondaryLabelColor">
-            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

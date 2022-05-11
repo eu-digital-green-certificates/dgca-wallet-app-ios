@@ -655,7 +655,7 @@
                                     <constraint firstAttribute="bottom" secondItem="wUD-Wr-dv7" secondAttribute="bottom" constant="8" id="ofl-Zf-DSu"/>
                                 </constraints>
                             </view>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="2Bn-TZ-xdi">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="2Bn-TZ-xdi">
                                 <rect key="frame" x="188.5" y="384" width="37" height="37"/>
                                 <color key="color" name="walletBlue"/>
                             </activityIndicatorView>
@@ -1115,7 +1115,7 @@
                                     <action selector="addNew" destination="BcE-gA-Tuj" eventType="touchUpInside" id="ox7-Wv-5g3"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Ixr-vD-aU3">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Ixr-vD-aU3">
                                 <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
                                 <color key="color" name="walletBlue"/>
                             </activityIndicatorView>
