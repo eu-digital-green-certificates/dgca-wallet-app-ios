@@ -84,7 +84,7 @@ class DCCViewerController: UIViewController {
         let validityState = DGCVerificationCenter.shared.dccInspector?.validateCertificate(cert)
         
         if let state = validityState {
-            self.sectionBuilder = DCCSectionBuilder(with: cert, validity: state, for: .verifier)
+            self.sectionBuilder = DCCSectionBuilder(with: cert, validity: state, for: .wallet)
             self.validityState = state
         }
     }
@@ -112,12 +112,12 @@ class DCCViewerController: UIViewController {
             
             nameLabel.textColor = .white
 
-            let allRulesValidity = validityState?.allRulesValidity ?? .invalid
             if certificate?.isRevoked ?? false {
                 headerBackground.backgroundColor = .walletRed
                 nameLabel.textColor = .white
             } else {
-                headerBackground.backgroundColor = allRulesValidity.validityBackground
+                nameLabel.textColor = .walletBlack
+                headerBackground.backgroundColor = .walletGray10
             }
             
         } else {
