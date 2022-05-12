@@ -707,16 +707,25 @@
                                 <color key="textColor" name="walletBlack"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The certificate has been revoked" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mme-Uh-YUL">
+                                <rect key="frame" x="16" y="16" width="343" height="21.666666666666671"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" name="walletRed"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9QX-BY-k3B"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="9QX-BY-k3B" firstAttribute="trailing" secondItem="7nr-IP-So2" secondAttribute="trailing" constant="16" id="2sf-yt-cft"/>
                             <constraint firstItem="9QX-BY-k3B" firstAttribute="bottom" secondItem="BmW-aV-sN6" secondAttribute="bottom" constant="16" id="ANw-Ky-7ee"/>
+                            <constraint firstItem="Mme-Uh-YUL" firstAttribute="top" secondItem="nMP-53-s92" secondAttribute="top" constant="16" id="CIK-b7-xvO"/>
                             <constraint firstItem="7nr-IP-So2" firstAttribute="top" secondItem="9QX-BY-k3B" secondAttribute="top" constant="16" id="QVn-Gj-8eG"/>
                             <constraint firstItem="BmW-aV-sN6" firstAttribute="top" secondItem="7nr-IP-So2" secondAttribute="bottom" constant="16" id="UUe-lF-BBy"/>
                             <constraint firstItem="BmW-aV-sN6" firstAttribute="centerX" secondItem="nMP-53-s92" secondAttribute="centerX" id="Uuq-4p-lK8"/>
                             <constraint firstItem="7nr-IP-So2" firstAttribute="leading" secondItem="9QX-BY-k3B" secondAttribute="leading" constant="16" id="iwZ-Mv-lE5"/>
+                            <constraint firstItem="9QX-BY-k3B" firstAttribute="trailing" secondItem="Mme-Uh-YUL" secondAttribute="trailing" constant="16" id="oS5-l2-nVb"/>
+                            <constraint firstItem="Mme-Uh-YUL" firstAttribute="leading" secondItem="9QX-BY-k3B" secondAttribute="leading" constant="16" id="wLu-3j-bpd"/>
                         </constraints>
                         <edgeInsets key="layoutMargins" top="0.0" left="20" bottom="0.0" right="20"/>
                     </view>
@@ -724,7 +733,7 @@
                     <size key="freeformSize" width="375" height="400"/>
                     <connections>
                         <outlet property="imageView" destination="7nr-IP-So2" id="ADg-pj-TOL"/>
-                        <outlet property="tanLabel" destination="BmW-aV-sN6" id="IbL-8E-weY"/>
+                        <outlet property="tanLabel" destination="Mme-Uh-YUL" id="Sdv-h5-iMr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fy6-pe-6cT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -824,19 +833,19 @@
     </scenes>
     <designables>
         <designable name="9zn-iE-p4i">
-            <size key="intrinsicContentSize" width="147" height="39"/>
+            <size key="intrinsicContentSize" width="171" height="51"/>
         </designable>
         <designable name="KkS-4l-iTy">
-            <size key="intrinsicContentSize" width="181" height="39"/>
+            <size key="intrinsicContentSize" width="205" height="51"/>
         </designable>
         <designable name="WJ5-9S-W9j">
-            <size key="intrinsicContentSize" width="60" height="39"/>
+            <size key="intrinsicContentSize" width="84" height="51"/>
         </designable>
         <designable name="a9u-Ia-KEX">
-            <size key="intrinsicContentSize" width="54" height="39"/>
+            <size key="intrinsicContentSize" width="78" height="51"/>
         </designable>
         <designable name="eOj-kZ-7kv">
-            <size key="intrinsicContentSize" width="32" height="39"/>
+            <size key="intrinsicContentSize" width="56" height="51"/>
         </designable>
     </designables>
     <resources>

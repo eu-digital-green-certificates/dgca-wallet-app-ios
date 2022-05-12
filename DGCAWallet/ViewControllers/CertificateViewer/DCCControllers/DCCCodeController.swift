@@ -35,6 +35,7 @@ import DCCInspection
 class DCCCodeController: UIViewController {
     @IBOutlet fileprivate weak var imageView: UIImageView!
     @IBOutlet fileprivate weak var tanLabel: UILabel!
+    @IBOutlet fileprivate weak var revokationLabel: UILabel!
 
     var certificate: MultiTypeCertificate? {
         (parent as? CertPagesController)?.embeddingVC?.certificate
@@ -46,9 +47,14 @@ class DCCCodeController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        revokationLabel.text = ""
+        
         #if canImport(DCCInspection)
             guard let hCert = certificate?.digitalCertificate as? HCert else { return }
             
+            if hCert.isRevoked {
+                revokationLabel.text = "The certificate has been revoked".localized
+            }
             imageView.image = hCert.qrCode
             tanLabel.text = ""
             if tan != nil {
