@@ -54,6 +54,9 @@ class DCCViewerController: UIViewController {
     var certificate: MultiTypeCertificate?
     weak var delegate: CertificateManaging?
     
+    var sectionBuilder: DCCSectionBuilder?
+    private var validityState: ValidityState?
+
     var certDate: Date?
     var tan: String?
     var isSaved = true
@@ -67,9 +70,25 @@ class DCCViewerController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupInterface()
+        validateCertificate()
     }
     
+    private func validateCertificate() {
+        self.checkCertificateValidity()
+        self.setupInterface()
+    }
+    
+    private func checkCertificateValidity() {
+        guard let cert = certificate?.digitalCertificate as? HCert else { return }
+                
+        let validityState = DGCVerificationCenter.shared.dccInspector?.validateCertificate(cert)
+        
+        if let state = validityState {
+            self.sectionBuilder = DCCSectionBuilder(with: cert, validity: state, for: .verifier)
+            self.validityState = state
+        }
+    }
+
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         Brightness.reset()
@@ -91,12 +110,14 @@ class DCCViewerController: UIViewController {
             shareButton.isHidden = false
             dismissButton.isHidden = false
             
+            nameLabel.textColor = .white
+
+            let allRulesValidity = validityState?.allRulesValidity ?? .invalid
             if certificate?.isRevoked ?? false {
                 headerBackground.backgroundColor = .walletRed
                 nameLabel.textColor = .white
             } else {
-                nameLabel.textColor = .walletBlack
-                headerBackground.backgroundColor = .walletGray10
+                headerBackground.backgroundColor = allRulesValidity.validityBackground
             }
             
         } else {

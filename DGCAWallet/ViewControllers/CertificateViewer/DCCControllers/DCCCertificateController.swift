@@ -18,12 +18,12 @@
  * limitations under the License.
  * ---license-end
  */
-//  
+//
 //  DCCCertificateController.swift
 //  DGCAWallet
-//  
+//
 //  Created by Yannick Spreen on 4/30/21.
-//  
+//
 
 import UIKit
 import DCCInspection
@@ -33,32 +33,15 @@ import DGCCoreLibrary
 class DCCCertificateController: UIViewController {
     @IBOutlet fileprivate weak var table: UITableView!
     @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
-
-    var certificate: MultiTypeCertificate? {
-        (parent as? CertPagesController)?.embeddingVC?.certificate
+    
+    private var sectionBuilder: DCCSectionBuilder? {
+        (parent as? CertPagesController)?.embeddingVC?.sectionBuilder
     }
-    private var validityState: ValidityState?
-    private var sectionBuilder: DCCSectionBuilder?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        validateAndSetupInterface()
         table.contentInset = .init(top: 0, left: 0, bottom: 32, right: 0)
-    }
-
-    private func validateAndSetupInterface() {
-        guard let hCert = certificate?.digitalCertificate as? HCert else { return }
-      
-        activityIndicator.startAnimating()
-        let validator = DCCCertificateValidator(with: hCert)
-        let state = validator.validateDCCCertificate()
-        self.validityState = state
-        let builder = DCCSectionBuilder(with: hCert, validity: state, for: .wallet)
-        self.sectionBuilder = builder
-        DispatchQueue.main.async {
-            self.activityIndicator.stopAnimating()
-            self.table.reloadData()
-        }
+        self.table.reloadData()
     }
 }
 
