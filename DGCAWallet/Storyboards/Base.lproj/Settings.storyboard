@@ -17,7 +17,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="1ci-L3-wGH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <sections>
                             <tableViewSection id="0l5-7N-GKg">
                                 <cells>
@@ -43,7 +43,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wallet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dnl-zt-ei8">
                                                     <rect key="frame" x="67" y="13.5" width="49.5" height="22"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <color key="textColor" name="walletBlue"/>
+                                                    <color key="textColor" name="certificateBlue"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="07c-2x-Rrw">
@@ -64,6 +64,8 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="07c-2x-Rrw" secondAttribute="trailing" constant="0.5" id="g7I-aF-XFU"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="tintColor" name="certificateBlue"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -79,7 +81,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Privacy Information" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hky-ZS-URO">
                                                     <rect key="frame" x="20" y="11" width="357.5" height="28"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <color key="textColor" name="walletBlue"/>
+                                                    <color key="textColor" name="certificateBlue"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -90,7 +92,8 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="hky-ZS-URO" secondAttribute="trailing" id="olK-Us-axD"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="tintColor" name="certificateBlue"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationLevel="1" indentationWidth="0.0" rowHeight="50" id="86j-jg-cmK">
                                         <rect key="frame" x="0.0" y="167" width="414" height="50"/>
@@ -105,7 +108,7 @@
                                                         <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
                                                     </accessibility>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <color key="textColor" name="walletBlue"/>
+                                                    <color key="textColor" name="certificateBlue"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -116,21 +119,22 @@
                                                 <constraint firstItem="5Lw-xZ-YJu" firstAttribute="leading" secondItem="dGR-ad-19n" secondAttribute="leadingMargin" id="ztd-48-mCz"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="tintColor" name="certificateBlue"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Trusted Public Keys and Revocation Data" id="3pf-6v-wgT" userLabel="Trusted Public Keys, Revocation Data">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="eKk-HB-cRH">
-                                        <rect key="frame" x="0.0" y="267" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="267" width="414" height="44.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eKk-HB-cRH" id="OUZ-m9-MQq">
-                                            <rect key="frame" x="0.0" y="0.0" width="385.5" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="385.5" height="44.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manage Data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AYl-mR-IpX">
-                                                    <rect key="frame" x="20" y="11" width="107" height="22"/>
+                                                    <rect key="frame" x="20" y="11" width="107" height="22.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -143,6 +147,8 @@
                                                 <constraint firstItem="AYl-mR-IpX" firstAttribute="top" secondItem="OUZ-m9-MQq" secondAttribute="topMargin" id="u3G-W7-64Y"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="tintColor" name="certificateBlue"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -154,7 +160,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="nqQ-GZ-nBR">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="nbb-SQ-pYn">
-                            <color key="tintColor" name="walletBlue"/>
+                            <color key="tintColor" name="certificateBlue"/>
                             <connections>
                                 <action selector="doneAction:" destination="Cs8-8v-zm5" id="IQh-sl-rFl"/>
                             </connections>
@@ -190,6 +196,7 @@
                             </label>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v45-PV-omx">
                                 <rect key="frame" x="25" y="199" width="364" height="613"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                     <wkPreferences key="preferences"/>
@@ -197,7 +204,7 @@
                             </wkWebView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="FgE-yf-uSb">
                                 <rect key="frame" x="188.5" y="487" width="37" height="37"/>
-                                <color key="color" name="walletBlue"/>
+                                <color key="color" name="certificateBlue"/>
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="apT-Rw-gEs"/>
@@ -216,7 +223,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="BDZ-mX-IuU">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="Aa6-t2-zk9">
-                            <color key="tintColor" name="walletBlue"/>
+                            <color key="tintColor" name="certificateBlue"/>
                             <connections>
                                 <action selector="doneAction:" destination="owi-dC-MFf" id="fkr-me-ftX"/>
                             </connections>
@@ -240,6 +247,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="oFp-Dw-tnq">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" name="certificateBlue"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -254,7 +262,7 @@
         <scene sceneID="L1X-nT-qdz">
             <objects>
                 <tableViewController id="QCK-p6-e3A" customClass="LicenseTableController" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="VW0-SN-JKQ">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="VW0-SN-JKQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -271,7 +279,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alamofire" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vwa-NW-acb">
                                                     <rect key="frame" x="20" y="11" width="357.5" height="28"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <color key="textColor" name="walletBlue"/>
+                                                    <color key="textColor" name="certificateBlue"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -282,6 +290,7 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="Vwa-NW-acb" secondAttribute="bottom" id="lgA-3J-GLt"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="tintColor" name="certificateBlue"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="50" id="38g-2Y-WsE" customClass="LicenseCell" customModule="DGCAWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="94.5" width="414" height="50"/>
@@ -293,7 +302,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="JSON Schema" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kOW-pc-SMT">
                                                     <rect key="frame" x="20" y="11" width="357.5" height="28"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <color key="textColor" name="walletBlue"/>
+                                                    <color key="textColor" name="certificateBlue"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -304,6 +313,7 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="kOW-pc-SMT" secondAttribute="bottom" id="rdS-1z-puE"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="tintColor" name="certificateBlue"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="50" id="STS-qc-7Tb" customClass="LicenseCell" customModule="DGCAWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="144.5" width="414" height="50"/>
@@ -315,7 +325,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swift CBOR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lkw-B1-lM2">
                                                     <rect key="frame" x="20" y="11" width="357.5" height="28"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <color key="textColor" name="walletBlue"/>
+                                                    <color key="textColor" name="certificateBlue"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -326,6 +336,7 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="Lkw-B1-lM2" secondAttribute="bottom" id="yVG-cy-fwc"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="tintColor" name="certificateBlue"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="50" id="Fl4-xP-hYx" customClass="LicenseCell" customModule="DGCAWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="194.5" width="414" height="50"/>
@@ -337,7 +348,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swifty JSON" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z12-E7-6GW">
                                                     <rect key="frame" x="20" y="11" width="357.5" height="28"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <color key="textColor" name="walletBlue"/>
+                                                    <color key="textColor" name="certificateBlue"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -348,6 +359,7 @@
                                                 <constraint firstItem="Z12-E7-6GW" firstAttribute="leading" secondItem="KWT-HP-OoB" secondAttribute="leadingMargin" id="prf-tJ-ASa"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="tintColor" name="certificateBlue"/>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -359,7 +371,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Licenses" id="ZwT-j2-c9R">
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="dZv-Hz-Kbu">
-                            <color key="tintColor" name="walletBlue"/>
+                            <color key="tintColor" name="certificateBlue"/>
                             <connections>
                                 <action selector="doneAction:" destination="QCK-p6-e3A" id="aWB-7C-3Jn"/>
                             </connections>
@@ -397,6 +409,7 @@
                                         </label>
                                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="2ic-re-mjL">
                                             <rect key="frame" x="20" y="131.5" width="20" height="20"/>
+                                            <color key="color" name="certificateBlue"/>
                                         </activityIndicatorView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ci-i5-QOs" customClass="RoundedButton" customModule="DGCAWallet" customModuleProvider="target">
                                             <rect key="frame" x="107" y="123" width="200" height="37"/>
@@ -405,7 +418,7 @@
                                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="U3k-j9-urs"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
-                                            <color key="tintColor" name="walletBlue"/>
+                                            <color key="tintColor" name="certificateBlue"/>
                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                             <state key="normal" title="Reload Data"/>
                                             <userDefinedRuntimeAttributes>
@@ -416,7 +429,7 @@
                                                     <real key="value" value="2"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                    <color key="value" name="walletBlue"/>
+                                                    <color key="value" name="certificateBlue"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="padding">
                                                     <real key="value" value="6"/>
@@ -429,13 +442,13 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cert Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="huX-tB-0y9">
                                             <rect key="frame" x="20" y="50" width="75" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="textColor" name="walletDarkGray"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last updated: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LUL-gD-2Rg">
                                             <rect key="frame" x="20" y="86.5" width="108.5" height="20.5"/>
                                             <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
-                                            <color key="textColor" name="walletBlue"/>
+                                            <color key="textColor" name="certificateBlue"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -456,6 +469,7 @@
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="PsA-Is-lLK" secondAttribute="trailing" constant="20" id="yQ8-hu-s7p"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="activityIndicator" destination="2ic-re-mjL" id="oqO-tD-aa9"/>
                                     <outlet property="certTaskName" destination="huX-tB-0y9" id="82b-C2-aZ6"/>
@@ -478,16 +492,19 @@
     </scenes>
     <designables>
         <designable name="8Ci-i5-QOs">
-            <size key="intrinsicContentSize" width="121" height="35"/>
+            <size key="intrinsicContentSize" width="109" height="35"/>
         </designable>
     </designables>
     <resources>
         <image name="iTunesArtwork" width="512" height="512"/>
+        <namedColor name="certificateBlue">
+            <color red="0.0" green="0.26666666666666666" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="charcoalGrey">
             <color red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="walletBlue">
-            <color red="0.0" green="0.2669999897480011" blue="0.57999998331069946" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="walletDarkGray">
+            <color red="0.25099998712539673" green="0.25099998712539673" blue="0.25099998712539673" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

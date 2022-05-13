@@ -240,7 +240,7 @@
                                     <constraint firstAttribute="width" secondItem="ZfC-bY-oMP" secondAttribute="height" multiplier="22:7" id="ZHL-wF-pBx"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" name="certificateBlue"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Done"/>
                                 <connections>
@@ -277,6 +277,7 @@
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hYc-54-hI0">
                                 <rect key="frame" x="0.0" y="90" width="375" height="633"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <segue destination="bEn-4T-Txt" kind="embed" identifier="pageEmbedSegue" id="qyy-iT-Xyh"/>
                                 </connections>
@@ -404,16 +405,19 @@
     </scenes>
     <designables>
         <designable name="4jK-Bn-Jec">
-            <size key="intrinsicContentSize" width="62" height="34"/>
+            <size key="intrinsicContentSize" width="54" height="38"/>
         </designable>
         <designable name="61S-fy-spg">
-            <size key="intrinsicContentSize" width="76" height="34"/>
+            <size key="intrinsicContentSize" width="68" height="38"/>
         </designable>
     </designables>
     <resources>
         <image name="smart-health-qr" width="905" height="902"/>
         <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="certificateBlue">
+            <color red="0.0" green="0.26666666666666666" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

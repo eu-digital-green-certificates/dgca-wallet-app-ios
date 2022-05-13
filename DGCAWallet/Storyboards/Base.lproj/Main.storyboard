@@ -77,12 +77,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h5n-Kt-7XB">
                                 <rect key="frame" x="16" y="109" width="382" height="615"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="tintColor" name="certificateBlue"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d6z-LK-c7h">
                                 <rect key="frame" x="352" y="60" width="42" height="33"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <state key="normal" title="Done">
-                                    <color key="titleColor" name="walletBlue"/>
+                                    <color key="titleColor" name="certificateBlue"/>
                                 </state>
                                 <connections>
                                     <action selector="closeAction:" destination="Zgy-od-xp6" eventType="touchUpInside" id="R9v-tv-LYc"/>
@@ -129,7 +130,7 @@
                                 <rect key="frame" x="352" y="60" width="42" height="33"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <state key="normal" title="Done">
-                                    <color key="titleColor" name="walletBlue"/>
+                                    <color key="titleColor" name="certificateBlue"/>
                                 </state>
                                 <connections>
                                     <action selector="closeAction:" destination="x7R-KV-5e1" eventType="touchUpInside" id="2su-68-lsh"/>
@@ -274,7 +275,7 @@
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="pfk-Sj-wYb"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" name="walletBlue"/>
+                                                    <color key="textColor" name="certificateBlue"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -288,6 +289,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="XYr-cx-IJW" secondAttribute="trailing" constant="20" symbolic="YES" id="jYi-lj-dKE"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <connections>
                                             <outlet property="descriptionLabel" destination="XYr-cx-IJW" id="qDO-EZ-C2t"/>
                                             <outlet property="nameLabel" destination="OyH-pm-2lL" id="WBd-fa-lVp"/>
@@ -387,13 +389,13 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vaccine" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XiI-QU-nZU">
                                                     <rect key="frame" x="20" y="47.5" width="56.5" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                                    <color key="textColor" name="walletGreen"/>
+                                                    <color key="textColor" systemColor="systemGreenColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01.01.21" textAlignment="natural" lineBreakMode="middleTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YKe-rH-l3u">
                                                     <rect key="frame" x="96.5" y="47.5" width="54.5" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" name="walletBlue"/>
+                                                    <color key="textColor" name="certificateBlue"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -766,7 +768,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27" id="oEI-nt-n82"/>
                                 </constraints>
-                                <color key="textColor" name="walletBlue"/>
+                                <color key="textColor" name="certificateBlue"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" textContentType="url"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -863,6 +865,7 @@
                 <navigationController navigationBarHidden="YES" id="q2g-Cz-5x2" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="oay-40-aHM">
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" name="certificateBlue"/>
                     </navigationBar>
                     <connections>
                         <segue destination="dgQ-uR-i7Y" kind="relationship" relationship="rootViewController" id="tWU-xg-7f6"/>
@@ -941,7 +944,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d8h-xx-YMC">
                                                     <rect key="frame" x="104" y="40" width="265.5" height="49"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" name="walletBlue"/>
+                                                    <color key="textColor" name="certificateBlue"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -987,7 +990,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZEe-eT-8Ct">
                                                     <rect key="frame" x="104" y="40" width="274" height="49"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" name="walletBlue"/>
+                                                    <color key="textColor" name="certificateBlue"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1031,15 +1034,15 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iTJ-x3-Wam">
-                                                    <rect key="frame" x="327.5" y="69" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.85490196080000003" green="0.12941176469999999" blue="0.19215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <rect key="frame" x="320" y="67" width="49.5" height="23"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                                    <color key="textColor" systemColor="systemRedColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="scanned 2021-04-01" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="APa-yy-a1r">
                                                     <rect key="frame" x="20" y="39.5" width="357.5" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" name="walletBlue"/>
+                                                    <color key="textColor" name="certificateBlue"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -1117,7 +1120,7 @@
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Ixr-vD-aU3">
                                 <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
-                                <color key="color" name="walletBlue"/>
+                                <color key="color" name="certificateBlue"/>
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="uNl-GU-yxp"/>
@@ -1371,19 +1374,19 @@
     </scenes>
     <designables>
         <designable name="L0p-Da-kgb">
-            <size key="intrinsicContentSize" width="70" height="28"/>
+            <size key="intrinsicContentSize" width="68" height="38"/>
         </designable>
         <designable name="MID-ne-Jur">
-            <size key="intrinsicContentSize" width="112" height="51"/>
+            <size key="intrinsicContentSize" width="88" height="39"/>
         </designable>
         <designable name="Rcx-o5-KDY">
-            <size key="intrinsicContentSize" width="71" height="51"/>
+            <size key="intrinsicContentSize" width="47" height="39"/>
         </designable>
         <designable name="WbA-kC-hOb">
-            <size key="intrinsicContentSize" width="71" height="51"/>
+            <size key="intrinsicContentSize" width="47" height="39"/>
         </designable>
         <designable name="fol-rA-9gU">
-            <size key="intrinsicContentSize" width="56" height="51"/>
+            <size key="intrinsicContentSize" width="32" height="39"/>
         </designable>
     </designables>
     <resources>
@@ -1391,6 +1394,9 @@
         <image name="gear_white" width="22" height="22"/>
         <image name="icon_large_valid" width="90" height="90"/>
         <image name="wallet_icon" width="112" height="112"/>
+        <namedColor name="certificateBlue">
+            <color red="0.0" green="0.26666666666666666" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="disabledText">
             <color red="0.62400001287460327" green="0.62400001287460327" blue="0.62400001287460327" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -1417,6 +1423,12 @@
         </systemColor>
         <systemColor name="systemGray4Color">
             <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

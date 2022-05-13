@@ -44,7 +44,7 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
                                         <state key="normal" title="Cancel">
-                                            <color key="titleColor" name="walletBlue"/>
+                                            <color key="titleColor" name="certificateBlue"/>
                                         </state>
                                         <connections>
                                             <action selector="cancelButtonClick" destination="WCj-Xf-fml" eventType="touchUpInside" id="JXr-tj-T3U"/>
@@ -126,7 +126,7 @@
                                         <rect key="frame" x="336" y="17.666666666666664" width="34" height="35"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
                                         <state key="normal" title="Edit">
-                                            <color key="titleColor" name="walletBlue"/>
+                                            <color key="titleColor" name="certificateBlue"/>
                                         </state>
                                         <connections>
                                             <action selector="editAction" destination="WCj-Xf-fml" eventType="touchUpInside" id="kpl-WI-I6Y"/>
@@ -394,7 +394,7 @@
                                 <rect key="frame" x="325" y="60" width="45" height="33"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <state key="normal" title="Close">
-                                    <color key="titleColor" name="walletBlue"/>
+                                    <color key="titleColor" name="certificateBlue"/>
                                 </state>
                                 <connections>
                                     <action selector="closeButtonAction:" destination="faH-nl-VQM" eventType="touchUpInside" id="uu6-BI-VSk"/>
@@ -501,7 +501,7 @@
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9H4-Vs-gJf">
                                                                             <rect key="frame" x="100" y="0.0" width="258" height="31.666666666666668"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <color key="textColor" systemColor="secondaryLabelColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
@@ -522,7 +522,7 @@
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pRw-1p-S7i">
                                                                             <rect key="frame" x="100" y="0.0" width="258" height="31.666666666666668"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <color key="textColor" systemColor="secondaryLabelColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
@@ -543,7 +543,7 @@
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZCb-Ed-iQl">
                                                                             <rect key="frame" x="100" y="0.0" width="258" height="31.666666666666668"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <color key="textColor" systemColor="secondaryLabelColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                     </subviews>
@@ -563,12 +563,12 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="20" id="fXY-eh-5o6"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" name="walletRed"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                            <color key="textColor" systemColor="systemRedColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstItem="Qs2-L8-mpL" firstAttribute="top" secondItem="cq6-nJ-agH" secondAttribute="top" constant="8" id="Nef-Et-YG8"/>
                                                         <constraint firstAttribute="bottom" secondItem="Fkf-Y8-KxP" secondAttribute="bottom" id="UPk-DF-LdF"/>
@@ -607,7 +607,7 @@
                                 <rect key="frame" x="325" y="60" width="45" height="33"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                 <state key="normal" title="Close">
-                                    <color key="titleColor" name="walletBlue"/>
+                                    <color key="titleColor" name="certificateBlue"/>
                                 </state>
                                 <connections>
                                     <action selector="closeAction:" destination="H6O-4X-ZX5" eventType="touchUpInside" id="rtu-Ij-xhD"/>
@@ -751,6 +751,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TPx-cd-Djx">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="tintColor" name="certificateBlue"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="infoCell" rowHeight="96" id="0du-5w-c9P" customClass="InfoCell" customModule="DGCAWallet" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="44.666666030883789" width="375" height="96"/>
@@ -762,13 +763,12 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="DE4382974329" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gn8-3g-ntq">
                                                     <rect key="frame" x="16" y="57.666666666666657" width="343" height="38.333333333333343"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="32"/>
-                                                    <color key="textColor" name="walletBlack"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Identification Number" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bxm-hI-f1t">
                                                     <rect key="frame" x="16" y="15.999999999999996" width="343" height="37.666666666666657"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <color key="textColor" name="walletDarkGray"/>
+                                                    <color key="textColor" systemColor="secondaryLabelColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -795,14 +795,9 @@
                             </tableView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="9Xz-H7-a0H">
                                 <rect key="frame" x="169" y="181.66666666666666" width="37" height="37"/>
-                                <color key="color" name="walletBlue"/>
+                                <color key="tintColor" name="certificateBlue"/>
+                                <color key="color" name="certificateBlue"/>
                             </activityIndicatorView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="gradient" translatesAutoresizingMaskIntoConstraints="NO" id="8HZ-m0-XR3">
-                                <rect key="frame" x="0.0" y="368" width="375" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="Ide-Dz-DW1"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="pSE-pl-RlJ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -813,9 +808,6 @@
                             <constraint firstAttribute="trailing" secondItem="TPx-cd-Djx" secondAttribute="trailing" id="Zr6-C4-Orm"/>
                             <constraint firstItem="TPx-cd-Djx" firstAttribute="leading" secondItem="yGn-qb-22J" secondAttribute="leading" id="g0g-xO-fT6"/>
                             <constraint firstItem="TPx-cd-Djx" firstAttribute="top" secondItem="yGn-qb-22J" secondAttribute="top" id="hOl-eX-xSv"/>
-                            <constraint firstItem="8HZ-m0-XR3" firstAttribute="bottom" secondItem="TPx-cd-Djx" secondAttribute="bottom" id="hp6-B1-6LW"/>
-                            <constraint firstItem="pSE-pl-RlJ" firstAttribute="trailing" secondItem="8HZ-m0-XR3" secondAttribute="trailing" id="sAZ-Kz-1xL"/>
-                            <constraint firstItem="8HZ-m0-XR3" firstAttribute="leading" secondItem="yGn-qb-22J" secondAttribute="leading" id="u8J-bS-f0h"/>
                         </constraints>
                         <edgeInsets key="layoutMargins" top="0.0" left="20" bottom="0.0" right="20"/>
                     </view>
@@ -851,15 +843,14 @@
     <resources>
         <image name="EU_logo" width="72" height="48"/>
         <image name="check" width="42" height="33.666667938232422"/>
-        <image name="gradient" width="1" height="100"/>
+        <namedColor name="certificateBlue">
+            <color red="0.0" green="0.26666666666666666" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="walletBlack">
             <color red="0.25099998712539673" green="0.25099998712539673" blue="0.25099998712539673" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="walletBlue">
             <color red="0.0" green="0.2669999897480011" blue="0.57999998331069946" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="walletDarkGray">
-            <color red="0.25099998712539673" green="0.25099998712539673" blue="0.25099998712539673" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="walletGray10">
             <color red="0.92199999094009399" green="0.92199999094009399" blue="0.92199999094009399" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -870,8 +861,17 @@
         <namedColor name="walletRed">
             <color red="0.85500001907348633" green="0.1289999932050705" blue="0.19200000166893005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
