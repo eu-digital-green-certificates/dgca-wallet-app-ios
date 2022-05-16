@@ -733,7 +733,8 @@
                     <size key="freeformSize" width="375" height="400"/>
                     <connections>
                         <outlet property="imageView" destination="7nr-IP-So2" id="ADg-pj-TOL"/>
-                        <outlet property="tanLabel" destination="Mme-Uh-YUL" id="Sdv-h5-iMr"/>
+                        <outlet property="revokationLabel" destination="Mme-Uh-YUL" id="ceq-TP-K8t"/>
+                        <outlet property="tanLabel" destination="BmW-aV-sN6" id="YoB-Y6-dr2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fy6-pe-6cT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -844,7 +845,7 @@
         <image name="EU_logo" width="72" height="48"/>
         <image name="check" width="42" height="33.666667938232422"/>
         <namedColor name="certificateBlue">
-            <color red="0.0" green="0.26666666666666666" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.2669999897480011" blue="0.57599997520446777" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="walletBlack">
             <color red="0.25099998712539673" green="0.25099998712539673" blue="0.25099998712539673" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

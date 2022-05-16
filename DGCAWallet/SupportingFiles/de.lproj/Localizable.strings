@@ -168,7 +168,7 @@
 "Cannot update stored data" = "Cannot update stored data";
 "Please update your data later." = "Please update your data later.";
 "Country codes list empty" = "Country codes list empty";
-"Certificate has been revoked" = "Certificate has been revoked";
+"Certificate has been revoked" = "Revoked";
 "Cannot read Barcode" = "Cannot read Barcode";
 "Something went wrong." = "Something went wrong.";
 "No camera available" = "No camera available";

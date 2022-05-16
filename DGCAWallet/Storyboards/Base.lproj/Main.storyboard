@@ -1050,10 +1050,10 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="Md0-O5-XZH" secondAttribute="trailing" id="1Z5-5M-bqm"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="APa-yy-a1r" secondAttribute="trailing" id="41i-m7-adT"/>
                                                 <constraint firstItem="APa-yy-a1r" firstAttribute="leading" secondItem="m3f-OR-BSb" secondAttribute="leadingMargin" id="4ow-Zt-EKj"/>
-                                                <constraint firstItem="6NN-i3-YUv" firstAttribute="leading" secondItem="m3f-OR-BSb" secondAttribute="leading" constant="20" symbolic="YES" id="Cgi-zu-NVT"/>
                                                 <constraint firstItem="APa-yy-a1r" firstAttribute="top" secondItem="Md0-O5-XZH" secondAttribute="bottom" constant="8" id="G8n-IW-If8"/>
                                                 <constraint firstItem="iTJ-x3-Wam" firstAttribute="bottom" secondItem="m3f-OR-BSb" secondAttribute="bottomMargin" id="ZIl-Gg-l0q"/>
                                                 <constraint firstItem="Md0-O5-XZH" firstAttribute="leading" secondItem="m3f-OR-BSb" secondAttribute="leadingMargin" id="c1E-ID-Czv"/>
+                                                <constraint firstItem="6NN-i3-YUv" firstAttribute="leading" secondItem="m3f-OR-BSb" secondAttribute="leadingMargin" id="dLd-n7-4Gc"/>
                                                 <constraint firstItem="Md0-O5-XZH" firstAttribute="top" secondItem="m3f-OR-BSb" secondAttribute="topMargin" id="fsD-fr-3gZ"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="iTJ-x3-Wam" secondAttribute="trailing" constant="8" id="hkh-h8-JRe"/>
                                                 <constraint firstItem="6NN-i3-YUv" firstAttribute="top" secondItem="APa-yy-a1r" secondAttribute="bottom" constant="8" id="jnF-C4-DW1"/>
@@ -1374,19 +1374,19 @@
     </scenes>
     <designables>
         <designable name="L0p-Da-kgb">
-            <size key="intrinsicContentSize" width="68" height="38"/>
+            <size key="intrinsicContentSize" width="70" height="28"/>
         </designable>
         <designable name="MID-ne-Jur">
-            <size key="intrinsicContentSize" width="88" height="39"/>
+            <size key="intrinsicContentSize" width="112" height="51"/>
         </designable>
         <designable name="Rcx-o5-KDY">
-            <size key="intrinsicContentSize" width="47" height="39"/>
+            <size key="intrinsicContentSize" width="71" height="51"/>
         </designable>
         <designable name="WbA-kC-hOb">
-            <size key="intrinsicContentSize" width="47" height="39"/>
+            <size key="intrinsicContentSize" width="71" height="51"/>
         </designable>
         <designable name="fol-rA-9gU">
-            <size key="intrinsicContentSize" width="32" height="39"/>
+            <size key="intrinsicContentSize" width="56" height="51"/>
         </designable>
     </designables>
     <resources>
@@ -1395,7 +1395,7 @@
         <image name="icon_large_valid" width="90" height="90"/>
         <image name="wallet_icon" width="112" height="112"/>
         <namedColor name="certificateBlue">
-            <color red="0.0" green="0.26666666666666666" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.2669999897480011" blue="0.57599997520446777" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="disabledText">
             <color red="0.62400001287460327" green="0.62400001287460327" blue="0.62400001287460327" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
