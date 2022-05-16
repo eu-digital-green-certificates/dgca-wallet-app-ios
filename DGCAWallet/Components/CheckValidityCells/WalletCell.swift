@@ -34,13 +34,13 @@ class WalletCell: UITableViewCell {
 	@IBOutlet fileprivate weak var revocationLabel: UILabel!
 	
 	func setupCell(_ certificate: MultiTypeCertificate) {
-		typeLabel.text = certificate.certTypeString
+		typeLabel.text = certificate.certTypeString.localized
 		nameLabel.text = certificate.fullName
 		dateLabel.text = String(format: "Scanned %@".localized, certificate.scannedDate.localDateString)
 		// guard let cert = dated.cert else { return }
         if certificate.isRevoked {
             revocationLabel.isHidden = false
-            revocationLabel.text = "Certificate has been revoked".localized
+            revocationLabel.text = "Revoked".localized
         } else {
             revocationLabel.isHidden = true
         }

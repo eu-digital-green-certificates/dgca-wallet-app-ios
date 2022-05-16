@@ -24,6 +24,10 @@
   
 */
 
+"HCertType.test" = "Test Result";
+"HCertType.vaccine" = "Vaccination";
+"HCertType.recovery" = "Recovery";
+
 "Wallet App" = "Wallet App";
 "Scanned %@" = "Scanned %@";
 "Save" = "Save";
@@ -170,7 +174,7 @@
 "Cannot update stored data" = "Cannot update stored data";
 "Please update your data later." = "Please update your data later.";
 "Country codes list empty" = "Country codes list empty";
-"Certificate has been revoked" = "Revoked";
+"Certificate has been revoked" = "Certificate has been revoked";
 "Cannot read Barcode" = "Cannot read Barcode";
 "Something went wrong." = "Something went wrong.";
 "No camera available" = "No camera available";
@@ -228,3 +232,4 @@
 "Unknown barcode format." = "Unknown barcode format.";
 "Cannot claim the certificate" = "Cannot claim the certificate";
 "The certificate has been revoked" = "The certificate has been revoked";
+"Revoked" = "Revoked";
