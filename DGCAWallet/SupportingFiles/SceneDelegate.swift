@@ -52,7 +52,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
-      isNFCFunctionality = false
+        isNFCFunctionality = false
+        let style = UITraitCollection.current.userInterfaceStyle
+        let mySceneDelegate = scene.delegate as? SceneDelegate
+        let window = mySceneDelegate?.window
+        window?.overrideUserInterfaceStyle = style
+
       #if targetEnvironment(simulator)
         SecureBackground.shared.disable()
       #else
