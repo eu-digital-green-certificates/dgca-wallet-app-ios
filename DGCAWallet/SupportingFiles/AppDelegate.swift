@@ -57,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           if !SecureBackground.shared.shouldAuthenticate {
               SecureBackground.shared.disable()
           } else {
-              SecureBackground.shared.authenticationWithTouchID { rezult in
+              SecureBackground.shared.authenticationWithTouchID { rezult, error in
                   if rezult {
                       SecureBackground.shared.disable()
                   }

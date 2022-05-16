@@ -51,35 +51,15 @@ class LocalAuthenticationController: UIViewController {
 extension LocalAuthenticationController {
     
     func authenticationWithTouchID() {
-        let localAuthenticationContext = LAContext()
-        localAuthenticationContext.localizedFallbackTitle = "Use Passcode".localized
-
-        var authError: NSError?
-        let reasonString = "To access the secure data".localized
-
-        if localAuthenticationContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
-            localAuthenticationContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reasonString) { [unowned self] success, evaluateError in
-                
-                DispatchQueue.main.async {
-                    if success {
-                        self.performSegue(withIdentifier: self.showHomeLoadingData, sender: nil)
-                        
-                    } else {
-                        //TODO: User did not authenticate successfully, look at error and take appropriate action
-                        guard let error = evaluateError else { return }
-                        
-                        let messageStr = self.evaluateAuthenticationPolicyMessageForLA(errorCode: error._code)
-                        
-                        self.showAlert(withTitle: "You did not authenticate successfully".localized, message: messageStr)
-                    }
-                }
-            }
-        } else {
-            guard let error = authError else { return }
-            
-            let messageStr = self.evaluateAuthenticationPolicyMessageForLA(errorCode: error.code)
-            showAlert(withTitle: "Cannot authenticate".localized, message: messageStr)
+      SecureBackground.shared.authenticationWithTouchID { success, error in
+        guard let error = error else {
+          self.performSegue(withIdentifier: self.showHomeLoadingData, sender: nil)
+          return
         }
+
+        let messageStr = self.evaluateAuthenticationPolicyMessageForLA(errorCode: error._code)
+        self.showAlert(withTitle: "You did not authenticate successfully".localized, message: messageStr)
+      }
     }
     
     func evaluatePolicyFailErrorMessageForLA(errorCode: Int) -> String {
@@ -98,7 +78,7 @@ extension LocalAuthenticationController {
                 default:
                     message = "Did not find error code on LAError object".localized
             }
-            
+
         } else {
             switch errorCode {
                 case LAError.touchIDLockout.rawValue:
