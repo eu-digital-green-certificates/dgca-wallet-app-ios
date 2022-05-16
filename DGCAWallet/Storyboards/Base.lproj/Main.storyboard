@@ -1022,43 +1022,43 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vaccination Shot 1 of 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="Md0-O5-XZH">
-                                                    <rect key="frame" x="20" y="11" width="357.5" height="20.5"/>
+                                                    <rect key="frame" x="20" y="11" width="178" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Max Mustermann" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6NN-i3-YUv">
-                                                    <rect key="frame" x="20" y="64.5" width="163.5" height="26.5"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                    <rect key="frame" x="20" y="42" width="357.5" height="23"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iTJ-x3-Wam">
-                                                    <rect key="frame" x="320" y="67" width="49.5" height="23"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                                    <rect key="frame" x="336" y="11" width="41.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" systemColor="systemRedColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="scanned 2021-04-01" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="APa-yy-a1r">
-                                                    <rect key="frame" x="20" y="39.5" width="357.5" height="17"/>
+                                                    <rect key="frame" x="241.5" y="73" width="136" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" name="certificateBlue"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="Md0-O5-XZH" secondAttribute="trailing" id="1Z5-5M-bqm"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="APa-yy-a1r" secondAttribute="trailing" id="41i-m7-adT"/>
-                                                <constraint firstItem="APa-yy-a1r" firstAttribute="leading" secondItem="m3f-OR-BSb" secondAttribute="leadingMargin" id="4ow-Zt-EKj"/>
-                                                <constraint firstItem="APa-yy-a1r" firstAttribute="top" secondItem="Md0-O5-XZH" secondAttribute="bottom" constant="8" id="G8n-IW-If8"/>
-                                                <constraint firstItem="iTJ-x3-Wam" firstAttribute="bottom" secondItem="m3f-OR-BSb" secondAttribute="bottomMargin" id="ZIl-Gg-l0q"/>
+                                                <constraint firstItem="iTJ-x3-Wam" firstAttribute="top" secondItem="m3f-OR-BSb" secondAttribute="topMargin" id="36x-tk-bU3"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="APa-yy-a1r" secondAttribute="trailing" id="Eva-ix-aPh"/>
                                                 <constraint firstItem="Md0-O5-XZH" firstAttribute="leading" secondItem="m3f-OR-BSb" secondAttribute="leadingMargin" id="c1E-ID-Czv"/>
-                                                <constraint firstItem="6NN-i3-YUv" firstAttribute="leading" secondItem="m3f-OR-BSb" secondAttribute="leadingMargin" id="dLd-n7-4Gc"/>
+                                                <constraint firstItem="APa-yy-a1r" firstAttribute="bottom" secondItem="m3f-OR-BSb" secondAttribute="bottomMargin" id="dBd-s3-UOJ"/>
+                                                <constraint firstItem="6NN-i3-YUv" firstAttribute="leading" secondItem="m3f-OR-BSb" secondAttribute="leadingMargin" id="dXO-wd-06B"/>
+                                                <constraint firstAttribute="trailing" secondItem="6NN-i3-YUv" secondAttribute="trailing" constant="8" id="eng-Af-n6d"/>
                                                 <constraint firstItem="Md0-O5-XZH" firstAttribute="top" secondItem="m3f-OR-BSb" secondAttribute="topMargin" id="fsD-fr-3gZ"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="iTJ-x3-Wam" secondAttribute="trailing" constant="8" id="hkh-h8-JRe"/>
-                                                <constraint firstItem="6NN-i3-YUv" firstAttribute="top" secondItem="APa-yy-a1r" secondAttribute="bottom" constant="8" id="jnF-C4-DW1"/>
-                                                <constraint firstItem="iTJ-x3-Wam" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6NN-i3-YUv" secondAttribute="trailing" constant="8" id="kao-mq-2fu"/>
-                                                <constraint firstAttribute="bottom" secondItem="6NN-i3-YUv" secondAttribute="bottom" constant="10" id="sCg-CG-U6j"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="iTJ-x3-Wam" secondAttribute="trailing" id="hkh-h8-JRe"/>
+                                                <constraint firstItem="APa-yy-a1r" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="m3f-OR-BSb" secondAttribute="leading" constant="20" id="igY-Hc-oMT"/>
+                                                <constraint firstItem="APa-yy-a1r" firstAttribute="top" secondItem="6NN-i3-YUv" secondAttribute="bottom" constant="8" symbolic="YES" id="q3J-yR-dT7"/>
+                                                <constraint firstItem="iTJ-x3-Wam" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Md0-O5-XZH" secondAttribute="trailing" constant="8" id="sbJ-uh-5Ra"/>
+                                                <constraint firstItem="6NN-i3-YUv" firstAttribute="top" secondItem="Md0-O5-XZH" secondAttribute="bottom" constant="10" id="vZ9-xt-zmv"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
