@@ -69,7 +69,7 @@ class SecureBackground {
 
 extension SecureBackground: SecureAuthorising {
     func tryAgainAuthentication() {
-        self.authenticationWithTouchID { result in
+        self.authenticationWithTouchID { result, error in
             if result {
                 self.disable()
             }
@@ -90,28 +90,24 @@ extension SecureBackground {
                 
                 DispatchQueue.main.async {
                     if success {
-                        completion(true)
+                        completion(true, nil)
                         
                     } else {
-                        //TODO: User did not authenticate successfully, look at error and take appropriate action
                         guard let error = evaluateError else { return }
-                        
+
+                      if error._code == LAError.biometryNotAvailable.rawValue {
+                        completion(true, nil)
+                      } else {
                         let messageStr = self.evaluateAuthenticationPolicyMessageForLA(errorCode: error._code)
-                        
+
                         self.showAlert(withTitle: "You did not authenticate successfully".localized, message: messageStr)
-                        completion(false)
+                        completion(false, error)
+                      }
                     }
                 }
             }
         } else {
-            guard let error = authError else {
-                completion(false)
-                return
-            }
-            
-            let messageStr = self.evaluateAuthenticationPolicyMessageForLA(errorCode: error.code)
-            showAlert(withTitle: "Cannot authenticate".localized, message: messageStr)
-            completion(false)
+          completion(true, nil)
         }
     }
 

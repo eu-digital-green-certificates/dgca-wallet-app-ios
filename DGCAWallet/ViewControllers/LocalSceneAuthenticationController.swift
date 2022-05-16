@@ -28,7 +28,7 @@
 
 import UIKit
 
-typealias AuthenticationCompletionHandler = (Bool) -> Void
+typealias AuthenticationCompletionHandler = (Bool, Error?) -> Void
 
 class LocalSceneAuthenticationController: UIViewController {
 
