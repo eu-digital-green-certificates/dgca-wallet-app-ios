@@ -57,7 +57,6 @@ class CertPagesController: UIPageViewController {
 
     func setBrightness() {
         index == 0 ? Brightness.forceFull() : Brightness.reset()
-        Brightness.forceFull()
     }
 }
 
