@@ -21,7 +21,6 @@
   DGCAWallet
 
   Created by Yannick Spreen on 5/6/21.
-  
 */
 
 "HCertType.test" = "Testergebnis";
@@ -122,6 +121,8 @@
 "Do you agree to share the %@ certificate with %@?" = "Sind Sie damit einverstanden, das %@-Zertifikat mit %@ zu teilen?";
 
 "Your certificate is not valid. Please refer to the Re-open EU website:" = "Ihre Bescheinigung ist nicht gültig. Bitte besuchen Sie die Re-open EU Website: https://reopen.europa.eu/";
+
+"Your certificate is valid but has the following restrictions:" = "Your certificate is valid but has the following restrictions:";
 
 "Unable to verify certificate" = "Das Zertifikat kann nicht validiert werden.";
 "Make sure you select the desired service..." = "Vergewissern Sie sich, dass Sie den gewünschten Dienst ausgewählt haben und versuchen Sie es erneut. Wenn das Problem erneut auftritt, besuchen Sie bitte die Re-open EU Website.";
@@ -229,4 +230,5 @@
 "Unknown certificate type." = "Unknown certificate type.";
 "Unknown barcode format." = "Unknown barcode format.";
 "Cannot claim the certificate" = "Cannot claim the certificate";
-"Revoked" = "Revoked"
+"The certificate has been revoked" = "The certificate has been revoked";
+"Revoked" = "Revoked";
