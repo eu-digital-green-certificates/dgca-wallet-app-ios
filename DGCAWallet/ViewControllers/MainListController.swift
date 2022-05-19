@@ -80,7 +80,8 @@ class MainListController: UIViewController {
 	private var expireDataTimer: Timer?
 	private var scannedToken: String = ""
 	private var loading = false
-	
+    private var nearCommunicatingHelper: NFCHelper?
+
     var downloadedDataHasExpired: Bool {
         return DCCDataCenter.downloadedDataHasExpired
     }
@@ -223,23 +224,7 @@ class MainListController: UIViewController {
 		menuActionSheet.addAction(UIAlertAction(title: "Cancel".localized, style: UIAlertAction.Style.cancel, handler: nil))
 		present(menuActionSheet, animated: true, completion: nil)
 	}
-	
-	func onNFCResult(success: Bool, message: String) {
-		let barcodeString = message
-		guard success, !barcodeString.isEmpty else { return }
 		
-		DispatchQueue.main.async { [weak self] in
-			DGCLogger.logInfo("\(message)")
-			let appDelegate = UIApplication.shared.delegate as? AppDelegate
-			appDelegate?.isNFCFunctionality = false
-			if #available(iOS 13.0, *) {
-				let scene = self?.sceneDelegate
-				scene?.isNFCFunctionality = false
-			}
-            self?.processBarcode(barcode: barcodeString)
-		}
-	}
-	
     private func processBarcode(barcode: String?) {
         guard let barcodeString = barcode, !barcodeString.isEmpty else { return }
         if CertificateApplicant.isApplicableDCCFormat(payload: barcodeString) {
@@ -329,6 +314,7 @@ class MainListController: UIViewController {
 		pdfPicker.delegate = self
 		present(pdfPicker, animated: true, completion: nil)
 	}
+    
 	private func scanNFC() {
 		let appDelegate = UIApplication.shared.delegate as? AppDelegate
 		appDelegate?.isNFCFunctionality = true
@@ -336,9 +322,12 @@ class MainListController: UIViewController {
 			let scene = self.sceneDelegate
 			scene?.isNFCFunctionality = true
 		}
-		let helper = NFCHelper()
-		helper.onNFCResult = onNFCResult(success:message:)
-		helper.restartSession()
+        if self.nearCommunicatingHelper == nil {
+            let helper = NFCHelper()
+            helper.delegate = self
+            self.nearCommunicatingHelper = helper
+        }
+        self.nearCommunicatingHelper?.restartSession()
 	}
 	
 	// MARK: Navifation
@@ -897,4 +886,23 @@ extension MainListController: UIDocumentPickerDelegate {
 			checkQRCodesInPDFFile(url: url)
 		}
 	}
+}
+
+// MARK: - NFC Result
+extension MainListController: NFCCommunicating {
+    func onNFCResult(_ result: Bool, message: String) {
+        DGCLogger.logInfo("Received NFC: \(message)")
+        guard result, !message.isEmpty else { return }
+        
+        let barcodeString = message
+        DispatchQueue.main.async { [weak self] in
+            let appDelegate = UIApplication.shared.delegate as? AppDelegate
+            appDelegate?.isNFCFunctionality = false
+            if #available(iOS 13.0, *) {
+                let scene = self?.sceneDelegate
+                scene?.isNFCFunctionality = false
+            }
+            self?.processBarcode(barcode: barcodeString)
+        }
+    }
 }
