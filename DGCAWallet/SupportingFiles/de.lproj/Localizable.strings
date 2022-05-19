@@ -102,7 +102,6 @@
 "PDF files" = "PDF-Dateien";
 "Get Image from" = "Bild laden von";
 "Next" = "Weiter";
-
 "Camera" = "Kamera";
 "Gallery" = "Galerie";
 "Cannot scan" = "Scannen nicht möglich.";
@@ -121,7 +120,6 @@
 "Do you agree to share the %@ certificate with %@?" = "Sind Sie damit einverstanden, das %@-Zertifikat mit %@ zu teilen?";
 
 "Your certificate is not valid. Please refer to the Re-open EU website:" = "Ihre Bescheinigung ist nicht gültig. Bitte besuchen Sie die Re-open EU Website: https://reopen.europa.eu/";
-
 "Your certificate is valid but has the following restrictions:" = "Your certificate is valid but has the following restrictions:";
 
 "Unable to verify certificate" = "Das Zertifikat kann nicht validiert werden.";
@@ -129,10 +127,8 @@
 
 "Validation error" = "Validierungsfehler";
 "Please refer to the Re-open EU website." = "Bitte besuchen Sie die Re-open EU Website.";
-
 "Failed to process ticketing request" = "Ein interner Fehler ist aufgetreten";
 "Please quit the application and restart again." = "Bitte beenden Sie die Anwendung und starten Sie sie erneut.";
-
 "The specified service cannot be used" = "Der angegebene Dienst kann nicht verwendet werden";
 "This certificate is not supported" = "Dieses Zertifikat wird nicht unterstützt";
 
@@ -141,7 +137,6 @@
 
 "Possible limitation" = "Mögliche Einschränkung";
 "Country rules validation failed" = "Validierung der Länderregeln fehlgeschlagen.";
-
 "Certificate logic engine error" = "Fehler in der Zertifikatlogik-Engine";
 
 "Departure" = "Abreise";
@@ -232,3 +227,4 @@
 "Cannot claim the certificate" = "Cannot claim the certificate";
 "The certificate has been revoked" = "The certificate has been revoked";
 "Revoked" = "Revoked";
+"Cannot read NFC Data" = "Cannot read NFC Data";

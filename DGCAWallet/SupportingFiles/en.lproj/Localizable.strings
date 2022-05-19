@@ -102,7 +102,6 @@
 "PDF files" = "PDF files";
 "Get Image from" = "Get Image from";
 "Next" = "Next";
-
 "Camera" = "Camera";
 "Gallery" = "Gallery";
 "Cannot scan" = "Cannot scan";
@@ -121,7 +120,6 @@
 "Do you agree to share the %@ certificate with %@?" = "Do you agree to share the %@ certificate with %@?";
 
 "Your certificate is not valid. Please refer to the Re-open EU website:" = "Your certificate is not valid. Please refer to the Re-open EU website:";
-
 "Your certificate is valid but has the following restrictions:" = "Your certificate is valid but has the following restrictions:";
 
 "Unable to verify certificate" = "Unable to verify certificate";
@@ -129,10 +127,8 @@
 
 "Validation error" = "Validation error";
 "Please refer to the Re-open EU website." = "Please refer to the Re-open EU website.";
-
 "Failed to process ticketing request" = "Failed to process ticketing request";
 "Please quit the application and restart again." = "Please quit the application and restart again.";
-
 "The specified service cannot be used" = "The specified service cannot be used";
 "This certificate is not supported" = "This certificate is not supported";
 
@@ -141,7 +137,6 @@
 
 "Possible limitation" = "Possible limitation";
 "Country rules validation failed" = "Country rules validation failed";
-
 "Certificate logic engine error" = "Certificate logic engine error";
 
 "Departure" = "Departure";
@@ -232,3 +227,4 @@
 "Cannot claim the certificate" = "Cannot claim the certificate";
 "The certificate has been revoked" = "The certificate has been revoked";
 "Revoked" = "Revoked";
+"Cannot read NFC Data" = "Cannot read NFC Data";

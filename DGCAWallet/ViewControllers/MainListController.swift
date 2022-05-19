@@ -891,7 +891,10 @@ extension MainListController: UIDocumentPickerDelegate {
 extension MainListController: NFCCommunicating {
     func onNFCResult(_ result: Bool, message: String) {
         DGCLogger.logInfo("Received NFC: \(message)")
-        guard result, !message.isEmpty else { return }
+        guard result, !message.isEmpty else {
+            self.showInfoAlert(withTitle: "Cannot read NFC Data".localized, message: message)
+            return
+        }
         
         let barcodeString = message
         DispatchQueue.main.async { [weak self] in
