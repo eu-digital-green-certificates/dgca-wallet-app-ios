@@ -81,7 +81,7 @@ class MainListController: UIViewController {
 	private var scannedToken: String = ""
 	private var loading = false
     private var nearCommunicatingHelper: NFCHelper?
-
+    
     var downloadedDataHasExpired: Bool {
         return DCCDataCenter.downloadedDataHasExpired
     }
@@ -346,7 +346,6 @@ class MainListController: UIViewController {
 			guard let serviceController = segue.destination as? ServerListController,
 			    let listOfServices = sender as? ServerListResponse else { return }
 			serviceController.serverListInfo = listOfServices
-			
 			
 		case SegueIdentifiers.showPDFViewer:
 			guard let serviceController = segue.destination as? PDFViewerController,
