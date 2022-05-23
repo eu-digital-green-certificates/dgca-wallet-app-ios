@@ -492,7 +492,7 @@
     </scenes>
     <designables>
         <designable name="8Ci-i5-QOs">
-            <size key="intrinsicContentSize" width="109" height="35"/>
+            <size key="intrinsicContentSize" width="121" height="35"/>
         </designable>
     </designables>
     <resources>

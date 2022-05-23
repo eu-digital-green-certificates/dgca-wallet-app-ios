@@ -224,7 +224,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rIQ-OU-AUt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-688.79999999999995" y="-23.645320197044335"/>
+            <point key="canvasLocation" x="559" y="-733"/>
         </scene>
         <!--Card Container Controller-->
         <scene sceneID="s0d-6b-0kx">
@@ -400,15 +400,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pbE-Z5-TfZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="117.59999999999999" y="-23.645320197044335"/>
+            <point key="canvasLocation" x="1356" y="-733"/>
         </scene>
     </scenes>
     <designables>
         <designable name="4jK-Bn-Jec">
-            <size key="intrinsicContentSize" width="54" height="38"/>
+            <size key="intrinsicContentSize" width="62" height="34"/>
         </designable>
         <designable name="61S-fy-spg">
-            <size key="intrinsicContentSize" width="68" height="38"/>
+            <size key="intrinsicContentSize" width="76" height="34"/>
         </designable>
     </designables>
     <resources>

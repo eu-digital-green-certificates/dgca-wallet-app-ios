@@ -232,7 +232,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9ZE-rf-pHy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="40" y="104.50236966824644"/>
+            <point key="canvasLocation" x="38" y="10"/>
         </scene>
         <!--Cert Pages Controller-->
         <scene sceneID="epa-ao-EQs">
@@ -240,7 +240,7 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="PGK-qk-zXH" customClass="CertPagesController" customModule="DGCAWallet" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IUQ-f6-kbe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1106" y="7"/>
+            <point key="canvasLocation" x="1032" y="-271"/>
         </scene>
         <!--Check Validity Controller-->
         <scene sceneID="7fp-eC-52X">
@@ -427,7 +427,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ets-pw-8xQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="991" y="601"/>
+            <point key="canvasLocation" x="1032" y="278"/>
         </scene>
         <!--Rule Validation ResultVC-->
         <scene sceneID="5CU-uj-UDS">
@@ -688,7 +688,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R9z-LI-YCp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1971" y="837"/>
+            <point key="canvasLocation" x="2000" y="278"/>
         </scene>
         <!--Code Controller-->
         <scene sceneID="ua8-UZ-7hv">
@@ -739,7 +739,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fy6-pe-6cT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2719" y="6"/>
+            <point key="canvasLocation" x="2635" y="-314"/>
         </scene>
         <!--Certificate Controller-->
         <scene sceneID="zRW-4o-eiU">
@@ -821,7 +821,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RPx-uO-wbp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1904" y="6"/>
+            <point key="canvasLocation" x="1845" y="-314"/>
         </scene>
     </scenes>
     <designables>
