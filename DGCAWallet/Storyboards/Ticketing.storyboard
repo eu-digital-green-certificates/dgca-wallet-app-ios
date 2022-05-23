@@ -172,9 +172,8 @@
                                             <constraints>
                                                 <constraint firstItem="MKa-92-hyk" firstAttribute="trailing" secondItem="DmV-zK-GJS" secondAttribute="trailingMargin" id="AOY-bK-zjP"/>
                                                 <constraint firstItem="1M0-i3-vZZ" firstAttribute="leading" secondItem="DmV-zK-GJS" secondAttribute="leadingMargin" id="F5g-fS-CXI"/>
-                                                <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="l22-0H-SgQ" secondAttribute="trailing" constant="20" id="LkO-g4-Am5"/>
                                                 <constraint firstItem="MKa-92-hyk" firstAttribute="leading" secondItem="DmV-zK-GJS" secondAttribute="leadingMargin" id="No5-Ua-Wc5"/>
-                                                <constraint firstItem="1M0-i3-vZZ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="MKa-92-hyk" secondAttribute="bottom" constant="16" id="Pk7-3t-Z6e"/>
+                                                <constraint firstItem="1M0-i3-vZZ" firstAttribute="top" secondItem="MKa-92-hyk" secondAttribute="bottom" constant="16" id="cDm-vl-RZg"/>
                                                 <constraint firstItem="MKa-92-hyk" firstAttribute="top" secondItem="DmV-zK-GJS" secondAttribute="topMargin" id="gMh-Pz-Gmc"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="1M0-i3-vZZ" secondAttribute="bottom" constant="0.5" id="nhj-0W-oHX"/>
                                                 <constraint firstItem="l22-0H-SgQ" firstAttribute="leading" secondItem="1M0-i3-vZZ" secondAttribute="trailing" constant="20" id="o3R-yV-mQ5"/>
@@ -635,7 +634,7 @@
             <size key="intrinsicContentSize" width="71" height="51"/>
         </designable>
         <designable name="1Bk-CK-nyY">
-            <size key="intrinsicContentSize" width="71" height="51"/>
+            <size key="intrinsicContentSize" width="47" height="39"/>
         </designable>
         <designable name="snh-LW-fgF">
             <size key="intrinsicContentSize" width="56" height="51"/>
