@@ -1031,7 +1031,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Max Mustermann" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6NN-i3-YUv">
-                                                    <rect key="frame" x="20" y="42" width="357.5" height="23"/>
+                                                    <rect key="frame" x="20" y="67" width="357.5" height="23"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1043,29 +1043,37 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="scanned 2021-04-01" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="APa-yy-a1r">
-                                                    <rect key="frame" x="241.5" y="73" width="136" height="17"/>
+                                                    <rect key="frame" x="20" y="42" width="136" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" name="certificateBlue"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DCC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UES-jk-Js2">
+                                                    <rect key="frame" x="341.5" y="40" width="36" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="6NN-i3-YUv" firstAttribute="bottom" secondItem="m3f-OR-BSb" secondAttribute="bottomMargin" id="2x8-b8-nYH"/>
                                                 <constraint firstItem="iTJ-x3-Wam" firstAttribute="top" secondItem="m3f-OR-BSb" secondAttribute="topMargin" id="36x-tk-bU3"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="APa-yy-a1r" secondAttribute="trailing" id="Eva-ix-aPh"/>
+                                                <constraint firstItem="6NN-i3-YUv" firstAttribute="leading" secondItem="m3f-OR-BSb" secondAttribute="leadingMargin" id="C66-Xe-ewL"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="UES-jk-Js2" secondAttribute="trailing" id="Eud-uN-YGx"/>
+                                                <constraint firstItem="UES-jk-Js2" firstAttribute="centerY" secondItem="m3f-OR-BSb" secondAttribute="centerY" id="F51-hK-gat"/>
+                                                <constraint firstItem="6NN-i3-YUv" firstAttribute="trailing" secondItem="m3f-OR-BSb" secondAttribute="trailingMargin" id="QTn-Nt-w0D"/>
+                                                <constraint firstItem="APa-yy-a1r" firstAttribute="top" secondItem="Md0-O5-XZH" secondAttribute="bottom" constant="10" id="Uhh-Ag-MyR"/>
+                                                <constraint firstItem="6NN-i3-YUv" firstAttribute="top" secondItem="APa-yy-a1r" secondAttribute="bottom" constant="8" symbolic="YES" id="Zm7-c4-an0"/>
                                                 <constraint firstItem="Md0-O5-XZH" firstAttribute="leading" secondItem="m3f-OR-BSb" secondAttribute="leadingMargin" id="c1E-ID-Czv"/>
-                                                <constraint firstItem="APa-yy-a1r" firstAttribute="bottom" secondItem="m3f-OR-BSb" secondAttribute="bottomMargin" id="dBd-s3-UOJ"/>
-                                                <constraint firstItem="6NN-i3-YUv" firstAttribute="leading" secondItem="m3f-OR-BSb" secondAttribute="leadingMargin" id="dXO-wd-06B"/>
-                                                <constraint firstAttribute="trailing" secondItem="6NN-i3-YUv" secondAttribute="trailing" constant="8" id="eng-Af-n6d"/>
                                                 <constraint firstItem="Md0-O5-XZH" firstAttribute="top" secondItem="m3f-OR-BSb" secondAttribute="topMargin" id="fsD-fr-3gZ"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="iTJ-x3-Wam" secondAttribute="trailing" id="hkh-h8-JRe"/>
-                                                <constraint firstItem="APa-yy-a1r" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="m3f-OR-BSb" secondAttribute="leading" constant="20" id="igY-Hc-oMT"/>
-                                                <constraint firstItem="APa-yy-a1r" firstAttribute="top" secondItem="6NN-i3-YUv" secondAttribute="bottom" constant="8" symbolic="YES" id="q3J-yR-dT7"/>
+                                                <constraint firstItem="APa-yy-a1r" firstAttribute="leading" secondItem="m3f-OR-BSb" secondAttribute="leadingMargin" id="inP-Id-xoo"/>
                                                 <constraint firstItem="iTJ-x3-Wam" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Md0-O5-XZH" secondAttribute="trailing" constant="8" id="sbJ-uh-5Ra"/>
-                                                <constraint firstItem="6NN-i3-YUv" firstAttribute="top" secondItem="Md0-O5-XZH" secondAttribute="bottom" constant="10" id="vZ9-xt-zmv"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="dateLabel" destination="APa-yy-a1r" id="hq8-y8-eho"/>
+                                            <outlet property="dccLabel" destination="UES-jk-Js2" id="rGj-OW-1CN"/>
                                             <outlet property="nameLabel" destination="6NN-i3-YUv" id="IDI-aQ-bij"/>
                                             <outlet property="revocationLabel" destination="iTJ-x3-Wam" id="0mp-O1-5MK"/>
                                             <outlet property="selectedBackgroundView" destination="kLh-5C-6Nc" id="F77-C5-E5N"/>
@@ -1378,19 +1386,19 @@
     </scenes>
     <designables>
         <designable name="L0p-Da-kgb">
-            <size key="intrinsicContentSize" width="68" height="38"/>
+            <size key="intrinsicContentSize" width="70" height="28"/>
         </designable>
         <designable name="MID-ne-Jur">
-            <size key="intrinsicContentSize" width="88" height="39"/>
+            <size key="intrinsicContentSize" width="112" height="51"/>
         </designable>
         <designable name="Rcx-o5-KDY">
-            <size key="intrinsicContentSize" width="47" height="39"/>
+            <size key="intrinsicContentSize" width="71" height="51"/>
         </designable>
         <designable name="WbA-kC-hOb">
-            <size key="intrinsicContentSize" width="47" height="39"/>
+            <size key="intrinsicContentSize" width="71" height="51"/>
         </designable>
         <designable name="fol-rA-9gU">
-            <size key="intrinsicContentSize" width="32" height="39"/>
+            <size key="intrinsicContentSize" width="56" height="51"/>
         </designable>
     </designables>
     <resources>

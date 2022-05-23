@@ -18,12 +18,12 @@
  * limitations under the License.
  * ---license-end
  */
-//  
+//
 //  DCCCodeController.swift
 //  DGCAWallet
-//  
+//
 //  Created by Yannick Spreen on 4/30/21.
-//  
+//
 
 import UIKit
 import DGCVerificationCenter
@@ -33,41 +33,48 @@ import DCCInspection
 #endif
 
 class DCCCodeController: UIViewController {
-    @IBOutlet fileprivate weak var imageView: UIImageView!
-    @IBOutlet fileprivate weak var tanLabel: UILabel!
-    @IBOutlet fileprivate weak var revokationLabel: UILabel!
 
-    var certificate: MultiTypeCertificate? {
-        (parent as? CertPagesController)?.embeddingVC?.certificate
+  @IBOutlet fileprivate weak var imageView: UIImageView!
+  @IBOutlet fileprivate weak var tanLabel: UILabel!
+  @IBOutlet fileprivate weak var revokationLabel: UILabel!
+
+  @IBOutlet fileprivate weak var revokedLabelBottomConstraint: NSLayoutConstraint!
+  @IBOutlet fileprivate weak var qrCodeTopConstraint: NSLayoutConstraint!
+
+  var certificate: MultiTypeCertificate? {
+    (parent as? CertPagesController)?.embeddingVC?.certificate
+  }
+
+  var tan: String? {
+    (parent as? CertPagesController)?.embeddingVC?.tan
+  }
+
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    revokationLabel.text = ""
+
+#if canImport(DCCInspection)
+    guard let hCert = certificate?.digitalCertificate as? HCert else { return }
+
+    if hCert.isRevoked {
+      revokationLabel.text = "The certificate has been revoked".localized
     }
-    
-    var tan: String? {
-        (parent as? CertPagesController)?.embeddingVC?.tan
+    imageView.image = hCert.qrCode
+    tanLabel.text = ""
+    if tan != nil {
+      tanLabel.text = String(format: "TAN: %@".localized, "tap to reveal".localized)
+      tanLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapToReveal)))
+      tanLabel.isUserInteractionEnabled = true
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        revokationLabel.text = ""
-        
-        #if canImport(DCCInspection)
-            guard let hCert = certificate?.digitalCertificate as? HCert else { return }
-            
-            if hCert.isRevoked {
-                revokationLabel.text = "The certificate has been revoked".localized
-            }
-            imageView.image = hCert.qrCode
-            tanLabel.text = ""
-            if tan != nil {
-                tanLabel.text = String(format: "TAN: %@".localized, "tap to reveal".localized)
-                tanLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapToReveal)))
-                tanLabel.isUserInteractionEnabled = true
-            }
-        #endif
-    }
+    qrCodeTopConstraint.isActive = !hCert.isRevoked
+    revokedLabelBottomConstraint.isActive = hCert.isRevoked
+#endif
+  }
 
-    @IBAction func tapToReveal() {
-        if let tan = tan {
-            tanLabel.text = String(format: "TAN: %@".localized, tan)
-        }
+  @IBAction func tapToReveal() {
+    if let tan = tan {
+      tanLabel.text = String(format: "TAN: %@".localized, tan)
     }
+  }
 }

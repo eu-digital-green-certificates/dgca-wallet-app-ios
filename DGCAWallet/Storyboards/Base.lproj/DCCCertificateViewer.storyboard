@@ -707,8 +707,8 @@
                                 <color key="textColor" name="walletBlack"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The certificate has been revoked" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mme-Uh-YUL">
-                                <rect key="frame" x="16" y="16" width="343" height="21.666666666666671"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The certificate has been revoked" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mme-Uh-YUL">
+                                <rect key="frame" x="16" y="16" width="343" height="22"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" name="walletRed"/>
                                 <nil key="highlightedColor"/>
@@ -724,6 +724,7 @@
                             <constraint firstItem="BmW-aV-sN6" firstAttribute="top" secondItem="7nr-IP-So2" secondAttribute="bottom" constant="16" id="UUe-lF-BBy"/>
                             <constraint firstItem="BmW-aV-sN6" firstAttribute="centerX" secondItem="nMP-53-s92" secondAttribute="centerX" id="Uuq-4p-lK8"/>
                             <constraint firstItem="7nr-IP-So2" firstAttribute="leading" secondItem="9QX-BY-k3B" secondAttribute="leading" constant="16" id="iwZ-Mv-lE5"/>
+                            <constraint firstItem="7nr-IP-So2" firstAttribute="top" secondItem="Mme-Uh-YUL" secondAttribute="bottom" constant="22" id="l3W-UW-mTo"/>
                             <constraint firstItem="9QX-BY-k3B" firstAttribute="trailing" secondItem="Mme-Uh-YUL" secondAttribute="trailing" constant="16" id="oS5-l2-nVb"/>
                             <constraint firstItem="Mme-Uh-YUL" firstAttribute="leading" secondItem="9QX-BY-k3B" secondAttribute="leading" constant="16" id="wLu-3j-bpd"/>
                         </constraints>
@@ -733,7 +734,9 @@
                     <size key="freeformSize" width="375" height="400"/>
                     <connections>
                         <outlet property="imageView" destination="7nr-IP-So2" id="ADg-pj-TOL"/>
+                        <outlet property="qrCodeTopConstraint" destination="QVn-Gj-8eG" id="h8s-Ia-KXl"/>
                         <outlet property="revokationLabel" destination="Mme-Uh-YUL" id="ceq-TP-K8t"/>
+                        <outlet property="revokedLabelBottomConstraint" destination="l3W-UW-mTo" id="VSG-pN-bCt"/>
                         <outlet property="tanLabel" destination="BmW-aV-sN6" id="YoB-Y6-dr2"/>
                     </connections>
                 </viewController>
