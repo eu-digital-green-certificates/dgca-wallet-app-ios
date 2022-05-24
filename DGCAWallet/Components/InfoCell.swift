@@ -28,6 +28,7 @@ import UIKit
 import DGCCoreLibrary
 
 class InfoCell: UITableViewCell {
+    
     @IBOutlet fileprivate weak var headerLabel: UILabel!
     @IBOutlet fileprivate weak var contentLabel: UILabel!
 
@@ -38,11 +39,11 @@ class InfoCell: UITableViewCell {
         let fontWeight = contentLabel.font.weight
         switch info.style {
         case .fixedWidthFont:
-          if #available(iOS 13.0, *) {
-              contentLabel.font = .monospacedSystemFont(ofSize: fontSize, weight: fontWeight)
-          } else {
-              contentLabel.font = .monospacedDigitSystemFont(ofSize: fontSize, weight: fontWeight)
-          }
+            if #available(iOS 13.0, *) {
+                contentLabel.font = .monospacedSystemFont(ofSize: fontSize, weight: fontWeight)
+            } else {
+                contentLabel.font = .monospacedDigitSystemFont(ofSize: fontSize, weight: fontWeight)
+            }
         default:
             contentLabel.font = .systemFont(ofSize: fontSize, weight: fontWeight)
         }

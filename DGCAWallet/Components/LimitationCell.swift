@@ -29,6 +29,7 @@
 import UIKit
 
 class LimitationCell: UITableViewCell {
+    
     @IBOutlet weak var issueTextView: UITextView! {
         didSet {
             issueTextView.text = ""

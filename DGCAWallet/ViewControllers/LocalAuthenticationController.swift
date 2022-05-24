@@ -24,7 +24,7 @@
 //  
 //  Created by Igor Khomiak on 29.04.2022.
 //  
-        
+
 
 import UIKit
 import LocalAuthentication
@@ -38,60 +38,61 @@ class LocalAuthenticationController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         appNameLabel.text = "Wallet App".localized
         messageLabel.text = "Please authenticate to access the secure data.".localized
-        #if targetEnvironment(simulator)
-            self.performSegue(withIdentifier: self.showHomeLoadingData, sender: nil)
-        #else
-            authenticationWithTouchID()
-        #endif
+#if targetEnvironment(simulator)
+        self.performSegue(withIdentifier: self.showHomeLoadingData, sender: nil)
+#else
+        authenticationWithTouchID()
+#endif
     }
 }
 
 extension LocalAuthenticationController {
     
     func authenticationWithTouchID() {
-      SecureBackground.shared.authenticationWithTouchID { success, error in
-        guard let error = error else {
-          self.performSegue(withIdentifier: self.showHomeLoadingData, sender: nil)
-          return
-        }
+        SecureBackground.shared.authenticationWithTouchID { success, error in
+            guard let error = error else {
+                self.performSegue(withIdentifier: self.showHomeLoadingData, sender: nil)
+                return
+            }
 
-        let messageStr = self.evaluateAuthenticationPolicyMessageForLA(errorCode: error._code)
-        self.showAlert(withTitle: "You did not authenticate successfully".localized, message: messageStr)
-      }
+            let messageStr = self.evaluateAuthenticationPolicyMessageForLA(errorCode: error._code)
+            self.showAlert(withTitle: "You did not authenticate successfully".localized, message: messageStr)
+        }
     }
     
     func evaluatePolicyFailErrorMessageForLA(errorCode: Int) -> String {
         var message = ""
         if #available(iOS 11.0, macOS 10.13, *) {
             switch errorCode {
-                case LAError.biometryNotAvailable.rawValue:
+            case LAError.biometryNotAvailable.rawValue:
                 message = "Authentication could not start because the device does not support biometric authentication.".localized
                 
-                case LAError.biometryLockout.rawValue:
-                    message = "Authentication could not continue because the user has been locked out of biometric authentication, due to failing authentication too many times.".localized
+            case LAError.biometryLockout.rawValue:
+                message = "Authentication could not continue because the user has been locked out of biometric authentication, due to failing authentication too many times.".localized
                 
-                case LAError.biometryNotEnrolled.rawValue:
-                    message = "Authentication could not start because the user has not enrolled in biometric authentication.".localized
+            case LAError.biometryNotEnrolled.rawValue:
+                message = "Authentication could not start because the user has not enrolled in biometric authentication.".localized
                 
-                default:
-                    message = "Did not find error code on LAError object".localized
+            default:
+                message = "Did not find error code on LAError object".localized
             }
 
         } else {
             switch errorCode {
-                case LAError.touchIDLockout.rawValue:
-                    message = "Too many failed attempts.".localized
+            case LAError.touchIDLockout.rawValue:
+                message = "Too many failed attempts.".localized
                 
-                case LAError.touchIDNotAvailable.rawValue:
-                    message = "TouchID is not available on the device".localized
+            case LAError.touchIDNotAvailable.rawValue:
+                message = "TouchID is not available on the device".localized
                 
-                case LAError.touchIDNotEnrolled.rawValue:
-                    message = "TouchID is not enrolled on the device".localized
+            case LAError.touchIDNotEnrolled.rawValue:
+                message = "TouchID is not enrolled on the device".localized
                 
-                default:
-                    message = "Did not find error code on LAError object".localized
+            default:
+                message = "Did not find error code on LAError object".localized
             }
         }
         
@@ -99,7 +100,6 @@ extension LocalAuthenticationController {
     }
     
     func evaluateAuthenticationPolicyMessageForLA(errorCode: Int) -> String {
-        
         var message = ""
         
         switch errorCode {
@@ -136,10 +136,10 @@ extension LocalAuthenticationController {
     }
     
     private func showAlert(withTitle title: String, message: String?) {
-      DispatchQueue.main.async {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK".localized, style: .default))
-        self.present(alertController, animated: true)
-      }
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK".localized, style: .default))
+            self.present(alertController, animated: true)
+        }
     }
 }

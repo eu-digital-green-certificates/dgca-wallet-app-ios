@@ -30,9 +30,10 @@ import UIKit
 import DCCInspection
 
 class SimpleValidityCell: UITableViewCell {
+
     @IBOutlet fileprivate weak var titleLabel: UILabel!
     @IBOutlet fileprivate weak var descriptionLabel: UILabel!
-  
+
     private weak var cellModel: ValidityCellModel? {
         didSet {
             self.setupView()

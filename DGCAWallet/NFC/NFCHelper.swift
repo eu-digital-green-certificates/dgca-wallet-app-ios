@@ -35,6 +35,7 @@ protocol NFCCommunicating: AnyObject {
 }
 
 class NFCHelper: NSObject, NFCNDEFReaderSessionDelegate {
+    
     weak var delegate: NFCCommunicating?
     
     func restartSession() {

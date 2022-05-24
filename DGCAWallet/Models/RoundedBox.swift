@@ -50,11 +50,13 @@ import UIKit
     
     required init?(coder : NSCoder) {
         super.init(coder: coder)
+
         setup()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         setup()
     }
     

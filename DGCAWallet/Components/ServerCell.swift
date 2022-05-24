@@ -32,30 +32,30 @@ import DCCInspection
 
 class ServerCell: UITableViewCell {
 
-  @IBOutlet fileprivate  weak var nameLabel: UILabel!
-  @IBOutlet fileprivate  weak var descriptionLabel: UILabel!
-  
-  private var service: ValidationService? {
-    didSet {
-      setupView()
-    }
-  }
-      
-  private func setupView() {
-    if let service = service {
-      nameLabel.text = service.name
-      descriptionLabel.text = service.serviceEndpoint
-    } else {
-      nameLabel.text = ""
-      descriptionLabel.text = ""
-    }
-  }
+    @IBOutlet fileprivate  weak var nameLabel: UILabel!
+    @IBOutlet fileprivate  weak var descriptionLabel: UILabel!
 
-  func setService(serv: ValidationService) {
-    service = serv
-  }
+    private var service: ValidationService? {
+        didSet {
+            setupView()
+        }
+    }
+
+    private func setupView() {
+        if let service = service {
+            nameLabel.text = service.name
+            descriptionLabel.text = service.serviceEndpoint
+        } else {
+            nameLabel.text = ""
+            descriptionLabel.text = ""
+        }
+    }
+
+    func setService(serv: ValidationService) {
+        service = serv
+    }
     
-  override func prepareForReuse() {
-    service = nil
-  }
+    override func prepareForReuse() {
+        service = nil
+    }
 }

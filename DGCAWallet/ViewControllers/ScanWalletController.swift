@@ -25,43 +25,45 @@ protocol ScanWalletDelegate: AnyObject {
 }
 
 class ScanWalletController: UIViewController {
+
     private var captureSession: AVCaptureSession?
     weak var delegate: ScanWalletDelegate?
 
     lazy var detectBarcodeRequest = VNDetectBarcodesRequest { request, error in
         guard error == nil else {
             self.showAlert(withTitle: "Cannot read Barcode".localized,
-                message: error?.localizedDescription ?? "Something went wrong.".localized)
+                           message: error?.localizedDescription ?? "Something went wrong.".localized)
             return
         }
         self.processClassification(request)
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-      return .portrait
+        return .portrait
     }
 
     private var camView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         camView = UIView(frame: .zero)
         camView.translatesAutoresizingMaskIntoConstraints = false
         camView.isUserInteractionEnabled = false
         view.addSubview(camView)
         NSLayoutConstraint.activate([
-          camView.topAnchor.constraint(equalTo: view.topAnchor),
-          camView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-          camView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-          camView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            camView.topAnchor.constraint(equalTo: view.topAnchor),
+            camView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            camView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            camView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-            
+
         view.backgroundColor = .init(white: 0, alpha: 1)
         
-    #if targetEnvironment(simulator)
+#if targetEnvironment(simulator)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-          // swiftlint:disable:next line_length
-          self.observationHandler(payloadString:
+            // swiftlint:disable:next line_length
+            self.observationHandler(payloadString:
         """
         {
           "protocol": "DCCVALIDATION",
@@ -75,22 +77,24 @@ class ScanWalletController: UIViewController {
         }
         """)
         }
-    #else
+#else
         captureSession = AVCaptureSession()
         checkPermissions()
         setupCameraLiveView()
-    #endif
+#endif
         SquareViewFinder.create(from: self)
         createDismissButton()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+
         captureSession?.stopRunning()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
         captureSession?.startRunning()
     }
 
@@ -99,23 +103,26 @@ class ScanWalletController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .clear
         button.setAttributedTitle(
-         NSAttributedString(string: "Cancel".localized, attributes: [.font: UIFont.systemFont(ofSize: 22,
-             weight: .semibold), .foregroundColor: UIColor.white]), for: .normal)
+            NSAttributedString(string: "Cancel".localized,
+                               attributes: [.font: UIFont.systemFont(ofSize: 22,
+                                                                     weight: .semibold),
+                                            .foregroundColor: UIColor.white]), for: .normal)
         button.addTarget(self, action: #selector(dismissScaner), for: .touchUpInside)
         view.addSubview(button)
-         
+
         NSLayoutConstraint.activate([
-          button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16.0),
-          button.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16.0)
+            button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16.0),
+            button.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16.0)
         ])
-     }
-     
-     @objc func dismissScaner() {
-         self.dismiss(animated: true, completion: nil)
-     }
+    }
+
+    @objc func dismissScaner() {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 private extension ScanWalletController  {
+
     func checkPermissions() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .notDetermined:
@@ -139,10 +146,11 @@ private extension ScanWalletController  {
         let videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)
         
         guard let device = videoDevice,
-            let videoDeviceInput = try? AVCaptureDeviceInput(device: device),
-            captureSession?.canAddInput(videoDeviceInput) == true
+              let videoDeviceInput = try? AVCaptureDeviceInput(device: device),
+              captureSession?.canAddInput(videoDeviceInput) == true
         else {
-            showAlert(withTitle: "No camera available".localized, message: "The app requires access the camera".localized)
+            showAlert(withTitle: "No camera available".localized,
+                      message: "The app requires access the camera".localized)
             return
         }
         
@@ -158,7 +166,7 @@ private extension ScanWalletController  {
 
     func processClassification(_ request: VNRequest) {
         DispatchQueue.main.async { [self] in
-        guard let barcodes = request.results else { return }
+            guard let barcodes = request.results else { return }
             if captureSession?.isRunning == true {
                 camView.layer.sublayers?.removeSubrange(1...)
                 
@@ -166,13 +174,13 @@ private extension ScanWalletController  {
                     var potentialQRCode: VNBarcodeObservation
                     if #available(iOS 15, *) {
                         guard let potentialCode = barcode as? VNBarcodeObservation,
-                          [.Aztec, .QR, .DataMatrix].contains(potentialCode.symbology),
-                          potentialCode.confidence > 0.9
+                              [.Aztec, .QR, .DataMatrix].contains(potentialCode.symbology),
+                              potentialCode.confidence > 0.9
                         else { return }
                         potentialQRCode = potentialCode
                     } else {
                         guard let potentialCode = barcode as? VNBarcodeObservation,
-                          potentialCode.confidence > 0.9,
+                              potentialCode.confidence > 0.9,
                               [.aztec, .qr, .dataMatrix].contains(potentialCode.symbology)
                         else { return }
                         potentialQRCode = potentialCode
@@ -185,7 +193,7 @@ private extension ScanWalletController  {
     }
     
     func observationHandler(payloadString: String?) {
-      guard let barcodeString = payloadString, !barcodeString.isEmpty else { return }
+        guard let barcodeString = payloadString, !barcodeString.isEmpty else { return }
         /// MARK: END OF SCANNING
         
         if CertificateApplicant.isApplicableDCCFormat(payload: barcodeString) {
@@ -207,10 +215,10 @@ private extension ScanWalletController  {
             } catch CertificateParsingError.kidNotFound(let rawUrl) {
                 DGCLogger.logInfo("Error kidNotFound when parse SH card.")
                 self.showAlert(title: "Unknown issuer of Smart Card".localized,
-                    subtitle: "Do you want to continue to identify the issuer?",
-                    actionTitle: "Continue".localized, cancelTitle: "Cancel".localized ) { response in
+                               subtitle: "Do you want to continue to identify the issuer?",
+                               actionTitle: "Continue".localized, cancelTitle: "Cancel".localized ) { response in
                     if response {
-                        #if canImport(DGCSHInspection)
+#if canImport(DGCSHInspection)
                         TrustedListLoader.resolveUnknownIssuer(rawUrl) { kidList, result in
                             if let certificate = try? MultiTypeCertificate(from: barcodeString) {
                                 self.delegate?.walletController(self, didScanCertificate: certificate)
@@ -219,7 +227,7 @@ private extension ScanWalletController  {
                                 self.showAlertWithError(CertificateParsingError.unknownFormat)
                             }
                         }
-                        #endif
+#endif
                         
                     } else { // user cancels
                         DGCLogger.logInfo("User cancelled verifying.")
@@ -233,19 +241,20 @@ private extension ScanWalletController  {
             }
             
         } else if let payloadData = (payloadString ?? "").data(using: .utf8),
-             let ticketing = try? JSONDecoder().decode(CheckInQR.self, from: payloadData) {
-             self.delegate?.walletController(self, didScanInfo: ticketing)
-         
-         } else {
-             DGCLogger.logInfo("Cannot recognise barcodeString: \(barcodeString)")
-             self.showAlertWithError(CertificateParsingError.unknownFormat)
-         }
+                  let ticketing = try? JSONDecoder().decode(CheckInQR.self, from: payloadData) {
+            self.delegate?.walletController(self, didScanInfo: ticketing)
+
+        } else {
+            DGCLogger.logInfo("Cannot recognise barcodeString: \(barcodeString)")
+            self.showAlertWithError(CertificateParsingError.unknownFormat)
+        }
     }
 }
 
 extension ScanWalletController: AVCaptureVideoDataOutputSampleBufferDelegate {
+
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer,
-        from connection: AVCaptureConnection) {
+                       from connection: AVCaptureConnection) {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
         let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .right)
         do {
@@ -257,9 +266,10 @@ extension ScanWalletController: AVCaptureVideoDataOutputSampleBufferDelegate {
 }
 
 private extension ScanWalletController {
+
     func configurePreviewLayer() {
         guard let captureSession = captureSession else { return }
-          
+
         let cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         cameraPreviewLayer.videoGravity = .resizeAspectFill
         cameraPreviewLayer.connection?.videoOrientation = .portrait
@@ -279,18 +289,21 @@ private extension ScanWalletController {
         DispatchQueue.main.async {
             switch error {
             case CertificateParsingError.invalidStructure:
-                self.showAlert(withTitle: "Cannot read Barcode".localized, message: "Cryptographic signature is invalid".localized)
+                self.showAlert(withTitle: "Cannot read Barcode".localized,
+                               message: "Cryptographic signature is invalid".localized)
             case CertificateParsingError.unknownFormat:
-                self.showAlert(withTitle: "Cannot read Barcode".localized, message: "Unknown certificate type.".localized)
+                self.showAlert(withTitle: "Cannot read Barcode".localized,
+                               message: "Unknown certificate type.".localized)
             default:
-                self.showAlert(withTitle: "Cannot read Barcode".localized, message: "Unknown barcode format.".localized)
+                self.showAlert(withTitle: "Cannot read Barcode".localized,
+                               message: "Unknown barcode format.".localized)
             }
         }
     }
 
     func showPermissionsAlert() {
         showAlert(withTitle: "Wallet App would like to access the camera".localized,
-            message: "Please open the Settings and grant permission for this app to use your camera.".localized
+                  message: "Please open the Settings and grant permission for this app to use your camera.".localized
         )
     }
 }

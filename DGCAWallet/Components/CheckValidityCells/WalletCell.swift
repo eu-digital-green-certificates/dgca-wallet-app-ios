@@ -28,24 +28,25 @@ import UIKit
 import DGCVerificationCenter
 
 class WalletCell: UITableViewCell {
-	@IBOutlet fileprivate weak var typeLabel: UILabel!
-	@IBOutlet fileprivate weak var nameLabel: UILabel!
-	@IBOutlet fileprivate weak var dateLabel: UILabel!
-	@IBOutlet fileprivate weak var revocationLabel: UILabel!
-  @IBOutlet fileprivate weak var dccLabel: UILabel!
+    
+    @IBOutlet fileprivate weak var typeLabel: UILabel!
+    @IBOutlet fileprivate weak var nameLabel: UILabel!
+    @IBOutlet fileprivate weak var dateLabel: UILabel!
+    @IBOutlet fileprivate weak var revocationLabel: UILabel!
+    @IBOutlet fileprivate weak var dccLabel: UILabel!
 
-	func setupCell(_ certificate: MultiTypeCertificate) {
-		typeLabel.text = certificate.certTypeString
-		nameLabel.text = certificate.fullName
-    dateLabel.text = certificate.certificateCreationDate
+    func setupCell(_ certificate: MultiTypeCertificate) {
+        typeLabel.text = certificate.certTypeString
+        nameLabel.text = certificate.fullName
+        dateLabel.text = certificate.certificateCreationDate
 
-    if certificate.isRevoked {
-      revocationLabel.isHidden = false
-      revocationLabel.text = "Revoked".localized
-    } else {
-      revocationLabel.isHidden = true
+        if certificate.isRevoked {
+            revocationLabel.isHidden = false
+            revocationLabel.text = "Revoked".localized
+        } else {
+            revocationLabel.isHidden = true
+        }
+
+        dccLabel.isHidden = !(certificate.certificateType == .dcc)
     }
-
-    dccLabel.isHidden = !(certificate.certificateType == .dcc)
-	}
 }
