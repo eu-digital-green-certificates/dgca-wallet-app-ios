@@ -28,19 +28,20 @@
 import UIKit
 
 struct Brightness {
+
     static var fallback: CGFloat?
 
     static func setTo(_ val: CGFloat) {
-      UIScreen.main.brightness = val
+        UIScreen.main.brightness = val
     }
 
     static func forceFull() {
-    if fallback != nil {
-      return
+        if fallback != nil {
+            return
+        }
+        fallback = UIScreen.main.brightness
+        setTo(1.0)
     }
-    fallback = UIScreen.main.brightness
-    setTo(1.0)
-  }
 
     static func reset() {
         guard let val = fallback else { return }

@@ -29,15 +29,17 @@
 import UIKit
 
 extension UIViewController {
+
     @available(iOS 13.0, *)
     var sceneDelegate: SceneDelegate? {
-      guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-          let delegate = windowScene.delegate as? SceneDelegate else { return nil }
-      return delegate
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let delegate = windowScene.delegate as? SceneDelegate else { return nil }
+        return delegate
     }
 }
 
 extension UIViewController {
+
     static func topMostViewController() -> UIViewController? {
         if #available(iOS 13.0, *) {
             let keyWindow = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
@@ -68,12 +70,13 @@ extension UIViewController {
 }
 
 extension UIViewController {
+
     func showInputDialog( title: String? = nil, subtitle: String? = nil,
-        actionTitle: String? = "OK".localized,
-        cancelTitle: String? = "Cancel".localized,
-        inputPlaceholder: String? = nil,
-        inputKeyboardType: UIKeyboardType = UIKeyboardType.default,
-        capitalization: UITextAutocapitalizationType? = nil, handler: ((_ text: String?) -> Void)? = nil) {
+                          actionTitle: String? = "OK".localized,
+                          cancelTitle: String? = "Cancel".localized,
+                          inputPlaceholder: String? = nil,
+                          inputKeyboardType: UIKeyboardType = UIKeyboardType.default,
+                          capitalization: UITextAutocapitalizationType? = nil, handler: ((_ text: String?) -> Void)? = nil) {
         
         let alert = UIAlertController(title: title, message: subtitle, preferredStyle: .alert)
         alert.addTextField { (textField: UITextField) in
@@ -86,8 +89,8 @@ extension UIViewController {
         
         alert.addAction(UIAlertAction(title: actionTitle, style: .default) { _ in
             guard let textField = alert.textFields?.first else {
-              handler?(nil)
-              return
+                handler?(nil)
+                return
             }
             handler?(textField.text)
         })
@@ -103,21 +106,21 @@ extension UIViewController {
         actionTitle: String? = "OK".localized,
         cancelTitle: String? = nil,
         handler: ((Bool) -> Void)? = nil) {
-        let alert = UIAlertController(title: title, message: subtitle, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: actionTitle, style: .default) { _ in
-            handler?(true)
-        })
-        if let cancelTitle = cancelTitle {
-          alert.addAction(UIAlertAction(title: cancelTitle, style: .cancel) { _ in
-              handler?(false)
-          })
+            let alert = UIAlertController(title: title, message: subtitle, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: actionTitle, style: .default) { _ in
+                handler?(true)
+            })
+            if let cancelTitle = cancelTitle {
+                alert.addAction(UIAlertAction(title: cancelTitle, style: .cancel) { _ in
+                    handler?(false)
+                })
+            }
+            present(alert, animated: true, completion: nil)
         }
-        present(alert, animated: true, completion: nil)
-    }
     
     func showInfoAlert(withTitle title: String, message: String) {
-      let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK".localized, style: .default))
-      self.present(alertController, animated: true)
+        self.present(alertController, animated: true)
     }
 }

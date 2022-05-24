@@ -30,32 +30,34 @@ import UIKit
 import DCCInspection
 
 class ImageTableViewCell: UITableViewCell {
-  @IBOutlet fileprivate weak var imagePreviewView: UIImageView!
-  @IBOutlet fileprivate weak var nameLabel: UILabel!
-  @IBOutlet fileprivate weak var timeLabel: UILabel!
-
-  private var savedImage: SavedImage? {
-    didSet {
-      setupView()
-    }
-  }
     
-  func setImage(image: SavedImage) {
-    savedImage = image
-  }
-  
-  private func setupView() {
-    guard let savedImage = savedImage else {
-      imagePreviewView.image = nil
-      nameLabel.text = ""
-      return
+    @IBOutlet fileprivate weak var imagePreviewView: UIImageView!
+    @IBOutlet fileprivate weak var nameLabel: UILabel!
+    @IBOutlet fileprivate weak var timeLabel: UILabel!
+
+    private var savedImage: SavedImage? {
+        didSet {
+            setupView()
+        }
     }
-    imagePreviewView.image = savedImage.image
-    nameLabel.text = savedImage.fileName
-    timeLabel.text = savedImage.dateString
-  }
-  
-  override func prepareForReuse() {
-      savedImage = nil
-  }
+    
+    func setImage(image: SavedImage) {
+        savedImage = image
+    }
+
+    private func setupView() {
+        guard let savedImage = savedImage else {
+            imagePreviewView.image = nil
+            nameLabel.text = ""
+            return
+        }
+        
+        imagePreviewView.image = savedImage.image
+        nameLabel.text = savedImage.fileName
+        timeLabel.text = savedImage.dateString
+    }
+
+    override func prepareForReuse() {
+        savedImage = nil
+    }
 }

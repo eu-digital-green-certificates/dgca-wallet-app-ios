@@ -24,7 +24,7 @@
 //  
 //  Created by Alexandr Chernyy on 08.07.2021.
 //  
-        
+
 
 import UIKit
 import DGCVerificationCenter
@@ -34,8 +34,9 @@ typealias OnDateChangedHandler = (Date) -> Void
 typealias OnCountryChangedHandler = (String?) -> Void
 
 class ExtendedValidityCell: UITableViewCell {
+    
     private enum Constants {
-      static let userDefaultsCountryKey = "UDWalletCountryKey"
+        static let userDefaultsCountryKey = "UDWalletCountryKey"
     }
 
     @IBOutlet fileprivate weak var destinationLabel: UILabel!
@@ -76,9 +77,9 @@ class ExtendedValidityCell: UITableViewCell {
         dateLabel.text = "Check the date".localized
         datePicker.minimumDate = Date()
         if #available(iOS 13.4, *) {
-          datePicker.preferredDatePickerStyle = .wheels
+            datePicker.preferredDatePickerStyle = .wheels
         } else {
-          // Fallback on earlier versions
+            // Fallback on earlier versions
         }
         datePicker.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
         setListOfRuleCounties(list: DGCVerificationCenter.countryCodes)
@@ -86,20 +87,22 @@ class ExtendedValidityCell: UITableViewCell {
 }
 
 extension ExtendedValidityCell {
+
     @objc func dateChanged(_ sender: UIDatePicker) {
-      dataHandler?(sender.date)
+        dataHandler?(sender.date)
     }
 }
 
 extension ExtendedValidityCell: UIPickerViewDataSource, UIPickerViewDelegate {
+
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-      return 1
+        return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return countryItems.isEmpty ? 1 : countryItems.count
     }
-      
+
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if countryItems.count == 0 {
             return "Country codes list empty".localized
@@ -107,27 +110,28 @@ extension ExtendedValidityCell: UIPickerViewDataSource, UIPickerViewDelegate {
             return countryItems[row].name
         }
     }
-      
+
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-      self.selectedCounty = countryItems[row]
-      countryHandler?(self.selectedCounty?.code)
+        self.selectedCounty = countryItems[row]
+        countryHandler?(self.selectedCounty?.code)
     }
 }
 
 extension ExtendedValidityCell {
+
     func setListOfRuleCounties(list: [CountryModel]) {
         self.countryItems = list
         self.countryPicker.reloadAllComponents()
         guard self.countryItems.count > 0 else { return }
-          
+
         if let selected = self.selectedCounty,
            let indexOfCountry = self.countryItems.firstIndex(where: {$0.code == selected.code}) {
-          countryPicker.selectRow(indexOfCountry, inComponent: 0, animated: false)
-          countryHandler?(selected.code)
+            countryPicker.selectRow(indexOfCountry, inComponent: 0, animated: false)
+            countryHandler?(selected.code)
         } else {
-          self.selectedCounty = self.countryItems.first
-          countryPicker.selectRow(0, inComponent: 0, animated: false)
-          countryHandler?(self.selectedCounty?.code)
+            self.selectedCounty = self.countryItems.first
+            countryPicker.selectRow(0, inComponent: 0, animated: false)
+            countryHandler?(self.selectedCounty?.code)
         }
     }
 }

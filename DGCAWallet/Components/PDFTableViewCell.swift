@@ -31,45 +31,48 @@ import PDFKit
 import DCCInspection
 
 class PDFTableViewCell: UITableViewCell {
+    
     @IBOutlet fileprivate weak var pdfView: UIView!
     @IBOutlet fileprivate weak var nameLabel: UILabel!
     @IBOutlet fileprivate weak var timeLabel: UILabel!
-  
+
     private var savedPDF: SavedPDF? {
-      didSet {
-        setupView()
-      }
+        didSet {
+            setupView()
+        }
     }
 
     private var pdfViewer: PDFView?
     func setPDF(pdf: SavedPDF) {
-      savedPDF = pdf
+        savedPDF = pdf
     }
     
     private func setupView() {
-      guard let savedPDF = savedPDF else {
-        nameLabel.text = ""
-        return
-      }
-      if pdfViewer == nil {
-        pdfViewer = PDFView(frame: pdfView.bounds)
-        pdfViewer?.autoScales = true
-          let scrollView = pdfViewer?.subviews.first as? UIScrollView
-        if scrollView != nil {
-          scrollView?.isScrollEnabled = false
+        guard let savedPDF = savedPDF else {
+            nameLabel.text = ""
+            return
         }
-          if let pdf = pdfViewer {
-              pdfView.addSubview(pdf)
-          }
-      }
-      if let document = savedPDF.pdf {
-        pdfViewer?.document = document
-      }
-      nameLabel.text = savedPDF.fileName
-      timeLabel.text = savedPDF.dateString
+
+        if pdfViewer == nil {
+            pdfViewer = PDFView(frame: pdfView.bounds)
+            pdfViewer?.autoScales = true
+            let scrollView = pdfViewer?.subviews.first as? UIScrollView
+            if scrollView != nil {
+                scrollView?.isScrollEnabled = false
+            }
+            if let pdf = pdfViewer {
+                pdfView.addSubview(pdf)
+            }
+        }
+        
+        if let document = savedPDF.pdf {
+            pdfViewer?.document = document
+        }
+        nameLabel.text = savedPDF.fileName
+        timeLabel.text = savedPDF.dateString
     }
-      
+
     override func prepareForReuse() {
-      savedPDF = nil
+        savedPDF = nil
     }
 }

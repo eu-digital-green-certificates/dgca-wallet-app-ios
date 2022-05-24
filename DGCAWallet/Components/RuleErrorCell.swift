@@ -29,6 +29,7 @@ import UIKit
 import DGCCoreLibrary
 
 class RuleErrorCell: UITableViewCell {
+    
     @IBOutlet fileprivate weak var ruleLabel: UILabel!
     @IBOutlet fileprivate weak var ruleValueLabel: UILabel!
     @IBOutlet fileprivate weak var currentLabel: UILabel!
@@ -39,14 +40,14 @@ class RuleErrorCell: UITableViewCell {
     
     private var infoItem: InfoSection? {
         didSet {
-          setupView()
+            setupView()
         }
     }
 
     override func prepareForReuse() {
-      setLabels()
+        setLabels()
     }
-      
+
     private func setLabels() {
         ruleLabel.text = "Rule".localized
         ruleValueLabel.text = ""
@@ -81,7 +82,7 @@ class RuleErrorCell: UITableViewCell {
             case .valid:
                 resultValueLabel.text = String(format: "Open for %@ (see settings)".localized, countryName)
             }
-          } else {
+        } else {
             switch infoItem.ruleValidationResult {
             case .invalid:
                 resultValueLabel.text = "Failed".localized
@@ -90,8 +91,8 @@ class RuleErrorCell: UITableViewCell {
             case .valid:
                 resultValueLabel.text = "Open".localized
             }
-          }
-      }
+        }
+    }
 
     func setupCell(with info: InfoSection) {
         self.infoItem = info

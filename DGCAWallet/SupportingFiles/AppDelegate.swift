@@ -17,12 +17,12 @@
  * limitations under the License.
  * ---license-end
  */
-//
-//  AppDelegate.swift
-//  DGCAWallet
-//
-//  Created by Yannick Spreen on 4/8/21.
-//
+    //
+    //  AppDelegate.swift
+    //  DGCAWallet
+    //
+    //  Created by Yannick Spreen on 4/8/21.
+    //
 
 import UIKit
 
@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var isNFCFunctionality = false
     
     func application(_ application: UIApplication,
-      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         if #available(iOS 13, *) {
             return true
         } else {
@@ -51,18 +51,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         isNFCFunctionality = false
-        #if targetEnvironment(simulator)
-          SecureBackground.shared.disable()
-        #else
-          if !SecureBackground.shared.shouldAuthenticate {
-              SecureBackground.shared.disable()
-          } else {
-              SecureBackground.shared.authenticationWithTouchID { rezult, error in
-                  if rezult {
-                      SecureBackground.shared.disable()
-                  }
-              }
-          }
-        #endif
+#if targetEnvironment(simulator)
+        SecureBackground.shared.disable()
+#else
+        if !SecureBackground.shared.shouldAuthenticate {
+            SecureBackground.shared.disable()
+        } else {
+            SecureBackground.shared.authenticationWithTouchID { rezult, error in
+                if rezult {
+                    SecureBackground.shared.disable()
+                }
+            }
+        }
+#endif
     }
 }

@@ -29,12 +29,13 @@ import UIKit
 import SwiftyJSON
 
 class LicenseCell: UITableViewCell {
+    
     @IBOutlet fileprivate weak var cellLabel: UILabel!
 
     var licenseObject: JSON = []
 
     func drawLabel(_ licenseObject: JSON) {
-       self.licenseObject = licenseObject
-       self.cellLabel.text = licenseObject["name"].string
+        self.licenseObject = licenseObject
+        self.cellLabel.text = licenseObject["name"].string
     }
 }

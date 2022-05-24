@@ -30,8 +30,9 @@ import DGCCoreLibrary
 import DGCVerificationCenter
 
 class HomeController: UIViewController {
+    
     private enum Constants {
-      static let scannerSegueID = "showMainList"
+        static let scannerSegueID = "showMainList"
     }
 
     @IBOutlet fileprivate weak var activityIndicator: UIActivityIndicatorView!
@@ -41,15 +42,17 @@ class HomeController: UIViewController {
     @IBOutlet fileprivate weak var reloadButton: UIButton!
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
-      return .lightContent
+        return .lightContent
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         appNameLabel.text = "Wallet App".localized
 
         let center = NotificationCenter.default
-        center.addObserver(forName: Notification.Name("LoadingRevocationsNotificationName"), object: nil, queue: .main) { notification in
+        center.addObserver(forName: Notification.Name("LoadingRevocationsNotificationName"),
+                           object: nil, queue: .main) { notification in
             let strMessage = notification.userInfo?["name"] as? String ?? "Loading data".localized
             self.messageLabel?.text = strMessage
             let percentage = notification.userInfo?["progress" ] as? Float ?? 0.0
@@ -107,14 +110,18 @@ class HomeController: UIViewController {
     }
     
     private func showAlertCannotReload() {
-        let alert = UIAlertController(title: "Cannot update stored data".localized, message: "Please update your data later.".localized, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Cannot update stored data".localized,
+                                      message: "Please update your data later.".localized,
+                                      preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Later".localized, style: .default, handler: { _ in
             self.activityIndicator.stopAnimating()
             self.loadComplete()
         }))
         
-        alert.addAction(UIAlertAction(title: "Reload".localized, style: .default, handler: { [unowned self] (_ : UIAlertAction) in
+        alert.addAction(UIAlertAction(title: "Reload".localized,
+                                      style: .default,
+                                      handler: { [unowned self] (_ : UIAlertAction) in
             self.reloadData()
         }))
         self.present(alert, animated: true, completion: nil)

@@ -30,26 +30,24 @@ import Foundation
 import SwiftPath
 
 class SHInterpreter {
-	
-	private var jsonPaths: [String:String] = [
-		"givenName": "$.vc..name..given.*",
-		"familyName": "$.vc..name..family",
-		"birthDate": "$.vc..birthDate",
-		"type": "$.vc.type.*",
-		"doseDate": "$.vc..occurrenceDateTime",
-		"issuer": "$.vc.*..display"
-	]
-	
-	private var dataMap: [String:String] = [:]
-	
+
+    private var jsonPaths: [String:String] = [
+        "givenName": "$.vc..name..given.*",
+        "familyName": "$.vc..name..family",
+        "birthDate": "$.vc..birthDate",
+        "type": "$.vc.type.*",
+        "doseDate": "$.vc..occurrenceDateTime",
+        "issuer": "$.vc.*..display"
+    ]
+
+    private var dataMap: [String:String] = [:]
+
     init(payload: String) {
-		jsonPaths.forEach { key, value in
-			if let jsonPath = SwiftPath(value),
+        jsonPaths.forEach { key, value in
+            if let jsonPath = SwiftPath(value),
                let _ = try? jsonPath.evaluate(with: payload) {
-				
-			}
-		}
-	}
-	
-	
+
+            }
+        }
+    }
 }

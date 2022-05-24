@@ -43,6 +43,7 @@ protocol ObjectSavable {
 }
 
 extension UserDefaults: ObjectSavable {
+
     func setObject<Object>(_ object: Object, forKey: String) throws where Object: Encodable {
         let encoder = JSONEncoder()
         do {

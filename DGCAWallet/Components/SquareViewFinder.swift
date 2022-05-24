@@ -27,51 +27,54 @@
 import UIKit
 
 class SquareViewFinder {
-    static func newView(from view: UIView? = nil) -> UIView {
-    let view = view ?? UIView(frame: .zero)
-    view.frame = .zero
-    view.translatesAutoresizingMaskIntoConstraints = false
-    view.backgroundColor = .clear
-    view.isUserInteractionEnabled = false
-    return view
-  }
 
-static func create(from controller: UIViewController) {
-    guard let view = controller.view else { return }
-      
-    let guide = newView()
-    let square = newView()
-    let imgTopRight = newView(from: UIImageView(image: UIImage(named: "cam_top_right")))
-    let imgTopLeft = newView(from: UIImageView(image: UIImage(named: "cam_top_left")))
-    let imgBottomRight = newView(from: UIImageView(image: UIImage(named: "cam_bottom_right")))
-    let imgBottomLeft = newView(from: UIImageView(image: UIImage(named: "cam_bottom_left")))
-    let constraints = [
-      guide.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      guide.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      guide.topAnchor.constraint(equalTo: view.topAnchor),
-      guide.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.53),
-      square.bottomAnchor.constraint(equalTo: guide.bottomAnchor),
-      square.centerXAnchor.constraint(equalTo: guide.centerXAnchor),
-      square.widthAnchor.constraint(equalToConstant: 250),
-      square.heightAnchor.constraint(equalToConstant: 250),
-      imgTopRight.topAnchor.constraint(equalTo: square.topAnchor),
-      imgTopRight.rightAnchor.constraint(equalTo: square.rightAnchor),
-      imgBottomRight.bottomAnchor.constraint(equalTo: square.bottomAnchor),
-      imgBottomRight.rightAnchor.constraint(equalTo: square.rightAnchor),
-      imgBottomLeft.bottomAnchor.constraint(equalTo: square.bottomAnchor),
-      imgBottomLeft.leftAnchor.constraint(equalTo: square.leftAnchor),
-      imgTopLeft.topAnchor.constraint(equalTo: square.topAnchor),
-      imgTopLeft.leftAnchor.constraint(equalTo: square.leftAnchor)
-    ]
-    for child in [
-      guide,
-      square,
-      imgTopRight,
-      imgTopLeft,
-      imgBottomRight,
-      imgBottomLeft] {
-      view.addSubview(child)
+    static func newView(from view: UIView? = nil) -> UIView {
+        let view = view ?? UIView(frame: .zero)
+        view.frame = .zero
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .clear
+        view.isUserInteractionEnabled = false
+        return view
     }
-    NSLayoutConstraint.activate(constraints)
-  }
+
+    static func create(from controller: UIViewController) {
+        guard let view = controller.view else { return }
+
+        let guide = newView()
+        let square = newView()
+        let imgTopRight = newView(from: UIImageView(image: UIImage(named: "cam_top_right")))
+        let imgTopLeft = newView(from: UIImageView(image: UIImage(named: "cam_top_left")))
+        let imgBottomRight = newView(from: UIImageView(image: UIImage(named: "cam_bottom_right")))
+        let imgBottomLeft = newView(from: UIImageView(image: UIImage(named: "cam_bottom_left")))
+        let constraints = [
+            guide.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            guide.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            guide.topAnchor.constraint(equalTo: view.topAnchor),
+            guide.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.53),
+            square.bottomAnchor.constraint(equalTo: guide.bottomAnchor),
+            square.centerXAnchor.constraint(equalTo: guide.centerXAnchor),
+            square.widthAnchor.constraint(equalToConstant: 250),
+            square.heightAnchor.constraint(equalToConstant: 250),
+            imgTopRight.topAnchor.constraint(equalTo: square.topAnchor),
+            imgTopRight.rightAnchor.constraint(equalTo: square.rightAnchor),
+            imgBottomRight.bottomAnchor.constraint(equalTo: square.bottomAnchor),
+            imgBottomRight.rightAnchor.constraint(equalTo: square.rightAnchor),
+            imgBottomLeft.bottomAnchor.constraint(equalTo: square.bottomAnchor),
+            imgBottomLeft.leftAnchor.constraint(equalTo: square.leftAnchor),
+            imgTopLeft.topAnchor.constraint(equalTo: square.topAnchor),
+            imgTopLeft.leftAnchor.constraint(equalTo: square.leftAnchor)
+        ]
+
+        for child in [
+            guide,
+            square,
+            imgTopRight,
+            imgTopLeft,
+            imgBottomRight,
+            imgBottomLeft] {
+            view.addSubview(child)
+        }
+
+        NSLayoutConstraint.activate(constraints)
+    }
 }

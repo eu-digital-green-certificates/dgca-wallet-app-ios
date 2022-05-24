@@ -35,9 +35,9 @@ import DCCInspection
 
 class DCCCertificateCell: UITableViewCell {
 
-  @IBOutlet fileprivate weak var nameLabel: UILabel!
-  @IBOutlet fileprivate weak var certTypeLabel: UILabel!
-  @IBOutlet fileprivate weak var descriptionLabel: UILabel!
+    @IBOutlet fileprivate weak var nameLabel: UILabel!
+    @IBOutlet fileprivate weak var certTypeLabel: UILabel!
+    @IBOutlet fileprivate weak var descriptionLabel: UILabel!
   
     var hCert: HCert? {
         didSet {
