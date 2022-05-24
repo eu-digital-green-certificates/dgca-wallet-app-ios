@@ -53,12 +53,10 @@ class MainListController: UIViewController {
         
         static let showSavedDCCCertificate = "showSavedDCCCertificate"
         static let showSavedICAOCertificate = "showSavedICAOCertificate"
-        static let showSavedDIVOCCertificate = "showSavedDIVOCCertificate"
-         static let showSavedSHCCertificate = "showSavedSHCCertificate"
+        static let showSavedSHCCertificate = "showSavedSHCCertificate"
 
 		static let showScannedDCCCertificate = "showScannedDCCCertificate"
         static let showScannedICAOCertificate = "showScannedICAOCertificate"
-        static let showScannedDIVOCCertificate = "showScannedDIVOCCertificate"
         static let showScannedSHCertificate = "showScannedSHCertificate"
 
 		static let showPDFViewer = "showPDFViewer"
@@ -377,10 +375,7 @@ class MainListController: UIViewController {
             
         case SegueIdentifiers.showScannedICAOCertificate:
             ()  // TODO implement ICAOCertificateViewerController
-            
-        case SegueIdentifiers.showScannedDIVOCCertificate:
-            ()  // TODO implement ICAOCertificateViewerController
-			
+            			
 		case SegueIdentifiers.showScannedSHCertificate:
 			guard let shVC = segue.destination as? CardContainerController else { return }
 			if let certificate = sender as? MultiTypeCertificate {
@@ -451,8 +446,6 @@ extension MainListController: ScanWalletDelegate {
                 self?.performSegue(withIdentifier: SegueIdentifiers.showScannedDCCCertificate, sender: certificate)
             case .icao:
                 self?.performSegue(withIdentifier: SegueIdentifiers.showScannedICAOCertificate, sender: certificate)
-            case .divoc:
-                self?.performSegue(withIdentifier: SegueIdentifiers.showScannedDIVOCCertificate, sender: certificate)
             case .shc:
                 self?.performSegue(withIdentifier: SegueIdentifiers.showScannedSHCertificate, sender: certificate)
             }
@@ -582,8 +575,6 @@ extension MainListController: UITableViewDelegate, UITableViewDataSource {
                 self.performSegue(withIdentifier: SegueIdentifiers.showSavedDCCCertificate, sender: certificates[indexPath.row])
             case .icao:
                 self.performSegue(withIdentifier: SegueIdentifiers.showSavedICAOCertificate, sender: certificates[indexPath.row])
-            case .divoc:
-                self.performSegue(withIdentifier: SegueIdentifiers.showSavedDIVOCCertificate, sender: certificates[indexPath.row])
             case .shc:
                 self.performSegue(withIdentifier: SegueIdentifiers.showSavedSHCCertificate, sender: certificates[indexPath.row])
             default:
@@ -749,8 +740,6 @@ extension MainListController {
             self.performSegue(withIdentifier: SegueIdentifiers.showScannedDCCCertificate, sender: certificate)
         case .icao:
             self.performSegue(withIdentifier: SegueIdentifiers.showScannedICAOCertificate, sender: certificate)
-        case .divoc:
-            self.performSegue(withIdentifier: SegueIdentifiers.showScannedDIVOCCertificate, sender: certificate)
         case .shc:
             self.performSegue(withIdentifier: SegueIdentifiers.showScannedSHCertificate, sender: certificate)
         }
