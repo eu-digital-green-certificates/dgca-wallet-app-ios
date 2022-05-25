@@ -232,7 +232,7 @@ class MainListController: UIViewController {
 
     private func processBarcode(barcode: String?) {
         guard let barcodeString = barcode, !barcodeString.isEmpty else { return }
-        if CertificateApplicant.isApplicableDCCFormat(payload: barcodeString) {
+        if DGCVerificationCenter.shared.isApplicableDCCFormat(payload: barcodeString) {
             do {
                 let certificate = try MultiTypeCertificate(from: barcodeString)
                 self.walletController(self, didScanCertificate: certificate)
@@ -243,7 +243,7 @@ class MainListController: UIViewController {
                 self.showAlertWithError(CertificateParsingError.invalidStructure)
             }
             
-        } else if CertificateApplicant.isApplicableSHCFormat(payload: barcodeString) {
+        } else if DGCVerificationCenter.shared.isApplicableSHCFormat(payload: barcodeString) {
             do {
                 let certificate = try MultiTypeCertificate(from: barcodeString)
                 self.walletController(self, didScanCertificate: certificate)
@@ -741,7 +741,7 @@ extension MainListController {
 
     private func tryFoundQRCodeIn(image: UIImage) {
         if let qrString = image.qrCodeString(),
-           CertificateApplicant.isApplicableFormatForVerification(payload: qrString) {
+           DGCVerificationCenter.shared.isApplicableFormat(payload: qrString) {
 
             if let certificate = try? MultiTypeCertificate(from: qrString) {
                 self.saveQrCode(certificate: certificate)
@@ -841,7 +841,7 @@ extension MainListController: UIDocumentPickerDelegate {
         
         for image in images {
             if let qrString = image.qrCodeString(),
-               CertificateApplicant.isApplicableFormatForVerification(payload: qrString) {
+               DGCVerificationCenter.shared.isApplicableFormat(payload: qrString) {
                 if let certificate = try? MultiTypeCertificate(from: qrString) {
                     self.saveQrCode(certificate: certificate)
                 } else {

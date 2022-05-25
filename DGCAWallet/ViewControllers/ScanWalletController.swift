@@ -196,7 +196,7 @@ private extension ScanWalletController  {
         guard let barcodeString = payloadString, !barcodeString.isEmpty else { return }
         /// MARK: END OF SCANNING
         
-        if CertificateApplicant.isApplicableDCCFormat(payload: barcodeString) {
+        if DGCVerificationCenter.shared.isApplicableDCCFormat(payload: barcodeString) {
             do {
                 let certificate = try MultiTypeCertificate(from: barcodeString)
                 self.delegate?.walletController(self, didScanCertificate: certificate)
@@ -207,7 +207,7 @@ private extension ScanWalletController  {
                 self.showAlertWithError(CertificateParsingError.invalidStructure)
             }
             
-        } else if CertificateApplicant.isApplicableSHCFormat(payload: barcodeString) {
+        } else if DGCVerificationCenter.shared.isApplicableSHCFormat(payload: barcodeString) {
             do {
                 let certificate = try MultiTypeCertificate(from: barcodeString)
                 self.delegate?.walletController(self, didScanCertificate: certificate)
@@ -215,10 +215,10 @@ private extension ScanWalletController  {
             } catch CertificateParsingError.kidNotFound(let rawUrl) {
                 DGCLogger.logInfo("Error kidNotFound when parse SH card.")
                 self.showAlert(title: "Unknown issuer of Smart Card".localized,
-                               subtitle: "Do you want to continue to identify the issuer?",
-                               actionTitle: "Continue".localized, cancelTitle: "Cancel".localized ) { response in
+                    subtitle: "Do you want to continue to identify the issuer?",
+                    actionTitle: "Continue".localized, cancelTitle: "Cancel".localized ) { response in
                     if response {
-#if canImport(DGCSHInspection)
+                    #if canImport(DGCSHInspection)
                         TrustedListLoader.resolveUnknownIssuer(rawUrl) { kidList, result in
                             if let certificate = try? MultiTypeCertificate(from: barcodeString) {
                                 self.delegate?.walletController(self, didScanCertificate: certificate)
@@ -227,7 +227,7 @@ private extension ScanWalletController  {
                                 self.showAlertWithError(CertificateParsingError.unknownFormat)
                             }
                         }
-#endif
+                    #endif
                         
                     } else { // user cancels
                         DGCLogger.logInfo("User cancelled verifying.")

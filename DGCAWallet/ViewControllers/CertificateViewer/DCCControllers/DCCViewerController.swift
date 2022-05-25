@@ -80,12 +80,10 @@ class DCCViewerController: UIViewController {
     
     private func checkCertificateValidity() {
         guard let cert = certificate?.digitalCertificate as? HCert else { return }
-                
-        let validityState = DGCVerificationCenter.shared.dccInspector?.validateCertificate(cert)
         
-        if let state = validityState {
-            self.sectionBuilder = DCCSectionBuilder(with: cert, validity: state, for: .wallet)
-            self.validityState = state
+        if let validityState = DGCVerificationCenter.shared.dccInspector?.validateCertificate(cert) {
+            self.sectionBuilder = DCCSectionBuilder(with: cert, validity: validityState, for: .wallet)
+            self.validityState = validityState
         }
     }
 
