@@ -63,7 +63,9 @@ Build steps
 
 ## Documentation
 
-- [ ] TODO: Link to documentation
+Overview of SDK modules:
+
+![DCC Overview-4](https://user-images.githubusercontent.com/19489046/181788893-5bd7ee8f-bbc6-4ca0-bfac-76d6ee3282c5.jpg)
 
 ## Support and feedback
 
